@@ -67,6 +67,7 @@ Trois types de documents cohabitent :
 | --- | --- | --- | --- |
 | [`GLOSSAIRE-METIER.md`](./GLOSSAIRE-METIER.md) | Fiche | Le vocabulaire de la chasse immobilière (mandat, honoraires, DPE…) | À consulter au besoin |
 | [`ORGANISATION-DEPOT.md`](./ORGANISATION-DEPOT.md) | Fiche + modèle | Ranger le dépôt et adopter des conventions (nommage, Git) | Dès le lancement |
+| [`Gherkin.md`](./Gherkin.md) | Fiche de cours | Écrire et borner des user stories en Gherkin (syntaxe, `Règle`, les 5 formes du « non », anti-patterns) — sert de référence pour le dossier [`user-stories/`](../user-stories/) | Phase 2 & 4 · **BC02/03** |
 
 ---
 
