@@ -117,7 +117,7 @@ from pathlib import Path
 # ----------------------------------------------------------------------------
 HERE = Path(__file__).resolve().parent
 SRC = Path(sys.argv[1]) if len(sys.argv) > 1 else HERE.parent / "annonces" / "annonces.csv"
-DST = Path(sys.argv[2]) if len(sys.argv) > 2 else HERE / "annonces.csv"
+DST = Path(sys.argv[2]) if len(sys.argv) > 2 else HERE / "annonces_normalised.csv"
 REPORT = HERE / "rapport_anomalies.txt"
 
 NULL = "NULL"  # valeur littérale écrite dans le CSV pour une inconnue réelle
