@@ -1,0 +1,6 @@
+﻿id,reference,date_creation,ville,code_postal,type_bien,budget_max,surface_min,nb_pieces_min,criteres_souhaites,dpe_max
+1,REC-ZS4F1KCW,2025-06-14,Toulouse,31000,Maison,406100,147,6,lumineux; calme; jardin,NULL
+2,REC-FKYQ5Q6P,2026-05-30,Limoges,87000,Maison,124500,153,NULL,terrasse,B
+3,REC-JZHFZRQ0,2025-11-11,Nantes,44000,Chalet,247900,70,1,balcon; ascenseur,NULL
+4,REC-H2W9FTUQ,2025-06-01,Annecy,74000,Chalet,327100,221,NULL,NULL,G
+5,REC-XV8PS237,2024-10-08,Toulouse,31000,Château,140600,182,1,lumineux; cave,B
