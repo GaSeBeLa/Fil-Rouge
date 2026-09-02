@@ -116,7 +116,7 @@ from pathlib import Path
 # 0. CHEMINS & CONSTANTES
 # ----------------------------------------------------------------------------
 HERE = Path(__file__).resolve().parent
-SRC = Path(sys.argv[1]) if len(sys.argv) > 1 else HERE.parent / "annonces" / "annonces.csv"
+SRC = Path(sys.argv[1]) if len(sys.argv) > 1 else HERE.parent / "normalised" /"annonces" / "annonces.csv"
 DST = Path(sys.argv[2]) if len(sys.argv) > 2 else HERE / "annonces_normalised.csv"
 REPORT = HERE / "rapport_anomalies.txt"
 
@@ -359,7 +359,11 @@ def derive_parking_spaces(description: str | None) -> int:
         return 1
     return 0
 
-
+def derive_nb_rooms(nb_rooms : int | None) ->int :
+    if nb_rooms:
+        return parse_int(nb_rooms)
+    else:
+        return NULL
 # ----------------------------------------------------------------------------
 # 2. TRANSFORMATION LIGNE PAR LIGNE
 # ----------------------------------------------------------------------------
@@ -386,7 +390,7 @@ def normalise_row(row: dict[str, str]) -> dict[str, object]:
         "latitude": parse_float(row.get("latitude")),
         "longitude": parse_float(row.get("longitude")),
         "floor": parse_etage(ref, row.get("etage")),
-        "nb_rooms": parse_int(row.get("nb_pieces")),
+        "nb_rooms": derive_nb_rooms(row.get("nb_pieces")),
         "nb_bedrooms": parse_int(row.get("nb_chambres")),
         "nb_bathrooms": None,       # aucune source ni indice texte -> NULL
         "nb_toilets": None,         # idem
