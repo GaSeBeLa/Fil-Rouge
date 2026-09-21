@@ -1,9 +1,21 @@
 # ADR-024 — les modifications à faire, en détail
 
-> 📋 **Rien n'est appliqué.** Ce fichier liste ce qu'il faudra changer **si**
-> l'ADR-024 est validé par le groupe. Le schéma
-> `docker/init-v2/01_create_fil_rouge_immobilier.sql` est le schéma de
-> référence du projet : il ne se modifie pas sur une décision non validée.
+> ✅ **APPLIQUÉ le 21/09/2026.** Ce fichier décrivait ce qu'il fallait changer ;
+> tout a été fait et **vérifié sur PostgreSQL 16** — 10 cas de test sur 10,
+> sur base neuve et sur base migrée. Il reste utile comme trace de ce qui a
+> bougé et pourquoi.
+>
+> ⚠️ **Mais `ADR-024` est toujours au statut « proposé ».** Le groupe ne l'a
+> pas validé. Si la décision change, c'est le §2 qu'il faut défaire.
+>
+> 📍 Où c'est fait :
+> - schéma : `docker/init-v2/01_create_fil_rouge_immobilier.sql`, table `payment`
+> - base existante : `docker/migrations/2026-09-21_adr-024_payment_refusal.sql`
+> - API : `API/src/app/models/payment_model.py`
+> - mesures : `docker/init-v2/README.md` §8
+>
+> ❌ **Pas encore fait** : les trois diagrammes MCD/MLD/MPD (§6) et les tests
+> automatiques (§7), qui attendent la base de test isolée (étape `A2`).
 >
 > Compagnon de [`adr-024-motif-refus-remuneration.md`](./adr-024-motif-refus-remuneration.md).
 
