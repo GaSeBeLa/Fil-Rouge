@@ -21,8 +21,9 @@ a l'air proche.
 
 | Fichier | Lire quand |
 |---|---|
-| `<NN>-<chantier>.md` | on joue une fiche `<X>*` — chantier **ouvert** |
-| `<NN>-<chantier>.md` | **clos** — ne se rejoue pas, garde son socle d'API |
+| `09-contraintes-mpd.md` | on relit une fiche `C1` à `C5` — chantier **clos** le 2026-09-11 : les contraintes qui manquent au MPD |
+| `09-annexe-*.md` | produits par les fiches `C*` — ne s'ouvrent que si une fiche les nomme |
+| *(hors dossier)* `livrables/2-modelisation/09-rapport-ecarts-contraintes.md` | le livrable du chantier `C` : écarts entre le MPD et les règles métier |
 
 ## Hors contexte IA — les sources de vérité du projet
 
@@ -31,8 +32,9 @@ la tâche les nomme.
 
 | Fichier | Lire quand |
 |---|---|
-| `docker/init/01_create_fil_rouge_immobilier.sql` | on touche une table, une colonne, une contrainte |
+| `docker/init-v2/01_create_fil_rouge_immobilier.sql` | on touche une table, une colonne, une contrainte — **18 tables, euros** |
+| `docker/init-v2/README.md` | on doute d'un choix du schéma v2 : euros, migration, hypothèses assumées, points ouverts |
 | `API/README.md` | on installe ou on lance l'API |
 | `API/src/app/main.py` | on cherche où va un bout de code — son en-tête décrit les trois couches |
 | `user-stories/<NN>_*.feature` | on vérifie une règle métier |
-| `../Fil-Rouge-EISI-Data-IA-26-D04-StarterPack - BASE/` | on vérifie l'énoncé, un livrable attendu, une fixture — **lecture seule** |
+| `../Fil-Rouge-EISI-Data-IA-26-D04-StarterPack*/` (les deux) | on vérifie l'énoncé, un livrable attendu, une fixture — **lecture seule** |

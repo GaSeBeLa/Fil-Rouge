@@ -4,34 +4,40 @@ Projet fil rouge EISI Data-IA : audit de données, modélisation et API REST
 (FastAPI + SQLModel sur PostgreSQL) pour un service de chasse immobilière.
 Ce n'est **pas** un produit hébergé : pas de front, pas de déploiement.
 Dossier `Fil-Rouge/`, dépôt git à sa racine. L'énoncé et les fixtures d'origine
-vivent dans `../Fil-Rouge-EISI-Data-IA-26-D04-StarterPack - BASE/` — **lecture
-seule, jamais modifié**.
+vivent dans `../Fil-Rouge-EISI-Data-IA-26-D04-StarterPack - BASE/` et
+`../Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/` — **lecture seule, jamais
+modifiés**.
 
 ## Où on en est — en cinq lignes
 
-- Le schéma PostgreSQL (12 tables) est posé dans `docker/init/` et monté par
-  `docker compose`.
-- L'API expose un CRUD complet sur les 12 tables, en trois couches
-  (routes / services / repositories) ; seul le health-check est testé.
+- Le schéma PostgreSQL (**18 tables**, montants en **euros**) est posé dans
+  `docker/init-v2/` et monté par `docker compose`. `docker/init/` (12 tables,
+  K€) est l'ancien schéma, gardé intact, plus monté.
+- L'API expose un CRUD complet en trois couches (routes / services /
+  repositories), mais sur **12 modèles seulement** : elle n'a pas suivi le
+  passage à 18 tables. Seul le health-check est testé.
 - Les user stories Gherkin (`user-stories/`) couvrent le parcours actuel et le
   futur parcours IA ; les règles métier ne sont pas encore implémentées.
 - `normalised/` porte la normalisation des annonces et son rapport d'anomalies.
-- Les quatre `livrables/` sont vides. Détail daté dans `context AI/08-etat.md`.
+- `livrables/2-modelisation/` porte trois rapports du chantier `C` ; les trois
+  autres livrables sont vides. Détail daté dans `context AI/08-etat.md`.
 
-## Quatre règles non négociables
+## Cinq règles non négociables
 
 1. **Annoncer le plan en une ou deux phrases avant d'agir**, et poser un
    questionnaire au moindre choix ouvert.
 2. **Mesurer avant de corriger**, et afficher les comptes bruts à côté du
    verdict — un instrument muet rend son propre échec indiagnosticable.
-3. **`../Fil-Rouge-EISI-Data-IA-26-D04-StarterPack - BASE/` ne se modifie
-   jamais**, et `docker/init/01_create_fil_rouge_immobilier.sql` est le schéma
-   de référence : tout modèle SQLModel s'y confronte par grep.
-4. **Aucun secret ni `.env` dans git**, aucun chemin absolu dans le code.
+3. **Les deux dossiers `../Fil-Rouge-EISI-Data-IA-26-D04-StarterPack*/` ne se
+   modifient jamais**, et `docker/init-v2/01_create_fil_rouge_immobilier.sql`
+   est le schéma de référence : tout modèle SQLModel s'y confronte par grep.
+4. **Tout montant est en euros, `NUMERIC(12,2)`** — jamais en K€. La décision
+   est tranchée et prouvée : `docker/init-v2/README.md` §1.
+5. **Aucun secret ni `.env` dans git**, aucun chemin absolu dans le code.
 
 Prose et commentaires de code en français ; noms de code en anglais.
-Le contexte IA (`CLAUDE.md`, `CHANTIER.md`, `context AI/`) est **versionné** :
-le projet se travaille à plusieurs.
+Le contexte IA (`CLAUDE.md`, `context AI/`) est **versionné** : le projet se
+travaille à plusieurs. Les notes métier libres vivent dans `md/`.
 
 ## Routage — ouvrir ceci, et rien d'autre
 
@@ -43,9 +49,10 @@ et seulement dans ce cas, ouvrir l'index.
 | écrire ou modifier du code de l'API | `API/README.md`, puis le fichier visé |
 | créer un module, chercher où va un bout de code | `API/src/app/main.py` — son en-tête décrit les trois couches |
 | vérifier une règle métier | `user-stories/<NN>_*.feature` |
-| vérifier une table, une colonne, une contrainte | `docker/init/01_create_fil_rouge_immobilier.sql` |
+| vérifier une table, une colonne, une contrainte | `docker/init-v2/01_create_fil_rouge_immobilier.sql` |
+| comprendre un choix du schéma v2 (euros, migration, hypothèses) | `docker/init-v2/README.md` |
 | ouvrir un chantier, ou le découper en fiches | **lancer `/vlp:chantier`** — la méthode vit dans le kit, pas ici |
-| jouer une fiche `<X>*` | `context AI/<NN>-<chantier>.md` — chantier **ouvert** |
+| relire une fiche `C1` à `C5` | `context AI/09-contraintes-mpd.md` — chantier **clos** le 2026-09-11, ne se rejoue pas |
 | reprendre après une longue interruption | `context AI/08-etat.md` |
 
 ## Économie de contexte
