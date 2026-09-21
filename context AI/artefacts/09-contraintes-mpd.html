@@ -1,0 +1,137 @@
+<title>Contraintes manquantes du MPD — Fil Rouge Immobilier</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+  :root { --ground:#f4f5f7; --surface:#fff; --line:#d9dce3; --line-fort:#b9bec9; --texte:#1a222e; --doux:#5c6675; --accent:#2f5d8c; --fait:#2f7a55; --cours:#a86a12; --bloque:#a63d40; --attente:#8d95a3; --ombre:0 1px 2px rgba(26,34,46,.06); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ground:#11161d; --surface:#19202a; --line:#2b3542; --line-fort:#3d4a5a; --texte:#e5e9ef; --doux:#98a2b1; --accent:#7fb0e0; --fait:#5fbb8b; --cours:#d9a441; --bloque:#e0777a; --attente:#6d7787; --ombre:none; } }
+  :root[data-theme="dark"] { --ground:#11161d; --surface:#19202a; --line:#2b3542; --line-fort:#3d4a5a; --texte:#e5e9ef; --doux:#98a2b1; --accent:#7fb0e0; --fait:#5fbb8b; --cours:#d9a441; --bloque:#e0777a; --attente:#6d7787; --ombre:none; }
+  * { box-sizing:border-box; } [hidden] { display:none !important; }
+  body { background:var(--ground); color:var(--texte); font-family:"Source Sans 3",system-ui,sans-serif; font-size:16px; line-height:1.55; }
+  .page { max-width:46rem; margin:0 auto; padding:2.5rem 1.25rem 4rem; display:flex; flex-direction:column; gap:2rem; }
+  h1,h2 { font-family:Archivo,system-ui,sans-serif; text-wrap:balance; margin:0; }
+  h1 { font-size:1.9rem; font-weight:700; letter-spacing:-.015em; }
+  h2 { font-size:.8rem; font-weight:700; text-transform:uppercase; letter-spacing:.09em; color:var(--doux); }
+  .eyebrow { font-family:"IBM Plex Mono",monospace; font-size:.75rem; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); }
+  .mono,.fiche .id,.fiche .etat,.journal time,.blocage pre { font-family:"IBM Plex Mono",monospace; }
+  .mono { font-variant-numeric:tabular-nums; }
+  header { display:flex; flex-direction:column; gap:.35rem; border-bottom:2px solid var(--line-fort); padding-bottom:1.25rem; }
+  header p { margin:.4rem 0 0; color:var(--doux); max-width:62ch; }
+  .avancement { display:flex; gap:.25rem; margin-top:.9rem; }
+  .avancement span { height:.4rem; flex:1; border-radius:1px; background:var(--line); }
+  section { display:flex; flex-direction:column; gap:.85rem; }
+  .fiches,.journal { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  .fiches { gap:.5rem; } .journal { gap:.6rem; }
+  .fiche { display:grid; grid-template-columns:3.5rem 1fr; gap:.1rem .9rem; background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--attente); border-radius:3px; padding:.7rem .9rem; box-shadow:var(--ombre); }
+  .fiche .id { font-weight:500; color:var(--doux); }
+  .fiche .titre { font-weight:600; }
+  .fiche .note { grid-column:2; font-size:.9rem; color:var(--doux); }
+  .fiche .cout { grid-column:2; font-size:.78rem; color:var(--doux); }
+  .cout-total { font-size:.85rem; color:var(--doux); }
+  .fiche .etat { grid-column:1; font-size:.68rem; letter-spacing:.07em; text-transform:uppercase; color:var(--attente); }
+  .avancement span[data-etat="faite"] { background:var(--fait); }
+  .avancement span[data-etat="encours"] { background:var(--cours); }
+  .avancement span[data-etat="bloquee"] { background:var(--bloque); }
+  .fiche[data-etat="faite"] { border-left-color:var(--fait); }
+  .fiche[data-etat="encours"] { border-left-color:var(--cours); }
+  .fiche[data-etat="bloquee"] { border-left-color:var(--bloque); }
+  .fiche[data-etat="faite"] .etat { color:var(--fait); }
+  .fiche[data-etat="encours"] .etat { color:var(--cours); }
+  .fiche[data-etat="bloquee"] .etat { color:var(--bloque); }
+  .fiche[data-etat="faite"] .titre { color:var(--doux); font-weight:400; }
+  .fiche[data-etat="encours"] .id,.fiche[data-etat="bloquee"] .id { color:var(--texte); }
+  .blocage { background:var(--surface); border:1px solid var(--bloque); border-radius:3px; padding:.8rem .9rem; }
+  .blocage pre { margin:.5rem 0 0; overflow-x:auto; font-size:.82rem; color:var(--texte); }
+  .journal li { display:grid; grid-template-columns:6rem 1fr; gap:.9rem; border-top:1px solid var(--line); padding-top:.6rem; }
+  .journal time { font-size:.85rem; color:var(--doux); }
+  .bilan { background:var(--surface); border:1px solid var(--line); border-top:3px solid var(--fait); border-radius:3px; padding:1rem 1.1rem; }
+  .bilan p { margin:0 0 .6rem; } .bilan p:last-child { margin-bottom:0; }
+  footer { border-top:1px solid var(--line); padding-top:.9rem; font-size:.82rem; color:var(--doux); display:flex; flex-wrap:wrap; gap:.25rem 1.25rem; }
+</style>
+
+<div class="page">
+  <header>
+    <div class="eyebrow">Fil Rouge Immobilier · fiches C1–C5</div>
+    <h1>Contraintes manquantes du MPD</h1>
+    <p>Le chantier est fini quand un rapport d'écarts écrit dit, règle métier par
+      règle métier, si la contrainte correspondante est présente dans le MPD,
+      absente, partielle ou fausse — et propose une formulation pour chaque
+      manque. Aucun fichier de schéma n'est modifié.</p>
+    <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
+    <div class="avancement">
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span>
+    </div>
+    <p class="mono" style="margin-top:.5rem">5 fiches · 5 faites</p>
+  </header>
+
+  <section>
+    <h2>Les fiches, dans l'ordre des dépendances</h2>
+    <!-- ZONE:fiches — data-etat vaut faite | encours | bloquee ; absent = à faire -->
+    <ul class="fiches">
+      <li class="fiche" data-etat="faite">
+        <span class="id">C1</span><span class="titre">Extraire du MPD un inventaire lisible des contraintes</span>
+        <span class="etat">faite</span>
+        <span class="note">Annexe écrite : 18 titres « ## », 0 balise HTML résiduelle — 222 colonnes, 133 CHECK (107 de colonne, 26 de table), 4 EXCLUDE.</span>
+        <span class="cout">Coût : 3 652 606 tokens (input 1 098 · output 42 888 · cache écrit 124 625 · cache lu 3 483 995)</span>
+      </li>
+      <li class="fiche" data-etat="faite">
+        <span class="id">C2</span><span class="titre">Relever les domaines de valeurs exigés par les user stories</span>
+        <span class="etat">faite</span>
+        <span class="note">Annexe écrite : 55 lignes « | » (51 règles + 4 d'en-tête) — par fichier 00:17, 01:4, 02:1, 03:3, 04:5, 05:2, 06:5, 07:6, 08:2, 09:6 ; 51/51 citations conformes à leur ligne source.</span>
+        <span class="cout">Coût : 4 440 554 tokens (input 1 198 · output 114 125 · cache écrit 280 546 · cache lu 4 044 685)</span>
+      </li>
+      <li class="fiche" data-etat="faite">
+        <span class="id">C3</span><span class="titre">Relever les domaines de valeurs exigés par les notes métier</span>
+        <span class="etat">faite</span>
+        <span class="note">Annexe écrite : 84 règles — par note BAREME-COMMISSION 15, NOTES-REMUNERATION-CHASSEUR 32, notes_contraintes_client 6, notes_contraintes_localisation_criteria 12, schema-tracabilite-remuneration-chasseur_v4 17 ; 2 lignes « contradiction » ; 14/14 citations vérifiées.</span>
+        <span class="cout">Coût : 4 540 505 tokens (input 1 040 · output 165 706 · cache écrit 427 529 · cache lu 3 946 230)</span>
+      </li>
+      <li class="fiche" data-etat="faite">
+        <span class="id">C4</span><span class="titre">Rapporter les écarts sur les personnes et les biens</span>
+        <span class="etat">faite</span>
+        <span class="note">Rapport section 1 écrit : 42 lignes-verdict ≥ 41 règles visées (33 par la colonne Cible + 8 rattachées), 0 manquante — couverte 22 · absente 14 · partielle 5 · fausse 1.</span>
+        <span class="cout">Coût : 5 272 930 tokens (input 1 254 · output 126 646 · cache écrit 291 770 · cache lu 4 853 260)</span>
+      </li>
+      <li class="fiche" data-etat="faite">
+        <span class="id">C5</span><span class="titre">Rapporter les écarts sur le mandat et la rémunération</span>
+        <span class="etat">faite</span>
+        <span class="note">Section 2 et synthèse écrites : 6 sous-titres, 108 lignes-verdict (couverte 62 · partielle 44 · absente 2 · fausse 0). Rapport entier, 18 tables : 150 lignes — couverte 84 · partielle 49 · absente 16 · fausse 1 ; 133 règles reprises sur 135 relevées (C2 51 + C3 84).</span>
+        <span class="cout">Coût : 5 156 524 tokens (input 1 422 · output 223 735 · cache écrit 454 227 · cache lu 4 477 140)</span>
+      </li>
+    </ul>
+    <p class="cout-total mono">Cumul du chantier : 31 326 311 tokens · 5 fiches mesurées, sessions comptées au 2026-09-11 — C1 à C4 ont continué après leur clôture (C1 : 5 164 213 / 3 652 606 à sa clôture ; C2 : 6 900 878 / 4 440 554 ; C3 : 6 816 463 / 4 540 505 ; C4 : 7 288 233 / 5 272 930)</p>
+  </section>
+
+  <!-- ZONE:blocage — publiée quand /tache s'arrête après deux tentatives ; retirée dès que la fiche repasse -->
+  <section hidden>
+    <h2>Arrêt sur blocage</h2>
+    <div class="blocage">
+      <p></p>
+      <pre></pre>
+    </div>
+  </section>
+
+  <section>
+    <h2>Journal des décisions</h2>
+    <!-- ZONE:journal — une ligne par décision imprévue tranchée en cours de fiche -->
+    <ul class="journal">
+      <li><time>2026-09-11</time><span>La vérification <code>python -m pytest -q</code> ne tourne pas : <code>sqlmodel</code> absent du Python 3.14 global, aucun environnement virtuel dans <code>API/</code>. L'utilisateur tranche : on le signale, on n'installe rien. Les fiches C* ne touchent aucun code ; leur critère de fin fait foi.</span></li>
+      <li><time>2026-09-11</time><span>C2 : l'annexe des user stories porte une colonne « Citation » (texte exact de la ligne source) en plus des trois prévues, et laisse toutes les colonnes MPD « à rattacher » faute d'ouvrir l'inventaire C1. Offre d'achat, facture et rendez-vous n'ont aucune table parmi les 18.</span></li>
+      <li><time>2026-09-11</time><span>C3 : l'annexe des notes relève deux contradictions sans les trancher — X01 (ancienneté et performance : clé du barème ou majoration du taux) et X02 (unité de H : € au centime ou K€) — ainsi que l'exemple Bruno, payé au-delà des 6 mois que pose sa propre note. Les trois restent à arbitrer en C5.</span></li>
+      <li><time>2026-09-11</time><span>C4 : l'offre d'achat est rattachée à <code>EstateProposed</code>, la note d'avis à <code>Estate_SearchRequest</code> ; le rendez-vous reste sans table. Le rapport établit que <code>Client</code> (<code>is married</code> en deux mots) et <code>Criteria</code> (quatre clauses <code>ck_client_*</code> sur des colonnes absentes) ne se créent pas en l'état du MPD.</span></li>
+      <li><time>2026-09-11</time><span>C5 : la facture est rattachée à <code>Payment.status</code>, le montant collecté par le notaire à <code>Sale.fees_amount</code> ; les indicateurs de performance, sans colonne, sont jugés couverts quand leurs données sources existent. Restent à vérifier dans le MPD : l'extension <code>btree_gist</code> (exigée par deux <code>EXCLUDE</code>) et <code>HunterPerformance.id_payment</code>, déclaré deux fois.</span></li>
+    </ul>
+  </section>
+
+  <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
+  <section>
+    <h2>Chantier clos le 2026-09-11</h2>
+    <div class="bilan">
+      <p><strong>Livré.</strong> L'inventaire du MPD, les annexes de règles (51 en user stories, 84 en notes) et <code>livrables/2-modelisation/09-rapport-ecarts-contraintes.md</code> : 150 verdicts sur 18 tables — 84 couvertes, 49 partielles, 16 absentes, 1 fausse ; 133 règles reprises sur 135 (U29 et F04, le rendez-vous, sans table). Écarts les plus coûteux : l'unité de H (K€ contre centime), le droit à rémunération non gardé, l'exclusivité sans exclusion.</p>
+      <p><strong>Surpris.</strong> <code>Client</code> et <code>Criteria</code> ne se créent pas en l'état du MPD ; <code>btree_gist</code> et le doublon <code>HunterPerformance.id_payment</code> sont à vérifier ; deux jours d'écart minimum entre deux scores d'un chasseur. <code>pytest</code> n'a pas tourné (<code>sqlmodel</code> absent, installation refusée) : le critère de fin des fiches fait foi. Restent à trancher : X01, X02, l'exemple Bruno.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>Fichier de fiches : <span class="mono">context AI/09-contraintes-mpd.md</span></span>
+    <span>Mis à jour le <span class="mono">2026-09-11</span></span>
+  </footer>
+</div>

@@ -68,8 +68,7 @@
     <!-- ZONE:encours — remplacé à chaque ouverture, remis à « aucun » à chaque clôture.
          /tache n'y touche pas : l'avancement fiche par fiche est sur la page du chantier. -->
     <div class="encours">
-      <div class="titre rien">aucun</div>
-      <div class="mono">le prochain s'ouvre par <span>/vlp:chantier</span></div>
+      <div class="rien">Aucun chantier ouvert — <span class="mono">/vlp:chantier</span> pour en ouvrir un.</div>
     </div>
   </section>
 
@@ -123,17 +122,25 @@
     <div class="tableau">
       <table>
         <thead>
-          <tr><th>Chantier</th><th>Fiches</th><th>Clos le</th><th>Ce qu'il a livré</th></tr>
+          <tr><th>Chantier</th><th>Fiches</th><th>Clos le</th><th>Ce qu'il a livré</th><th>Tokens</th></tr>
         </thead>
         <tbody>
+          <tr>
+            <td><a href="https://claude.ai/code/artifact/e740ccd5-eade-41ab-86fd-4c59d058543b">Contraintes manquantes du MPD</a> <span class="badge" data-etat="clos">clos</span></td>
+            <td class="mono">C1–C5</td>
+            <td class="mono">2026-09-11</td>
+            <td>Rapport d'écarts sur les 18 tables du MPD : 150 verdicts (84 couvertes, 49 partielles, 16 absentes, 1 fausse), 133 règles reprises sur 135.</td>
+            <td class="mono">≈31,3M (31 326 311)</td>
+          </tr>
         </tbody>
       </table>
     </div>
+    <p class="mono" style="margin:0;font-size:.85rem;color:var(--doux)">Total cumulé : ≈31,3M (31 326 311) tokens · 1 chantier clos</p>
   </section>
 
   <footer>
-    <span>Lettres de fiche prises : <span class="mono">aucune</span></span>
+    <span>Lettres de fiche prises : <span class="mono">C</span> (clos)</span>
     <span>État détaillé : <span class="mono">context AI/08-etat.md</span></span>
-    <span>Mis à jour le <span class="mono">2026-09-07</span></span>
+    <span>Mis à jour le <span class="mono">2026-09-11</span></span>
   </footer>
 </div>
