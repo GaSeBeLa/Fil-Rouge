@@ -48,6 +48,7 @@ et seulement dans ce cas, ouvrir l'index.
 | La tâche | Ouvrir |
 |---|---|
 | écrire ou modifier du code de l'API | `API/README.md`, puis le fichier visé |
+| lancer l'API et son Swagger | `docker compose up -d api` depuis `docker/`, puis http://localhost:8000/docs |
 | créer un module, chercher où va un bout de code | `API/src/app/main.py` — son en-tête décrit les trois couches |
 | vérifier une règle métier | `user-stories/<NN>_*.feature` |
 | vérifier une table, une colonne, une contrainte | `docker/init-v2/01_create_fil_rouge_immobilier.sql` |
