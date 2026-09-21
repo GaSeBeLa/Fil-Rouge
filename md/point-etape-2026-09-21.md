@@ -103,6 +103,25 @@ calcul. En soutenance, on dit « valeur proposée, validée par le groupe ».
 
 ## 5. Les 5 questions à trancher ensemble
 
+> 🗳️ **Position de Sébastien, arrêtée le 21/09 — à valider par le groupe.**
+> Ce n'est pas encore une décision collective : l'étape **A1** du plan reste
+> ouverte. Le détail de chaque question est conservé ci-dessous, inchangé.
+
+| # | La question | Réponse retenue |
+|---|---|---|
+| 1 | Date de début du barème | **Reculer à 2025** — le barème démarre au 01/01/2025 |
+| 2 | Quel score entre dans un paiement | **Le score de cette vente**, comme le sujet |
+| 3 | Chasseur sans droit à sa paie | **Ajouter la colonne « motif »** à `payment` — option **B** |
+| 4 | Biens de la démo | **Créer 3 à 5 biens fictifs** à Montpellier |
+| 5 | Mandat renouvelé | **La vente pointe vers le nouveau mandat** |
+
+⚠️ **La réponse 3 change le plan.** Elle ne se contente pas du seed : elle
+impose un **changement de schéma** sur `payment` (colonne de motif, et
+contrainte `base_rate > 0` à assouplir). Donc un **ADR** et une modification de
+`docker/init-v2/01_create_fil_rouge_immobilier.sql` **avant** l'étape A4.
+Nouvelle étape **A3 bis** au §6.
+
+
 ### Question 1 — 📅 À quelle date commence le barème ?
 
 - **Le problème.** Dans le code d'exemple du sujet, le barème commence le
@@ -174,6 +193,7 @@ calcul. En soutenance, on dit « valeur proposée, validée par le groupe ».
 | A1 | Trancher les 5 questions du §5 | **tout le groupe** | rien |
 | A2 | Monter une base **de test**, séparée de la vraie | Sébastien | rien |
 | A3 | Reprendre la calculette du sujet et ses 55 tests | Sébastien | A2 |
+| A3 bis | Motif de refus sur `payment` : ADR + schéma (suite Q3) | le groupe | A1 |
 | A4 | Écrire le seed `04_seed_demo.sql` | Sébastien | A1 et A3 |
 | A5 | Décider quoi faire des 4 défauts du §7 | le groupe | rien |
 | A6 | Un générateur de **gros volume** | plus tard, Phase 3 | A3 |
