@@ -36,6 +36,10 @@ modifiés**.
    est tranchée et prouvée : `docker/init-v2/README.md` §1.
 5. **Aucun secret ni `.env` dans git**, aucun chemin absolu dans le code.
 
+Les ADR ne vivent pas dans le dépôt mais sur Confluence : le dossier
+`decisions/` ne contient qu'un `.gitkeep`, et rien ne s'écrit sur Confluence
+depuis le dépôt — la synchronisation est manuelle, et décidée par le groupe.
+
 Prose et commentaires de code en français ; noms de code en anglais.
 Le contexte IA (`CLAUDE.md`, `context AI/`) est **versionné** : le projet se
 travaille à plusieurs. Les notes métier libres vivent dans `md/`.
@@ -53,6 +57,7 @@ et seulement dans ce cas, ouvrir l'index.
 | vérifier une règle métier | `user-stories/<NN>_*.feature` |
 | vérifier une table, une colonne, une contrainte | `docker/init-v2/01_create_fil_rouge_immobilier.sql` |
 | comprendre un choix du schéma v2 (euros, migration, hypothèses) | `docker/init-v2/README.md` |
+| relire une décision d'architecture (ADR) | **Confluence**, espace `GaSeBeLa1` — [wiki du projet](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/overview?homepageId=15008134). Le dossier `decisions/` du dépôt est **vide**, rien n'y est écrit |
 | ouvrir un chantier, ou le découper en fiches | **lancer `/vlp:chantier`** — la méthode vit dans le kit, pas ici |
 | relire une fiche `C1` à `C5` | `context AI/09-contraintes-mpd.md` — chantier **clos** le 2026-09-11, ne se rejoue pas |
 | reprendre après une longue interruption | `context AI/08-etat.md` |
