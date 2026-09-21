@@ -116,3 +116,12 @@ de ce que le code dit déjà.
   confirmer : `hire_date` = date de création du compte, `search_request.status`
   = `confirmed`, `commission_rate` non migrée (sens métier ambigu),
   `energetic_score` retirée (elle était `NULL` partout).
+- **2026-09-21** — `CHANTIER.md` et `INSTALLER-LE-WORKFLOW.md` sont supprimés :
+  la méthode de chantier vit désormais dans le plugin `vlp`, elle n'est plus
+  recopiée dans le dépôt. L'entrée du 2026-09-07 qui cite `CHANTIER.md` reste
+  telle quelle : c'est un fait daté, pas une consigne. Les deux fichiers
+  restent récupérables depuis le commit `2448614`.
+- **2026-09-21** — le dépôt suivait **67 fichiers `.pyc`** : sortis du suivi,
+  et un `.gitignore` complet posé. Les livrables du chantier `C`, ses annexes
+  et les notes métier (`md/`) sont enfin versionnés — ils ne l'étaient pas.
+
