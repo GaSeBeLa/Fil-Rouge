@@ -16,10 +16,10 @@
   les hypothèses et les 6 points ouverts sont dans `docker/init-v2/README.md`.
   `docker/init/` (12 tables, K€) reste intact mais n'est plus monté.
 - **API** — FastAPI + SQLModel, CRUD en trois couches (`routes/`, `services/`,
-  `repositories/`), pas de PATCH, choix assumé. ⚠️ **12 modèles pour 18
-  tables** : `sale`, `payment`, `commission_scale`, `hunter_performance`,
-  `parameters_fees` et `visit` n'existent pas côté API. Toute la chaîne de
-  rémunération est en base et invisible depuis l'API.
+  `repositories/`), pas de PATCH, choix assumé. Alignée sur les **18 tables**
+  depuis le 2026-09-21 : 18 modèles, 224 champs pour 224 colonnes, 18
+  ressources REST, 91 opérations. Tout montant est un `Decimal`. Vérifié en
+  exécution : `GET` sur les 18 ressources, 18/18 en `200`.
 - **Tests** — seulement `test_health.py` (test de fumée, ne touche pas la
   base). `conftest.py` expose une fixture `client` ; **pas encore de fixture
   de base de test isolée** — c'est le premier verrou.
@@ -39,9 +39,8 @@ ordonné par ce qui débloque le reste.
 
 | # | Chantier | Ce qu'il apporte | Coût estimé | Dépend de |
 |---|---|---|---|---|
-| 0 | Rattraper l'API sur les 18 tables | 6 modèles + couches manquants (`sale`, `payment`, `commission_scale`, `hunter_performance`, `parameters_fees`, `visit`) : sans eux, aucune règle de rémunération n'est implémentable | 4–6 fiches | rien |
 | 1 | Base de test isolée + tests d'intégration CRUD | une vérification qui prouve quelque chose : aujourd'hui `pytest` ne teste que le health-check | 4–6 fiches | rien |
-| 2 | Règles métier mandat / rémunération / barème | implémente les US 00 et 07 dans la couche `services/`, avec leurs tests ; reprend `U02` et `U05` laissés commentés dans le `01` | 5–7 fiches | 0, 1 |
+| 2 | Règles métier mandat / rémunération / barème | implémente les US 00 et 07 dans la couche `services/`, avec leurs tests ; reprend `U02` et `U05` laissés commentés dans le `01` | 5–7 fiches | 1 |
 | 3 | Livrable 2 — modélisation (MCD/MLD) | reconstruit le modèle depuis le SQL existant, pour `livrables/2-modelisation/` | 3–4 fiches | rien |
 | 4 | Livrable 1 — audit des données | rapport de normalisation à partir de `normalised/rapport_anomalies.txt` | 3–4 fiches | rien |
 | 5 | Livrable 3 — architecture | documente les trois couches et les choix (pas de PATCH, bases génériques) | 2–3 fiches | 1 |
@@ -124,4 +123,21 @@ de ce que le code dit déjà.
 - **2026-09-21** — le dépôt suivait **67 fichiers `.pyc`** : sortis du suivi,
   et un `.gitignore` complet posé. Les livrables du chantier `C`, ses annexes
   et les notes métier (`md/`) sont enfin versionnés — ils ne l'étaient pas.
+- **2026-09-21** — **l'API est rattrapée sur les 18 tables** (chantier 0 de la
+  TODO, clos le jour de son ouverture). 6 modèles créés (`Sale`, `Payment`,
+  `CommissionScale`, `HunterPerformance`, `ParametersFees`, `Visit`) et leurs
+  trois couches. Mesuré : **224 champs déclarés pour 224 colonnes en base**,
+  18/18 tables couvertes, 0 écart.
+- **2026-09-21** — 7 des 12 modèles existants étaient **faux**, pas seulement
+  incomplets : 19 colonnes manquantes, 7 colonnes inexistantes, et **14 champs
+  monétaires typés `float`** sur des colonnes `NUMERIC` — dont `estate.price`.
+  Tous passés en `Decimal`. Deux contraintes étaient inversées :
+  `criteria.estate_type` est obligatoire et `typology` facultatif, l'inverse
+  de ce que le modèle déclarait.
+- **2026-09-21** — vérification en exécution, dans un conteneur jetable (rien
+  installé sur le poste, conformément à la décision du 2026-09-11) : `GET` sur
+  les 18 ressources, **18/18 en `200`**, 91 opérations exposées. `price`
+  remonte en `"354712.00"` — le `Decimal` est préservé au centime.
+  ⚠️ Cette vérification n'est **pas** un test automatisé : `pytest` ne couvre
+  toujours que le health-check. Le chantier 1 reste le premier verrou.
 

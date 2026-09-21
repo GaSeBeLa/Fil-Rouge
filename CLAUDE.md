@@ -14,8 +14,9 @@ modifiés**.
   `docker/init-v2/` et monté par `docker compose`. `docker/init/` (12 tables,
   K€) est l'ancien schéma, gardé intact, plus monté.
 - L'API expose un CRUD complet en trois couches (routes / services /
-  repositories), mais sur **12 modèles seulement** : elle n'a pas suivi le
-  passage à 18 tables. Seul le health-check est testé.
+  repositories) sur les **18 tables**, en `Decimal` pour tout montant.
+  91 opérations vérifiées en `200` contre la base. Seul le health-check est
+  testé automatiquement : la base de test isolée reste le premier verrou.
 - Les user stories Gherkin (`user-stories/`) couvrent le parcours actuel et le
   futur parcours IA ; les règles métier ne sont pas encore implémentées.
 - `normalised/` porte la normalisation des annonces et son rapport d'anomalies.
