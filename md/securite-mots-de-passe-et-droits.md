@@ -16,6 +16,36 @@
 
 ---
 
+## ⚠️ Périmètre révisé le 22/09/2026 — la moitié de cette note est caduque
+
+Le **client** a tranché dans l'après-midi, après la rédaction de cette note :
+
+> « vous ne gérez pas l'auth, c'est géré au dessus »
+
+Détail, citations complètes et conséquences :
+`md/adr-026-perimetre-authentification.md`.
+
+| Ce qui tombe | Ce qui reste |
+|---|---|
+| ❌ `§3` — authentification, JWT, login | ✅ `§1` — les mesures du 22/09 |
+| ❌ `§4` — RBAC, ownership, `403` | ✅ `§2` — le hachage Argon2id |
+| ❌ `§5.3` durée du jeton, `§5.5` périmètre, `§5.6` politique de mot de passe | ✅ `§4.1` — le piège IDOR, à savoir expliquer |
+| ❌ `md/tuto-2-authentification-jwt.md` | ✅ `§7` — l'argument RGPD pour la soutenance |
+
+➡️ **Le hachage reste justifié**, mais son motif change : ce n'est plus
+« pour se connecter », c'est le *privacy by design* exigé par le sujet.
+Stocker un mot de passe en clair resterait indéfendable.
+
+➡️ **Le tableau du `§4.3` n'est plus un backlog.** Il est devenu un
+livrable de conception, repris et complété dans
+`md/matrice-droits-crud-par-role.md`.
+
+💡 **Cette note n'est pas supprimée.** Ses mesures sont justes, son
+vocabulaire aussi, et elle trace une réflexion que le jury peut interroger.
+Une piste écartée en conscience vaut mieux qu'une piste jamais explorée.
+
+---
+
 ## 1. Le constat, mesuré le 22/09
 
 | Vérification | Résultat |

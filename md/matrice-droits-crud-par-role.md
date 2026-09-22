@@ -11,6 +11,32 @@
 
 ---
 
+## ⚠️ Périmètre révisé le 22/09/2026 — à lire avant le reste
+
+Le **client** a tranché le 22/09, après la rédaction de cette note :
+
+> « vous ne gérez pas l'auth, c'est géré au dessus »
+
+➡️ **Ce tableau ne sera pas codé.** Ni contrôle par rôle, ni filtrage par
+appartenance, ni tests `403`. Détail et citations : `md/adr-026-perimetre-authentification.md`.
+
+➡️ **Mais il reste un livrable.** Le sujet exige une note « souveraineté &
+sécurité des données » qui réclame le **périmètre d'accès**, et pose le
+RGPD comme non optionnel. Le client a retiré l'implémentation, pas l'énoncé.
+
+| Avant le 22/09 | Depuis le 22/09 |
+|---|---|
+| Spécification à implémenter dans l'API | **Livrable de conception** |
+| Les 🟡 bloquaient du code | Les 🟡 bloquent un document |
+| Preuve = des tests `401` / `403` | Preuve = un ADR argumenté |
+
+⚠️ **Une réserve.** La question posée au client mélangeait deux sujets :
+« l'authentification » **et** « ce qu'ils peuvent faire sur l'application ».
+Son « non » portait sur les deux, mais sa justification ne parle que de
+l'auth. ➡️ **À lui faire préciser.**
+
+---
+
 ## 1. Le constat, en trois phrases
 
 **1.** L'énoncé ne dit **rien** sur les droits d'accès. Pas une ligne.
@@ -78,8 +104,11 @@ migration. Et il n'y a **aucun** compte Admin.
 
 ✅ Le hachage Argon2id est en place depuis le 22/09 (commit `d8ba03d`) :
 plus rien ne bloque la **création des vrais comptes** Manager et Admin.
-Proposition déjà sur la table : **1 admin, 2 managers** — deux, pour
-pouvoir démontrer qu'un manager ne voit pas les chasseurs de l'autre.
+Proposition déjà sur la table : **1 admin, 2 managers**.
+
+⚠️ Depuis la révision de périmètre, ces comptes servent au **seed de
+démonstration**, plus à se connecter. Deux managers restent utiles : ils
+rendent le modèle lisible, et le placeholder de migration doit disparaître.
 
 ---
 
