@@ -177,25 +177,48 @@ chose cette semaine, c'est celle-là.
 
 Même page que l'ADR-024 : *Journal de décisions (ADR)*, espace `GaSeBeLa1`.
 
-1. [ ] Ouvrir `md/adr-025-lien-chasseur-manager.md`.
-2. [ ] ⚠️ **Ne pas copier le haut du fichier** : commencer la sélection à la
+1. [x] Ouvrir `md/adr-025-lien-chasseur-manager.md`.
+2. [x] ⚠️ **Ne pas copier le haut du fichier** : commencer la sélection à la
    ligne `**ADR-025 : Chaque chasseur est rattaché à un manager**`.
-3. [ ] ⚠️ Le numéro suppose que l'ADR-024 est bien numéroté 024 (bloc 2.1).
+3. [x] ⚠️ Le numéro suppose que l'ADR-024 est bien numéroté 024 (bloc 2.1).
    Si le journal a tranché autrement, décaler.
-4. [ ] Coller en bas de la page, vérifier les tableaux, publier.
-5. [ ] En réunion : le faire passer de « proposé » à « accepté » (avec l'ADR-024,
+4. [x] Coller en bas de la page, vérifier les tableaux, publier.
+5. [x] En réunion : le faire passer de « proposé » à « accepté » (avec l'ADR-024,
    bloc 3.2).
+
+✅ **Fait le 22/09** — vérifié sur Confluence : l'ADR-025 est en bas du
+journal, statut **« accepté »**.
+
+⚠️ **Deux choses vues au passage, à corriger sur Confluence (toi seul) :**
+
+- [ ] La note de fin de fichier *« À corriger dans le drawio, hors ADR :
+      `criteria.budget_max NUMERIC (12.2)`… »* a été collée avec l'ADR. Elle
+      était pour nous, pas pour le journal : à retirer.
+- [ ] **L'ADR-024 lui-même n'est pas dans le journal.** Entre l'ADR-023 et
+      l'ADR-025 se trouve *« ADR-024 — les modifications à faire, en détail »*
+      — c'est le **compagnon technique** (`md/adr-024-modifications-a-faire.md`),
+      pas la décision (`md/adr-024-motif-refus-remuneration.md`, qui commence
+      par `**ADR-024 : Traçabilité du refus de rémunération du chasseur**`
+      avec date, statut, options). Le journal a donc un **trou** : aucun bloc
+      « ADR-024 : … / Statut : … ». À remplacer par le bon fichier — le bloc
+      2.2 ci-dessus dit lequel.
 
 ### 6.2 Le drawio — toi seul
 
 Fichier `MPD 03 4.drawio.xml` (et la page Confluence *Schémas - MCD/MLD/MPD
 Cible* si elle est déjà à jour).
 
-- [ ] `criteria.budget_max` : **`NUMERIC (12.2)`** → **`NUMERIC (12, 2)`**.
+- [x] `criteria.budget_max` : **`NUMERIC (12.2)`** → **`NUMERIC (12, 2)`**.
       Un point au lieu d'une virgule. Le script SQL lit déjà `(12, 2)`.
-- [ ] Décider si le lien Hunter → Manager garde le libellé **« Manages »**,
+- [x] Décider si le lien Hunter → Manager garde le libellé **« Manages »**,
       ou passe à **« Supervises »** pour ne pas le confondre avec le lien
       SearchRequest → Manager, qui s'appelle aussi « Manages ».
+
+🟢 **Fait le 22/09, dit par toi — non vérifiable d'ici** : le diagramme vit
+dans Confluence, dont l'API ne rend pas le contenu draw.io. ⚠️ Le fichier
+local `vrac/MPD 03 4.drawio.xml` (11:20) porte encore `12.2` et aucun
+« Supervises » : penser à **ré-exporter** le drawio à jour, et me dire quel
+libellé a été retenu pour que je l'aligne dans le script et l'ADR.
 
 ### 6.3 Ta base locale
 
@@ -212,8 +235,11 @@ ou, pour garder les données :
 docker exec -i fil_rouge_immobilier_db sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -v ON_ERROR_STOP=1' < migrations/2026-09-22_hunter_manager.sql
 ```
 
-- [ ] Vérifier ensuite : `SELECT count(*) FROM hunter WHERE id_realestatemanager IS NULL;`
+- [x] Vérifier ensuite : `SELECT count(*) FROM hunter WHERE id_realestatemanager IS NULL;`
       doit donner **0**.
+
+🟢 **Fait le 22/09, dit par toi — non revérifié** : Docker Desktop était fermé
+au moment du contrôle.
 
 ### 6.4 Pour le seed (`A4`)
 
