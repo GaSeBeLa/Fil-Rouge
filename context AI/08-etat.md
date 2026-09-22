@@ -141,3 +141,14 @@ de ce que le code dit déjà.
   ⚠️ Cette vérification n'est **pas** un test automatisé : `pytest` ne couvre
   toujours que le health-check. Le chantier 1 reste le premier verrou.
 
+- **2026-09-22** — **chaque chasseur a un manager** (MPD 03 4) :
+  `hunter.id_realestatemanager NOT NULL`, FK vers `real_estate_manager(id_user)`.
+  Choix du groupe appuyé sur l'exemple ENF-03 du sujet — un exemple de
+  rédaction, pas une exigence du client — à acter : brouillon
+  `md/adr-025-lien-chasseur-manager.md`. Les 6 chasseurs migrés sont rattachés
+  à un **manager placeholder** (user 25), hypothèse documentée au README
+  init-v2 §3.6. Mesuré, PostgreSQL 16, base neuve **et** base migrée par
+  `docker/migrations/2026-09-22_hunter_manager.sql` (rejouable) : 7 cas
+  adverses sur 7, même comportement des deux côtés ; API `GET /hunters` en
+  `200` avec la colonne, `POST` sans manager en `409`. Le schéma compte
+  désormais **226 colonnes** (le « 224 » n'avait pas suivi l'ADR-024).
