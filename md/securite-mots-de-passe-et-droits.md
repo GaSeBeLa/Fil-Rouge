@@ -8,6 +8,11 @@
 > extraits de code sont des **esquisses non testées**, pas du code à coller.
 >
 > 📅 22 septembre 2026. Couvre les étapes `B1`, `B2` et `B3` du plan.
+>
+> 🛠️ **Pour passer à la pratique**, deux tutos pas-à-pas :
+> `md/tuto-1-hachage-mots-de-passe.md` puis
+> `md/tuto-2-authentification-jwt.md`. Cette note dit *pourquoi* ; les tutos
+> disent *comment*.
 
 ---
 
@@ -359,6 +364,11 @@ compte.
 
 💡 **Les étapes 1 et 2 ne dépendent de rien.** Elles peuvent démarrer tout de
 suite, sans attendre la réunion.
+
+| Étapes | Tuto correspondant |
+|---|---|
+| 1 à 3 | `md/tuto-1-hachage-mots-de-passe.md` |
+| 4 à 8 | `md/tuto-2-authentification-jwt.md` |
 
 ---
 
