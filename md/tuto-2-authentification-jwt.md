@@ -490,12 +490,23 @@ class PaymentService(BaseService[Payment]):
         if role == "Hunter":
             # Restriction DANS la requête, pas après.
             statement = statement.where(Payment.id_hunter == user.id)
+        elif role == "Manager":
+            # Ses chasseurs : ceux dont hunter.id_realestatemanager est lui.
+            # Lien ajouté le 22/09 (voir §8.2). Les deux colonnes portent
+            # des id de "user", comme toutes les FK du schéma.
+            mine = select(Hunter.id_user).where(
+                Hunter.id_realestatemanager == user.id
+            )
+            statement = statement.where(Payment.id_hunter.in_(mine))
         elif role == "Client":
             raise HTTPException(status_code=403, detail="Droits insuffisants")
         # Admin : aucune restriction.
 
         return session.exec(statement).all()
 ```
+
+⚠️ La branche `Manager` n'a **pas été exécutée** : elle est écrite à la main,
+à vérifier au moment de l'implémenter (étape 7 du plan).
 
 💡 **Pourquoi dans le `WHERE` et pas après ?**
 
@@ -507,37 +518,39 @@ la requête SQL.
 ⚠️ Et le `GET /payments/{id}` demande le même soin : un identifiant deviné
 suffit, sinon.
 
-### 8.2 🔴 Un obstacle : le lien manager → chasseur n'existe pas
+### 8.2 ✅ Résolu le 22/09 : le lien manager → chasseur existe
 
-Vérifié dans le schéma le 22/09 :
+Le matin, ce paragraphe décrivait un obstacle : `hunter` n'avait aucune
+colonne vers son manager, et la règle « un manager voit la paie de ses
+chasseurs » ne pouvait pas s'écrire. Deux pistes étaient proposées — **A**,
+une colonne sur `hunter` ; **B**, dériver le lien des `search_request`.
 
-- `hunter` n'a **aucune** colonne `id_manager` ;
-- `real_estate_manager` n'a **aucune** référence vers `hunter` ;
-- aucune table de liaison entre les deux.
+**Tranché l'après-midi** (MPD 03 4, commit `51f4761`) — piste **A**, en plus
+strict :
 
-➡️ **La règle « un manager voit la paie de ses chasseurs » ne peut pas
-s'écrire aujourd'hui.** Rien en base ne dit qui encadre qui.
+| Quoi | Valeur |
+|---|---|
+| Colonne | `hunter.id_realestatemanager`, **`NOT NULL`** |
+| Cible | `real_estate_manager(id_user)` — donc un id de `"user"` |
+| Cardinalité | Hunter (1,1) — RealEstateManager (0,n) |
+| ADR | brouillon `md/adr-025-lien-chasseur-manager.md`, à valider |
+| Base locale d'avant le 22/09 | `docker compose down -v && docker compose up -d`, ou `docker/migrations/2026-09-22_hunter_manager.sql` |
 
-Le seul endroit où les deux se croisent est `search_request`, qui porte à la
-fois `id_hunter` et `id_realestatemanager`.
+➡️ C'est ce que la branche `Manager` du §8.1 utilise.
 
-| Piste | Principe | Coût |
-|---|---|---|
-| **A** ✅ | ajouter `hunter.id_manager` (FK nullable) | une migration, mais explicite et durable |
-| **B** | dériver le lien des `search_request` communes | zéro migration, mais indirect et fragile |
+### 8.3 Un seul compte Manager, et c'est un placeholder
 
-💡 **Recommandation : piste A.** Un rattachement hiérarchique est un fait
-métier stable, pas une conséquence d'un historique de dossiers.
+Mesuré le matin : `Manager` **0**, `Admin` **0**.
 
-⚠️ **À trancher en réunion avant d'écrire cette partie.**
+Depuis l'après-midi : `Manager` **1** — `manager.migration@chassimmo.fr`
+(user 25), créé par la migration parce que la colonne est `NOT NULL` et que
+la source n'a aucun manager. Compte **bloqué** (même placeholder que les 24
+autres), nom bidon, **pas une personne**. Les 6 chasseurs pointent vers lui.
+`Admin` : toujours **0**.
 
-### 8.3 Et il n'y a aucun compte Manager
-
-Mesuré : `Manager` **0 compte**, `Admin` **0 compte**.
-
-➡️ Même une fois la règle écrite, elle ne sera **ni démontrable, ni
-testable**. Il faut créer ces comptes — **après le tuto 1**, sinon leur mot de
-passe part en clair.
+➡️ La règle est écrite, mais elle reste **ni démontrable, ni testable** avec
+un seul manager. Il faut de vrais comptes — **après le tuto 1**, sinon leur
+mot de passe part en clair.
 
 Proposition : **1 admin, 2 managers**. Deux, pour pouvoir montrer qu'un manager
 ne voit pas les chasseurs de l'autre.
@@ -643,7 +656,7 @@ Les autres ne prouvent que l'authentification.
 |---|---|---|
 | 1 | JWT, ou session en base ? | tout ce tuto |
 | 2 | Durée du jeton ? *(proposition : 1 h)* | §2.2 |
-| 3 | Piste A ou B pour le lien manager → chasseur ? | §8.2 |
+| 3 | ~~Piste A ou B pour le lien manager → chasseur ?~~ **tranché le 22/09**, reste à valider l'ADR-025 | §8.2 |
 | 4 | Combien de comptes Manager / Admin ? *(proposition : 2 et 1)* | §8.3 |
 | 5 | La matrice « qui voit quoi » | §7, §8 |
 | 6 | Longueur minimale d'un mot de passe ? | tuto 1, §4.2 |
@@ -673,7 +686,7 @@ Les autres ne prouvent que l'authentification.
 | Avertissement si la clé fait moins de 32 octets | mesuré : `InsecureKeyLengthWarning`, RFC 7518 §3.2 |
 | Rate-limiting sur les endpoints d'authentification | Confluence, `ADR-016` |
 | Les ~90 routes viennent d'une seule fabrique | `API/src/app/routes/crud_router.py` |
-| Aucun lien `hunter` ↔ `real_estate_manager` | `docker/init-v2/01_create_fil_rouge_immobilier.sql` |
-| 0 compte `Manager`, 0 compte `Admin` | mesuré en base le 22/09 |
+| Lien `hunter` → `real_estate_manager` depuis le 22/09 après-midi (absent le matin) | `docker/init-v2/01_create_fil_rouge_immobilier.sql`, table `hunter` ; `md/adr-025-lien-chasseur-manager.md` |
+| 0 compte `Manager`, 0 compte `Admin` le matin ; 1 manager placeholder l'après-midi | mesuré en base le 22/09 ; `docker/init-v2/README.md` §3.6 |
 | Aucun ADR sur l'authentification | Confluence, *Journal de décisions* — `ADR-001` à `ADR-024` relus le 22/09 |
 | Aucun secret dans git | `CLAUDE.md` du projet, règle 5 |

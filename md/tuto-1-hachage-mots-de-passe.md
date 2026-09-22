@@ -537,7 +537,7 @@ Deux choses à faire **plus tard**, pas maintenant :
 | Quoi | Quand |
 |---|---|
 | Remplacer le placeholder `$2b$` (bcrypt) par une vraie empreinte Argon2id | à l'écriture du seed |
-| Créer les comptes `Manager` et `Admin` — zéro des deux aujourd'hui | après ce tuto |
+| Créer de **vrais** comptes `Manager` et `Admin` — aujourd'hui : 1 manager placeholder bloqué (migration du 22/09), 0 admin | après ce tuto |
 
 ⚠️ **Ne créez pas de compte admin avant d'avoir fini ce tuto.** Son mot de
 passe partirait en clair.

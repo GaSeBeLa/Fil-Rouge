@@ -20,8 +20,8 @@
 
 | Vérification | Résultat |
 |---|---|
-| Comptes en base | **24** — 18 `Client`, 6 `Hunter` |
-| Comptes `Manager` / `Admin` | **0** et **0** ⚠️ |
+| Comptes en base | **24** — 18 `Client`, 6 `Hunter` *(25 depuis l'après-midi, §4.4)* |
+| Comptes `Manager` / `Admin` | **0** et **0** ⚠️ *(depuis l'après-midi : 1 manager **placeholder**, bloqué — §4.4)* |
 | Mot de passe haché | ❌ aucun mécanisme |
 | Route protégée | ❌ aucune, sur ~90 opérations |
 | Dépendance de hachage | ❌ absente de `requirements.txt` |
@@ -292,27 +292,32 @@ Les cases 🟡 sont à trancher en réunion.
 | `estate`, `picture` | ✅ | ✅ | ✅ | ✅ |
 | `mandate`, `sale` | 🟡 les siens | 🟡 les siens | 🟡 | ✅ |
 
-### 4.4 ⚠️ Un obstacle mesuré : le lien manager → chasseur n'existe pas
+### 4.4 ✅ Résolu le 22/09 : le lien manager → chasseur existe
 
-Vérifié dans le schéma le 22/09 :
+Le matin, ce paragraphe décrivait un **obstacle** : aucune colonne, aucune
+table ne disait qui encadre qui. Le seul croisement était `search_request`,
+qui porte `id_hunter` et `id_realestatemanager`. Deux pistes étaient
+proposées : **A**, une colonne `hunter.id_manager` ; **B**, dériver le lien
+des demandes communes.
 
-- `hunter` n'a **aucune** colonne `id_manager`.
-- `real_estate_manager` n'a **aucune** référence vers `hunter`.
-- Aucune table de liaison entre les deux.
+**Tranché l'après-midi** (MPD 03 4, commit `51f4761`) — piste **A**, en plus
+strict :
 
-➡️ **La phrase « son manager » n'a aujourd'hui aucun support en base.** On ne
-peut pas écrire la règle, faute de savoir qui encadre qui.
+- `hunter.id_realestatemanager`, **`NOT NULL`**, FK vers
+  `real_estate_manager(id_user)`, `ON DELETE RESTRICT` ;
+- relation Hunter (1,1) — RealEstateManager (0,n) : un chasseur a toujours
+  un manager, un manager peut n'en avoir aucun ;
+- brouillon d'ADR à faire valider : `md/adr-025-lien-chasseur-manager.md`.
 
-Le seul endroit où les deux se croisent est `search_request`, qui porte à la
-fois `id_hunter` et `id_realestatemanager`. Deux pistes :
+➡️ **La phrase « son manager » a maintenant un support en base.** La règle
+peut s'écrire — le code est dans `tuto-2`, §8.1.
 
-| Piste | Principe | Coût |
-|---|---|---|
-| **A** | ajouter `hunter.id_manager` (FK nullable) | une migration, mais explicite et durable |
-| **B** | dériver le lien des `search_request` communes | zéro migration, mais indirect et fragile |
+⚠️ Deux choses à savoir :
 
-💡 Recommandation : **piste A**. Un rattachement hiérarchique est un fait métier
-stable, pas une conséquence d'un historique de dossiers.
+| Quoi | Détail |
+|---|---|
+| Un manager **placeholder** existe | user 25, `manager.migration@chassimmo.fr`, bloqué par le même placeholder que les 24 autres. Les 6 chasseurs pointent vers lui. Ce n'est **pas** une personne : le seed le remplacera. |
+| Une base locale créée **avant** le 22/09 n'a pas la colonne | `docker compose down -v && docker compose up -d`, ou jouer `docker/migrations/2026-09-22_hunter_manager.sql`. |
 
 ### 4.5 Ce qu'il faut écrire
 
@@ -330,7 +335,8 @@ stable, pas une conséquence d'un historique de dossiers.
 1. 👔 **Combien de comptes `Manager` et `Admin` ?** Zéro des deux aujourd'hui.
    Proposition : **1 admin, 2 managers** — deux, pour pouvoir démontrer qu'un
    manager ne voit pas les chasseurs de l'autre.
-2. 🔗 **Piste A ou B pour le lien manager → chasseur ?** (§4.4)
+2. ~~🔗 Piste A ou B pour le lien manager → chasseur ?~~ **Tranché le 22/09** :
+   piste A, en `NOT NULL` (§4.4). Reste à **valider l'ADR-025**.
 3. ⏱️ **Durée de validité du jeton ?** Sans révocation possible (§3.2), c'est le
    seul garde-fou. Proposition : 1 h, sans *refresh token* — hors périmètre.
 4. 🔑 **Que fait-on des 24 comptes migrés ?** Leur serrure est bouchée, rien ne
@@ -354,7 +360,7 @@ stable, pas une conséquence d'un historique de dossiers.
 | 4 | `POST /auth/login` + JWT + `get_current_user` | 2 | 🟠 |
 | 5 | `401` par défaut sur `build_crud_router` | 4 | 🟢 |
 | 6 | `require_role` — RBAC | 5 + §4.3 validé | 🟠 |
-| 7 | Filtrage par appartenance | 6 + §4.4 tranché | 🔴 |
+| 7 | Filtrage par appartenance | 6 *(§4.4 tranché le 22/09)* | 🔴 |
 | 8 | Tests `401` / `403` / accès légitime | base de test (`A2`) | 🟠 |
 
 ⚠️ **Le verrou réel est ailleurs** : l'étape 8 attend la **base de test isolée**
@@ -417,7 +423,7 @@ C'est exact, et bien plus difficile à contester.
 | Aucun hachage dans le service | `API/src/app/services/user_service.py` — 7 lignes |
 | L'architecture prévoit la surcharge | `API/src/app/services/base_service.py`, en-tête |
 | Les ~90 routes sont génériques | `API/src/app/routes/crud_router.py` |
-| Aucun lien `hunter` ↔ `real_estate_manager` | schéma de référence, ces deux tables |
+| Lien `hunter` → `real_estate_manager` depuis le 22/09 (absent le matin) | `docker/init-v2/01_create_fil_rouge_immobilier.sql`, table `hunter` ; `md/adr-025-lien-chasseur-manager.md` |
 | Le rôle `Admin` manquait | `docker/migrations/2026-09-22_role_admin.sql` |
 | Le RGPD n'est pas optionnel | `BASE/Readme.md`, section RGPD |
 | L'exigence d'accès est un **exemple** | `BASE/documents utiles/CAHIER-DES-CHARGES-TECHNIQUE.md`, « Exigences non fonctionnelles (extrait) » |
@@ -438,7 +444,8 @@ FROM role r LEFT JOIN "user" u ON u.id_role = r.id
 GROUP BY r.id, r.wording ORDER BY r.id;
 ```
 
-Attendu : **4 lignes** — Client 18, Hunter 6, Manager 0, Admin 0. `\q` pour
+Attendu : **4 lignes** — Client 18, Hunter 6, Manager **1** (le placeholder
+du §4.4 ; **0** sur une base créée avant le 22/09), Admin 0. `\q` pour
 sortir.
 
 ### 8.2 Rejouer la preuve du §1.2
