@@ -1,447 +1,480 @@
-# Mots de passe et droits d'accès — ce qu'il faut faire
+# Mots de passe et droits d'accès — ce qu'il reste à faire
 
-> 📖 **Écrit pour tout le groupe, techniciens ou non.** Chaque notion est
-> expliquée avant d'être utilisée. Aucune connaissance préalable demandée.
+> 📖 **Pour tout le groupe.** Niveau supposé : SQL, Python, Docker. Aucune
+> notion de sécurité applicative supposée — hachage, JWT et RBAC sont
+> expliqués ici.
 >
-> ⚠️ **Note rédigée avec l'IA.** Elle ne fait pas foi : les sources sont au §9.
+> ⚠️ **Note rédigée avec l'IA.** Elle ne fait pas foi : sources au §8. Les
+> extraits de code sont des **esquisses non testées**, pas du code à coller.
 >
-> 📅 22 septembre 2026. Correspond aux étapes `B1`, `B2` et `B3` du plan.
+> 📅 22 septembre 2026. Couvre les étapes `B1`, `B2` et `B3` du plan.
 
 ---
 
-## 1. Le problème, en une image
+## 1. Le constat, mesuré le 22/09
 
-Notre application a **24 comptes**. Aujourd'hui, deux choses clochent :
-
-🔓 **Les mots de passe s'écrivent en clair.** C'est comme si, à l'hôtel, la
-réception notait le code de ton coffre-fort sur un carnet posé sur le
-comptoir. N'importe qui passant derrière le comptoir peut le lire.
-
-🚪 **Toutes les portes sont ouvertes.** Il n'y a ni serrure, ni badge. Qui que
-tu sois, tu peux consulter la paie de n'importe quel chasseur, les budgets de
-n'importe quel client, les coordonnées de tout le monde.
-
-**Ce document explique comment fermer ces deux trous.** Ce sont deux chantiers
-différents, à faire dans l'ordre.
-
----
-
-## 2. Où on en est exactement — mesuré le 22/09
-
-### 2.1 Les chiffres
-
-| Ce qu'on a vérifié | Résultat |
+| Vérification | Résultat |
 |---|---|
-| Comptes dans la base | **24** — 18 clients, 6 chasseurs |
-| Comptes « manager » | **0** ⚠️ |
-| Comptes « admin » | **0** ⚠️ |
-| Mots de passe protégés | ❌ **aucun** |
-| Routes protégées dans l'API | ❌ **aucune** |
-| Outil de protection installé | ❌ aucun |
+| Comptes en base | **24** — 18 `Client`, 6 `Hunter` |
+| Comptes `Manager` / `Admin` | **0** et **0** ⚠️ |
+| Mot de passe haché | ❌ aucun mécanisme |
+| Route protégée | ❌ aucune, sur ~90 opérations |
+| Dépendance de hachage | ❌ absente de `requirements.txt` |
 
-### 2.2 Ce qui va mieux qu'on ne le croyait
+### 1.1 Ce qui protège déjà — le passé
 
-✅ **Les 24 comptes existants ne sont pas en danger.**
-
-Quand les données de l'ancien système ont été reprises, personne n'a inventé de
-faux mots de passe. À la place, l'équipe a écrit dans chaque compte une valeur
-volontairement inutilisable :
+Les 24 comptes repris de l'ancien système portent tous la même valeur :
 
 ```
 $2b$12$MIGRATED_PLACEHOLDER_MUST_RESET
 ```
 
-🔒 **C'est une serrure bouchée à la colle.** Aucun mot de passe au monde ne
-correspond à cette valeur. Personne ne peut entrer sur ces 24 comptes. C'était
-le bon réflexe, et il est resté en place.
+Ce n'est **pas** un mot de passe, ni même un hachage valide. C'est un
+placeholder délibéré : aucune entrée ne pourra jamais lui correspondre, donc
+aucune connexion n'est possible sur ces comptes. Le choix est documenté dans
+`02_migration.sql`. Bon réflexe, et toujours en place.
 
-✅ **Deuxième bonne nouvelle** : l'API ne renvoie plus jamais le mot de passe
-quand on lui demande la liste des comptes. C'était un bug, corrigé le 21/09.
+✅ Second point acquis : `UserPublic` empêche `password` de sortir dans les
+réponses de l'API. Corrigé le 21/09.
 
-### 2.3 Ce qui est pire qu'on ne le croyait
+### 1.2 Ce qui ne protège rien — le présent
 
-❌ **Tout compte créé aujourd'hui stocke son mot de passe en clair.**
-
-Ce n'est pas une supposition. Le test a été fait le 22/09 :
+Test effectué le 22/09 sur la base de dev :
 
 | Étape | Résultat |
 |---|---|
-| 1. Créer un compte via l'API, mot de passe `MotDePasseEnClair123` | accepté |
-| 2. Regarder ce que la base a gardé | **`MotDePasseEnClair123`** ❌ |
-| 3. Supprimer le compte de test | fait, retour à 24 comptes |
+| `POST /users` avec `"password": "MotDePasseEnClair123"` | créé |
+| `SELECT password FROM "user"` sur la ligne créée | **`MotDePasseEnClair123`** ❌ |
+| `DELETE /users/{id}` | `200`, retour à 24 comptes |
 
-➡️ **Le mot de passe est recopié tel quel, lisible par quiconque ouvre la
-base.** Le placeholder protège le passé ; il ne protège rien de ce qu'on
-écrira demain.
+La valeur est persistée telle quelle. `UserService` hérite de `BaseService`
+sans rien surcharger — `create()` passe l'objet au repository sans le toucher.
 
-💡 C'est exactement ce qu'il faut montrer au groupe : le trou n'est pas
-théorique, il est déjà ouvert.
+➡️ **Le placeholder protège les données migrées. Rien ne protège ce qui sera
+écrit ensuite.**
+
+### 1.3 Détail à corriger au passage
+
+Le placeholder commence par `$2b$`, préfixe **bcrypt**. Or `ADR-016` retient
+**Argon2id**, dont le préfixe est `$argon2id$`. La valeur est inerte, donc sans
+risque, mais elle contredit la décision. À remplacer quand le seed sera écrit.
 
 ---
 
-## 3. Premier chantier — protéger les mots de passe
+## 2. `B1` — hacher les mots de passe
 
-### 3.1 « Hacher », c'est quoi ?
+### 2.1 Hachage, pas chiffrement
 
-🍓 **Imagine un smoothie.** Tu mets une fraise dans un mixeur. Tu obtiens un
-liquide rose. Personne, même avec le meilleur matériel du monde, ne peut
-reconstituer la fraise d'origine à partir du smoothie.
+Deux opérations souvent confondues :
 
-**Hacher un mot de passe, c'est ça.** On passe le mot de passe au mixeur, et on
-ne garde **que le smoothie**. Le mot de passe d'origine, on ne le garde nulle
-part.
-
-### 3.2 Mais alors, comment vérifie-t-on ?
-
-Question logique. La réponse est simple :
-
-1. Tu tapes ton mot de passe pour te connecter.
-2. L'application le passe **au même mixeur**.
-3. Elle compare **les deux smoothies**.
-4. S'ils sont identiques, c'est que c'était le bon mot de passe. ✅
-
-➡️ À aucun moment l'application n'a eu besoin de connaître ton mot de passe.
-Elle sait juste reconnaître son empreinte.
-
-### 3.3 Pourquoi c'est important
-
-Si quelqu'un vole notre base de données :
-
-| Aujourd'hui | Après |
-|---|---|
-| Il lit tous les mots de passe | Il ne trouve que des smoothies |
-| Il peut se connecter à la place de chacun | Il ne peut rien en faire |
-
-💡 **Et ça dépasse notre appli.** Beaucoup de gens réutilisent le même mot de
-passe partout. Un mot de passe volé chez nous ouvrirait aussi leur boîte mail.
-C'est pour ça que ce n'est pas négociable.
-
-### 3.4 Le petit truc en plus : le « sel »
-
-Si deux personnes choisissent le même mot de passe, elles auraient le même
-smoothie — et un voleur verrait qu'elles ont le même.
-
-🧂 **Le sel**, c'est un ingrédient aléatoire ajouté à chaque mixage. Résultat :
-même mot de passe, smoothies différents. Chacun est unique.
-
-✅ **Bonne nouvelle** : l'outil qu'on a choisi fait ça tout seul. On n'a rien à
-gérer.
-
-### 3.5 L'outil est déjà choisi
-
-⚠️ **Le point d'étape du 21/09 disait que ce choix restait à faire. C'est
-faux** : la décision existe depuis le **4 septembre**.
-
-`ADR-016` a retenu **Argon2id** — un mixeur reconnu comme le meilleur
-aujourd'hui, recommandé par l'OWASP, l'organisme de référence en sécurité web.
-
-Deux raisons de l'avoir préféré à son concurrent historique :
-
-- 🐢 **Il est lent exprès.** Un mixeur trop rapide permet à un voleur d'essayer
-  des milliards de mots de passe par seconde. Celui-ci est calibré pour prendre
-  environ **un quart de seconde**. Invisible pour toi, ruineux pour un attaquant.
-- 🧠 **Il consomme de la mémoire exprès.** Les cartes graphiques, qu'utilisent
-  les pirates pour casser des mots de passe en masse, ont beaucoup de
-  puissance mais peu de mémoire. Cet outil les prend à contre-pied.
-
-✅ **Et la base est déjà prête** : la colonne qui stocke le mot de passe a déjà
-la bonne taille pour accueillir un smoothie Argon2id.
-
-✅ **Confirmé le 22/09** : on part bien sur **Argon2**. Le choix n'est plus en
-discussion, il reste à l'appliquer — et à faire passer `ADR-016` de
-« proposé » à « validé ».
-
-⚠️ **Un petit détail à ne pas rater.** Le placeholder des 24 comptes commence
-par `$2b$`, qui est la signature d'un **autre** mixeur, plus ancien, appelé
-bcrypt. Ce n'est pas grave — la valeur est inutilisable de toute façon — mais
-elle envoie un mauvais signal : on croit lire du bcrypt alors qu'on a décidé
-Argon2. À remplacer par un placeholder cohérent quand on écrira les données de
-démo.
-
-### 3.6 Ce qu'il reste concrètement à faire
-
-| # | Quoi | Pour les techniciens |
+| | Chiffrement | Hachage |
 |---|---|---|
-| 1 | Installer l'outil | ajouter `argon2-cffi` aux dépendances |
-| 2 | Mixer à la création d'un compte | dans le service, jamais dans la route |
-| 3 | Séparer ce qu'on reçoit de ce qu'on stocke | un modèle `UserCreate` d'entrée |
-| 4 | Ne jamais écrire le mot de passe ailleurs | ni journal, ni cache, ni message d'erreur |
+| Réversible | ✅ avec la clé | ❌ jamais |
+| Sortie | taille variable | taille fixe |
+| Usage ici | ❌ à proscrire | ✅ le bon outil |
 
-🟡 **À moitié fait** : le point 3 est déjà en place **dans un sens**. L'API ne
-renvoie plus jamais le mot de passe. Il manque l'autre sens : ce qu'on accepte
-en entrée.
+On ne veut **pas** pouvoir retrouver le mot de passe. Une base chiffrée reste
+déchiffrable par qui détient la clé — et la clé finit toujours quelque part
+près de la base.
 
----
+**Le principe** : on ne stocke que l'empreinte. À la connexion, on hache
+l'entrée et on compare les deux empreintes. Le mot de passe en clair n'existe
+que le temps de la requête, en mémoire.
 
-## 4. Deuxième chantier — savoir qui est qui
+### 2.2 Pourquoi pas SHA-256
 
-⚠️ **Avant de décider ce que quelqu'un a le droit de voir, il faut savoir qui
-il est.** C'est une étape à part entière, qu'on oublie souvent.
+Réflexe courant, et c'est un piège.
 
-### 4.1 Le bracelet de festival
+SHA-256 est conçu pour être **rapide** — qualité pour vérifier l'intégrité d'un
+fichier, défaut rédhibitoire ici. Un GPU grand public calcule des **milliards**
+de SHA-256 par seconde. Une attaque par dictionnaire sur une base volée devient
+triviale.
 
-🎪 À l'entrée d'un festival, tu montres ta carte d'identité **une seule fois**.
-On te donne un **bracelet**. Ensuite, à chaque scène, tu montres le bracelet —
-pas ta carte.
+Il faut une fonction **délibérément coûteuse** : une KDF *(Key Derivation
+Function)*. Son temps de calcul est un paramètre, pas un accident.
 
-C'est exactement ce qu'il nous faut :
+### 2.3 Argon2id — décidé, confirmé le 22/09
 
-1. Tu envoies ton email et ton mot de passe **une fois**.
-2. L'application vérifie, et te renvoie un **bracelet électronique**.
-3. À chaque demande suivante, ton navigateur montre le bracelet.
+`ADR-016` (04/09, statut *proposé*) retient **Argon2id** via `argon2-cffi`.
+Vainqueur de la *Password Hashing Competition*, recommandé par l'OWASP.
 
-💡 **Pourquoi ne pas renvoyer le mot de passe à chaque fois ?** Parce qu'il
-circulerait en permanence sur le réseau. Le bracelet, lui, **expire tout seul**
-au bout d'un moment — et un bracelet volé ne donne pas le mot de passe.
+Trois paramètres de coût :
 
-### 4.2 Ce qu'il reste à faire
-
-| # | Quoi |
+| Paramètre | Effet |
 |---|---|
-| 1 | Une page de connexion : email + mot de passe → un bracelet |
-| 2 | Chaque demande à l'API présente son bracelet |
-| 3 | Une demande **sans** bracelet valide est refusée |
+| `time_cost` | nombre de passes — coût CPU |
+| `memory_cost` | mémoire occupée par hachage |
+| `parallelism` | threads utilisés |
 
----
+💡 **`memory_cost` est le paramètre décisif.** Argon2 est *memory-hard* : il
+exige beaucoup de RAM par calcul. Les GPU et ASIC ont énormément de cœurs mais
+peu de mémoire par cœur — leur avantage s'effondre. C'est ce qui le sépare de
+bcrypt.
 
-## 5. Troisième chantier — qui a le droit de voir quoi
+🎯 **Cible retenue par l'ADR : 250 à 500 ms par hachage**, sur la machine qui
+exécute l'API. Les valeurs ne se recopient pas depuis un blog, elles se
+**mesurent** chez nous — c'est le matériel qui décide.
 
-Le bracelet dit **qui tu es**. Les droits disent **où tu peux aller**.
+⚠️ Coût assumé : chaque connexion consomme ~0,3 s de CPU et plusieurs dizaines
+de Mo. C'est voulu, et c'est aussi pourquoi l'endpoint de login **doit** être
+rate-limité — sinon il devient un vecteur de déni de service.
 
-### 5.1 Nos quatre rôles
+### 2.4 Le sel, en deux lignes
 
-| Rôle | Qui c'est | Comptes aujourd'hui |
-|---|---|---|
-| `Client` | le particulier qui cherche un bien | **18** |
-| `Hunter` | le chasseur immobilier | **6** |
-| `Manager` | le responsable qui encadre des chasseurs | **0** ⚠️ |
-| `Admin` | l'administrateur du système | **0** ⚠️ |
+Un **sel** est une valeur aléatoire ajoutée avant hachage. Sans lui, deux
+comptes de même mot de passe produisent la même empreinte, ce qui ouvre les
+attaques par table précalculée (*rainbow tables*).
 
-### 🆕 Le rôle `Admin` a été créé le 22/09
+✅ `argon2-cffi` génère le sel seul et l'inclut dans la chaîne de sortie, au
+format PHC : `$argon2id$v=…$m=…,t=…,p=…$<sel>$<empreinte>`.
 
-Il manquait, et c'est une drôle d'histoire.
+➡️ **Rien à gérer côté application, et aucune colonne à ajouter.** Les
+paramètres voyagent avec l'empreinte : un hachage produit avec d'anciens
+réglages reste vérifiable après leur changement.
 
-Le schéma **autorisait** le mot « Admin » depuis le début. Mais la ligne
-n'avait jamais été **écrite**. Autrement dit : le rôle était prévu au
-règlement, mais n'existait nulle part. Impossible de nommer qui que ce soit
-administrateur.
+### 2.5 Ce qu'il faut écrire
 
-➡️ C'est corrigé : la base compte maintenant **quatre rôles**, et l'API les
-affiche bien tous les quatre.
+**1.** `requirements.txt` → ajouter `argon2-cffi`.
 
-💡 **Pourquoi l'admin n'a pas de fiche d'identité, contrairement aux autres ?**
-Un client, un chasseur et un manager ont chacun une fiche en base avec leur
-nom, leur téléphone, leur société. L'admin, non — **et c'est voulu**. Un
-administrateur n'a pas de métier immobilier : il ne cherche pas de bien, n'en
-vend pas, n'encadre personne. Il n'a que des **droits**. Rien d'autre à
-stocker sur lui.
+**2.** Un module dédié, `app/utils/security.py` :
 
-⚠️ **Aucun compte admin n'a été créé**, volontairement. Créer un compte veut
-dire écrire un mot de passe — qui serait aujourd'hui stocké en clair (§2.3).
-**Le premier compte admin se crée après le hachage, pas avant.**
+```python
+from argon2 import PasswordHasher
+from argon2.exceptions import VerifyMismatchError
 
-⚠️ **Et le manager reste à zéro.** C'est pourtant lui qui devrait consulter la
-paie de ses chasseurs. Tant qu'aucun compte n'existe, cette règle ne peut être
-**ni montrée, ni testée**.
+_ph = PasswordHasher()  # paramètres à calibrer, cf. §2.3
 
-### 5.2 Le piège à éviter absolument
+def hash_password(plain: str) -> str:
+    return _ph.hash(plain)
 
-C'est le point le plus important de tout ce document.
-
-❌ **Le rôle ne suffit pas.**
-
-Bruno et Sophie sont tous les deux chasseurs. Ils ont le **même rôle**. Si on
-s'arrête au rôle, Bruno peut consulter la paie de Sophie.
-
-✅ **Il faut donc deux vérifications, pas une :**
-
-| Niveau | La question posée | Exemple |
-|---|---|---|
-| 1 | *Ton rôle a-t-il accès à ce type d'information ?* | un client n'a rien à faire dans les paies |
-| 2 | *Est-ce que c'est **à toi** ?* | Bruno voit **sa** paie, pas celle de Sophie |
-
-💡 Dans une soutenance, c'est exactement là que le jury appuie. « Un chasseur
-peut-il voir la rémunération d'un collègue ? » Il faut pouvoir répondre non, et
-le **montrer**.
-
-### 5.3 Ce qu'il reste à faire
-
-| # | Quoi |
-|---|---|
-| 1 | Remplir le tableau « qui voit quoi » (§6) |
-| 2 | Vérifier le rôle sur chaque route |
-| 3 | Vérifier l'appartenance sur les données personnelles |
-| 4 | Prouver par des tests qu'un accès interdit est **refusé** |
-
----
-
-## 6. Ce qu'il faut décider ensemble
-
-Rien de technique ici. Ce sont des choix métier.
-
-### 6.1 Le tableau à remplir
-
-Une croix = « a le droit de voir ». Les cases 🟡 sont à trancher.
-
-| Donnée | Client | Chasseur | Manager | Admin |
-|---|---|---|---|---|
-| Ses propres coordonnées | ✅ | ✅ | ✅ | ✅ |
-| Les coordonnées d'un autre | ❌ | 🟡 ses clients ? | 🟡 | ✅ |
-| Sa propre rémunération | — | ✅ | — | ✅ |
-| La rémunération d'un autre chasseur | ❌ | ❌ | 🟡 les siens ? | ✅ |
-| Le barème de commission | ❌ | 🟡 le sien ? | 🟡 | ✅ |
-| Les biens et annonces | ✅ | ✅ | ✅ | ✅ |
-| Son mandat | ✅ | ✅ | 🟡 | ✅ |
-
-### 6.2 Les cinq questions
-
-1. 👔 **Combien de comptes manager et admin crée-t-on ?** Aujourd'hui zéro des
-   deux. Proposition : **un admin** et **deux managers**, pour pouvoir montrer
-   qu'un manager voit ses chasseurs et pas ceux du voisin.
-2. 🔗 **Comment sait-on qu'un chasseur dépend d'un manager ?** Le lien
-   n'existe pas en base aujourd'hui. Il faut décider comment le créer — c'est
-   la condition pour que la règle « son manager » veuille dire quelque chose.
-3. ⏱️ **Combien de temps dure un bracelet ?** Une heure, une journée ? Court =
-   plus sûr, mais il faut se reconnecter souvent.
-4. 🔑 **Que fait-on des 24 comptes existants ?** Leur serrure est bouchée
-   (§2.2), donc rien ne presse. Proposition : leur donner un vrai mot de passe
-   mixé dans les données de démo, pour pouvoir se connecter en soutenance.
-5. 📋 **Jusqu'où va-t-on ?** Inscription, changement de mot de passe, « mot de
-   passe oublié » : chacun est un chantier en plus. Le sujet ne les demande
-   pas explicitement.
-
----
-
-## 7. Le plan, dans l'ordre
-
-Chaque étape s'appuie sur la précédente. On ne peut pas sauter.
-
-| # | Étape | Attend | Poids |
-|---|---|---|---|
-| 0 | ~~Créer le rôle `Admin`~~ | — | ✅ **fait le 22/09** |
-| 1 | Installer Argon2id et mixer à la création | rien | 🟢 petit |
-| 2 | Séparer l'entrée de la sortie | 1 | 🟢 petit |
-| 3 | Créer la page de connexion et le bracelet | 2 | 🟠 moyen |
-| 4 | Refuser toute demande sans bracelet | 3 | 🟠 moyen |
-| 5 | Vérifier le rôle sur chaque route | 4 + le §6 rempli | 🟠 moyen |
-| 6 | Vérifier l'appartenance des données | 5 | 🔴 le plus délicat |
-| 7 | Les tests qui prouvent que ça bloque | base de test (`A2`) | 🟠 moyen |
-
-⚠️ **Le vrai verrou est ailleurs.** L'étape 7 attend la **base de test isolée**
-(étape `A2` du plan). Sans elle, chaque test abîmerait la vraie base. Tant
-qu'elle n'existe pas, on peut écrire la sécurité, mais pas **prouver** qu'elle
-tient — et en soutenance, seule la preuve compte.
-
-💡 **Les étapes 1 et 2 sont indépendantes de tout.** Elles peuvent démarrer
-aujourd'hui.
-
-💡 **Les comptes manager et admin se créent entre l'étape 2 et l'étape 3** —
-une fois le mixeur en place, jamais avant.
-
----
-
-## 8. Ce que ça vaut en soutenance
-
-### 8.1 Une correction importante à faire
-
-⚠️ Le point d'étape du 21/09 affirme : *« Le cahier des charges demande que la
-paie d'un chasseur ne soit visible que par lui et son manager. »*
-
-**C'est imprécis, et c'est risqué de le dire tel quel.** En remontant à la
-source, cette phrase vient d'un **exemple de rédaction** placé dans un modèle
-de document à remplir — la section s'intitule d'ailleurs « Exigences non
-fonctionnelles **(extrait)** ». Ce n'est pas une commande du client.
-
-Si un jury vérifie, on se retrouve à avoir présenté un exemple pédagogique
-comme une exigence contractuelle.
-
-### 8.2 Le vrai argument, bien plus solide
-
-Le **RGPD**, lui, est explicitement exigé, et le sujet écrit noir sur blanc que
-ces exigences « ne sont **pas optionnelles** ; leur absence est pénalisante en
-jury ». Il demande la protection des données **dès la conception**.
-
-➡️ **Notre justification devient donc :** on restreint les accès parce que le
-RGPD impose la minimisation, pas parce qu'une ligne d'exemple le suggérait. Et
-c'est le groupe qui a arbitré le détail du « qui voit quoi » — d'où le tableau
-du §6, à porter en ADR.
-
-💡 C'est plus honnête, et bien plus difficile à attaquer.
-
-### 8.3 Deux décisions à ouvrir
-
-- `ADR-016` (Argon2id) est encore au statut **« proposé »** depuis le 4/09. À
-  valider.
-- Le tableau « qui voit quoi » mérite **son propre ADR**, une fois rempli.
-
----
-
-## 9. Où vérifier
-
-| Ce qui est affirmé | Source |
-|---|---|
-| Argon2id est choisi, via `argon2-cffi` | Confluence, *Journal de décisions*, `ADR-016` |
-| La colonne mot de passe est déjà dimensionnée | `docker/init-v2/01_create_fil_rouge_immobilier.sql`, table `user` |
-| Le placeholder des 24 comptes | `docker/init-v2/02_migration.sql`, bloc `1. USERS` |
-| L'API ne renvoie plus le mot de passe | `API/src/app/models/user_model.py`, classe `UserPublic` |
-| Rien ne mixe le mot de passe | `API/src/app/services/user_service.py` — 7 lignes, aucun traitement |
-| Aucune authentification dans l'API | aucun fichier d'authentification dans `API/src/app/` |
-| L'outil n'est pas installé | `API/requirements.txt` |
-| Le rôle `Admin` manquait | `docker/migrations/2026-09-22_role_admin.sql` |
-| Le RGPD n'est pas optionnel | `BASE/Readme.md`, section 🔐 RGPD |
-| L'exigence sur les droits est un **exemple** | `BASE/documents utiles/CAHIER-DES-CHARGES-TECHNIQUE.md`, section « Exigences non fonctionnelles (extrait) » |
-
-### 9.1 Revoir les quatre rôles
-
-Depuis `docker/` :
-
-```bash
-docker exec fil_rouge_immobilier_db sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "SELECT r.id, r.wording, count(u.id) FROM role r LEFT JOIN \"user\" u ON u.id_role = r.id GROUP BY r.id, r.wording ORDER BY r.id;"'
+def verify_password(stored: str, plain: str) -> bool:
+    try:
+        _ph.verify(stored, plain)
+        return True
+    except VerifyMismatchError:
+        return False
 ```
 
-Attendu : **4 lignes** — Client 18, Hunter 6, Manager 0, Admin 0.
+⚠️ **Ne jamais comparer avec `==`.** `verify()` est à temps constant : sa durée
+ne dépend pas du nombre de caractères corrects. Un `==` classique s'arrête au
+premier octet différent, ce qui laisse fuir de l'information par le temps de
+réponse (*timing attack*).
 
-### 9.2 Refaire la preuve du mot de passe en clair
+**3.** Surcharger `UserService.create()` et `.replace()`.
 
-⚠️ Ces trois commandes **écrivent dans la base**, puis nettoient derrière
-elles. La troisième n'est pas optionnelle.
+💡 L'architecture a été pensée pour ça — c'est écrit dans l'en-tête de
+`base_service.py` : *« une sous-classe comme UserService peut surcharger
+create() pour hasher le mot de passe avant d'appeler super().create(), sans que
+les routers ni les repositories n'aient à changer »*. Il n'y a plus qu'à le
+faire.
 
-**1.** Créer un compte de test :
+**4.** `check_needs_rehash()` après une connexion réussie : si les paramètres
+ont durci depuis, on re-hache à la volée, sans rien demander à l'utilisateur.
+
+**5.** Aucun `print`, aucun log, aucune exception ne doit contenir le mot de
+passe en clair.
+
+### 2.6 `B2` — séparer entrée et sortie
+
+État actuel dans `user_router.py` :
+
+```python
+response_model=User,      # modèle d'ENTRÉE  (POST, PUT)
+read_model=UserPublic,    # modèle de SORTIE (sans password)
+```
+
+🟡 **La moitié est faite.** La sortie est propre. L'entrée, non : `User` est le
+modèle de table, donc le client de l'API peut poster `id`, `created_at`,
+`id_role` — et le mot de passe brut.
+
+➡️ Il manque un `UserCreate` (email, mot de passe en clair, rôle) et un
+`UserUpdate`. Le modèle de table ne doit jamais servir de schéma d'entrée.
+
+---
+
+## 3. `B3a` — authentification
+
+### 3.1 Deux mots à ne pas confondre
+
+| | Question | Code HTTP |
+|---|---|---|
+| **Authentification** | *qui es-tu ?* | `401 Unauthorized` |
+| **Autorisation** | *as-tu le droit ?* | `403 Forbidden` |
+
+Aujourd'hui, ni l'une ni l'autre. Elles se traitent dans cet ordre.
+
+### 3.2 Le jeton JWT
+
+Renvoyer email + mot de passe à chaque requête est exclu. À la place :
+
+1. `POST /auth/login` → vérification du mot de passe → **un jeton signé**.
+2. Chaque requête suivante porte `Authorization: Bearer <jeton>`.
+
+**Un JWT, c'est trois parties en base64url**, séparées par des points :
+`header.payload.signature`.
+
+⚠️ **Signé ≠ chiffré.** Le `payload` est lisible par n'importe qui — il suffit
+de le décoder. La signature garantit qu'il n'a pas été **modifié**, pas qu'il
+est secret. **Aucune donnée sensible dans un JWT.**
+
+Claims utiles ici : `sub` (id utilisateur), `exp` (expiration), et le rôle.
+
+💡 **Conséquence importante** : un JWT est *stateless*. Rien n'est stocké côté
+serveur, donc **on ne peut pas révoquer un jeton émis**. Un jeton volé reste
+valide jusqu'à son `exp` — d'où l'intérêt d'une durée courte. C'est le
+compromis à assumer, et une question du §5.
+
+### 3.3 Ce qu'il faut écrire
+
+| # | Quoi |
+|---|---|
+| 1 | `POST /auth/login`, via `OAuth2PasswordRequestForm` (intégré à FastAPI) |
+| 2 | Signature du jeton avec une clé lue dans `.env` — **jamais en dur** |
+| 3 | Une dépendance `get_current_user()` : décode, vérifie, charge l'utilisateur |
+| 4 | Sinon : `401` |
+
+⚠️ **Un message d'erreur unique** pour « email inconnu » et « mot de passe
+faux ». Deux messages distincts permettent d'énumérer les comptes existants.
+
+---
+
+## 4. `B3b` — autorisation
+
+### 4.1 Le piège central
+
+❌ **Vérifier le rôle ne suffit pas.**
+
+Deux chasseurs portent le même rôle `Hunter`. Un contrôle limité au rôle
+autorise le chasseur A à lire le `/payments/{id}` du chasseur B.
+
+C'est une **élévation de privilège horizontale** (famille IDOR) — la faille la
+plus fréquente sur une API CRUD comme la nôtre, et exactement là qu'un jury
+appuie.
+
+✅ **Deux contrôles, systématiquement :**
+
+| Niveau | Question | Mécanisme |
+|---|---|---|
+| **RBAC** | ce rôle peut-il accéder à ce type de ressource ? | le `role` de l'utilisateur |
+| **Ownership** | cette ligne précise est-elle la sienne ? | `WHERE id_hunter = :current` |
+
+### 4.2 Où poser le contrôle
+
+- ❌ Pas dans le router : il ne connaît pas le métier, et un autre appelant le contourne.
+- ❌ Pas dans le repository : trop bas, il ne connaît pas l'utilisateur courant.
+- ✅ **Dans le service** — la couche prévue pour la règle métier.
+
+💡 **Filtrer dans le `WHERE`, pas après le chargement.** Charger 500 lignes puis
+en écarter 499 en Python, c'est lire des données qu'on n'a pas le droit de
+lire. La restriction appartient à la requête SQL.
+
+⚠️ **Point d'architecture** : les ~90 routes sont générées par
+`build_crud_router`. Un `dependencies=[Depends(get_current_user)]` posé sur
+l'`APIRouter` qu'il construit protège **les 18 tables d'un coup**. L'ownership,
+lui, reste à écrire service par service.
+
+### 4.3 Le tableau à remplir
+
+Les cases 🟡 sont à trancher en réunion.
+
+| Ressource | Client | Hunter | Manager | Admin |
+|---|---|---|---|---|
+| Son propre compte | ✅ | ✅ | ✅ | ✅ |
+| Le compte d'un autre | ❌ | 🟡 ses clients ? | 🟡 | ✅ |
+| `payment` le concernant | — | ✅ | — | ✅ |
+| `payment` d'un autre chasseur | ❌ | ❌ | 🟡 les siens ? | ✅ |
+| `commission_scale` | ❌ | 🟡 le sien ? | 🟡 | ✅ |
+| `estate`, `picture` | ✅ | ✅ | ✅ | ✅ |
+| `mandate`, `sale` | 🟡 les siens | 🟡 les siens | 🟡 | ✅ |
+
+### 4.4 ⚠️ Un obstacle mesuré : le lien manager → chasseur n'existe pas
+
+Vérifié dans le schéma le 22/09 :
+
+- `hunter` n'a **aucune** colonne `id_manager`.
+- `real_estate_manager` n'a **aucune** référence vers `hunter`.
+- Aucune table de liaison entre les deux.
+
+➡️ **La phrase « son manager » n'a aujourd'hui aucun support en base.** On ne
+peut pas écrire la règle, faute de savoir qui encadre qui.
+
+Le seul endroit où les deux se croisent est `search_request`, qui porte à la
+fois `id_hunter` et `id_realestatemanager`. Deux pistes :
+
+| Piste | Principe | Coût |
+|---|---|---|
+| **A** | ajouter `hunter.id_manager` (FK nullable) | une migration, mais explicite et durable |
+| **B** | dériver le lien des `search_request` communes | zéro migration, mais indirect et fragile |
+
+💡 Recommandation : **piste A**. Un rattachement hiérarchique est un fait métier
+stable, pas une conséquence d'un historique de dossiers.
+
+### 4.5 Ce qu'il faut écrire
+
+| # | Quoi |
+|---|---|
+| 1 | Le tableau du §4.3, validé, puis porté en ADR |
+| 2 | Une dépendance `require_role(*roles)` → `403` sinon |
+| 3 | Le filtrage par appartenance dans les services concernés |
+| 4 | Des tests qui prouvent qu'un accès interdit renvoie bien `403` |
+
+---
+
+## 5. À décider en réunion
+
+1. 👔 **Combien de comptes `Manager` et `Admin` ?** Zéro des deux aujourd'hui.
+   Proposition : **1 admin, 2 managers** — deux, pour pouvoir démontrer qu'un
+   manager ne voit pas les chasseurs de l'autre.
+2. 🔗 **Piste A ou B pour le lien manager → chasseur ?** (§4.4)
+3. ⏱️ **Durée de validité du jeton ?** Sans révocation possible (§3.2), c'est le
+   seul garde-fou. Proposition : 1 h, sans *refresh token* — hors périmètre.
+4. 🔑 **Que fait-on des 24 comptes migrés ?** Leur serrure est bouchée, rien ne
+   presse. Proposition : mots de passe hachés dans le seed, pour pouvoir se
+   connecter en démo.
+5. 📋 **Périmètre** : inscription publique, changement de mot de passe, reset par
+   email ? Chacun est un chantier. Le sujet ne les exige pas.
+6. 📏 **Politique de mot de passe** : longueur minimale ? Refus des mots de passe
+   connus comme compromis ? L'OWASP privilégie la longueur sur la complexité.
+
+---
+
+## 6. Plan et dépendances
+
+| # | Étape | Dépend de | Poids |
+|---|---|---|---|
+| 0 | ~~Créer le rôle `Admin`~~ | — | ✅ **fait le 22/09** |
+| 1 | `argon2-cffi` + `security.py` + calibrage | rien | 🟢 |
+| 2 | `UserCreate` / `UserUpdate`, hachage dans le service | 1 | 🟢 |
+| 3 | Créer les comptes `Manager` et `Admin` | 2 | 🟢 |
+| 4 | `POST /auth/login` + JWT + `get_current_user` | 2 | 🟠 |
+| 5 | `401` par défaut sur `build_crud_router` | 4 | 🟢 |
+| 6 | `require_role` — RBAC | 5 + §4.3 validé | 🟠 |
+| 7 | Filtrage par appartenance | 6 + §4.4 tranché | 🔴 |
+| 8 | Tests `401` / `403` / accès légitime | base de test (`A2`) | 🟠 |
+
+⚠️ **Le verrou réel est ailleurs** : l'étape 8 attend la **base de test isolée**
+(`A2`). Sans elle, chaque test écrit dans la base de dev. On peut implémenter la
+sécurité sans `A2`, mais pas la **prouver** — et en soutenance, seule la preuve
+compte.
+
+💡 **Les étapes 1 et 2 ne dépendent de rien.** Elles peuvent démarrer tout de
+suite, sans attendre la réunion.
+
+---
+
+## 7. Pour la soutenance
+
+### 7.1 Une affirmation à corriger
+
+Le point d'étape du 21/09 écrit : *« Le cahier des charges demande que la paie
+d'un chasseur ne soit visible que par lui et son manager. »*
+
+⚠️ **C'est inexact.** En remontant à la source, la phrase vient d'un **exemple
+de rédaction** dans un modèle de document — la section s'intitule « Exigences
+non fonctionnelles **(extrait)** ». Ce n'est pas une exigence client.
+
+Présenter un exemple pédagogique comme une contrainte contractuelle est
+attaquable, et vérifiable en trente secondes par un jury.
+
+### 7.2 L'argument solide
+
+Le **RGPD** est explicitement exigé, et le sujet précise que ces exigences « ne
+sont **pas optionnelles** ; leur absence est pénalisante en jury ». Il demande
+la protection des données **dès la conception**.
+
+➡️ **Formulation à retenir** : on restreint les accès au titre du principe de
+minimisation (RGPD). Le détail du « qui voit quoi » est un **arbitrage du
+groupe**, tracé dans un ADR — celui du §4.3.
+
+C'est exact, et bien plus difficile à contester.
+
+### 7.3 Deux décisions à faire avancer
+
+- `ADR-016` (Argon2id) : **« proposé » depuis le 04/09**. À valider.
+- La matrice d'accès du §4.3 : mérite son propre ADR.
+
+---
+
+## 8. Sources et vérification
+
+| Affirmation | Source |
+|---|---|
+| Argon2id retenu, via `argon2-cffi`, cible 250-500 ms | Confluence, *Journal de décisions*, `ADR-016` |
+| `password VARCHAR(255)` déjà dimensionné | `docker/init-v2/01_create_fil_rouge_immobilier.sql`, table `user` |
+| Le placeholder des 24 comptes | `docker/init-v2/02_migration.sql`, bloc `1. USERS` |
+| `UserPublic` protège la sortie | `API/src/app/models/user_model.py` |
+| `User` sert encore de modèle d'entrée | `API/src/app/routes/user_router.py` |
+| Aucun hachage dans le service | `API/src/app/services/user_service.py` — 7 lignes |
+| L'architecture prévoit la surcharge | `API/src/app/services/base_service.py`, en-tête |
+| Les ~90 routes sont génériques | `API/src/app/routes/crud_router.py` |
+| Aucun lien `hunter` ↔ `real_estate_manager` | schéma de référence, ces deux tables |
+| Le rôle `Admin` manquait | `docker/migrations/2026-09-22_role_admin.sql` |
+| Le RGPD n'est pas optionnel | `BASE/Readme.md`, section RGPD |
+| L'exigence d'accès est un **exemple** | `BASE/documents utiles/CAHIER-DES-CHARGES-TECHNIQUE.md`, « Exigences non fonctionnelles (extrait) » |
+
+### 8.1 Rejouer le comptage des rôles
+
+Depuis `docker/`, ouvrir une session psql :
+
+```bash
+docker exec -it fil_rouge_immobilier_db sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB"'
+```
+
+Puis :
+
+```sql
+SELECT r.id, r.wording, count(u.id)
+FROM role r LEFT JOIN "user" u ON u.id_role = r.id
+GROUP BY r.id, r.wording ORDER BY r.id;
+```
+
+Attendu : **4 lignes** — Client 18, Hunter 6, Manager 0, Admin 0. `\q` pour
+sortir.
+
+### 8.2 Rejouer la preuve du §1.2
+
+⚠️ Ces trois étapes **écrivent dans la base de dev**. La troisième n'est pas
+optionnelle.
+
+**1.** Créer un compte de test, et noter l'`id` renvoyé :
 
 ```bash
 curl -s -X POST http://localhost:8000/users -H "Content-Type: application/json" -d '{"email":"test-preuve-hash@exemple.fr","password":"MotDePasseEnClair123","is_activated":true,"id_role":1}'
 ```
 
-**2.** Lire ce que la base a gardé :
+**2.** Lire ce qui a été persisté, dans la session psql du §8.1 :
 
-```bash
-docker exec fil_rouge_immobilier_db sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "SELECT id, email, password FROM \"user\" WHERE email = '"'"'test-preuve-hash@exemple.fr'"'"';"'
+```sql
+SELECT id, email, password FROM "user"
+WHERE email = 'test-preuve-hash@exemple.fr';
 ```
 
-Attendu : **`MotDePasseEnClair123`**, en toutes lettres. C'est le problème.
+Attendu : **`MotDePasseEnClair123`**, en clair. C'est le problème.
 
-**3.** Supprimer le compte de test — remplacer `NN` par l'`id` renvoyé
-à l'étape 1 :
+**3.** Nettoyer — remplacer `NN` par l'`id` de l'étape 1 :
 
 ```bash
 curl -s -X DELETE http://localhost:8000/users/NN
 ```
 
-Attendu ensuite : **24 comptes**, comme avant.
+Attendu ensuite : 24 comptes.
 
 ---
 
-## Mini-lexique
+## Lexique
 
-| Mot | En clair |
+| Terme | Définition |
 |---|---|
-| **Hacher** | passer un mot de passe au mixeur, sans garder le fruit |
-| **Sel** | un ingrédient aléatoire, pour que deux mots de passe identiques ne se ressemblent pas |
-| **Argon2id** | le mixeur qu'on a choisi |
-| **OWASP** | l'organisme de référence en sécurité des applications web |
-| **Jeton (token)** | le bracelet de festival : une preuve qu'on s'est déjà identifié |
-| **Authentification** | prouver **qui** on est |
-| **Autorisation** | savoir **ce qu'on a le droit** de faire |
-| **RGPD** | la loi européenne sur les données personnelles |
-| **Minimisation** | n'accéder qu'aux données strictement nécessaires |
-| **ADR** | une décision d'équipe écrite, sur Confluence |
+| **KDF** | fonction de dérivation de clé — lente par construction |
+| **Argon2id** | la KDF retenue ; *memory-hard*, donc hostile aux GPU |
+| **Sel** | aléa par mot de passe ; neutralise les tables précalculées |
+| **Format PHC** | encodage standard qui embarque paramètres, sel et empreinte |
+| **Timing attack** | fuite d'information par le temps de réponse |
+| **JWT** | jeton signé, lisible, non révocable, porté par `Authorization: Bearer` |
+| **Stateless** | aucun état serveur — d'où l'impossibilité de révoquer |
+| **RBAC** | contrôle d'accès par rôle |
+| **Ownership** | contrôle d'appartenance de la ligne |
+| **IDOR** | accès à la ressource d'autrui via son identifiant |
+| **401 / 403** | non authentifié / authentifié mais sans droit |
+| **Minimisation** | principe RGPD : n'accéder qu'au strictement nécessaire |
+| **ADR** | décision d'architecture tracée, sur Confluence |
