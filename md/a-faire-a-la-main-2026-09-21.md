@@ -163,3 +163,60 @@ Rappel du plan du point d'étape, pour situer :
 
 💡 `A2` ne dépend de personne et débloque tout le reste. Si tu ne fais qu'une
 chose cette semaine, c'est celle-là.
+
+---
+
+## Ajout du 22 septembre — le lien chasseur → manager
+
+> 📝 **Note.** Ce bloc a été ajouté le 22/09, après la séance du 21/09 que ce
+> fichier décrit. Il vient du chantier de l'après-midi : `hunter` porte
+> désormais `id_realestatemanager` (`NOT NULL`), commit `51f4761`. Les blocs
+> 1 à 5 ci-dessus n'ont pas été retouchés.
+
+### 6.1 Confluence — coller l'ADR-025 (toi seul)
+
+Même page que l'ADR-024 : *Journal de décisions (ADR)*, espace `GaSeBeLa1`.
+
+1. [ ] Ouvrir `md/adr-025-lien-chasseur-manager.md`.
+2. [ ] ⚠️ **Ne pas copier le haut du fichier** : commencer la sélection à la
+   ligne `**ADR-025 : Chaque chasseur est rattaché à un manager**`.
+3. [ ] ⚠️ Le numéro suppose que l'ADR-024 est bien numéroté 024 (bloc 2.1).
+   Si le journal a tranché autrement, décaler.
+4. [ ] Coller en bas de la page, vérifier les tableaux, publier.
+5. [ ] En réunion : le faire passer de « proposé » à « accepté » (avec l'ADR-024,
+   bloc 3.2).
+
+### 6.2 Le drawio — toi seul
+
+Fichier `MPD 03 4.drawio.xml` (et la page Confluence *Schémas - MCD/MLD/MPD
+Cible* si elle est déjà à jour).
+
+- [ ] `criteria.budget_max` : **`NUMERIC (12.2)`** → **`NUMERIC (12, 2)`**.
+      Un point au lieu d'une virgule. Le script SQL lit déjà `(12, 2)`.
+- [ ] Décider si le lien Hunter → Manager garde le libellé **« Manages »**,
+      ou passe à **« Supervises »** pour ne pas le confondre avec le lien
+      SearchRequest → Manager, qui s'appelle aussi « Manages ».
+
+### 6.3 Ta base locale
+
+Si ta base Docker a été créée **avant** le 22/09, elle n'a pas la colonne.
+Depuis `docker/`, au choix :
+
+```bash
+docker compose down -v && docker compose up -d
+```
+
+ou, pour garder les données :
+
+```bash
+docker exec -i fil_rouge_immobilier_db sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -v ON_ERROR_STOP=1' < migrations/2026-09-22_hunter_manager.sql
+```
+
+- [ ] Vérifier ensuite : `SELECT count(*) FROM hunter WHERE id_realestatemanager IS NULL;`
+      doit donner **0**.
+
+### 6.4 Pour le seed (`A4`)
+
+- [ ] Prévoir de **vrais** managers, et remplacer le placeholder
+      `manager.migration@chassimmo.fr` (user 25) — puis le supprimer une fois
+      qu'aucun chasseur ne pointe vers lui. Voir `docker/init-v2/README.md` §3.6.
