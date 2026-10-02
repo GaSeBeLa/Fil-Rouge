@@ -20,10 +20,13 @@
   depuis le 2026-09-21 : 18 modèles, 224 champs pour 224 colonnes, 18
   ressources REST, 91 opérations. Tout montant est un `Decimal`. Vérifié en
   exécution : `GET` sur les 18 ressources, 18/18 en `200`.
-- **Tests** *(au 2026-10-02)* — **66 tests**, `66 passed`, lancés dans le
-  conteneur `api` : 44 unitaires sans PostgreSQL, 22 d'intégration sur la
-  base de test isolée `fil_rouge_test` (`docker/create_test_db.sh`). Reste :
-  la calculette de rémunération (chantier 2).
+- **Tests** *(au 2026-10-02)* — **121 tests**, `121 passed`, lancés dans le
+  conteneur `api` : 99 unitaires sans PostgreSQL (dont les 55 cas de
+  rémunération), 22 d'intégration sur la base de test isolée
+  `fil_rouge_test` (`docker/create_test_db.sh`).
+- **Calcul de rémunération** *(au 2026-10-02)* — `services/remuneration.py`,
+  code de référence du sujet recopié tel quel ; fonction pure, **pas encore
+  branchée sur la base**.
 - **Métier** — les règles (mandat, rémunération, barème, performance) existent
   en Gherkin dans `user-stories/` et en notes, mais **aucune n'est
   implémentée**. Le schéma non plus ne les porte pas : `U02` (exclusivité du
@@ -41,7 +44,7 @@ ordonné par ce qui débloque le reste.
 | # | Chantier | Ce qu'il apporte | Coût estimé | Dépend de |
 |---|---|---|---|---|
 | 1 | ~~Base de test isolée + tests d'intégration CRUD~~ ✅ **fait le 2026-10-02** | `fil_rouge_test` + 22 tests d'intégration (voir journal) | — | rien |
-| 2 | Règles métier mandat / rémunération / barème | implémente les US 00 et 07 dans la couche `services/`, avec leurs tests ; reprend `U02` et `U05` laissés commentés dans le `01` | 5–7 fiches | 1 |
+| 2 | Règles métier mandat / rémunération / barème | implémente les US 00 et 07 dans la couche `services/`, avec leurs tests ; reprend `U02` et `U05` laissés commentés dans le `01`. 🟡 **Calcul pur fait le 2026-10-02** (55 cas verts) ; reste le branchement base et les règles de mandat | 4–6 fiches | 1 ✅ |
 | 3 | Livrable 2 — modélisation (MCD/MLD) | reconstruit le modèle depuis le SQL existant, pour `livrables/2-modelisation/` | 3–4 fiches | rien |
 | 4 | Livrable 1 — audit des données | rapport de normalisation à partir de `normalised/rapport_anomalies.txt` | 3–4 fiches | rien |
 | 5 | Livrable 3 — architecture | documente les trois couches et les choix (pas de PATCH, bases génériques) | 2–3 fiches | 1 |
@@ -173,3 +176,15 @@ de ce que le code dit déjà.
   modifié. 22 tests d'intégration, `66 passed` au total. Mesuré : comptes des
   deux bases identiques avant/après ; contrainte `estate_price_check`
   retirée → 1 test rouge ; `db` arrêté → `44 passed, 22 skipped`.
+- **2026-10-02** — **calculette de rémunération** : option A retenue —
+  reprendre le module de référence du sujet plutôt que le réécrire (B,
+  écartée : ne pourrait que s'écarter de la référence). Les 8 blocs `python`
+  de `REGLES-CALCUL-REMUNERATION.md` §14.2-14.3 sont **extraits par script**,
+  pas retapés : `diff` = 24 lignes ajoutées (docstring), 0 retirée. Noms
+  laissés en français, comme la source. `10_calcul_remuneration_chasseur.feature`
+  copié dans `user-stories/` (`cmp` identique). Le sujet ne fournit PAS le
+  fichier de tests (2 exemples en §14.5) : `tests/test_remuneration.py`
+  écrit, **55 passed** (6+5+20+8+13+3). Sabotage `ROUND_HALF_UP` →
+  `ROUND_DOWN` → 1 test rouge. Non couverts : « un seul chasseur rémunéré »
+  et la Règle `@tracabilite` (persistance). Reste : brancher sur la base,
+  après arbitrage de `X01`.

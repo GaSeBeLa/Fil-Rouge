@@ -15,11 +15,13 @@ modifiés**.
   K€) est l'ancien schéma, gardé intact, plus monté.
 - L'API expose un CRUD complet en trois couches (routes / services /
   repositories) sur les **18 tables**, en `Decimal` pour tout montant.
-  91 opérations vérifiées en `200` contre la base. **66 tests** : 44 unitaires
-  sans base, 22 d'intégration sur la base de test isolée `fil_rouge_test`
-  (`docker/create_test_db.sh`) — voir `API/README.md` § Tests.
+  91 opérations vérifiées en `200` contre la base. **121 tests** : 99 unitaires
+  sans base (dont les 55 cas de rémunération), 22 d'intégration sur la base de
+  test isolée `fil_rouge_test` (`docker/create_test_db.sh`) — voir
+  `API/README.md` § Tests.
 - Les user stories Gherkin (`user-stories/`) couvrent le parcours actuel et le
-  futur parcours IA ; les règles métier ne sont pas encore implémentées.
+  futur parcours IA. Seul le **calcul de rémunération** est implémenté
+  (`services/remuneration.py`, code du sujet, non branché sur la base).
 - `normalised/` porte la normalisation des annonces et son rapport d'anomalies.
 - `livrables/2-modelisation/` porte trois rapports du chantier `C` ; les trois
   autres livrables sont vides. Détail daté dans `context AI/08-etat.md`.
