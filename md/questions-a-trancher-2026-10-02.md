@@ -81,17 +81,31 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 | Prix des biens | ✅ colonne `price_eur`, ligne à ligne | 2026-09-21 | `08-etat.md:110-113` |
 | Ancien schéma `docker/init/` | ✅ obsolète, `init-v2` fait foi | 2026-09-21 | `08-etat.md:105-109` |
 
-### Réponses de Sébastien — 2026-10-02 (page à cartes, v1)
+### Réponses de Sébastien — 2026-10-02 (page à cartes, v1 puis v2)
 
-⚠️ Avis d'**un** membre : à valider par le groupe pour les cartes 👥.
+⚠️ Avis d'**un** membre : **à reprendre avec l'équipe lundi** pour les cartes 👥,
+puis à confirmer par Jeff quand la carte le dit.
 
 | Id | Réponse | Ce que ça entraîne |
 |---|---|---|
 | D1 à D4 | ✅ **garder** | Rien à défaire. |
-| Q-REM-01 | 📝 pas d'option cochée : « définir la borne, informer Jeff, citer exactement la contradiction » | Contradiction citée sur la carte (`REGLES-CALCUL-REMUNERATION.md` l. 173-174, 181, 188) ; nouvelle **Q-JEF-19**. |
+| Q-REM-01 | 📝 pas d'option cochée : « définir la borne, informer Jeff, citer exactement la contradiction ; et changer le decimal(12,2) en numeric(12) » | Contradiction citée sur la carte (`REGLES-CALCUL-REMUNERATION.md` l. 173-174, 181, 188) ; nouvelle **Q-JEF-19**. ⚠️ `NUMERIC(12)` heurte la règle 4 de `CLAUDE.md` (« Tout montant est en euros, `NUMERIC(12,2)` ») ; honoraires et paiement ont des centimes (`F10:253`). 🟡 Lundi : prix seuls en euros entiers, ou centimes gardés et borne `'[)'` ? |
 | Q-REM-02 | ✅ **statut-mandat** (pas l'option recommandée) | Nouveau statut de fin sur `mandate` ; peut servir aussi à **Q-REM-14**. ⚠️ S'écarte de `RCR:100` (motif du refus dans `paiements`) : à écrire dans l'ADR. |
-| Q-REM-03 | 📝 pas d'option cochée : « explique la différence entre le Score et le Taux » | Explication ajoutée sur la carte (v2) ; question toujours ouverte. |
-| Q-REM-04 | ✅ **jsonb** | Colonne `payment.calculation_details JSONB`, dans le lot de migration. |
+| Q-REM-03 | ✅ **colonne** — « à documenter et à confirmer avec Jeff » | `payment.performance_score`. |
+| Q-REM-04 | ✅ **jsonb** | `payment.calculation_details JSONB`. |
+| Q-REM-05 | ✅ **table** | Table `remuneration_parameters` + CHECK `01:754-755` relâchés. |
+| Q-REM-06 | ✅ **recalcul** | Code du sujet intact ; écart à `F10:293` dans l'ADR ; Q-JEF-17. |
+| Q-REM-07 | ✅ **client-tous** — remarque : moins de visites = meilleure note | Remarque **juste** (`RCR:55`, `RCR:147`) : mon argument « gonfle la note » était faux, corrigé en v3 (aussi Q-ACC-13). Q-JEF-08. |
+| Q-REM-08 | ✅ **non-refusees** | Q-JEF-09. |
+| Q-REM-09 | ✅ **signes-sans-renouv** | Q-JEF-09 ; mandats annulés à demander. |
+| Q-REM-10 | ✅ **oui** | `final_rate` dans `chk_refused`. |
+| Q-REM-11 | ✅ **api** | Test d'intégration montant = taux × honoraires. |
+| Q-REM-12 | ✅ **c3** | C3 codée dans `sale_service`. |
+
+**Lot de migration qui en découle** (un seul `docker compose down -v`) :
+nouveau statut de `mandate` (Q-REM-02), `payment.performance_score` (Q-REM-03),
+`payment.calculation_details` (Q-REM-04), table `remuneration_parameters` et
+CHECK relâchés (Q-REM-05), `final_rate` dans `chk_refused` (Q-REM-10).
 
 ---
 
