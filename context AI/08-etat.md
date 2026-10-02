@@ -20,9 +20,10 @@
   depuis le 2026-09-21 : 18 modèles, 224 champs pour 224 colonnes, 18
   ressources REST, 91 opérations. Tout montant est un `Decimal`. Vérifié en
   exécution : `GET` sur les 18 ressources, 18/18 en `200`.
-- **Tests** — seulement `test_health.py` (test de fumée, ne touche pas la
-  base). `conftest.py` expose une fixture `client` ; **pas encore de fixture
-  de base de test isolée** — c'est le premier verrou.
+- **Tests** *(au 2026-10-02)* — **44 tests unitaires**, `44 passed`, lancés
+  dans le conteneur `api`, sans PostgreSQL : sécurité, services, repository
+  générique, modèles `User`, router générique. **Pas encore de fixture de
+  base de test isolée** — c'est la prochaine étape.
 - **Métier** — les règles (mandat, rémunération, barème, performance) existent
   en Gherkin dans `user-stories/` et en notes, mais **aucune n'est
   implémentée**. Le schéma non plus ne les porte pas : `U02` (exclusivité du
@@ -157,3 +158,10 @@ de ce que le code dit déjà.
   échoue. Le compose n'est pas modifié ; on lance `docker compose up -d db api`.
   Aucun code n'utilisait MinIO. Remplaçant à choisir en groupe. Détail et
   sources : `md/minio-images-indisponibles-2026-10-02.md`.
+- **2026-10-02** — **premiers tests unitaires** : 43 tests ajoutés (6
+  fichiers), `44 passed` en 3,75 s dans le conteneur `api`. Hors méthode
+  chantier, à la demande de l'utilisateur. Isolation par `unittest.mock` et
+  `dependency_overrides`, aucune dépendance ajoutée. Mesuré : `44 passed`
+  aussi **avec `db` arrêté** ; un sabotage du hachage dans
+  `UserService.create` fait échouer 1 test. Ordre décidé pour la suite :
+  unitaires → base de test isolée (chantier 1) → calculette (chantier 2).
