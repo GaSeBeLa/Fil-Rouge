@@ -81,6 +81,18 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 | Prix des biens | ✅ colonne `price_eur`, ligne à ligne | 2026-09-21 | `08-etat.md:110-113` |
 | Ancien schéma `docker/init/` | ✅ obsolète, `init-v2` fait foi | 2026-09-21 | `08-etat.md:105-109` |
 
+### Réponses de Sébastien — 2026-10-02 (page à cartes, v1)
+
+⚠️ Avis d'**un** membre : à valider par le groupe pour les cartes 👥.
+
+| Id | Réponse | Ce que ça entraîne |
+|---|---|---|
+| D1 à D4 | ✅ **garder** | Rien à défaire. |
+| Q-REM-01 | 📝 pas d'option cochée : « définir la borne, informer Jeff, citer exactement la contradiction » | Contradiction citée sur la carte (`REGLES-CALCUL-REMUNERATION.md` l. 173-174, 181, 188) ; nouvelle **Q-JEF-19**. |
+| Q-REM-02 | ✅ **statut-mandat** (pas l'option recommandée) | Nouveau statut de fin sur `mandate` ; peut servir aussi à **Q-REM-14**. ⚠️ S'écarte de `RCR:100` (motif du refus dans `paiements`) : à écrire dans l'ADR. |
+| Q-REM-03 | 📝 pas d'option cochée : « explique la différence entre le Score et le Taux » | Explication ajoutée sur la carte (v2) ; question toujours ouverte. |
+| Q-REM-04 | ✅ **jsonb** | Colonne `payment.calculation_details JSONB`, dans le lot de migration. |
+
 ---
 
 ## 1. Toutes les questions, par thème
@@ -728,6 +740,10 @@ n'a plus qu'à dire « oui » ou à corriger.
   Le sujet donne 10 ans pour les paiements ; il manque le reste. (Q-ACC-21)
 - **Q-JEF-18** — Quelle **échelle de priorité** pour le client sur un bien proposé ? (Q-SCH-05)
 - **Q-JEF-16** — Qui peut créer un **barème propre à un chasseur**, et qui le valide ? (Q-PAR-09)
+- **Q-JEF-19** — Un prix **pile sur une limite** du barème (200 000 €, 350 000 €…) : quel
+  taux ? Le sujet écrit « < 200 000 € » (l. 173) mais aussi `BETWEEN` (l. 188), qui
+  inclut la limite. Proposé : la limite appartient à la tranche du dessus
+  (350 000 € → 40 %, comme l. 181). (Q-REM-01, ajoutée le 2026-10-02)
 
 ---
 
