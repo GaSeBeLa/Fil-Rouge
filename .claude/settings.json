@@ -2,7 +2,16 @@
   "permissions": {
     "allow": [
       "Bash(cd API && python -m pytest -q)",
-      "Bash(python -m pytest -q)"
+      "Bash(python -m pytest -q)",
+      "Bash(git check-ignore *)",
+      "PowerShell(Select-String *)",
+      "PowerShell(Get-CimInstance *)",
+      "PowerShell(Get-Content *)",
+      "PowerShell(Get-ChildItem *)",
+      "PowerShell(Get-Date *)",
+      "mcp__9bd19151-fd62-4332-b5d9-4b565bb47365__getConfluencePage",
+      "mcp__9bd19151-fd62-4332-b5d9-4b565bb47365__searchConfluenceUsingCql",
+      "mcp__terminal__read_terminal"
     ]
   }
 }
