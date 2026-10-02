@@ -20,10 +20,10 @@
   depuis le 2026-09-21 : 18 modèles, 224 champs pour 224 colonnes, 18
   ressources REST, 91 opérations. Tout montant est un `Decimal`. Vérifié en
   exécution : `GET` sur les 18 ressources, 18/18 en `200`.
-- **Tests** *(au 2026-10-02)* — **44 tests unitaires**, `44 passed`, lancés
-  dans le conteneur `api`, sans PostgreSQL : sécurité, services, repository
-  générique, modèles `User`, router générique. **Pas encore de fixture de
-  base de test isolée** — c'est la prochaine étape.
+- **Tests** *(au 2026-10-02)* — **66 tests**, `66 passed`, lancés dans le
+  conteneur `api` : 44 unitaires sans PostgreSQL, 22 d'intégration sur la
+  base de test isolée `fil_rouge_test` (`docker/create_test_db.sh`). Reste :
+  la calculette de rémunération (chantier 2).
 - **Métier** — les règles (mandat, rémunération, barème, performance) existent
   en Gherkin dans `user-stories/` et en notes, mais **aucune n'est
   implémentée**. Le schéma non plus ne les porte pas : `U02` (exclusivité du
@@ -40,7 +40,7 @@ ordonné par ce qui débloque le reste.
 
 | # | Chantier | Ce qu'il apporte | Coût estimé | Dépend de |
 |---|---|---|---|---|
-| 1 | Base de test isolée + tests d'intégration CRUD | une vérification qui prouve quelque chose : aujourd'hui `pytest` ne teste que le health-check | 4–6 fiches | rien |
+| 1 | ~~Base de test isolée + tests d'intégration CRUD~~ ✅ **fait le 2026-10-02** | `fil_rouge_test` + 22 tests d'intégration (voir journal) | — | rien |
 | 2 | Règles métier mandat / rémunération / barème | implémente les US 00 et 07 dans la couche `services/`, avec leurs tests ; reprend `U02` et `U05` laissés commentés dans le `01` | 5–7 fiches | 1 |
 | 3 | Livrable 2 — modélisation (MCD/MLD) | reconstruit le modèle depuis le SQL existant, pour `livrables/2-modelisation/` | 3–4 fiches | rien |
 | 4 | Livrable 1 — audit des données | rapport de normalisation à partir de `normalised/rapport_anomalies.txt` | 3–4 fiches | rien |
@@ -165,3 +165,11 @@ de ce que le code dit déjà.
   aussi **avec `db` arrêté** ; un sabotage du hachage dans
   `UserService.create` fait échouer 1 test. Ordre décidé pour la suite :
   unitaires → base de test isolée (chantier 1) → calculette (chantier 2).
+- **2026-10-02** — **base de test isolée** (chantier 1, hors méthode fiches) :
+  option A retenue — base `fil_rouge_test` dans le même conteneur, rejouant
+  `01` + `02` (pas `03`), et chaque test annulé en fin (transaction +
+  SAVEPOINT). Écartées : rollback sur la base de dev (dépend de ses données),
+  SQLite (ignore `CHECK`, `NUMERIC`, `EXCLUDE`). `docker-compose.yml` non
+  modifié. 22 tests d'intégration, `66 passed` au total. Mesuré : comptes des
+  deux bases identiques avant/après ; contrainte `estate_price_check`
+  retirée → 1 test rouge ; `db` arrêté → `44 passed, 22 skipped`.

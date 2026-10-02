@@ -15,8 +15,9 @@ modifiés**.
   K€) est l'ancien schéma, gardé intact, plus monté.
 - L'API expose un CRUD complet en trois couches (routes / services /
   repositories) sur les **18 tables**, en `Decimal` pour tout montant.
-  91 opérations vérifiées en `200` contre la base. Seul le health-check est
-  testé automatiquement : la base de test isolée reste le premier verrou.
+  91 opérations vérifiées en `200` contre la base. **66 tests** : 44 unitaires
+  sans base, 22 d'intégration sur la base de test isolée `fil_rouge_test`
+  (`docker/create_test_db.sh`) — voir `API/README.md` § Tests.
 - Les user stories Gherkin (`user-stories/`) couvrent le parcours actuel et le
   futur parcours IA ; les règles métier ne sont pas encore implémentées.
 - `normalised/` porte la normalisation des annonces et son rapport d'anomalies.
