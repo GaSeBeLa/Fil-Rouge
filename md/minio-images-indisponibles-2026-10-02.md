@@ -1,10 +1,10 @@
-# MinIO retiré du projet — 2026-10-02
+# MinIO ne se télécharge plus — 2026-10-02
 
 ## En une phrase
 
 MinIO **existe toujours**, mais sa version **gratuite prête à l'emploi**
-a disparu : on ne peut plus la télécharger, donc on l'a retirée du
-`docker-compose.yml`.
+a disparu : on ne peut plus la télécharger. Il **reste** dans le
+`docker-compose.yml`, mais on le contourne au lancement.
 
 ## Ce qu'était MinIO dans le projet
 
@@ -40,14 +40,20 @@ Le README officiel le dit lui-même :
   - ❌ **6** images MinIO refusées (`quay.io` et Docker Hub, `minio` et `mc`)
   - ✅ `postgres:16` passe → ce n'est pas notre installation Docker.
 
-## Ce qu'on a fait
+## Ce qu'on fait en attendant
 
-- Retiré les services `minio`, `minio-setup` et le volume `minio_data` de
-  `docker/docker-compose.yml` (commit `498f24a`).
-- Résultat vérifié : `docker compose up -d` relance `db` et `api`, Swagger
-  répond **HTTP 200**.
-- `.env.exemple` garde `MINIO_ROOT_USER` / `MINIO_ROOT_PASSWORD` :
-  inutilisés, sans danger.
+- Le `docker-compose.yml` n'est **pas modifié** : les services `minio` et
+  `minio-setup` y sont toujours.
+- On lance **seulement** la base et l'API, depuis `docker/` :
+
+  ```bash
+  docker compose up -d db api
+  ```
+
+- Résultat vérifié le 2026-10-02 : `db` et `api` démarrent, Swagger répond
+  **HTTP 200**.
+- ⚠️ Un `docker compose up -d` **sans** préciser les services échoue
+  toujours, à cause de MinIO.
 
 ## 🟡 À décider en groupe
 
@@ -66,4 +72,5 @@ vus en extrait seulement.
 
 ## ⚠️ Pour l'équipe
 
-Qui a encore l'ancien compose aura la **même erreur** : faire un `git pull`.
+Tout le monde aura la **même erreur** avec `docker compose up -d` :
+lancer `docker compose up -d db api` à la place.
