@@ -152,3 +152,8 @@ de ce que le code dit déjà.
   adverses sur 7, même comportement des deux côtés ; API `GET /hunters` en
   `200` avec la colonne, `POST` sans manager en `409`. Le schéma compte
   désormais **226 colonnes** (le « 224 » n'avait pas suivi l'ADR-024).
+- **2026-10-02** — **MinIO retiré du compose** : ses images ne se
+  téléchargent plus (supprimées de Docker Hub le 2026-09-11, `quay.io` exige
+  un compte) et faisaient échouer tout `docker compose up`. Aucun code ne
+  l'utilisait. Remplaçant à choisir en groupe. Détail et sources :
+  `md/minio-retrait-2026-10-02.md`.
