@@ -84,10 +84,10 @@
   .arg { display:block; font-size:.92rem; color:var(--doux); line-height:1.5; margin-top:.15rem; }
 </style>
 
-<div class="page" data-cle="filrouge-2026-10-02-questions-v4">
+<div class="page" data-cle="filrouge-2026-10-02-questions-v5">
 
   <header style="display:flex;flex-direction:column;gap:.8rem">
-    <p class="mono sous">Fil Rouge Immobilier · 2026-10-02 · version 4 · registre md/questions-a-trancher-2026-10-02.md</p>
+    <p class="mono sous">Fil Rouge Immobilier · 2026-10-02 · version 5 · registre md/questions-a-trancher-2026-10-02.md</p>
     <h1>Questions à trancher</h1>
     <span class="jauge">🟢 Ça tient, mais…</span>
     <ul>
@@ -195,7 +195,7 @@
   <section id="t0">
     <h2>A · Rémunération : champs absents ou ambigus en base</h2>
     <p class="sous">Le cœur de la demande. La calculette lit une vente et rend un paiement ; la base n'a pas tout ce qu'il faut.</p>
-    <div class="question" id="Q-REM-01" data-note-init="définir la borne et informer Jeff, et citer exactement la contradiction. Décision du 2026-10-05 : les prix passent sans virgule (DECIMAL(12), euros entiers) ; le « numeric(12) » du 2026-10-02 était une erreur de formulation. Bornes du barème en [] (incluses).">
+    <div class="question" id="Q-REM-01" data-note-init="définir la borne et informer Jeff, et citer exactement la contradiction. Décision du 2026-10-05 : les prix passent sans virgule, en INTEGER (euros entiers) ; le « numeric(12) » du 2026-10-02 était une erreur de formulation. Bornes du barème en [] (incluses).">
       <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>📝 Q-REM-01 · Borne haute d'une tranche du barème : incluse ou exclue ?</h3><span class="puce faible">⚙️ code</span></div>
       <p class="qui">Qui tranche : <b>👥 Groupe, puis Jeff (Q-JEF-19)</b></p>
       <ul>
@@ -215,10 +215,10 @@
         <li>Le sujet lui-même hésite (citations ci-dessous) : c'est à nous de fixer la règle, puis de la faire valider par Jeff.</li>
       </ul></div>
       <div class="repondu"><ul>
-        <li>📝 Ton commentaire : « définir la borne et informer Jeff, et citer exactement la contradiction. Décision du 2026-10-05 : les prix passent sans virgule (DECIMAL(12), euros entiers) ; le « numeric(12) » du 2026-10-02 était une erreur de formulation. Bornes du barème en [] (incluses). »</li>
+        <li>📝 Ton commentaire : « définir la borne et informer Jeff, et citer exactement la contradiction. Décision du 2026-10-05 : les prix passent sans virgule, en INTEGER (euros entiers) ; le « numeric(12) » du 2026-10-02 était une erreur de formulation. Bornes du barème en [] (incluses). »</li>
         <li>➡️ Fait : la contradiction est citée mot pour mot plus haut ; la question part chez Jeff en <b>Q-JEF-19</b>.</li>
-        <li>✅ Décision du 2026-10-05 : les <b>prix</b> passent en <b>euros entiers</b>, <span class=mono>DECIMAL(12)</span>.</li>
-        <li>ℹ️ <span class=mono>DECIMAL</span> et <span class=mono>NUMERIC</span> sont le même type ; <span class=mono>(12)</span> sans second chiffre = 0 décimale (<a href="https://www.postgresql.org/docs/16/datatype-numeric.html">doc PostgreSQL 16</a>, lue le 2026-10-05).</li>
+        <li>✅ Décision du 2026-10-05 : les <b>prix</b> passent en <b>euros entiers</b>, type <span class=mono>INTEGER</span> (pas <span class=mono>DECIMAL</span>).</li>
+        <li>ℹ️ <span class=mono>INTEGER</span> va jusqu'à <b>2 147 483 647</b> ; « The type <span class=mono>integer</span> is the common choice » (<a href="https://www.postgresql.org/docs/16/datatype-numeric.html">doc PostgreSQL 16</a>, lue le 2026-10-05). La calculette, en <span class=mono>Decimal</span>, convertit avec <span class=mono>Decimal(prix)</span> : conversion exacte.</li>
         <li>✅ Décision du 2026-10-05 : les deux <span class=mono>EXCLUDE</span> du barème passent de <span class=mono>'[)'</span> à <span class=mono>'[]'</span> (<span class=mono>01:706</span>, <span class=mono>01:713</span>) : la borne haute est <b>incluse</b>, comme dans le code (<span class=mono>prix &lt;= montant_max</span>, <span class=mono>rem.py:241</span>).</li>
         <li>➡️ Effet : prix entiers + bornes incluses = tranches <span class=mono>[0 ; 199 999]</span>, <span class=mono>[200 000 ; 349 999]</span>… <b>Ni trou, ni chevauchement</b>, et c'est mot pour mot le tableau du sujet (l. 173-174).</li>
         <li>➡️ L'adaptateur de <b>D3</b> devient inutile : la base stocke <span class=mono>199999</span>, le code le lit tel quel.</li>
