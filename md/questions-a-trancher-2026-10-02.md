@@ -89,7 +89,7 @@ puis à confirmer par Jeff quand la carte le dit.
 | Id | Réponse | Ce que ça entraîne |
 |---|---|---|
 | D1 à D4 | ✅ **garder** | Rien à défaire. |
-| Q-REM-01 | 📝 pas d'option cochée : « définir la borne, informer Jeff, citer exactement la contradiction ; et changer le decimal(12,2) en numeric(12) » | Contradiction citée sur la carte (`REGLES-CALCUL-REMUNERATION.md` l. 173-174, 181, 188) ; nouvelle **Q-JEF-19**. ✅ **Décision du 2026-10-05** (le « numeric(12) » était une erreur de formulation) : les **prix** passent en **euros entiers**, type **`INTEGER`** (pas `DECIMAL`) — jusqu'à 2 147 483 647, « The type `integer` is the common choice » ([doc PostgreSQL 16](https://www.postgresql.org/docs/16/datatype-numeric.html), lue le 2026-10-05) ; la calculette, en `Decimal`, convertit avec `Decimal(prix)` (exact) ; les `EXCLUDE` du barème passent de `'[)'` à `'[]'` (`01:706`, `01:713`). Tranches `[0 ; 199 999]`, `[200 000 ; 349 999]`… : ni trou ni chevauchement, comme le tableau du sujet et `rem.py:241`. L'adaptateur de D3 devient inutile. 🟡 Colonnes « prix » à confirmer : `sale.purchase_amount` (`01:650`), `estate.price` (`01:515`), `amount_proposition` (`01:605`), `amount_min/max` (`01:691-692`). Honoraires, fixe et paiement **gardent leurs centimes** (`F10:253`). À mettre à jour : règle 4 de `CLAUDE.md`, `docker/init-v2/README.md` §1. |
+| Q-REM-01 | ✅ **Tranchée le 2026-10-05** : prix et bornes du barème en **`INTEGER`** (euros entiers, sans chiffre entre parenthèses), `EXCLUDE` du barème en `'[]'` (`01:706`, `01:713`). Le « numeric(12) » du 2026-10-02 était une erreur de formulation. | Tranches `[0 ; 199 999]`, `[200 000 ; 349 999]`… : ni trou ni chevauchement ; base, code (`rem.py:241`) et tableau du sujet (l. 173-174) d'accord. Mesuré : `price_eur` = 2 556 prix, 0 avec centimes, max 406 042 €. `INTEGER` va jusqu'à 2 147 483 647 ([doc PostgreSQL 16](https://www.postgresql.org/docs/16/datatype-numeric.html), lue le 2026-10-05). D3 (adaptateur) inutile ; Jeff informé par Q-JEF-19. Gardent leurs centimes : honoraires, fixe, paiement (`F10:253`). 🟡 Lot de migration : `sale.purchase_amount`, `estate.price`, `amount_proposition`, `amount_min/max` en INTEGER ; modèles `Decimal` → `int` ; règle 4 de `CLAUDE.md` ; `init-v2/README.md` §1. ⚠️ Non testé (Docker éteint) : `numrange` sur INTEGER, import de `354712.00`. |
 | Q-REM-02 | ✅ **statut-mandat** (pas l'option recommandée) | Nouveau statut de fin sur `mandate` ; peut servir aussi à **Q-REM-14**. ⚠️ S'écarte de `RCR:100` (motif du refus dans `paiements`) : à écrire dans l'ADR. |
 | Q-REM-03 | ✅ **colonne** — « à documenter et à confirmer avec Jeff » | `payment.performance_score`. |
 | Q-REM-04 | ✅ **jsonb** | `payment.calculation_details JSONB`. |
@@ -754,10 +754,10 @@ n'a plus qu'à dire « oui » ou à corriger.
   Le sujet donne 10 ans pour les paiements ; il manque le reste. (Q-ACC-21)
 - **Q-JEF-18** — Quelle **échelle de priorité** pour le client sur un bien proposé ? (Q-SCH-05)
 - **Q-JEF-16** — Qui peut créer un **barème propre à un chasseur**, et qui le valide ? (Q-PAR-09)
-- **Q-JEF-19** — Un prix **pile sur une limite** du barème (200 000 €, 350 000 €…) : quel
-  taux ? Le sujet écrit « < 200 000 € » (l. 173) mais aussi `BETWEEN` (l. 188), qui
-  inclut la limite. Proposé : la limite appartient à la tranche du dessus
-  (350 000 € → 40 %, comme l. 181). (Q-REM-01, ajoutée le 2026-10-02)
+- **Q-JEF-19** — **Pour information** (pas une question) : un prix pile sur une
+  limite du barème prend la tranche du dessus, comme votre tableau (200 000 € → 35 %,
+  350 000 € → 40 %). Les prix sont stockés en euros entiers. Dites-nous si ce n'est
+  pas votre lecture. (Q-REM-01, tranchée le 2026-10-05)
 
 ---
 

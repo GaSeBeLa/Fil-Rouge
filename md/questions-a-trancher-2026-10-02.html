@@ -84,17 +84,17 @@
   .arg { display:block; font-size:.92rem; color:var(--doux); line-height:1.5; margin-top:.15rem; }
 </style>
 
-<div class="page" data-cle="filrouge-2026-10-02-questions-v5">
+<div class="page" data-cle="filrouge-2026-10-02-questions-v6">
 
   <header style="display:flex;flex-direction:column;gap:.8rem">
-    <p class="mono sous">Fil Rouge Immobilier · 2026-10-02 · version 5 · registre md/questions-a-trancher-2026-10-02.md</p>
+    <p class="mono sous">Fil Rouge Immobilier · 2026-10-02 · version 6 · registre md/questions-a-trancher-2026-10-02.md</p>
     <h1>Questions à trancher</h1>
     <span class="jauge">🟢 Ça tient, mais…</span>
     <ul>
       <li>✅ <b>125 questions</b>, une carte chacune, avec l'option que je recommande marquée « (recommandé) ».</li>
       <li>⚠️ <b>25 réponses changent la base</b> (badge rouge 🗄️) : elles se paient toutes d'un <span class="mono">docker compose down -v</span> chez chacun. À grouper.</li>
       <li>🆕 Version 2 : chaque carte a un bloc <b>🗣️ En clair</b>, et chaque option un <b>👍 pour</b> et un <b>👎 contre</b>.</li>
-      <li>✅ Tes <b>15 réponses</b> et tes <b>3 commentaires</b> du 2026-10-02 sont déjà notés (cartes ✅ et 📝, encadré vert).</li>
+      <li>✅ Tes <b>16 réponses</b> et tes <b>3 commentaires</b> du 2026-10-02 sont déjà notés (cartes ✅ et 📝, encadré vert).</li>
       <li>➡️ Coche, commente si besoin (bouton « + Ajouter un commentaire » sous chaque carte), puis <b>copie tes réponses</b> en bas de page.</li>
     </ul>
     <nav aria-label="Sommaire"><ul>
@@ -196,7 +196,7 @@
     <h2>A · Rémunération : champs absents ou ambigus en base</h2>
     <p class="sous">Le cœur de la demande. La calculette lit une vente et rend un paiement ; la base n'a pas tout ce qu'il faut.</p>
     <div class="question" id="Q-REM-01" data-note-init="définir la borne et informer Jeff, et citer exactement la contradiction. Décision du 2026-10-05 : les prix passent sans virgule, en INTEGER (euros entiers) ; le « numeric(12) » du 2026-10-02 était une erreur de formulation. Bornes du barème en [] (incluses).">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>📝 Q-REM-01 · Borne haute d'une tranche du barème : incluse ou exclue ?</h3><span class="puce faible">⚙️ code</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-REM-01 · Borne haute d'une tranche du barème : incluse ou exclue ?</h3><span class="puce faible">⚙️ code</span></div>
       <p class="qui">Qui tranche : <b>👥 Groupe, puis Jeff (Q-JEF-19)</b></p>
       <ul>
         <li>La base <b>exclut</b> la borne : <span class=mono>'[)'</span> (<span class=mono>01:706</span>).</li>
@@ -215,21 +215,22 @@
         <li>Le sujet lui-même hésite (citations ci-dessous) : c'est à nous de fixer la règle, puis de la faire valider par Jeff.</li>
       </ul></div>
       <div class="repondu"><ul>
+        <li>✅ Ta réponse du 2026-10-02 : <b>prix-entiers</b></li>
         <li>📝 Ton commentaire : « définir la borne et informer Jeff, et citer exactement la contradiction. Décision du 2026-10-05 : les prix passent sans virgule, en INTEGER (euros entiers) ; le « numeric(12) » du 2026-10-02 était une erreur de formulation. Bornes du barème en [] (incluses). »</li>
-        <li>➡️ Fait : la contradiction est citée mot pour mot plus haut ; la question part chez Jeff en <b>Q-JEF-19</b>.</li>
-        <li>✅ Décision du 2026-10-05 : les <b>prix</b> passent en <b>euros entiers</b>, type <span class=mono>INTEGER</span> (pas <span class=mono>DECIMAL</span>).</li>
-        <li>ℹ️ <span class=mono>INTEGER</span> va jusqu'à <b>2 147 483 647</b> ; « The type <span class=mono>integer</span> is the common choice » (<a href="https://www.postgresql.org/docs/16/datatype-numeric.html">doc PostgreSQL 16</a>, lue le 2026-10-05). La calculette, en <span class=mono>Decimal</span>, convertit avec <span class=mono>Decimal(prix)</span> : conversion exacte.</li>
-        <li>✅ Décision du 2026-10-05 : les deux <span class=mono>EXCLUDE</span> du barème passent de <span class=mono>'[)'</span> à <span class=mono>'[]'</span> (<span class=mono>01:706</span>, <span class=mono>01:713</span>) : la borne haute est <b>incluse</b>, comme dans le code (<span class=mono>prix &lt;= montant_max</span>, <span class=mono>rem.py:241</span>).</li>
-        <li>➡️ Effet : prix entiers + bornes incluses = tranches <span class=mono>[0 ; 199 999]</span>, <span class=mono>[200 000 ; 349 999]</span>… <b>Ni trou, ni chevauchement</b>, et c'est mot pour mot le tableau du sujet (l. 173-174).</li>
-        <li>➡️ L'adaptateur de <b>D3</b> devient inutile : la base stocke <span class=mono>199999</span>, le code le lit tel quel.</li>
-        <li>🟡 Colonnes « prix » à confirmer : <span class=mono>sale.purchase_amount</span> (<span class=mono>01:650</span>), <span class=mono>estate.price</span> (<span class=mono>01:515</span>), <span class=mono>offer.amount_proposition</span> (<span class=mono>01:605</span>), bornes <span class=mono>amount_min/max</span> du barème (<span class=mono>01:691-692</span>).</li>
-        <li>⚠️ Restent avec centimes : honoraires, fixe, montant payé (arrondi au centime, <span class=mono>F10:253</span>).</li>
-        <li>⚠️ À mettre à jour aussi : règle 4 de <span class=mono>CLAUDE.md</span> et <span class=mono>docker/init-v2/README.md</span> §1 (« tous les montants NUMERIC(12,2) »).</li>
+        <li>✅ <b>Tranchée le 2026-10-05</b> : prix et bornes du barème en <span class=mono>INTEGER</span> (euros entiers), <span class=mono>EXCLUDE</span> du barème en <span class=mono>'[]'</span> (<span class=mono>01:706</span>, <span class=mono>01:713</span>).</li>
+        <li>➡️ Tranches <span class=mono>[0 ; 199 999]</span>, <span class=mono>[200 000 ; 349 999]</span>… : <b>ni trou, ni chevauchement</b>. La base, le code (<span class=mono>prix &lt;= montant_max</span>, <span class=mono>rem.py:241</span>) et le tableau du sujet (l. 173-174) disent la même chose.</li>
+        <li>📏 Mesuré : <span class=mono>normalised/annonces_normalised.csv</span>, <span class=mono>price_eur</span> : <b>2 556</b> prix, <b>0</b> avec centimes, max 406 042 €.</li>
+        <li>ℹ️ <span class=mono>INTEGER</span> s'écrit sans chiffre entre parenthèses ; il va jusqu'à <b>2 147 483 647</b> (<a href="https://www.postgresql.org/docs/16/datatype-numeric.html">doc PostgreSQL 16</a>, lue le 2026-10-05).</li>
+        <li>➡️ D3 (adaptateur) devient inutile. Jeff est informé par <b>Q-JEF-19</b>, reformulée en information.</li>
+        <li>⚠️ Gardent leurs centimes : honoraires, fixe, montant payé (<span class=mono>F10:253</span>).</li>
+        <li>🟡 Suite, dans le lot de migration : colonnes à passer en INTEGER (<span class=mono>sale.purchase_amount</span>, <span class=mono>estate.price</span>, <span class=mono>amount_proposition</span>, <span class=mono>amount_min/max</span>) ; modèles <span class=mono>Decimal</span> → <span class=mono>int</span> ; règle 4 de <span class=mono>CLAUDE.md</span> ; <span class=mono>init-v2/README.md</span> §1.</li>
+        <li>⚠️ Pas encore testé (Docker éteint) : <span class=mono>numrange</span> sur des colonnes INTEGER, et l'import de <span class=mono>354712.00</span> dans une colonne INTEGER.</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-REM-01" value="adaptateur"><span><b>Convertir à la lecture (recommandé)</b>On stocke 200000. La couche qui lit la base fait montant_max − 0,01. Zéro ligne changée dans remuneration.py, les 55 tests restent verts.<span class="arg">👍 On garde la base propre (aucun trou, aucun chevauchement) et on ne touche pas au code fourni par le sujet.</span><span class="arg">👎 Une conversion de plus à écrire et à tester ; il faut l'expliquer à l'oral.</span></span></label>
         <label><input type="radio" name="Q-REM-01" value="changer-code"><span><b>Changer le code du sujet</b>< au lieu de <=. ❌ Casse le test qui attend 199 999 € → 30 % (test_remuneration.py:193).<span class="arg">👍 Une seule convention partout, la plus simple à lire.</span><span class="arg">👎 On modifie le code du sujet, et un test officiel casse.</span></span></label>
         <label><input type="radio" name="Q-REM-01" value="base-incluse"><span><b>Passer la base en '[]'</b>On stocke 199999,99. Change 2 contraintes EXCLUDE dans 01 : base à recréer.<span class="arg">👍 Le code reste tel quel.</span><span class="arg">👎 On stocke des valeurs bizarres (199 999,99) et on recrée la base pour tous.</span></span></label>
+        <label><input type="radio" name="Q-REM-01" value="prix-entiers" checked><span><b>Prix en INTEGER + bornes '[]' (tranché le 2026-10-05)</b>Prix et bornes du barème en euros entiers, EXCLUDE en '[]' : tranches [0 ; 199 999], [200 000 ; 349 999]… Base à recréer, dans le lot de migration.<span class="arg">👍 Base, code et tableau du sujet disent la même chose ; ni trou ni chevauchement ; aucun prix importé n'a de centimes (2 556 sur 2 556 entiers).</span><span class="arg">👎 Base à recréer ; modèles en int ; règle 4 de CLAUDE.md à réécrire.</span></span></label>
       </div>
     </div>
     <div class="question" id="Q-REM-02">
@@ -2025,7 +2026,7 @@
       </div>
     </div>
     <div class="question" id="Q-JEF-19">
-      <h3>🧑‍💼 Q-JEF-19 · Un prix pile sur une limite du barème (200 000 €, 350 000 €…) : quel taux ? Le sujet écrit « < 200 000 € » mais aussi « BETWEEN », qui inclut la limite. Nous proposons : la limite appartient à la tranche du dessus (350 000 € → 40 %).</h3>
+      <h3>🧑‍💼 Q-JEF-19 · Pour information (pas une question) : un prix pile sur une limite prend la tranche du dessus, comme votre tableau (200 000 € → 35 %, 350 000 € → 40 %). Les prix sont stockés en euros entiers. Dites-nous si ce n'est pas votre lecture.</h3>
       <p class="qui">Voir Q-REM-01 : ta demande du 2026-10-02.</p>
       <div class="choix">
         <label><input type="radio" name="Q-JEF-19" value="envoyer">Envoyer telle quelle</label>
