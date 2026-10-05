@@ -79,8 +79,15 @@
   .clair { background:var(--carte); border-left:4px solid var(--accent); border-radius:6px; padding:.6rem .9rem; display:flex; flex-direction:column; gap:.3rem; }
   .clair-t { font-weight:700; color:var(--accent); }
   .repondu { background:var(--ok-fond); border-radius:6px; padding:.6rem .9rem; }
-  .repondu ul { list-style:none; padding:0; }
+  .repondu ul, .adapte ul { list-style:none; padding:0; }
+  .adapte { background:var(--warn-fond); border-left:4px solid var(--warn); border-radius:6px; padding:.6rem .9rem; display:flex; flex-direction:column; gap:.3rem; }
+  .adapte-t { font-weight:700; color:var(--warn); }
+  .prof { border-left:4px solid var(--trait); padding:.2rem .9rem; }
+  .puces { display:flex; flex-wrap:wrap; gap:.4rem; }
+  .mono, .question { overflow-wrap:anywhere; }  /* un mot trop long (chemin, nom de colonne) se coupe : pas de défilement horizontal sur téléphone */
   .arg { display:block; font-size:.9375rem; color:var(--doux); line-height:1.5; margin-top:.15rem; }
+  a.src { text-underline-offset:.15em; }  /* citation d'une carte ouverte : lien vers GitHub */
+  a.src:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
   .rattachees { margin-left:1.2rem; padding-left:.9rem; border-left:3px solid var(--trait); display:flex; flex-direction:column; gap:1rem; }
   .rattachees > h3 { color:var(--doux); }
   @media (max-width:480px) { .rattachees { margin-left:0; } }
@@ -104,11 +111,13 @@
       <li>✅ <b>20 questions</b> qui ne se tranchent qu'avec Jeff, ou après sa réponse. Chacune porte <b>notre position</b>, tirée de vos réponses.</li>
       <li>🆕 Sous elles, les <b>34 cartes du registre</b> que seul Jeff tranche, venues de la page principale avec leurs cases et vos <b>13 réponses</b>.</li>
       <li>🟡 Pour chaque question : la poser, la reformuler, ou non. Plus <b>6 décisions</b> prises seul, à valider.</li>
+      <li>🔗 Dans les cartes encore ouvertes, chaque source citée est un <b>lien</b> vers le fichier, à la ligne près : voir <a href="#sources">les abréviations</a>.</li>
       <li>⚠️ <b>4 points coincent</b> encore entre vos réponses : voir « Ce qui coince ».</li>
       <li>➡️ Après l'entretien : la réponse de Jeff dans le commentaire de chaque carte, puis copier en bas de page.</li>
     </ul>
     <nav aria-label="Sommaire"><ul>
       <li><a href="#contexte">Contexte</a></li>
+      <li><a href="#sources">Sources</a></li>
       <li><a href="#decisions">Décisions</a></li>
       <li><a href="#avant">Avant de choisir</a></li>
       <li><a href="#j0">Les chiffres de la rémunération</a></li><li><a href="#j1">La note de performance du chasseur</a></li><li><a href="#j2">Le mandat</a></li><li><a href="#j3">Les données reprises de l'ancienne base</a></li><li><a href="#j4">Les droits, le RGPD et les barèmes</a></li><li><a href="#j5">Pour information, et une confirmation</a></li>
@@ -124,9 +133,9 @@
       <p>🧰 <strong>Fil Rouge Immobilier</strong> : la base et l'API d'un service de chasse immobilière, projet de groupe.</p>
       <p>🏗️ <strong>Le travail en cours : les questions à trancher</strong>. Son but : régler les questions ouvertes, puis modifier la base <b>en une seule fois</b>.</p>
       <div>
-        <p>📍 <strong>Où on en est : 33 réponses données.</strong></p>
+        <p>📍 <strong>Où on en est : 57 réponses données.</strong></p>
         <ul>
-          <li>✅ <strong>D1 à D4, Q-REM-01 à 19, Q-PAR-01 à 09, Q-INF-06</strong> : répondues, le 2026-10-02 et le 2026-10-05.</li>
+          <li>✅ <strong>D1 à D4, Q-REM-01 à 19, Q-PAR-01 à 09, Q-MAN-01 à 07, 16 cartes Q-SCH, Q-INF-06 et Q-ACC-11</strong> : répondues, le 2026-10-02 et le 2026-10-05.</li>
           <li>➡️ <strong>Ensuite, l'entretien avec Jeff</strong> : cette page.</li>
           <li>🗓️ <strong>Après</strong> : le lot de migration (un seul <span class="mono">docker compose down -v</span>), puis les ADR, une fois toutes les réponses reçues.</li>
         </ul>
@@ -167,7 +176,7 @@
   <section>
     <h2>Votre demande, en clair</h2>
     <div class="clair">
-      <p>💬 Oui : <b>20 questions</b> ne se tranchent qu'avec Jeff, ou après sa réponse. Elles couvrent <b>42 cartes</b> du registre ; <b>18</b> ont déjà votre réponse, à lui faire confirmer.</p>
+      <p>💬 Oui : <b>20 questions</b> ne se tranchent qu'avec Jeff, ou après sa réponse. Elles couvrent <b>42 cartes</b> du registre ; <b>21</b> ont déjà votre réponse, à lui faire confirmer.</p>
       <div>
         <p>💡 <strong>Mon avis : les lui poser en une fois, notre position en face.</strong></p>
         <ul>
@@ -186,13 +195,36 @@
     <div class="chiffres">
       <div class="chiffre"><b>20</b><span>questions pour Jeff</span></div>
       <div class="chiffre"><b>42</b><span>cartes du registre qu'elles couvrent</span></div>
-      <div class="chiffre"><b>18</b><span>de ces cartes ont votre réponse</span></div>
+      <div class="chiffre"><b>21</b><span>de ces cartes ont votre réponse</span></div>
       <div class="chiffre"><b>4</b><span>peuvent changer la base : à poser d'abord</span></div>
       <div class="chiffre"><b>34</b><span>de ces cartes se cochent ici, sous leur question</span></div>
     </div>
     <ul class="sous" style="font-size:.95rem">
       <li>Comptes tirés des listes qui génèrent cette page ; mêmes identifiants que le registre.</li>
     </ul>
+  </section>
+
+  <section id="sources">
+    <h2>🔗 Les sources citées</h2>
+    <div class="clair">
+      <p>🔗 Dans les cartes encore ouvertes (les questions pour Jeff, et les cartes du registre sans réponse), chaque source citée est un <b>lien</b> : il ouvre le fichier sur GitHub, à la ligne citée.</p>
+      <ul>
+        <li>📌 Le fichier <b>tel qu'il était le 2026-10-05</b> : la ligne reste juste, même si le fichier change ensuite.</li>
+        <li>⏭️ Les cartes déjà répondues n'ont pas de liens.</li>
+      </ul>
+    </div>
+    <div class="tableau"><table>
+      <thead><tr><th>Abréviation</th><th>Le fichier</th><th>Où</th></tr></thead>
+      <tbody>
+        <tr><td class="n"><span class="mono">F00 à F10</span></td><td><a href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/tree/902207e3c72fe5c806f639020e00558d0f592a26/user-stories" target="_blank" rel="noopener"><span class="mono">user-stories</span></a> : les user stories du sujet (F10 : le calcul de la rémunération)</td><td>sujet du prof</td></tr>
+        <tr><td class="n"><span class="mono">RCR</span></td><td><a href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md" target="_blank" rel="noopener"><span class="mono">documents utiles/REGLES-CALCUL-REMUNERATION.md</span></a> : les règles de calcul de la rémunération</td><td>sujet du prof</td></tr>
+        <tr><td class="n"><span class="mono">Readme.md</span></td><td><a href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/Readme.md" target="_blank" rel="noopener"><span class="mono">Readme.md</span></a> : l'énoncé du projet</td><td>sujet du prof</td></tr>
+        <tr><td class="n"><span class="mono">PgSQL.sql</span></td><td><a href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/fixtures/PgSQL.sql" target="_blank" rel="noopener"><span class="mono">fixtures/PgSQL.sql</span></a> : les données d'origine</td><td>sujet du prof</td></tr>
+        <tr><td class="n"><span class="mono">01</span></td><td><a href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql" target="_blank" rel="noopener"><span class="mono">docker/init-v2/01_create_fil_rouge_immobilier.sql</span></a> : notre schéma de la base</td><td>notre dépôt</td></tr>
+        <tr><td class="n"><span class="mono">02</span></td><td><a href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/02_migration.sql" target="_blank" rel="noopener"><span class="mono">docker/init-v2/02_migration.sql</span></a> : la reprise des données d'origine</td><td>notre dépôt</td></tr>
+        <tr><td class="n"><span class="mono">rem.py</span></td><td><a href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/API/src/app/services/remuneration.py" target="_blank" rel="noopener"><span class="mono">API/src/app/services/remuneration.py</span></a> : le calcul de la rémunération (code du sujet)</td><td>notre dépôt</td></tr>
+      </tbody>
+    </table></div>
   </section>
 
   <section id="decisions">
@@ -339,21 +371,21 @@
       <div class="tete"><h3>🧑‍💼 Q-JEF-01 · Validez-vous les chiffres proposés par le sujet ?</h3><span class="puce ko">🗄️ peut changer la base</span></div>
       <dl class="grille">
         <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Le sujet propose ces chiffres. Nous les gardons tous. <b>Les validez-vous ?</b></li><li>Honoraires : <b>3 000 € + 2,5 %</b> du prix.</li><li>Part du chasseur selon le prix : <b>30 / 35 / 40 / 45 / 50 %</b>.</li><li>Poids des 5 critères de la note : <b>25 / 10 / 25 / 15 / 25</b>.</li><li>Ventes et mandats comptés sur <b>12 mois glissants</b>.</li><li>Bonus d'ancienneté : <b>jusqu'à +10 %</b>, atteint à 5 ans. Bonus de performance : <b>de −20 % à +20 %</b>.</li><li>Taux final toujours entre <b>20 % et 60 %</b>. Le plancher de 20 % ne sert pas aujourd'hui : on le garde.</li><li>Arrondis : note à <b>1 décimale</b>, taux à <b>4 décimales</b>.</li><li>Grilles de notes : délai, visites, et <b>100 / 60</b> pour un mandat exclusif ou non.</li></ul></dd>
-        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le sujet le dit : des « paramètres proposés, non imposés par le métier » (<span class="mono">F10:3-5</span>).</li><li>Seul le client peut les rendre officiels.</li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le sujet le dit : des « paramètres proposés, non imposés par le métier » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/10_calcul_remuneration_chasseur.feature#L3-L5" target="_blank" rel="noopener" title="user-stories/10_calcul_remuneration_chasseur.feature, lignes 3-5 — sujet du prof, sur GitHub"><span class="mono">F10:3-5</span></a>).</li><li>Seul le client peut les rendre officiels.</li></ul></dd>
         <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-PAR-01</b> · Honoraires : 3 000 € + 2,5 % → <b>Valeurs du sujet</b> (réponse du 2026-10-05)</li><li>✅ <b>Q-PAR-04</b> · Fenêtre des critères de volume : 12 mois glissants → <b>12 mois glissants</b> (réponse du 2026-10-05)</li><li>✅ <b>Q-PAR-06</b> · Poids des 5 critères : 25 / 10 / 25 / 15 / 25 → <b>Valeurs du sujet</b> (réponse du 2026-10-05)<br>📝 Votre note : « les valeurs sont donné par le client, dont on fait confiance. »</li><li>✅ <b>Q-PAR-07</b> · Ancienneté +10 % max, performance ±20 % → <b>Valeurs du sujet</b> (réponse du 2026-10-05)</li><li>✅ <b>Q-PAR-08</b> · Garder le plancher de 20 %, qui ne mord jamais ? → <b>Garder</b> (réponse du 2026-10-05)</li><li>🟡 <b>Q-PAR-10</b> · Tranches et taux : 30 / 35 / 40 / 45 / 50 % → pas encore répondue. 💡 Je propose : « Valeurs du sujet »</li><li>🟡 <b>Q-PAR-11</b> · Arrondi du score (1 déc.) et du taux (4 déc.) → pas encore répondue. 💡 Je propose : « Valeurs du sujet »</li><li>🟡 <b>Q-PAR-13</b> · Grilles de notes : délai, visites, exclusivité 100 / 60 → pas encore répondue. 💡 Je propose : « Valeurs du sujet »</li><li>⚠️ Votre note sur Q-PAR-06 : les valeurs viennent du client, et on lui fait confiance. <b>Nuance</b> : pour l'instant, elles viennent du <b>sujet</b>, comme propositions. Elles deviennent celles du client quand <b>Jeff dit oui</b>.</li></ul></div></dd>
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Q-REM-19 (réponse : oui) grave <b>20 % et 60 %</b> dans la base : si Jeff change ces bornes, <b>base à recréer</b>.</li><li>Q-REM-05 (réponse : table) : ses chiffres remplissent la table des paramètres. En changer un = une ligne.</li><li>📝 Ensuite, l'ADR K : « paramètres proposés, validés par Jeff le … ».</li></ul></dd>
       </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary><p><span class="mono">RCR:59</span> : « Ce que ce document propose (à valider avec le client) : toutes les valeurs numériques ». Tableau D1 à D9 : <span class="mono">RCR:316-330</span>. Tranches : <span class="mono">RCR:171-177</span>. Ancienneté : « 0 % → +10 % (plafond à 5 ans) » (<span class="mono">RCR:207</span>). Plancher et plafond : <span class="mono">RCR:215</span> ; le pire cas est 30 % × 0,80 = 24 %. Arrondis : <span class="mono">RCR:223-229</span>. Grilles : <span class="mono">RCR:143-147</span>. L'arrondi du <b>montant</b> au centime est une <b>règle</b> (<span class="mono">F10:253</span>) : pas en question. CHECK prévu par R21 : <span class="mono">01:747-754</span>.</p></details>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p><a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L59" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 59 — sujet du prof, sur GitHub"><span class="mono">RCR:59</span></a> : « Ce que ce document propose (à valider avec le client) : toutes les valeurs numériques ». Tableau D1 à D9 : <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L316-L330" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, lignes 316-330 — sujet du prof, sur GitHub"><span class="mono">RCR:316-330</span></a>. Tranches : <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L171-L177" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, lignes 171-177 — sujet du prof, sur GitHub"><span class="mono">RCR:171-177</span></a>. Ancienneté : « 0 % → +10 % (plafond à 5 ans) » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L207" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 207 — sujet du prof, sur GitHub"><span class="mono">RCR:207</span></a>). Plancher et plafond : <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L215" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 215 — sujet du prof, sur GitHub"><span class="mono">RCR:215</span></a> ; le pire cas est 30 % × 0,80 = 24 %. Arrondis : <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L223-L229" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, lignes 223-229 — sujet du prof, sur GitHub"><span class="mono">RCR:223-229</span></a>. Grilles : <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L143-L147" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, lignes 143-147 — sujet du prof, sur GitHub"><span class="mono">RCR:143-147</span></a>. L'arrondi du <b>montant</b> au centime est une <b>règle</b> (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/10_calcul_remuneration_chasseur.feature#L253" target="_blank" rel="noopener" title="user-stories/10_calcul_remuneration_chasseur.feature, ligne 253 — sujet du prof, sur GitHub"><span class="mono">F10:253</span></a>) : pas en question. CHECK prévu par R21 : <a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L747-L754" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, lignes 747-754 — notre dépôt, sur GitHub"><span class="mono">01:747-754</span></a>.</p></details>
       <div class="choix options">
         <label><input type="radio" name="Q-JEF-01" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Son oui rend les chiffres officiels : en soutenance, on cite sa validation.</span><span>➖ Une longue liste : la lui montrer écrite, pas la lire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-01" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
-        <label><input type="radio" name="Q-JEF-01" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Rien à attendre : tout est déjà codé.</span><span>➖ On présenterait des propositions comme des exigences du client : l'erreur que le sujet signale (<span class="mono">RCR:40</span>).</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-01" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Rien à attendre : tout est déjà codé.</span><span>➖ On présenterait des propositions comme des exigences du client : l'erreur que le sujet signale (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L40" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 40 — sujet du prof, sur GitHub"><span class="mono">RCR:40</span></a>).</span></span></span></label>
       </div>
     </div>
     <div class="rattachees" aria-label="Cartes du registre sous Q-JEF-01">
       <h3>↳ 8 carte(s) du registre sous Q-JEF-01 : à cocher ici seulement</h3>
     <div class="question" id="Q-PAR-01">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-PAR-01 · Honoraires : 3 000 € + 2,5 %</h3><span class="puce moyen">🧑‍💼 attend Jeff</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-PAR-01 · Honoraires : 3 000 € + 2,5 %</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li><span class=mono>RCR:321</span> (D1 du sujet).</li>
@@ -371,7 +403,7 @@
       </div>
     </div>
     <div class="question" id="Q-PAR-04">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-PAR-04 · Fenêtre des critères de volume : 12 mois glissants</h3><span class="puce moyen">🧑‍💼 attend Jeff</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-PAR-04 · Fenêtre des critères de volume : 12 mois glissants</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li><span class=mono>RCR:324</span> (D4).</li>
@@ -389,7 +421,7 @@
       </div>
     </div>
     <div class="question" id="Q-PAR-06" data-note-init="les valeurs sont donné par le client, dont on fait confiance.">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-PAR-06 · Poids des 5 critères : 25 / 10 / 25 / 15 / 25</h3><span class="puce moyen">🧑‍💼 attend Jeff</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-PAR-06 · Poids des 5 critères : 25 / 10 / 25 / 15 / 25</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li><span class=mono>RCR:326</span> (D6).</li>
@@ -409,7 +441,7 @@
       </div>
     </div>
     <div class="question" id="Q-PAR-07">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-PAR-07 · Ancienneté +10 % max, performance ±20 %</h3><span class="puce moyen">🧑‍💼 attend Jeff</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-PAR-07 · Ancienneté +10 % max, performance ±20 %</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li><span class=mono>RCR:327</span> (D7).</li>
@@ -429,7 +461,7 @@
       </div>
     </div>
     <div class="question" id="Q-PAR-08">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-PAR-08 · Garder le plancher de 20 %, qui ne mord jamais ?</h3><span class="puce moyen">🧑‍💼 attend Jeff</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-PAR-08 · Garder le plancher de 20 %, qui ne mord jamais ?</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li><span class=mono>RCR:328</span> (D8), <span class=mono>RCR:215</span>.</li>
@@ -447,10 +479,10 @@
       </div>
     </div>
     <div class="question" id="Q-PAR-10">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-PAR-10 · Tranches et taux : 30 / 35 / 40 / 45 / 50 %</h3><span class="puce moyen">🧑‍💼 attend Jeff</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-PAR-10 · Tranches et taux : 30 / 35 / 40 / 45 / 50 %</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
-        <li><span class=mono>RCR:171-177</span>.</li>
+        <li><a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L171-L177" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, lignes 171-177 — sujet du prof, sur GitHub"><span class=mono>RCR:171-177</span></a>.</li>
       </ul>
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>Plus le bien est cher, plus la part du chasseur est grande : 30 % à 50 %.</li>
@@ -461,11 +493,11 @@
       </div>
     </div>
     <div class="question" id="Q-PAR-11">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-PAR-11 · Arrondi du score (1 déc.) et du taux (4 déc.)</h3><span class="puce moyen">🧑‍💼 attend Jeff</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-PAR-11 · Arrondi du score (1 déc.) et du taux (4 déc.)</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
-        <li><span class=mono>RCR:223-229</span>.</li>
-        <li>L'arrondi du <b>montant</b> au centime est une règle (<span class=mono>F10:253</span>) : pas en question ici.</li>
+        <li><a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L223-L229" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, lignes 223-229 — sujet du prof, sur GitHub"><span class=mono>RCR:223-229</span></a>.</li>
+        <li>L'arrondi du <b>montant</b> au centime est une règle (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/10_calcul_remuneration_chasseur.feature#L253" target="_blank" rel="noopener" title="user-stories/10_calcul_remuneration_chasseur.feature, ligne 253 — sujet du prof, sur GitHub"><span class=mono>F10:253</span></a>) : pas en question ici.</li>
       </ul>
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>Précision des arrondis : note à 1 chiffre après la virgule, taux à 4.</li>
@@ -476,11 +508,11 @@
       </div>
     </div>
     <div class="question" id="Q-PAR-13">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-PAR-13 · Grilles de notes : délai, visites, exclusivité 100 / 60</h3><span class="puce moyen">🧑‍💼 attend Jeff</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-PAR-13 · Grilles de notes : délai, visites, exclusivité 100 / 60</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
-        <li><span class=mono>F10:107-138</span>, <span class=mono>RCR:143-147</span>.</li>
-        <li>100 contre 60 avantage l'exclusivité (<span class=mono>RCR:159</span>).</li>
+        <li><a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/10_calcul_remuneration_chasseur.feature#L107-L138" target="_blank" rel="noopener" title="user-stories/10_calcul_remuneration_chasseur.feature, lignes 107-138 — sujet du prof, sur GitHub"><span class=mono>F10:107-138</span></a>, <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L143-L147" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, lignes 143-147 — sujet du prof, sur GitHub"><span class=mono>RCR:143-147</span></a>.</li>
+        <li>100 contre 60 avantage l'exclusivité (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L159" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 159 — sujet du prof, sur GitHub"><span class=mono>RCR:159</span></a>).</li>
       </ul>
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>Comment chaque critère est noté : par exemple, 100 points en exclusif, 60 en non exclusif.</li>
@@ -495,21 +527,21 @@
       <div class="tete"><h3>🧑‍💼 Q-JEF-02 · Confirmez-vous le barème par palier, et son saut de 600 € ?</h3><span class="puce faible">⚙️ peut changer le code</span></div>
       <dl class="grille">
         <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Un <b>seul taux</b> s'applique à tout le montant, selon la tranche du prix.</li><li>À <b>350 000 €</b>, la part passe de 35 % à 40 % : environ <b>600 €</b> de plus pour le chasseur, pour <b>1 €</b> de prix en plus.</li><li><b>Est-ce bien voulu ?</b></li></ul></dd>
-        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le sujet se contredit : c'est une « Règle » en <span class="mono">F10:166</span>, et une décision à trancher (D3) en <span class="mono">RCR:323</span>.</li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le sujet se contredit : c'est une « Règle » en <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/10_calcul_remuneration_chasseur.feature#L166" target="_blank" rel="noopener" title="user-stories/10_calcul_remuneration_chasseur.feature, ligne 166 — sujet du prof, sur GitHub"><span class="mono">F10:166</span></a>, et une décision à trancher (D3) en <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L323" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 323 — sujet du prof, sur GitHub"><span class="mono">RCR:323</span></a>.</li></ul></dd>
         <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-PAR-03</b> · Barème par palier → <b>Palier</b> (réponse du 2026-10-05)</li></ul></div></dd>
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>S'il veut un barème progressif : <b>calcul et 55 cas de test à refaire</b>.</li></ul></dd>
       </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary><p><span class="mono">F10:166</span> : « Règle: Le taux de base est celui de la tranche de montant du barème en vigueur, sans progressivité entre tranches ». <span class="mono">RCR:181</span> : « un saut d'environ 600 € de rémunération pour 1 € de prix supplémentaire ». Calcul : à 350 000 €, honoraires = 3 000 + 2,5 % × 350 000 = 11 750 € ; 5 % de 11 750 € = 587,50 €, avant les bonus.</p></details>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p><a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/10_calcul_remuneration_chasseur.feature#L166" target="_blank" rel="noopener" title="user-stories/10_calcul_remuneration_chasseur.feature, ligne 166 — sujet du prof, sur GitHub"><span class="mono">F10:166</span></a> : « Règle: Le taux de base est celui de la tranche de montant du barème en vigueur, sans progressivité entre tranches ». <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L181" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 181 — sujet du prof, sur GitHub"><span class="mono">RCR:181</span></a> : « un saut d'environ 600 € de rémunération pour 1 € de prix supplémentaire ». Calcul : à 350 000 €, honoraires = 3 000 + 2,5 % × 350 000 = 11 750 € ; 5 % de 11 750 € = 587,50 €, avant les bonus.</p></details>
       <div class="choix options">
         <label><input type="radio" name="Q-JEF-02" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Une confirmation suffit : le code et les tests suivent déjà le palier.</span><span>➖ Le saut de 600 € peut le faire changer d'avis : calcul et tests à refaire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-02" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
-        <label><input type="radio" name="Q-JEF-02" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Le sujet en fait une règle (<span class="mono">F10:166</span>).</span><span>➖ Le sujet dit aussi « décision » (<span class="mono">RCR:323</span>) : un jury peut demander qui l'a validée.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-02" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Le sujet en fait une règle (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/10_calcul_remuneration_chasseur.feature#L166" target="_blank" rel="noopener" title="user-stories/10_calcul_remuneration_chasseur.feature, ligne 166 — sujet du prof, sur GitHub"><span class="mono">F10:166</span></a>).</span><span>➖ Le sujet la range aussi dans ses « Décisions à trancher » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L315" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 315 — sujet du prof, sur GitHub"><span class="mono">RCR:315</span></a> ; D3 : <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L323" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 323 — sujet du prof, sur GitHub"><span class="mono">:323</span></a>) : un jury peut demander qui l'a validée.</span></span></span></label>
       </div>
     </div>
     <div class="rattachees" aria-label="Cartes du registre sous Q-JEF-02">
       <h3>↳ 1 carte(s) du registre sous Q-JEF-02 : à cocher ici seulement</h3>
     <div class="question" id="Q-PAR-03">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-PAR-03 · Barème par palier</h3><span class="puce moyen">🧑‍💼 attend Jeff</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-PAR-03 · Barème par palier</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff (confirmation)</b></p>
       <ul>
         <li>⚠️ Le sujet se contredit : <span class=mono>Règle:</span> en <span class=mono>F10:166</span>, décision D3 en <span class=mono>RCR:323</span>.</li>
@@ -532,11 +564,11 @@
       <div class="tete"><h3>🧑‍💼 Q-JEF-03 · Mandat non exclusif : si un autre vend, qui touche quoi ?</h3><span class="puce ko">🗄️ peut changer la base</span></div>
       <dl class="grille">
         <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Mandat <b>non exclusif</b>. Le client achète <b>seul</b>, ou par <b>une autre agence</b>.</li><li>Notre chasseur ne touche <b>rien</b> : c'est bien ça ? Ou une <b>indemnité</b> ?</li><li>Et l'entreprise : touche-t-elle des <b>honoraires</b> dans ce cas ?</li></ul></dd>
-        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le sujet le dit lui-même : « une ambiguïté à lever avec le client » (<span class="mono">RCR:100</span>).</li><li>Il propose « Rien (R = 0), mais motif tracé » (<span class="mono">RCR:322</span>, D2).</li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le sujet le dit lui-même : « une ambiguïté à lever avec le client » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L100" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 100 — sujet du prof, sur GitHub"><span class="mono">RCR:100</span></a>).</li><li>Il propose « Rien (R = 0), mais motif tracé » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L322" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 322 — sujet du prof, sur GitHub"><span class="mono">RCR:322</span></a>, D2).</li></ul></dd>
         <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-PAR-02</b> · Non exclusif, le client trouve seul : rien, ou une indemnité ? → <b>Rien, motif tracé</b> (réponse du 2026-10-05)</li><li>✅ <b>Q-REM-02</b> · Vente par « un chasseur d'une autre agence » : où la ranger ? → <b>Pas de vente : le mandat prend un statut de fin</b> (réponse du 2026-10-02)</li></ul></div></dd>
-        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>⚠️ S'il veut une <b>indemnité</b> : un paiement exige une vente (<span class="mono">01:760</span>). Or Q-REM-02 n'enregistre pas de vente : <b>choix à revoir</b>.</li><li>S'il dit que l'entreprise touche des honoraires : il faut une vente, avec une 3e origine (<span class="mono">01:657-658</span> n'en a que 2).</li><li>S'il confirme « rien » : votre choix tient, le lot de migration peut partir.</li></ul></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>⚠️ S'il veut une <b>indemnité</b> : un paiement exige une vente (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L760" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, ligne 760 — notre dépôt, sur GitHub"><span class="mono">01:760</span></a>). Or Q-REM-02 n'enregistre pas de vente : <b>choix à revoir</b>.</li><li>S'il dit que l'entreprise touche des honoraires : il faut une vente, avec une 3e origine (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L657-L658" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, lignes 657-658 — notre dépôt, sur GitHub"><span class="mono">01:657-658</span></a> n'en a que 2).</li><li>S'il confirme « rien » : votre choix tient, le lot de migration peut partir.</li></ul></dd>
       </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary><p>Tableau des cas : <span class="mono">RCR:94-96</span>. « Un chasseur d'une autre agence » : cas impossible en exclusif, non rémunéré en non exclusif. <span class="mono">sale.fees_amount &gt; 0</span> (<span class="mono">01:656</span>) ; <span class="mono">sale_origin</span> : 'hunter' ou 'client_alone' (<span class="mono">01:657-658</span>) ; <span class="mono">payment.id_sale</span> obligatoire (<span class="mono">01:760</span>). Statuts du mandat : <span class="mono">01:405-407</span>.</p></details>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p>Tableau des cas : <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L94-L96" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, lignes 94-96 — sujet du prof, sur GitHub"><span class="mono">RCR:94-96</span></a>. « Un chasseur d'une autre agence » : cas impossible en exclusif, non rémunéré en non exclusif. <span class="mono">sale.fees_amount &gt; 0</span> (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L656" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, ligne 656 — notre dépôt, sur GitHub"><span class="mono">01:656</span></a>) ; <span class="mono">sale_origin</span> : 'hunter' ou 'client_alone' (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L657-L658" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, lignes 657-658 — notre dépôt, sur GitHub"><span class="mono">01:657-658</span></a>) ; <span class="mono">payment.id_sale</span> obligatoire (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L760" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, ligne 760 — notre dépôt, sur GitHub"><span class="mono">01:760</span></a>). Statuts du mandat : <a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L405-L407" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, lignes 405-407 — notre dépôt, sur GitHub"><span class="mono">01:405-407</span></a>.</p></details>
       <div class="choix options">
         <label><input type="radio" name="Q-JEF-03" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Sa réponse décide où ranger ce cas dans la base, <b>avant</b> le lot de migration.</span><span>➖ S'il veut une indemnité, Q-REM-02 est à revoir.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-03" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
@@ -546,7 +578,7 @@
     <div class="rattachees" aria-label="Cartes du registre sous Q-JEF-03">
       <h3>↳ 1 carte(s) du registre sous Q-JEF-03 : à cocher ici seulement</h3>
     <div class="question" id="Q-PAR-02">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-PAR-02 · Non exclusif, le client trouve seul : rien, ou une indemnité ?</h3><span class="puce moyen">🧑‍💼 attend Jeff</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-PAR-02 · Non exclusif, le client trouve seul : rien, ou une indemnité ?</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li><span class=mono>RCR:322</span> (D2), <span class=mono>RCR:100</span>.</li>
@@ -571,10 +603,10 @@
       <dl class="grille">
         <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Le sujet dit que les honoraires sont <b>HT</b>, hors taxes. <b>Vous confirmez ?</b></li></ul></dd>
         <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Avec ou sans TVA, tous les montants changent.</li><li>Le sujet l'affirme sans le marquer « paramètre » : une confirmation suffit.</li></ul></dd>
-        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>💡 HT, comme le sujet (<span class="mono">RCR:131</span>). Aucune carte du registre n'en dépend.</li></ul></div></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>💡 HT, comme le sujet (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L131" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 131 — sujet du prof, sur GitHub"><span class="mono">RCR:131</span></a>). Aucune carte du registre n'en dépend.</li></ul></div></dd>
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Rien s'il confirme. S'il dit TTC : la base de toute la paie change.</li></ul></dd>
       </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary><p><span class="mono">RCR:131</span> : « H est un montant HT ». La même ligne range la TVA dans le cycle de paiement, pas dans le calcul de la part.</p></details>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p><a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L131" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 131 — sujet du prof, sur GitHub"><span class="mono">RCR:131</span></a> : « H est un montant HT ». La même ligne range la TVA dans le cycle de paiement, pas dans le calcul de la part.</p></details>
       <div class="choix options">
         <label><input type="radio" name="Q-JEF-04" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Un mot suffit, et on cite sa confirmation.</span><span>➖ Une question de plus, pour une réponse presque sûre.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-04" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
@@ -590,11 +622,11 @@
       <div class="tete"><h3>🧑‍💼 Q-JEF-05 · Comment la note doit-elle baisser quand un mandat finit sans vente ?</h3><span class="puce faible">⚙️ peut changer le code</span></div>
       <dl class="grille">
         <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Le sujet dit qu'un mandat fini sans vente fait <b>baisser</b> la note. Avec les critères proposés, elle ne baisse pas.</li><li>Nous proposons le <b>taux de transformation</b> : ventes ÷ mandats, à la place du critère « mandats signés ».</li><li><b>Validez-vous ?</b> Et quelle note pour quel taux : à partir de quel taux un chasseur a-t-il <b>100 points</b> ?</li></ul></dd>
-        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le sujet laisse ce choix au client : la variante « mérite d'être posée au client » (<span class="mono">RCR:160</span>).</li><li>Il ne donne <b>aucune grille de notes</b> pour ce taux.</li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le sujet laisse ce choix au client : la variante « mérite d'être posée au client » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L160" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 160 — sujet du prof, sur GitHub"><span class="mono">RCR:160</span></a>).</li><li>Il ne donne <b>aucune grille de notes</b> pour ce taux.</li></ul></dd>
         <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-PAR-05</b> · Ventes et mandats séparés, ou taux de transformation ? → <b>Taux de transformation</b> (réponse du 2026-10-05)<br>📝 Votre note : « demandé a jeff comment le score baisse, le calcule ? »</li></ul></div></dd>
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Sans sa grille, votre choix ne peut pas être codé.</li><li>Le critère « mandats signés » (15 % de la note) change de formule : les cas de test qui l'utilisent sont à refaire.</li><li>Lié à Q-JEF-09 : avec ce taux, compter un mandat annulé fait <b>baisser</b> la note.</li></ul></dd>
       </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary><p><span class="mono">Readme.md:135</span> : « Les indicateurs de performance sont alors recalculés à la baisse ». <span class="mono">F10:295-300</span> : « Un mandat arrivé à échéance sans vente dégrade le score du chasseur ». Aujourd'hui S₄ = <span class="mono">min(100 ; mandats × 10)</span> (<span class="mono">RCR:146</span>) : un mandat de plus ne fait jamais baisser la note. Le taux remplace <b>S₄ seulement</b> (<span class="mono">RCR:160</span>) : les 5 poids restent. ⚠️ Deux lectures du dénominateur, à lui faire trancher : mandats <b>signés</b> sur 12 mois (la note baisse dès la signature, et remonte à la vente), ou mandats <b>clos</b>, vendus ou échus (la note baisse pile à l'échéance, comme <span class="mono">F10:295-300</span>).</p></details>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p><a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/Readme.md?plain=1#L135" target="_blank" rel="noopener" title="Readme.md, ligne 135 — sujet du prof, sur GitHub"><span class="mono">Readme.md:135</span></a> : « Les indicateurs de performance sont alors recalculés à la baisse ». <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/10_calcul_remuneration_chasseur.feature#L295-L300" target="_blank" rel="noopener" title="user-stories/10_calcul_remuneration_chasseur.feature, lignes 295-300 — sujet du prof, sur GitHub"><span class="mono">F10:295-300</span></a> : « Un mandat arrivé à échéance sans vente dégrade le score du chasseur ». Aujourd'hui S₄ = <span class="mono">min(100 ; mandats × 10)</span> (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L146" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 146 — sujet du prof, sur GitHub"><span class="mono">RCR:146</span></a>) : un mandat de plus ne fait jamais baisser la note. Le taux remplace <b>S₄ seulement</b> (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L160" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 160 — sujet du prof, sur GitHub"><span class="mono">RCR:160</span></a>) : les 5 poids restent. ⚠️ Deux lectures du dénominateur, à lui faire trancher : mandats <b>signés</b> sur 12 mois (la note baisse dès la signature, et remonte à la vente), ou mandats <b>clos</b>, vendus ou échus (la note baisse pile à l'échéance, comme <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/10_calcul_remuneration_chasseur.feature#L295-L300" target="_blank" rel="noopener" title="user-stories/10_calcul_remuneration_chasseur.feature, lignes 295-300 — sujet du prof, sur GitHub"><span class="mono">F10:295-300</span></a>).</p></details>
       <div class="choix options">
         <label><input type="radio" name="Q-JEF-05" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Avec votre choix, un mandat sans vente fait baisser la note, comme le veut le sujet. Il ne manque que sa grille.</span><span>➖ S'il refuse, on garde « séparés », et la phrase du sujet reste fausse : à dire en soutenance.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-05" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
@@ -604,7 +636,7 @@
     <div class="rattachees" aria-label="Cartes du registre sous Q-JEF-05">
       <h3>↳ 1 carte(s) du registre sous Q-JEF-05 : à cocher ici seulement</h3>
     <div class="question" id="Q-PAR-05" data-note-init="demandé a jeff comment le score baisse, le calcule ?">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-PAR-05 · Ventes et mandats séparés, ou taux de transformation ?</h3><span class="puce moyen">🧑‍💼 attend Jeff</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-PAR-05 · Ventes et mandats séparés, ou taux de transformation ?</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li><span class=mono>RCR:325</span> (D5).</li>
@@ -632,11 +664,11 @@
       <div class="tete"><h3>🧑‍💼 Q-JEF-08 · Quelles visites comptent dans la note ?</h3><span class="puce faible">⚙️ peut changer le code</span></div>
       <dl class="grille">
         <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Pour la note « visites », nous comptons les visites <b>du client</b>, sur <b>tous les biens du mandat</b>, jusqu'au jour de l'acte.</li><li><b>Moins</b> il y en a, <b>meilleure</b> est la note. <b>C'est bien ça ?</b></li></ul></dd>
-        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le sujet dit seulement « le client a effectué 5 visites avant l'achat » (<span class="mono">F10:259</span>) : il ne dit pas lesquelles.</li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le sujet dit seulement « le client a effectué 5 visites avant l'achat » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/10_calcul_remuneration_chasseur.feature#L259" target="_blank" rel="noopener" title="user-stories/10_calcul_remuneration_chasseur.feature, ligne 259 — sujet du prof, sur GitHub"><span class="mono">F10:259</span></a>) : il ne dit pas lesquelles.</li></ul></dd>
         <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-REM-07</b> · Quelles visites comptent ? → <b>Visites du client, tous les biens du mandat, jusqu'au jour de l'acte</b> (réponse du 2026-10-02)<br>📝 Votre note : « plus un client visite, meilleure est la note ? Ça devrait être l&#x27;inverse : moins il visite, meilleure est la note, vu que le hunter a bien ciblé le besoin. »</li></ul></div></dd>
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Le compte des visites, dans le code.</li><li>Lié à Q-JEF-14 : qui enregistre une visite (Q-ACC-13).</li></ul></dd>
       </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary><p>Grille : 3 visites ou moins → 100 ; plus de 15 → 0 (<span class="mono">RCR:147</span>). « moins il y en a, plus la rémunération monte » (<span class="mono">RCR:55</span>). Types de visite en base : 'hunter' et 'client' (<span class="mono">01:635</span>).</p></details>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p>Grille : 3 visites ou moins → 100 ; plus de 15 → 0 (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L147" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 147 — sujet du prof, sur GitHub"><span class="mono">RCR:147</span></a>). « moins il y en a, plus la rémunération monte » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L55" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 55 — sujet du prof, sur GitHub"><span class="mono">RCR:55</span></a>). Types de visite en base : 'hunter' et 'client' (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L635" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, ligne 635 — notre dépôt, sur GitHub"><span class="mono">01:635</span></a>).</p></details>
       <div class="choix options">
         <label><input type="radio" name="Q-JEF-08" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Ce compte change la note, donc la paie : mieux vaut sa règle que la nôtre.</span><span>➖ Aucun gros : une phrase à valider.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-08" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
@@ -646,10 +678,10 @@
     <div class="rattachees" aria-label="Cartes du registre sous Q-JEF-08">
       <h3>↳ 1 carte(s) du registre sous Q-JEF-08 : à cocher ici seulement</h3>
     <div class="question" id="Q-REM-07" data-note-init="plus un client visite, meilleure est la note ? Ça devrait être l&#x27;inverse : moins il visite, meilleure est la note, vu que le hunter a bien ciblé le besoin.">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-REM-07 · Quelles visites comptent ?</h3><span class="puce faible">⚙️ code</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-REM-07 · Quelles visites comptent ?</h3><span class="puces"><span class="puce faible">⚙️ code</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff (Q-JEF-08)</b></p>
       <ul>
-        <li>Deux types : <span class=mono>'hunter'</span>, <span class=mono>'client'</span> (<span class=mono>01:631</span>).</li>
+        <li>Deux types : <span class=mono>'hunter'</span>, <span class=mono>'client'</span> (<span class=mono>01:635</span>).</li>
         <li><span class=mono>F10:259</span> : « le client a effectué 5 visites ».</li>
       </ul>
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
@@ -674,11 +706,11 @@
       <div class="tete"><h3>🧑‍💼 Q-JEF-09 · Quelles ventes et quels mandats comptent sur 12 mois ?</h3><span class="puce faible">⚙️ peut changer le code</span></div>
       <dl class="grille">
         <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Ventes : seulement celles qui ont <b>ouvert un droit</b>, pas les refusées ?</li><li>Mandats : les mandats signés, <b>sans compter</b> les renouvellements ?</li><li>Et un mandat <b>annulé</b> : compte-t-il ?</li></ul></dd>
-        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le sujet dit « ventes réussies » et « mandats signés » (<span class="mono">RCR:145-146</span>), sans plus de détail.</li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le sujet dit « ventes réussies » et « mandats signés » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L145-L146" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, lignes 145-146 — sujet du prof, sur GitHub"><span class="mono">RCR:145-146</span></a>), sans plus de détail.</li></ul></dd>
         <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-REM-08</b> · Quelles ventes comptent sur 12 mois ? → <b>Les ventes non refusées</b> (réponse du 2026-10-02)</li><li>✅ <b>Q-REM-09</b> · Quels mandats comptent sur 12 mois ? → <b>Signés, sans les renouvellements</b> (réponse du 2026-10-02)</li><li>🟡 Les mandats <b>annulés</b> : pas encore tranché.</li></ul></div></dd>
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Le compte des ventes et des mandats, dans le code.</li><li>⚠️ Lié à Q-JEF-05 : avec la formule actuelle, compter un mandat annulé <b>gonfle</b> la note (signer, puis annuler). Avec le taux de transformation, il la <b>fait baisser</b>.</li></ul></dd>
       </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary><p>S₃ = <span class="mono">min(100 ; ventes × 20)</span>, S₄ = <span class="mono">min(100 ; mandats × 10)</span> (<span class="mono">RCR:145-146</span>). La vente en cours n'est pas comptée (<span class="mono">RCR:470</span>, cité au registre).</p></details>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p>S₃ = <span class="mono">min(100 ; ventes × 20)</span>, S₄ = <span class="mono">min(100 ; mandats × 10)</span> (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L145-L146" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, lignes 145-146 — sujet du prof, sur GitHub"><span class="mono">RCR:145-146</span></a>). La vente en cours n'est pas comptée (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L470" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 470 — sujet du prof, sur GitHub"><span class="mono">RCR:470</span></a>, cité au registre).</p></details>
       <div class="choix options">
         <label><input type="radio" name="Q-JEF-09" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Deux réponses à confirmer, et un trou à combler : les mandats annulés.</span><span>➖ La réponse dépend aussi de Q-JEF-05 : poser les deux ensemble.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-09" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
@@ -688,7 +720,7 @@
     <div class="rattachees" aria-label="Cartes du registre sous Q-JEF-09">
       <h3>↳ 2 carte(s) du registre sous Q-JEF-09 : à cocher ici seulement</h3>
     <div class="question" id="Q-REM-08">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-REM-08 · Quelles ventes comptent sur 12 mois ?</h3><span class="puce faible">⚙️ code</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-REM-08 · Quelles ventes comptent sur 12 mois ?</h3><span class="puces"><span class="puce faible">⚙️ code</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff (Q-JEF-09)</b></p>
       <ul>
         <li>La vente en cours est exclue (<span class=mono>RCR:470</span>).</li>
@@ -707,7 +739,7 @@
       </div>
     </div>
     <div class="question" id="Q-REM-09">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-REM-09 · Quels mandats comptent sur 12 mois ?</h3><span class="puce faible">⚙️ code</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-REM-09 · Quels mandats comptent sur 12 mois ?</h3><span class="puces"><span class="puce faible">⚙️ code</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff (Q-JEF-09)</b></p>
       <ul>
         <li>Un mandat expiré compte (<span class=mono>F10:298</span>).</li>
@@ -731,11 +763,11 @@
       <div class="tete"><h3>🧑‍💼 Q-JEF-17 · Pour payer une vente : note recalculée, ou dernière note gardée ?</h3><span class="puce faible">⚙️ peut changer le code</span></div>
       <dl class="grille">
         <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Pour payer une vente, nous <b>recalculons</b> la note à partir de cette vente : c'est le code du sujet.</li><li>Le sujet dit aussi que la note d'après paiement « sert de base au calcul de la prochaine rémunération ».</li><li><b>Laquelle voulez-vous ?</b></li></ul></dd>
-        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Deux textes du sujet se contredisent : le code (<span class="mono">rem.py:275-276</span>) et le scénario (<span class="mono">F10:293</span>).</li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Deux textes du sujet se contredisent : le code (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/API/src/app/services/remuneration.py#L275-L276" target="_blank" rel="noopener" title="API/src/app/services/remuneration.py, lignes 275-276 — notre dépôt, sur GitHub"><span class="mono">rem.py:275-276</span></a>) et le scénario (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/10_calcul_remuneration_chasseur.feature#L293" target="_blank" rel="noopener" title="user-stories/10_calcul_remuneration_chasseur.feature, ligne 293 — sujet du prof, sur GitHub"><span class="mono">F10:293</span></a>).</li></ul></dd>
         <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-REM-06</b> · Le score : recalculé à chaque vente, ou lu dans hunter_performance ? → <b>Recalculer à chaque vente</b> (réponse du 2026-10-02)</li></ul></div></dd>
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>S'il veut la note gardée : <b>calculette et 55 cas à réécrire</b>.</li><li>📝 ADR E.</li></ul></dd>
       </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary><p><span class="mono">F10:289-293</span> : scénario « Les indicateurs de performance sont recalculés après le paiement ». Sa dernière ligne : « Et le nouveau score sert de base au calcul de la prochaine rémunération ».</p></details>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p><a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/10_calcul_remuneration_chasseur.feature#L289-L293" target="_blank" rel="noopener" title="user-stories/10_calcul_remuneration_chasseur.feature, lignes 289-293 — sujet du prof, sur GitHub"><span class="mono">F10:289-293</span></a> : scénario « Les indicateurs de performance sont recalculés après le paiement ». Sa dernière ligne : « Et le nouveau score sert de base au calcul de la prochaine rémunération ».</p></details>
       <div class="choix options">
         <label><input type="radio" name="Q-JEF-17" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Seul lui peut choisir entre deux textes du sujet.</span><span>➖ S'il choisit la note gardée, la calculette est à réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-17" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
@@ -746,11 +778,11 @@
       <div class="tete"><h3>🧑‍💼 Q-JEF-10 · Avez-vous la vraie date d'entrée des chasseurs ?</h3><span class="puce faible">⚙️ peut changer le code</span></div>
       <dl class="grille">
         <dt class="net">🗣️ À lui dire</dt><dd><ul><li>L'ancienneté donne un bonus. Faute de mieux, nous prenons la <b>date de création du compte</b>.</li><li><b>Avez-vous la vraie date d'embauche ?</b></li></ul></dd>
-        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>C'est une « donnée RH » (<span class="mono">RCR:762</span>) : seule l'entreprise l'a.</li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>C'est une « donnée RH » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L762" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 762 — sujet du prof, sur GitHub"><span class="mono">RCR:762</span></a>) : seule l'entreprise l'a.</li></ul></dd>
         <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-REM-16</b> · Ancienneté : quelle date d'entrée ? → <b>Garder l'hypothèse, la dire en soutenance</b> (réponse du 2026-10-05)</li><li>🔁 <b>Q-MIG-02</b> · hire_date = date de création du compte → doublon de <b>Q-REM-16</b> : « Garder l'hypothèse », réponse reportée</li></ul></div></dd>
-        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>S'il a les dates : la migration (<span class="mono">02:24-26</span>) est à corriger.</li><li>Sinon, l'hypothèse reste, dite en soutenance.</li></ul></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>S'il a les dates : la migration (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/02_migration.sql#L24-L26" target="_blank" rel="noopener" title="docker/init-v2/02_migration.sql, lignes 24-26 — notre dépôt, sur GitHub"><span class="mono">02:24-26</span></a>) est à corriger.</li><li>Sinon, l'hypothèse reste, dite en soutenance.</li></ul></dd>
       </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary><p><span class="mono">02:24-26</span> : « hire_date » est repris de « user ».created_at, sur 6 lignes. Le fichier le dit : « C'est une HYPOTHÈSE de migration, pas une donnée d'origine ».</p></details>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p><a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/02_migration.sql#L24-L26" target="_blank" rel="noopener" title="docker/init-v2/02_migration.sql, lignes 24-26 — notre dépôt, sur GitHub"><span class="mono">02:24-26</span></a> : « hire_date » est repris de « user ».created_at, sur 6 lignes. Le fichier le dit : « C'est une HYPOTHÈSE de migration, pas une donnée d'origine ».</p></details>
       <div class="choix options">
         <label><input type="radio" name="Q-JEF-10" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Une donnée que seul lui peut donner.</span><span>➖ Aucun : s'il ne l'a pas, on garde l'hypothèse.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-10" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
@@ -760,7 +792,7 @@
     <div class="rattachees" aria-label="Cartes du registre sous Q-JEF-10">
       <h3>↳ 2 carte(s) du registre sous Q-JEF-10 : à cocher ici seulement</h3>
     <div class="question" id="Q-REM-16">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-REM-16 · Ancienneté : quelle date d'entrée ?</h3><span class="puce moyen">🧑‍💼 attend Jeff</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-REM-16 · Ancienneté : quelle date d'entrée ?</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff (Q-JEF-10)</b></p>
       <ul>
         <li><span class=mono>hire_date</span> = date de création du compte (<span class=mono>02:24-26</span>).</li>
@@ -779,7 +811,7 @@
       </div>
     </div>
     <div class="question" id="Q-MIG-02">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🔁 Q-MIG-02 · hire_date = date de création du compte</h3><span class="puce moyen">🧑‍💼 attend Jeff</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🔁 Q-MIG-02 · hire_date = date de création du compte</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>Voir Q-REM-16.</li>
@@ -806,10 +838,10 @@
       <dl class="grille">
         <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Un client annule son mandat <b>exclusif</b>.</li><li>Peut-il signer <b>tout de suite</b> avec un autre chasseur ? Ou reste-t-il lié jusqu'à la fin prévue ?</li></ul></dd>
         <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>C'est une règle du contrat entre l'entreprise et son client.</li></ul></dd>
-        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>🟡 <b>Q-MAN-02</b> · Activer l'exclusivité (U02), et le mandat annulé (D7) → pas encore répondue. 💡 Je propose : « Corriger, activer, l'annulation libère tout de suite »</li></ul></div></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-MAN-02</b> · Activer l'exclusivité (U02), et le mandat annulé (D7) → <b>Corriger, activer, l'annulation libère tout de suite</b> (réponse du 2026-10-05)</li></ul></div></dd>
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>La règle d'exclusivité (un trigger déjà écrit, éteint) s'active dans le lot de migration : sa condition dépend de cette réponse.</li></ul></dd>
       </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary><p>Trigger commenté : <span class="mono">01:474-497</span>. ❌ Tel quel, il bloque le renouvellement, car rien n'exclut le mandat parent : correctif proposé en Q-MAN-02.</p></details>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p>Trigger commenté : <a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L474-L497" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, lignes 474-497 — notre dépôt, sur GitHub"><span class="mono">01:474-497</span></a>. ❌ Tel quel, il bloque le renouvellement, car rien n'exclut le mandat parent : correctif proposé en Q-MAN-02.</p></details>
       <div class="choix options">
         <label><input type="radio" name="Q-JEF-06" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ La règle d'exclusivité s'écrit d'après sa réponse, dans le même lot de migration.</span><span>➖ Aucun gros.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-06" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
@@ -820,11 +852,11 @@
       <div class="tete"><h3>🧑‍💼 Q-JEF-07 · Combien de renouvellements, et d'où part le délai ?</h3><span class="puce faible">⚙️ peut changer le code</span></div>
       <dl class="grille">
         <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Un mandat se renouvelle si aucune vente n'a abouti. <b>Combien de fois</b> au plus ?</li><li>Pour la note « délai », comptez-vous depuis la <b>première</b> signature ?</li></ul></dd>
-        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le sujet dit « renouvelé à l'échéance si aucune vente n'a abouti » (<span class="mono">F00:40</span>), sans limite ni point de départ.</li></ul></dd>
-        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>🟡 <b>Q-MAN-03</b> · Renouvellement : combien de fois, seulement sans vente ? → pas encore répondue. 💡 Je propose : « Imposer « sans vente » dans l'API, sans limite de nombre »</li><li>🟡 <b>Q-MAN-04</b> · Après un renouvellement : quel mandat, d'où part le délai ? → pas encore répondue. 💡 Je propose : « Valider les deux »</li></ul></div></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le sujet dit « renouvelé à l'échéance si aucune vente n'a abouti » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/00_regles_metier_mandat_remuneration.feature#L40" target="_blank" rel="noopener" title="user-stories/00_regles_metier_mandat_remuneration.feature, ligne 40 — sujet du prof, sur GitHub"><span class="mono">F00:40</span></a>), sans limite ni point de départ.</li></ul></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-MAN-03</b> · Renouvellement : combien de fois, seulement sans vente ? → <b>Imposer « sans vente » dans l'API, sans limite de nombre</b> (réponse du 2026-10-05)</li><li>✅ <b>Q-MAN-04</b> · Après un renouvellement : quel mandat, d'où part le délai ? → <b>Valider les deux</b> (réponse du 2026-10-05)</li></ul></div></dd>
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>La règle de renouvellement, dans le code.</li><li>Le calcul du délai remonte la chaîne des mandats renouvelés.</li></ul></dd>
       </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary><p>La grille de délai va jusqu'à « plus de 48 semaines » (<span class="mono">RCR:143</span>) : il faut au moins un renouvellement pour l'atteindre. Délai depuis la première signature : <span class="mono">09-contraintes-a-coder.md:207-210</span>.</p></details>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p>La grille de délai va au-delà de 48 semaines (« &gt; 48 : 0 », <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L143" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 143 — sujet du prof, sur GitHub"><span class="mono">RCR:143</span></a>) : il faut au moins un renouvellement pour l'atteindre. Délai depuis la première signature : <a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/livrables/2-modelisation/09-contraintes-a-coder.md?plain=1#L207-L210" target="_blank" rel="noopener" title="livrables/2-modelisation/09-contraintes-a-coder.md, lignes 207-210 — notre dépôt, sur GitHub"><span class="mono">09-contraintes-a-coder.md:207-210</span></a>.</p></details>
       <div class="choix options">
         <label><input type="radio" name="Q-JEF-07" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Sa réponse fixe la règle, et le délai de la note en dépend.</span><span>➖ Aucun gros.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-07" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
@@ -835,11 +867,11 @@
       <div class="tete"><h3>🧑‍💼 Q-JEF-11 · Le mandat de Bruno est-il un mandat renouvelé ?</h3><span class="puce doc">ℹ️ confirmation</span></div>
       <dl class="grille">
         <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Dans votre exemple, Bruno signe le <b>14/11/2025</b>. L'acte a lieu le <b>30/07/2026</b>, après 6 mois.</li><li>Son mandat finit le <b>14/08/2026</b> : 9 mois. Nous le lisons comme un mandat <b>renouvelé</b>. <b>C'est bien ça ?</b></li></ul></dd>
-        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Un acte après la fin du mandat n'ouvre aucun droit, « sauf renouvellement du mandat » (<span class="mono">RCR:98</span>). Simple confirmation.</li></ul></dd>
-        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ Lecture du groupe : Bruno est payé parce que son mandat est renouvelé (<span class="mono">09-decisions-a-prendre.md:136-140</span>).</li></ul></div></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Un acte après la fin du mandat n'ouvre aucun droit, « sauf renouvellement du mandat » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L98" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 98 — sujet du prof, sur GitHub"><span class="mono">RCR:98</span></a>). Simple confirmation.</li></ul></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ Lecture du groupe : Bruno est payé parce que son mandat est renouvelé (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/livrables/2-modelisation/09-decisions-a-prendre.md?plain=1#L136-L140" target="_blank" rel="noopener" title="livrables/2-modelisation/09-decisions-a-prendre.md, lignes 136-140 — notre dépôt, sur GitHub"><span class="mono">09-decisions-a-prendre.md:136-140</span></a>).</li></ul></div></dd>
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Rien s'il confirme. Sinon, l'exemple officiel contredit la règle : à remonter au sujet.</li></ul></dd>
       </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary><p>Situation de Bruno : <span class="mono">RCR:237</span>. Dates du calcul : <span class="mono">RCR:697</span>, <span class="mono">date_fin_mandat=date(2026, 8, 14)</span>. Un mandat dure 6 mois (<span class="mono">RCR:98</span>).</p></details>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p>Situation de Bruno : <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L237" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 237 — sujet du prof, sur GitHub"><span class="mono">RCR:237</span></a>. Dates du calcul : <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L697" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 697 — sujet du prof, sur GitHub"><span class="mono">RCR:697</span></a>, <span class="mono">date_fin_mandat=date(2026, 8, 14)</span>. Un mandat dure 6 mois (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L98" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 98 — sujet du prof, sur GitHub"><span class="mono">RCR:98</span></a>).</p></details>
       <div class="choix options">
         <label><input type="radio" name="Q-JEF-11" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Un mot suffit, et une contradiction apparente du sujet se ferme.</span><span>➖ Une question de plus.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-11" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
@@ -855,11 +887,11 @@
       <div class="tete"><h3>🧑‍💼 Q-JEF-12 · taux_commission : un pourcentage de quoi ?</h3><span class="puce doc">📝 doc et livrables</span></div>
       <dl class="grille">
         <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Votre ancienne base a une colonne <b>taux_commission</b>, de 2,00 à 3,25.</li><li>Est-ce un pourcentage du <b>prix</b> du bien, ou des <b>honoraires</b> ?</li></ul></dd>
-        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Seul le client sait ce que veut dire sa colonne.</li><li>Le sujet la compare à la paie de Bruno : <b>1,48 %</b> du prix (<span class="mono">RCR:256</span>).</li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Seul le client sait ce que veut dire sa colonne.</li><li>Le sujet la compare à la paie de Bruno : <b>1,48 %</b> du prix (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L256" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 256 — sujet du prof, sur GitHub"><span class="mono">RCR:256</span></a>).</li></ul></dd>
         <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>🟡 <b>Q-MIG-01</b> · Sens de taux_commission (2,00 à 3,25) → pas encore répondue. 💡 Je propose : « % des honoraires, non migré »</li></ul></div></dd>
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>La colonne n'est pas migrée : rien ne bloque. Sa réponse nourrit l'audit.</li></ul></dd>
       </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary><p>Valeurs mesurées dans la source : 2,00 · 2,50 · 2,75 · 3,00 · 3,25 (<span class="mono">docker/init-v2/README.md:136</span>). ⚠️ Le sujet écrit « 2,50–3,25 % » (<span class="mono">RCR:256</span>) : il oublie 2,00. Au-delà de 400 000 €, 3,25 % du prix dépasserait les honoraires eux-mêmes (3 000 € + 2,5 %).</p></details>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p>Valeurs mesurées dans la source : 2,00 · 2,50 · 2,75 · 3,00 · 3,25 (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/README.md?plain=1#L136" target="_blank" rel="noopener" title="docker/init-v2/README.md, ligne 136 — notre dépôt, sur GitHub"><span class="mono">docker/init-v2/README.md:136</span></a>). ⚠️ Le sujet écrit « 2,50–3,25 % » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L256" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 256 — sujet du prof, sur GitHub"><span class="mono">RCR:256</span></a>) : il oublie 2,00. Au-delà de 400 000 €, 3,25 % du prix dépasserait les honoraires eux-mêmes (3 000 € + 2,5 %).</p></details>
       <div class="choix options">
         <label><input type="radio" name="Q-JEF-12" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Seul lui sait ; sa réponse ferme un constat d'audit.</span><span>➖ Aucun.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-12" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
@@ -869,7 +901,7 @@
     <div class="rattachees" aria-label="Cartes du registre sous Q-JEF-12">
       <h3>↳ 1 carte(s) du registre sous Q-JEF-12 : à cocher ici seulement</h3>
     <div class="question" id="Q-MIG-01">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-MIG-01 · Sens de taux_commission (2,00 à 3,25)</h3><span class="puce moyen">🧑‍💼 attend Jeff</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-MIG-01 · Sens de taux_commission (2,00 à 3,25)</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>3,25 % du prix dépasserait les honoraires (anomalie A2 du sujet).</li>
@@ -892,7 +924,7 @@
         <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>🟡 <b>Q-MIG-12</b> · Mandat 13 ignoré : son client est un chasseur → pas encore répondue. 💡 Je propose : « Demander si c'est Nina Girard »</li><li>🟡 <b>Q-MIG-13</b> · Sens de « suspendu » et « termine » → pas encore répondue. 💡 Je propose : « Demander ; en attendant termine → completed »</li><li>🟡 <b>Q-MIG-10</b> · 6 mandats « actif » déjà échus au 25/07/2026 → pas encore répondue. 💡 Je propose : « Constat d'audit ; demander à Jeff »</li></ul></div></dd>
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>La migration (<span class="mono">02</span>) : une ligne pour le mandat 13, la traduction des statuts, l'état des 6 mandats.</li></ul></dd>
       </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary><p>Mandat 13 écarté : <span class="mono">02:167</span>, « client_id=3 est un chasseur ». Statuts d'origine : <span class="mono">PgSQL.sql:26</span> du sujet. En attendant : termine → completed.</p></details>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p>Mandat 13 écarté : <a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/02_migration.sql#L167" target="_blank" rel="noopener" title="docker/init-v2/02_migration.sql, ligne 167 — notre dépôt, sur GitHub"><span class="mono">02:167</span></a>, « client_id=3 est un chasseur ». Statuts d'origine : <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/fixtures/PgSQL.sql#L26" target="_blank" rel="noopener" title="fixtures/PgSQL.sql, ligne 26 — sujet du prof, sur GitHub"><span class="mono">PgSQL.sql:26</span></a> du sujet. En attendant : termine → completed.</p></details>
       <div class="choix options">
         <label><input type="radio" name="Q-JEF-13" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Trois réponses qui corrigent la migration et nourrissent l'audit.</span><span>➖ Trois questions en une : les séparer à l'oral.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-13" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
@@ -902,7 +934,7 @@
     <div class="rattachees" aria-label="Cartes du registre sous Q-JEF-13">
       <h3>↳ 3 carte(s) du registre sous Q-JEF-13 : à cocher ici seulement</h3>
     <div class="question" id="Q-MIG-10">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-MIG-10 · 6 mandats « actif » déjà échus au 25/07/2026</h3><span class="puce moyen">🧑‍💼 attend Jeff</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-MIG-10 · 6 mandats « actif » déjà échus au 25/07/2026</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>Le piège du sujet.</li>
@@ -916,10 +948,10 @@
       </div>
     </div>
     <div class="question" id="Q-MIG-12">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-MIG-12 · Mandat 13 ignoré : son client est un chasseur</h3><span class="puce moyen">🧑‍💼 attend Jeff</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-MIG-12 · Mandat 13 ignoré : son client est un chasseur</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
-        <li><span class=mono>02:167</span>.</li>
+        <li><a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/02_migration.sql#L167" target="_blank" rel="noopener" title="docker/init-v2/02_migration.sql, ligne 167 — notre dépôt, sur GitHub"><span class=mono>02:167</span></a>.</li>
         <li>Nina Girard (user 19) : même ville, même budget, aucun mandat.</li>
       </ul>
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
@@ -931,10 +963,10 @@
       </div>
     </div>
     <div class="question" id="Q-MIG-13">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-MIG-13 · Sens de « suspendu » et « termine »</h3><span class="puce moyen">🧑‍💼 attend Jeff</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-MIG-13 · Sens de « suspendu » et « termine »</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
-        <li><span class=mono>PgSQL.sql:26</span> du sujet.</li>
+        <li><a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/fixtures/PgSQL.sql#L26" target="_blank" rel="noopener" title="fixtures/PgSQL.sql, ligne 26 — sujet du prof, sur GitHub"><span class=mono>PgSQL.sql:26</span></a> du sujet.</li>
       </ul>
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>Que veulent dire « suspendu » et « terminé » dans l'ancienne base ?</li>
@@ -981,7 +1013,7 @@
     <div class="rattachees" aria-label="Cartes du registre sous Q-JEF-14">
       <h3>↳ 11 carte(s) du registre sous Q-JEF-14 : à cocher ici seulement</h3>
     <div class="question" id="Q-ACC-01">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🔁 Q-ACC-01 · Reposer à Jeff la question des droits</h3><span class="puce doc">📝 doc / ADR</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🔁 Q-ACC-01 · Reposer à Jeff la question des droits</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>Le 22/09, elle était mêlée à l'auth (<span class=mono>md/adr-026-…:116-120</span>).</li>
@@ -998,7 +1030,7 @@
       </div>
     </div>
     <div class="question" id="Q-ACC-02">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-02 · Que voit le manager ?</h3><span class="puce doc">📝 doc / ADR</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-02 · Que voit le manager ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>ADR-027 Q1.</li>
@@ -1012,7 +1044,7 @@
       </div>
     </div>
     <div class="question" id="Q-ACC-03">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-03 · Qui enregistre la vente ?</h3><span class="puce doc">📝 doc / ADR</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-03 · Qui enregistre la vente ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>ADR-027 Q2.</li>
@@ -1026,7 +1058,7 @@
       </div>
     </div>
     <div class="question" id="Q-ACC-04">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-04 · Qui fait avancer la facture ?</h3><span class="puce doc">📝 doc / ADR</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-04 · Qui fait avancer la facture ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>ADR-027 Q3.</li>
@@ -1040,7 +1072,7 @@
       </div>
     </div>
     <div class="question" id="Q-ACC-05">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-05 · Le client voit-il tout le catalogue ?</h3><span class="puce doc">📝 doc / ADR</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-05 · Le client voit-il tout le catalogue ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>ADR-027 Q4.</li>
@@ -1054,7 +1086,7 @@
       </div>
     </div>
     <div class="question" id="Q-ACC-06">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-06 · Le chasseur voit-il son barème ?</h3><span class="puce doc">📝 doc / ADR</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-06 · Le chasseur voit-il son barème ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>ADR-027 Q5.</li>
@@ -1068,7 +1100,7 @@
       </div>
     </div>
     <div class="question" id="Q-ACC-07">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-07 · Qui fixe barèmes et honoraires ?</h3><span class="puce doc">📝 doc / ADR</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-07 · Qui fixe barèmes et honoraires ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>ADR-027 Q6.</li>
@@ -1082,7 +1114,7 @@
       </div>
     </div>
     <div class="question" id="Q-ACC-10">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-10 · Qui affecte une demande à un chasseur ?</h3><span class="puce doc">📝 doc / ADR</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-10 · Qui affecte une demande à un chasseur ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>Matrice §6.</li>
@@ -1096,7 +1128,7 @@
       </div>
     </div>
     <div class="question" id="Q-ACC-12">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-12 · Qui crée le compte client ?</h3><span class="puce doc">📝 doc / ADR</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-12 · Qui crée le compte client ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>Matrice §6.</li>
@@ -1110,7 +1142,7 @@
       </div>
     </div>
     <div class="question" id="Q-ACC-13">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-13 · Qui enregistre une visite du client ?</h3><span class="puce doc">📝 doc / ADR</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-13 · Qui enregistre une visite du client ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>Matrice §6.</li>
@@ -1124,7 +1156,7 @@
       </div>
     </div>
     <div class="question" id="Q-ACC-15">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-15 · Un chasseur peut-il créer une demande ?</h3><span class="puce doc">📝 doc / ADR</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-15 · Un chasseur peut-il créer une demande ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>Matrice §6.</li>
@@ -1146,7 +1178,7 @@
         <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>🟡 <b>Q-ACC-21</b> · Durée de conservation avant anonymisation → pas encore répondue. 💡 Je propose : « 10 ans pour les paiements, X à demander »</li></ul></div></dd>
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Le registre RGPD, un livrable. Plus tard : une tâche d'anonymisation.</li></ul></dd>
       </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary><p><span class="mono">REGISTRE-RGPD.md:27</span> : « Durée du mandat + X ans (obligations légales) ». <span class="mono">:28</span> : « Tant que le compte est actif ». <span class="mono">:29</span> : « 10 ans (obligation comptable) ». <span class="mono">:30</span> : une ligne « … » à compléter.</p></details>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p><a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGISTRE-RGPD.md?plain=1#L27" target="_blank" rel="noopener" title="documents utiles/REGISTRE-RGPD.md, ligne 27 — sujet du prof, sur GitHub"><span class="mono">REGISTRE-RGPD.md:27</span></a> : « Durée du mandat + X ans (obligations légales) ». <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGISTRE-RGPD.md?plain=1#L28" target="_blank" rel="noopener" title="documents utiles/REGISTRE-RGPD.md, ligne 28 — sujet du prof, sur GitHub"><span class="mono">:28</span></a> : « Tant que le compte est actif ». <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGISTRE-RGPD.md?plain=1#L29" target="_blank" rel="noopener" title="documents utiles/REGISTRE-RGPD.md, ligne 29 — sujet du prof, sur GitHub"><span class="mono">:29</span></a> : « 10 ans (obligation comptable) ». <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGISTRE-RGPD.md?plain=1#L30" target="_blank" rel="noopener" title="documents utiles/REGISTRE-RGPD.md, ligne 30 — sujet du prof, sur GitHub"><span class="mono">:30</span></a> : une ligne « … » à compléter.</p></details>
       <div class="choix options">
         <label><input type="radio" name="Q-JEF-15" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ La durée est au client ; sa réponse complète le registre.</span><span>➖ Il peut ne pas savoir : venir avec une proposition.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-15" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
@@ -1156,10 +1188,10 @@
     <div class="rattachees" aria-label="Cartes du registre sous Q-JEF-15">
       <h3>↳ 1 carte(s) du registre sous Q-JEF-15 : à cocher ici seulement</h3>
     <div class="question" id="Q-ACC-21">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-21 · Durée de conservation avant anonymisation</h3><span class="puce moyen">🧑‍💼 attend Jeff</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-21 · Durée de conservation avant anonymisation</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
-        <li>Le sujet donne « 10 ans (obligation comptable) » pour les paiements (<span class=mono>REGISTRE-RGPD.md:29</span>).</li>
+        <li>Le sujet donne « 10 ans (obligation comptable) » pour les paiements (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGISTRE-RGPD.md?plain=1#L29" target="_blank" rel="noopener" title="documents utiles/REGISTRE-RGPD.md, ligne 29 — sujet du prof, sur GitHub"><span class=mono>REGISTRE-RGPD.md:29</span></a>).</li>
         <li>Reste : « Durée du mandat + X ans ».</li>
       </ul>
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
@@ -1179,7 +1211,7 @@
         <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>🟡 <b>Q-SCH-05</b> · D6 : échelle de priorité du client → pas encore répondue. 💡 Je propose : « 1 à 5 »</li></ul></div></dd>
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Une colonne de <span class="mono">estate_proposed</span>, dans le lot de migration.</li></ul></dd>
       </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary><p>Brouillon commenté : <span class="mono">01:624-627</span>, <span class="mono">client_priority SMALLINT CHECK (client_priority BETWEEN 1 AND 5)</span>.</p></details>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p>Brouillon commenté : <a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L624-L627" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, lignes 624-627 — notre dépôt, sur GitHub"><span class="mono">01:624-627</span></a>, <span class="mono">client_priority SMALLINT CHECK (client_priority BETWEEN 1 AND 5)</span>.</p></details>
       <div class="choix options">
         <label><input type="radio" name="Q-JEF-18" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Une colonne du lot de migration en dépend.</span><span>➖ Aucun gros.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-18" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
@@ -1189,10 +1221,10 @@
     <div class="rattachees" aria-label="Cartes du registre sous Q-JEF-18">
       <h3>↳ 1 carte(s) du registre sous Q-JEF-18 : à cocher ici seulement</h3>
     <div class="question" id="Q-SCH-05">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-SCH-05 · D6 : échelle de priorité du client</h3><span class="puce ko">🗄️ change la BDD</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-SCH-05 · D6 : échelle de priorité du client</h3><span class="puces"><span class="puce ko">🗄️ change la BDD</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff (Q-JEF-18)</b></p>
       <ul>
-        <li>Brouillon commenté (<span class=mono>01:620-623</span>).</li>
+        <li>Brouillon commenté (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L624-L627" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, lignes 624-627 — notre dépôt, sur GitHub"><span class=mono>01:624-627</span></a>).</li>
         <li>C'est aussi la question 9 d'ADR-027.</li>
       </ul>
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
@@ -1208,11 +1240,11 @@
       <div class="tete"><h3>🧑‍💼 Q-JEF-16 · Des barèmes propres à un chasseur : en voulez-vous ? Si oui, qui les crée ?</h3><span class="puce doc">📝 doc et livrables</span></div>
       <dl class="grille">
         <dt class="net">🗣️ À lui dire</dt><dd><ul><li>1. Voulez-vous pouvoir négocier une <b>grille avec un chasseur</b> (un barème à son nom), en plus des bonus d'ancienneté et de performance ?</li><li>2. Si oui : <b>qui la crée</b>, et <b>qui la valide</b> ?</li></ul></dd>
-        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le Readme dit le barème « différent pour chaque chasseur (en fonction de leur ancienneté et de leur performance) » (<span class="mono">Readme.md:80</span>). Les bonus le font déjà (Q-REM-18).</li><li>Le barème à son nom est un <b>ajout</b> du sujet, pour « négocier une grille avec un chasseur senior » (<span class="mono">RCR:193</span>). S'il n'en veut pas, la question 2 tombe.</li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le Readme dit le barème « différent pour chaque chasseur (en fonction de leur ancienneté et de leur performance) » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/Readme.md?plain=1#L80" target="_blank" rel="noopener" title="Readme.md, ligne 80 — sujet du prof, sur GitHub"><span class="mono">Readme.md:80</span></a>). Les bonus le font déjà (Q-REM-18).</li><li>Le barème à son nom est un <b>ajout</b> du sujet, pour « négocier une grille avec un chasseur senior » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L193" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 193 — sujet du prof, sur GitHub"><span class="mono">RCR:193</span></a>). S'il n'en veut pas, la question 2 tombe.</li></ul></dd>
         <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-PAR-09</b> · Qui crée un barème propre à un chasseur ? → <b>Le manager, inscrit dans le RACI</b> (réponse du 2026-10-05)</li><li>⚠️ Voir Q-JEF-14 : Q-ACC-07 propose « la direction seule ».</li></ul></div></dd>
-        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Rien dans la base : <span class="mono">commission_scale.id_hunter</span> existe déjà.</li><li>Le « qui » va dans le RACI (<span class="mono">RCR:329</span>, D9).</li></ul></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Rien dans la base : <span class="mono">commission_scale.id_hunter</span> existe déjà.</li><li>Le « qui » va dans le RACI (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L329" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 329 — sujet du prof, sur GitHub"><span class="mono">RCR:329</span></a>, D9).</li></ul></dd>
       </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary><p><span class="mono">RCR:186-193</span> : un barème par défaut, et un barème nominatif qui « le surcharge quand il existe ». Base : « id_hunter NULL = barème par défaut ; renseigné = barème propre au chasseur » (commentaire de <span class="mono">commission_scale</span>).</p></details>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p><a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L186-L193" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, lignes 186-193 — sujet du prof, sur GitHub"><span class="mono">RCR:186-193</span></a> : un barème par défaut, et un barème nominatif qui « le surcharge quand il existe ». Base : « id_hunter NULL = barème par défaut ; renseigné = barème propre au chasseur » (commentaire de <span class="mono">commission_scale</span>).</p></details>
       <div class="choix options">
         <label><input type="radio" name="Q-JEF-16" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ S'il n'en veut pas : une règle de moins à coder et à défendre.</span><span>➖ Deux questions en une.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-16" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
@@ -1222,7 +1254,7 @@
     <div class="rattachees" aria-label="Cartes du registre sous Q-JEF-16">
       <h3>↳ 1 carte(s) du registre sous Q-JEF-16 : à cocher ici seulement</h3>
     <div class="question" id="Q-PAR-09">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-PAR-09 · Qui crée un barème propre à un chasseur ?</h3><span class="puce doc">📝 doc / ADR</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-PAR-09 · Qui crée un barème propre à un chasseur ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li><span class=mono>RCR:329</span> (D9).</li>
@@ -1254,7 +1286,7 @@
         <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-REM-01</b> · Borne haute d'une tranche du barème : incluse ou exclue ? → <b>Prix en INTEGER + bornes '[]' (tranché le 2026-10-05)</b> (réponse du 2026-10-05)<br>📝 Votre note : « définir la borne et informer Jeff, et citer exactement la contradiction. Décision du 2026-10-05 : les prix passent sans virgule, en INTEGER (euros entiers) ; le « numeric(12) » du 2026-10-02 était une erreur de formulation. Bornes du barème en [] (incluses). »</li></ul></div></dd>
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Rien s'il est d'accord : c'est fait et testé (<span class="mono">c896e39</span>, <span class="mono">abbc84e</span>, <span class="mono">d3c128c</span>, <span class="mono">fea3c9f</span>).</li></ul></dd>
       </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary><p>Le sujet se contredit : « &lt; 200 000 € » (<span class="mono">RCR:173</span>) contre <span class="mono">BETWEEN</span>, qui inclut les deux bouts (<span class="mono">RCR:188</span>). Base : bornes incluses <span class="mono">'[]'</span>, tranches <span class="mono">[0 ; 199 999]</span>, <span class="mono">[200 000 ; 349 999]</span>…</p></details>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p>Le sujet se contredit : « &lt; 200 000 € » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L173" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 173 — sujet du prof, sur GitHub"><span class="mono">RCR:173</span></a>) contre <span class="mono">BETWEEN</span>, qui inclut les deux bouts (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L188" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 188 — sujet du prof, sur GitHub"><span class="mono">RCR:188</span></a>). Base : bornes incluses <span class="mono">'[]'</span>, tranches <span class="mono">[0 ; 199 999]</span>, <span class="mono">[200 000 ; 349 999]</span>…</p></details>
       <div class="choix options">
         <label><input type="radio" name="Q-JEF-19" value="envoyer"><span><b>L'envoyer pour information (recommandé)</b><span class="effet"><span>➕ Il peut corriger tôt si ce n'est pas sa lecture.</span><span>➖ Aucun.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-19" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
@@ -1267,9 +1299,9 @@
         <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Chaque paiement gardera la <b>note de performance</b> du chasseur, et le <b>détail du calcul</b> : les 5 notes, les visites, l'ancienneté…</li><li>But : pouvoir refaire le calcul plus tard. <b>C'est bien ce que vous voulez ?</b></li></ul></dd>
         <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Votre note sur Q-REM-03 : « à documenter et à confirmer avec Jeff ».</li></ul></dd>
         <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-REM-03</b> · Figer le score de performance sur le paiement ? → <b>Ajouter payment.performance_score</b> (réponse du 2026-10-02)<br>📝 Votre note : « à documenter et à confirmer avec Jeff »</li><li>✅ <b>Q-REM-04</b> · Figer les 5 notes et les entrées du calcul ? → <b>Une colonne JSONB calculation_details</b> (réponse du 2026-10-02)</li></ul></div></dd>
-        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Le sujet l'exige déjà : « On stocke donc tous les termes du calcul » (<span class="mono">RCR:292</span>). Sa réponse ne devrait rien changer au lot de migration.</li></ul></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Le sujet l'exige déjà : « On stocke donc tous les termes du calcul » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L292" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 292 — sujet du prof, sur GitHub"><span class="mono">RCR:292</span></a>). Sa réponse ne devrait rien changer au lot de migration.</li></ul></dd>
       </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary><p>Colonnes prévues : <span class="mono">payment.performance_score</span> (Q-REM-03) et <span class="mono">payment.calculation_details</span> en JSONB (Q-REM-04). Le sujet liste <span class="mono">score_performance</span> dans <span class="mono">paiements</span> (<span class="mono">RCR:286</span>). 📝 ADR C.</p></details>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p>Colonnes prévues : <span class="mono">payment.performance_score</span> (Q-REM-03) et <span class="mono">payment.calculation_details</span> en JSONB (Q-REM-04). Le sujet liste <span class="mono">score_performance</span> dans <span class="mono">paiements</span> (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L286" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 286 — sujet du prof, sur GitHub"><span class="mono">RCR:286</span></a>). 📝 ADR C.</p></details>
       <div class="choix options">
         <label><input type="radio" name="Q-JEF-20" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Vous l'aviez demandé.</span><span>➖ Le sujet l'exige déjà : la réponse est presque sûre.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-20" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
@@ -1287,8 +1319,8 @@
           <tr><td class="n">Q-REM-02</td><td>Vente par une autre agence : où la ranger</td><td>✅ Pas de vente : le mandat prend un statut de fin</td><td class="n">Q-JEF-03</td><td>S'il veut une indemnité, ou des honoraires pour l'entreprise : il faut une vente, donc revoir ce choix.</td></tr>
           <tr><td class="n">Q-REM-19</td><td>Borner le taux final à 20-60 % dans la base</td><td>✅ Activer le CHECK 0,20-0,60</td><td class="n">Q-JEF-01</td><td>S'il change 20 % ou 60 % : base à recréer.</td></tr>
           <tr><td class="n">Q-REM-06</td><td>La note recalculée à chaque vente</td><td>✅ Recalculer à chaque vente</td><td class="n">Q-JEF-17</td><td>S'il veut la note gardée : calculette et 55 cas à réécrire.</td></tr>
-          <tr><td class="n">Q-MAN-02</td><td>Activer l'exclusivité</td><td>🟡 ouverte</td><td class="n">Q-JEF-06</td><td>La condition du trigger, dans le lot de migration.</td></tr>
-          <tr><td class="n">Q-MAN-03<br>Q-MAN-04</td><td>Renouvellement et délai</td><td>🟡 ouverte<br>🟡 ouverte</td><td class="n">Q-JEF-07</td><td>La règle de renouvellement, et le calcul du délai.</td></tr>
+          <tr><td class="n">Q-MAN-02</td><td>Activer l'exclusivité</td><td>✅ Corriger, activer, l'annulation libère tout de suite</td><td class="n">Q-JEF-06</td><td>La condition du trigger, dans le lot de migration.</td></tr>
+          <tr><td class="n">Q-MAN-03<br>Q-MAN-04</td><td>Renouvellement et délai</td><td>✅ Imposer « sans vente » dans l'API, sans limite de nombre<br>✅ Valider les deux</td><td class="n">Q-JEF-07</td><td>La règle de renouvellement, et le calcul du délai.</td></tr>
           <tr><td class="n">Q-INF-02</td><td>Écrire le seed de démo</td><td>🟡 ouverte</td><td class="n">Q-JEF-03<br>Q-JEF-07<br>Q-JEF-17</td><td>Le seed attend Q-PAR-02, Q-MAN-04 et Q-REM-06.</td></tr>
       </tbody>
     </table></div>
