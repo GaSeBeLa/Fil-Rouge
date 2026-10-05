@@ -14,11 +14,11 @@ modifiés**.
   `docker/init-v2/` et monté par `docker compose`. `docker/init/` (12 tables,
   K€) est l'ancien schéma, gardé intact, plus monté.
 - L'API expose un CRUD complet en trois couches (routes / services /
-  repositories) sur les **18 tables**, en `Decimal` pour tout montant.
-  91 opérations vérifiées en `200` contre la base. **121 tests** : 99 unitaires
-  sans base (dont les 55 cas de rémunération), 22 d'intégration sur la base de
-  test isolée `fil_rouge_test` (`docker/create_test_db.sh`) — voir
-  `API/README.md` § Tests.
+  repositories) sur les **18 tables** ; le routeur commun revalide l'entrée
+  (`422` avant la base). 91 opérations vérifiées en `200` contre la base.
+  **123 tests** : 99 unitaires sans base (dont les 55 cas de rémunération),
+  24 d'intégration sur la base de test isolée `fil_rouge_test`
+  (`docker/create_test_db.sh`) — voir `API/README.md` § Tests.
 - Les user stories Gherkin (`user-stories/`) couvrent le parcours actuel et le
   futur parcours IA. Seul le **calcul de rémunération** est implémenté
   (`services/remuneration.py`, code du sujet, non branché sur la base).
@@ -35,8 +35,10 @@ modifiés**.
 3. **Les deux dossiers `../Fil-Rouge-EISI-Data-IA-26-D04-StarterPack*/` ne se
    modifient jamais**, et `docker/init-v2/01_create_fil_rouge_immobilier.sql`
    est le schéma de référence : tout modèle SQLModel s'y confronte par grep.
-4. **Tout montant est en euros, `NUMERIC(12,2)`** — jamais en K€. La décision
-   est tranchée et prouvée : `docker/init-v2/README.md` §1.
+4. **Tout montant est en euros** — jamais en K€ (`docker/init-v2/README.md`
+   §1). Deux types depuis le 2026-10-05 (Q-REM-01) : prix, budgets, bornes du
+   barème et part fixe en **`INTEGER`** (`int`) ; honoraires et paiement en
+   **`NUMERIC(12,2)`** (`Decimal`), car le sujet arrondit au centime.
 5. **Aucun secret ni `.env` dans git**, aucun chemin absolu dans le code.
 
 Les ADR ne vivent pas dans le dépôt mais sur Confluence : le dossier

@@ -15,14 +15,19 @@
   PostgreSQL 16 : 0 erreur, 2 556 biens, 1 976 photos, 18 clients. Les choix,
   les hypothèses et les 6 points ouverts sont dans `docker/init-v2/README.md`.
   `docker/init/` (12 tables, K€) reste intact mais n'est plus monté.
+  *(au 2026-10-05)* Prix, budgets, bornes du barème et part fixe en
+  `INTEGER` ; honoraires et paiement en `NUMERIC(12,2)` ; tranches du barème
+  bornées `'[]'` (Q-REM-01).
 - **API** — FastAPI + SQLModel, CRUD en trois couches (`routes/`, `services/`,
   `repositories/`), pas de PATCH, choix assumé. Alignée sur les **18 tables**
   depuis le 2026-09-21 : 18 modèles, 224 champs pour 224 colonnes, 18
-  ressources REST, 91 opérations. Tout montant est un `Decimal`. Vérifié en
-  exécution : `GET` sur les 18 ressources, 18/18 en `200`.
-- **Tests** *(au 2026-10-02)* — **121 tests**, `121 passed`, lancés dans le
+  ressources REST, 91 opérations. Vérifié en exécution : `GET` sur les 18
+  ressources, 18/18 en `200`. *(au 2026-10-05)* Prix en `int`, honoraires et
+  paiement en `Decimal` ; le routeur commun revalide l'entrée du `POST` et du
+  `PUT` (`422` avant la base).
+- **Tests** *(au 2026-10-05)* — **123 tests**, `123 passed`, lancés dans le
   conteneur `api` : 99 unitaires sans PostgreSQL (dont les 55 cas de
-  rémunération), 22 d'intégration sur la base de test isolée
+  rémunération), 24 d'intégration sur la base de test isolée
   `fil_rouge_test` (`docker/create_test_db.sh`).
 - **Calcul de rémunération** *(au 2026-10-02)* — `services/remuneration.py`,
   code de référence du sujet recopié tel quel ; fonction pure, **pas encore
@@ -188,3 +193,23 @@ de ce que le code dit déjà.
   `ROUND_DOWN` → 1 test rouge. Non couverts : « un seul chasseur rémunéré »
   et la Règle `@tracabilite` (persistance). Reste : brancher sur la base,
   après arbitrage de `X01`.
+- **2026-10-05** — **Q-REM-01 tranchée : prix en euros entiers, bornes du
+  barème incluses.** La base excluait la borne haute (`'[)'`), le code
+  l'incluait (`prix <= montant_max`) : un prix à 199 999,50 € tombait hors
+  barème. Décision du groupe : prix, budgets, bornes du barème et part fixe
+  en `INTEGER`, `EXCLUDE` du barème en `'[]'` ; honoraires et paiement restent
+  `NUMERIC(12,2)` (le sujet arrondit au centime, feature 10 l. 253). Écartés :
+  adaptateur `amount_max − 0,01` à la lecture, et bornes à 199 999,99.
+  Mesuré : `price_eur` = 2 556 prix, 0 avec centimes ; dans une base
+  temporaire, `01` → `02` → `03` sans erreur, chaque prix limite dans
+  exactement une tranche, chevauchement refusé. Commits `c896e39`, `abbc84e`.
+  Registre : `md/questions-a-trancher-2026-10-02.md`.
+- **2026-10-05** — **le routeur commun valide l'entrée** (Q-INF-06). Mesuré :
+  un modèle de table SQLModel ne valide pas ce que FastAPI lui passe —
+  `199999.5` était arrondi en silence à `200000` (tranche du dessus),
+  `"199999.50"` plantait (`DataError`), un champ manquant finissait en `409`.
+  `_validated` (`crud_router.py`) revalide avec `model_validate` : `422`
+  avant la base, `loc` préfixé par `body`. Contre-épreuve : sans elle, 3
+  tests rouges. `123 passed`. pyright : aucune erreur de plus. Commits
+  `d3c128c` (modèles en `int`), `fea3c9f` (validation). ⚠️ Toute l'équipe
+  doit faire `docker compose down -v`, puis `bash docker/create_test_db.sh`.
