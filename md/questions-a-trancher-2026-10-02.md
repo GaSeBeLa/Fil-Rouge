@@ -109,7 +109,7 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 | Q-REM-14 | ✅ **statut** (2026-10-05) | Statut de fin sur `mandate` (`01:405-407`), ex. `'lost'`. 🟡 Un seul statut pour Q-REM-02 et Q-REM-14, ou deux ? |
 | Q-REM-15 | ✅ **seed** (2026-10-05) | Le seed fait commencer le barème par défaut en 2025 ; `rem.py:298` garde 2026. |
 | Q-REM-16 | ✅ **hypothese** (2026-10-05) | `hire_date` = date de création du compte (`02:24-26`), dite en soutenance ; Jeff dira s'il a mieux (Q-JEF-10). |
-| Q-REM-17 | ✅ **colonnes** (2026-10-05) | `announced_at`, `invoice_submitted_at`, `verified_at`, `scheduled_for` et `invoice_reference` sur `payment`. 💡 Un CHECK par date, comme `chk_paid` (`01:765-767`). Rejoint Q-ACC-11 (pas encore répondue). |
+| Q-REM-17 | ✅ **colonnes** (2026-10-05) | `announced_at`, `invoice_submitted_at`, `verified_at`, `scheduled_for` et `invoice_reference` sur `payment`. 💡 Un CHECK par date, comme `chk_paid` (`01:765-767`). Q-ACC-11 en est le doublon (marqué le 2026-10-05). |
 | Q-REM-18 | ✅ **acter** (2026-10-05) | ADR X01 (option B) à écrire. À mettre à jour avec lui : `08-etat.md` (l. 80, 195) et `API/README.md:151`, qui attendent encore « l'arbitrage de X01 ». |
 | Q-REM-19 | ✅ **oui** (2026-10-05, pas l'option recommandée) | `CHECK (final_rate BETWEEN 0.20 AND 0.60)` à la place de `01:755`. ⚠️ **Tension avec Q-REM-05** : on relâche deux réglages (`01:758-759`) et on en grave deux autres ; si Jeff change 20 % ou 60 % (Q-JEF-01), base à recréer. À revoir après sa réponse. |
 | Q-PAR-01 | ✅ **sujet** (2026-10-05) | À valider par Jeff (Q-JEF-01). |
@@ -121,6 +121,15 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 | Q-PAR-07 | ✅ **sujet** (2026-10-05) | Cohérent avec Q-REM-05 : ces valeurs sortent des CHECK. Jeff : Q-JEF-01. |
 | Q-PAR-08 | ✅ **garder** (2026-10-05) | Jeff : Q-JEF-01. |
 | Q-PAR-09 | ✅ **manager** (2026-10-05) | ⚠️ Ne colle pas avec la recommandation de Q-ACC-07 (« la direction seule ») ; 💡 la direction fixe le barème par défaut, le manager les barèmes nominatifs. Jeff dira d'abord s'il en veut (Q-JEF-16, en deux temps). Va dans le RACI (`RCR:329`). |
+
+**Doublons marqués le 2026-10-05** (rien de supprimé, identifiants gardés) :
+la réponse de la carte d'origine est **reportée**, pas donnée.
+
+| Doublon | De | Réponse reportée |
+|---|---|---|
+| Q-MIG-02 | Q-REM-16 | garder l'hypothèse (Q-REM-16 : `hypothese`) |
+| Q-ACC-11 | Q-REM-17 | `invoice_reference` sur `payment` (Q-REM-17 : `colonnes`) |
+| Q-ACC-01 | Q-JEF-14 | oui : la question des droits est posée à Jeff |
 
 **Lot de migration qui en découle** (un seul `docker compose down -v`,
 numéros de `01` relus le 2026-10-05) :
@@ -615,7 +624,7 @@ Arguments pour les points qui méritent plus qu'un « oui » :
 | Id | Hypothèse | Qui | Source |
 |---|---|---|---|
 | Q-MIG-01 | Sens de `taux_commission` (2,00 à 3,25) | 🧑‍💼 | `docker/init-v2/README.md:145-147` |
-| Q-MIG-02 | `hire_date` = date de création du compte | 🧑‍💼 | `02:24-26` |
+| Q-MIG-02 | 🔁 **Doublon de Q-REM-16** (2026-10-05) — `hire_date` = date de création du compte | 🧑‍💼 | `02:24-26` |
 | Q-MIG-03 | `search_request.status = 'confirmed'` | 👥 | `docker/init-v2/README.md:161-174` |
 | Q-MIG-04 | Manager fictif (user 25) | 👥 | `docker/init-v2/README.md:176-192` |
 | Q-MIG-05 | `energetic_score` retiré | 👥 | `08-etat.md:118-121` |
@@ -659,7 +668,7 @@ fait quoi** dans le métier.
 
 | Id | Question | Qui | 💡 Recommandation |
 |---|---|---|---|
-| Q-ACC-01 | Reposer à Jeff la question des **droits** | 🧑‍💼 | **Oui**, en une question nette (Q-JEF-14) |
+| Q-ACC-01 | 🔁 **Doublon de Q-JEF-14** (2026-10-05) — Reposer à Jeff la question des **droits** | 🧑‍💼 | **Oui**, en une question nette (Q-JEF-14) |
 | Q-ACC-02 | Que voit le manager ? | 🧑‍💼 | Ses chasseurs et leurs paiements |
 | Q-ACC-03 | Qui enregistre la vente ? | 🧑‍💼 | Le manager |
 | Q-ACC-04 | Qui fait avancer la facture dans ses états ? | 🧑‍💼 | Le chasseur dépose, le manager vérifie |
@@ -669,7 +678,7 @@ fait quoi** dans le métier.
 | Q-ACC-08 | Désactiver plutôt que supprimer ? | 👥 | **Oui** : les clés en `RESTRICT` y poussent déjà |
 | Q-ACC-09 | Quel compte lance l'import des biens ? | 👥 | Un compte technique dédié |
 | Q-ACC-10 | Qui affecte une demande à un chasseur ? | 🧑‍💼 | Le manager |
-| Q-ACC-11 | Où ranger la facture du chasseur ? | 👥 | Avec Q-REM-17 (`invoice_reference`) |
+| Q-ACC-11 | 🔁 **Doublon de Q-REM-17** (2026-10-05) — Où ranger la facture du chasseur ? | 👥 | Avec Q-REM-17 (`invoice_reference`) |
 | Q-ACC-12 | Qui crée le compte client ? | 🧑‍💼 | Le client, par sa demande en ligne |
 | Q-ACC-13 | Qui enregistre une visite du client ? | 🧑‍💼 | Le chasseur qui l'accompagne |
 | Q-ACC-14 | Droits des chasseurs-IA ? | 📋 | Reporter au parcours IA |
