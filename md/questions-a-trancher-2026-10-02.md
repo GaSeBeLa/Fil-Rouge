@@ -87,7 +87,8 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 - 2026-10-05 : la liste complète est renvoyée comme « nos réponses », avec
   16 nouvelles (Q-REM-13 à 19, Q-PAR-01 à 09).
 - ➡️ Les cartes 🧑‍💼 restent à confirmer par Jeff : **rapport à part**
-  `md/questions-pour-jeff-2026-10-05.html` (voir partie 2).
+  `md/questions-pour-jeff-2026-10-05.html` (voir partie 2). Les 34 cartes que
+  seul Jeff tranche s'y cochent, et nulle part ailleurs, depuis le 2026-10-05.
 
 | Id | Réponse | Ce que ça entraîne |
 |---|---|---|
@@ -755,9 +756,34 @@ Sources :
 ## 2. Questions que seul Jeff peut trancher
 
 ➡️ **Rapport à part, depuis le 2026-10-05** : `md/questions-pour-jeff-2026-10-05.html`
-(artifact « Questions pour Jeff »). Chaque question y porte **notre position**,
+(artifact « Fil Rouge — Questions pour Jeff »). Chaque question y porte **notre position**,
 tirée des réponses, et ce que sa réponse change. Elles se cochent **là-bas
 seulement** : la page principale n'a plus que le lien.
+
+🆕 **Cartes déménagées le 2026-10-05** (option A) : les **34 cartes** de la
+partie 1 que seul Jeff tranche (« Qui tranche » commence par Jeff, sans
+« puis groupe ») ne se cochent plus que dans le rapport Jeff, rangées sous la
+question qui les regroupe. Leurs 13 réponses et 2 doublons y sont reportés.
+Elles restent décrites dans la partie 1 de ce registre.
+
+| Question pour Jeff | Cartes rangées dessous |
+|---|---|
+| Q-JEF-01 | Q-PAR-01, 04, 06, 07, 08, 10, 11, 13 |
+| Q-JEF-02 | Q-PAR-03 |
+| Q-JEF-03 | Q-PAR-02 |
+| Q-JEF-05 | Q-PAR-05 |
+| Q-JEF-08 | Q-REM-07 |
+| Q-JEF-09 | Q-REM-08, Q-REM-09 |
+| Q-JEF-10 | Q-REM-16, Q-MIG-02 |
+| Q-JEF-12 | Q-MIG-01 |
+| Q-JEF-13 | Q-MIG-10, Q-MIG-12, Q-MIG-13 |
+| Q-JEF-14 | Q-ACC-01 à 07, 10, 12, 13, 15 |
+| Q-JEF-15 | Q-ACC-21 |
+| Q-JEF-16 | Q-PAR-09 |
+| Q-JEF-18 | Q-SCH-05 |
+
+Restent sur la page principale, car le groupe tranche d'abord : Q-REM-01,
+Q-REM-02, Q-REM-06, Q-MAN-02, Q-MAN-03.
 
 À lui envoyer **en une fois**, avec la proposition du sujet en face : il
 n'a plus qu'à dire « oui » ou à corriger. 20 questions : les 19 ci-dessous,
