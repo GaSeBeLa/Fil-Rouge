@@ -74,7 +74,7 @@ la donne.
 
 - ✅ Seules ces **4 valeurs** sont permises pour un rôle (SQL, ligne 148).
 - ➡️ Le **notaire** et le **vendeur** apparaissent dans le parcours (H9),
-  mais n'ont **aucun rôle** : ils n'utilisent pas le système.
+  mais n'ont **aucun rôle** : ils n'utilisent pas le système (hors périmètre).
 - ➡️ Les futurs **chasseurs-IA** (`Readme.md`, « Le futur des besoins »)
   sont prévus comme des **Hunters** : colonne `hunter.is_hunter_ai`
   (SQL, ligne 259). 🟡 Ont-ils les mêmes droits qu'un chasseur humain ?
