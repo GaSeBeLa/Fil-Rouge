@@ -9,8 +9,12 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 - 📚 **Sources lues** : le schéma `docker/init-v2/01` et `02`, les modèles de
   l'API, les `.feature`, `md/`, `livrables/`, `context AI/08-etat.md`, et le
   sujet (`StarterPack - BASE`, en lecture seule).
-- ⚠️ Les numéros de ligne viennent de lectures faites le 2026-10-02. Ils
-  bougent si le fichier change.
+- ⚠️ Les numéros de ligne viennent de lectures faites le 2026-10-02, **relues le
+  2026-10-05** dans les parties 0, 1 (thèmes A à D) et 3 : le schéma `01` avait
+  glissé de 4 lignes. Ils bougent si le fichier change.
+- 🔄 Les thèmes E, F et G gardent ici leur résumé. Leur texte **enrichi et relu**
+  (contexte, « En clair », ➕/➖, ce que dit le sujet du prof) est dans la page à
+  cartes, version 11 (`md/questions-a-trancher-2026-10-02.html`).
 
 ---
 
@@ -72,7 +76,7 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 |---|---|---|---|
 | Unité monétaire | ✅ **euro** ; depuis le 2026-10-05 (Q-REM-01) : prix, budgets et barème en `INTEGER`, honoraires et paiement en `NUMERIC(12,2)` | 2026-09-21, revu 2026-10-05 | `context AI/08-etat.md:98-104`, `CLAUDE.md` règle 4 |
 | Acte après la fin du mandat | ✅ **refusé, sauf renouvellement** | 2026-09-11 | `09-dec:122-178` |
-| Mandat renouvelé | ✅ `'renewed'` marque le **nouveau** mandat | — | `09-dec:96-118`, `01:423` |
+| Mandat renouvelé | ✅ `'renewed'` marque le **nouveau** mandat | — | `09-dec:96-118`, `01:427` |
 | Fin de mandat | ✅ `ends_at` **stocké** | 2026-09-11 | `09-dec:222` |
 | Chaque chasseur a un manager | ✅ ADR-025, **accepté sur Confluence** | 2026-09-22 | `md/a-faire-a-la-main-2026-09-21.md:189-190` |
 | Authentification | ❌ hors périmètre (Jeff) | 2026-09-22 | `md/adr-026-…:62-80` |
@@ -86,6 +90,10 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 - 2026-10-02 : réponses de Sébastien (D1 à D4, Q-REM-01 à 12).
 - 2026-10-05 : la liste complète est renvoyée comme « nos réponses », avec
   16 nouvelles (Q-REM-13 à 19, Q-PAR-01 à 09).
+- 2026-10-05, 2e série (page v10) : **24 réponses** (Q-MAN-01 à 07, Q-SCH-01 à 04
+  et 06 à 17, Q-ACC-11). Q-MAN-08 est cochée mais commentée « revoir, pas répondu » :
+  elle **reste ouverte**, carte réécrite. Deux fois, case et commentaire diffèrent
+  (Q-SCH-06, Q-SCH-17) : **le commentaire fait foi**.
 - ➡️ Les cartes 🧑‍💼 restent à confirmer par Jeff : **rapport à part**
   `md/questions-pour-jeff-2026-10-05.html` (voir partie 2). Les 34 cartes que
   seul Jeff tranche s'y cochent, et nulle part ailleurs, depuis le 2026-10-05.
@@ -97,7 +105,7 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 | Q-REM-02 | ✅ **statut-mandat** (pas l'option recommandée) | Nouveau statut de fin sur `mandate` ; peut servir aussi à **Q-REM-14**. ⚠️ S'écarte de `RCR:100` (motif du refus dans `paiements`) : à écrire dans l'ADR. |
 | Q-REM-03 | ✅ **colonne** — « à documenter et à confirmer avec Jeff » | `payment.performance_score`. |
 | Q-REM-04 | ✅ **jsonb** | `payment.calculation_details JSONB`. |
-| Q-REM-05 | ✅ **table** | Table `remuneration_parameters` + CHECK `01:754-755` relâchés. |
+| Q-REM-05 | ✅ **table** | Table `remuneration_parameters` + CHECK `01:758-759` relâchés. |
 | Q-REM-06 | ✅ **recalcul** | Code du sujet intact ; écart à `F10:293` dans l'ADR ; Q-JEF-17. |
 | Q-REM-07 | ✅ **client-tous** — remarque : moins de visites = meilleure note | Remarque **juste** (`RCR:55`, `RCR:147`) : mon argument « gonfle la note » était faux, corrigé en v3 (aussi Q-ACC-13). Q-JEF-08. |
 | Q-REM-08 | ✅ **non-refusees** | Q-JEF-09. |
@@ -110,7 +118,7 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 | Q-REM-14 | ✅ **statut** (2026-10-05) | Statut de fin sur `mandate` (`01:405-407`), ex. `'lost'`. 🟡 Un seul statut pour Q-REM-02 et Q-REM-14, ou deux ? |
 | Q-REM-15 | ✅ **seed** (2026-10-05) | Le seed fait commencer le barème par défaut en 2025 ; `rem.py:298` garde 2026. |
 | Q-REM-16 | ✅ **hypothese** (2026-10-05) | `hire_date` = date de création du compte (`02:24-26`), dite en soutenance ; Jeff dira s'il a mieux (Q-JEF-10). |
-| Q-REM-17 | ✅ **colonnes** (2026-10-05) | `announced_at`, `invoice_submitted_at`, `verified_at`, `scheduled_for` et `invoice_reference` sur `payment`. 💡 Un CHECK par date, comme `chk_paid` (`01:765-767`). Q-ACC-11 en est le doublon (marqué le 2026-10-05). |
+| Q-REM-17 | ✅ **colonnes** (2026-10-05) | `announced_at`, `invoice_submitted_at`, `verified_at`, `scheduled_for` et `invoice_reference` sur `payment`. 💡 Un CHECK par date, comme `chk_paid` (`01:765-767`). Q-ACC-11, répondue le 2026-10-05 (`colonne`), rejoint ce lot. |
 | Q-REM-18 | ✅ **acter** (2026-10-05) | ADR X01 (option B) à écrire. À mettre à jour avec lui : `08-etat.md` (l. 80, 195) et `API/README.md:151`, qui attendent encore « l'arbitrage de X01 ». |
 | Q-REM-19 | ✅ **oui** (2026-10-05, pas l'option recommandée) | `CHECK (final_rate BETWEEN 0.20 AND 0.60)` à la place de `01:755`. ⚠️ **Tension avec Q-REM-05** : on relâche deux réglages (`01:758-759`) et on en grave deux autres ; si Jeff change 20 % ou 60 % (Q-JEF-01), base à recréer. À revoir après sa réponse. |
 | Q-PAR-01 | ✅ **sujet** (2026-10-05) | À valider par Jeff (Q-JEF-01). |
@@ -122,6 +130,31 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 | Q-PAR-07 | ✅ **sujet** (2026-10-05) | Cohérent avec Q-REM-05 : ces valeurs sortent des CHECK. Jeff : Q-JEF-01. |
 | Q-PAR-08 | ✅ **garder** (2026-10-05) | Jeff : Q-JEF-01. |
 | Q-PAR-09 | ✅ **manager** (2026-10-05) | ⚠️ Ne colle pas avec la recommandation de Q-ACC-07 (« la direction seule ») ; 💡 la direction fixe le barème par défaut, le manager les barèmes nominatifs. Jeff dira d'abord s'il en veut (Q-JEF-16, en deux temps). Va dans le RACI (`RCR:329`). |
+| Q-MAN-01 | ✅ **Activer** (2026-10-05) | CHECK « exactement 6 mois » à la place de celui de `ends_at` (`01:412-414`), SQL prêt (`01:435-445`). Fin de mois : à écrire dans l'ADR L. |
+| Q-MAN-02 | ✅ **Corriger, activer, l'annulation libère tout de suite** (2026-10-05) | Trigger corrigé (parent exclu, `IS DISTINCT FROM`) et activé (`01:450-499`). D7 : Jeff confirme (Q-JEF-06). |
+| Q-MAN-03 | ✅ **Imposer « sans vente » dans l'API, sans limite de nombre** (2026-10-05) | Code seul, dans l'API. Jeff : Q-JEF-07. |
+| Q-MAN-04 | ✅ **Valider les deux** (2026-10-05) | La vente pointe vers le nouveau mandat ; le délai part de la 1re signature : le code remonte `id_mandate_parent`. |
+| Q-MAN-05 | ✅ **Poser un CHECK d'égalité** (2026-10-05) — « le mandat doit être signé par les deux partie, donc il faudrait rajouter  is_hunter_signed et date signature reflèterais la signature des deux ? qu'en pense tu ? a modifié les schemas et bdd » | CHECK case ↔ date ; `02:218` et `02:225` à corriger. Ta question (signature du chasseur) devient **Q-MAN-09**. |
+| Q-MAN-06 | ✅ **Toutes dans l'API, chacune testée** (2026-10-05) — « dit nous si on a besoin de metre a jours les schémas » | Tables : non. Trois TODO de `01` à annoter « contrôlé par l'API » (`01:639-641`, `664-668`, `789-795`). Diagrammes : non. ⚠️ `RCR:98` : « sauf renouvellement du mandat ». |
+| Q-MAN-07 | ✅ **Autoriser 'canceled' sans date de signature** (2026-10-05) | `chk_status_signature` modifié (`01:430-432`). |
+| Q-SCH-01 | ✅ **Garder le tout-ou-rien** (2026-10-05, pas l'option recommandée) — « ajoutez un champ "non renseigné" pour les champs vides. car l'on veux pas perdre l'intégrité malgré l'import des ancienne données, (obligatoire de les migré) » | `ALTER` de `02:64-66` retiré ; 18 clients : adresse « non renseigné » ; code postal refusé par le format (`01:210`) : **Q-SCH-18**. |
+| Q-SCH-02 | ✅ **Garder criteria, écrire un ADR qui remplace ADR-009** (2026-10-05) — « Ecrit sur l'ADR09 une ligne disant "modifié le , par l'adr xx" » | ADR N. La ligne sur ADR-009 se fera à la synchro Confluence, manuelle et décidée par le groupe. |
+| Q-SCH-03 | ✅ **Acter les 4 statuts** (2026-10-05) | ADR O ; ferme D4. |
+| Q-SCH-04 | ✅ **Ajouter 'signed'** (2026-10-05) | `proposition_status` (`01:610-612`) ; ADR O ; ferme D5. |
+| Q-SCH-06 | ✅ **Journal des notes : une ligne datée par note, sans période** (2026-10-05) — case cochée différente, **le commentaire fait foi** — « Validé : journal des notes, sans périodes (ni « garder », ni tsrange). Chaque note = une ligne datée à la seconde (scored_at TIMESTAMP NOT NULL) ; la note actuelle = la dernière ligne. On retire valid_from, valid_until, chk_perf_period et excl_perf_no_overlap ; on ajoute UNIQUE (id_payment), UNIQUE (id_mandate) et un index (id_hunter, scored_at DESC). Raison : Q-REM-06 recalcule la note à chaque vente, donc deux ventes le même jour doivent passer. À faire dans le lot de migration. ADR à noter (ferme D9). » | Journal des notes : voir le commentaire. ADR P ; ferme D9. |
+| Q-SCH-07 | ✅ **Ne pas créer, hors MVP** (2026-10-05) | Rien en base. ADR T (limites assumées). |
+| Q-SCH-08 | ✅ **Reporter au parcours IA** (2026-10-05) | Rien maintenant. ADR T. |
+| Q-SCH-09 | ✅ **Ajouter** (2026-10-05) | `created_at` sur `client`, `hunter`, `real_estate_manager`, `role` (`01:169-170`). |
+| Q-SCH-10 | ✅ **Renommer maintenant** (2026-10-05) | `is_cartet` → `is_carte_t` : colonne, modèle, migration (`01:257-260`). |
+| Q-SCH-11 | ✅ **Contrôler** (2026-10-05, pas l'option recommandée) | Mesuré : 2 556 codes postaux sur 2 556 au format français ; mais `country_iso` vide sur tous les biens (`01:512-513`) : `'FR'` d'abord, puis le CHECK. |
+| Q-SCH-12 | ✅ **Sans espace** (2026-10-05, pas l'option recommandée) | ⚠️ **À confirmer.** CHECK de `01:215` (client) et `01:391` (criteria) ; GB et NL gardent leur espace (`01:213-214`). |
+| Q-SCH-13 | ✅ **« Supervises », et l'écrire** (2026-10-05) | Diagramme et README du schéma (`docker/init-v2/README.md:429-433`). |
+| Q-SCH-14 | ✅ **Accepter comme limite** (2026-10-05) | Rien. ADR T. |
+| Q-SCH-15 | ✅ **Resserrer la tranche à > 0** (2026-10-05) | CHECK de `01:697`. |
+| Q-SCH-16 | ✅ **Ajouter le CHECK** (2026-10-05) | ⏭️ **Sans objet** depuis Q-SCH-17 : `valid_until` disparaît. |
+| Q-SCH-17 | ✅ **Par construction : une grille vaut jusqu'à la suivante** (2026-10-05) — case cochée différente, **le commentaire fait foi** — « Décidé : ni contrôle API ni « rien » — une grille vaut jusqu'à la suivante, par construction. parameters_fees : on retire valid_until ; valid_from est renommé effective_from (« en vigueur à partir du »). La contrainte EXCLUDE (01:685-686) est remplacée par UNIQUE (effective_from) : deux grilles ne démarrent pas le même jour. Lecture : la grille d'une vente = la dernière dont effective_from <= date de l'acte. Trou impossible ; seul cas restant : une vente avant la 1re grille, couvert par le seed (Q-REM-15). Code du sujet inchangé : l'adaptateur calcule date_fin = veille de la grille suivante. À toucher : 01:679-680 et 686, parameters_fees_model.py:26-27. Lot de migration. ADR à noter. » | Voir le commentaire. ADR Q ; rend Q-SCH-16 sans objet. |
+| Q-ACC-11 | ✅ **invoice_reference sur payment** (2026-10-05) | Même lot que Q-REM-17 ; plus un doublon. |
+| Q-MAN-08 | ✏️ cochée « Reporter », commentaire « revoir, pas répondu » : **reste ouverte** | Carte réécrite (thème C). |
 
 **Doublons marqués le 2026-10-05** (rien de supprimé, identifiants gardés) :
 la réponse de la carte d'origine est **reportée**, pas donnée.
@@ -129,7 +162,7 @@ la réponse de la carte d'origine est **reportée**, pas donnée.
 | Doublon | De | Réponse reportée |
 |---|---|---|
 | Q-MIG-02 | Q-REM-16 | garder l'hypothèse (Q-REM-16 : `hypothese`) |
-| Q-ACC-11 | Q-REM-17 | `invoice_reference` sur `payment` (Q-REM-17 : `colonnes`) |
+| Q-ACC-11 | Q-REM-17 | ✅ plus un doublon : répondue le 2026-10-05 (`colonne`) |
 | Q-ACC-01 | Q-JEF-14 | oui : la question des droits est posée à Jeff |
 
 **Lot de migration qui en découle** (un seul `docker compose down -v`,
@@ -142,6 +175,21 @@ numéros de `01` relus le 2026-10-05) :
 - clé de `sale` vers `parameters_fees` (Q-REM-13) ;
 - 4 dates et `invoice_reference` sur `payment` (Q-REM-17) ;
 - `CHECK (final_rate BETWEEN 0.20 AND 0.60)` (Q-REM-19 ; `01:755`) — ⚠️ voir Q-REM-05.
+- 2e série du 2026-10-05 :
+  - CHECK « exactement 6 mois » à la place de celui de `ends_at` (déjà rédigé dans le TODO U05) (Q-MAN-01 ; `01:412-414`, `01:435-445`) ;
+  - Trigger d'exclusivité corrigé (le mandat parent exclu) et activé (Q-MAN-02 ; `01:450-499`) ;
+  - Signature : un CHECK qui relie la case et la date ; MAND-0008 et MAND-0016 corrigés — 🟡 forme selon Q-MAN-09 (Q-MAN-05, Q-MAN-09 ; `01:408, 415`, `02:218, 225`) ;
+  - 3 TODO annotés « contrôlé par l'API » (commentaires seuls) (Q-MAN-06 ; `01:639-641`, `01:664-668`, `01:789-795`) ;
+  - `chk_status_signature` : `'canceled'` permis sans date de signature (Q-MAN-07 ; `01:430-432`) ;
+  - `ALTER` retiré de 02 ; 18 clients : adresse « non renseigné », code postal selon Q-SCH-18 (Q-SCH-01, Q-SCH-18 ; `02:64-66`, `02:148-165`) ;
+  - `proposition_status` : `'signed'` ajouté (Q-SCH-04 ; `01:610-612`) ;
+  - `hunter_performance` en journal : `scored_at`, 2 UNIQUE, 1 index ; `valid_from`, `valid_until` et 2 contraintes retirés (Q-SCH-06 ; `01:803-825`) ;
+  - `created_at` sur `client`, `hunter`, `real_estate_manager`, `role` (Q-SCH-09 ; `01:169-170`) ;
+  - `is_cartet` renommé `is_carte_t` (colonne, modèle, migration) (Q-SCH-10 ; `01:257-260`) ;
+  - `country_iso = 'FR'` sur les 2 556 biens, puis CHECK du code postal par pays (Q-SCH-11 ; `01:512-513`, `01:563-567`) ;
+  - Eircode sans espace, sur `client` et `criteria` — ⚠️ à confirmer (Q-SCH-12 ; `01:215`, `01:391`) ;
+  - Taux de tranche `> 0` (Q-SCH-15 ; `01:697`) ;
+  - `parameters_fees` : `effective_from` et `UNIQUE` ; `valid_until` et l'`EXCLUDE` retirés (Q-SCH-17 ; `01:679-686`) ;
 - ⏸️ Attendent Jeff avant de partir : Q-JEF-01, 03, 06, 18.
 - ✅ Déjà fait, hors lot : Q-REM-01 (prix en `INTEGER`), qui demande lui aussi un `down -v`.
 
@@ -160,12 +208,53 @@ Simple pense-bête ; 💡 regroupement proposé, numéros donnés sur Confluence
 | G | Validation de l'entrée dans le routeur commun | Q-INF-06 | décidé et fait le 2026-10-05 |
 | H | X01 : ancienneté et performance majorent le taux | Q-REM-18 | décidé le 2026-10-05 — « il suffit de l'acter » (`09-dec:303-324`) |
 | I | Vente reliée à sa grille d'honoraires | Q-REM-13 | décidé — **amende ADR-019** (proposé, « sans clé ») |
-| J | Étapes du paiement : 4 dates et la référence de facture | Q-REM-17 | décidé |
+| J | Étapes du paiement : 4 dates et la référence de facture | Q-REM-17, Q-ACC-11 | décidé |
 | K | Paramètres proposés, validés par Jeff | Q-PAR-01 à 04, 06 à 08, 10, 11, 13 | positions du groupe — attend Jeff (Q-JEF-01, 02, 03) |
+| L | Règles du mandat : 6 mois exacts, exclusivité, renouvellement, annulation | Q-MAN-01, Q-MAN-02, Q-MAN-03, Q-MAN-04, Q-MAN-07 | décidé le 2026-10-05 — confirmations de Jeff : Q-JEF-06 (annulation), Q-JEF-07 (renouvellement) |
+| M | Règles qui croisent plusieurs tables : dans l'API, chacune testée | Q-MAN-06 | décidé le 2026-10-05 |
+| N | Localisation sur criteria : remplace ADR-009 | Q-SCH-02 | décidé — et sur ADR-009, la ligne « modifié le …, par l'ADR xx » demandée le 2026-10-05, à la synchro Confluence |
+| O | Statuts de la demande et de l'offre | Q-SCH-03, Q-SCH-04 | décidé — ferme D4 et D5 |
+| P | Journal des notes du chasseur | Q-SCH-06 | décidé — ferme D9 |
+| Q | Grilles d'honoraires « en vigueur à partir du » | Q-SCH-17 | décidé — rend Q-SCH-16 sans objet |
+| R | Adresse client : tout-ou-rien, « non renseigné » pour les données reprises | Q-SCH-01, Q-SCH-18 | décidé (Q-SCH-01) — 🟡 code postal à trancher (Q-SCH-18) |
+| S | Signature du mandat | Q-MAN-05, Q-MAN-09 | 🟡 à trancher : une signature ou deux (Q-MAN-09) |
+| T | Limites assumées du MVP | Q-SCH-07, Q-SCH-08, Q-SCH-14 | décidé — à dire en soutenance |
 
 Pas d'ADR propre : Q-REM-10 (un CHECK), Q-REM-12 (C3 déjà écrite), Q-REM-15
 (seed seul), Q-REM-16 (hypothèse déjà écrite, `02:24-26`), D1 à D4.
 Q-PAR-09 va dans le RACI, pas dans un ADR (`RCR:329`).
+2e série : pas d'ADR propre non plus pour Q-SCH-09, 10, 11, 12, 15 (un CHECK ou une
+colonne chacune) et Q-SCH-13 (un libellé) ; 💡 une ligne chacune dans le README du
+schéma. Q-SCH-16 : sans objet.
+
+**Ce que les réponses du 2026-10-05 changent aux autres cartes** — aucune réponse
+n'est changée ; quand deux réponses tirent dans deux sens, la carte le montre :
+
+| Carte | Ce qui change |
+|---|---|
+| Q-SCH-06 | ✅ Case cochée « tsrange », commentaire « journal » : **le commentaire est retenu** ; une case « Journal des notes » ajoutée. |
+| Q-SCH-17 | ✅ Case cochée « Rien », commentaire « par construction » : **le commentaire est retenu** ; une case ajoutée. |
+| Q-SCH-16 | ⏭️ **Sans objet** : Q-SCH-17 retire la date de fin des grilles. |
+| Q-SCH-12 | ⚠️ **À confirmer** : « Sans espace » laisse deux conventions dans la même colonne. |
+| Q-SCH-01 | 📏 Les 18 clients repris n'ont ni adresse ni code postal ; « non renseigné » est refusé pour le code postal → Q-SCH-18. |
+| Q-SCH-11 | 📏 2 556 codes postaux sur 2 556 conformes ; mais le pays des biens est vide : à remplir d'abord. |
+| Q-MAN-05, Q-MAN-06 | 💬 Réponses à vos deux questions (deux signatures ? schémas à changer ?). |
+| Q-MAN-08 | ✏️ **Réécrite**, sources du prof relues ; recommandation passée à « Reporter ». |
+| Q-MAN-09 | 🆕 **Nouvelle** : une signature ou deux ? (ton commentaire sur Q-MAN-05). |
+| Q-SCH-18 | 🆕 **Nouvelle** : le code postal des 18 clients repris (ta réponse à Q-SCH-01). |
+| Q-INF-02 | 🔄 **Réduite** : il ne reste que Q-INF-03. |
+| Q-PRO-02 | 🔄 **Réduite** : 3 réponses sur 5 confirmées ; restent la Q3 à acter (ADR-024) et la Q4 (Q-INF-03). |
+| Q-INF-03 | 🔑 La dernière question ouverte du seed et du point d'étape. |
+| Q-PRO-03 | 🔄 9 ADR de plus au pense-bête (L à T). |
+| Q-PRO-06 | 🔗 La ligne sur ADR-009 (Q-SCH-02) et les ADR L à T, au même passage. |
+| Q-MIG-03 | 🔗 Statuts actés (Q-SCH-03) ; 2 mandats contradictoires à corriger d'abord (Q-MAN-05) ; 🆕 une case « au mandat signé ». |
+| Q-MIG-08 | ✅ Le lieu reste sur criteria (Q-SCH-02) : c'est là que les secteurs doivent arriver. |
+| Q-MIG-09 | 🆕 Une case « laisser le minimum vide ». |
+| Q-MIG-07, Q-PRO-08 | 🔗 Même logique que Q-SCH-01 ; un format `+33…` refuserait les 4 numéros 0000000000. |
+| Q-ACC-20 | ⚠️ Relecture : ADR-025 est déjà « accepté » sur Confluence (22/09) ; ENF-03 est un exemple dans le cahier des charges, mais une exigence dans les règles de calcul. La carte montre les deux lectures. |
+| Q-ACC-14 | 🔗 Cohérente avec Q-SCH-08 (reporter au parcours IA). |
+| Q-ACC-11 | ✅ Répondue : rejoint Q-REM-17 ; ce n'est plus un doublon. |
+| Q-PRO-05 | 🔗 Le lot de migration grossit : l'écart avec le CDC v2.0 aussi. |
 
 ---
 
@@ -179,9 +268,9 @@ Voici ce qui ne colle pas avec la base.
 
 #### Q-REM-01 — Borne haute d'une tranche du barème : incluse ou exclue ?
 
-- 🟡 **Ouvert** · 👥 **Groupe**
+- ✅ **Répondue et faite le 2026-10-05 : « Prix en INTEGER + bornes '[]' (tranché le 2026-10-05) »** · 👥 **Groupe**
 - **Constat** :
-  - la base **exclut** la borne haute : `numrange(amount_min, amount_max, '[)')` (`01:706`, `01:713`) ;
+  - la base **excluait** la borne haute (`'[)'`) ; passée en `'[]'` le 2026-10-05 (`01:710`, `01:717`) ;
   - le code l'**inclut** : `prix <= l.montant_max` (`rem.py:241`) ;
   - `F10:23-27` et `parametrage_par_defaut` écrivent des bornes incluses :
     `LigneBareme(debut, d(0), d("0.30"), d(199999))` (`rem.py:304`) ;
@@ -205,11 +294,11 @@ Voici ce qui ne colle pas avec la base.
 
 #### Q-REM-02 — Origine « un chasseur d'une autre agence » : où la ranger ?
 
-- 🟡 **Ouvert** · 👥 **Groupe**, après 🧑‍💼 **Jeff** (Q-JEF-03)
+- ✅ **Répondue le 2026-10-02 : « Pas de vente : le mandat prend un statut de fin »** · 👥 **Groupe**, après 🧑‍💼 **Jeff** (Q-JEF-03)
 - **Constat** :
   - le code a **3** origines, dont `AUTRE_AGENCE` (`rem.py:54-57`) ;
-  - la base n'en a que **2** : `'hunter'`, `'client_alone'` (`01:653-654`) ;
-  - et `sale.fees_amount` est `NOT NULL CHECK (> 0)` (`01:652`).
+  - la base n'en a que **2** : `'hunter'`, `'client_alone'` (`01:657-658`) ;
+  - et `sale.fees_amount` est `NOT NULL CHECK (> 0)` (`01:656`).
 - ➡️ Si l'entreprise **ne touche rien** sur une vente faite par une autre
   agence, on ne peut **pas** enregistrer cette vente : il n'y a pas
   d'honoraires à saisir.
@@ -217,22 +306,22 @@ Voici ce qui ne colle pas avec la base.
   (`'client_alone'`) : l'entreprise touche-t-elle des honoraires ?
 - **Options** :
   - A — ajouter `'other_agency'` au `CHECK`, et accepter des honoraires à **0** quand l'entreprise ne touche rien
-    (passer `sale.fees_amount CHECK (> 0)` à `>= 0`, `01:652`) ;
+    (passer `sale.fees_amount CHECK (> 0)` à `>= 0`, `01:656`) ;
   - B — ne pas créer de `sale` : le mandat passe à un statut de fin (ex. `'lost'`, à ajouter) ;
   - C — ne rien stocker.
 - 💡 **Recommandation : A**, la forme exacte dépend de Q-JEF-03.
   - Le refus doit être **tracé** sur `payment` (ADR-024, `refusal_reason = 'out_of_scope'`).
     Le sujet insiste sur « l'intérêt de stocker le motif » (`RCR:100`).
-  - Or un `payment` exige une vente : `id_sale NOT NULL` (`01:756`).
+  - Or un `payment` exige une vente : `id_sale NOT NULL` (`01:760`).
   - ❌ B rangerait deux refus que le code traite pareil (`rem.py:174`) de deux façons différentes.
 
 #### Q-REM-03 — Le score de performance doit-il être figé sur le paiement ?
 
-- 🟡 **Ouvert** · 👥 **Groupe**
+- ✅ **Répondue le 2026-10-02 : « Ajouter payment.performance_score »** · 👥 **Groupe**
 - **Constat** :
   - `F10:275-287` exige de **figer** les éléments du calcul à la date de l'acte ;
-  - `payment` fige les taux (`01:742-755`) mais **pas le score** ;
-  - `hunter_performance.score` (`01:798`) est un score **par période**,
+  - `payment` fige les taux (`01:746-759`) mais **pas le score** ;
+  - `hunter_performance.score` (`01:802`) est un score **par période**,
     recalculé **après** paiement : ce n'est pas celui qui a servi.
 - **Options** :
   - A — ajouter `payment.performance_score NUMERIC(4,1)`, `NULL` si refus ;
@@ -246,7 +335,7 @@ Voici ce qui ne colle pas avec la base.
 
 #### Q-REM-04 — Faut-il figer les 5 notes et les entrées du calcul ?
 
-- 🟡 **Ouvert** · 👥 **Groupe**
+- ✅ **Répondue le 2026-10-02 : « Une colonne JSONB calculation_details »** · 👥 **Groupe**
 - **Constat** : absents en base :
   - les **5 notes** (délai, exclusivité, ventes, mandats, visites) ;
   - les **entrées** : `nb_visites`, `annees_anciennete`, `ventes_12_mois`, `mandats_12_mois` (`rem.py:137-140`).
@@ -263,14 +352,14 @@ Voici ce qui ne colle pas avec la base.
 
 #### Q-REM-05 — Les paramètres de performance et de modulation : en table ou en code ?
 
-- 🟡 **Ouvert** · 👥 **Groupe**
+- ✅ **Répondue le 2026-10-02 : « Table versionnée + relâcher les CHECK »** · 👥 **Groupe**
 - **Constat** :
   - **aucune table** pour les poids, les paliers, les notes, les points, la
     fenêtre de 12 mois (`rem.py:92-105`) ;
   - ni pour le taux par année, le pivot, l'amplitude, le plancher, le plafond (`rem.py:108-116`) ;
   - deux de ces valeurs sont **gravées dans des `CHECK`** :
-    - `seniority_rate BETWEEN 0 AND 0.10` (`01:754`) ;
-    - `performance_rate BETWEEN -0.20 AND 0.20` (`01:755`).
+    - `seniority_rate BETWEEN 0 AND 0.10` (`01:758`) ;
+    - `performance_rate BETWEEN -0.20 AND 0.20` (`01:759`).
 - ✅ Le sujet dit qu'un paramètre vit dans « une table de paramètres, jamais en dur »
   (`RCR:42-47`).
 - **Options** :
@@ -284,7 +373,7 @@ Voici ce qui ne colle pas avec la base.
 
 #### Q-REM-06 — Le score : recalculé à chaque vente, ou lu dans `hunter_performance` ?
 
-- 🟠 **Position à valider** (Sébastien : « le score de cette vente ») · 👥 **Groupe**, à confirmer par 🧑‍💼 **Jeff** (Q-JEF-17)
+- ✅ **Répondue le 2026-10-02 : « Recalculer à chaque vente »** · 👥 **Groupe**, à confirmer par 🧑‍💼 **Jeff** (Q-JEF-17)
 - **Constat** :
   - `F10:293` : « Le nouveau score sert de base au calcul de la prochaine rémunération » ;
   - le code **recalcule** le score avec les données de la vente (`rem.py:275-276`), sans lire de score stocké ;
@@ -302,9 +391,9 @@ Voici ce qui ne colle pas avec la base.
 
 #### Q-REM-07 — Quelles visites comptent ?
 
-- 🟡 **Ouvert** · 🧑‍💼 **Jeff** (Q-JEF-08), le groupe écrit la requête
+- ✅ **Répondue le 2026-10-02 : « Visites du client, tous les biens du mandat, jusqu'au jour de l'acte »** · 🧑‍💼 **Jeff** (Q-JEF-08), le groupe écrit la requête
 - **Constat** :
-  - `visit.visitor_type IN ('hunter', 'client')` (`01:631`) ;
+  - `visit.visitor_type IN ('hunter', 'client')` (`01:635`) ;
   - `F10:259` : « le client a effectué 5 visites » ;
   - le sujet cite les deux sortes de visites (`Readme.md:100-101`).
 - **Questions** : quel type ? tous les biens du mandat, ou seulement le bien vendu ? avant l'acte seulement ?
@@ -314,7 +403,7 @@ Voici ce qui ne colle pas avec la base.
 
 #### Q-REM-08 — Quelles ventes comptent dans « ventes sur 12 mois » ?
 
-- 🟡 **Ouvert** · 🧑‍💼 **Jeff** (Q-JEF-09)
+- ✅ **Répondue le 2026-10-02 : « Les ventes non refusées »** · 🧑‍💼 **Jeff** (Q-JEF-09)
 - **Constat** : `RCR:470` exclut la vente en cours ; rien d'autre n'est dit.
 - **Questions** : une vente refusée compte-t-elle ? une vente `client_alone` ?
 - 💡 **Recommandation** : les ventes des mandats du chasseur dont le paiement
@@ -323,7 +412,7 @@ Voici ce qui ne colle pas avec la base.
 
 #### Q-REM-09 — Quels mandats comptent dans « mandats sur 12 mois » ?
 
-- 🟡 **Ouvert** · 🧑‍💼 **Jeff** (Q-JEF-09)
+- ✅ **Répondue le 2026-10-02 : « Signés, sans les renouvellements »** · 🧑‍💼 **Jeff** (Q-JEF-09)
 - **Constat** : `F10:298` compte un mandat expiré. Rien sur `canceled`, `pending_signature`, `renewed`.
 - 💡 **Recommandation** : les mandats **signés** (`signature_date` non vide)
   dans la fenêtre, **sans les renouvellements** (`id_mandate_parent IS NULL`).
@@ -333,9 +422,9 @@ Voici ce qui ne colle pas avec la base.
 
 #### Q-REM-10 — `final_rate` doit-il être obligatoire sur un paiement non refusé ?
 
-- 🟡 **Ouvert** · 👥 **Groupe**
+- ✅ **Répondue le 2026-10-02 : « L'ajouter à chk_refused »** · 👥 **Groupe**
 - **Constat** : `chk_refused` exige `base_rate`, `seniority_rate`,
-  `performance_rate` non vides, mais **pas** `final_rate` (`01:778-783`).
+  `performance_rate` non vides, mais **pas** `final_rate` (`01:782-787`).
   - `payment_model.py:11-12` dit « NULL tant qu'il n'est pas arrêté », sans règle derrière.
 - 💡 **Recommandation : l'ajouter à `chk_refused`.**
   - Le premier statut est `'announced'` : le montant est déjà annoncé, donc le taux est connu.
@@ -343,7 +432,7 @@ Voici ce qui ne colle pas avec la base.
 
 #### Q-REM-11 — Qui garantit `montant = taux × honoraires` ?
 
-- 🟡 **Ouvert** · 👥 **Groupe**
+- ✅ **Répondue le 2026-10-02 : « L'API seule, avec un test d'intégration »** · 👥 **Groupe**
 - **Constat** : rien ne vérifie `amount`, `final_rate` ni `fees_amount`
   entre eux. L'arrondi « au demi supérieur » n'existe que dans le code.
 - **Options** : trigger, colonne générée, ou API seule.
@@ -353,8 +442,8 @@ Voici ce qui ne colle pas avec la base.
 
 #### Q-REM-12 — Les honoraires sont rangés sur `sale`, qu'on peut modifier
 
-- 🟡 **Ouvert** · 👥 **Groupe**
-- **Constat** : `sale.fees_amount` (`01:652`) reste modifiable après paiement (`PUT /sales/{id}`).
+- ✅ **Répondue le 2026-10-02 : « Appliquer C3 dans sale_service »** · 👥 **Groupe**
+- **Constat** : `sale.fees_amount` (`01:656`) reste modifiable après paiement (`PUT /sales/{id}`).
 - ✅ **Déjà prévu** : la contrainte C3 dit « Refuser toute modification de `fees_amount` »
   (`09-contraintes-a-coder.md:110-117`), par trigger ou dans le service.
 - ⚠️ Le sujet range les honoraires **sur le paiement** : « prix_acte, honoraires » (`RCR:286`).
@@ -363,24 +452,24 @@ Voici ce qui ne colle pas avec la base.
 
 #### Q-REM-13 — Lien vers la ligne de `parameters_fees` utilisée ?
 
-- ✅ **Répondu le 2026-10-05 : `cle`** (voir §0) — avant : 🔵 appliqué, pas acté : pas de clé, choix d'ADR-019 (« proposé »)
+- ✅ **Répondue le 2026-10-05 : « Ajouter une clé »** (voir §0) — avant : 🔵 appliqué, pas acté : pas de clé, choix d'ADR-019 (« proposé »)
 - **Constat** : `parameters_fees.id` n'est référencé nulle part.
 - 💡 **Recommandation : garder sans clé**, et accepter ADR-019.
   - Le montant est déjà figé dans `sale.fees_amount`.
-  - La ligne se retrouve par la date : `EXCLUDE` (`01:681-682`) garantit qu'il y en a **au plus une** (voir Q-SCH-17 pour les trous).
+  - La ligne se retrouve par la date : `EXCLUDE` (`01:685-686`) garantit qu'il y en a **au plus une** (voir Q-SCH-17 pour les trous).
 
 #### Q-REM-14 — Le mandat « perdant » de deux mandats non exclusifs
 
-- ✅ **Répondu le 2026-10-05 : `statut`** (voir §0) · 👥 **Groupe**
+- ✅ **Répondue le 2026-10-05 : « Ajouter un statut de fin (ex. 'lost') »** (voir §0) · 👥 **Groupe**
 - **Constat** : `F10:52-56` : un seul chasseur est payé ; « "Bruno" ne perçoit aucune rémunération » (`F10:56`).
-  - `sale.id_mandate` est `UNIQUE` (`01:655`) : le perdant n'a **pas** de vente.
+  - `sale.id_mandate` est `UNIQUE` (`01:659`) : le perdant n'a **pas** de vente.
 - 💡 **Recommandation** : le mandat perdant prend un **statut de fin** (à ajouter, ex. `'lost'`).
-  - Les statuts actuels sont `active`, `completed`, `expired`, `renewed`, `canceled`, `pending_signature` (`01:401-403`) :
+  - Les statuts actuels sont `active`, `completed`, `expired`, `renewed`, `canceled`, `pending_signature` (`01:405-407`) :
     aucun ne dit « vendu par un autre ».
 
 #### Q-REM-15 — Date de début du barème par défaut
 
-- ✅ **Répondu le 2026-10-05 : `seed`** (voir §0) — avant : 🟠 position de Sébastien, « reculer à 2025 » · 👥 **Groupe**
+- ✅ **Répondue le 2026-10-05 : « Reculer à 2025, dans le seed seulement »** (voir §0) — avant : 🟠 position de Sébastien, « reculer à 2025 » · 👥 **Groupe**
 - **Constat** : `rem.py:298` : `debut = date(2026, 1, 1)`.
   - Une vente du seed datée de 2025 lèverait `BaremeIntrouvable`.
 - 💡 **Recommandation : reculer, dans le seed seulement.**
@@ -388,15 +477,15 @@ Voici ce qui ne colle pas avec la base.
 
 #### Q-REM-16 — Ancienneté : quelle date d'entrée ?
 
-- ✅ **Répondu le 2026-10-05 : `hypothese`** (voir §0) ; reste posé à 🧑‍💼 **Jeff** (Q-JEF-10)
+- ✅ **Répondue le 2026-10-05 : « Garder l'hypothèse, la dire en soutenance »** (voir §0) ; reste posé à 🧑‍💼 **Jeff** (Q-JEF-10)
 - **Constat** : `hire_date` = date de création du compte (`02:24-26`).
   - Le sujet : « Dépend de la date d'entrée du chasseur, donnée RH » (`RCR:762`).
 - 💡 **Recommandation** : garder l'hypothèse, la dire en soutenance, et demander à Jeff si une vraie date existe.
 
 #### Q-REM-17 — Statuts du paiement : quelles dates garder ?
 
-- ✅ **Répondu le 2026-10-05 : `colonnes`** (voir §0) · 👥 **Groupe**
-- **Constat** : `F07:10-34` décrit 5 étapes. La base n'a que `created_at` et `paid_at` (`01:730`).
+- ✅ **Répondue le 2026-10-05 : « 4 colonnes de date + invoice_reference »** (voir §0) · 👥 **Groupe**
+- **Constat** : `F07:10-34` décrit 5 étapes. La base n'a que `created_at` et `paid_at` (`01:724`, `01:734`).
   - Absents : date d'annonce, facture (fichier, numéro), date de vérification, date programmée.
 - **Options** :
   - A — une colonne de date par étape, plus `invoice_reference` ;
@@ -409,9 +498,9 @@ Voici ce qui ne colle pas avec la base.
 
 #### Q-REM-18 — Ancienneté et performance : clé du barème, ou majoration du taux ? (X01)
 
-- ✅ **Répondu le 2026-10-05 : `acter`** (voir §0) — avant : 🔵 appliqué, pas acté · 👥 **Groupe**
+- ✅ **Répondue le 2026-10-05 : « Acter B dans un ADR maintenant »** (voir §0) — avant : 🔵 appliqué, pas acté · 👥 **Groupe**
 - **Constat** :
-  - le schéma et le code **majorent le taux** (option B) : `payment.seniority_rate`, `performance_rate` (`01:754-755`) ;
+  - le schéma et le code **majorent le taux** (option B) : `payment.seniority_rate`, `performance_rate` (`01:758-759`) ;
   - `F10:201` le confirme ;
   - `09-dec:303-324` : « Il suffit de l'acter, dans un ADR. »
 - 💡 **Recommandation : acter B dans un ADR, maintenant.**
@@ -420,11 +509,11 @@ Voici ce qui ne colle pas avec la base.
 
 #### Q-REM-19 — Borner le taux final entre 20 et 60 % en base (R21) ?
 
-- ✅ **Répondu le 2026-10-05 : `oui`**, contre ma recommandation ci-dessous (voir §0 : tension avec Q-REM-05) · 👥 **Groupe**
-- **Constat** : `01:743-750` propose `CHECK (final_rate BETWEEN 0.20 AND 0.60)`.
-  `01:131` range R21 parmi les décisions ouvertes.
+- ✅ **Répondue le 2026-10-05 : « Activer le CHECK 0,20-0,60 »**, contre ma recommandation ci-dessous (voir §0 : tension avec Q-REM-05) · 👥 **Groupe**
+- **Constat** : `01:747-754` propose `CHECK (final_rate BETWEEN 0.20 AND 0.60)`.
+  `01:134-137` range R21 parmi les décisions ouvertes.
 - 💡 **Recommandation : ne pas activer R21.**
-  - Le **bornage** est une règle (`F10:201` ; `01:749-750` : « la règle de bornage, elle, est bien métier »).
+  - Le **bornage** est une règle (`F10:201` ; `01:753-754` : « la règle de bornage, elle, est bien métier »).
   - Mais **20 % et 60 %** sont des **paramètres** proposés (`F10:3-5`) : ils ne vont pas dans un `CHECK`.
   - Les graver dans un `CHECK` refait l'erreur relevée en Q-REM-05.
   - Le code borne déjà le taux (`rem.py:264`).
@@ -456,7 +545,7 @@ validés par Jeff le … ». Elles sont toutes listées en **partie 2**.
 **Règles fixées par le sujet — à confirmer, pas à choisir** :
 
 - ✅ **Montant arrondi au centime, au demi supérieur** : c'est une `Règle:` de
-  `F10:253` (« arrondi au centime au demi supérieur »). `01:721` dit aussi « règle officielle ».
+  `F10:253` (« arrondi au centime au demi supérieur »). `01:725` dit aussi « règle officielle ».
 - ✅ **Honoraires HT** : `RCR:131` l'affirme, sans la mention « (paramètre) ».
   Ce n'est pas une proposition ; une simple confirmation suffit.
 - ⚠️ **Palier** : le sujet **se contredit**.
@@ -483,9 +572,9 @@ Arguments pour les points qui méritent plus qu'un « oui » :
 
 #### Q-MAN-01 — Activer la règle « exactement 6 mois » (U05)
 
-- 🟡 **Ouvert** (SQL prêt, commenté) · 👥 **Groupe**
-- **Constat** : le `CHECK` actuel n'impose que l'ordre des dates (`01:409-410`).
-  Un mandat « peut durer 10 ans ou 1 jour » (`01:431-443`).
+- ✅ **Répondue le 2026-10-05 : « Activer »** · 👥 **Groupe**
+- **Constat** : le `CHECK` actuel n'impose que l'ordre des dates (`01:412-414`).
+  Un mandat « peut durer 10 ans ou 1 jour » (`01:435-445`).
 - 💡 **Recommandation : activer.**
   - « 6 mois renouvelable » est une **règle** du sujet, pas un paramètre (`RCR:57`).
   - ⚠️ Cas de fin de mois : 31/08 + 6 mois. PostgreSQL rend le **28 ou 29/02**.
@@ -493,11 +582,11 @@ Arguments pour les points qui méritent plus qu'un « oui » :
 
 #### Q-MAN-02 — Activer l'exclusivité (U02) — et le cas du mandat annulé (D7)
 
-- 🟡 **Ouvert** · 👥 **Groupe** pour le trigger, 🧑‍💼 **Jeff** pour D7 (Q-JEF-06)
-- **Constat** : trigger écrit et commenté (`01:446-496`). D7 :
-  « un mandat 'canceled' libère-t-il le client tout de suite ? » (`01:463-465`).
+- ✅ **Répondue le 2026-10-05 : « Corriger, activer, l'annulation libère tout de suite »** · 👥 **Groupe** pour le trigger, 🧑‍💼 **Jeff** pour D7 (Q-JEF-06)
+- **Constat** : trigger écrit et commenté (`01:450-499`). D7 :
+  « un mandat 'canceled' libère-t-il le client tout de suite ? » (`01:467-469`).
 - ❌ **Piège** : tel qu'écrit, le trigger **bloquerait le renouvellement** d'un mandat exclusif.
-  - Les plages se comparent en `'[]'` (`01:483-484`), et rien n'exclut le mandat parent (`01:477-485`).
+  - Les plages se comparent en `'[]'` (`01:487-488`), et rien n'exclut le mandat parent (`01:481-488`).
   - Un renouvellement signé à l'échéance (`F00:40`) touche la date de fin du parent : il serait refusé.
 - 💡 **Recommandation : corriger, puis activer, avec D7 = B** (l'annulation libère tout de suite).
   - D'abord exclure le parent : `m.id IS DISTINCT FROM NEW.id_mandate_parent`, ou les mandats déjà finis.
@@ -507,7 +596,7 @@ Arguments pour les points qui méritent plus qu'un « oui » :
 
 #### Q-MAN-03 — Renouvellement : combien de fois, et seulement sans vente ?
 
-- 🟡 **Ouvert** · 🧑‍💼 **Jeff** (Q-JEF-07), puis 👥 **Groupe**
+- ✅ **Répondue le 2026-10-05 : « Imposer « sans vente » dans l'API, sans limite de nombre »** · 🧑‍💼 **Jeff** (Q-JEF-07), puis 👥 **Groupe**
 - **Constat** :
   - « renouvelable si aucune vente n'a abouti » (`F00:40`) : rien ne l'impose en base (U07) ;
   - le nombre de renouvellements n'est dit nulle part ;
@@ -518,7 +607,7 @@ Arguments pour les points qui méritent plus qu'un « oui » :
 
 #### Q-MAN-04 — Après un renouvellement : quel mandat la vente vise, et d'où part le délai ?
 
-- 🟠 **Position à valider** (Sébastien) · 👥 **Groupe**
+- ✅ **Répondue le 2026-10-05 : « Valider les deux »** · 👥 **Groupe**
 - **Constat** : `md/point-etape-2026-09-21.md` Q5 : « La vente pointe vers le nouveau mandat ».
   Le délai (R08) part de la **première** signature (`09-contraintes-a-coder.md:207-210`).
 - 💡 **Recommandation : valider les deux.**
@@ -528,69 +617,107 @@ Arguments pour les points qui méritent plus qu'un « oui » :
 
 #### Q-MAN-05 — `is_client_signed` : doublon de `signature_date` ?
 
-- 🟡 **Ouvert** · 👥 **Groupe**
+- ✅ **Répondue le 2026-10-05 : « Poser un CHECK d'égalité »** · 👥 **Groupe**
 - **Constat** : aucune règle n'utilise la colonne. `02:218` insère un mandat
   avec une date de signature **et** `is_client_signed = false`.
 - 💡 **Recommandation** : la supprimer, ou poser `CHECK (is_client_signed = (signature_date IS NOT NULL))`.
   - Deux colonnes qui disent la même chose finissent par se contredire : `02:218` le montre déjà.
+- ➡️ **Suite du 2026-10-05** :
+  - 💬 Ta question : faut-il aussi la signature du chasseur ? ✅ L'idée est juste : un mandat est un contrat à deux.
+  - ⚠️ Le sujet ne parle que de la signature du **client** : `Readme.md:98` et `01_particulier_demande_et_compte.feature:35-36`. L'ajouter est un **choix à nous**, à dire en soutenance.
+  - ➡️ Posée en Q-MAN-09 : 💡 deux dates plutôt que deux cases oui/non.
+  - 📏 La ligne contradictoire existe **deux fois** : `MAND-0008` (`02:218`) et `MAND-0016` (`02:225`), annulés, `is_client_signed = false`, mais avec une date de signature.
 
 #### Q-MAN-06 — Règles qui croisent plusieurs tables (non imposées)
 
-- 🟡 **Ouvert** · 👥 **Groupe**
+- ✅ **Répondue le 2026-10-05 : « Toutes dans l'API, chacune testée »** · 👥 **Groupe**
 - **Constat**, trois TODO dans `01` :
-  - une visite peut précéder la signature du mandat (`01:635-637`) ;
-  - une vente peut tomber hors de la validité du mandat, ou sur un mandat non signé (`01:660-664`) ;
-  - « on peut aujourd'hui payer un chasseur qui n'est PAS celui du mandat » (`01:785-792`) ;
-  - un paiement peut viser un barème **pas en vigueur** à la date de l'acte (`01:787-788`),
+  - une visite peut précéder la signature du mandat (`01:639-641`) ;
+  - une vente peut tomber hors de la validité du mandat, ou sur un mandat non signé (`01:664-668`) ;
+  - « on peut aujourd'hui payer un chasseur qui n'est PAS celui du mandat » (`01:789-795`) ;
+  - un paiement peut viser un barème **pas en vigueur** à la date de l'acte (`01:791-792`),
     ou le barème **propre à un autre chasseur**.
 - 💡 **Recommandation : toutes dans l'API**, chacune avec un test d'intégration.
   - Les deux dernières sont les plus graves : c'est de l'argent versé à tort.
+- ➡️ **Suite du 2026-10-05** :
+  - 💬 Ta question : faut-il mettre à jour les schémas ?
+  - **Les tables : non.** Les règles vivent dans l'API, avec leurs tests ; aucune colonne ne change.
+  - **Trois commentaires de 01 : oui.** Ils décrivent ces règles comme « trigger ou API » : `01:639-641` (visite), `01:664-668` (vente), `01:789-795` (paiement). À annoter « contrôlé par l'API (Q-MAN-06) », dans le lot.
+  - **Les diagrammes : non.** Ces règles se rangent dans `09-contraintes-a-coder.md`, pas dans le MCD.
+  - ⚠️ À ne pas oublier dans l'API : « Un acte signé après cette date n'ouvre aucun droit, **sauf renouvellement du mandat** » (`RCR:98`). Le TODO D3 de `01:669-672` le rappelle.
 
 #### Q-MAN-07 — Annuler un mandat jamais signé : impossible
 
-- 🟡 **Ouvert** · 👥 **Groupe**
+- ✅ **Répondue le 2026-10-05 : « Autoriser 'canceled' sans date de signature »** · 👥 **Groupe**
 - **Constat** : `chk_status_signature` exige une date de signature dès que le
-  statut n'est plus `pending_signature` (`01:426-428`).
+  statut n'est plus `pending_signature` (`01:430-432`).
   - ➡️ Un mandat en attente ne peut pas passer à `canceled` sans une date **inventée**.
 - 💡 **Recommandation** : autoriser `canceled` **sans** date de signature dans ce `CHECK`.
   - Un client qui renonce avant de signer est un cas normal.
 
-#### Q-MAN-08 — Réaffecter une demande refusée par un chasseur (U27)
+#### Q-MAN-08 — Réaffecter une demande refusée : faut-il se souvenir de qui a refusé ?
 
-- 🟡 **Ouvert** · 👥 **Groupe**
-- **Constat** : « rien ne se souvient du chasseur qui a refusé : il faut un
-  historique des refus (colonne ou table) » (`09-contraintes-a-coder.md:237-246`).
-- 💡 **Recommandation** : une petite table `search_request_refusal` (demande, chasseur, date).
-  - Sinon la demande peut être réaffectée au chasseur qui l'a déjà refusée.
+- 🟡 **Ouvert** (✏️ réécrite le 2026-10-05 : cochée « Reporter », commentaire « revoir, pas répondu » ; 🆕 recommandation passée de « table » à « reporter ») · 👥 **Groupe**
+- **Constat** :
+  - Le Readme dit seulement que le chasseur « peut ne pas l'accepter » (`Readme.md:124`) ; dans son schéma, un refus mène à **Fin** (`Readme.md:140`).
+  - La réaffectation vient d'une user story du prof : la demande « **peut** être réaffectée à un autre chasseur » (`04_chasseur_prise_en_charge_demande.feature:21`). « Peut », pas « doit ».
+  - Le prof présente ses stories comme une « synthèse de travail », pas un livrable officiel (`Readme.md:50`).
+  - ⚠️ Notre contrainte C8 écrit « **doit** aller à un autre chasseur » (`09-contraintes-a-coder.md:244`) : plus fort que la story.
+  - Une demande ne garde qu'**un** chasseur (`search_request.id_hunter`, `01:282`) : à la réaffectation, celui qui a refusé est oublié.
+- **Options** :
+  - Une table search_request_refusal (demande, chasseur, date) — Une table ; l'API refuse de réaffecter à un chasseur qui a déjà dit non.
+  - Reporter — Rien maintenant ; la réaffectation attend que l'affectation soit décidée.
+- 💡 **Recommandation : reporter.**
+  - ➕ Rien à coder tant que l'affectation n'est pas décidée. Le statut 'rejected', acté avec les trois autres en Q-SCH-03, dit déjà qu'une demande a été refusée.
+  - ➖ Si on réaffecte un jour, la demande peut revenir au chasseur qui l'a refusée : à dire comme limite en soutenance.
+
+#### Q-MAN-09 — Signature du mandat : par le client seul, ou par les deux parties ?
+
+- 🟡 **Ouvert** (🆕 née le 2026-10-05 du commentaire sur Q-MAN-05) · 👥 **Groupe**
+- **Constat** :
+  - Le sujet ne parle que de la signature du client : `Readme.md:98`, `01_particulier_demande_et_compte.feature:35-36`.
+  - Aujourd'hui : une case `is_client_signed` (`01:415`) et une date `signature_date` (`01:408`) ; la date fait partir les 6 mois (Q-MAN-01).
+  - Deux mandats repris se contredisent déjà : `02:218` et `02:225` (case à non, date remplie).
+- **Options** :
+  - Deux dates : client_signed_on et hunter_signed_on — signature_date = la plus tardive des deux ; is_client_signed retiré ; un CHECK les relie.
+  - Deux cases oui/non : is_client_signed et is_hunter_signed — Une colonne ajoutée ; un CHECK : date remplie si et seulement si les deux cases sont à oui.
+  - Le client seul, comme le sujet — Q-MAN-05 tel quel : un CHECK d'égalité.
+- 💡 **Recommandation : deux dates : client_signed_on et hunter_signed_on.**
+  - ➕ On sait qui a signé et quand ; rien ne peut se contredire, un CHECK le garantit.
+  - ➖ Deux colonnes de plus ; modèle, migration 02 et API à toucher ; un ajout au sujet, à justifier à l'oral.
 
 ### D. Schéma — autres questions
 
 | Id | Question | Statut | Qui | Source |
 |---|---|---|---|---|
-| Q-SCH-01 | Valider l'assouplissement de `ck_client_address_all_or_nothing` | 🟠 | 👥 | `08-etat.md:114-117`, `02:64-66` |
-| Q-SCH-02 | N2 : la localisation sur `search_request` ou `criteria` ? | 🟡 | 👥 | `01:294-296`, `09-dec:226-248` |
-| Q-SCH-03 | D4 : statuts d'une demande de recherche | 🔵 | 👥 | `09-dec:328-347`, `01:283-285` |
-| Q-SCH-04 | D5 : état manquant d'une offre (« signée, pas envoyée ») | 🟡 | 👥 | `09-dec:351-370` |
-| Q-SCH-05 | D6 : échelle de priorité du client | 🟡 | 🧑‍💼 | `01:620-623`, ADR-027 Q9 (`md/adr-027-…:144`) |
-| Q-SCH-06 | D9 : deux scores le même jour | 🟡 | 👥 | `01:814-816`, `09-dec:411-428` |
-| Q-SCH-07 | D10 : table des rendez-vous (`U29`, `F04`) | 🟡 | 👥 | `09-dec:432-441` |
-| Q-SCH-08 | D11, D12 : pertinence (`F05`), types d'offre (`F07`) | 🟡 | 📋 | `09-dec:449-464` |
-| Q-SCH-09 | `created_at` absent de 4 tables | 🟡 | 👥 | `01:165-166` |
-| Q-SCH-10 | Renommer `is_cartet` en `is_carte_t` | 🟡 | 👥 | `01:253-256` |
-| Q-SCH-11 | Code postal non contrôlé sur `estate` | 🟡 | 👥 | `01:559-561` |
-| Q-SCH-12 | Eircode avec espace | 🟠 | 👥 | `01:56-58` |
-| Q-SCH-13 | Libellé du 2e lien « Manages » | 🟠 | 👥 | `docker/init-v2/README.md:427-431` |
-| Q-SCH-14 | Pas d'historique des changements de manager | 🔵 | 👥 | `docker/init-v2/README.md:475-477` |
-| Q-SCH-15 | Taux de tranche `>= 0` contre taux de base `> 0` | 🟡 | 👥 | `01:693`, `01:742` |
-| Q-SCH-16 | `parameters_fees` sans `valid_until > valid_from` | 🟡 | 👥 | `01:676` |
-| Q-SCH-17 | Trous entre deux périodes de paramètres | 🟡 | 👥 | `09-contraintes-a-coder.md` C2 |
+| Q-SCH-01 | Valider l'assouplissement de `ck_client_address_all_or_nothing` | ✅ | 👥 | `08-etat.md:119-122`, `02:64-66` |
+| Q-SCH-02 | N2 : la localisation sur `search_request` ou `criteria` ? | ✅ | 👥 | `01:298-300`, `09-dec:226-248` |
+| Q-SCH-03 | D4 : statuts d'une demande de recherche | ✅ | 👥 | `09-dec:328-347`, `01:287-288` |
+| Q-SCH-04 | D5 : état manquant d'une offre (« signée, pas envoyée ») | ✅ | 👥 | `09-dec:351-370` |
+| Q-SCH-05 | D6 : échelle de priorité du client | 🟡 | 🧑‍💼 | `01:624-627`, ADR-027 Q9 (`md/adr-027-…:144`) |
+| Q-SCH-06 | D9 : deux scores le même jour | ✅ | 👥 | `01:817-820`, `09-dec:411-428` |
+| Q-SCH-07 | D10 : table des rendez-vous (`U29`, `F04`) | ✅ | 👥 | `09-dec:432-441` |
+| Q-SCH-08 | D11, D12 : pertinence (`F05`), types d'offre (`F07`) | ✅ | 📋 | `09-dec:449-464` |
+| Q-SCH-09 | `created_at` absent de 4 tables | ✅ | 👥 | `01:169-170` |
+| Q-SCH-10 | Renommer `is_cartet` en `is_carte_t` | ✅ | 👥 | `01:257-260` |
+| Q-SCH-11 | Code postal non contrôlé sur `estate` | ✅ | 👥 | `01:563-565` |
+| Q-SCH-12 | Eircode avec espace | ⚠️ à confirmer | 👥 | `01:55-59` |
+| Q-SCH-13 | Libellé du 2e lien « Manages » | ✅ | 👥 | `docker/init-v2/README.md:429-433` |
+| Q-SCH-14 | Pas d'historique des changements de manager | ✅ | 👥 | `docker/init-v2/README.md:477-479` |
+| Q-SCH-15 | Taux de tranche `>= 0` contre taux de base `> 0` | ✅ | 👥 | `01:697`, `01:746` |
+| Q-SCH-16 | `parameters_fees` sans `valid_until > valid_from` | ⏭️ sans objet | 👥 | `01:676` |
+| Q-SCH-17 | Trous entre deux périodes de paramètres | ✅ | 👥 | `09-contraintes-a-coder.md` C2 |
+| Q-SCH-18 | 🆕 Code postal des 18 clients repris, avec le tout-ou-rien gardé | 🟡 | 👥 | `02:148-165`, `01:186`, `01:210` |
+
+✅ **Réponses du 2026-10-05** : voir la partie 0. Les recommandations ci-dessous
+datent d'avant ; **la réponse fait foi**.
 
 💡 **Recommandations** :
 
 - **Q-SCH-01** : **valider**, et déplacer l'`ALTER` dans `01`.
   - Sinon 18 clients perdent leur ville.
 - **Q-SCH-02** : garder **`criteria`**, mais **écrire un ADR qui remplace ADR-009**.
-  - ⚠️ ADR-009 est **accepté** et place la localisation sur `search_request` (`01:294`).
+  - ⚠️ ADR-009 est **accepté** et place la localisation sur `search_request` (`01:298`).
   - Un ADR accepté fait foi (`09-dec:34-35`) : le schéma actuel le contredit.
   - `criteria` est versionné : la localisation change avec les critères.
 - **Q-SCH-03** : **acter** les 4 statuts déjà en base.
@@ -616,9 +743,11 @@ Arguments pour les points qui méritent plus qu'un « oui » :
   - A — resserrer la tranche à `> 0` ;
   - B — assouplir `payment.base_rate` à `>= 0`, dans l'esprit de Q-REM-05.
   - 💡 **A** : avec le plancher, une tranche à 0 % paierait quand même 20 % (`rem.py:264`). Un taux 0 n'a donc pas de sens.
-- **Q-SCH-16** : **ajouter**, comme sur `commission_scale` (`01:701`).
+- **Q-SCH-16** : **ajouter**, comme sur `commission_scale` (`01:704-705`).
 - **Q-SCH-17** : contrôle **dans l'API**, à l'écriture.
   - La base garantit « au plus une » ligne, pas « exactement une ».
+- **Q-SCH-18** (🆕) : **un code factice `00000`**, documenté.
+  - Le tout-ou-rien reste entier, comme Q-SCH-01 le veut ; même logique que les téléphones `0000000000` (Q-MIG-07).
 
 ### E. Migration — hypothèses à confirmer
 
@@ -628,7 +757,7 @@ Arguments pour les points qui méritent plus qu'un « oui » :
 | Q-MIG-02 | 🔁 **Doublon de Q-REM-16** (2026-10-05) — `hire_date` = date de création du compte | 🧑‍💼 | `02:24-26` |
 | Q-MIG-03 | `search_request.status = 'confirmed'` | 👥 | `docker/init-v2/README.md:161-174` |
 | Q-MIG-04 | Manager fictif (user 25) | 👥 | `docker/init-v2/README.md:176-192` |
-| Q-MIG-05 | `energetic_score` retiré | 👥 | `08-etat.md:118-121` |
+| Q-MIG-05 | `energetic_score` retiré | 👥 | `08-etat.md:123-126` |
 | Q-MIG-06 | Remplir `energy_class` depuis `dpe` | 👥 | `docker/init-v2/README.md:90-91` |
 | Q-MIG-07 | Téléphones `0000000000` (3 clients + le manager) | 👥 | `02:143-145` |
 | Q-MIG-08 | Secteurs non migrés : `criteria.town` vide 17 fois sur 17 | 👥 | `02:70-72` |
@@ -644,17 +773,19 @@ Arguments pour les points qui méritent plus qu'un « oui » :
   - 3,25 % du prix donnerait plus que les honoraires (`RCR`, anomalie A2).
   - ⚠️ Le README du schéma l'attribue au **groupe**. Je le mets chez Jeff : c'est le sens d'une donnée du client.
 - **Q-MIG-02** : voir Q-REM-16.
-- **Q-MIG-03** : **`'launched'`** quand un mandat existe.
-  - L'`UPDATE` est prêt, et c'est plus juste.
+- **Q-MIG-03** : **`'launched'`** pour les 17 demandes : toutes ont un mandat.
+  - L'`UPDATE` est prêt (`02:241-246`), et c'est plus juste.
+  - 🆕 2026-10-05 : une voie « au mandat signé » (15 sur 17) ; elle dépend des 2 mandats contradictoires (Q-MAN-05, Q-MAN-09).
 - **Q-MIG-04** : le remplacer dans le seed, **puis le supprimer**.
 - **Q-MIG-05** : **acter** : la colonne était vide partout.
 - **Q-MIG-06** : **oui**, dans `03` : donnée gratuite.
 - **Q-MIG-07** : **garder**, et le signaler à l'audit.
-  - La colonne est `NOT NULL` (`01:180`, `01:224`) ; le seed les remplace.
+  - La colonne est `NOT NULL` (`01:184`, `01:228`, `01:246`). ⚠️ « le seed les remplace » contredit `md/point-etape-2026-09-21.md:233` (« Un seed ne doit pas les cacher ») : au groupe de dire lequel prime.
 - **Q-MIG-08** : **migrer** les secteurs.
   - Sinon aucun critère n'a de lieu.
 - **Q-MIG-09** : **garder**, et le signaler à l'audit.
-  - On n'invente pas un minimum.
+  - ⚠️ Le minimum égal au maximum vient de **notre** migration (`02:192-208`), pas de la source.
+  - 🆕 2026-10-05 : une voie « laisser le minimum vide » (NULL), que la base et l'API acceptent (`01:318`).
 - **Q-MIG-10** : garder comme **constat d'audit** ; demander à Jeff s'ils ont été renouvelés.
 - **Q-MIG-11** : sans importance (auth hors périmètre) ; le dire dans le seed.
 - **Q-MIG-12** : demander si le vrai client est **Nina Girard** (user 19).
@@ -688,7 +819,7 @@ fait quoi** dans le métier.
 | Q-ACC-17 | Mot de passe : 12 caractères minimum ? | 👥 | **Garder 12** : déjà codé et testé |
 | Q-ACC-18 | Garder `user.password` ? | 👥 | **Garder** : prêt si l'auth revient |
 | Q-ACC-19 | Clé d'API proposée par Jeff, « optionnelle » | 👥 | **Ne pas faire** ; la citer comme piste |
-| Q-ACC-20 | Réécrire ADR-025 sans ENF-03 | 👥 | **Oui** : ENF-03 n'est qu'un exemple |
+| Q-ACC-20 | Réécrire ADR-025 sans ENF-03 | 👥 | **Oui** : ENF-03 vient d'un exemple (`CAHIER-DES-CHARGES-TECHNIQUE.md:74`) ; ⚠️ mais `RCR:296` et `RCR:763` le reprennent comme exigence. ⚠️ ADR-025 est déjà « accepté » sur Confluence (`md/a-faire-a-la-main-2026-09-21.md:189-190`) : ne pas le réécrire, mais écrire un nouvel ADR qui l'amende ; l'ancien ne s'efface pas (`JOURNAL-DE-DECISIONS.md:72`) |
 | Q-ACC-21 | Durée de conservation avant anonymisation | 🧑‍💼 | Voir plus bas |
 
 Sources :
@@ -730,7 +861,8 @@ Sources :
 - **Q-INF-01** : d'abord décider **s'il faut** un stockage objet.
   - Rien ne lit d'images aujourd'hui.
   - Sinon, retirer le service, avec l'accord du responsable de `docker-compose.yml`.
-- **Q-INF-02** : après Q-REM-15, Q-REM-06, Q-PAR-02, Q-MAN-04 et Q-INF-03.
+- **Q-INF-02** : il ne reste que **Q-INF-03** (les 4 autres sont répondues ; Q-PAR-02 attend Jeff, Q-JEF-03).
+  - Et après le lot de migration, sinon le seed serait à refaire.
 - **Q-INF-03** : **oui**.
   - Les 2 556 biens sont hors de Montpellier, et plafonnent à 406 042 €.
 - **Q-INF-04** : le sujet les exige ; commencer par le **parcours de paiement**.
@@ -740,10 +872,12 @@ Sources :
 - **Q-INF-08** : ENF-01 se mesure avec le générateur (Q-INF-07) ; ENF-03 tombe avec l'auth (ADR-026).
 - **Q-PRO-01** : **en nommer un**.
   - Il tranche les questions « groupe » et tient le journal d'ADR.
-- **Q-PRO-02** : une réunion de 30 min : ces réponses bloquent le seed.
+- **Q-PRO-02** : 3 réponses sur 5 confirmées par d'autres cartes (Q1 = Q-REM-15, Q2 = Q-REM-06, Q5 = Q-MAN-04).
+  - Restent : Q3, en base mais pas actée (ADR-024 « proposé »), et Q4 = Q-INF-03.
 - **Q-PRO-03** : tout passer **en une séance**.
   - À accepter : 016, 017, 019 à 024, 026, 027.
   - À écrire : l'ADR de la décision D3 (`09-dec:178`), et celui de X01 (Q-REM-18).
+  - 🆕 2026-10-05 : plus les ADR L à T du pense-bête (partie 0).
   - Un ADR proposé ne fait pas foi (`09-dec:34-38`).
 - **Q-PRO-04** : le **journal Confluence** fait foi ; corriger le CDC.
 - **Q-PRO-05** : **oui**, vite : il qualifie de « bloquant » ce qui existe.
@@ -874,22 +1008,22 @@ plus Q-JEF-20.
 ### ❌ Défauts dans le code et le schéma
 
 - ⚠️ **`mandate_model.py:23`** : `ends_at: date` est déclaré **obligatoire**,
-  alors que la base le veut **vide** pour un mandat `pending_signature` (`01:409`, `01:426-428`).
+  alors que la base le veut **vide** pour un mandat `pending_signature` (`01:412-414`, `01:430-432`).
   - ✅ **Mesuré le 2026-10-02**, sur `fil_rouge_test`, transaction annulée :
     `POST /mandates` sans `ends_at` → **`201`**, `GET` → **`200`**, `ends_at: null`.
   - ➡️ **Pas de bug** : les modèles de table ne valident pas l'entrée (`API/README.md:216-218`).
   - Défaut **de documentation** seulement : l'annotation ment, et la doc Swagger peut afficher le champ comme obligatoire.
     Passer à `Optional[date] = None`.
 - **`sale_model.py`** et **`payment_model.py`** ne déclarent pas `unique=True`
-  sur `id_mandate` et `id_sale`, alors que la base le fait (`01:655`, `01:756`).
+  sur `id_mandate` et `id_sale`, alors que la base le fait (`01:659`, `01:760`).
 - **`sale_model.py:7-8`** : dit qu'une vente `client_alone` est « hors mandat ».
   Faux : `id_mandate` est `NOT NULL`.
 - **`created_at`** : les modèles produisent une date **avec** fuseau ; la
   colonne est `TIMESTAMP` **sans** fuseau. La valeur stockée peut être décalée.
-- **Paramètres gravés dans des `CHECK`** (`01:754-755`) : contraire à « jamais en dur » (`RCR:42-47`).
-- **`amount_max` contrôlé deux fois** (`01:692` et `01:698-699`).
+- **Paramètres gravés dans des `CHECK`** (`01:758-759`) : contraire à « jamais en dur » (`RCR:42-47`).
+- **`amount_max` contrôlé deux fois** (`01:696` et `01:702-703`).
 - **Commentaires périmés** :
-  - `01:900` dit que `02` et `03` visent « l'ANCIEN schéma en K€ » ;
+  - `01:904` dit que `02` et `03` visent « l'ANCIEN schéma en K€ » ;
   - `02:189` parle encore de « K€ (colonne cible NUMERIC(6,1)) » ;
   - `02:235-236` dit que les clés de `client` et `hunter` sont `id_user` ;
   - `02:29` renvoie au « README point 5 » au lieu de §3.5.
@@ -897,18 +1031,20 @@ plus Q-JEF-20.
 ### ⚠️ Incohérences entre documents
 
 - **« D2 » veut dire deux choses** dans le même fichier :
-  - `01:130` et `01:752` : D2 = ancienneté (numérotation du groupe) ;
-  - `01:722` : D2 = « R = 0 » (numérotation du sujet, `RCR:322`).
+  - `01:134` et `01:756` : D2 = ancienneté (numérotation du groupe) ;
+  - `01:726` : D2 = « R = 0 » (numérotation du sujet, `RCR:322`).
   - ➡️ Le groupe et le sujet numérotent tous deux de **D1 à D9**. Il faut un préfixe.
-- **D10 mal étiqueté** : `01:626` l'attribue aux visites ; c'est la table des rendez-vous (`09-dec:432-441`).
-- **D9 décrit deux fois différemment** : `01:814-816` dit « un jour d'écart », `09-dec:413-422` dit « deux jours ».
-- **D3 brouillé** : `01:665-668` dit qu'un acte tardif « peut ouvrir droit » ; la décision est « refus sauf renouvellement ».
+- **D10 mal étiqueté** : `01:630` l'attribue aux visites ; c'est la table des rendez-vous (`09-dec:432-441`), que Q-SCH-07 écarte (hors MVP).
+- **D9 décrit deux fois différemment** : `01:817-820` dit « un jour d'écart », `09-dec:413-422` dit « deux jours ».
+- **D3 brouillé** : `01:669-672` dit qu'un acte tardif « peut ouvrir droit » ; la décision est « refus sauf renouvellement ».
 - **D1 pas mis à jour** : `09-dec:299` dit encore « Solution B » (K€), avec sa justification « doit rester indicatif », abandonnée.
 - **ADR-025** : « accepté » sur Confluence, « proposé » dans le dépôt (`md/adr-025-…:17`, `08-etat.md:152`).
+- **N2 dit encore « ouvert »** alors que Q-SCH-02 l'a tranché le 2026-10-05 : `01:298-300`, `09-dec:248` (vide),
+  `docker/init-v2/README.md:311`.
 - **Numéro d'ADR de la localisation** : ADR-010 dans `md/notes_contraintes_localisation_criteria.md:90`,
-  ADR-009 dans `01:131` et `01:294`.
+  ADR-009 dans `01:136` et `01:298`.
 - **Comptes faux dans `08-etat.md` lui-même** : « 224 colonnes » (`08-etat.md:20`, `:133`)
-  contre « 226 colonnes » (`08-etat.md:158`, et `01:891`).
+  contre « 226 colonnes » (`08-etat.md:158`, et `01:895`).
 - **`rapport-tests.md:253`** : « 17 des 18 ressources » à tester, alors que 3 le sont : il en reste **15**.
 - **X01 présenté comme bloquant** (`08-etat.md:190`, `API/README.md:147`) : voir Q-REM-18.
 - **`CLAUDE.md` et `08-etat.md`** disent que trois livrables sont vides : `4-application` contient le rapport de tests.
@@ -937,7 +1073,7 @@ plus Q-JEF-20.
 - **Trop d'ADR « proposés »** : une dizaine. Un ADR proposé ne fait pas foi (`09-dec:34-38`).
   En soutenance, « appliqué mais pas validé » est difficile à défendre.
 - **La base ne protège pas l'argent** : on peut payer le mauvais chasseur
-  (`01:785-792`), avec un montant faux (Q-REM-11), sur des honoraires modifiables (Q-REM-12).
+  (`01:789-795`) ; ➡️ contrôlé dans l'API depuis Q-MAN-06 (2026-10-05), avec un montant faux (Q-REM-11), sur des honoraires modifiables (Q-REM-12).
 - **Aucun test fonctionnel**, alors que le sujet en exige (`Readme.md:256`).
 - **La calculette n'est pas branchée** : elle ne lit pas le barème et n'écrit pas le paiement.
 - **Les 2 556 biens ne servent pas la démo** : ils sont hors de Montpellier.
