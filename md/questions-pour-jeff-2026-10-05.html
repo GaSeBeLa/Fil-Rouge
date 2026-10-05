@@ -1,0 +1,814 @@
+<title>Questions pour Jeff</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    --fond:#f3e8d4; --carte:#faf1e2; --trait:#dcd0b7; --texte:#50433b; --doux:#6e6151;
+    --accent:#8a4b12; --ok:#2c6e48; --ok-fond:#e4f0e2; --warn:#8a5a0c; --warn-fond:#fbe9cc;
+    --ko:#9c3431; --ko-fond:#f8e0da; --q-fond:#fbe4d2;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--fond); color:var(--texte); font-family:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif; font-size:18px; letter-spacing:.05em; line-height:1.7; padding-inline:16px; text-align:left; }
+  .page { max-width:46rem; margin:0 auto; padding-block:2.5rem 4rem; display:flex; flex-direction:column; gap:2.6rem; }
+  h1,h2,h3 { margin:0; text-wrap:balance; line-height:1.25; }
+  h1 { font-size:2.1rem; }
+  h2 { font-size:1.35rem; color:var(--accent); }
+  h3 { font-size:1.08rem; }
+  p { margin:0; }
+  ul { margin:0; padding-left:1.2rem; display:flex; flex-direction:column; gap:.35rem; }
+  .mono, .fil time, td.n, textarea { letter-spacing:normal; }
+  .mono { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:max(.85em, 15px); font-variant-numeric:tabular-nums; }
+  section { display:flex; flex-direction:column; gap:1rem; }
+  .sous { color:var(--doux); }
+  .jauge { align-self:flex-start; display:inline-flex; gap:.5rem; align-items:center; padding:.35rem .8rem; border-radius:6px; background:var(--ok-fond); color:var(--ok); font-weight:700; }
+  .jauge.moyen { background:var(--warn-fond); color:var(--warn); }
+  .jauge.ko { background:var(--ko-fond); color:var(--ko); }
+  .chiffres { display:grid; grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr)); gap:.75rem; }
+  .chiffre { background:var(--carte); border:1px solid var(--trait); border-radius:8px; padding:.8rem 1rem; display:flex; flex-direction:column; gap:.1rem; }
+  .chiffre b { font-size:1.6rem; font-variant-numeric:tabular-nums; }
+  .chiffre span { color:var(--doux); font-size:1rem; line-height:1.4; }
+  .decision { background:var(--carte); border:1px solid var(--trait); border-radius:8px; padding:1rem 1.1rem; display:flex; flex-direction:column; gap:.6rem; }
+  .decision .tete { display:flex; flex-wrap:wrap; gap:.5rem; align-items:baseline; justify-content:space-between; }
+  .puce { font-size:.9375rem; font-weight:700; padding:.1rem .5rem; border-radius:4px; white-space:nowrap; }
+  .puce.faible { background:var(--ok-fond); color:var(--ok); }
+  .puce.moyen { background:var(--warn-fond); color:var(--warn); }
+  .grille { display:grid; grid-template-columns:9rem 1fr; gap:.25rem .9rem; margin:0; }
+  .grille dt { color:var(--doux); font-size:1rem; }
+  .grille dd { margin:0; }
+  .choix { display:flex; flex-wrap:wrap; gap:.5rem; padding-top:.3rem; border-top:1px dashed var(--trait); }
+  .choix label { display:inline-flex; align-items:center; gap:.4rem; padding:.3rem .75rem; border:1px solid var(--trait); border-radius:999px; cursor:pointer; font-size:.95rem; background:var(--carte); }
+  .choix.options { flex-direction:column; }
+  .choix.options label { border-radius:8px; align-items:flex-start; }
+  .choix.options label span b { display:block; }
+  .choix input { accent-color:var(--accent); margin-top:.35rem; }
+  .choix label:has(input:checked) { border-color:var(--accent); background:var(--q-fond); }
+  .choix label:focus-within { outline:2px solid var(--accent); outline-offset:2px; }
+  .question { background:var(--q-fond); border-radius:8px; padding:1rem 1.1rem; display:flex; flex-direction:column; gap:.6rem; }
+  .alerte { background:var(--warn-fond); border-radius:8px; padding:1rem 1.1rem; display:flex; flex-direction:column; gap:.5rem; }
+  .erreur { background:var(--ko-fond); border-radius:8px; padding:1rem 1.1rem; display:flex; flex-direction:column; gap:.5rem; }
+  .fil { list-style:none; padding:0; gap:0; }
+  .fil li { display:grid; grid-template-columns:3.6rem 1fr; gap:.8rem; padding:.55rem 0; border-top:1px solid var(--trait); }
+  .fil time { font-family:"IBM Plex Mono",monospace; color:var(--doux); font-size:.9375rem; padding-top:.15rem; }
+  .tableau { overflow-x:auto; }
+  table { border-collapse:collapse; width:100%; font-size:.95rem; }
+  th { text-align:left; color:var(--doux); font-weight:700; font-size:.9375rem; padding:.4rem .7rem .4rem 0; border-bottom:2px solid var(--trait); }
+  td { padding:.6rem .7rem .6rem 0; border-bottom:1px solid var(--trait); vertical-align:top; }
+  td.n { font-family:"IBM Plex Mono",monospace; white-space:nowrap; }
+  a { color:var(--accent); }
+  button { font:inherit; font-weight:700; color:var(--carte); background:var(--accent); border:0; border-radius:6px; padding:.6rem 1.1rem; cursor:pointer; }
+  button:focus-visible { outline:2px solid var(--texte); outline-offset:2px; }
+  textarea { width:100%; min-height:8rem; font-family:"IBM Plex Mono",monospace; font-size:.9375rem; background:var(--carte); color:var(--texte); border:1px solid var(--trait); border-radius:6px; padding:.6rem; }
+  .ligne { display:flex; flex-wrap:wrap; gap:.8rem; align-items:center; }
+  .note summary { display:inline-block; list-style:none; cursor:pointer; color:var(--accent); font-weight:700; font-size:.95rem; padding:.2rem .7rem; border:1px dashed var(--trait); border-radius:6px; }
+  .note summary::-webkit-details-marker { display:none; }
+  .note summary:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .note textarea { display:block; margin-top:.5rem; min-height:4.5rem; font-family:inherit; font-size:.95rem; line-height:1.5; }
+  .clair { background:var(--carte); border:1px solid var(--trait); border-radius:8px; padding:1rem 1.1rem; display:flex; flex-direction:column; gap:.9rem; }
+  .grille dt.net { color:var(--texte); font-weight:700; }
+  .grille dt.plus { color:var(--ok); font-weight:700; }
+  .grille dt.moins { color:var(--ko); font-weight:700; }
+  .technique { border-top:1px dashed var(--trait); padding-top:.5rem; }
+  .technique summary { cursor:pointer; color:var(--doux); font-weight:700; font-size:.95rem; }
+  .technique summary:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .technique > .grille, .technique > p { margin-top:.6rem; }
+  .effet { display:flex; flex-direction:column; gap:.15rem; }
+  @media (max-width:480px) { .grille { grid-template-columns:1fr; } .grille dt { margin-top:.4rem; } }
+  .puce.ko { background:var(--ko-fond); color:var(--ko); }
+  .puce.doc { background:var(--carte); color:var(--doux); border:1px solid var(--trait); }
+  .question .tete { display:flex; flex-wrap:wrap; gap:.5rem; align-items:baseline; justify-content:space-between; }
+  .question .grille { grid-template-columns:10.5rem 1fr; }
+  .grille dd { min-width:0; }
+  .grille dd ul { padding-left:1.1rem; }
+  .position { background:var(--ok-fond); border-radius:6px; padding:.6rem .9rem; }
+  .position ul { list-style:none; padding:0; }
+  nav ul { flex-direction:row; flex-wrap:wrap; gap:.4rem 1rem; list-style:none; padding:0; }
+  @media (max-width:480px) { .question .grille { grid-template-columns:1fr; } }
+</style>
+
+<div class="page" data-cle="filrouge-2026-10-05-jeff-v1">
+
+  <header style="display:flex;flex-direction:column;gap:.8rem">
+    <p class="mono sous">Fil Rouge Immobilier · 2026-10-05 · rapport à part · registre md/questions-a-trancher-2026-10-02.md, partie 2</p>
+    <h1>Questions pour Jeff</h1>
+    <span class="jauge">🟢 Ça tient, mais…</span>
+    <ul>
+      <li>✅ <b>20 questions</b> qui ne se tranchent qu'avec Jeff, ou après sa réponse. Chacune porte <b>notre position</b>, tirée de vos réponses.</li>
+      <li>🟡 Pour chaque carte : la poser, la reformuler, ou non. Plus <b>6 décisions</b> prises seul, à valider.</li>
+      <li>⚠️ <b>4 points coincent</b> encore entre vos réponses : voir « Ce qui coince ».</li>
+      <li>➡️ Après l'entretien : la réponse de Jeff dans le commentaire de chaque carte, puis copier en bas de page.</li>
+    </ul>
+    <nav aria-label="Sommaire"><ul>
+      <li><a href="#contexte">Contexte</a></li>
+      <li><a href="#decisions">Décisions</a></li>
+      <li><a href="#avant">Avant de choisir</a></li>
+      <li><a href="#j0">Les chiffres de la rémunération</a></li><li><a href="#j1">La note de performance du chasseur</a></li><li><a href="#j2">Le mandat</a></li><li><a href="#j3">Les données reprises de l'ancienne base</a></li><li><a href="#j4">Les droits, le RGPD et les barèmes</a></li><li><a href="#j5">Pour information, et une confirmation</a></li>
+      <li><a href="#apres">Après Jeff</a></li>
+      <li><a href="#coince">Ce qui coince</a></li>
+      <li><a href="#reponses-section">Réponses</a></li>
+    </ul></nav>
+  </header>
+
+  <section id="contexte">
+    <h2>Le contexte : où on en est</h2>
+    <div class="clair">
+      <p>🧰 <strong>Fil Rouge Immobilier</strong> : la base et l'API d'un service de chasse immobilière, projet de groupe.</p>
+      <p>🏗️ <strong>Le travail en cours : les questions à trancher</strong>. Son but : régler les questions ouvertes, puis modifier la base <b>en une seule fois</b>.</p>
+      <div>
+        <p>📍 <strong>Où on en est : 33 réponses données.</strong></p>
+        <ul>
+          <li>✅ <strong>D1 à D4, Q-REM-01 à 19, Q-PAR-01 à 09, Q-INF-06</strong> : répondues, le 2026-10-02 et le 2026-10-05.</li>
+          <li>➡️ <strong>Ensuite, l'entretien avec Jeff</strong> : cette page.</li>
+          <li>🗓️ <strong>Après</strong> : le lot de migration (un seul <span class="mono">docker compose down -v</span>), puis les ADR, une fois toutes les réponses reçues.</li>
+        </ul>
+      </div>
+      <div>
+        <p>❓ <strong>Pourquoi ce rapport existe</strong></p>
+        <ul>
+          <li>Demandé le 2026-10-05 : réunir à part les questions qui ne se tranchent qu'avec Jeff, ou après lui avoir parlé.</li>
+        </ul>
+      </div>
+      <p>📝 <strong>Ce que cette page vous demande</strong> : pour 20 questions, dire si on la pose ; valider 6 décisions. Le commit et le push se demandent à part, dans la conversation.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>En deux mots : c'est quoi, une question pour Jeff ?</h2>
+    <div class="clair">
+      <p>🧑‍💼 <strong>Jeff joue le client.</strong> Il dit ce que l'entreprise veut ; nous, on dit comment le faire.</p>
+      <div>
+        <p>Deux familles de questions :</p>
+        <ul>
+          <li><strong>Seul Jeff tranche</strong> : un fait de son entreprise (une date d'embauche, le sens d'une colonne), ou un choix de métier (combien touche un chasseur).</li>
+          <li><strong>On tranche après lui</strong> : un choix du groupe qui dépend de sa réponse. Exemple : où ranger une vente perdue dépend de qui touche quoi.</li>
+        </ul>
+      </div>
+      <div>
+        <p>Trois mots reviennent :</p>
+        <ul>
+          <li><strong>paramètre</strong> : un chiffre proposé par le sujet, que Jeff peut changer ;</li>
+          <li><strong>règle</strong> : ce que le métier impose, qui ne se discute pas ;</li>
+          <li><strong>notre position</strong> : ce que l'équipe propose, pour que Jeff réponde d'un mot.</li>
+        </ul>
+      </div>
+      <p>➡️ <strong>Pourquoi c'est utile</strong> : on sait quoi lui demander, et ce que chaque réponse débloque.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Votre demande, en clair</h2>
+    <div class="clair">
+      <p>💬 Oui : <b>20 questions</b> ne se tranchent qu'avec Jeff, ou après sa réponse. Elles couvrent <b>42 cartes</b> du registre ; <b>18</b> ont déjà votre réponse, à lui faire confirmer.</p>
+      <div>
+        <p>💡 <strong>Mon avis : les lui poser en une fois, notre position en face.</strong></p>
+        <ul>
+          <li>➕ On arrive avec des propositions, pas des questions ouvertes : il répond d'un mot.</li>
+          <li>➖ 20, c'est beaucoup : commencer par les <b>4 cartes 🗄️</b> (Q-JEF-01, Q-JEF-03, Q-JEF-06, Q-JEF-18), qui bloquent le lot de migration.</li>
+        </ul>
+      </div>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+        <p>Comment j'ai trié : les cartes « Qui tranche : Jeff » de la page principale ; les cartes du groupe marquées « après Jeff » ou « à confirmer avec Jeff » ; vos notes sur Q-REM-03 et Q-PAR-05. Base : la partie 2 du registre (<span class="mono">md/questions-a-trancher-2026-10-02.md</span>), 19 questions ; une ajoutée, Q-JEF-20. Les positions sont lues dans vos réponses ; une carte sans réponse montre l'option que je recommandais. Sources du sujet relues le 2026-10-05.</p>
+      </details>
+    </div>
+  </section>
+
+  <section>
+    <h2>Les chiffres</h2>
+    <div class="chiffres">
+      <div class="chiffre"><b>20</b><span>questions pour Jeff</span></div>
+      <div class="chiffre"><b>42</b><span>cartes du registre qu'elles couvrent</span></div>
+      <div class="chiffre"><b>18</b><span>de ces cartes ont votre réponse</span></div>
+      <div class="chiffre"><b>4</b><span>peuvent changer la base : à poser d'abord</span></div>
+    </div>
+    <ul class="sous" style="font-size:.95rem">
+      <li>Comptes tirés des listes qui génèrent cette page ; mêmes identifiants que le registre.</li>
+    </ul>
+  </section>
+
+  <section id="decisions">
+    <h2>Les décisions prises seul — à valider</h2>
+    <p class="sous">Des choix faits en construisant ce rapport, sans vous demander. Chaque carte dit d'abord ce que le choix veut dire, puis son bon et son moins bon côté ; le détail technique est replié en bas de la carte.</p>
+
+    <div class="decision">
+      <div class="tete"><h3>DJ1 · Q-JEF-05 reformulée avec votre choix</h3><span class="puce doc">📝 ce rapport</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>La question ne demande plus « voulez-vous une baisse ? ». Elle dit comment nous la ferions, et demande la grille.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>Jeff répond à une proposition, pas à une question ouverte.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>Si Jeff ne veut aucune baisse, la question part d'un principe qu'il refuse.</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Le problème</dt><dd>Votre réponse Q-PAR-05 (taux de transformation) et votre note : demander à Jeff comment la note baisse, et le calcul.</dd>
+        <dt>Mon choix</dt><dd>Question réécrite autour du taux de transformation et de sa grille de notes.</dd>
+        <dt>Écarté</dt><dd>L'ancien libellé, qui ignorait votre réponse.</dd>
+        <dt>Le prix</dt><dd>Aucun.</dd>
+        <dt>Défaire</dt><dd>Reprendre le libellé du registre, partie 2, version du 2026-10-02.</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="DJ1" value="garder">Je garde</label><label><input type="radio" name="DJ1" value="revoir">À revoir</label></div>
+    </div>
+    <div class="decision">
+      <div class="tete"><h3>DJ2 · Q-JEF-16 posée en deux temps</h3><span class="puce doc">📝 ce rapport</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>D'abord « en voulez-vous ? », puis « qui les crée ? ».</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>S'il n'en veut pas, la question du « qui » tombe.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>Une question de plus à l'oral.</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Le problème</dt><dd>Le Readme veut un barème « différent pour chaque chasseur » (<span class="mono">Readme.md:80</span>) : les bonus le font déjà (Q-REM-18). Le barème à son nom est un ajout du sujet (<span class="mono">RCR:193</span>).</dd>
+        <dt>Mon choix</dt><dd>Demander d'abord s'il en veut.</dd>
+        <dt>Écarté</dt><dd>Ne demander que « qui » : on supposait la réponse.</dd>
+        <dt>Le prix</dt><dd>Aucun.</dd>
+        <dt>Défaire</dt><dd>Reprendre « Qui crée un barème propre à un chasseur, et qui le valide ? ».</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="DJ2" value="garder">Je garde</label><label><input type="radio" name="DJ2" value="revoir">À revoir</label></div>
+    </div>
+    <div class="decision">
+      <div class="tete"><h3>DJ3 · Une question ajoutée : Q-JEF-20</h3><span class="puce doc">📝 ce rapport</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>Votre note sur Q-REM-03 demandait de confirmer avec Jeff ; aucune question ne le portait.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>Rien n'est oublié.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>Le sujet l'exige déjà : sa réponse ne devrait rien changer.</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Le problème</dt><dd>« à documenter et à confirmer avec Jeff » (votre note sur Q-REM-03).</dd>
+        <dt>Mon choix</dt><dd>Q-JEF-20, posée comme une confirmation.</dd>
+        <dt>Écarté</dt><dd>La fondre dans Q-JEF-01 : un autre sujet.</dd>
+        <dt>Le prix</dt><dd>Une question de plus.</dd>
+        <dt>Défaire</dt><dd>Cocher « Ne pas la poser ».</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="DJ3" value="garder">Je garde</label><label><input type="radio" name="DJ3" value="revoir">À revoir</label></div>
+    </div>
+    <div class="decision">
+      <div class="tete"><h3>DJ4 · Les arrondis ajoutés à Q-JEF-01</h3><span class="puce doc">📝 ce rapport</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>La liste des chiffres à valider oubliait les arrondis, qui sont aussi une proposition du sujet.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>La liste est complète.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>Une ligne de plus.</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Le problème</dt><dd>Q-JEF-01 listait Q-PAR-01, 04, 06, 07, 08, 10 et 13. Q-PAR-11 manquait : arrondis de la note et du taux (<span class="mono">RCR:223-229</span>).</dd>
+        <dt>Mon choix</dt><dd>L'ajouter à la liste.</dd>
+        <dt>Écarté</dt><dd>En faire une question à part.</dd>
+        <dt>Le prix</dt><dd>Aucun.</dd>
+        <dt>Défaire</dt><dd>Retirer la ligne « Arrondis ».</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="DJ4" value="garder">Je garde</label><label><input type="radio" name="DJ4" value="revoir">À revoir</label></div>
+    </div>
+    <div class="decision">
+      <div class="tete"><h3>DJ5 · La partie 2 de la page principale renvoie ici</h3><span class="puce doc">📝 ce rapport</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>Les questions pour Jeff ne se cochent plus qu'ici.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>Un seul endroit où répondre : pas deux réponses qui divergent.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>Deux pages à ouvrir.</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Le problème</dt><dd>Deux pages avec les mêmes questions donnent deux réponses possibles.</dd>
+        <dt>Mon choix</dt><dd>Page principale : la partie 2 devient un lien ; chaque carte qui dépend de Jeff le dit.</dd>
+        <dt>Écarté</dt><dd>Tout déplacer ici : vous avez déjà répondu sur la page principale.</dd>
+        <dt>Le prix</dt><dd>Aucun.</dd>
+        <dt>Défaire</dt><dd>Régénérer la page principale sans le lien.</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="DJ5" value="garder">Je garde</label><label><input type="radio" name="DJ5" value="revoir">À revoir</label></div>
+    </div>
+    <div class="decision">
+      <div class="tete"><h3>DJ6 · Les cases préparent ; le commentaire garde la réponse de Jeff</h3><span class="puce doc">📝 ce rapport</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>Les cases disent si on pose la question. La réponse de Jeff s'écrit dans le commentaire de la carte.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>Une seule page, avant et après l'entretien.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>La réponse de Jeff est en texte libre, pas en cases.</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Le problème</dt><dd>Il faut noter deux choses : avant, quoi poser ; après, ce qu'il répond.</dd>
+        <dt>Mon choix</dt><dd>Les cases pour avant, le commentaire pour après.</dd>
+        <dt>Écarté</dt><dd>Deux jeux de cases par carte : illisible.</dd>
+        <dt>Le prix</dt><dd>Aucun.</dd>
+        <dt>Défaire</dt><dd>Une version 2 avec des cases « réponse de Jeff ».</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="DJ6" value="garder">Je garde</label><label><input type="radio" name="DJ6" value="revoir">À revoir</label></div>
+    </div>
+  </section>
+
+  <section id="avant">
+    <h2>Avant de choisir</h2>
+    <p class="sous">Chaque carte a les trois mêmes options. Voici ce que chacune change.</p>
+    <div class="tableau"><table>
+      <thead><tr><th>Option</th><th>Ce que ça change</th></tr></thead>
+      <tbody>
+        <tr><td><b>✅ La poser telle quelle</b> (recommandé)</td><td>Elle part dans la liste pour Jeff, avec notre position en face.</td></tr>
+        <tr><td><b>✏️ La reformuler</b></td><td>Dites comment dans le commentaire de la carte ; je la réécris avant l'entretien.</td></tr>
+        <tr><td><b>⏭️ Ne pas la poser</b></td><td>Le groupe tranche seul, ou la question tombe. Si elle touche une règle, un ADR le dira.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="alerte">
+      <h3>⚠️ D'abord les 4 cartes 🗄️</h3>
+      <ul>
+        <li>Q-JEF-01, Q-JEF-03, Q-JEF-06, Q-JEF-18 : leur réponse peut changer la base.</li>
+        <li>➡️ Le lot de migration les attend : <b>un seul</b> <span class="mono">docker compose down -v</span> pour tous.</li>
+      </ul>
+    </div>
+    <div class="clair">
+      <p>📝 <strong>Après l'entretien</strong> : notez ce que Jeff a dit dans le commentaire de chaque carte (« + Ajouter un commentaire »). Copiez vos réponses en bas de page, et collez-les dans la conversation : je reporte tout dans le registre.</p>
+    </div>
+  </section>
+
+  <section id="j0">
+    <h2>Les choix à trancher · Les chiffres de la rémunération</h2>
+    <p class="sous">Tous ces chiffres sont des propositions du sujet, « à valider avec le client » (<span class="mono">RCR:59</span>). Vous les avez gardés : il reste à faire dire oui à Jeff.</p>
+    <div class="question" id="Q-JEF-01">
+      <div class="tete"><h3>🧑‍💼 Q-JEF-01 · Validez-vous les chiffres proposés par le sujet ?</h3><span class="puce ko">🗄️ peut changer la base</span></div>
+      <dl class="grille">
+        <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Le sujet propose ces chiffres. Nous les gardons tous. <b>Les validez-vous ?</b></li><li>Honoraires : <b>3 000 € + 2,5 %</b> du prix.</li><li>Part du chasseur selon le prix : <b>30 / 35 / 40 / 45 / 50 %</b>.</li><li>Poids des 5 critères de la note : <b>25 / 10 / 25 / 15 / 25</b>.</li><li>Ventes et mandats comptés sur <b>12 mois glissants</b>.</li><li>Bonus d'ancienneté : <b>jusqu'à +10 %</b>, atteint à 5 ans. Bonus de performance : <b>de −20 % à +20 %</b>.</li><li>Taux final toujours entre <b>20 % et 60 %</b>. Le plancher de 20 % ne sert pas aujourd'hui : on le garde.</li><li>Arrondis : note à <b>1 décimale</b>, taux à <b>4 décimales</b>.</li><li>Grilles de notes : délai, visites, et <b>100 / 60</b> pour un mandat exclusif ou non.</li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le sujet le dit : des « paramètres proposés, non imposés par le métier » (<span class="mono">F10:3-5</span>).</li><li>Seul le client peut les rendre officiels.</li></ul></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-PAR-01</b> · Honoraires : 3 000 € + 2,5 % → <b>Valeurs du sujet</b> (réponse du 2026-10-05)</li><li>✅ <b>Q-PAR-04</b> · Fenêtre des critères de volume : 12 mois glissants → <b>12 mois glissants</b> (réponse du 2026-10-05)</li><li>✅ <b>Q-PAR-06</b> · Poids des 5 critères : 25 / 10 / 25 / 15 / 25 → <b>Valeurs du sujet</b> (réponse du 2026-10-05)<br>📝 Votre note : « les valeurs sont donné par le client, dont on fait confiance. »</li><li>✅ <b>Q-PAR-07</b> · Ancienneté +10 % max, performance ±20 % → <b>Valeurs du sujet</b> (réponse du 2026-10-05)</li><li>✅ <b>Q-PAR-08</b> · Garder le plancher de 20 %, qui ne mord jamais ? → <b>Garder</b> (réponse du 2026-10-05)</li><li>🟡 <b>Q-PAR-10</b> · Tranches et taux : 30 / 35 / 40 / 45 / 50 % → pas encore répondue. 💡 Je propose : « Valeurs du sujet »</li><li>🟡 <b>Q-PAR-11</b> · Arrondi du score (1 déc.) et du taux (4 déc.) → pas encore répondue. 💡 Je propose : « Valeurs du sujet »</li><li>🟡 <b>Q-PAR-13</b> · Grilles de notes : délai, visites, exclusivité 100 / 60 → pas encore répondue. 💡 Je propose : « Valeurs du sujet »</li><li>⚠️ Votre note sur Q-PAR-06 : les valeurs viennent du client, et on lui fait confiance. <b>Nuance</b> : pour l'instant, elles viennent du <b>sujet</b>, comme propositions. Elles deviennent celles du client quand <b>Jeff dit oui</b>.</li></ul></div></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Q-REM-19 (réponse : oui) grave <b>20 % et 60 %</b> dans la base : si Jeff change ces bornes, <b>base à recréer</b>.</li><li>Q-REM-05 (réponse : table) : ses chiffres remplissent la table des paramètres. En changer un = une ligne.</li><li>📝 Ensuite, l'ADR K : « paramètres proposés, validés par Jeff le … ».</li></ul></dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p><span class="mono">RCR:59</span> : « Ce que ce document propose (à valider avec le client) : toutes les valeurs numériques ». Tableau D1 à D9 : <span class="mono">RCR:316-330</span>. Tranches : <span class="mono">RCR:171-177</span>. Ancienneté : « 0 % → +10 % (plafond à 5 ans) » (<span class="mono">RCR:207</span>). Plancher et plafond : <span class="mono">RCR:215</span> ; le pire cas est 30 % × 0,80 = 24 %. Arrondis : <span class="mono">RCR:223-229</span>. Grilles : <span class="mono">RCR:143-147</span>. L'arrondi du <b>montant</b> au centime est une <b>règle</b> (<span class="mono">F10:253</span>) : pas en question. CHECK prévu par R21 : <span class="mono">01:747-754</span>.</p></details>
+      <div class="choix options">
+        <label><input type="radio" name="Q-JEF-01" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Son oui rend les chiffres officiels : en soutenance, on cite sa validation.</span><span>➖ Une longue liste : la lui montrer écrite, pas la lire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-01" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-01" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Rien à attendre : tout est déjà codé.</span><span>➖ On présenterait des propositions comme des exigences du client : l'erreur que le sujet signale (<span class="mono">RCR:40</span>).</span></span></span></label>
+      </div>
+    </div>
+    <div class="question" id="Q-JEF-02">
+      <div class="tete"><h3>🧑‍💼 Q-JEF-02 · Confirmez-vous le barème par palier, et son saut de 600 € ?</h3><span class="puce faible">⚙️ peut changer le code</span></div>
+      <dl class="grille">
+        <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Un <b>seul taux</b> s'applique à tout le montant, selon la tranche du prix.</li><li>À <b>350 000 €</b>, la part passe de 35 % à 40 % : environ <b>600 €</b> de plus pour le chasseur, pour <b>1 €</b> de prix en plus.</li><li><b>Est-ce bien voulu ?</b></li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le sujet se contredit : c'est une « Règle » en <span class="mono">F10:166</span>, et une décision à trancher (D3) en <span class="mono">RCR:323</span>.</li></ul></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-PAR-03</b> · Barème par palier → <b>Palier</b> (réponse du 2026-10-05)</li></ul></div></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>S'il veut un barème progressif : <b>calcul et 55 cas de test à refaire</b>.</li></ul></dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p><span class="mono">F10:166</span> : « Règle: Le taux de base est celui de la tranche de montant du barème en vigueur, sans progressivité entre tranches ». <span class="mono">RCR:181</span> : « un saut d'environ 600 € de rémunération pour 1 € de prix supplémentaire ». Calcul : à 350 000 €, honoraires = 3 000 + 2,5 % × 350 000 = 11 750 € ; 5 % de 11 750 € = 587,50 €, avant les bonus.</p></details>
+      <div class="choix options">
+        <label><input type="radio" name="Q-JEF-02" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Une confirmation suffit : le code et les tests suivent déjà le palier.</span><span>➖ Le saut de 600 € peut le faire changer d'avis : calcul et tests à refaire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-02" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-02" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Le sujet en fait une règle (<span class="mono">F10:166</span>).</span><span>➖ Le sujet dit aussi « décision » (<span class="mono">RCR:323</span>) : un jury peut demander qui l'a validée.</span></span></span></label>
+      </div>
+    </div>
+    <div class="question" id="Q-JEF-03">
+      <div class="tete"><h3>🧑‍💼 Q-JEF-03 · Mandat non exclusif : si un autre vend, qui touche quoi ?</h3><span class="puce ko">🗄️ peut changer la base</span></div>
+      <dl class="grille">
+        <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Mandat <b>non exclusif</b>. Le client achète <b>seul</b>, ou par <b>une autre agence</b>.</li><li>Notre chasseur ne touche <b>rien</b> : c'est bien ça ? Ou une <b>indemnité</b> ?</li><li>Et l'entreprise : touche-t-elle des <b>honoraires</b> dans ce cas ?</li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le sujet le dit lui-même : « une ambiguïté à lever avec le client » (<span class="mono">RCR:100</span>).</li><li>Il propose « Rien (R = 0), mais motif tracé » (<span class="mono">RCR:322</span>, D2).</li></ul></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-PAR-02</b> · Non exclusif, le client trouve seul : rien, ou une indemnité ? → <b>Rien, motif tracé</b> (réponse du 2026-10-05)</li><li>✅ <b>Q-REM-02</b> · Vente par « un chasseur d'une autre agence » : où la ranger ? → <b>Pas de vente : le mandat prend un statut de fin</b> (réponse du 2026-10-02)</li></ul></div></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>⚠️ S'il veut une <b>indemnité</b> : un paiement exige une vente (<span class="mono">01:760</span>). Or Q-REM-02 n'enregistre pas de vente : <b>choix à revoir</b>.</li><li>S'il dit que l'entreprise touche des honoraires : il faut une vente, avec une 3e origine (<span class="mono">01:657-658</span> n'en a que 2).</li><li>S'il confirme « rien » : votre choix tient, le lot de migration peut partir.</li></ul></dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p>Tableau des cas : <span class="mono">RCR:94-96</span>. « Un chasseur d'une autre agence » : cas impossible en exclusif, non rémunéré en non exclusif. <span class="mono">sale.fees_amount &gt; 0</span> (<span class="mono">01:656</span>) ; <span class="mono">sale_origin</span> : 'hunter' ou 'client_alone' (<span class="mono">01:657-658</span>) ; <span class="mono">payment.id_sale</span> obligatoire (<span class="mono">01:760</span>). Statuts du mandat : <span class="mono">01:405-407</span>.</p></details>
+      <div class="choix options">
+        <label><input type="radio" name="Q-JEF-03" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Sa réponse décide où ranger ce cas dans la base, <b>avant</b> le lot de migration.</span><span>➖ S'il veut une indemnité, Q-REM-02 est à revoir.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-03" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-03" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Le sujet propose déjà « rien ».</span><span>➖ Le lot de migration partirait sur une supposition que le sujet dit ambiguë.</span></span></span></label>
+      </div>
+    </div>
+    <div class="question" id="Q-JEF-04">
+      <div class="tete"><h3>🧑‍💼 Q-JEF-04 · Les honoraires sont-ils hors taxes (HT) ?</h3><span class="puce doc">ℹ️ confirmation</span></div>
+      <dl class="grille">
+        <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Le sujet dit que les honoraires sont <b>HT</b>, hors taxes. <b>Vous confirmez ?</b></li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Avec ou sans TVA, tous les montants changent.</li><li>Le sujet l'affirme sans le marquer « paramètre » : une confirmation suffit.</li></ul></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>💡 HT, comme le sujet (<span class="mono">RCR:131</span>). Aucune carte du registre n'en dépend.</li></ul></div></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Rien s'il confirme. S'il dit TTC : la base de toute la paie change.</li></ul></dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p><span class="mono">RCR:131</span> : « H est un montant HT ». La même ligne range la TVA dans le cycle de paiement, pas dans le calcul de la part.</p></details>
+      <div class="choix options">
+        <label><input type="radio" name="Q-JEF-04" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Un mot suffit, et on cite sa confirmation.</span><span>➖ Une question de plus, pour une réponse presque sûre.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-04" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-04" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Le sujet l'affirme : c'est une règle.</span><span>➖ Aucun, sauf s'il pensait TTC.</span></span></span></label>
+      </div>
+    </div>
+  </section>
+
+  <section id="j1">
+    <h2>Les choix à trancher · La note de performance du chasseur</h2>
+    <p class="sous">La note sur 100 donne un bonus de −20 % à +20 % sur la part du chasseur. Ce qu'on y compte change donc sa paie.</p>
+    <div class="question" id="Q-JEF-05">
+      <div class="tete"><h3>🧑‍💼 Q-JEF-05 · Comment la note doit-elle baisser quand un mandat finit sans vente ?</h3><span class="puce faible">⚙️ peut changer le code</span></div>
+      <dl class="grille">
+        <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Le sujet dit qu'un mandat fini sans vente fait <b>baisser</b> la note. Avec les critères proposés, elle ne baisse pas.</li><li>Nous proposons le <b>taux de transformation</b> : ventes ÷ mandats, à la place du critère « mandats signés ».</li><li><b>Validez-vous ?</b> Et quelle note pour quel taux : à partir de quel taux un chasseur a-t-il <b>100 points</b> ?</li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le sujet laisse ce choix au client : la variante « mérite d'être posée au client » (<span class="mono">RCR:160</span>).</li><li>Il ne donne <b>aucune grille de notes</b> pour ce taux.</li></ul></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-PAR-05</b> · Ventes et mandats séparés, ou taux de transformation ? → <b>Taux de transformation</b> (réponse du 2026-10-05)<br>📝 Votre note : « demandé a jeff comment le score baisse, le calcule ? »</li></ul></div></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Sans sa grille, votre choix ne peut pas être codé.</li><li>Le critère « mandats signés » (15 % de la note) change de formule : les cas de test qui l'utilisent sont à refaire.</li><li>Lié à Q-JEF-09 : avec ce taux, compter un mandat annulé fait <b>baisser</b> la note.</li></ul></dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p><span class="mono">Readme.md:135</span> : « Les indicateurs de performance sont alors recalculés à la baisse ». <span class="mono">F10:295-300</span> : « Un mandat arrivé à échéance sans vente dégrade le score du chasseur ». Aujourd'hui S₄ = <span class="mono">min(100 ; mandats × 10)</span> (<span class="mono">RCR:146</span>) : un mandat de plus ne fait jamais baisser la note. Le taux remplace <b>S₄ seulement</b> (<span class="mono">RCR:160</span>) : les 5 poids restent. ⚠️ Deux lectures du dénominateur, à lui faire trancher : mandats <b>signés</b> sur 12 mois (la note baisse dès la signature, et remonte à la vente), ou mandats <b>clos</b>, vendus ou échus (la note baisse pile à l'échéance, comme <span class="mono">F10:295-300</span>).</p></details>
+      <div class="choix options">
+        <label><input type="radio" name="Q-JEF-05" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Avec votre choix, un mandat sans vente fait baisser la note, comme le veut le sujet. Il ne manque que sa grille.</span><span>➖ S'il refuse, on garde « séparés », et la phrase du sujet reste fausse : à dire en soutenance.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-05" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-05" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ On peut proposer une grille nous-mêmes, marquée « proposition du groupe ».</span><span>➖ On inventerait un chiffre qui touche la paie : c'est au client de le donner.</span></span></span></label>
+      </div>
+    </div>
+    <div class="question" id="Q-JEF-08">
+      <div class="tete"><h3>🧑‍💼 Q-JEF-08 · Quelles visites comptent dans la note ?</h3><span class="puce faible">⚙️ peut changer le code</span></div>
+      <dl class="grille">
+        <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Pour la note « visites », nous comptons les visites <b>du client</b>, sur <b>tous les biens du mandat</b>, jusqu'au jour de l'acte.</li><li><b>Moins</b> il y en a, <b>meilleure</b> est la note. <b>C'est bien ça ?</b></li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le sujet dit seulement « le client a effectué 5 visites avant l'achat » (<span class="mono">F10:259</span>) : il ne dit pas lesquelles.</li></ul></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-REM-07</b> · Quelles visites comptent ? → <b>Visites du client, tous les biens du mandat, jusqu'au jour de l'acte</b> (réponse du 2026-10-02)<br>📝 Votre note : « plus un client visite, meilleure est la note ? Ça devrait être l&#x27;inverse : moins il visite, meilleure est la note, vu que le hunter a bien ciblé le besoin. »</li></ul></div></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Le compte des visites, dans le code.</li><li>Lié à Q-JEF-14 : qui enregistre une visite (Q-ACC-13).</li></ul></dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p>Grille : 3 visites ou moins → 100 ; plus de 15 → 0 (<span class="mono">RCR:147</span>). « moins il y en a, plus la rémunération monte » (<span class="mono">RCR:55</span>). Types de visite en base : 'hunter' et 'client' (<span class="mono">01:635</span>).</p></details>
+      <div class="choix options">
+        <label><input type="radio" name="Q-JEF-08" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Ce compte change la note, donc la paie : mieux vaut sa règle que la nôtre.</span><span>➖ Aucun gros : une phrase à valider.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-08" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-08" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Notre lecture colle au texte du sujet.</span><span>➖ Si un chasseur conteste sa note, on n'a que notre lecture.</span></span></span></label>
+      </div>
+    </div>
+    <div class="question" id="Q-JEF-09">
+      <div class="tete"><h3>🧑‍💼 Q-JEF-09 · Quelles ventes et quels mandats comptent sur 12 mois ?</h3><span class="puce faible">⚙️ peut changer le code</span></div>
+      <dl class="grille">
+        <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Ventes : seulement celles qui ont <b>ouvert un droit</b>, pas les refusées ?</li><li>Mandats : les mandats signés, <b>sans compter</b> les renouvellements ?</li><li>Et un mandat <b>annulé</b> : compte-t-il ?</li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le sujet dit « ventes réussies » et « mandats signés » (<span class="mono">RCR:145-146</span>), sans plus de détail.</li></ul></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-REM-08</b> · Quelles ventes comptent sur 12 mois ? → <b>Les ventes non refusées</b> (réponse du 2026-10-02)</li><li>✅ <b>Q-REM-09</b> · Quels mandats comptent sur 12 mois ? → <b>Signés, sans les renouvellements</b> (réponse du 2026-10-02)</li><li>🟡 Les mandats <b>annulés</b> : pas encore tranché.</li></ul></div></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Le compte des ventes et des mandats, dans le code.</li><li>⚠️ Lié à Q-JEF-05 : avec la formule actuelle, compter un mandat annulé <b>gonfle</b> la note (signer, puis annuler). Avec le taux de transformation, il la <b>fait baisser</b>.</li></ul></dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p>S₃ = <span class="mono">min(100 ; ventes × 20)</span>, S₄ = <span class="mono">min(100 ; mandats × 10)</span> (<span class="mono">RCR:145-146</span>). La vente en cours n'est pas comptée (<span class="mono">RCR:470</span>, cité au registre).</p></details>
+      <div class="choix options">
+        <label><input type="radio" name="Q-JEF-09" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Deux réponses à confirmer, et un trou à combler : les mandats annulés.</span><span>➖ La réponse dépend aussi de Q-JEF-05 : poser les deux ensemble.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-09" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-09" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Nos deux réponses tiennent seules.</span><span>➖ Les mandats annulés restent sans règle.</span></span></span></label>
+      </div>
+    </div>
+    <div class="question" id="Q-JEF-17">
+      <div class="tete"><h3>🧑‍💼 Q-JEF-17 · Pour payer une vente : note recalculée, ou dernière note gardée ?</h3><span class="puce faible">⚙️ peut changer le code</span></div>
+      <dl class="grille">
+        <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Pour payer une vente, nous <b>recalculons</b> la note à partir de cette vente : c'est le code du sujet.</li><li>Le sujet dit aussi que la note d'après paiement « sert de base au calcul de la prochaine rémunération ».</li><li><b>Laquelle voulez-vous ?</b></li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Deux textes du sujet se contredisent : le code (<span class="mono">rem.py:275-276</span>) et le scénario (<span class="mono">F10:293</span>).</li></ul></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-REM-06</b> · Le score : recalculé à chaque vente, ou lu dans hunter_performance ? → <b>Recalculer à chaque vente</b> (réponse du 2026-10-02)</li></ul></div></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>S'il veut la note gardée : <b>calculette et 55 cas à réécrire</b>.</li><li>📝 ADR E.</li></ul></dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p><span class="mono">F10:289-293</span> : scénario « Les indicateurs de performance sont recalculés après le paiement ». Sa dernière ligne : « Et le nouveau score sert de base au calcul de la prochaine rémunération ».</p></details>
+      <div class="choix options">
+        <label><input type="radio" name="Q-JEF-17" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Seul lui peut choisir entre deux textes du sujet.</span><span>➖ S'il choisit la note gardée, la calculette est à réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-17" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-17" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Le code du sujet recalcule déjà : rien à faire.</span><span>➖ On choisit entre deux textes du sujet sans le client.</span></span></span></label>
+      </div>
+    </div>
+    <div class="question" id="Q-JEF-10">
+      <div class="tete"><h3>🧑‍💼 Q-JEF-10 · Avez-vous la vraie date d'entrée des chasseurs ?</h3><span class="puce faible">⚙️ peut changer le code</span></div>
+      <dl class="grille">
+        <dt class="net">🗣️ À lui dire</dt><dd><ul><li>L'ancienneté donne un bonus. Faute de mieux, nous prenons la <b>date de création du compte</b>.</li><li><b>Avez-vous la vraie date d'embauche ?</b></li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>C'est une « donnée RH » (<span class="mono">RCR:762</span>) : seule l'entreprise l'a.</li></ul></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-REM-16</b> · Ancienneté : quelle date d'entrée ? → <b>Garder l'hypothèse, la dire en soutenance</b> (réponse du 2026-10-05)</li><li>🟡 <b>Q-MIG-02</b> · hire_date = date de création du compte → pas encore répondue. 💡 Je propose : « Garder l'hypothèse »</li></ul></div></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>S'il a les dates : la migration (<span class="mono">02:24-26</span>) est à corriger.</li><li>Sinon, l'hypothèse reste, dite en soutenance.</li></ul></dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p><span class="mono">02:24-26</span> : « hire_date » est repris de « user ».created_at, sur 6 lignes. Le fichier le dit : « C'est une HYPOTHÈSE de migration, pas une donnée d'origine ».</p></details>
+      <div class="choix options">
+        <label><input type="radio" name="Q-JEF-10" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Une donnée que seul lui peut donner.</span><span>➖ Aucun : s'il ne l'a pas, on garde l'hypothèse.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-10" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-10" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ L'hypothèse est écrite, et sera dite.</span><span>➖ Le bonus d'ancienneté peut être faux.</span></span></span></label>
+      </div>
+    </div>
+  </section>
+
+  <section id="j2">
+    <h2>Les choix à trancher · Le mandat</h2>
+    <p class="sous">Un mandat dure 6 mois, et se renouvelle si rien n'est vendu. Trois cas restent flous.</p>
+    <div class="question" id="Q-JEF-06">
+      <div class="tete"><h3>🧑‍💼 Q-JEF-06 · Un mandat exclusif annulé libère-t-il le client tout de suite ?</h3><span class="puce ko">🗄️ peut changer la base</span></div>
+      <dl class="grille">
+        <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Un client annule son mandat <b>exclusif</b>.</li><li>Peut-il signer <b>tout de suite</b> avec un autre chasseur ? Ou reste-t-il lié jusqu'à la fin prévue ?</li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>C'est une règle du contrat entre l'entreprise et son client.</li></ul></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>🟡 <b>Q-MAN-02</b> · Activer l'exclusivité (U02), et le mandat annulé (D7) → pas encore répondue. 💡 Je propose : « Corriger, activer, l'annulation libère tout de suite »</li></ul></div></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>La règle d'exclusivité (un trigger déjà écrit, éteint) s'active dans le lot de migration : sa condition dépend de cette réponse.</li></ul></dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p>Trigger commenté : <span class="mono">01:474-497</span>. ❌ Tel quel, il bloque le renouvellement, car rien n'exclut le mandat parent : correctif proposé en Q-MAN-02.</p></details>
+      <div class="choix options">
+        <label><input type="radio" name="Q-JEF-06" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ La règle d'exclusivité s'écrit d'après sa réponse, dans le même lot de migration.</span><span>➖ Aucun gros.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-06" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-06" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ On peut prendre seuls l'option la plus souple.</span><span>➖ Une règle de contrat décidée sans le client.</span></span></span></label>
+      </div>
+    </div>
+    <div class="question" id="Q-JEF-07">
+      <div class="tete"><h3>🧑‍💼 Q-JEF-07 · Combien de renouvellements, et d'où part le délai ?</h3><span class="puce faible">⚙️ peut changer le code</span></div>
+      <dl class="grille">
+        <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Un mandat se renouvelle si aucune vente n'a abouti. <b>Combien de fois</b> au plus ?</li><li>Pour la note « délai », comptez-vous depuis la <b>première</b> signature ?</li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le sujet dit « renouvelé à l'échéance si aucune vente n'a abouti » (<span class="mono">F00:40</span>), sans limite ni point de départ.</li></ul></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>🟡 <b>Q-MAN-03</b> · Renouvellement : combien de fois, seulement sans vente ? → pas encore répondue. 💡 Je propose : « Imposer « sans vente » dans l'API, sans limite de nombre »</li><li>🟡 <b>Q-MAN-04</b> · Après un renouvellement : quel mandat, d'où part le délai ? → pas encore répondue. 💡 Je propose : « Valider les deux »</li></ul></div></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>La règle de renouvellement, dans le code.</li><li>Le calcul du délai remonte la chaîne des mandats renouvelés.</li></ul></dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p>La grille de délai va jusqu'à « plus de 48 semaines » (<span class="mono">RCR:143</span>) : il faut au moins un renouvellement pour l'atteindre. Délai depuis la première signature : <span class="mono">09-contraintes-a-coder.md:207-210</span>.</p></details>
+      <div class="choix options">
+        <label><input type="radio" name="Q-JEF-07" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Sa réponse fixe la règle, et le délai de la note en dépend.</span><span>➖ Aucun gros.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-07" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-07" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Le sujet ne fixe pas de limite : on n'en invente pas.</span><span>➖ Un mandat pourrait durer des années sans que personne l'ait voulu.</span></span></span></label>
+      </div>
+    </div>
+    <div class="question" id="Q-JEF-11">
+      <div class="tete"><h3>🧑‍💼 Q-JEF-11 · Le mandat de Bruno est-il un mandat renouvelé ?</h3><span class="puce doc">ℹ️ confirmation</span></div>
+      <dl class="grille">
+        <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Dans votre exemple, Bruno signe le <b>14/11/2025</b>. L'acte a lieu le <b>30/07/2026</b>, après 6 mois.</li><li>Son mandat finit le <b>14/08/2026</b> : 9 mois. Nous le lisons comme un mandat <b>renouvelé</b>. <b>C'est bien ça ?</b></li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Un acte après la fin du mandat n'ouvre aucun droit, « sauf renouvellement du mandat » (<span class="mono">RCR:98</span>). Simple confirmation.</li></ul></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ Lecture du groupe : Bruno est payé parce que son mandat est renouvelé (<span class="mono">09-decisions-a-prendre.md:136-140</span>).</li></ul></div></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Rien s'il confirme. Sinon, l'exemple officiel contredit la règle : à remonter au sujet.</li></ul></dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p>Situation de Bruno : <span class="mono">RCR:237</span>. Dates du calcul : <span class="mono">RCR:697</span>, <span class="mono">date_fin_mandat=date(2026, 8, 14)</span>. Un mandat dure 6 mois (<span class="mono">RCR:98</span>).</p></details>
+      <div class="choix options">
+        <label><input type="radio" name="Q-JEF-11" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Un mot suffit, et une contradiction apparente du sujet se ferme.</span><span>➖ Une question de plus.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-11" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-11" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Notre lecture est argumentée.</span><span>➖ Si on se trompe, un exemple officiel contredit notre règle.</span></span></span></label>
+      </div>
+    </div>
+  </section>
+
+  <section id="j3">
+    <h2>Les choix à trancher · Les données reprises de l'ancienne base</h2>
+    <p class="sous">Ce que la migration a dû deviner. Seul le client connaît sa propre base.</p>
+    <div class="question" id="Q-JEF-12">
+      <div class="tete"><h3>🧑‍💼 Q-JEF-12 · taux_commission : un pourcentage de quoi ?</h3><span class="puce doc">📝 doc et livrables</span></div>
+      <dl class="grille">
+        <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Votre ancienne base a une colonne <b>taux_commission</b>, de 2,00 à 3,25.</li><li>Est-ce un pourcentage du <b>prix</b> du bien, ou des <b>honoraires</b> ?</li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Seul le client sait ce que veut dire sa colonne.</li><li>Le sujet la compare à la paie de Bruno : <b>1,48 %</b> du prix (<span class="mono">RCR:256</span>).</li></ul></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>🟡 <b>Q-MIG-01</b> · Sens de taux_commission (2,00 à 3,25) → pas encore répondue. 💡 Je propose : « % des honoraires, non migré »</li></ul></div></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>La colonne n'est pas migrée : rien ne bloque. Sa réponse nourrit l'audit.</li></ul></dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p>Valeurs mesurées dans la source : 2,00 · 2,50 · 2,75 · 3,00 · 3,25 (<span class="mono">docker/init-v2/README.md:136</span>). ⚠️ Le sujet écrit « 2,50–3,25 % » (<span class="mono">RCR:256</span>) : il oublie 2,00. Au-delà de 400 000 €, 3,25 % du prix dépasserait les honoraires eux-mêmes (3 000 € + 2,5 %).</p></details>
+      <div class="choix options">
+        <label><input type="radio" name="Q-JEF-12" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Seul lui sait ; sa réponse ferme un constat d'audit.</span><span>➖ Aucun.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-12" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-12" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ La colonne n'est pas migrée : rien ne bloque.</span><span>➖ Un constat d'audit reste sans explication.</span></span></span></label>
+      </div>
+    </div>
+    <div class="question" id="Q-JEF-13">
+      <div class="tete"><h3>🧑‍💼 Q-JEF-13 · Trois questions sur les mandats repris</h3><span class="puce faible">⚙️ peut changer le code</span></div>
+      <dl class="grille">
+        <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Le mandat 13 a pour client <b>un chasseur</b>. Le vrai client est-il <b>Nina Girard</b> ? Même ville, même budget, et aucun mandat.</li><li>Que veulent dire les statuts <b>suspendu</b> et <b>termine</b> ?</li><li><b>6 mandats</b> « actif » étaient déjà échus au 25/07/2026. Renouvelés, ou finis ?</li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Ce sont des faits de la base du client : seul lui les connaît.</li></ul></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>🟡 <b>Q-MIG-12</b> · Mandat 13 ignoré : son client est un chasseur → pas encore répondue. 💡 Je propose : « Demander si c'est Nina Girard »</li><li>🟡 <b>Q-MIG-13</b> · Sens de « suspendu » et « termine » → pas encore répondue. 💡 Je propose : « Demander ; en attendant termine → completed »</li><li>🟡 <b>Q-MIG-10</b> · 6 mandats « actif » déjà échus au 25/07/2026 → pas encore répondue. 💡 Je propose : « Constat d'audit ; demander à Jeff »</li></ul></div></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>La migration (<span class="mono">02</span>) : une ligne pour le mandat 13, la traduction des statuts, l'état des 6 mandats.</li></ul></dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p>Mandat 13 écarté : <span class="mono">02:167</span>, « client_id=3 est un chasseur ». Statuts d'origine : <span class="mono">PgSQL.sql:26</span> du sujet. En attendant : termine → completed.</p></details>
+      <div class="choix options">
+        <label><input type="radio" name="Q-JEF-13" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Trois réponses qui corrigent la migration et nourrissent l'audit.</span><span>➖ Trois questions en une : les séparer à l'oral.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-13" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-13" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ La migration tourne déjà avec nos hypothèses.</span><span>➖ Un mandat perdu, et deux statuts devinés.</span></span></span></label>
+      </div>
+    </div>
+  </section>
+
+  <section id="j4">
+    <h2>Les choix à trancher · Les droits, le RGPD et les barèmes</h2>
+    <p class="sous">L'authentification n'est pas à nous (Jeff, 22/09). Les droits métier, eux, restent un livrable.</p>
+    <div class="question" id="Q-JEF-14">
+      <div class="tete"><h3>🧑‍💼 Q-JEF-14 · Qui a le droit de faire quoi ?</h3><span class="puce doc">📝 doc et livrables</span></div>
+      <dl class="grille">
+        <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Le 22/09, vous avez dit que l'authentification n'est pas à nous.</li><li>Mais <b>qui a le droit de faire quoi</b> reste une règle métier. <b>Validez-vous ce tableau ?</b></li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le 22/09, la question était mêlée à l'authentification (Q-ACC-01).</li><li>La matrice des droits (ADR-027) est un livrable.</li></ul></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>🟡 <b>Q-ACC-01</b> · Reposer à Jeff la question des droits → pas encore répondue. 💡 Je propose : « Oui, en une question nette »</li><li>🟡 Le tableau ci-dessous : <b>0 ligne(s) sur 10</b> répondue(s) par l'équipe ; les autres sont <b>mes propositions</b> (💡), à valider avant l'entretien (page principale, partie F).</li><li>⚠️ Q-ACC-07 propose « la direction seule » pour les barèmes. Votre Q-PAR-09 dit que <b>le manager</b> crée un barème propre à un chasseur. 💡 Pour les accorder : la direction fixe le barème <b>par défaut</b>, le manager les barèmes <b>nominatifs</b>.</li></ul></div></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>La matrice des droits et ADR-027. Rien dans la base.</li></ul></dd>
+      </dl>
+      <div class="tableau"><table>
+        <thead><tr><th>Carte</th><th>La question</th><th>Ce qu'on propose</th></tr></thead><tbody>
+          <tr><td class="n">Q-ACC-02</td><td>Que voit le manager ?</td><td>💡 Ses chasseurs et leurs paiements</td></tr>
+          <tr><td class="n">Q-ACC-03</td><td>Qui enregistre la vente ?</td><td>💡 Le manager</td></tr>
+          <tr><td class="n">Q-ACC-04</td><td>Qui fait avancer la facture ?</td><td>💡 Le chasseur dépose, le manager vérifie</td></tr>
+          <tr><td class="n">Q-ACC-05</td><td>Le client voit-il tout le catalogue ?</td><td>💡 Non : les biens proposés pour lui</td></tr>
+          <tr><td class="n">Q-ACC-06</td><td>Le chasseur voit-il son barème ?</td><td>💡 Oui</td></tr>
+          <tr><td class="n">Q-ACC-07</td><td>Qui fixe barèmes et honoraires ?</td><td>💡 La direction seule</td></tr>
+          <tr><td class="n">Q-ACC-10</td><td>Qui affecte une demande à un chasseur ?</td><td>💡 Le manager</td></tr>
+          <tr><td class="n">Q-ACC-12</td><td>Qui crée le compte client ?</td><td>💡 Le client, par sa demande en ligne</td></tr>
+          <tr><td class="n">Q-ACC-13</td><td>Qui enregistre une visite du client ?</td><td>💡 Le chasseur qui l'accompagne</td></tr>
+          <tr><td class="n">Q-ACC-15</td><td>Un chasseur peut-il créer une demande ?</td><td>💡 Non : la demande vient du client</td></tr>
+        </tbody></table></div>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p>Questions d'ADR-027 (Q1 à Q6) et matrice §6, reprises au registre (Q-ACC-02 à 15). Jeff, le 2026-09-22 : « vous ne gérez pas l'auth, c'est géré au dessus » (<span class="mono">md/adr-026-perimetre-authentification.md</span>).</p></details>
+      <div class="choix options">
+        <label><input type="radio" name="Q-JEF-14" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ La matrice des droits est un livrable : validée par le client, elle se défend.</span><span>➖ Dix lignes : lui montrer le tableau écrit.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-14" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-14" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ On peut décider seuls, au moindre droit.</span><span>➖ Le jury peut demander d'où viennent ces droits.</span></span></span></label>
+      </div>
+    </div>
+    <div class="question" id="Q-JEF-15">
+      <div class="tete"><h3>🧑‍💼 Q-JEF-15 · Combien de temps garder les données avant de les anonymiser ?</h3><span class="puce doc">📝 doc et livrables</span></div>
+      <dl class="grille">
+        <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Le sujet donne <b>10 ans</b> pour les paiements : c'est une obligation comptable.</li><li>Pour les mandats, il écrit « Durée du mandat + <b>X</b> ans ». <b>Combien vaut X ?</b></li><li>Et pour les autres données, sans durée : demandes, visites ?</li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le RGPD reste exigé, même sans l'authentification (Jeff, 22/09).</li><li>La durée est un choix de l'entreprise, responsable des données.</li></ul></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>🟡 <b>Q-ACC-21</b> · Durée de conservation avant anonymisation → pas encore répondue. 💡 Je propose : « 10 ans pour les paiements, X à demander »</li></ul></div></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Le registre RGPD, un livrable. Plus tard : une tâche d'anonymisation.</li></ul></dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p><span class="mono">REGISTRE-RGPD.md:27</span> : « Durée du mandat + X ans (obligations légales) ». <span class="mono">:28</span> : « Tant que le compte est actif ». <span class="mono">:29</span> : « 10 ans (obligation comptable) ». <span class="mono">:30</span> : une ligne « … » à compléter.</p></details>
+      <div class="choix options">
+        <label><input type="radio" name="Q-JEF-15" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ La durée est au client ; sa réponse complète le registre.</span><span>➖ Il peut ne pas savoir : venir avec une proposition.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-15" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-15" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ On peut proposer une durée courante, marquée « proposée ».</span><span>➖ Une durée inventée, dans un registre légal.</span></span></span></label>
+      </div>
+    </div>
+    <div class="question" id="Q-JEF-18">
+      <div class="tete"><h3>🧑‍💼 Q-JEF-18 · Quelle échelle de priorité pour le client ?</h3><span class="puce ko">🗄️ peut changer la base</span></div>
+      <dl class="grille">
+        <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Le client peut dire si un bien proposé l'intéresse plus ou moins.</li><li>Sur quelle échelle : <b>de 1 à 5</b>, ou <b>haute / moyenne / basse</b> ?</li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>C'est la façon de parler de ses clients : à lui de choisir.</li><li>C'est aussi la question 9 d'ADR-027.</li></ul></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>🟡 <b>Q-SCH-05</b> · D6 : échelle de priorité du client → pas encore répondue. 💡 Je propose : « 1 à 5 »</li></ul></div></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Une colonne de <span class="mono">estate_proposed</span>, dans le lot de migration.</li></ul></dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p>Brouillon commenté : <span class="mono">01:624-627</span>, <span class="mono">client_priority SMALLINT CHECK (client_priority BETWEEN 1 AND 5)</span>.</p></details>
+      <div class="choix options">
+        <label><input type="radio" name="Q-JEF-18" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Une colonne du lot de migration en dépend.</span><span>➖ Aucun gros.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-18" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-18" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ 1 à 5 est simple, et se trie.</span><span>➖ Une échelle qu'il ne reconnaîtra peut-être pas.</span></span></span></label>
+      </div>
+    </div>
+    <div class="question" id="Q-JEF-16">
+      <div class="tete"><h3>🧑‍💼 Q-JEF-16 · Des barèmes propres à un chasseur : en voulez-vous ? Si oui, qui les crée ?</h3><span class="puce doc">📝 doc et livrables</span></div>
+      <dl class="grille">
+        <dt class="net">🗣️ À lui dire</dt><dd><ul><li>1. Voulez-vous pouvoir négocier une <b>grille avec un chasseur</b> (un barème à son nom), en plus des bonus d'ancienneté et de performance ?</li><li>2. Si oui : <b>qui la crée</b>, et <b>qui la valide</b> ?</li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Le Readme dit le barème « différent pour chaque chasseur (en fonction de leur ancienneté et de leur performance) » (<span class="mono">Readme.md:80</span>). Les bonus le font déjà (Q-REM-18).</li><li>Le barème à son nom est un <b>ajout</b> du sujet, pour « négocier une grille avec un chasseur senior » (<span class="mono">RCR:193</span>). S'il n'en veut pas, la question 2 tombe.</li></ul></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-PAR-09</b> · Qui crée un barème propre à un chasseur ? → <b>Le manager, inscrit dans le RACI</b> (réponse du 2026-10-05)</li><li>⚠️ Voir Q-JEF-14 : Q-ACC-07 propose « la direction seule ».</li></ul></div></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Rien dans la base : <span class="mono">commission_scale.id_hunter</span> existe déjà.</li><li>Le « qui » va dans le RACI (<span class="mono">RCR:329</span>, D9).</li></ul></dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p><span class="mono">RCR:186-193</span> : un barème par défaut, et un barème nominatif qui « le surcharge quand il existe ». Base : « id_hunter NULL = barème par défaut ; renseigné = barème propre au chasseur » (commentaire de <span class="mono">commission_scale</span>).</p></details>
+      <div class="choix options">
+        <label><input type="radio" name="Q-JEF-16" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ S'il n'en veut pas : une règle de moins à coder et à défendre.</span><span>➖ Deux questions en une.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-16" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-16" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ La base sait déjà le faire.</span><span>➖ Qui fixe la grille d'un chasseur touche à sa paie : c'est au client.</span></span></span></label>
+      </div>
+    </div>
+  </section>
+
+  <section id="j5">
+    <h2>Les choix à trancher · Pour information, et une confirmation</h2>
+    <p class="sous">Pas des choix à lui demander : ce qu'on lui dit, pour qu'il puisse corriger tôt.</p>
+    <div class="question" id="Q-JEF-19">
+      <div class="tete"><h3>🧑‍💼 Q-JEF-19 · Information : un prix pile sur une limite prend la tranche du dessus</h3><span class="puce doc">ℹ️ information</span></div>
+      <dl class="grille">
+        <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Un prix pile sur une limite du barème prend la <b>tranche du dessus</b>, comme votre tableau : <b>200 000 € → 35 %</b>, <b>350 000 € → 40 %</b>.</li><li>Les prix sont stockés en <b>euros entiers</b>. Dites-nous si ce n'est pas votre lecture.</li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Vous l'avez demandé le 2026-10-02 (Q-REM-01) : « définir la borne et informer Jeff ».</li></ul></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-REM-01</b> · Borne haute d'une tranche du barème : incluse ou exclue ? → <b>Prix en INTEGER + bornes '[]' (tranché le 2026-10-05)</b> (réponse du 2026-10-05)<br>📝 Votre note : « définir la borne et informer Jeff, et citer exactement la contradiction. Décision du 2026-10-05 : les prix passent sans virgule, en INTEGER (euros entiers) ; le « numeric(12) » du 2026-10-02 était une erreur de formulation. Bornes du barème en [] (incluses). »</li></ul></div></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Rien s'il est d'accord : c'est fait et testé (<span class="mono">c896e39</span>, <span class="mono">abbc84e</span>, <span class="mono">d3c128c</span>, <span class="mono">fea3c9f</span>).</li></ul></dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p>Le sujet se contredit : « &lt; 200 000 € » (<span class="mono">RCR:173</span>) contre <span class="mono">BETWEEN</span>, qui inclut les deux bouts (<span class="mono">RCR:188</span>). Base : bornes incluses <span class="mono">'[]'</span>, tranches <span class="mono">[0 ; 199 999]</span>, <span class="mono">[200 000 ; 349 999]</span>…</p></details>
+      <div class="choix options">
+        <label><input type="radio" name="Q-JEF-19" value="envoyer"><span><b>L'envoyer pour information (recommandé)</b><span class="effet"><span>➕ Il peut corriger tôt si ce n'est pas sa lecture.</span><span>➖ Aucun.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-19" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-19" value="ne-pas-envoyer"><span><b>Ne pas l'envoyer</b><span class="effet"><span>➕ Une ligne de moins.</span><span>➖ Vous aviez demandé de l'informer.</span></span></span></label>
+      </div>
+    </div>
+    <div class="question" id="Q-JEF-20">
+      <div class="tete"><h3>🧑‍💼 Q-JEF-20 · Confirmation : chaque paiement garde sa note et le détail du calcul</h3><span class="puce doc">ℹ️ confirmation</span></div>
+      <dl class="grille">
+        <dt class="net">🗣️ À lui dire</dt><dd><ul><li>Chaque paiement gardera la <b>note de performance</b> du chasseur, et le <b>détail du calcul</b> : les 5 notes, les visites, l'ancienneté…</li><li>But : pouvoir refaire le calcul plus tard. <b>C'est bien ce que vous voulez ?</b></li></ul></dd>
+        <dt class="net">❓ Pourquoi lui</dt><dd><ul><li>Votre note sur Q-REM-03 : « à documenter et à confirmer avec Jeff ».</li></ul></dd>
+        <dt class="net">🤝 Notre position</dt><dd><div class="position"><ul><li>✅ <b>Q-REM-03</b> · Figer le score de performance sur le paiement ? → <b>Ajouter payment.performance_score</b> (réponse du 2026-10-02)<br>📝 Votre note : « à documenter et à confirmer avec Jeff »</li><li>✅ <b>Q-REM-04</b> · Figer les 5 notes et les entrées du calcul ? → <b>Une colonne JSONB calculation_details</b> (réponse du 2026-10-02)</li></ul></div></dd>
+        <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Le sujet l'exige déjà : « On stocke donc tous les termes du calcul » (<span class="mono">RCR:292</span>). Sa réponse ne devrait rien changer au lot de migration.</li></ul></dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary><p>Colonnes prévues : <span class="mono">payment.performance_score</span> (Q-REM-03) et <span class="mono">payment.calculation_details</span> en JSONB (Q-REM-04). Le sujet liste <span class="mono">score_performance</span> dans <span class="mono">paiements</span> (<span class="mono">RCR:286</span>). 📝 ADR C.</p></details>
+      <div class="choix options">
+        <label><input type="radio" name="Q-JEF-20" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Vous l'aviez demandé.</span><span>➖ Le sujet l'exige déjà : la réponse est presque sûre.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-20" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-20" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Le sujet l'exige : pas besoin de lui.</span><span>➖ Votre note demandait sa confirmation.</span></span></span></label>
+      </div>
+    </div>
+  </section>
+
+  <section id="apres">
+    <h2>Ce que le groupe tranchera après Jeff</h2>
+    <p class="sous">Des questions du groupe qui attendent sa réponse. Elles se cochent sur la <a href="https://claude.ai/artifact/WWVtxpDWxvD4Wf8rWnytUp" target="_blank" rel="noopener">page principale</a> ; ici, juste ce qui peut changer.</p>
+    <div class="tableau"><table>
+      <thead><tr><th>Carte</th><th>Le sujet</th><th>État</th><th>Attend</th><th>Ce qui peut changer</th></tr></thead>
+      <tbody>
+          <tr><td class="n">Q-REM-02</td><td>Vente par une autre agence : où la ranger</td><td>✅ statut-mandat</td><td class="n">Q-JEF-03</td><td>S'il veut une indemnité, ou des honoraires pour l'entreprise : il faut une vente, donc revoir ce choix.</td></tr>
+          <tr><td class="n">Q-REM-19</td><td>Borner le taux final à 20-60 % dans la base</td><td>✅ oui</td><td class="n">Q-JEF-01</td><td>S'il change 20 % ou 60 % : base à recréer.</td></tr>
+          <tr><td class="n">Q-PAR-05</td><td>Le taux de transformation</td><td>✅ transfo</td><td class="n">Q-JEF-05</td><td>Il faut sa grille de notes ; sans elle, rien à coder.</td></tr>
+          <tr><td class="n">Q-REM-06</td><td>La note recalculée à chaque vente</td><td>✅ recalcul</td><td class="n">Q-JEF-17</td><td>S'il veut la note gardée : calculette et 55 cas à réécrire.</td></tr>
+          <tr><td class="n">Q-REM-07<br>Q-REM-08<br>Q-REM-09</td><td>Ce que compte la note</td><td>✅ client-tous<br>✅ non-refusees<br>✅ signes-sans-renouv</td><td class="n">Q-JEF-08<br>Q-JEF-09</td><td>Les comptages ; le cas des mandats annulés.</td></tr>
+          <tr><td class="n">Q-REM-16<br>Q-MIG-02</td><td>La date d'entrée des chasseurs</td><td>✅ hypothese<br>🟡 ouverte</td><td class="n">Q-JEF-10</td><td>S'il a les dates : migration 02 à corriger.</td></tr>
+          <tr><td class="n">Q-MAN-02</td><td>Activer l'exclusivité</td><td>🟡 ouverte</td><td class="n">Q-JEF-06</td><td>La condition du trigger, dans le lot de migration.</td></tr>
+          <tr><td class="n">Q-MAN-03<br>Q-MAN-04</td><td>Renouvellement et délai</td><td>🟡 ouverte<br>🟡 ouverte</td><td class="n">Q-JEF-07</td><td>La règle de renouvellement, et le calcul du délai.</td></tr>
+          <tr><td class="n">Q-SCH-05</td><td>La priorité du client</td><td>🟡 ouverte</td><td class="n">Q-JEF-18</td><td>Le type de la colonne.</td></tr>
+          <tr><td class="n">Q-PAR-09<br>Q-ACC-07</td><td>Qui fixe un barème</td><td>✅ manager<br>🟡 ouverte</td><td class="n">Q-JEF-14<br>Q-JEF-16</td><td>Accorder les deux réponses.</td></tr>
+          <tr><td class="n">Q-INF-02</td><td>Écrire le seed de démo</td><td>🟡 ouverte</td><td class="n">Q-JEF-03<br>Q-JEF-07<br>Q-JEF-17</td><td>Le seed attend Q-PAR-02, Q-MAN-04 et Q-REM-06.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="coince">
+    <h2>Ce qui coince</h2>
+    <p class="sous">Des réponses qui ne collent pas encore avec une autre, ou avec le sujet. Aucune n'est fausse : chacune demande un mot de plus.</p>
+    <div class="alerte">
+      <h3>⚠️ Q-REM-19 contre Q-REM-05</h3>
+      <p>💬 <strong>En clair</strong> : Vous sortez deux réglages de la base (Q-REM-05, table), et vous en gravez deux autres (Q-REM-19 : 20 % et 60 %). Ces deux chiffres sont à faire valider par Jeff (Q-JEF-01).</p>
+      <ul>
+        <li>➖ S'il les change, il faudra recréer la base.</li>
+        <li>➕ S'il les valide, le CHECK tient. Sinon, le revoir en équipe avant le lot de migration.</li>
+      </ul>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+        <p>CHECK relâchés par Q-REM-05 : <span class="mono">01:758-759</span>. CHECK de R21 : remplacerait <span class="mono">01:755</span>. Le commentaire de R21 le dit lui-même : bornes « proposés, non imposés », « d'où la prudence » (<span class="mono">01:747-754</span>).</p>
+      </details>
+    </div>
+    <div class="alerte">
+      <h3>⚠️ Votre note sur Q-PAR-06</h3>
+      <p>💬 <strong>En clair</strong> : Les chiffres ne viennent pas encore du client : le sujet les propose (<span class="mono">F10:3-5</span>). Ils deviennent ceux du client quand Jeff dit oui.</p>
+      <ul>
+        <li>➖ Sans son oui, en soutenance, on présenterait une proposition comme une exigence (<span class="mono">RCR:40</span>).</li>
+        <li>➕ Q-JEF-01 règle ça en une question.</li>
+      </ul>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+        <p><span class="mono">F10:3-5</span> : « Les valeurs numériques (montant fixe, pourcentage, tranches, poids, bornes) sont des paramètres proposés, non imposés par le métier ».</p>
+      </details>
+    </div>
+    <div class="alerte">
+      <h3>⚠️ Q-PAR-05 : pas de grille pour le taux</h3>
+      <p>💬 <strong>En clair</strong> : Le taux de transformation n'a pas de grille de notes dans le sujet.</p>
+      <ul>
+        <li>➖ Impossible de le coder sans elle.</li>
+        <li>➕ Q-JEF-05 la demande. On peut aussi en proposer une, marquée « proposition du groupe ».</li>
+      </ul>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+        <p><span class="mono">RCR:160</span> : la variante remplace S₄ ; « la variante mérite d'être posée au client ». Aucune notation donnée.</p>
+      </details>
+    </div>
+    <div class="alerte">
+      <h3>⚠️ Q-PAR-09 contre Q-ACC-07</h3>
+      <p>💬 <strong>En clair</strong> : Votre Q-PAR-09 dit : le manager crée un barème propre. La carte Q-ACC-07 propose : la direction seule fixe les barèmes.</p>
+      <ul>
+        <li>➖ Les deux ne tiennent pas ensemble.</li>
+        <li>➕ 💡 La direction fixe le barème par défaut, le manager les barèmes nominatifs. Jeff tranche (Q-JEF-14, Q-JEF-16).</li>
+      </ul>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+        <p><span class="mono">RCR:329</span> (D9) : « À définir dans le RACI.md ». Q-ACC-07 n'est pas encore répondue.</p>
+      </details>
+    </div>
+  </section>
+
+  <section>
+    <h2>Le fil</h2>
+    <p class="sous" style="font-size:.95rem">Dates de 2026, au format mois-jour. Q-JEF = question pour Jeff ; Q-REM, Q-PAR = rémunération et ses paramètres.</p>
+    <ul class="fil">
+      <li><time>09-22</time><span><b>Jeff</b> · l'authentification n'est pas à nous ; le RGPD reste exigé.</span></li>
+      <li><time>10-02</time><span><b>Registre</b> · 124 questions, dont 18 pour Jeff (Q-JEF-01 à 18).</span></li>
+      <li><time>10-02</time><span><b>Réponses</b> · D1 à D4, Q-REM-01 à 12.</span></li>
+      <li><time>10-05</time><span><b>Q-REM-01</b> · tranchée : prix en euros entiers. Q-JEF-19 ajoutée, pour information.</span></li>
+      <li><time>10-05</time><span><b>Réponses</b> · Q-REM-13 à 19, Q-PAR-01 à 09 : « nos réponses ».</span></li>
+      <li><time>10-05</time><span><b>Ce rapport</b> · 20 questions pour Jeff, dont 1 ajoutée (Q-JEF-20).</span></li>
+    </ul>
+  </section>
+
+  <section id="reponses-section">
+    <h2>Vos réponses</h2>
+    <p class="sous">Le bouton copie vos coches et vos commentaires. Collez-les dans la conversation.</p>
+    <div class="ligne"><button type="button" id="copier">Copier mes réponses</button><span id="etat" class="sous" aria-live="polite"></span></div>
+    <textarea id="reponses" readonly aria-label="Vos réponses"></textarea>
+  </section>
+
+  <footer class="sous" style="font-size:.9375rem;border-top:1px solid var(--trait);padding-top:1rem">
+    Dépôt <span class="mono">Fil-Rouge</span> · registre <span class="mono">md/questions-a-trancher-2026-10-02.md</span>, partie 2 · toutes les questions : <a href="https://claude.ai/artifact/WWVtxpDWxvD4Wf8rWnytUp" target="_blank" rel="noopener">page principale</a>. Hors périmètre : authentification, acte notarié.
+  </footer>
+</div>
+
+<script>
+  const page = document.querySelector(".page");
+  const cle = "rapport:" + (page.dataset.cle || document.title);
+  const titre = document.querySelector("h1").textContent.trim() || document.title;
+  const zone = document.getElementById("reponses");
+  const noms = [...new Set([...document.querySelectorAll('input[type="radio"]')].map(e => e.name))];
+  function lireStock() { try { return JSON.parse(localStorage.getItem(cle) || "{}"); } catch (e) { return {}; } }
+  function ecrireStock(v) { try { localStorage.setItem(cle, JSON.stringify(v)); } catch (e) {} }
+  const notes = {};
+  function texte() {
+    const lignes = ["Mes réponses — " + titre + " :"];
+    for (const n of noms) {
+      const c = document.querySelector('input[name="' + n + '"]:checked');
+      lignes.push("- " + n + " : " + (c ? c.value : "pas répondu"));
+      const note = notes[n].value.trim();
+      if (note) lignes.push("  ↳ " + note.replace(/\s*\n\s*/g, "\n    "));
+    }
+    return lignes.join("\n");
+  }
+  function maj() { zone.value = texte(); }
+  const stock = lireStock();
+  for (const n of noms) {
+    const radio = document.querySelector('input[name="' + n + '"]');
+    const carte = radio.closest(".decision, .question") || radio.parentElement;
+    const bloc = document.createElement("details");
+    const bouton = document.createElement("summary");
+    const champ = document.createElement("textarea");
+    bloc.className = "note";
+    champ.dataset.note = n;
+    champ.setAttribute("aria-label", "Commentaire sur " + n);
+    champ.value = stock["note:" + n] || "";
+    const libelle = () => { bouton.textContent = bloc.open ? "− Replier le commentaire" : champ.value.trim() ? "✏️ Voir mon commentaire" : "+ Ajouter un commentaire"; };
+    bloc.addEventListener("toggle", () => { libelle(); if (bloc.open) champ.focus(); });
+    bloc.append(bouton, champ);
+    carte.appendChild(bloc);
+    notes[n] = champ;
+    libelle();
+    if (!stock[n]) continue;
+    for (const el of document.querySelectorAll('input[name="' + n + '"]')) if (el.value === stock[n]) el.checked = true;
+  }
+  document.addEventListener("change", e => {
+    if (e.target.matches('input[type="radio"]')) { const s = lireStock(); s[e.target.name] = e.target.value; ecrireStock(s); maj(); }
+  });
+  document.addEventListener("input", e => {
+    if (e.target.matches("textarea[data-note]")) { const s = lireStock(); s["note:" + e.target.dataset.note] = e.target.value; ecrireStock(s); maj(); }
+  });
+  document.getElementById("copier").addEventListener("click", () => {
+    const etat = document.getElementById("etat");
+    navigator.clipboard.writeText(zone.value).then(() => { etat.textContent = "Copié."; })
+      .catch(() => { zone.focus(); zone.select(); etat.textContent = "Sélectionné : fais Ctrl+C."; });
+  });
+  maj();
+</script>

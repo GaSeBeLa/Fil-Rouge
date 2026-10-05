@@ -1,4 +1,4 @@
-# Questions à trancher — état au 2026-10-02
+# Questions à trancher — état au 2026-10-05
 
 Ce document **centralise** toutes les questions ouvertes du projet.
 Chacune porte sa **source**, **qui tranche**, les **options**, et une
@@ -70,7 +70,7 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 
 | Sujet | Décision | Date | Source |
 |---|---|---|---|
-| Unité monétaire | ✅ **euro**, `NUMERIC(12,2)` | 2026-09-21 | `context AI/08-etat.md:98-104` |
+| Unité monétaire | ✅ **euro** ; depuis le 2026-10-05 (Q-REM-01) : prix, budgets et barème en `INTEGER`, honoraires et paiement en `NUMERIC(12,2)` | 2026-09-21, revu 2026-10-05 | `context AI/08-etat.md:98-104`, `CLAUDE.md` règle 4 |
 | Acte après la fin du mandat | ✅ **refusé, sauf renouvellement** | 2026-09-11 | `09-dec:122-178` |
 | Mandat renouvelé | ✅ `'renewed'` marque le **nouveau** mandat | — | `09-dec:96-118`, `01:423` |
 | Fin de mandat | ✅ `ends_at` **stocké** | 2026-09-11 | `09-dec:222` |
@@ -81,15 +81,18 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 | Prix des biens | ✅ colonne `price_eur`, ligne à ligne | 2026-09-21 | `08-etat.md:110-113` |
 | Ancien schéma `docker/init/` | ✅ obsolète, `init-v2` fait foi | 2026-09-21 | `08-etat.md:105-109` |
 
-### Réponses de Sébastien — 2026-10-02 (page à cartes, v1 puis v2)
+### Réponses — 2026-10-02 et 2026-10-05 (pages à cartes)
 
-⚠️ Avis d'**un** membre : **à reprendre avec l'équipe lundi** pour les cartes 👥,
-puis à confirmer par Jeff quand la carte le dit.
+- 2026-10-02 : réponses de Sébastien (D1 à D4, Q-REM-01 à 12).
+- 2026-10-05 : la liste complète est renvoyée comme « nos réponses », avec
+  16 nouvelles (Q-REM-13 à 19, Q-PAR-01 à 09).
+- ➡️ Les cartes 🧑‍💼 restent à confirmer par Jeff : **rapport à part**
+  `md/questions-pour-jeff-2026-10-05.html` (voir partie 2).
 
 | Id | Réponse | Ce que ça entraîne |
 |---|---|---|
 | D1 à D4 | ✅ **garder** | Rien à défaire. |
-| Q-REM-01 | ✅ **Tranchée le 2026-10-05** : prix et bornes du barème en **`INTEGER`** (euros entiers, sans chiffre entre parenthèses), `EXCLUDE` du barème en `'[]'` (`01:706`, `01:713`). Le « numeric(12) » du 2026-10-02 était une erreur de formulation. | Tranches `[0 ; 199 999]`, `[200 000 ; 349 999]`… : ni trou ni chevauchement ; base, code (`rem.py:241`) et tableau du sujet (l. 173-174) d'accord. Mesuré : `price_eur` = 2 556 prix, 0 avec centimes, max 406 042 €. `INTEGER` va jusqu'à 2 147 483 647 ([doc PostgreSQL 16](https://www.postgresql.org/docs/16/datatype-numeric.html), lue le 2026-10-05). D3 (adaptateur) inutile ; Jeff informé par Q-JEF-19. Gardent leurs centimes : honoraires, fixe, paiement (`F10:253`). 🟡 Lot de migration : `sale.purchase_amount`, `estate.price`, `amount_proposition`, `amount_min/max` en INTEGER ; modèles `Decimal` → `int` ; règle 4 de `CLAUDE.md` ; `init-v2/README.md` §1. ⚠️ Non testé (Docker éteint) : `numrange` sur INTEGER, import de `354712.00`. |
+| Q-REM-01 | ✅ **Tranchée et faite le 2026-10-05** : prix et bornes du barème en **`INTEGER`** (euros entiers, sans chiffre entre parenthèses), `EXCLUDE` du barème en `'[]'`. Le « numeric(12) » du 2026-10-02 était une erreur de formulation. | Tranches `[0 ; 199 999]`, `[200 000 ; 349 999]`… : ni trou ni chevauchement ; base, code (`rem.py:241`) et tableau du sujet (l. 173-174) d'accord. Mesuré : `price_eur` = 2 556 prix, 0 avec centimes, max 406 042 €. `INTEGER` va jusqu'à 2 147 483 647 ([doc PostgreSQL 16](https://www.postgresql.org/docs/16/datatype-numeric.html), lue le 2026-10-05). ✅ Fait : schéma (`c896e39`, `abbc84e`), modèles en `int` (`d3c128c`), 422 sur un prix à virgule (`fea3c9f`) ; testé sur une base temporaire (01, 02, 03 passent ; chevauchement refusé) ; 123 tests passent. D3 (adaptateur) inutile ; Jeff informé par Q-JEF-19. Gardent leurs centimes : honoraires et paiement, `NUMERIC(12,2)` (`F10:253`). |
 | Q-REM-02 | ✅ **statut-mandat** (pas l'option recommandée) | Nouveau statut de fin sur `mandate` ; peut servir aussi à **Q-REM-14**. ⚠️ S'écarte de `RCR:100` (motif du refus dans `paiements`) : à écrire dans l'ADR. |
 | Q-REM-03 | ✅ **colonne** — « à documenter et à confirmer avec Jeff » | `payment.performance_score`. |
 | Q-REM-04 | ✅ **jsonb** | `payment.calculation_details JSONB`. |
@@ -102,11 +105,35 @@ puis à confirmer par Jeff quand la carte le dit.
 | Q-REM-11 | ✅ **api** | Test d'intégration montant = taux × honoraires. |
 | Q-REM-12 | ✅ **c3** | C3 codée dans `sale_service`. |
 | Q-INF-06 | ✅ **valider dans le routeur commun** (2026-10-05) | Fait : `_validated` (`crud_router.py`) — prix à virgule et champ manquant en 422 ; commits `d3c128c`, `fea3c9f`. |
+| Q-REM-13 | ✅ **cle** (2026-10-05, pas l'option recommandée) | Clé de `sale` vers `parameters_fees` (💡 ex. `sale.id_parameters_fees`) ; `02` n'insère aucune vente, rien à remplir. **Amende ADR-019** (proposé, « sans clé »). |
+| Q-REM-14 | ✅ **statut** (2026-10-05) | Statut de fin sur `mandate` (`01:405-407`), ex. `'lost'`. 🟡 Un seul statut pour Q-REM-02 et Q-REM-14, ou deux ? |
+| Q-REM-15 | ✅ **seed** (2026-10-05) | Le seed fait commencer le barème par défaut en 2025 ; `rem.py:298` garde 2026. |
+| Q-REM-16 | ✅ **hypothese** (2026-10-05) | `hire_date` = date de création du compte (`02:24-26`), dite en soutenance ; Jeff dira s'il a mieux (Q-JEF-10). |
+| Q-REM-17 | ✅ **colonnes** (2026-10-05) | `announced_at`, `invoice_submitted_at`, `verified_at`, `scheduled_for` et `invoice_reference` sur `payment`. 💡 Un CHECK par date, comme `chk_paid` (`01:765-767`). Rejoint Q-ACC-11 (pas encore répondue). |
+| Q-REM-18 | ✅ **acter** (2026-10-05) | ADR X01 (option B) à écrire. À mettre à jour avec lui : `08-etat.md` (l. 80, 195) et `API/README.md:151`, qui attendent encore « l'arbitrage de X01 ». |
+| Q-REM-19 | ✅ **oui** (2026-10-05, pas l'option recommandée) | `CHECK (final_rate BETWEEN 0.20 AND 0.60)` à la place de `01:755`. ⚠️ **Tension avec Q-REM-05** : on relâche deux réglages (`01:758-759`) et on en grave deux autres ; si Jeff change 20 % ou 60 % (Q-JEF-01), base à recréer. À revoir après sa réponse. |
+| Q-PAR-01 | ✅ **sujet** (2026-10-05) | À valider par Jeff (Q-JEF-01). |
+| Q-PAR-02 | ✅ **rien** (2026-10-05) | À valider par Jeff (Q-JEF-03). ⚠️ S'il veut une indemnité : un paiement exige une vente (`01:760`), Q-REM-02 à revoir. |
+| Q-PAR-03 | ✅ **palier** (2026-10-05) | À confirmer par Jeff (Q-JEF-02). |
+| Q-PAR-04 | ✅ **12** (2026-10-05) | À valider par Jeff (Q-JEF-01). |
+| Q-PAR-05 | ✅ **transfo** (2026-10-05, pas l'option recommandée) — « demandé a jeff comment le score baisse, le calcule ? » | Atout : un mandat sans vente fait baisser la note, comme `Readme.md:135`. Le taux remplace S₄ seulement (`RCR:160`) ; les 5 poids restent. ⚠️ Le sujet ne donne **aucune grille** de notes pour ce taux : demandée à Jeff (Q-JEF-05, reformulée). |
+| Q-PAR-06 | ✅ **sujet** (2026-10-05) — « les valeurs sont donné par le client, dont on fait confiance. » | ⚠️ Nuance : le sujet les dit « proposés, non imposés par le métier » (`F10:3-5`) ; elles deviennent celles du client quand Jeff dit oui (Q-JEF-01). |
+| Q-PAR-07 | ✅ **sujet** (2026-10-05) | Cohérent avec Q-REM-05 : ces valeurs sortent des CHECK. Jeff : Q-JEF-01. |
+| Q-PAR-08 | ✅ **garder** (2026-10-05) | Jeff : Q-JEF-01. |
+| Q-PAR-09 | ✅ **manager** (2026-10-05) | ⚠️ Ne colle pas avec la recommandation de Q-ACC-07 (« la direction seule ») ; 💡 la direction fixe le barème par défaut, le manager les barèmes nominatifs. Jeff dira d'abord s'il en veut (Q-JEF-16, en deux temps). Va dans le RACI (`RCR:329`). |
 
-**Lot de migration qui en découle** (un seul `docker compose down -v`) :
-nouveau statut de `mandate` (Q-REM-02), `payment.performance_score` (Q-REM-03),
-`payment.calculation_details` (Q-REM-04), table `remuneration_parameters` et
-CHECK relâchés (Q-REM-05), `final_rate` dans `chk_refused` (Q-REM-10).
+**Lot de migration qui en découle** (un seul `docker compose down -v`,
+numéros de `01` relus le 2026-10-05) :
+
+- statut(s) de fin de `mandate` (Q-REM-02, Q-REM-14 ; `01:405-407`) ;
+- `payment.performance_score` (Q-REM-03) et `payment.calculation_details` en JSONB (Q-REM-04) ;
+- table `remuneration_parameters`, CHECK `01:758-759` relâchés (Q-REM-05) ;
+- `final_rate` dans `chk_refused` (Q-REM-10 ; `01:782-787`) ;
+- clé de `sale` vers `parameters_fees` (Q-REM-13) ;
+- 4 dates et `invoice_reference` sur `payment` (Q-REM-17) ;
+- `CHECK (final_rate BETWEEN 0.20 AND 0.60)` (Q-REM-19 ; `01:755`) — ⚠️ voir Q-REM-05.
+- ⏸️ Attendent Jeff avant de partir : Q-JEF-01, 03, 06, 18.
+- ✅ Déjà fait, hors lot : Q-REM-01 (prix en `INTEGER`), qui demande lui aussi un `down -v`.
 
 **ADR à écrire — plus tard** ⏸️ : rien n'est rédigé maintenant ; les ADR
 s'écrivent une fois **toutes les réponses** reçues (demandé le 2026-10-05).
@@ -114,16 +141,21 @@ Simple pense-bête ; 💡 regroupement proposé, numéros donnés sur Confluence
 
 | ADR | Ce qu'il acte | Questions | État |
 |---|---|---|---|
-| A | Types monétaires : prix en INTEGER, bornes du barème incluses | Q-REM-01 | décidé — remplace « tout montant en NUMERIC(12,2) » |
-| B | Vente perdue : statut de fin du mandat | Q-REM-02, Q-REM-14 | décidé pour Q-REM-02 — **amende ADR-024** (motif de refus sur payment), écart à `RCR:100` |
-| C | Traçabilité du calcul : figer le score et les entrées | Q-REM-03, Q-REM-04, Q-REM-11 | décidé — à confirmer avec Jeff (Q-REM-03) |
-| D | Paramètres de rémunération en table versionnée | Q-REM-05 | décidé — relâche deux CHECK de 01 |
-| E | Score recalculé à chaque vente | Q-REM-06 | décidé — écart à `F10:293` ; attend Jeff (Q-JEF-17) |
-| F | Définition des critères de performance | Q-REM-07, Q-REM-08, Q-REM-09 | décidé par le groupe — attend Jeff (Q-JEF-08, Q-JEF-09) |
+| A | Types monétaires : prix en INTEGER, bornes du barème incluses | Q-REM-01 | décidé et fait le 2026-10-05 — remplace « tout montant en NUMERIC(12,2) » |
+| B | Vente perdue : statut de fin du mandat | Q-REM-02, Q-REM-14 | décidé — **amende ADR-024** (motif de refus sur payment), écart à `RCR:100` ; attend Jeff (Q-JEF-03) |
+| C | Traçabilité du calcul : figer la note et les entrées | Q-REM-03, Q-REM-04, Q-REM-11 | décidé — confirmation de Jeff (Q-JEF-20) |
+| D | Paramètres de rémunération en table versionnée | Q-REM-05, Q-REM-19 | décidé — relâche deux CHECK ; ⚠️ Q-REM-19 en ajoute un (20-60 %) : à justifier ou à revoir |
+| E | Note recalculée à chaque vente | Q-REM-06 | décidé — écart à `F10:293` ; attend Jeff (Q-JEF-17) |
+| F | Définition des critères de performance | Q-REM-07, Q-REM-08, Q-REM-09, Q-PAR-05 | décidé par le groupe — attend Jeff (Q-JEF-05, 08, 09) |
 | G | Validation de l'entrée dans le routeur commun | Q-INF-06 | décidé et fait le 2026-10-05 |
+| H | X01 : ancienneté et performance majorent le taux | Q-REM-18 | décidé le 2026-10-05 — « il suffit de l'acter » (`09-dec:303-324`) |
+| I | Vente reliée à sa grille d'honoraires | Q-REM-13 | décidé — **amende ADR-019** (proposé, « sans clé ») |
+| J | Étapes du paiement : 4 dates et la référence de facture | Q-REM-17 | décidé |
+| K | Paramètres proposés, validés par Jeff | Q-PAR-01 à 04, 06 à 08, 10, 11, 13 | positions du groupe — attend Jeff (Q-JEF-01, 02, 03) |
 
-Pas d'ADR propre : Q-REM-10 (un CHECK), Q-REM-12 (C3 déjà écrite), D1 à D4.
-ADR prévu si tranché : Q-REM-18 (X01).
+Pas d'ADR propre : Q-REM-10 (un CHECK), Q-REM-12 (C3 déjà écrite), Q-REM-15
+(seed seul), Q-REM-16 (hypothèse déjà écrite, `02:24-26`), D1 à D4.
+Q-PAR-09 va dans le RACI, pas dans un ADR (`RCR:329`).
 
 ---
 
@@ -321,7 +353,7 @@ Voici ce qui ne colle pas avec la base.
 
 #### Q-REM-13 — Lien vers la ligne de `parameters_fees` utilisée ?
 
-- 🔵 **Appliqué, pas acté** : pas de clé, choix d'ADR-019 (« proposé »)
+- ✅ **Répondu le 2026-10-05 : `cle`** (voir §0) — avant : 🔵 appliqué, pas acté : pas de clé, choix d'ADR-019 (« proposé »)
 - **Constat** : `parameters_fees.id` n'est référencé nulle part.
 - 💡 **Recommandation : garder sans clé**, et accepter ADR-019.
   - Le montant est déjà figé dans `sale.fees_amount`.
@@ -329,7 +361,7 @@ Voici ce qui ne colle pas avec la base.
 
 #### Q-REM-14 — Le mandat « perdant » de deux mandats non exclusifs
 
-- 🟡 **Ouvert** · 👥 **Groupe**
+- ✅ **Répondu le 2026-10-05 : `statut`** (voir §0) · 👥 **Groupe**
 - **Constat** : `F10:52-56` : un seul chasseur est payé ; « "Bruno" ne perçoit aucune rémunération » (`F10:56`).
   - `sale.id_mandate` est `UNIQUE` (`01:655`) : le perdant n'a **pas** de vente.
 - 💡 **Recommandation** : le mandat perdant prend un **statut de fin** (à ajouter, ex. `'lost'`).
@@ -338,7 +370,7 @@ Voici ce qui ne colle pas avec la base.
 
 #### Q-REM-15 — Date de début du barème par défaut
 
-- 🟠 **Position à valider** (Sébastien : « reculer à 2025 ») · 👥 **Groupe**
+- ✅ **Répondu le 2026-10-05 : `seed`** (voir §0) — avant : 🟠 position de Sébastien, « reculer à 2025 » · 👥 **Groupe**
 - **Constat** : `rem.py:298` : `debut = date(2026, 1, 1)`.
   - Une vente du seed datée de 2025 lèverait `BaremeIntrouvable`.
 - 💡 **Recommandation : reculer, dans le seed seulement.**
@@ -346,14 +378,14 @@ Voici ce qui ne colle pas avec la base.
 
 #### Q-REM-16 — Ancienneté : quelle date d'entrée ?
 
-- 🟠 **Hypothèse de migration** · 🧑‍💼 **Jeff** (Q-JEF-10)
+- ✅ **Répondu le 2026-10-05 : `hypothese`** (voir §0) ; reste posé à 🧑‍💼 **Jeff** (Q-JEF-10)
 - **Constat** : `hire_date` = date de création du compte (`02:24-26`).
   - Le sujet : « Dépend de la date d'entrée du chasseur, donnée RH » (`RCR:762`).
 - 💡 **Recommandation** : garder l'hypothèse, la dire en soutenance, et demander à Jeff si une vraie date existe.
 
 #### Q-REM-17 — Statuts du paiement : quelles dates garder ?
 
-- 🟡 **Ouvert** · 👥 **Groupe**
+- ✅ **Répondu le 2026-10-05 : `colonnes`** (voir §0) · 👥 **Groupe**
 - **Constat** : `F07:10-34` décrit 5 étapes. La base n'a que `created_at` et `paid_at` (`01:730`).
   - Absents : date d'annonce, facture (fichier, numéro), date de vérification, date programmée.
 - **Options** :
@@ -367,7 +399,7 @@ Voici ce qui ne colle pas avec la base.
 
 #### Q-REM-18 — Ancienneté et performance : clé du barème, ou majoration du taux ? (X01)
 
-- 🔵 **Appliqué, pas acté** · 👥 **Groupe**
+- ✅ **Répondu le 2026-10-05 : `acter`** (voir §0) — avant : 🔵 appliqué, pas acté · 👥 **Groupe**
 - **Constat** :
   - le schéma et le code **majorent le taux** (option B) : `payment.seniority_rate`, `performance_rate` (`01:754-755`) ;
   - `F10:201` le confirme ;
@@ -378,7 +410,7 @@ Voici ce qui ne colle pas avec la base.
 
 #### Q-REM-19 — Borner le taux final entre 20 et 60 % en base (R21) ?
 
-- 🟡 **Ouvert** · 👥 **Groupe**
+- ✅ **Répondu le 2026-10-05 : `oui`**, contre ma recommandation ci-dessous (voir §0 : tension avec Q-REM-05) · 👥 **Groupe**
 - **Constat** : `01:743-750` propose `CHECK (final_rate BETWEEN 0.20 AND 0.60)`.
   `01:131` range R21 parmi les décisions ouvertes.
 - 💡 **Recommandation : ne pas activer R21.**
@@ -396,20 +428,20 @@ Le code les porte déjà dans `parametrage_par_defaut`.
 les valeurs du sujet par défaut, et noter dans un ADR « paramètres proposés,
 validés par Jeff le … ». Elles sont toutes listées en **partie 2**.
 
-| Id | Question | Proposé par le sujet | Source |
-|---|---|---|---|
-| Q-PAR-01 | Honoraires : fixe et pourcentage | 3 000 € + 2,5 % | `RCR:321` (D1) |
-| Q-PAR-02 | Non exclusif, client trouve seul : rien, ou indemnité ? | rien, motif tracé | `RCR:322` (D2), `RCR:100` |
-| Q-PAR-03 | Barème par palier ou progressif ? | palier | `RCR:323` (D3) — ⚠️ voir plus bas |
-| Q-PAR-04 | Fenêtre des critères de volume | 12 mois glissants | `RCR:324` (D4) |
-| Q-PAR-05 | Ventes et mandats séparés, ou taux de transformation ? | séparés | `RCR:325` (D5) |
-| Q-PAR-06 | Poids des 5 critères | 25 / 10 / 25 / 15 / 25 | `RCR:326` (D6) |
-| Q-PAR-07 | Effet de l'ancienneté et de la performance | +10 % max, ±20 % | `RCR:327` (D7) |
-| Q-PAR-08 | Garder le plancher de 20 %, qui ne mord jamais ? | oui | `RCR:328` (D8) |
-| Q-PAR-09 | Qui crée un barème propre à un chasseur ? | à définir | `RCR:329` (D9) |
-| Q-PAR-10 | Bornes et taux des tranches | 30 / 35 / 40 / 45 / 50 % | `RCR:171-177` |
-| Q-PAR-11 | Arrondi du score (1 déc.) et du taux (4 déc.) | demi supérieur | `RCR:223-229` |
-| Q-PAR-13 | Grilles de notes (délai, visites, exclusivité 100/60) | `F10:107-138` | `RCR:143-147` |
+| Id | Question | Proposé par le sujet | Source | Réponse du groupe (2026-10-05) |
+|---|---|---|---|---|
+| Q-PAR-01 | Honoraires : fixe et pourcentage | 3 000 € + 2,5 % | `RCR:321` (D1) | ✅ sujet |
+| Q-PAR-02 | Non exclusif, client trouve seul : rien, ou indemnité ? | rien, motif tracé | `RCR:322` (D2), `RCR:100` | ✅ rien |
+| Q-PAR-03 | Barème par palier ou progressif ? | palier | `RCR:323` (D3) — ⚠️ voir plus bas | ✅ palier |
+| Q-PAR-04 | Fenêtre des critères de volume | 12 mois glissants | `RCR:324` (D4) | ✅ 12 mois |
+| Q-PAR-05 | Ventes et mandats séparés, ou taux de transformation ? | séparés | `RCR:325` (D5) | ✅ **transfo** — grille à demander |
+| Q-PAR-06 | Poids des 5 critères | 25 / 10 / 25 / 15 / 25 | `RCR:326` (D6) | ✅ sujet |
+| Q-PAR-07 | Effet de l'ancienneté et de la performance | +10 % max, ±20 % | `RCR:327` (D7) | ✅ sujet |
+| Q-PAR-08 | Garder le plancher de 20 %, qui ne mord jamais ? | oui | `RCR:328` (D8) | ✅ garder |
+| Q-PAR-09 | Qui crée un barème propre à un chasseur ? | à définir | `RCR:329` (D9) | ✅ manager |
+| Q-PAR-10 | Bornes et taux des tranches | 30 / 35 / 40 / 45 / 50 % | `RCR:171-177` | 🟡 |
+| Q-PAR-11 | Arrondi du score (1 déc.) et du taux (4 déc.) | demi supérieur | `RCR:223-229` | 🟡 |
+| Q-PAR-13 | Grilles de notes (délai, visites, exclusivité 100/60) | `F10:107-138` | `RCR:143-147` | 🟡 |
 
 **Règles fixées par le sujet — à confirmer, pas à choisir** :
 
@@ -713,15 +745,23 @@ Sources :
 
 ## 2. Questions que seul Jeff peut trancher
 
+➡️ **Rapport à part, depuis le 2026-10-05** : `md/questions-pour-jeff-2026-10-05.html`
+(artifact « Questions pour Jeff »). Chaque question y porte **notre position**,
+tirée des réponses, et ce que sa réponse change. Elles se cochent **là-bas
+seulement** : la page principale n'a plus que le lien.
+
 À lui envoyer **en une fois**, avec la proposition du sujet en face : il
-n'a plus qu'à dire « oui » ou à corriger.
+n'a plus qu'à dire « oui » ou à corriger. 20 questions : les 19 ci-dessous,
+plus Q-JEF-20.
 
 ### Les chiffres
 
 - **Q-JEF-01** — Valide-t-il les **paramètres proposés** par le sujet ?
   Fixe 3 000 € + 2,5 %, tranches 30 à 50 %, poids 25/10/25/15/25,
-  ancienneté +2 %/an plafonnée à +10 %, performance ±20 %, taux final entre 20 et 60 %.
-  (Q-PAR-01, 04, 06, 07, 08, 10, 13)
+  ancienneté « 0 % → +10 % (plafond à 5 ans) » (`RCR:207`), performance ±20 %,
+  taux final entre 20 et 60 %, arrondis de la note (1 déc.) et du taux (4 déc.).
+  (Q-PAR-01, 04, 06, 07, 08, 10, **11** — ajouté le 2026-10-05 —, 13)
+  - Q-REM-19 (oui) grave 20 % et 60 % dans la base : s'il les change, base à recréer.
 - **Q-JEF-02** — Confirme-t-il le barème **par palier** (le taux de la tranche
   s'applique à tout) ? `F10:166` en fait une règle, `RCR:323` une décision.
   ⚠️ Le palier crée un saut d'environ 600 € à 350 000 €. (Q-PAR-03)
@@ -732,11 +772,16 @@ n'a plus qu'à dire « oui » ou à corriger.
 
 ### La performance
 
-- **Q-JEF-05** — Le sujet dit que le score est « recalculé **à la baisse** »
-  quand un mandat expire sans vente (`Readme.md:135`, `F10:295-300`).
-  Avec les critères proposés, un mandat de plus **ne fait jamais baisser** le score.
-  Veut-il une vraie baisse ? Si oui, **un moyen** : le taux de transformation
-  (ventes ÷ mandats) ; un autre : une pénalité par mandat échu. (Q-PAR-05)
+- **Q-JEF-05** — 🆕 Reformulée le 2026-10-05, d'après la réponse Q-PAR-05 (transfo).
+  Le sujet dit que le score est « recalculé **à la baisse** » quand un mandat
+  expire sans vente (`Readme.md:135`, `F10:295-300`). Avec les critères
+  proposés, un mandat de plus **ne fait jamais baisser** le score.
+  Nous proposons le **taux de transformation** (ventes ÷ mandats) à la place
+  de S₄ (`RCR:160`). Le valide-t-il ? Et **quelle grille de notes** : quel taux
+  vaut 100 points ? Le sujet n'en donne aucune. (Q-PAR-05)
+  - Détail à lui faire trancher : mandats **signés** sur 12 mois au dénominateur
+    (la note baisse dès la signature), ou mandats **clos**, vendus ou échus
+    (la note baisse pile à l'échéance, comme `F10:295-300`).
 - **Q-JEF-08** — Quelles **visites** comptent : celles du client, du
   chasseur, ou les deux ? Sur tous les biens du mandat ? (Q-REM-07)
 - **Q-JEF-09** — Quelles **ventes** et quels **mandats** comptent sur 12 mois ?
@@ -771,11 +816,21 @@ n'a plus qu'à dire « oui » ou à corriger.
 - **Q-JEF-15** — Combien de temps garder les données avant **anonymisation** ?
   Le sujet donne 10 ans pour les paiements ; il manque le reste. (Q-ACC-21)
 - **Q-JEF-18** — Quelle **échelle de priorité** pour le client sur un bien proposé ? (Q-SCH-05)
-- **Q-JEF-16** — Qui peut créer un **barème propre à un chasseur**, et qui le valide ? (Q-PAR-09)
+- **Q-JEF-16** — 🆕 En deux temps depuis le 2026-10-05. 1. Veut-il des
+  **barèmes propres à un chasseur** (`RCR:186-193`), en plus des bonus
+  d'ancienneté et de performance, qui rendent déjà le barème « différent pour
+  chaque chasseur » (`Readme.md:80`) ? 2. Si oui, qui les crée, et qui les
+  valide ? Notre position : le manager (Q-PAR-09). ⚠️ À accorder avec
+  Q-ACC-07 (💡 « la direction seule »). (Q-PAR-09)
 - **Q-JEF-19** — **Pour information** (pas une question) : un prix pile sur une
   limite du barème prend la tranche du dessus, comme votre tableau (200 000 € → 35 %,
   350 000 € → 40 %). Les prix sont stockés en euros entiers. Dites-nous si ce n'est
   pas votre lecture. (Q-REM-01, tranchée le 2026-10-05)
+- **Q-JEF-20** — 🆕 Ajoutée le 2026-10-05. **Confirmation** : chaque paiement
+  garde la note de performance et le détail du calcul (les 5 notes, les visites,
+  l'ancienneté…), pour pouvoir le refaire. Est-ce bien ce qu'il veut ?
+  Le sujet l'exige déjà (`RCR:292`) ; la note de Q-REM-03 demandait sa
+  confirmation. (Q-REM-03, Q-REM-04)
 
 ---
 
