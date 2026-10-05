@@ -2,26 +2,13 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
   :root {
-    --fond:#f7efdf; --carte:#fffaf0; --trait:#e2d6bf; --texte:#1f1a14; --doux:#5f5446;
+    color-scheme: light;
+    --fond:#f3e8d4; --carte:#faf1e2; --trait:#dcd0b7; --texte:#50433b; --doux:#6e6151;
     --accent:#8a4b12; --ok:#2c6e48; --ok-fond:#e4f0e2; --warn:#8a5a0c; --warn-fond:#fbe9cc;
     --ko:#9c3431; --ko-fond:#f8e0da; --q-fond:#fbe4d2;
   }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      color-scheme: dark;
-      --fond:#1a1510; --carte:#241d16; --trait:#3a3025; --texte:#f1e8da; --doux:#b9ab96;
-      --accent:#f0a860; --ok:#7cc796; --ok-fond:#1c2a1f; --warn:#e8b560; --warn-fond:#2e2414;
-      --ko:#ec8a80; --ko-fond:#2f1c19; --q-fond:#33241a;
-    }
-  }
-  :root[data-theme="dark"] {
-    color-scheme: dark;
-    --fond:#1a1510; --carte:#241d16; --trait:#3a3025; --texte:#f1e8da; --doux:#b9ab96;
-    --accent:#f0a860; --ok:#7cc796; --ok-fond:#1c2a1f; --warn:#e8b560; --warn-fond:#2e2414;
-    --ko:#ec8a80; --ko-fond:#2f1c19; --q-fond:#33241a;
-  }
   * { box-sizing:border-box; }
-  body { margin:0; background:var(--fond); color:var(--texte); font-family:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif; font-size:18px; line-height:1.7; padding-inline:16px; text-align:left; }
+  body { margin:0; background:var(--fond); color:var(--texte); font-family:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif; font-size:18px; letter-spacing:.05em; line-height:1.7; padding-inline:16px; text-align:left; }
   .page { max-width:46rem; margin:0 auto; padding-block:2.5rem 4rem; display:flex; flex-direction:column; gap:2.6rem; }
   h1,h2,h3 { margin:0; text-wrap:balance; line-height:1.25; }
   h1 { font-size:2.1rem; }
@@ -29,7 +16,8 @@
   h3 { font-size:1.08rem; }
   p { margin:0; }
   ul { margin:0; padding-left:1.2rem; display:flex; flex-direction:column; gap:.35rem; }
-  .mono { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.85em; font-variant-numeric:tabular-nums; }
+  .mono, .fil time, td.n, textarea { letter-spacing:normal; }
+  .mono { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:max(.85em, 15px); font-variant-numeric:tabular-nums; }
   section { display:flex; flex-direction:column; gap:1rem; }
   .sous { color:var(--doux); }
   .jauge { align-self:flex-start; display:inline-flex; gap:.5rem; align-items:center; padding:.35rem .8rem; border-radius:6px; background:var(--ok-fond); color:var(--ok); font-weight:700; }
@@ -38,14 +26,14 @@
   .chiffres { display:grid; grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr)); gap:.75rem; }
   .chiffre { background:var(--carte); border:1px solid var(--trait); border-radius:8px; padding:.8rem 1rem; display:flex; flex-direction:column; gap:.1rem; }
   .chiffre b { font-size:1.6rem; font-variant-numeric:tabular-nums; }
-  .chiffre span { color:var(--doux); font-size:.9rem; line-height:1.4; }
+  .chiffre span { color:var(--doux); font-size:1rem; line-height:1.4; }
   .decision { background:var(--carte); border:1px solid var(--trait); border-radius:8px; padding:1rem 1.1rem; display:flex; flex-direction:column; gap:.6rem; }
   .decision .tete { display:flex; flex-wrap:wrap; gap:.5rem; align-items:baseline; justify-content:space-between; }
-  .puce { font-size:.8rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:.1rem .5rem; border-radius:4px; white-space:nowrap; }
+  .puce { font-size:.9375rem; font-weight:700; padding:.1rem .5rem; border-radius:4px; white-space:nowrap; }
   .puce.faible { background:var(--ok-fond); color:var(--ok); }
   .puce.moyen { background:var(--warn-fond); color:var(--warn); }
-  .grille { display:grid; grid-template-columns:7.5rem 1fr; gap:.25rem .9rem; margin:0; }
-  .grille dt { color:var(--doux); font-size:.92rem; }
+  .grille { display:grid; grid-template-columns:9rem 1fr; gap:.25rem .9rem; margin:0; }
+  .grille dt { color:var(--doux); font-size:1rem; }
   .grille dd { margin:0; }
   .choix { display:flex; flex-wrap:wrap; gap:.5rem; padding-top:.3rem; border-top:1px dashed var(--trait); }
   .choix label { display:inline-flex; align-items:center; gap:.4rem; padding:.3rem .75rem; border:1px solid var(--trait); border-radius:999px; cursor:pointer; font-size:.95rem; background:var(--carte); }
@@ -60,23 +48,30 @@
   .erreur { background:var(--ko-fond); border-radius:8px; padding:1rem 1.1rem; display:flex; flex-direction:column; gap:.5rem; }
   .fil { list-style:none; padding:0; gap:0; }
   .fil li { display:grid; grid-template-columns:3.6rem 1fr; gap:.8rem; padding:.55rem 0; border-top:1px solid var(--trait); }
-  .fil time { font-family:"IBM Plex Mono",monospace; color:var(--doux); font-size:.9rem; padding-top:.15rem; }
+  .fil time { font-family:"IBM Plex Mono",monospace; color:var(--doux); font-size:.9375rem; padding-top:.15rem; }
   .tableau { overflow-x:auto; }
   table { border-collapse:collapse; width:100%; font-size:.95rem; }
-  th { text-align:left; color:var(--doux); font-weight:700; font-size:.82rem; text-transform:uppercase; letter-spacing:.05em; padding:.4rem .7rem .4rem 0; border-bottom:2px solid var(--trait); }
+  th { text-align:left; color:var(--doux); font-weight:700; font-size:.9375rem; padding:.4rem .7rem .4rem 0; border-bottom:2px solid var(--trait); }
   td { padding:.6rem .7rem .6rem 0; border-bottom:1px solid var(--trait); vertical-align:top; }
   td.n { font-family:"IBM Plex Mono",monospace; white-space:nowrap; }
   a { color:var(--accent); }
-  button { font:inherit; font-weight:700; color:#fff; background:var(--accent); border:0; border-radius:6px; padding:.6rem 1.1rem; cursor:pointer; }
-  :root[data-theme="dark"] button { color:#1a1510; }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) button { color:#1a1510; } }
+  button { font:inherit; font-weight:700; color:var(--carte); background:var(--accent); border:0; border-radius:6px; padding:.6rem 1.1rem; cursor:pointer; }
   button:focus-visible { outline:2px solid var(--texte); outline-offset:2px; }
-  textarea { width:100%; min-height:8rem; font-family:"IBM Plex Mono",monospace; font-size:.85rem; background:var(--carte); color:var(--texte); border:1px solid var(--trait); border-radius:6px; padding:.6rem; }
+  textarea { width:100%; min-height:8rem; font-family:"IBM Plex Mono",monospace; font-size:.9375rem; background:var(--carte); color:var(--texte); border:1px solid var(--trait); border-radius:6px; padding:.6rem; }
   .ligne { display:flex; flex-wrap:wrap; gap:.8rem; align-items:center; }
   .note summary { display:inline-block; list-style:none; cursor:pointer; color:var(--accent); font-weight:700; font-size:.95rem; padding:.2rem .7rem; border:1px dashed var(--trait); border-radius:6px; }
   .note summary::-webkit-details-marker { display:none; }
   .note summary:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
   .note textarea { display:block; margin-top:.5rem; min-height:4.5rem; font-family:inherit; font-size:.95rem; line-height:1.5; }
+  .clair { background:var(--carte); border:1px solid var(--trait); border-radius:8px; padding:1rem 1.1rem; display:flex; flex-direction:column; gap:.9rem; }
+  .grille dt.net { color:var(--texte); font-weight:700; }
+  .grille dt.plus { color:var(--ok); font-weight:700; }
+  .grille dt.moins { color:var(--ko); font-weight:700; }
+  .technique { border-top:1px dashed var(--trait); padding-top:.5rem; }
+  .technique summary { cursor:pointer; color:var(--doux); font-weight:700; font-size:.95rem; }
+  .technique summary:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .technique > .grille, .technique > p { margin-top:.6rem; }
+  .effet { display:flex; flex-direction:column; gap:.15rem; }
   @media (max-width:480px) { .grille { grid-template-columns:1fr; } .grille dt { margin-top:.4rem; } }
   .puce.doc { background:var(--carte); color:var(--doux); border:1px solid var(--trait); }
   .puce.ko { background:var(--ko-fond); color:var(--ko); }
@@ -89,10 +84,10 @@
   .arg { display:block; font-size:.92rem; color:var(--doux); line-height:1.5; margin-top:.15rem; }
 </style>
 
-<div class="page" data-cle="filrouge-2026-10-02-questions-v3">
+<div class="page" data-cle="filrouge-2026-10-02-questions-v4">
 
   <header style="display:flex;flex-direction:column;gap:.8rem">
-    <p class="mono sous">Fil Rouge Immobilier · 2026-10-02 · version 3 · registre md/questions-a-trancher-2026-10-02.md</p>
+    <p class="mono sous">Fil Rouge Immobilier · 2026-10-02 · version 4 · registre md/questions-a-trancher-2026-10-02.md</p>
     <h1>Questions à trancher</h1>
     <span class="jauge">🟢 Ça tient, mais…</span>
     <ul>
@@ -200,7 +195,7 @@
   <section id="t0">
     <h2>A · Rémunération : champs absents ou ambigus en base</h2>
     <p class="sous">Le cœur de la demande. La calculette lit une vente et rend un paiement ; la base n'a pas tout ce qu'il faut.</p>
-    <div class="question" id="Q-REM-01" data-note-init="définir la borne et informer Jeff, et citer exactement la contradiction ; et changer le decimal(12,2) en numeric(12)">
+    <div class="question" id="Q-REM-01" data-note-init="définir la borne et informer Jeff, et citer exactement la contradiction. Décision du 2026-10-05 : les prix passent sans virgule (DECIMAL(12), euros entiers) ; le « numeric(12) » du 2026-10-02 était une erreur de formulation. Bornes du barème en [] (incluses).">
       <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>📝 Q-REM-01 · Borne haute d'une tranche du barème : incluse ou exclue ?</h3><span class="puce faible">⚙️ code</span></div>
       <p class="qui">Qui tranche : <b>👥 Groupe, puis Jeff (Q-JEF-19)</b></p>
       <ul>
@@ -220,11 +215,16 @@
         <li>Le sujet lui-même hésite (citations ci-dessous) : c'est à nous de fixer la règle, puis de la faire valider par Jeff.</li>
       </ul></div>
       <div class="repondu"><ul>
-        <li>📝 Ton commentaire : « définir la borne et informer Jeff, et citer exactement la contradiction ; et changer le decimal(12,2) en numeric(12) »</li>
+        <li>📝 Ton commentaire : « définir la borne et informer Jeff, et citer exactement la contradiction. Décision du 2026-10-05 : les prix passent sans virgule (DECIMAL(12), euros entiers) ; le « numeric(12) » du 2026-10-02 était une erreur de formulation. Bornes du barème en [] (incluses). »</li>
         <li>➡️ Fait : la contradiction est citée mot pour mot plus haut ; la question part chez Jeff en <b>Q-JEF-19</b>.</li>
-        <li>⚠️ Passer en <span class=mono>NUMERIC(12)</span> (sans centimes) heurte une règle du groupe : « Tout montant est en euros, <span class=mono>NUMERIC(12,2)</span> » (<span class=mono>CLAUDE.md</span>, règle 4).</li>
-        <li>⚠️ Les honoraires (3 000 € + 2,5 %) et le montant payé ont des centimes, arrondis au centime par le sujet (<span class=mono>F10:253</span>) : eux ne peuvent pas passer sans centimes.</li>
-        <li>🟡 À trancher lundi : seulement les <b>prix</b> en euros entiers ? Ou garder les centimes, la borne <span class=mono>'[)'</span> de la base suffisant à fermer le trou ?</li>
+        <li>✅ Décision du 2026-10-05 : les <b>prix</b> passent en <b>euros entiers</b>, <span class=mono>DECIMAL(12)</span>.</li>
+        <li>ℹ️ <span class=mono>DECIMAL</span> et <span class=mono>NUMERIC</span> sont le même type ; <span class=mono>(12)</span> sans second chiffre = 0 décimale (<a href="https://www.postgresql.org/docs/16/datatype-numeric.html">doc PostgreSQL 16</a>, lue le 2026-10-05).</li>
+        <li>✅ Décision du 2026-10-05 : les deux <span class=mono>EXCLUDE</span> du barème passent de <span class=mono>'[)'</span> à <span class=mono>'[]'</span> (<span class=mono>01:706</span>, <span class=mono>01:713</span>) : la borne haute est <b>incluse</b>, comme dans le code (<span class=mono>prix &lt;= montant_max</span>, <span class=mono>rem.py:241</span>).</li>
+        <li>➡️ Effet : prix entiers + bornes incluses = tranches <span class=mono>[0 ; 199 999]</span>, <span class=mono>[200 000 ; 349 999]</span>… <b>Ni trou, ni chevauchement</b>, et c'est mot pour mot le tableau du sujet (l. 173-174).</li>
+        <li>➡️ L'adaptateur de <b>D3</b> devient inutile : la base stocke <span class=mono>199999</span>, le code le lit tel quel.</li>
+        <li>🟡 Colonnes « prix » à confirmer : <span class=mono>sale.purchase_amount</span> (<span class=mono>01:650</span>), <span class=mono>estate.price</span> (<span class=mono>01:515</span>), <span class=mono>offer.amount_proposition</span> (<span class=mono>01:605</span>), bornes <span class=mono>amount_min/max</span> du barème (<span class=mono>01:691-692</span>).</li>
+        <li>⚠️ Restent avec centimes : honoraires, fixe, montant payé (arrondi au centime, <span class=mono>F10:253</span>).</li>
+        <li>⚠️ À mettre à jour aussi : règle 4 de <span class=mono>CLAUDE.md</span> et <span class=mono>docker/init-v2/README.md</span> §1 (« tous les montants NUMERIC(12,2) »).</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-REM-01" value="adaptateur"><span><b>Convertir à la lecture (recommandé)</b>On stocke 200000. La couche qui lit la base fait montant_max − 0,01. Zéro ligne changée dans remuneration.py, les 55 tests restent verts.<span class="arg">👍 On garde la base propre (aucun trou, aucun chevauchement) et on ne touche pas au code fourni par le sujet.</span><span class="arg">👎 Une conversion de plus à écrire et à tester ; il faut l'expliquer à l'oral.</span></span></label>
