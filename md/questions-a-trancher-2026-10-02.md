@@ -101,11 +101,29 @@ puis à confirmer par Jeff quand la carte le dit.
 | Q-REM-10 | ✅ **oui** | `final_rate` dans `chk_refused`. |
 | Q-REM-11 | ✅ **api** | Test d'intégration montant = taux × honoraires. |
 | Q-REM-12 | ✅ **c3** | C3 codée dans `sale_service`. |
+| Q-INF-06 | ✅ **valider dans le routeur commun** (2026-10-05) | Fait : `_validated` (`crud_router.py`) — prix à virgule et champ manquant en 422 ; commits `d3c128c`, `fea3c9f`. |
 
 **Lot de migration qui en découle** (un seul `docker compose down -v`) :
 nouveau statut de `mandate` (Q-REM-02), `payment.performance_score` (Q-REM-03),
 `payment.calculation_details` (Q-REM-04), table `remuneration_parameters` et
 CHECK relâchés (Q-REM-05), `final_rate` dans `chk_refused` (Q-REM-10).
+
+**ADR à écrire — plus tard** ⏸️ : rien n'est rédigé maintenant ; les ADR
+s'écrivent une fois **toutes les réponses** reçues (demandé le 2026-10-05).
+Simple pense-bête ; 💡 regroupement proposé, numéros donnés sur Confluence.
+
+| ADR | Ce qu'il acte | Questions | État |
+|---|---|---|---|
+| A | Types monétaires : prix en INTEGER, bornes du barème incluses | Q-REM-01 | décidé — remplace « tout montant en NUMERIC(12,2) » |
+| B | Vente perdue : statut de fin du mandat | Q-REM-02, Q-REM-14 | décidé pour Q-REM-02 — **amende ADR-024** (motif de refus sur payment), écart à `RCR:100` |
+| C | Traçabilité du calcul : figer le score et les entrées | Q-REM-03, Q-REM-04, Q-REM-11 | décidé — à confirmer avec Jeff (Q-REM-03) |
+| D | Paramètres de rémunération en table versionnée | Q-REM-05 | décidé — relâche deux CHECK de 01 |
+| E | Score recalculé à chaque vente | Q-REM-06 | décidé — écart à `F10:293` ; attend Jeff (Q-JEF-17) |
+| F | Définition des critères de performance | Q-REM-07, Q-REM-08, Q-REM-09 | décidé par le groupe — attend Jeff (Q-JEF-08, Q-JEF-09) |
+| G | Validation de l'entrée dans le routeur commun | Q-INF-06 | décidé et fait le 2026-10-05 |
+
+Pas d'ADR propre : Q-REM-10 (un CHECK), Q-REM-12 (C3 déjà écrite), D1 à D4.
+ADR prévu si tranché : Q-REM-18 (X01).
 
 ---
 

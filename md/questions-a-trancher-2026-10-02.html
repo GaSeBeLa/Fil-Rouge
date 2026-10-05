@@ -84,21 +84,22 @@
   .arg { display:block; font-size:.92rem; color:var(--doux); line-height:1.5; margin-top:.15rem; }
 </style>
 
-<div class="page" data-cle="filrouge-2026-10-02-questions-v6">
+<div class="page" data-cle="filrouge-2026-10-02-questions-v7">
 
   <header style="display:flex;flex-direction:column;gap:.8rem">
-    <p class="mono sous">Fil Rouge Immobilier · 2026-10-02 · version 6 · registre md/questions-a-trancher-2026-10-02.md</p>
+    <p class="mono sous">Fil Rouge Immobilier · 2026-10-02 · version 7 · registre md/questions-a-trancher-2026-10-02.md</p>
     <h1>Questions à trancher</h1>
     <span class="jauge">🟢 Ça tient, mais…</span>
     <ul>
       <li>✅ <b>125 questions</b>, une carte chacune, avec l'option que je recommande marquée « (recommandé) ».</li>
       <li>⚠️ <b>25 réponses changent la base</b> (badge rouge 🗄️) : elles se paient toutes d'un <span class="mono">docker compose down -v</span> chez chacun. À grouper.</li>
       <li>🆕 Version 2 : chaque carte a un bloc <b>🗣️ En clair</b>, et chaque option un <b>👍 pour</b> et un <b>👎 contre</b>.</li>
-      <li>✅ Tes <b>16 réponses</b> et tes <b>3 commentaires</b> du 2026-10-02 sont déjà notés (cartes ✅ et 📝, encadré vert).</li>
+      <li>✅ Tes <b>17 réponses</b> et tes <b>3 commentaires</b> du 2026-10-02 sont déjà notés (cartes ✅ et 📝, encadré vert).</li>
       <li>➡️ Coche, commente si besoin (bouton « + Ajouter un commentaire » sous chaque carte), puis <b>copie tes réponses</b> en bas de page.</li>
     </ul>
     <nav aria-label="Sommaire"><ul>
       <li><a href="#bdd">Avant de choisir</a></li>
+      <li><a href="#adr">ADR à écrire</a></li>
       <li><a href="#decisions">Décisions D1-D4</a></li>
       <li><a href="#t0">A</a></li><li><a href="#t1">B</a></li><li><a href="#t2">C</a></li><li><a href="#t3">D</a></li><li><a href="#t4">E</a></li><li><a href="#t5">F</a></li><li><a href="#t6">G</a></li>
       <li><a href="#jeff">Jeff</a></li>
@@ -140,6 +141,27 @@
         <tr><td>Alembic</td><td>Des migrations versionnées, sans tout effacer. Version <b>1.20.0</b>, licence <b>MIT</b> (<a href="https://pypi.org/project/alembic/">pypi</a>, lu le 2026-10-02). Coût : apprendre l'outil, et 01 cesse d'être la seule source.</td></tr>
       </tbody>
     </table></div>
+  </section>
+
+  <section id="adr">
+    <h2>📝 ADR à écrire — plus tard</h2>
+    <p class="sous">Certaines réponses changent une règle ou la base : elles demanderont un ADR sur Confluence. ⏸️ <b>Rien n'est rédigé maintenant</b> : les ADR s'écrivent une fois <b>toutes les réponses</b> reçues. Simple pense-bête ; 💡 regroupement proposé, numéros donnés sur Confluence.</p>
+    <div class="tableau"><table>
+      <thead><tr><th>ADR</th><th>Ce qu'il acte</th><th>Questions</th><th>État</th></tr></thead>
+      <tbody>
+        <tr><td class="n">A</td><td>Types monétaires : prix en INTEGER, bornes du barème incluses</td><td class="n">Q-REM-01</td><td>décidé — remplace « tout montant en NUMERIC(12,2) »</td></tr>
+        <tr><td class="n">B</td><td>Vente perdue : statut de fin du mandat</td><td class="n">Q-REM-02, Q-REM-14</td><td>décidé pour Q-REM-02 — <b>amende ADR-024</b> (motif de refus sur payment), écart à RCR:100</td></tr>
+        <tr><td class="n">C</td><td>Traçabilité du calcul : figer le score et les entrées</td><td class="n">Q-REM-03, Q-REM-04, Q-REM-11</td><td>décidé — à confirmer avec Jeff (Q-REM-03)</td></tr>
+        <tr><td class="n">D</td><td>Paramètres de rémunération en table versionnée</td><td class="n">Q-REM-05</td><td>décidé — relâche deux CHECK de 01</td></tr>
+        <tr><td class="n">E</td><td>Score recalculé à chaque vente</td><td class="n">Q-REM-06</td><td>décidé — écart à F10:293 ; attend Jeff (Q-JEF-17)</td></tr>
+        <tr><td class="n">F</td><td>Définition des critères de performance</td><td class="n">Q-REM-07, Q-REM-08, Q-REM-09</td><td>décidé par le groupe — attend Jeff (Q-JEF-08, Q-JEF-09)</td></tr>
+        <tr><td class="n">G</td><td>Validation de l'entrée dans le routeur commun</td><td class="n">Q-INF-06</td><td>décidé et fait le 2026-10-05 (422 avant la base)</td></tr>
+      </tbody>
+    </table></div>
+    <ul class="sous" style="font-size:.95rem">
+      <li>Pas d'ADR propre : Q-REM-10 (un CHECK), Q-REM-12 (contrainte C3 déjà écrite), D1 à D4.</li>
+      <li>ADR prévu si tranché : Q-REM-18 (X01, « il suffit de l'acter »).</li>
+    </ul>
   </section>
 
   <section id="decisions">
@@ -225,6 +247,7 @@
         <li>⚠️ Gardent leurs centimes : honoraires, fixe, montant payé (<span class=mono>F10:253</span>).</li>
         <li>🟡 Suite, dans le lot de migration : colonnes à passer en INTEGER (<span class=mono>sale.purchase_amount</span>, <span class=mono>estate.price</span>, <span class=mono>amount_proposition</span>, <span class=mono>amount_min/max</span>) ; modèles <span class=mono>Decimal</span> → <span class=mono>int</span> ; règle 4 de <span class=mono>CLAUDE.md</span> ; <span class=mono>init-v2/README.md</span> §1.</li>
         <li>⚠️ Pas encore testé (Docker éteint) : <span class=mono>numrange</span> sur des colonnes INTEGER, et l'import de <span class=mono>354712.00</span> dans une colonne INTEGER.</li>
+        <li>📝 <b>ADR à écrire</b> — A · Types monétaires : prix en INTEGER, bornes du barème incluses — après toutes les réponses (voir « ADR à écrire » en haut de page)</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-REM-01" value="adaptateur"><span><b>Convertir à la lecture (recommandé)</b>On stocke 200000. La couche qui lit la base fait montant_max − 0,01. Zéro ligne changée dans remuneration.py, les 55 tests restent verts.<span class="arg">👍 On garde la base propre (aucun trou, aucun chevauchement) et on ne touche pas au code fourni par le sujet.</span><span class="arg">👎 Une conversion de plus à écrire et à tester ; il faut l'expliquer à l'oral.</span></span></label>
@@ -253,6 +276,7 @@
         <li>➡️ Conséquence : un nouveau statut de fin sur <span class=mono>mandate</span> (CHECK de <span class=mono>01:402-403</span> à modifier).</li>
         <li>💡 Le même statut peut servir à <b>Q-REM-14</b> (mandat « perdant ») : un seul changement pour deux questions.</li>
         <li>⚠️ À écrire dans l'ADR : <span class=mono>RCR:100</span> conseille de garder le motif d'un refus dans <span class=mono>paiements</span> ; ici il vit sur le mandat.</li>
+        <li>📝 <b>ADR à écrire</b> — B · Vente perdue : statut de fin du mandat — après toutes les réponses (voir « ADR à écrire » en haut de page)</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-REM-02" value="other-agency"><span><b>Ajouter 'other_agency' et accepter des honoraires à 0 (recommandé)</b>2 CHECK modifiés dans sale. Le refus reste tracé au même endroit que les autres.<span class="arg">👍 Tous les refus au même endroit (payment), comme le conseille <span class=mono>RCR:100</span> (« stocker le motif du droit refusé dans paiements »).</span><span class="arg">👎 Il faut une vente sans honoraires : on assouplit deux règles de la base.</span></span></label>
@@ -279,6 +303,7 @@
         <li>✅ Ta réponse du 2026-10-02 : <b>colonne</b></li>
         <li>📝 Ton commentaire : « à documenter et à confirmer avec Jeff »</li>
         <li>➡️ Conséquence : colonne <span class=mono>payment.performance_score</span> ; à documenter dans l'ADR et à confirmer avec Jeff.</li>
+        <li>📝 <b>ADR à écrire</b> — C · Traçabilité du calcul : figer le score et les entrées — après toutes les réponses (voir « ADR à écrire » en haut de page)</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-REM-03" value="colonne" checked><span><b>Ajouter payment.performance_score (recommandé)</b>Une colonne NUMERIC(4,1), vide si refus.<span class="arg">👍 On relit la note telle qu'elle était le jour du calcul, quoi qu'il arrive aux paramètres.</span><span class="arg">👎 Une colonne de plus, presque toujours redondante.</span></span></label>
@@ -301,6 +326,7 @@
       <div class="repondu"><ul>
         <li>✅ Ta réponse du 2026-10-02 : <b>jsonb</b></li>
         <li>➡️ Conséquence : une colonne <span class=mono>calculation_details JSONB</span> sur <span class=mono>payment</span>, dans le lot de migration.</li>
+        <li>📝 <b>ADR à écrire</b> — C · Traçabilité du calcul : figer le score et les entrées — après toutes les réponses (voir « ADR à écrire » en haut de page)</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-REM-04" value="jsonb" checked><span><b>Une colonne JSONB calculation_details (recommandé)</b>Une colonne sur payment, lisible en soutenance.<span class="arg">👍 Une seule colonne souple ; ajouter un ingrédient ne change pas la base.</span><span class="arg">👎 La base ne vérifie pas le contenu.</span></span></label>
@@ -324,6 +350,7 @@
       <div class="repondu"><ul>
         <li>✅ Ta réponse du 2026-10-02 : <b>table</b></li>
         <li>➡️ Conséquence : table <span class=mono>remuneration_parameters</span> + relâcher les CHECK de <span class=mono>01:754-755</span> ; la calculette lit la table.</li>
+        <li>📝 <b>ADR à écrire</b> — D · Paramètres de rémunération en table versionnée — après toutes les réponses (voir « ADR à écrire » en haut de page)</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-REM-05" value="table" checked><span><b>Table versionnée + relâcher les CHECK (recommandé)</b>Une table remuneration_parameters (dates de validité + JSONB). Suit le sujet à la lettre.<span class="arg">👍 Suit le sujet à la lettre ; un changement de réglage = une ligne ajoutée.</span><span class="arg">👎 Une table de plus, et la calculette doit la lire.</span></span></label>
@@ -347,6 +374,7 @@
       <div class="repondu"><ul>
         <li>✅ Ta réponse du 2026-10-02 : <b>recalcul</b></li>
         <li>➡️ Le code du sujet reste tel quel ; écart à <span class=mono>F10:293</span> à écrire dans l'ADR ; à confirmer par Jeff (<b>Q-JEF-17</b>).</li>
+        <li>📝 <b>ADR à écrire</b> — E · Score recalculé à chaque vente — après toutes les réponses (voir « ADR à écrire » en haut de page)</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-REM-06" value="recalcul" checked><span><b>Recalculer à chaque vente (recommandé)</b>Le code du sujet ; hunter_performance devient un historique. Écart à F10:293 à écrire dans l'ADR.<span class="arg">👍 C'est ce que fait déjà le code fourni : rien à réécrire, les 55 cas restent justes.</span><span class="arg">👎 Écart avec une phrase du sujet, à justifier dans un ADR.</span></span></label>
@@ -370,6 +398,7 @@
         <li>📝 Ton commentaire : « plus un client visite, meilleure est la note ? Ça devrait être l&#x27;inverse : moins il visite, meilleure est la note, vu que le hunter a bien ciblé le besoin. »</li>
         <li>✅ Ta remarque est juste : mon ancien argument « gonfle la note » était <b>faux</b>, corrigé ci-dessous.</li>
         <li>➡️ Encore à confirmer par Jeff (<b>Q-JEF-08</b>).</li>
+        <li>📝 <b>ADR à écrire</b> — F · Définition des critères de performance — après toutes les réponses (voir « ADR à écrire » en haut de page)</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-REM-07" value="client-tous" checked><span><b>Visites du client, tous les biens du mandat, jusqu'au jour de l'acte (recommandé)</b>Lecture littérale de F10:259.<span class="arg">👍 Colle à la phrase du sujet ; mesure tout le chemin du client jusqu'à l'achat, donc la justesse du ciblage.</span><span class="arg">👎 Un client indécis qui veut tout voir fait baisser la note du chasseur, sans faute de sa part.</span></span></label>
@@ -390,6 +419,7 @@
       <div class="repondu"><ul>
         <li>✅ Ta réponse du 2026-10-02 : <b>non-refusees</b></li>
         <li>➡️ À confirmer par Jeff (<b>Q-JEF-09</b>).</li>
+        <li>📝 <b>ADR à écrire</b> — F · Définition des critères de performance — après toutes les réponses (voir « ADR à écrire » en haut de page)</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-REM-08" value="non-refusees" checked><span><b>Les ventes non refusées (recommandé)</b>« Ventes réussies » = celles qui ouvrent un droit.<span class="arg">👍 Seules les ventes qui ont réussi comptent : logique pour une prime.</span><span class="arg">👎 Il faut lire le statut des paiements.</span></span></label>
@@ -409,6 +439,7 @@
       <div class="repondu"><ul>
         <li>✅ Ta réponse du 2026-10-02 : <b>signes-sans-renouv</b></li>
         <li>➡️ À confirmer par Jeff (<b>Q-JEF-09</b>) ; le sort des mandats annulés reste à lui demander.</li>
+        <li>📝 <b>ADR à écrire</b> — F · Définition des critères de performance — après toutes les réponses (voir « ADR à écrire » en haut de page)</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-REM-09" value="signes-sans-renouv" checked><span><b>Signés, sans les renouvellements (recommandé)</b>Un mandat renouvelé 3 fois ne compte pas 4 fois. Annulés : à Jeff.<span class="arg">👍 Un client = un mandat ; pas de prime pour un simple renouvellement.</span><span class="arg">👎 Il faut remonter la chaîne des renouvellements.</span></span></label>
@@ -447,6 +478,7 @@
       <div class="repondu"><ul>
         <li>✅ Ta réponse du 2026-10-02 : <b>api</b></li>
         <li>➡️ Un test d'intégration vérifie montant = taux × honoraires.</li>
+        <li>📝 <b>ADR à écrire</b> — C · Traçabilité du calcul : figer le score et les entrées — après toutes les réponses (voir « ADR à écrire » en haut de page)</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-REM-11" value="api" checked><span><b>L'API seule, avec un test d'intégration (recommandé)</b>Une seule source de vérité : remuneration.py.<span class="arg">👍 Une seule formule, dans un seul fichier ; un test la vérifie.</span><span class="arg">👎 Quelqu'un qui écrit directement dans la base n'est pas contrôlé.</span></span></label>
@@ -1704,7 +1736,7 @@
       </div>
     </div>
     <div class="question" id="Q-INF-06">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-INF-06 · Champ manquant → 409 au lieu de 422</h3><span class="puce faible">⚙️ code</span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-INF-06 · Champ manquant → 409 au lieu de 422</h3><span class="puce faible">⚙️ code</span></div>
       <p class="qui">Qui tranche : <b>👥 Groupe</b></p>
       <ul>
         <li><span class=mono>API/README.md:216-218</span>.</li>
@@ -1712,9 +1744,15 @@
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>Oublier un champ renvoie « conflit » (409) au lieu de « donnée invalide » (422).</li>
       </ul></div>
+      <div class="repondu"><ul>
+        <li>✅ Ta réponse du 2026-10-02 : <b>routeur</b></li>
+        <li>✅ Fait le 2026-10-05 : un prix à virgule et un champ manquant rendent 422 (mesuré ; contre-épreuve : sans la validation, 3 tests rouges). Commits <span class=mono>d3c128c</span>, <span class=mono>fea3c9f</span>.</li>
+        <li>📝 <b>ADR à écrire</b> — G · Validation de l'entrée dans le routeur commun — après toutes les réponses (voir « ADR à écrire » en haut de page)</li>
+      </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-INF-06" value="pydantic"><span><b>Modèles d'entrée Pydantic (recommandé)</b>Code.<span class="arg">👍 Erreurs claires, avant la base.</span><span class="arg">👎 Les règles existent en double (base et Python).</span></span></label>
         <label><input type="radio" name="Q-INF-06" value="garder"><span><b>Garder</b>Erreurs peu claires.<span class="arg">👍 Rien à faire.</span><span class="arg">👎 Messages d'erreur trompeurs.</span></span></label>
+        <label><input type="radio" name="Q-INF-06" value="routeur" checked><span><b>Valider dans le routeur commun (fait le 2026-10-05)</b>_validated revalide le corps du POST et du PUT avec model_validate : 422 avant la base, pour les 18 tables.<span class="arg">👍 Une seule fonction pour les 18 tables ; mesuré : prix à virgule et champ manquant en 422.</span><span class="arg">👎 Les CHECK restent vus par PostgreSQL seul (409).</span></span></label>
       </div>
     </div>
     <div class="question" id="Q-INF-07">
