@@ -88,6 +88,10 @@
   .arg { display:block; font-size:.9375rem; color:var(--doux); line-height:1.5; margin-top:.15rem; }
   a.src { text-underline-offset:.15em; }  /* citation d'une carte ouverte : lien vers GitHub */
   a.src:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  /* 2026-10-06 : le gabarit (rapport-choix.html:88) met TOUT gras d'une option sur sa ligne ;
+     seul le titre de l'option doit l'être, le gras du texte reste dans la phrase. */
+  .choix.options label span b { display:inline; }
+  .choix.options label > span > b:first-child { display:block; }
   nav ul { flex-direction:row; flex-wrap:wrap; gap:.4rem 1rem; list-style:none; padding:0; }
 </style>
 
