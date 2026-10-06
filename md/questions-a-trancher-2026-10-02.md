@@ -1,4 +1,4 @@
-# Questions à trancher — état au 2026-10-05
+# Questions à trancher — état au 2026-10-06
 
 Ce document **centralise** toutes les questions ouvertes du projet.
 Chacune porte sa **source**, **qui tranche**, les **options**, et une
@@ -14,7 +14,10 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
   glissé de 4 lignes. Ils bougent si le fichier change.
 - 🔄 Les thèmes E, F et G gardent ici leur résumé. Leur texte **enrichi et relu**
   (contexte, « En clair », ➕/➖, ce que dit le sujet du prof) est dans la page à
-  cartes, version 11 (`md/questions-a-trancher-2026-10-02.html`).
+  cartes, version 12 (`md/questions-a-trancher-2026-10-02.html`).
+- 🆕 **2026-10-06** : 3e série de réponses reportée (partie 0), statuts des
+  thèmes C à G mis à jour, ADR U à Z ajoutés au pense-bête. Numéros de `01` et
+  `02` relus le 2026-10-06 : inchangés depuis le 2026-10-05.
 
 ---
 
@@ -26,10 +29,11 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 |---|---|---|
 | 👥 **Groupe** | l'équipe, en réunion, tracé dans un ADR | technique, modélisation, choix internes |
 | 🧑‍💼 **Jeff** | le client (formateur qui joue le commanditaire) | le métier, les chiffres, les droits |
-| 📋 **PO** | le product owner | priorités, périmètre, découpage |
+| 📋 **PO** | le product owner : **Jeff** (Q-PRO-01, 2026-10-06) | priorités, périmètre, découpage |
 | 🎓 **Prof** | le formateur en tant qu'évaluateur | attendus de la soutenance |
 
-- ⚠️ **Aucun PO n'est nommé**, ni dans le sujet, ni dans le dépôt (voir **Q-PRO-01**).
+- ✅ **Le PO, c'est Jeff** (Q-PRO-01, 2026-10-06). Il joue **tous les rôles sauf le
+  développement** ; le développement, c'est l'équipe.
 - ✅ Jeff joue le client : `md/adr-026-perimetre-authentification.md:22`.
   Le sujet le confirme : « le formateur jouant le commanditaire »
   (`NOTE-DE-CADRAGE.md:70`).
@@ -39,6 +43,7 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 - 🟡 **Ouvert** : personne n'a tranché.
 - 🟠 **Position ou hypothèse à valider** : quelqu'un a proposé, ou la migration a supposé ; le groupe n'a pas acté.
 - 🔵 **Appliqué, pas acté** : le code ou le schéma le fait déjà, sans ADR accepté.
+- 📝 **Note sans case** : un commentaire, sans réponse cochée ; la carte **reste ouverte**.
 - 💡 **Ma recommandation** : mon avis, argumenté. **Pas une règle.**
 
 ### Les chiffres sont des paramètres
@@ -78,14 +83,14 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 | Acte après la fin du mandat | ✅ **refusé, sauf renouvellement** | 2026-09-11 | `09-dec:122-178` |
 | Mandat renouvelé | ✅ `'renewed'` marque le **nouveau** mandat | — | `09-dec:96-118`, `01:427` |
 | Fin de mandat | ✅ `ends_at` **stocké** | 2026-09-11 | `09-dec:222` |
-| Chaque chasseur a un manager | ✅ ADR-025, **accepté sur Confluence** | 2026-09-22 | `md/a-faire-a-la-main-2026-09-21.md:189-190` |
+| Chaque chasseur a un manager | ✅ ADR-025, **accepté sur Confluence** — ⚠️ **« Annulé »** dans la copie du journal d'ADR de Confluence lue le 2026-10-06 : à vérifier (Q-ACC-20) | 2026-09-22 | `md/a-faire-a-la-main-2026-09-21.md:189-190` |
 | Authentification | ❌ hors périmètre (Jeff) | 2026-09-22 | `md/adr-026-…:62-80` |
 | Base de test | ✅ `fil_rouge_test`, isolée | 2026-10-02 | `08-etat.md:171-178` |
 | Calculette | ✅ code du sujet, repris tel quel | 2026-10-02 | `08-etat.md:179-190` |
 | Prix des biens | ✅ colonne `price_eur`, ligne à ligne | 2026-09-21 | `08-etat.md:110-113` |
 | Ancien schéma `docker/init/` | ✅ obsolète, `init-v2` fait foi | 2026-09-21 | `08-etat.md:105-109` |
 
-### Réponses — 2026-10-02 et 2026-10-05 (pages à cartes)
+### Réponses — 2026-10-02, 2026-10-05 et 2026-10-06 (pages à cartes)
 
 - 2026-10-02 : réponses de Sébastien (D1 à D4, Q-REM-01 à 12).
 - 2026-10-05 : la liste complète est renvoyée comme « nos réponses », avec
@@ -94,9 +99,15 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
   et 06 à 17, Q-ACC-11). Q-MAN-08 est cochée mais commentée « revoir, pas répondu » :
   elle **reste ouverte**, carte réécrite. Deux fois, case et commentaire diffèrent
   (Q-SCH-06, Q-SCH-17) : **le commentaire fait foi**.
+- 2026-10-06, 3e série (page v11) : **29 réponses** — 27 nouvelles, et
+  **2 changées** (Q-MAN-05, Q-ACC-11). **7 notes sans case** (Q-MIG-03, 05, 07, 11,
+  Q-ACC-17, 18, Q-PRO-05) : elles **restent ouvertes**. Mes avis, demandés dans
+  13 notes, sont plus bas (💬 Avis demandés) : 💡 des avis, pas des règles.
 - ➡️ Les cartes 🧑‍💼 restent à confirmer par Jeff : **rapport à part**
   `md/questions-pour-jeff-2026-10-05.html` (voir partie 2). Les 34 cartes que
   seul Jeff tranche s'y cochent, et nulle part ailleurs, depuis le 2026-10-05.
+  🆕 2026-10-06 : Jeff **ne remplit pas** ce rapport. Le groupe lui pose les
+  questions **en entretien** ; l'équipe y note ses réponses.
 
 | Id | Réponse | Ce que ça entraîne |
 |---|---|---|
@@ -114,11 +125,11 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 | Q-REM-11 | ✅ **api** | Test d'intégration montant = taux × honoraires. |
 | Q-REM-12 | ✅ **c3** | C3 codée dans `sale_service`. |
 | Q-INF-06 | ✅ **valider dans le routeur commun** (2026-10-05) | Fait : `_validated` (`crud_router.py`) — prix à virgule et champ manquant en 422 ; commits `d3c128c`, `fea3c9f`. |
-| Q-REM-13 | ✅ **cle** (2026-10-05, pas l'option recommandée) | Clé de `sale` vers `parameters_fees` (💡 ex. `sale.id_parameters_fees`) ; `02` n'insère aucune vente, rien à remplir. **Amende ADR-019** (proposé, « sans clé »). |
+| Q-REM-13 | ✅ **cle** (2026-10-05, pas l'option recommandée) | Clé de `sale` vers `parameters_fees` (💡 ex. `sale.id_parameters_fees`) ; `02` n'insère aucune vente, rien à remplir. **Amende ADR-019** (proposé, « sans clé »). ⚠️ ADR-019 est « accepté » dans la copie du journal d'ADR de Confluence lue le 2026-10-06 : un nouvel ADR le remplace, on ne l'amende pas. |
 | Q-REM-14 | ✅ **statut** (2026-10-05) | Statut de fin sur `mandate` (`01:405-407`), ex. `'lost'`. 🟡 Un seul statut pour Q-REM-02 et Q-REM-14, ou deux ? |
 | Q-REM-15 | ✅ **seed** (2026-10-05) | Le seed fait commencer le barème par défaut en 2025 ; `rem.py:298` garde 2026. |
 | Q-REM-16 | ✅ **hypothese** (2026-10-05) | `hire_date` = date de création du compte (`02:24-26`), dite en soutenance ; Jeff dira s'il a mieux (Q-JEF-10). |
-| Q-REM-17 | ✅ **colonnes** (2026-10-05) | `announced_at`, `invoice_submitted_at`, `verified_at`, `scheduled_for` et `invoice_reference` sur `payment`. 💡 Un CHECK par date, comme `chk_paid` (`01:765-767`). Q-ACC-11, répondue le 2026-10-05 (`colonne`), rejoint ce lot. |
+| Q-REM-17 | ✅ **colonnes** (2026-10-05) | `announced_at`, `invoice_submitted_at`, `verified_at`, `scheduled_for` et `invoice_reference` sur `payment`. 💡 Un CHECK par date, comme `chk_paid` (`01:765-767`). Q-ACC-11, répondue le 2026-10-05 (`colonne`), rejoint ce lot. ✏️ **2026-10-06** : Q-ACC-11 changée (une table des factures) : `invoice_reference`, `invoice_submitted_at` et `verified_at` quittent `payment`, **à reprendre**. |
 | Q-REM-18 | ✅ **acter** (2026-10-05) | ADR X01 (option B) à écrire. À mettre à jour avec lui : `08-etat.md` (l. 80, 195) et `API/README.md:151`, qui attendent encore « l'arbitrage de X01 ». |
 | Q-REM-19 | ✅ **oui** (2026-10-05, pas l'option recommandée) | `CHECK (final_rate BETWEEN 0.20 AND 0.60)` à la place de `01:755`. ⚠️ **Tension avec Q-REM-05** : on relâche deux réglages (`01:758-759`) et on en grave deux autres ; si Jeff change 20 % ou 60 % (Q-JEF-01), base à recréer. À revoir après sa réponse. |
 | Q-PAR-01 | ✅ **sujet** (2026-10-05) | À valider par Jeff (Q-JEF-01). |
@@ -134,7 +145,7 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 | Q-MAN-02 | ✅ **Corriger, activer, l'annulation libère tout de suite** (2026-10-05) | Trigger corrigé (parent exclu, `IS DISTINCT FROM`) et activé (`01:450-499`). D7 : Jeff confirme (Q-JEF-06). |
 | Q-MAN-03 | ✅ **Imposer « sans vente » dans l'API, sans limite de nombre** (2026-10-05) | Code seul, dans l'API. Jeff : Q-JEF-07. |
 | Q-MAN-04 | ✅ **Valider les deux** (2026-10-05) | La vente pointe vers le nouveau mandat ; le délai part de la 1re signature : le code remonte `id_mandate_parent`. |
-| Q-MAN-05 | ✅ **Poser un CHECK d'égalité** (2026-10-05) — « le mandat doit être signé par les deux partie, donc il faudrait rajouter  is_hunter_signed et date signature reflèterais la signature des deux ? qu'en pense tu ? a modifié les schemas et bdd » | CHECK case ↔ date ; `02:218` et `02:225` à corriger. Ta question (signature du chasseur) devient **Q-MAN-09**. |
+| Q-MAN-05 | ✏️ **Changée le 2026-10-06**, voir plus bas. Avant : « Poser un CHECK d'égalité » (2026-10-05) — « le mandat doit être signé par les deux partie, donc il faudrait rajouter  is_hunter_signed et date signature reflèterais la signature des deux ? qu'en pense tu ? a modifié les schemas et bdd » | CHECK case ↔ date ; `02:218` et `02:225` à corriger. Ta question (signature du chasseur) devient **Q-MAN-09**. |
 | Q-MAN-06 | ✅ **Toutes dans l'API, chacune testée** (2026-10-05) — « dit nous si on a besoin de metre a jours les schémas » | Tables : non. Trois TODO de `01` à annoter « contrôlé par l'API » (`01:639-641`, `664-668`, `789-795`). Diagrammes : non. ⚠️ `RCR:98` : « sauf renouvellement du mandat ». |
 | Q-MAN-07 | ✅ **Autoriser 'canceled' sans date de signature** (2026-10-05) | `chk_status_signature` modifié (`01:430-432`). |
 | Q-SCH-01 | ✅ **Garder le tout-ou-rien** (2026-10-05, pas l'option recommandée) — « ajoutez un champ "non renseigné" pour les champs vides. car l'on veux pas perdre l'intégrité malgré l'import des ancienne données, (obligatoire de les migré) » | `ALTER` de `02:64-66` retiré ; 18 clients : adresse « non renseigné » ; code postal refusé par le format (`01:210`) : **Q-SCH-18**. |
@@ -153,8 +164,117 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 | Q-SCH-15 | ✅ **Resserrer la tranche à > 0** (2026-10-05) | CHECK de `01:697`. |
 | Q-SCH-16 | ✅ **Ajouter le CHECK** (2026-10-05) | ⏭️ **Sans objet** depuis Q-SCH-17 : `valid_until` disparaît. |
 | Q-SCH-17 | ✅ **Par construction : une grille vaut jusqu'à la suivante** (2026-10-05) — case cochée différente, **le commentaire fait foi** — « Décidé : ni contrôle API ni « rien » — une grille vaut jusqu'à la suivante, par construction. parameters_fees : on retire valid_until ; valid_from est renommé effective_from (« en vigueur à partir du »). La contrainte EXCLUDE (01:685-686) est remplacée par UNIQUE (effective_from) : deux grilles ne démarrent pas le même jour. Lecture : la grille d'une vente = la dernière dont effective_from <= date de l'acte. Trou impossible ; seul cas restant : une vente avant la 1re grille, couvert par le seed (Q-REM-15). Code du sujet inchangé : l'adaptateur calcule date_fin = veille de la grille suivante. À toucher : 01:679-680 et 686, parameters_fees_model.py:26-27. Lot de migration. ADR à noter. » | Voir le commentaire. ADR Q ; rend Q-SCH-16 sans objet. |
-| Q-ACC-11 | ✅ **invoice_reference sur payment** (2026-10-05) | Même lot que Q-REM-17 ; plus un doublon. |
-| Q-MAN-08 | ✏️ cochée « Reporter », commentaire « revoir, pas répondu » : **reste ouverte** | Carte réécrite (thème C). |
+| Q-ACC-11 | ✏️ **Changée le 2026-10-06**, voir plus bas. Avant : « invoice_reference sur payment » (2026-10-05) | Même lot que Q-REM-17 ; plus un doublon. |
+| Q-MAN-08 | ✏️ cochée « Reporter », commentaire « revoir, pas répondu » (2026-10-05) ; ✅ **répondue le 2026-10-06**, voir plus bas | Carte réécrite (thème C). |
+| Q-MAN-05 | ✅ **Supprimer la colonne** (2026-10-06, pas l'option recommandée) — « le mandat doit être signé par les deux partie, donc il faudrait rajouter  is_hunter_signed et date signature reflèterais la signature des deux ? qu'en pense tu ? a modifié les schemas et bdd » | ✏️ **Change la réponse du 2026-10-05** (« Poser un CHECK d'égalité »), à la suite de Q-MAN-09. `is_client_signed` est retiré (`01:415`) : modèle, API et `02` touchés. Plus de case, plus de contradiction : `MAND-0008` et `MAND-0016` (`02:218`, `02:225`) gardent leur date, reprise de la source (`date_debut`, `PgSQL.sql:130`). ADR S. |
+| Q-MAN-08 | ✅ **Reporter** (2026-10-06) | Rien maintenant : la réaffectation attend que l'**affectation** soit décidée, avec Jeff (Q-JEF-14). 💡 Une ligne dans l'ADR T (limites assumées) : une demande réaffectée peut revenir au chasseur qui l'a refusée. |
+| Q-MAN-09 | ✅ **Le client seul, comme le sujet** (2026-10-06, pas l'option recommandée) — « retirer is_client_signed, par juste la date de signature, on passe par le status pending signature » | Comme le sujet : seule la signature du **client** compte (`Readme.md:98`). **Le commentaire fait foi** : pas de CHECK d'égalité (l'effet écrit sous l'option) ; la case disparaît (Q-MAN-05). Restent la date `signature_date` (`01:408`) et le statut. `pending_signature` existe déjà (`01:405-407`) ; `chk_status_signature` le relie à la date : « en attente » si et seulement si pas de date (`01:430-432`). ADR S : décidé. |
+| Q-SCH-18 | ✅ **Un code factice 00000, documenté** (2026-10-06) | `02` écrit `00000` pour les 18 clients repris (`02:148-165`) ; le format français l'accepte : 5 chiffres (`01:210`). Une ligne dans le README du schéma, et dans l'audit. ADR R : décidé. Jeff peut fournir les vrais codes (Q-JEF-26). |
+| Q-MIG-04 | ✅ **Remplacer dans le seed, puis supprimer** (2026-10-06) | Le seed crée 2 managers (Q-ACC-16), y rattache les 6 chasseurs, puis efface le user 25 (`02:122-128`). Dans cet ordre : les clés sont en `ON DELETE RESTRICT` (`01:222-223`, `01:266-267`). 💡 Effacer, et non désactiver (Q-ACC-08) : ce compte n'a jamais servi. À dire. ⚠️ Suppose le lien chasseur → manager : ADR-025 serait « Annulé » sur Confluence (voir Q-ACC-20). |
+| Q-MIG-06 | ✅ **Oui, dans 03** (2026-10-06) — « si la colone est vide, placeholder ? » | Le script d'import `03` recopie la lettre `dpe` dans `estate.energy_class` (`01:521`) : **1 623** biens sur 2 556. ⚠️ `03` est une copie retouchée de `normalised/populate_estate.sql` ; le script de retouche n'est pas dans le dépôt : comment régénérer `03`, non vérifié. 💡 Hors carte, au même passage : `criteria.energy_class_max` (`01:328`) ; 2 recherches disent « DPE C max » et « DPE D max » (`02:192`, `02:207`). |
+| Q-MIG-08 | ✅ **Migrer les secteurs** (2026-10-06) — « ajoute dans criteraia, sector nullable , idem dans estate » | `02` enrichi : la ville, le code postal et le pays `'FR'` des secteurs passent dans `criteria` (`01:301-305`) ; une ville exige un pays (`01:379-380`). 🆕 Ta note : une colonne **quartier**, facultative, sur `criteria` **et** sur `estate`. 💡 Nom proposé : `district` (`sector` désignait toute la table source : ville, quartier, code postal). Facultative, comme dans la source : 2 secteurs sur 10 n'ont pas de quartier (`PgSQL.sql:37`, `:46-47`). ⚠️ Les 2 556 biens n'ont pas de quartier : le CSV n'a que `town`, `street` et `postal_code`. `estate.district` resterait vide pour eux. ADR N (la localisation) ; lot de migration. |
+| Q-MIG-09 | ✅ **Laisser le minimum vide (NULL, « inconnu »)** (2026-10-06, pas l'option recommandée) | `02` : `budget_min` à **NULL** sur les 17 critères (`02:192-208`) ; la base l'accepte (`01:318`), l'API aussi (`criteria_model.py:35`). Rien d'inventé. Le commentaire périmé de `02:189` (NOT NULL, K€, `NUMERIC(6,1)`) se corrige au même passage. ADR U (données reprises). |
+| Q-ACC-08 | ✅ **Oui** (2026-10-06) — « lorsqu'il y a une demande de suppression de compte, admin va rendre anonyme les données du compte et passé le compte en inactif . tout ca pour la RGPD. donne ton avis stp. » | Désactiver plutôt que supprimer. Sur une demande d'effacement, l'admin **rend anonyme** le compte, puis le passe **inactif** (ta note). ADR V. Combien de temps garder avant d'anonymiser : Jeff (Q-JEF-15). |
+| Q-ACC-09 | ✅ **L'admin** (2026-10-06, pas l'option recommandée) — « à avoir avec jeff si un hunter ou manager peut crée un bien à la main, si non les biens vont être importer via un script dans Airflow. Donc, dit moi ce que tu en pense . Es ce que l'admin aurais besoin de lancer qq chose ou le Airflow le ferais tout seul. aide nous » | ⚠️ Pas l'option recommandée (un compte technique). Ta note pose deux questions : la saisie à la main (Jeff, Q-JEF-24) et Airflow. |
+| Q-ACC-11 | ✅ **Une table document** (2026-10-06, pas l'option recommandée) — « Revu le 2026-10-06 : on remplace « colonne » par une table à part pour les factures du chasseur (ex. hunter_invoice), à confirmer avec Jeff. Raisons : une facture refusée puis renvoyée doit laisser une trace ; chaque facture a son état (soumise, vérifiée, refusée) et son montant ; le sujet propose déjà un facture_id dans paiements (REGLES-CALCUL-REMUNERATION.md:288). On ne renomme pas payment : il porte le calcul de la rémunération, pas la facture, et « facture » se confondrait avec celle du particulier (03_particulier_offre_et_signature.feature:37-41). À reporter sur Q-REM-17 : invoice_reference, invoice_submitted_at et verified_at passent de payment à la table des factures. Question pour Jeff : une table de factures du chasseur, reliée au paiement, ça vous convient ? » | ✏️ **Change la réponse du 2026-10-05** (`invoice_reference` sur `payment`). Une table des factures du chasseur (ex. `hunter_invoice`), reliée au paiement : chaque envoi garde son état, sa date et son montant. ➡️ **Q-REM-17 à reprendre** : `invoice_reference`, `invoice_submitted_at` et `verified_at` quittent `payment` ; `announced_at` et `scheduled_for` y restent. À confirmer avec Jeff : Q-JEF-23. ADR J amendé. |
+| Q-ACC-14 | ✅ **Reporter au parcours IA** (2026-10-06) | Rien maintenant ; même logique que Q-SCH-08. 💡 ADR T. 📋 Carte du PO : le PO, c'est **Jeff** (Q-PRO-01). À lui confirmer en une phrase. |
+| Q-ACC-16 | ✅ **1 admin, 2 managers** (2026-10-06) | Seed : 1 admin (1 ligne `user`), 2 managers (`user` et `real_estate_manager`) ; les 6 chasseurs en 2 équipes ; puis le manager fictif effacé (Q-MIG-04). ⚠️ Suppose le lien chasseur → manager (ADR-025, voir Q-ACC-20). |
+| Q-ACC-19 | ✅ **La faire** (2026-10-06, pas l'option recommandée) — « a redéfinir un peut plus avec jeff. si l'on gere une clé d'api et comment. » | ⚠️ Pas l'option recommandée. Ta note : **à redéfinir avec Jeff**, une clé ou plusieurs, et comment (Q-JEF-22). Rien avant. Outil prêt : `APIKeyHeader` de FastAPI, sans dépendance à ajouter ; la clé dans `docker/.env`, jamais dans git. ADR Y. |
+| Q-ACC-20 | ✅ **Oui** (2026-10-06) — « a confirmé plus tard, on comprends pas. » | 🟡 **À confirmer plus tard** (ta note). Explication simple plus bas (💬 Avis demandés). |
+| Q-INF-01 | ✅ **Décider d'abord s'il en faut un** (2026-10-06) — « il faut voir avec robin (2eme proff) mais a priori on le garde » | Rien tant que Robin (le 2e professeur) n'a pas donné son avis ; a priori, on garde MinIO. 🆕 Le 2026-10-06, `be15c04` remplace les deux images MinIO par des images `pgsty/…`, épinglées par empreinte `sha256`. Qu'elles se téléchargent : **non vérifié ici**. ⚠️ Images d'un éditeur tiers (`pgsty`), pas de MinIO lui-même : leur provenance est à connaître. L'empreinte garantit au moins qu'elles ne changent pas. Si elles marchent : `md/minio-images-indisponibles-2026-10-02.md` et `context AI/08-etat.md` sont à mettre à jour. |
+| Q-INF-02 | ✅ **Après ces réponses** (2026-10-06) — « a faire apres les réponses de jeff, donc apres les deux rapports. et notre entrevue avec jeff. » | Le seed s'écrit **après l'entretien avec Jeff**, puis après le lot de migration. Toutes ses dépendances sont répondues (Q-INF-03, le 2026-10-06). Il contiendra : 1 admin et 2 managers (Q-ACC-16), le manager fictif remplacé (Q-MIG-04), des biens de démo (Q-INF-03), le barème dès 2025 (Q-REM-15). |
+| Q-INF-03 | ✅ **3 à 5 biens fictifs** (2026-10-06) — « a définir au moment du seed, plusieurs par départements » | Au moment du seed : **plusieurs biens fictifs par département** (ta note). 💡 Les secteurs des clients du sujet : **Hérault (34)**, 7 sur 10 ; **Rhône (69)**, 2 ; **Loire-Atlantique (44)**, 1 (`PgSQL.sql:42-51`). Nos 2 556 biens n'ont que Nantes en commun. 💡 Un acte d'au moins **500 000 €** montre la tranche à 45 % (budget de 550 000 €, `PgSQL.sql:95`). Ferme la Q4 du point d'étape (Q-PRO-02). |
+| Q-INF-04 | ✅ **Commencer par le parcours de paiement** (2026-10-06) | Après le branchement de la calculette sur la base (chantier 2), et après le lot de migration. Le scénario, de bout en bout : mandat signé → visites → vente → paiement (`PLAN-DE-TESTS.md:16`). |
+| Q-INF-05 | ✅ **payment, sale, mandate d'abord** (2026-10-06) — « voir pour finir les tests d'intégration des autres table, et pourquoi ? » | D'abord `payment`, `sale` et `mandate`, **après le lot de migration** (il les change) ; puis les 12 autres (ta note). 💬 « Pourquoi ? » : réponse plus bas (💬 Avis demandés). |
+| Q-INF-07 | ✅ **Quand le seed est stable** (2026-10-06) — « à explicité, » | Après le seed. 💬 Explication plus bas (💬 Avis demandés). |
+| Q-INF-08 | ✅ **ENF-01 avec le générateur ; ENF-03 tombe avec l'auth** (2026-10-06) | ENF-01 : un test de charge, 500 mandats en moins de 2 s, sur les requêtes qui comptent ventes et mandats ; avec le générateur (Q-INF-07). ENF-03 : pas de test, expliqué en soutenance (l'auth est hors périmètre). 💡 Dans le rapport de tests : d'où viennent ENF-01 et ENF-03 (un « Exemple rempli » du prof, `CAHIER-DES-CHARGES-TECHNIQUE.md:74`) ; et « rémunération » à corriger en « performance » (`rapport-tests.md:254`). |
+| Q-PRO-01 | ✅ **En nommer un** (2026-10-06) — « c'est Jeff » | Le PO, c'est **Jeff**. Il joue **tous les rôles sauf le développement**, qui revient à l'équipe (dit le 2026-10-06). ➡️ Les 3 cartes 📋 PO (Q-SCH-08, Q-ACC-14, Q-PRO-07) sont à lui confirmer. ⚠️ L'option disait aussi « il tient le journal d'ADR » : Jeff ne le tiendra pas. 💡 Un membre de l'équipe, nommé dans la RACI. Q-JEF-25 lui demande de valider les ADR en une séance. |
+| Q-PRO-02 | ✅ **Plus tard** (2026-10-06, pas l'option recommandée) | ⚠️ Pas l'option recommandée (une réunion de 30 min). Il ne reste presque rien : Q1, Q2 et Q5 confirmées par d'autres cartes ; **Q4 répondue** le 2026-10-06 (Q-INF-03). Reste **Q3**, le motif de refus : en base, pas acté (ADR-024) ; il passera à la séance des ADR (Q-PRO-03). |
+| Q-PRO-03 | ✅ **Tout en une séance** (2026-10-06) — « attendre la confirmation de jeff » | Une séance, **après toutes les réponses**, Jeff compris (Q-JEF-25). 🆕 D'après la copie du journal d'ADR de Confluence lue le 2026-10-06 : ADR-016 à 023 sont déjà **« accepté »** ; ADR-025 et la page 024 sont **« Annulé »** ; ADR-027 reste **« proposé »**. La séance porte donc sur : ADR-027, nos brouillons (024, motif de refus ; 026, périmètre de l'auth, à renuméroter 028), les ADR déjà acceptés à remplacer (019 par Q-REM-13) et les ADR du pense-bête. |
+| Q-PRO-04 | ✅ **Le journal Confluence fait foi** (2026-10-06) — « ard16 a était marqué comme annulé le 06/10 » | Le CDC suit la numérotation du journal : Argon2 = ADR-016. ⚠️ Ta note : **ADR-016 annulé le 06/10**. La copie du journal lue le même jour à 11 h 16 le dit encore « accepté » : à vérifier sur Confluence. S'il est bien annulé : le code hache toujours en Argon2 (`security.py:20-32`). À aligner après la réponse de Jeff sur le mot de passe (Q-JEF-21). |
+| Q-PRO-06 | ✅ **Oui** (2026-10-06) — « je pense que l'on va découpé le Journal de décisions (ADR) en dossier et page pour chaque ADR; avec un dossier; ADR acceptée, ADR refusé, ADR proposé, etc. plus simple pour la maintenance et la lecture » | Au prochain passage manuel sur Confluence : retirer la note drawio collée avec ADR-025 ; coller la fiche ADR-024 (`md/adr-024-motif-refus-remuneration.md`, à partir de la ligne 16) ; la ligne sur ADR-009 (Q-SCH-02). 💬 Ta proposition (une page par ADR, des dossiers par statut) : avis plus bas (💬 Avis demandés). |
+| Q-PRO-07 | ✅ **Planifier maintenant** (2026-10-06) — « a voir apres la réunion avec jeff » | Le planning se fait **après l'entretien avec Jeff**, qui est aussi le PO. ⚠️ Avant de planifier le livrable 3 : sa cible est la phase 3, la croissance (OLTP/OLAP, 3V, PCA/PRA, `Readme.md:241-250`), pas les trois couches de l'API (`08-etat.md:55`). ⚠️ L'audit (livrable 1) ne peut pas s'appuyer sur `normalised/rapport_anomalies.txt` : 2 lignes, « 0 anomalies ». |
+| Q-PRO-08 | ✅ **Harmoniser** (2026-10-06, pas l'option recommandée) | ⚠️ Pas l'option recommandée (reporter). Le format est **déjà fixé par ADR-007** (accepté) : un seul champ international, indicatif compris, ex. `+33612345678`, validé par une « regex E.164 souple » (copie du journal d'ADR de Confluence lue le 2026-10-06). Le CHECK l'écrit dans la base, sur les 3 tables (`01:184-185`, `01:228-229`, `01:246-247`). Pas d'ADR propre : il applique ADR-007. ⚠️ Il refusera les 4 faux numéros `0000000000` : voir Q-MIG-07. |
+| Q-MIG-03 | 📝 **Note sans case** (2026-10-06) — « ajouter "suspendu" et "annulé" ? a voir avec jeff » : **reste ouverte** | 📝 Ta note rejoint **Q-JEF-13**, déjà posée à Jeff (le sens de « suspendu »). |
+| Q-MIG-05 | 📝 **Note sans case** (2026-10-06) — « ajoute un placeholder au valeurs des ancienne données, on grade la note et l'on met un place holder dans les autre valeurs » : **reste ouverte** | 📝 Ta note demande une valeur factice. Mon avis : vide. |
+| Q-MIG-07 | 📝 **Note sans case** (2026-10-06) — « ajouté +330000000000 ?, un autre placeholder ? » : **reste ouverte** | 📝 Liée à Q-PRO-08, répondue « Harmoniser » le même jour. |
+| Q-MIG-11 | 📝 **Note sans case** (2026-10-06) — « faire un ADR qui annule la gestion des mots de passe dans l'appli ? » : **reste ouverte** | 📝 Ta question est posée à Jeff : **Q-JEF-21** (garder un mot de passe ?). |
+| Q-ACC-17 | 📝 **Note sans case** (2026-10-06) — « hors scope, authentification hors scope » : **reste ouverte** | 📝 Hors périmètre, dit ta note : rien à décider de plus. |
+| Q-ACC-18 | 📝 **Note sans case** (2026-10-06) — « hors scope, authentification hors scope. avoir avec jeff si on garde le mot de pass dans la bdd. » : **reste ouverte** | 📝 C'est **Q-JEF-21**, posée à Jeff. Rien avant sa réponse. |
+| Q-PRO-05 | 📝 **Note sans case** (2026-10-06) — « le CDC est pas fini, il faut le complété et le finir , puis voir si l'on doit en faire un pour le FIX et la suite » : **reste ouverte** | 📝 Ta note : finir le CDC d'abord. |
+
+**💬 Avis demandés dans tes notes du 2026-10-06** — 💡 ce sont mes avis, pas
+des règles : la réponse reste au groupe. Sources relues le 2026-10-06.
+
+- **Q-MIG-03** :
+  - 💡 Ces deux états touchent surtout le **mandat** : « annulé » y existe déjà (`canceled`, `01:405-407`), « suspendu » non.
+  - Ajouter un état à la **demande** rouvrirait Q-SCH-03 : 4 statuts actés le 2026-10-05 (`01:287-288`).
+  - ⚠️ Sans la case « signé » (Q-MAN-05), la voie « au mandat signé » ne trie plus les 2 mandats annulés : les 17 ont une date. Il faudrait filtrer sur le statut.
+  - 💡 Attendre la réponse de Jeff, puis trancher la carte.
+- **Q-MIG-05** :
+  - 💬 Je comprends ta note ainsi : garder la note énergie (la lettre), et mettre une valeur factice dans les autres colonnes d'énergie. Si ce n'est pas ça, dis-le.
+  - ✅ **La lettre se garde** : c'est Q-MIG-06, répondue « oui » (`dpe` → `energy_class`).
+  - ⚠️ `energetic_score` n'a **rien à garder** : `NULL` sur les 2 556 biens (`normalised/annonces_normalised.csv`).
+  - ❌ **Une valeur factice est impossible** : `energy_kwh_m2` et `energy_co2_m2` refusent 0 (`CHECK > 0`, `01:524-525`). Un faux nombre positif se lirait comme une vraie mesure.
+  - 💡 **Laisser vide (NULL)** : ces colonnes l'acceptent. Et **acter** le retrait de `energetic_score` (la recommandation) : ADR U.
+- **Q-MIG-06** :
+  - 💡 **Pas de valeur factice : laisser vide (NULL)** pour les 933 biens sans lettre.
+  - La colonne accepte le vide (`01:521`, sans `NOT NULL`). Une lettre hors liste, comme `X`, serait refusée (CHECK de A à G).
+  - Une fausse lettre se lirait comme une vraie : un bien noté « A » par défaut sortirait dans une recherche « DPE C max ».
+  - Le sujet fait pareil : son générateur ne donne une lettre qu'à une partie des biens (`outils/generer_annonces.py:86`, `:282-287`).
+  - ✅ Même logique que ta réponse Q-MIG-09 : vide veut dire « inconnu ».
+- **Q-MIG-07** :
+  - 💡 **Oui, une valeur factice, mais au bon format** : sinon le CHECK de Q-PRO-08 refusera les 4 `0000000000`.
+  - Le format est déjà fixé par **ADR-007** (accepté) : un champ international, indicatif compris, ex. `+33612345678` (copie du journal d'ADR de Confluence lue le 2026-10-06).
+  - ⚠️ `+330000000000` a **un zéro de trop** : un numéro français s'écrit `+33` puis **9 chiffres**, comme `+33611223344` (`02:135`). Soit `+33000000000`.
+  - ⚠️ Le CHECK doit **accepter** cette valeur : un format trop strict (premier chiffre de 1 à 9) la refuserait.
+  - ✅ Même logique que tes réponses Q-SCH-01 et Q-SCH-18 : la colonne reste obligatoire, la valeur factice est **documentée** (README, audit), et le seed ne la cache pas (`md/point-etape-2026-09-21.md:233`).
+  - Autre voie : rendre la colonne facultative (l'option « nullable ») ; plus de valeur factice, mais le téléphone n'est plus exigé des nouveaux clients.
+- **Q-MIG-11** :
+  - 💡 **Attendre Jeff.** S'il dit « non » : oui, un ADR qui retire `user.password`. Coût compté le 2026-10-06 : 4 fichiers d'`API/src`, 8 de tests, 27 lignes de `02`, et `docker/migrations/2026-09-22_hunter_manager.sql:46-48`.
+  - S'il dit « oui » : garder, et une phrase dans le seed sur le faux préfixe `$2b$` (la recommandation).
+  - ⚠️ Ta note sur Q-PRO-04 dit ADR-016 (Argon2) annulé le 06/10 : même chantier.
+- **Q-ACC-08** :
+  - ✅ **D'accord**, et la base s'y prête : ses **34** clés étrangères sont toutes en `ON DELETE RESTRICT`, aucune en `CASCADE` (compté le 2026-10-06). Rien ne s'efface par ricochet.
+  - ⚠️ **Rendre anonyme n'est pas vider** : nom, prénom et téléphone sont obligatoires (`01:176-179`, `01:184`), et l'e-mail est unique (`01:159`). 💡 Des valeurs neutres au bon format : « non renseigné », un e-mail unique par compte (ex. `anonyme-42@exemple.invalid`).
+  - ⚠️ **`is_activated` a deux sens** : « inscription finie » (`F01:28`) et « compte actif ». Il accepte le vide, sans valeur par défaut (`01:161`). 💡 Une date `deactivated_at` (vide = actif) dirait aussi **quand** ; sinon, écrire le sens retenu.
+  - ⚠️ **La route DELETE** reste ouverte sur les 18 ressources (`crud_router.py:104-111`) : à retirer pour les comptes, ou à justifier.
+- **Q-ACC-09** :
+  - 💬 **Airflow le ferait tout seul** : un DAG (un traitement Airflow) se lance selon un **planning**, ou **à la demande** ([doc officielle Airflow](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html), 3.3.2, lue le 2026-10-06). Planifié, l'admin n'a rien à lancer ; il peut relancer à la main après un échec.
+  - 💡 **Qui écrit en base** : Airflow, avec son propre compte PostgreSQL, pas le compte de l'admin dans l'application. Les deux se concilient : **l'admin surveille, un compte technique écrit**.
+  - ⚠️ Airflow n'est pas dans le projet : l'ajouter touche `docker/docker-compose.yml`, avec l'accord de son responsable. Pour l'analytique, le sujet n'impose aucun outil ETL (`Readme.md:247`).
+  - ⚠️ Quel que soit le compte, `estate` ne dit pas qui a créé un bien (`01:507-569`). 💡 Une colonne d'auteur ou de source, si Jeff veut aussi la saisie à la main.
+- **Q-ACC-17** :
+  - ✅ D'accord : 12 est déjà codé et testé, rien à changer.
+  - 💡 En soutenance, ne pas citer le NIST pour 12 (il demande 15 sans second facteur) : dire « valeur du tuto, gardée car l'auth est hors périmètre ».
+  - Si Jeff fait retirer le mot de passe (Q-JEF-21), la carte devient sans objet.
+- **Q-ACC-20** :
+  - 💬 ADR-025 dit : **chaque chasseur a un manager**. La base l'exige (`01:266-267`).
+  - Sa **raison écrite** : « pour que seul son manager voie sa paie ». C'est un contrôle d'accès (ENF-03).
+  - Or ce contrôle **ne sera pas codé** : l'authentification est hors périmètre (Jeff, 22/09).
+  - Réécrire, c'est **garder la règle et changer la raison** : « c'est l'organisation de l'entreprise » (un choix de modélisation).
+  - ⚠️ Nouveau : la copie du journal d'ADR de Confluence lue le 2026-10-06 dit ADR-025 **« Annulé »**. Si c'est voulu, la question devient : garder le lien sans ADR, ou le retirer ? Vos réponses Q-SCH-13, Q-MIG-04 et Q-ACC-16 le gardent.
+- **Q-INF-05** :
+  - 💬 **Pourquoi tester chaque table** : chacune a ses propres règles dans la base (clés, CHECK, UNIQUE). Le routeur commun n'est testé qu'une fois, sans base (`API/tests/test_crud_router.py`) : ça ne prouve pas que les règles de chaque table renvoient la bonne erreur (409 ou 422).
+  - 📏 Aujourd'hui, **3 ressources sur 18** sont testées contre une vraie base (`/users`, `/clients`, `/estates`) : 15 ne l'ont jamais été.
+  - 💬 **Pourquoi l'argent d'abord** : une erreur y coûte de l'argent (payer le mauvais chasseur, `01:789-795`) ; `chk_refused` a 14 conditions (`01:773-787`).
+  - 💬 **Pourquoi après le lot** : ces 3 tables vont changer ; des tests écrits avant seraient à refaire.
+- **Q-INF-07** :
+  - 💬 **Le seed** : quelques lignes lisibles, écrites à la main, pour la démo.
+  - 💬 **Le générateur** : une machine qui fabrique **des milliers** de fausses lignes, pour mesurer si la base tient la charge.
+  - Il sert à deux choses : la note d'indexation, avant / après (`md/point-etape-2026-09-21.md:209-211`), et ENF-01, 500 mandats en moins de 2 s (Q-INF-08).
+  - Pourquoi après le seed : les deux suivent le même schéma, qui change encore (lot de migration). Écrit trop tôt, il serait à refaire.
+  - Pour les biens, l'outil du prof suffit (`outils/generer_annonces.py`) ; clients, mandats et ventes sont à fabriquer nous-mêmes.
+- **Q-PRO-05** :
+  - ✅ D'accord pour le finir : c'est un **livrable noté** de la phase 2 (`GRILLE-EVALUATION.md:73`).
+  - 💡 Le finir **sur le bon schéma** (`docker/init-v2/` : 18 tables, en euros) et **après le lot de migration** : sinon il sera faux une deuxième fois.
+  - 🟡 **« Le FIX »** : je ne sais pas ce que c'est. Le lot de migration ? Une version corrective ? À préciser.
+  - ➡️ Prévenir Békanty reste utile : son §12 déclare absentes 6 tables qui existent (`md/a-faire-a-la-main-2026-09-21.md:72-74`).
+- **Q-PRO-06** :
+  - ✅ **Une page par ADR : oui.** Le modèle du prof veut une fiche par décision (`JOURNAL-DE-DECISIONS.md:7`).
+  - ⚠️ **Des dossiers par statut : plutôt non.** Un ADR change de statut (proposé, accepté, remplacé) : il faudrait le **déplacer** à chaque fois, et l'ordre des numéros se perdrait.
+  - 💡 À la place : **un seul dossier**, les pages numérotées (ADR-001, ADR-002…), le **statut en tête** de chaque page, et **une page d'index** : numéro, titre, statut, date.
+  - Le prof : ne jamais effacer un ADR ; un ADR remplacé porte « remplacé par ADR-xxx » (`JOURNAL-DE-DECISIONS.md:72`). L'index le montre d'un coup d'œil.
 
 **Doublons marqués le 2026-10-05** (rien de supprimé, identifiants gardés) :
 la réponse de la carte d'origine est **reportée**, pas donnée.
@@ -162,7 +282,7 @@ la réponse de la carte d'origine est **reportée**, pas donnée.
 | Doublon | De | Réponse reportée |
 |---|---|---|
 | Q-MIG-02 | Q-REM-16 | garder l'hypothèse (Q-REM-16 : `hypothese`) |
-| Q-ACC-11 | Q-REM-17 | ✅ plus un doublon : répondue le 2026-10-05 (`colonne`) |
+| Q-ACC-11 | Q-REM-17 | ✅ plus un doublon : répondue le 2026-10-05 (`colonne`), ✏️ changée le 2026-10-06 (une table des factures) |
 | Q-ACC-01 | Q-JEF-14 | oui : la question des droits est posée à Jeff |
 
 **Lot de migration qui en découle** (un seul `docker compose down -v`,
@@ -173,15 +293,15 @@ numéros de `01` relus le 2026-10-05) :
 - table `remuneration_parameters`, CHECK `01:758-759` relâchés (Q-REM-05) ;
 - `final_rate` dans `chk_refused` (Q-REM-10 ; `01:782-787`) ;
 - clé de `sale` vers `parameters_fees` (Q-REM-13) ;
-- 4 dates et `invoice_reference` sur `payment` (Q-REM-17) ;
+- 4 dates et `invoice_reference` sur `payment` (Q-REM-17) — ✏️ 2026-10-06 : `invoice_reference`, `invoice_submitted_at` et `verified_at` passent à une table des factures (Q-ACC-11), 🟡 attend Jeff (Q-JEF-23) ;
 - `CHECK (final_rate BETWEEN 0.20 AND 0.60)` (Q-REM-19 ; `01:755`) — ⚠️ voir Q-REM-05.
 - 2e série du 2026-10-05 :
   - CHECK « exactement 6 mois » à la place de celui de `ends_at` (déjà rédigé dans le TODO U05) (Q-MAN-01 ; `01:412-414`, `01:435-445`) ;
   - Trigger d'exclusivité corrigé (le mandat parent exclu) et activé (Q-MAN-02 ; `01:450-499`) ;
-  - Signature : un CHECK qui relie la case et la date ; MAND-0008 et MAND-0016 corrigés — 🟡 forme selon Q-MAN-09 (Q-MAN-05, Q-MAN-09 ; `01:408, 415`, `02:218, 225`) ;
+  - Signature : ✏️ 2026-10-06 — `is_client_signed` retiré ; la date et le statut `pending_signature` suffisent ; MAND-0008 et MAND-0016 n'ont plus rien à corriger (Q-MAN-05, Q-MAN-09 ; `01:408`, `01:415`, `01:430-432`) ;
   - 3 TODO annotés « contrôlé par l'API » (commentaires seuls) (Q-MAN-06 ; `01:639-641`, `01:664-668`, `01:789-795`) ;
   - `chk_status_signature` : `'canceled'` permis sans date de signature (Q-MAN-07 ; `01:430-432`) ;
-  - `ALTER` retiré de 02 ; 18 clients : adresse « non renseigné », code postal selon Q-SCH-18 (Q-SCH-01, Q-SCH-18 ; `02:64-66`, `02:148-165`) ;
+  - `ALTER` retiré de 02 ; 18 clients : adresse « non renseigné », code postal `00000` (Q-SCH-01, Q-SCH-18 ; `02:64-66`, `02:148-165`) ;
   - `proposition_status` : `'signed'` ajouté (Q-SCH-04 ; `01:610-612`) ;
   - `hunter_performance` en journal : `scored_at`, 2 UNIQUE, 1 index ; `valid_from`, `valid_until` et 2 contraintes retirés (Q-SCH-06 ; `01:803-825`) ;
   - `created_at` sur `client`, `hunter`, `real_estate_manager`, `role` (Q-SCH-09 ; `01:169-170`) ;
@@ -190,7 +310,13 @@ numéros de `01` relus le 2026-10-05) :
   - Eircode sans espace, sur `client` et `criteria` — ⚠️ à confirmer (Q-SCH-12 ; `01:215`, `01:391`) ;
   - Taux de tranche `> 0` (Q-SCH-15 ; `01:697`) ;
   - `parameters_fees` : `effective_from` et `UNIQUE` ; `valid_until` et l'`EXCLUDE` retirés (Q-SCH-17 ; `01:679-686`) ;
-- ⏸️ Attendent Jeff avant de partir : Q-JEF-01, 03, 06, 18.
+- 3e série du 2026-10-06 :
+  - `estate.energy_class` rempli depuis `dpe` dans `03` (1 623 biens) ; vide pour les 933 autres (Q-MIG-06 ; `01:521`, `03`) ;
+  - Ville, code postal et pays `'FR'` des secteurs dans `criteria` ; 🆕 une colonne quartier facultative (💡 `district`) sur `criteria` et `estate` (Q-MIG-08 ; `01:301-305`, `02:192-208`) ;
+  - `budget_min` à NULL sur les 17 critères ; commentaire de `02:189` corrigé (Q-MIG-09 ; `02:189-208`) ;
+  - CHECK de format des téléphones (ADR-007), 3 tables — 🟡 sort des 4 `0000000000` (Q-MIG-07) (Q-PRO-08 ; `01:184-185`, `01:228-229`, `01:246-247`) ;
+- ⏸️ Attendent Jeff avant de partir : Q-JEF-01, 03, 06, 18 ; 🆕 2026-10-06 : Q-JEF-21 (mot de passe),
+  Q-JEF-23 (factures), Q-JEF-26 (données manquantes).
 - ✅ Déjà fait, hors lot : Q-REM-01 (prix en `INTEGER`), qui demande lui aussi un `down -v`.
 
 **ADR à écrire — plus tard** ⏸️ : rien n'est rédigé maintenant ; les ADR
@@ -207,18 +333,23 @@ Simple pense-bête ; 💡 regroupement proposé, numéros donnés sur Confluence
 | F | Définition des critères de performance | Q-REM-07, Q-REM-08, Q-REM-09, Q-PAR-05 | décidé par le groupe — attend Jeff (Q-JEF-05, 08, 09) |
 | G | Validation de l'entrée dans le routeur commun | Q-INF-06 | décidé et fait le 2026-10-05 |
 | H | X01 : ancienneté et performance majorent le taux | Q-REM-18 | décidé le 2026-10-05 — « il suffit de l'acter » (`09-dec:303-324`) |
-| I | Vente reliée à sa grille d'honoraires | Q-REM-13 | décidé — **amende ADR-019** (proposé, « sans clé ») |
-| J | Étapes du paiement : 4 dates et la référence de facture | Q-REM-17, Q-ACC-11 | décidé |
+| I | Vente reliée à sa grille d'honoraires | Q-REM-13 | décidé — remplace ADR-019 (« sans clé »), ⚠️ « accepté » sur Confluence d'après la copie du 2026-10-06 : un nouvel ADR, pas un amendement |
+| J | Étapes du paiement et factures du chasseur | Q-REM-17, Q-ACC-11 | décidé — ✏️ 2026-10-06 : une **table des factures** (Q-ACC-11) ; attend Jeff (Q-JEF-23) |
 | K | Paramètres proposés, validés par Jeff | Q-PAR-01 à 04, 06 à 08, 10, 11, 13 | positions du groupe — attend Jeff (Q-JEF-01, 02, 03) |
 | L | Règles du mandat : 6 mois exacts, exclusivité, renouvellement, annulation | Q-MAN-01, Q-MAN-02, Q-MAN-03, Q-MAN-04, Q-MAN-07 | décidé le 2026-10-05 — confirmations de Jeff : Q-JEF-06 (annulation), Q-JEF-07 (renouvellement) |
 | M | Règles qui croisent plusieurs tables : dans l'API, chacune testée | Q-MAN-06 | décidé le 2026-10-05 |
-| N | Localisation sur criteria : remplace ADR-009 | Q-SCH-02 | décidé — et sur ADR-009, la ligne « modifié le …, par l'ADR xx » demandée le 2026-10-05, à la synchro Confluence |
+| N | Localisation sur criteria : remplace ADR-009 | Q-SCH-02, Q-MIG-08 | décidé — et sur ADR-009, la ligne « modifié le …, par l'ADR xx » demandée le 2026-10-05, à la synchro Confluence ; 🆕 la colonne quartier (Q-MIG-08) |
 | O | Statuts de la demande et de l'offre | Q-SCH-03, Q-SCH-04 | décidé — ferme D4 et D5 |
 | P | Journal des notes du chasseur | Q-SCH-06 | décidé — ferme D9 |
 | Q | Grilles d'honoraires « en vigueur à partir du » | Q-SCH-17 | décidé — rend Q-SCH-16 sans objet |
-| R | Adresse client : tout-ou-rien, « non renseigné » pour les données reprises | Q-SCH-01, Q-SCH-18 | décidé (Q-SCH-01) — 🟡 code postal à trancher (Q-SCH-18) |
-| S | Signature du mandat | Q-MAN-05, Q-MAN-09 | 🟡 à trancher : une signature ou deux (Q-MAN-09) |
-| T | Limites assumées du MVP | Q-SCH-07, Q-SCH-08, Q-SCH-14 | décidé — à dire en soutenance |
+| R | Adresse client : tout-ou-rien, « non renseigné » pour les données reprises | Q-SCH-01, Q-SCH-18 | décidé — code postal `00000` (Q-SCH-18, 2026-10-06) |
+| S | Signature du mandat | Q-MAN-05, Q-MAN-09 | décidé le 2026-10-06 — le client seul ; `is_client_signed` retiré ; la date et le statut `pending_signature` suffisent |
+| T | Limites assumées du MVP | Q-SCH-07, Q-SCH-08, Q-SCH-14, Q-MAN-08, Q-ACC-14 | décidé — à dire en soutenance |
+| U | Données reprises incomplètes : vide (NULL) ou valeur factice documentée | Q-MIG-05, Q-MIG-06, Q-MIG-07, Q-MIG-09 | en partie décidé (Q-MIG-09 : vide ; Q-SCH-18, ADR R : `00000`) — 💡 règle proposée : vide si la colonne l'accepte, sinon une valeur factice au bon format ; attend Jeff (Q-JEF-26) |
+| V | Effacement d'un compte : désactiver et rendre anonyme | Q-ACC-08 | décidé le 2026-10-06 — durée de conservation : Jeff (Q-JEF-15) |
+| W | Import des biens : qui écrit en base, et comment (Airflow ?) | Q-ACC-09 | 🟡 réponse « l'admin » ; attend Jeff (Q-JEF-24) — 💡 l'admin surveille, un compte technique écrit |
+| Y | Mot de passe et clé d'API | Q-ACC-19, Q-MIG-11, Q-ACC-17, Q-ACC-18 | 🟡 attend Jeff (Q-JEF-21, Q-JEF-22) ; ⚠️ ADR-016 (Argon2) annulé le 06/10 ? |
+| Z | Lien chasseur → manager : la raison réécrite | Q-ACC-20 | 🟡 « à confirmer plus tard » ; ⚠️ ADR-025 « Annulé » sur Confluence (copie du 2026-10-06) |
 
 Pas d'ADR propre : Q-REM-10 (un CHECK), Q-REM-12 (C3 déjà écrite), Q-REM-15
 (seed seul), Q-REM-16 (hypothèse déjà écrite, `02:24-26`), D1 à D4.
@@ -226,6 +357,7 @@ Q-PAR-09 va dans le RACI, pas dans un ADR (`RCR:329`).
 2e série : pas d'ADR propre non plus pour Q-SCH-09, 10, 11, 12, 15 (un CHECK ou une
 colonne chacune) et Q-SCH-13 (un libellé) ; 💡 une ligne chacune dans le README du
 schéma. Q-SCH-16 : sans objet.
+3e série : pas d'ADR propre pour Q-MAN-05 (dans S), Q-MIG-04 et Q-ACC-16 (le seed), Q-INF-01 à 08 (infrastructure et tests), Q-PRO-08 (il applique ADR-007), Q-PRO-01 (va dans la RACI : Jeff est le PO), Q-PRO-02, 03, 04, 06 et 07 (l'organisation du travail et du journal). La lettre X est sautée : X01 la prend déjà.
 
 **Ce que les réponses du 2026-10-05 changent aux autres cartes** — aucune réponse
 n'est changée ; quand deux réponses tirent dans deux sens, la carte le montre :
@@ -255,6 +387,25 @@ n'est changée ; quand deux réponses tirent dans deux sens, la carte le montre 
 | Q-ACC-14 | 🔗 Cohérente avec Q-SCH-08 (reporter au parcours IA). |
 | Q-ACC-11 | ✅ Répondue : rejoint Q-REM-17 ; ce n'est plus un doublon. |
 | Q-PRO-05 | 🔗 Le lot de migration grossit : l'écart avec le CDC v2.0 aussi. |
+
+**Ce que les réponses du 2026-10-06 changent aux autres cartes** — ✏️ deux
+réponses changent (Q-MAN-05, Q-ACC-11) ; les autres s'ajoutent :
+
+| Carte | Ce qui change |
+|---|---|
+| Q-MAN-05 | ✏️ Réponse **changée** : « Supprimer la colonne », à la suite de Q-MAN-09. Le CHECK case ↔ date n'a plus d'objet. |
+| Q-ACC-11 | ✏️ Réponse **changée** : une table des factures, à confirmer avec Jeff (Q-JEF-23). |
+| Q-REM-17 | 🔗 3 de ses 5 colonnes passent à la table des factures (Q-ACC-11). |
+| Q-REM-13 | ⚠️ ADR-019 est « accepté » dans la copie du journal du 2026-10-06, pas « proposé » : un nouvel ADR le remplace, on ne l'amende pas. |
+| Q-MIG-03 | 🔗 Ta note rejoint Q-JEF-13. ⚠️ Sans la case « signé », la voie « au mandat signé » ne trie plus les 2 mandats annulés. |
+| Q-MIG-05, Q-MIG-06 | 💬 Avis : vide (NULL) plutôt qu'une valeur factice, comme ta réponse Q-MIG-09. Les colonnes d'énergie refusent 0. |
+| Q-MIG-07 | 🔗 Q-PRO-08 (« Harmoniser ») : la valeur factice doit passer le format d'ADR-007. `+33000000000`, pas `+330000000000`. |
+| Q-MIG-11, Q-ACC-17, Q-ACC-18 | 🔗 Toutes attendent Q-JEF-21 : garder un mot de passe ? |
+| Q-ACC-20 | ⚠️ ADR-025 « Annulé » dans la copie du journal du 2026-10-06 : à vérifier avant de le réécrire. |
+| Q-PRO-04 | ⚠️ ADR-016 : « annulé le 06/10 » (ta note), « accepté » dans la copie de 11 h 16 : à vérifier. |
+| Q-PRO-02 | 🔄 Q4 répondue (Q-INF-03) : il ne reste que Q3 (ADR-024). |
+| Q-INF-02 | 🔄 Toutes ses dépendances sont répondues ; il attend l'entretien avec Jeff, puis le lot de migration. |
+| Q-SCH-08, Q-ACC-14, Q-PRO-07 | 🔗 Cartes 📋 PO : le PO, c'est Jeff (Q-PRO-01) ; à lui confirmer. |
 
 ---
 
@@ -617,7 +768,7 @@ Arguments pour les points qui méritent plus qu'un « oui » :
 
 #### Q-MAN-05 — `is_client_signed` : doublon de `signature_date` ?
 
-- ✅ **Répondue le 2026-10-05 : « Poser un CHECK d'égalité »** · 👥 **Groupe**
+- ✅ **Répondue le 2026-10-06 : « Supprimer la colonne »** (✏️ changée ; le 2026-10-05 : « Poser un CHECK d'égalité » ; détail : partie 0) · 👥 **Groupe**
 - **Constat** : aucune règle n'utilise la colonne. `02:218` insère un mandat
   avec une date de signature **et** `is_client_signed = false`.
 - 💡 **Recommandation** : la supprimer, ou poser `CHECK (is_client_signed = (signature_date IS NOT NULL))`.
@@ -657,7 +808,7 @@ Arguments pour les points qui méritent plus qu'un « oui » :
 
 #### Q-MAN-08 — Réaffecter une demande refusée : faut-il se souvenir de qui a refusé ?
 
-- 🟡 **Ouvert** (✏️ réécrite le 2026-10-05 : cochée « Reporter », commentaire « revoir, pas répondu » ; 🆕 recommandation passée de « table » à « reporter ») · 👥 **Groupe**
+- ✅ **Répondue le 2026-10-06 : « Reporter »** (✏️ réécrite le 2026-10-05 ; détail : partie 0) · 👥 **Groupe**
 - **Constat** :
   - Le Readme dit seulement que le chasseur « peut ne pas l'accepter » (`Readme.md:124`) ; dans son schéma, un refus mène à **Fin** (`Readme.md:140`).
   - La réaffectation vient d'une user story du prof : la demande « **peut** être réaffectée à un autre chasseur » (`04_chasseur_prise_en_charge_demande.feature:21`). « Peut », pas « doit ».
@@ -673,7 +824,7 @@ Arguments pour les points qui méritent plus qu'un « oui » :
 
 #### Q-MAN-09 — Signature du mandat : par le client seul, ou par les deux parties ?
 
-- 🟡 **Ouvert** (🆕 née le 2026-10-05 du commentaire sur Q-MAN-05) · 👥 **Groupe**
+- ✅ **Répondue le 2026-10-06 : « Le client seul, comme le sujet »** — le commentaire fait foi : `is_client_signed` retiré, pas de CHECK d'égalité (🆕 née le 2026-10-05 du commentaire sur Q-MAN-05 ; détail : partie 0) · 👥 **Groupe**
 - **Constat** :
   - Le sujet ne parle que de la signature du client : `Readme.md:98`, `01_particulier_demande_et_compte.feature:35-36`.
   - Aujourd'hui : une case `is_client_signed` (`01:415`) et une date `signature_date` (`01:408`) ; la date fait partir les 6 mois (Q-MAN-01).
@@ -707,9 +858,9 @@ Arguments pour les points qui méritent plus qu'un « oui » :
 | Q-SCH-15 | Taux de tranche `>= 0` contre taux de base `> 0` | ✅ | 👥 | `01:697`, `01:746` |
 | Q-SCH-16 | `parameters_fees` sans `valid_until > valid_from` | ⏭️ sans objet | 👥 | `01:676` |
 | Q-SCH-17 | Trous entre deux périodes de paramètres | ✅ | 👥 | `09-contraintes-a-coder.md` C2 |
-| Q-SCH-18 | 🆕 Code postal des 18 clients repris, avec le tout-ou-rien gardé | 🟡 | 👥 | `02:148-165`, `01:186`, `01:210` |
+| Q-SCH-18 | 🆕 Code postal des 18 clients repris, avec le tout-ou-rien gardé | ✅ | 👥 | `02:148-165`, `01:186`, `01:210` |
 
-✅ **Réponses du 2026-10-05** : voir la partie 0. Les recommandations ci-dessous
+✅ **Réponses du 2026-10-05 et du 2026-10-06** : voir la partie 0. Les recommandations ci-dessous
 datent d'avant ; **la réponse fait foi**.
 
 💡 **Recommandations** :
@@ -755,17 +906,19 @@ datent d'avant ; **la réponse fait foi**.
 |---|---|---|---|
 | Q-MIG-01 | Sens de `taux_commission` (2,00 à 3,25) | 🧑‍💼 | `docker/init-v2/README.md:145-147` |
 | Q-MIG-02 | 🔁 **Doublon de Q-REM-16** (2026-10-05) — `hire_date` = date de création du compte | 🧑‍💼 | `02:24-26` |
-| Q-MIG-03 | `search_request.status = 'confirmed'` | 👥 | `docker/init-v2/README.md:161-174` |
-| Q-MIG-04 | Manager fictif (user 25) | 👥 | `docker/init-v2/README.md:176-192` |
-| Q-MIG-05 | `energetic_score` retiré | 👥 | `08-etat.md:123-126` |
-| Q-MIG-06 | Remplir `energy_class` depuis `dpe` | 👥 | `docker/init-v2/README.md:90-91` |
-| Q-MIG-07 | Téléphones `0000000000` (3 clients + le manager) | 👥 | `02:143-145` |
-| Q-MIG-08 | Secteurs non migrés : `criteria.town` vide 17 fois sur 17 | 👥 | `02:70-72` |
-| Q-MIG-09 | `budget_min = budget_max` 17 fois sur 17 | 👥 | `md/point-etape-2026-09-21.md` §7 |
+| Q-MIG-03 | 📝 `search_request.status = 'confirmed'` | 👥 | `docker/init-v2/README.md:161-174` |
+| Q-MIG-04 | ✅ Manager fictif (user 25) | 👥 | `docker/init-v2/README.md:176-192` |
+| Q-MIG-05 | 📝 `energetic_score` retiré | 👥 | `08-etat.md:123-126` |
+| Q-MIG-06 | ✅ Remplir `energy_class` depuis `dpe` | 👥 | `docker/init-v2/README.md:90-91` |
+| Q-MIG-07 | 📝 Téléphones `0000000000` (3 clients + le manager) | 👥 | `02:143-145` |
+| Q-MIG-08 | ✅ Secteurs non migrés : `criteria.town` vide 17 fois sur 17 | 👥 | `02:70-72` |
+| Q-MIG-09 | ✅ `budget_min = budget_max` 17 fois sur 17 | 👥 | `md/point-etape-2026-09-21.md` §7 |
 | Q-MIG-10 | 6 mandats « actif » déjà échus au 25/07/2026 | 🧑‍💼 | `md/point-etape-2026-09-21.md:240-243` |
-| Q-MIG-11 | Mot de passe fictif au préfixe bcrypt `$2b$` | 👥 | `02:97-127` |
+| Q-MIG-11 | 📝 Mot de passe fictif au préfixe bcrypt `$2b$` | 👥 | `02:97-127` |
 | Q-MIG-12 | Mandat 13 ignoré : son client est un chasseur | 🧑‍💼 | `02:167` |
 | Q-MIG-13 | Sens des statuts source `suspendu`, `termine` | 🧑‍💼 | `PgSQL.sql:26` du sujet |
+
+✅ **Répondues le 2026-10-06** : Q-MIG-04, Q-MIG-06, Q-MIG-08, Q-MIG-09. 📝 **Notes sans case** (restent ouvertes) : Q-MIG-03, Q-MIG-05, Q-MIG-07, Q-MIG-11. Détail dans la partie 0 ; ce qui suit date d'avant, **la réponse fait foi**.
 
 💡 **Recommandations** :
 
@@ -807,20 +960,22 @@ fait quoi** dans le métier.
 | Q-ACC-05 | Le client voit-il tout le catalogue ? | 🧑‍💼 | Non : les biens proposés pour lui |
 | Q-ACC-06 | Le chasseur voit-il son barème ? | 🧑‍💼 | Oui : sa paie doit se comprendre |
 | Q-ACC-07 | Qui fixe barèmes et honoraires ? | 🧑‍💼 | La direction seule |
-| Q-ACC-08 | Désactiver plutôt que supprimer ? | 👥 | **Oui** : les clés en `RESTRICT` y poussent déjà |
-| Q-ACC-09 | Quel compte lance l'import des biens ? | 👥 | Un compte technique dédié |
+| Q-ACC-08 | ✅ Désactiver plutôt que supprimer ? | 👥 | **Oui** : les clés en `RESTRICT` y poussent déjà |
+| Q-ACC-09 | ✅ Quel compte lance l'import des biens ? | 👥 | Un compte technique dédié |
 | Q-ACC-10 | Qui affecte une demande à un chasseur ? | 🧑‍💼 | Le manager |
-| Q-ACC-11 | 🔁 **Doublon de Q-REM-17** (2026-10-05) — Où ranger la facture du chasseur ? | 👥 | Avec Q-REM-17 (`invoice_reference`) |
+| Q-ACC-11 | ✅ Où ranger la facture du chasseur ? (✏️ changée le 2026-10-06 : une table des factures) | 👥 | Avec Q-REM-17 (`invoice_reference`) |
 | Q-ACC-12 | Qui crée le compte client ? | 🧑‍💼 | Le client, par sa demande en ligne |
 | Q-ACC-13 | Qui enregistre une visite du client ? | 🧑‍💼 | Le chasseur qui l'accompagne |
-| Q-ACC-14 | Droits des chasseurs-IA ? | 📋 | Reporter au parcours IA |
+| Q-ACC-14 | ✅ Droits des chasseurs-IA ? | 📋 | Reporter au parcours IA |
 | Q-ACC-15 | Un chasseur peut-il créer une demande ? | 🧑‍💼 | Non : la demande vient du client |
-| Q-ACC-16 | Combien de comptes Admin / Manager dans le seed ? | 👥 | **1 admin, 2 managers** |
-| Q-ACC-17 | Mot de passe : 12 caractères minimum ? | 👥 | **Garder 12** : déjà codé et testé |
-| Q-ACC-18 | Garder `user.password` ? | 👥 | **Garder** : prêt si l'auth revient |
-| Q-ACC-19 | Clé d'API proposée par Jeff, « optionnelle » | 👥 | **Ne pas faire** ; la citer comme piste |
-| Q-ACC-20 | Réécrire ADR-025 sans ENF-03 | 👥 | **Oui** : ENF-03 vient d'un exemple (`CAHIER-DES-CHARGES-TECHNIQUE.md:74`) ; ⚠️ mais `RCR:296` et `RCR:763` le reprennent comme exigence. ⚠️ ADR-025 est déjà « accepté » sur Confluence (`md/a-faire-a-la-main-2026-09-21.md:189-190`) : ne pas le réécrire, mais écrire un nouvel ADR qui l'amende ; l'ancien ne s'efface pas (`JOURNAL-DE-DECISIONS.md:72`) |
+| Q-ACC-16 | ✅ Combien de comptes Admin / Manager dans le seed ? | 👥 | **1 admin, 2 managers** |
+| Q-ACC-17 | 📝 Mot de passe : 12 caractères minimum ? | 👥 | **Garder 12** : déjà codé et testé |
+| Q-ACC-18 | 📝 Garder `user.password` ? | 👥 | **Garder** : prêt si l'auth revient |
+| Q-ACC-19 | ✅ Clé d'API proposée par Jeff, « optionnelle » | 👥 | **Ne pas faire** ; la citer comme piste |
+| Q-ACC-20 | ✅ Réécrire ADR-025 sans ENF-03 | 👥 | **Oui** : ENF-03 vient d'un exemple (`CAHIER-DES-CHARGES-TECHNIQUE.md:74`) ; ⚠️ mais `RCR:296` et `RCR:763` le reprennent comme exigence. ⚠️ ADR-025 est déjà « accepté » sur Confluence (`md/a-faire-a-la-main-2026-09-21.md:189-190`) : ne pas le réécrire, mais écrire un nouvel ADR qui l'amende ; l'ancien ne s'efface pas (`JOURNAL-DE-DECISIONS.md:72`) |
 | Q-ACC-21 | Durée de conservation avant anonymisation | 🧑‍💼 | Voir plus bas |
+
+✅ **Répondues le 2026-10-06** : Q-ACC-08, Q-ACC-09, Q-ACC-11, Q-ACC-14, Q-ACC-16, Q-ACC-19, Q-ACC-20. 📝 **Notes sans case** (restent ouvertes) : Q-ACC-17, Q-ACC-18. Détail dans la partie 0 ; ce qui suit date d'avant, **la réponse fait foi**.
 
 Sources :
 
@@ -839,22 +994,24 @@ Sources :
 
 | Id | Question | Qui | Source |
 |---|---|---|---|
-| Q-INF-01 | Remplacer MinIO (image introuvable) | 👥 | `md/minio-images-indisponibles-2026-10-02.md:58-71` |
-| Q-INF-02 | Écrire le seed `04_seed_demo.sql` | 👥 | `md/point-etape-2026-09-21.md:197` |
-| Q-INF-03 | Biens de démo : 3 à 5 biens fictifs à Montpellier ? | 👥 | `md/point-etape-2026-09-21.md:160-169` |
-| Q-INF-04 | Aucun test fonctionnel | 👥 | `rapport-tests.md:245-257` |
-| Q-INF-05 | 15 ressources sur 18 sans test d'intégration | 👥 | `rapport-tests.md:253` |
+| Q-INF-01 | ✅ Remplacer MinIO (image introuvable) | 👥 | `md/minio-images-indisponibles-2026-10-02.md:58-71` |
+| Q-INF-02 | ✅ Écrire le seed `04_seed_demo.sql` | 👥 | `md/point-etape-2026-09-21.md:197` |
+| Q-INF-03 | ✅ Biens de démo : 3 à 5 biens fictifs à Montpellier ? | 👥 | `md/point-etape-2026-09-21.md:160-169` |
+| Q-INF-04 | ✅ Aucun test fonctionnel | 👥 | `rapport-tests.md:245-257` |
+| Q-INF-05 | ✅ 15 ressources sur 18 sans test d'intégration | 👥 | `rapport-tests.md:253` |
 | Q-INF-06 | Champ obligatoire manquant → `409`, pas `422` | 👥 | `API/README.md:216-218` |
-| Q-INF-07 | Générateur de données en masse (phase 3) | 👥 | `md/point-etape-2026-09-21.md:199` |
-| Q-INF-08 | ENF-01 (500 mandats en moins de 2 s) et ENF-03 non testés | 👥 | `rapport-tests.md:254-255` |
-| Q-PRO-01 | **Qui est le PO ?** | 👥 | — |
-| Q-PRO-02 | Valider les 5 réponses du point d'étape (A1) | 👥 | `md/point-etape-2026-09-21.md:106-108` |
-| Q-PRO-03 | ADR à passer en « accepté », ou à écrire | 👥 | `md/a-faire-a-la-main-2026-09-21.md:96-112`, `09-dec:178` |
-| Q-PRO-04 | Argon2 : ADR-016 ou ADR-017 ? | 👥 | `md/adr-024-motif-refus-remuneration.md:7-10` |
-| Q-PRO-05 | Dire à Békanty que le CDC v2.0 audite l'**ancien** schéma | 👥 | `md/a-faire-a-la-main-2026-09-21.md:66-79` |
-| Q-PRO-06 | Nettoyer Confluence (note drawio, compagnon d'ADR-024) | 👥 | `md/a-faire-a-la-main-2026-09-21.md:192-204` |
-| Q-PRO-07 | Livrables 1 (audit) et 3 (architecture) vides | 📋 | `08-etat.md` |
-| Q-PRO-08 | Format des téléphones entre tables | 👥 | `md/notes_contraintes_client.md:34-36` |
+| Q-INF-07 | ✅ Générateur de données en masse (phase 3) | 👥 | `md/point-etape-2026-09-21.md:199` |
+| Q-INF-08 | ✅ ENF-01 (500 mandats en moins de 2 s) et ENF-03 non testés | 👥 | `rapport-tests.md:254-255` |
+| Q-PRO-01 | ✅ **Qui est le PO ?** Jeff (2026-10-06) | 👥 | — |
+| Q-PRO-02 | ✅ Valider les 5 réponses du point d'étape (A1) | 👥 | `md/point-etape-2026-09-21.md:106-108` |
+| Q-PRO-03 | ✅ ADR à passer en « accepté », ou à écrire | 👥 | `md/a-faire-a-la-main-2026-09-21.md:96-112`, `09-dec:178` |
+| Q-PRO-04 | ✅ Argon2 : ADR-016 ou ADR-017 ? | 👥 | `md/adr-024-motif-refus-remuneration.md:7-10` |
+| Q-PRO-05 | 📝 Dire à Békanty que le CDC v2.0 audite l'**ancien** schéma | 👥 | `md/a-faire-a-la-main-2026-09-21.md:66-79` |
+| Q-PRO-06 | ✅ Nettoyer Confluence (note drawio, compagnon d'ADR-024) | 👥 | `md/a-faire-a-la-main-2026-09-21.md:192-204` |
+| Q-PRO-07 | ✅ Livrables 1 (audit) et 3 (architecture) vides | 📋 | `08-etat.md` |
+| Q-PRO-08 | ✅ Format des téléphones entre tables | 👥 | `md/notes_contraintes_client.md:34-36` |
+
+✅ **Répondues le 2026-10-06** : Q-INF-01, Q-INF-02, Q-INF-03, Q-INF-04, Q-INF-05, Q-INF-07, Q-INF-08, Q-PRO-01, Q-PRO-02, Q-PRO-03, Q-PRO-04, Q-PRO-06, Q-PRO-07, Q-PRO-08. 📝 **Notes sans case** (restent ouvertes) : Q-PRO-05. Détail dans la partie 0 ; ce qui suit date d'avant, **la réponse fait foi**.
 
 💡 **Recommandations** :
 
@@ -872,6 +1029,8 @@ Sources :
 - **Q-INF-08** : ENF-01 se mesure avec le générateur (Q-INF-07) ; ENF-03 tombe avec l'auth (ADR-026).
 - **Q-PRO-01** : **en nommer un**.
   - Il tranche les questions « groupe » et tient le journal d'ADR.
+  - ✅ Répondu le 2026-10-06 : **Jeff**, qui joue tous les rôles sauf le développement.
+    Le journal d'ADR sera tenu par un membre de l'équipe (💡 à nommer dans la RACI).
 - **Q-PRO-02** : 3 réponses sur 5 confirmées par d'autres cartes (Q1 = Q-REM-15, Q2 = Q-REM-06, Q5 = Q-MAN-04).
   - Restent : Q3, en base mais pas actée (ADR-024 « proposé »), et Q4 = Q-INF-03.
 - **Q-PRO-03** : tout passer **en une séance**.
@@ -902,7 +1061,7 @@ Elles restent décrites dans la partie 1 de ce registre.
 
 🆕 **Mis à jour le 2026-10-06**, d'après la 3e série de réponses :
 **6 questions ajoutées** (Q-JEF-21 à 26) et **3 complétées** (Q-JEF-13, 15, 19).
-Ces réponses ne sont **pas encore reportées** dans la partie 1 : c'est l'étape suivante.
+✅ Reportées le 2026-10-06 : partie 0 (réponses, avis, lot, ADR) et partie 1 (statuts).
 
 | Question pour Jeff | Cartes rangées dessous |
 |---|---|
@@ -923,8 +1082,10 @@ Ces réponses ne sont **pas encore reportées** dans la partie 1 : c'est l'étap
 Restent sur la page principale, car le groupe tranche d'abord : Q-REM-01,
 Q-REM-02, Q-REM-06, Q-MAN-02, Q-MAN-03.
 
-À lui envoyer **en une fois**, avec la proposition du sujet en face : il
-n'a plus qu'à dire « oui » ou à corriger. 26 questions : 19 le 2026-10-02,
+🆕 2026-10-06 : Jeff **ne remplit pas** le rapport. Le groupe lui pose les
+questions **en entretien**, court : la liste, rangée par thème, les questions
+qui débloquent le plus d'abord, ouvre le rapport. L'équipe y note ses réponses.
+Jeff joue **tous les rôles sauf le développement** : client et PO. 26 questions : 19 le 2026-10-02,
 Q-JEF-20 le 2026-10-05, Q-JEF-21 à 26 le 2026-10-06.
 
 ### Les chiffres
@@ -1101,6 +1262,15 @@ Q-JEF-20 le 2026-10-05, Q-JEF-21 à 26 le 2026-10-06.
 - **D3 brouillé** : `01:669-672` dit qu'un acte tardif « peut ouvrir droit » ; la décision est « refus sauf renouvellement ».
 - **D1 pas mis à jour** : `09-dec:299` dit encore « Solution B » (K€), avec sa justification « doit rester indicatif », abandonnée.
 - **ADR-025** : « accepté » sur Confluence, « proposé » dans le dépôt (`md/adr-025-…:17`, `08-etat.md:152`).
+  - 🆕 2026-10-06 : la copie du journal d'ADR de Confluence lue le 2026-10-06 le dit **« Annulé »** ; vos réponses
+    (Q-SCH-13, Q-MIG-04, Q-ACC-16) gardent le lien chasseur → manager. À vérifier (Q-ACC-20).
+- 🆕 **ADR-016 (Argon2)** : « annulé le 06/10 » d'après ta note sur Q-PRO-04, « accepté » dans la
+  copie du journal lue le même jour à 11 h 16. Le code hache toujours en Argon2 (`API/src/app/utils/security.py:20-32`).
+- 🆕 **ADR-019** : « proposé » dans ce registre (Q-REM-13, ADR I), « accepté » dans la copie du journal du 2026-10-06.
+- 🆕 **Deux ADR-026** : sur Confluence, « robustesse des mots de passe », annulé le 22/09 ;
+  notre brouillon `md/adr-026-perimetre-authentification.md` devra prendre un autre numéro (028 au 2026-10-06).
+- 🆕 **MinIO** : `be15c04` (2026-10-06) change les images ; `md/minio-images-indisponibles-2026-10-02.md`
+  et `context AI/08-etat.md` les disent encore introuvables. Que les nouvelles se téléchargent : non vérifié.
 - **N2 dit encore « ouvert »** alors que Q-SCH-02 l'a tranché le 2026-10-05 : `01:298-300`, `09-dec:248` (vide),
   `docker/init-v2/README.md:311`.
 - **Numéro d'ADR de la localisation** : ADR-010 dans `md/notes_contraintes_localisation_criteria.md:90`,
@@ -1141,18 +1311,23 @@ Q-JEF-20 le 2026-10-05, Q-JEF-21 à 26 le 2026-10-06.
 - **Les 2 556 biens ne servent pas la démo** : ils sont hors de Montpellier.
 - **Beaucoup de documents se recouvrent** (`md/`, `livrables/`, `context AI/`) :
   une même question y vit à trois endroits, avec trois états.
+- 🆕 **Q-PRO-08 posait une question déjà tranchée** : le format des téléphones est fixé par
+  ADR-007, accepté (copie du journal d'ADR de Confluence lue le 2026-10-06). La carte ne le citait pas.
+- 🆕 **Q-MIG-07 recommandait de garder les `0000000000`** : ils ne respectent pas le format d'ADR-007.
 
 ---
 
 ## 4. Autres idées
 
+- 🆕 **2026-10-06**, ta note sur les idées : « note tes idée et propose les plus tard apres les
+  entrevues ». Elles attendent l'entretien avec Jeff.
 - 💡 **Un seul registre de questions** : ce fichier, avec ses identifiants
   `Q-…`, remplace les listes éparses. Une question tranchée y prend sa date
   et son ADR, puis sort de la liste.
 - 💡 **Préfixer les décisions** : `DS-` pour celles du sujet, `DG-` pour
   celles du groupe. Fin de la confusion sur « D2 ».
-- 💡 **Un atelier d'une heure avec Jeff** : la partie 2, imprimée, avec la
-  valeur proposée en face de chaque question.
+- ✅ **Un entretien avec Jeff**, court (décidé le 2026-10-06) : la liste en tête du
+  rapport Jeff, rangée par thème, les questions qui débloquent le plus d'abord.
 - 💡 **Une diapo « règle ou paramètre »** en soutenance : c'est le piège que
   le sujet annonce (`RCR:40`), et on a de quoi le montrer.
 - 💡 **Rejouer les 55 cas contre la base**, une fois la calculette branchée :
