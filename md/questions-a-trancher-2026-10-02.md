@@ -64,7 +64,7 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 - `01` = `docker/init-v2/01_create_fil_rouge_immobilier.sql`
 - `02` = `docker/init-v2/02_migration.sql`
 - `rem.py` = `API/src/app/services/remuneration.py`
-- `F00`, `F07`, `F10` = `user-stories/00_…`, `07_…`, `10_….feature`
+- `F00` à `F10` = `user-stories/00_…` à `10_….feature` (ex. `F07` = `07_…`)
 - `RCR` = `REGLES-CALCUL-REMUNERATION.md` du sujet
 - `09-dec` = `livrables/2-modelisation/09-decisions-a-prendre.md`
 
@@ -900,6 +900,10 @@ partie 1 que seul Jeff tranche (« Qui tranche » commence par Jeff, sans
 question qui les regroupe. Leurs 13 réponses et 2 doublons y sont reportés.
 Elles restent décrites dans la partie 1 de ce registre.
 
+🆕 **Mis à jour le 2026-10-06**, d'après la 3e série de réponses :
+**6 questions ajoutées** (Q-JEF-21 à 26) et **3 complétées** (Q-JEF-13, 15, 19).
+Ces réponses ne sont **pas encore reportées** dans la partie 1 : c'est l'étape suivante.
+
 | Question pour Jeff | Cartes rangées dessous |
 |---|---|
 | Q-JEF-01 | Q-PAR-01, 04, 06, 07, 08, 10, 11, 13 |
@@ -920,8 +924,8 @@ Restent sur la page principale, car le groupe tranche d'abord : Q-REM-01,
 Q-REM-02, Q-REM-06, Q-MAN-02, Q-MAN-03.
 
 À lui envoyer **en une fois**, avec la proposition du sujet en face : il
-n'a plus qu'à dire « oui » ou à corriger. 20 questions : les 19 ci-dessous,
-plus Q-JEF-20.
+n'a plus qu'à dire « oui » ou à corriger. 26 questions : 19 le 2026-10-02,
+Q-JEF-20 le 2026-10-05, Q-JEF-21 à 26 le 2026-10-06.
 
 ### Les chiffres
 
@@ -975,6 +979,19 @@ plus Q-JEF-20.
 - **Q-JEF-12** — `taux_commission` (2,00 à 3,25) : pourcentage du **prix** ou des **honoraires** ? (Q-MIG-01)
 - **Q-JEF-13** — Le mandat 13 vise un chasseur comme client : le vrai client est-il **Nina Girard** ?
   Que veulent dire `suspendu` et `termine` ? Les 6 mandats « actif » échus ont-ils été renouvelés ? (Q-MIG-10, 12, 13)
+  - 🆕 Complétée le 2026-10-06 (Q-MIG-03) : un mandat peut-il être **mis en pause**,
+    puis reprendre ? La **demande de recherche** peut-elle être suspendue, ou annulée ?
+    Elle n'a que 4 états (`01:287-288`), le mandat 6, sans « suspendu » (`01:405-407`).
+  - ⚠️ La migration traduit « suspendu » en `canceled` pour 2 mandats (`02:218`, `02:225`),
+    sans l'écrire nulle part : « suspend » donne 0 résultat dans `02` et dans `docker/init-v2/README.md`.
+- **Q-JEF-26** — 🆕 Ajoutée le 2026-10-06. Des données manquent dans l'ancienne base :
+  le **téléphone** de 3 clients (`PgSQL.sql:94`, `:100`, `:106`), l'**adresse** et le
+  **code postal** de 18 clients, le **budget minimum** des 17 demandes (`PgSQL.sql:71`).
+  Peut-il les fournir ? Sinon : « non renseigné », sans rien inventer.
+  (Q-SCH-01, Q-SCH-18, Q-MIG-07, Q-MIG-09)
+  - 🟡 À fixer en groupe : « inconnu » s'écrit NULL quand la colonne l'accepte
+    (Q-MIG-09, « vide ») ; une valeur factice seulement si elle est obligatoire
+    (téléphone `01:184`, code postal `01:210`).
 
 ### Les droits et le RGPD
 
@@ -982,8 +999,21 @@ plus Q-JEF-20.
   peut faire quoi** reste ouvert : que voit le manager, qui enregistre la vente,
   qui valide la facture, le chasseur voit-il son barème ?
   (Q-ACC-02 à 07, Q-ACC-10, 12, 13, 15)
+- **Q-JEF-24** — 🆕 Ajoutée le 2026-10-06. Un bien peut-il être **saisi à la main**
+  par un chasseur ou un manager, ou vient-il **seulement de l'import** ? Le sujet ne
+  décrit que la sélection automatique (`F05:16`). (Q-ACC-09)
+  - 💡 Airflow lance un traitement selon un planning ou à la demande
+    ([doc officielle](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html),
+    3.3.2, lue le 2026-10-06) : planifié, l'import tourne seul. C'est Airflow qui
+    écrit en base : plutôt l'option « compte technique » de Q-ACC-09. À revoir en groupe.
 - **Q-JEF-15** — Combien de temps garder les données avant **anonymisation** ?
   Le sujet donne 10 ans pour les paiements ; il manque le reste. (Q-ACC-21)
+  - 🆕 Complétée le 2026-10-06 (Q-ACC-08) : pour **effacer un compte**, nous proposons
+    que l'admin le **désactive**, rende **anonyme** ce qui n'est pas obligatoire, et
+    **garde** ce que la loi impose (paiements, 10 ans, `REGISTRE-RGPD.md:29`).
+    Le sujet pose la question sans y répondre (`REGISTRE-RGPD.md:38`).
+  - ⚠️ L'API garde une route DELETE sur les 18 ressources (`API/src/app/routes/crud_router.py:104-111`) :
+    à retirer, ou à justifier, si on désactive.
 - **Q-JEF-18** — Quelle **échelle de priorité** pour le client sur un bien proposé ? (Q-SCH-05)
 - **Q-JEF-16** — 🆕 En deux temps depuis le 2026-10-05. 1. Veut-il des
   **barèmes propres à un chasseur** (`RCR:186-193`), en plus des bonus
@@ -991,15 +1021,47 @@ plus Q-JEF-20.
   chaque chasseur » (`Readme.md:80`) ? 2. Si oui, qui les crée, et qui les
   valide ? Notre position : le manager (Q-PAR-09). ⚠️ À accorder avec
   Q-ACC-07 (💡 « la direction seule »). (Q-PAR-09)
+
+### Le mot de passe et la clé d'API
+
+- **Q-JEF-21** — 🆕 Ajoutée le 2026-10-06. Notre base doit-elle garder un **mot de
+  passe** pour chaque compte ? La couche « au dessus » le lira-t-elle chez nous ?
+  Sinon, nous le retirons. (Q-ACC-18, Q-MIG-11)
+  - ⚠️ Le brouillon d'ADR-026 dit l'inverse : la colonne reste, car Jeff a dit
+    « consommés » (`md/adr-026-perimetre-authentification.md:70-72`). Sa réponse tranche.
+  - Coût d'un retrait, compté le 2026-10-06 : 4 fichiers d'`API/src`, 8 fichiers
+    d'`API/tests`, 27 lignes de `02`.
+- **Q-JEF-22** — 🆕 Ajoutée le 2026-10-06. La **clé d'API** qu'il proposait le 22/09
+  (`md/adr-026-perimetre-authentification.md:51-53`) : **une seule**, ou **une par
+  programme** ? Et comment la lui remettre ? (Q-ACC-19)
+
+### La facture du chasseur
+
+- **Q-JEF-23** — 🆕 Ajoutée le 2026-10-06. Une facture **refusée puis renvoyée** :
+  garder **chaque envoi**, ou seulement la **dernière** ? Le sujet n'en dit rien
+  (`F07:18-27`, `RCR:284-289`). (Q-ACC-11, Q-REM-17)
+  - ⚠️ Chez nous, `'refused'` sur un paiement veut dire « pas de droit à
+    rémunération » (`01:728-729`), pas « facture refusée ».
+
+### Pour information, et des confirmations
+
 - **Q-JEF-19** — **Pour information** (pas une question) : un prix pile sur une
   limite du barème prend la tranche du dessus, comme votre tableau (200 000 € → 35 %,
   350 000 € → 40 %). Les prix sont stockés en euros entiers. Dites-nous si ce n'est
   pas votre lecture. (Q-REM-01, tranchée le 2026-10-05)
+  - 🆕 Complétée le 2026-10-06 (note sur Q-REM-01) : la contradiction, mot pour mot.
+    Le tableau dit « < 200 000 € » pour 30 %, puis « 200 000 – 349 999 € » pour 35 %
+    (`RCR:173-174`) ; la requête dit `BETWEEN montant_min AND COALESCE(montant_max, 999999999)`
+    (`RCR:188`), bornes incluses. Avec des centimes, 199 999,50 € ne tomberait dans aucune tranche.
 - **Q-JEF-20** — 🆕 Ajoutée le 2026-10-05. **Confirmation** : chaque paiement
   garde la note de performance et le détail du calcul (les 5 notes, les visites,
   l'ancienneté…), pour pouvoir le refaire. Est-ce bien ce qu'il veut ?
   Le sujet l'exige déjà (`RCR:292`) ; la note de Q-REM-03 demandait sa
   confirmation. (Q-REM-03, Q-REM-04)
+- **Q-JEF-25** — 🆕 Ajoutée le 2026-10-06. **Confirmation** : il est notre **PO** ;
+  valide-t-il nos ADR **en une séance**, après ses réponses ? Seul « accepté »
+  compte (`livrables/2-modelisation/09-decisions-a-prendre.md:34-35`). (Q-PRO-01, Q-PRO-03)
+  - Le journal d'ADR sera tenu par un membre du groupe, à nommer dans la RACI.
 
 ---
 
