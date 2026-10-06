@@ -134,6 +134,16 @@
   nav ul { flex-direction:row; flex-wrap:wrap; gap:.4rem 1rem; list-style:none; padding:0; }
   @media (max-width:480px) { .question .grille { grid-template-columns:1fr; } }
   .puce.neuf { background:var(--q-fond); color:var(--accent); }  /* 2026-10-06 : carte ajoutée ou complétée */
+  /* 2026-10-06 : la liste pour l'entretien avec Jeff */
+  .entretien { list-style:none; padding:0; display:flex; flex-direction:column; gap:.6rem; }
+  .entretien li { background:var(--carte); border:1px solid var(--trait); border-radius:8px; padding:.6rem .9rem; display:flex; flex-direction:column; gap:.2rem; }
+  .entretien .pos { color:var(--doux); font-size:.95rem; }
+  .entretien .carte-lien { font-size:.95rem; white-space:nowrap; }
+  .entretien .id { white-space:nowrap; }  /* un identifiant ne se coupe pas au tiret */
+  .bloc-entretien { display:flex; flex-direction:column; gap:.6rem; }
+  .bloc-entretien > p { color:var(--doux); }
+  .filtres-entretien { background:var(--carte); border:1px solid var(--trait); border-radius:8px; padding:.7rem 1rem; margin-top:0; }
+  .filtres-entretien > p { font-weight:700; color:var(--accent); }
 </style>
 
 <div class="page" data-format="gros" data-cle="filrouge-2026-10-05-jeff-v1">
@@ -146,13 +156,15 @@
       <li>✅ <b>26 questions</b> qui ne se tranchent qu'avec Jeff, ou après sa réponse. Chacune porte <b>notre position</b>, tirée de vos réponses.</li>
       <li>🆕 <b>Mis à jour le 2026-10-06</b>, d'après vos réponses du jour : <b>6 questions ajoutées</b> (Q-JEF-21 à 26), <b>3 complétées</b> (Q-JEF-13, 15, 19). Elles portent la puce 🆕 ; le pourquoi est dans les décisions DJ7 à DJ10.</li>
       <li>🆕 Sous elles, les <b>34 cartes du registre</b> que seul Jeff tranche, venues de la page principale avec leurs cases et vos <b>13 réponses</b>.</li>
-      <li>🟡 Pour chaque question : la poser, la reformuler, ou non. Plus <b>10 décisions</b> prises seul, à valider.</li>
+      <li>🟡 Pour chaque question : la poser, la reformuler, ou non. Plus <b>11 décisions</b> prises seul, à valider.</li>
       <li>🔗 Dans les cartes encore ouvertes, chaque source citée est un <b>lien</b> vers le fichier, à la ligne près : voir <a href="#sources">les abréviations</a>.</li>
       <li>⚠️ <b>5 points coincent</b> encore entre vos réponses : voir « Ce qui coince ».</li>
+      <li>🎤 <b>La liste pour l'entretien</b> : 28 lignes en 6 blocs, dont <b>10 ⭐ à poser absolument</b>, avec des filtres : <a href="#entretien">la liste</a>.</li>
       <li>➡️ Après l'entretien : la réponse de Jeff dans le commentaire de chaque carte, puis copier en bas de page.</li>
     </ul>
     <nav aria-label="Sommaire"><ul>
       <li><a href="#contexte">Contexte</a></li>
+      <li><a href="#entretien">Entretien</a></li>
       <li><a href="#sources">Sources</a></li>
       <li><a href="#decisions">Décisions</a></li>
       <li><a href="#avant">Avant de choisir</a></li>
@@ -173,7 +185,7 @@
         <ul>
           <li>✅ <strong>D1 à D4, Q-REM-01 à 19, Q-PAR-01 à 09, Q-MAN-01 à 09, 17 cartes Q-SCH, 4 cartes Q-MIG, 7 cartes Q-ACC, Q-INF-01 à 08 et 7 cartes Q-PRO</strong> : répondues, le 2026-10-02, le 2026-10-05 et le 2026-10-06.</li>
           <li>📝 <strong>7 cartes ont une note sans case cochée</strong> : elles restent ouvertes, votre note est montrée telle quelle.</li>
-          <li>➡️ <strong>Ensuite, l'entretien avec Jeff</strong> : cette page.</li>
+          <li>➡️ <strong>Ensuite, l'entretien avec Jeff</strong> : cette page, et sa <a href="#entretien">liste pour l'entretien</a>.</li>
           <li>🗓️ <strong>Après</strong> : le lot de migration (un seul <span class="mono">docker compose down -v</span>), puis les ADR, une fois toutes les réponses reçues.</li>
         </ul>
       </div>
@@ -183,14 +195,110 @@
           <li>Demandé le 2026-10-05 : réunir à part les questions qui ne se tranchent qu'avec Jeff, ou après lui avoir parlé.</li>
         </ul>
       </div>
-      <p>📝 <strong>Ce que cette page vous demande</strong> : pour 26 questions, dire si on la pose ; trancher les 19 cartes du registre encore ouvertes (🟡) ; valider 10 décisions. Le commit et le push se demandent à part, dans la conversation.</p>
+      <p>📝 <strong>Ce que cette page vous demande</strong> : pour 26 questions, dire si on la pose ; trancher les 19 cartes du registre encore ouvertes (🟡) ; valider 11 décisions. Le commit et le push se demandent à part, dans la conversation.</p>
+    </div>
+  </section>
+
+  <section id="entretien">
+    <h2>🎤 La liste pour l'entretien</h2>
+    <div class="clair">
+      <p>🧑‍💼 <b>Jeff joue tous les rôles, sauf le développement</b> : le client, et le PO. Le développement, c'est l'équipe.</p>
+      <ul>
+        <li>💬 Jeff <b>ne remplit pas</b> cette page : on lui pose les questions <b>de vive voix</b>.</li>
+        <li>⏱️ L'entretien est court : <b>28 lignes</b> en 6 blocs, dans l'ordre d'une conversation. Si le temps manque : le filtre ⭐ ne garde que les <b>10 à poser absolument</b>.</li>
+        <li>📝 Après : sa réponse dans le <b>commentaire de la carte</b> (le lien au bout de chaque ligne), puis « Copier mes réponses » en bas de page.</li>
+        <li>🔖 Les marques : ⭐ à poser absolument (sa réponse peut changer la base, ou bloque du code) · ⏳ si le temps le permet · ✔️ un oui d'un mot. En face : 🤝 votre réponse, 💡 ma proposition, ℹ️ un fait, 📋 le détail est sur la carte.</li>
+      </ul>
+    </div>
+    <div class="commandes filtres-entretien" id="filtres-entretien" hidden>
+      <p>🔎 Filtrer la liste</p>
+      <div class="rangee">
+        <button type="button" data-prio-choix="toutes">Toutes · 28</button>
+        <button type="button" data-prio-choix="abs">⭐ À poser absolument · 10</button>
+        <button type="button" data-prio-choix="temps">⏳ Si le temps le permet · 10</button>
+        <button type="button" data-prio-choix="conf">✔️ Un oui d'un mot · 8</button>
+      </div>
+      <div class="rangee">
+        <button type="button" data-bloc-choix="tous">Tous les blocs</button>
+        <button type="button" data-bloc-choix="a">💶 Ce que touche le chasseur</button>
+        <button type="button" data-bloc-choix="b">📊 La note du chasseur</button>
+        <button type="button" data-bloc-choix="c">📝 Le mandat et le client</button>
+        <button type="button" data-bloc-choix="d">🗃️ Votre ancienne base</button>
+        <button type="button" data-bloc-choix="e">🔐 Comptes, droits et RGPD</button>
+        <button type="button" data-bloc-choix="f">📋 Jeff PO : des oui d'un mot</button>
+      </div>
+      <p class="sous" id="entretien-compte" aria-live="polite"></p>
+    </div>
+    <div class="bloc-entretien" data-bloc="a">
+      <h3>💶 Ce que touche le chasseur</h3>
+      <p>L'argent d'abord : le cœur du sujet.</p>
+      <ul class="entretien">
+        <li data-prio="abs"><span><b>1.</b> <span title="À poser absolument">⭐</span> Validez-vous les chiffres que le sujet propose : honoraires, parts du chasseur, poids de la note, bonus, bornes, arrondis ? <a href="#Q-JEF-01" class="carte-lien">Q-JEF-01</a></span><span class="pos">🤝 Nous les gardons tous. Un oui règle <b>8 cartes</b> (Q-PAR).</span></li>
+        <li data-prio="abs"><span><b>2.</b> <span title="À poser absolument">⭐</span> Mandat non exclusif, le client achète par une autre agence : notre chasseur touche-t-il quelque chose ? Et l'entreprise ? <a href="#Q-JEF-03" class="carte-lien">Q-JEF-03</a></span><span class="pos">🤝 Rien pour le chasseur, motif tracé (<span class="id">Q-PAR-02</span>) ; pas de vente chez nous (<span class="id">Q-REM-02</span>).</span></li>
+        <li data-prio="abs"><span><b>3.</b> <span title="À poser absolument">⭐</span> Une facture du chasseur refusée puis renvoyée : garder chaque envoi, ou seulement la dernière ? <a href="#Q-JEF-23" class="carte-lien">Q-JEF-23</a></span><span class="pos">🤝 Une table à part pour les factures (<span class="id">Q-ACC-11</span>, réponse du 06/10), à lui confirmer.</span></li>
+        <li data-prio="conf"><span><b>4.</b> <span title="Un oui d'un mot">✔️</span> Le barème par palier est-il voulu, avec son saut d'environ 600 € à 350 000 € ? <a href="#Q-JEF-02" class="carte-lien">Q-JEF-02</a></span><span class="pos">🤝 Palier (<span class="id">Q-PAR-03</span>).</span></li>
+        <li data-prio="conf"><span><b>5.</b> <span title="Un oui d'un mot">✔️</span> Les honoraires sont-ils hors taxes (HT) ? <a href="#Q-JEF-04" class="carte-lien">Q-JEF-04</a></span><span class="pos">💡 HT, comme le sujet.</span></li>
+      </ul>
+    </div>
+    <div class="bloc-entretien" data-bloc="b">
+      <h3>📊 La note du chasseur</h3>
+      <p>Elle fixe le bonus de performance.</p>
+      <ul class="entretien">
+        <li data-prio="abs"><span><b>6.</b> <span title="À poser absolument">⭐</span> Un mandat fini sans vente doit faire baisser la note : validez-vous le taux de transformation (ventes ÷ mandats) ? Et quelle note pour quel taux ? <a href="#Q-JEF-05" class="carte-lien">Q-JEF-05</a></span><span class="pos">🤝 Taux de transformation (<span class="id">Q-PAR-05</span>). Sans sa grille de notes, <b>rien à coder</b>.</span></li>
+        <li data-prio="temps"><span><b>7.</b> <span title="Si le temps le permet">⏳</span> Sur 12 mois, quelles ventes et quels mandats comptent ? Un mandat annulé compte-t-il ? <a href="#Q-JEF-09" class="carte-lien">Q-JEF-09</a></span><span class="pos">🤝 Les ventes non refusées, les mandats signés sans les renouvellements. Annulé : pas tranché. Lié à la question 6.</span></li>
+        <li data-prio="temps"><span><b>8.</b> <span title="Si le temps le permet">⏳</span> Pour payer une vente : note recalculée sur cette vente, ou dernière note gardée ? <a href="#Q-JEF-17" class="carte-lien">Q-JEF-17</a></span><span class="pos">🤝 Recalculée à chaque vente (<span class="id">Q-REM-06</span>), comme le code du sujet.</span></li>
+        <li data-prio="temps"><span><b>9.</b> <span title="Si le temps le permet">⏳</span> La note « visites » compte-t-elle toutes les visites du client, sur tous les biens du mandat, jusqu'à l'acte ? Moins il y en a, mieux c'est ? <a href="#Q-JEF-08" class="carte-lien">Q-JEF-08</a></span><span class="pos">🤝 Oui (<span class="id">Q-REM-07</span>, et votre note : moins de visites, meilleure note).</span></li>
+        <li data-prio="temps"><span><b>10.</b> <span title="Si le temps le permet">⏳</span> Avez-vous la vraie date d'embauche des chasseurs ? <a href="#Q-JEF-10" class="carte-lien">Q-JEF-10</a></span><span class="pos">🤝 Sinon, la date de création du compte, dite en soutenance (<span class="id">Q-REM-16</span>).</span></li>
+      </ul>
+    </div>
+    <div class="bloc-entretien" data-bloc="c">
+      <h3>📝 Le mandat et le client</h3>
+      <p>Les règles du mandat, et l'avis du client sur un bien.</p>
+      <ul class="entretien">
+        <li data-prio="abs"><span><b>11.</b> <span title="À poser absolument">⭐</span> Un client annule son mandat exclusif : peut-il signer tout de suite avec un autre chasseur ? <a href="#Q-JEF-06" class="carte-lien">Q-JEF-06</a></span><span class="pos">🤝 Oui, l'annulation libère tout de suite (<span class="id">Q-MAN-02</span>).</span></li>
+        <li data-prio="abs"><span><b>12.</b> <span title="À poser absolument">⭐</span> L'intérêt du client pour un bien proposé : une note de 1 à 5, ou haute / moyenne / basse ? <a href="#Q-JEF-18" class="carte-lien">Q-JEF-18</a></span><span class="pos">💡 De 1 à 5 (<span class="id">Q-SCH-05</span>, pas encore répondue).</span></li>
+        <li data-prio="temps"><span><b>13.</b> <span title="Si le temps le permet">⏳</span> Combien de renouvellements au plus ? Et le délai part-il de la première signature ? <a href="#Q-JEF-07" class="carte-lien">Q-JEF-07</a></span><span class="pos">🤝 Sans limite de nombre (<span class="id">Q-MAN-03</span>) ; délai depuis la première signature (<span class="id">Q-MAN-04</span>).</span></li>
+        <li data-prio="conf"><span><b>14.</b> <span title="Un oui d'un mot">✔️</span> Dans votre exemple, le mandat de Bruno est-il un mandat renouvelé ? <a href="#Q-JEF-11" class="carte-lien">Q-JEF-11</a></span><span class="pos">🤝 Oui, c'est notre lecture.</span></li>
+      </ul>
+    </div>
+    <div class="bloc-entretien" data-bloc="d">
+      <h3>🗃️ Votre ancienne base</h3>
+      <p>Lui seul connaît ses données.</p>
+      <ul class="entretien">
+        <li data-prio="abs"><span><b>15.</b> <span title="À poser absolument">⭐</span> Quatre points sur les mandats repris : le vrai client du mandat 13, le sens de « suspendu » et « termine », les 6 mandats échus, et la pause d'un mandat. <a href="#Q-JEF-13" class="carte-lien">Q-JEF-13</a></span><span class="pos">📋 Les quatre sous-questions sont sur la carte.</span></li>
+        <li data-prio="abs"><span><b>16.</b> <span title="À poser absolument">⭐</span> Pouvez-vous fournir ce qui manque : le téléphone de 3 clients, l'adresse de 18 clients, le budget minimum de 17 demandes ? <a href="#Q-JEF-26" class="carte-lien">Q-JEF-26</a></span><span class="pos">🤝 Sinon, « non renseigné », sans rien inventer.</span></li>
+        <li data-prio="temps"><span><b>17.</b> <span title="Si le temps le permet">⏳</span> La colonne <span class="mono">taux_commission</span> (de 2,00 à 3,25) : un pourcentage du prix, ou des honoraires ? <a href="#Q-JEF-12" class="carte-lien">Q-JEF-12</a></span><span class="pos">ℹ️ Rien ne bloque : la réponse nourrit l'audit.</span></li>
+      </ul>
+    </div>
+    <div class="bloc-entretien" data-bloc="e">
+      <h3>🔐 Comptes, droits et RGPD</h3>
+      <p>Qui fait quoi, et ce qu'on garde.</p>
+      <ul class="entretien">
+        <li data-prio="abs"><span><b>18.</b> <span title="À poser absolument">⭐</span> La couche du dessus lira-t-elle le mot de passe dans notre base ? Sinon, nous le retirons. <a href="#Q-JEF-21" class="carte-lien">Q-JEF-21</a></span><span class="pos">🤝 Le groupe penche pour le retirer (vos notes sur <span class="id">Q-ACC-18</span> et <span class="id">Q-MIG-11</span>).</span></li>
+        <li data-prio="abs"><span><b>19.</b> <span title="À poser absolument">⭐</span> Validez-vous notre tableau : qui a le droit de faire quoi ? <a href="#Q-JEF-14" class="carte-lien">Q-JEF-14</a></span><span class="pos">📋 Le tableau est sur la carte. Un oui règle <b>11 cartes</b>.</span></li>
+        <li data-prio="temps"><span><b>20.</b> <span title="Si le temps le permet">⏳</span> Voulez-vous des barèmes propres à un chasseur ? Si oui, qui les crée et les valide ? <a href="#Q-JEF-16" class="carte-lien">Q-JEF-16</a></span><span class="pos">🤝 Le manager, inscrit dans le RACI (<span class="id">Q-PAR-09</span>). ⚠️ Lié à la question 19.</span></li>
+        <li data-prio="temps"><span><b>21.</b> <span title="Si le temps le permet">⏳</span> La clé d'API : une seule, ou une par programme ? Et comment vous les remettre ? <a href="#Q-JEF-22" class="carte-lien">Q-JEF-22</a></span><span class="pos">🤝 La faire (<span class="id">Q-ACC-19</span>). 💡 Une par programme.</span></li>
+        <li data-prio="temps"><span><b>22.</b> <span title="Si le temps le permet">⏳</span> Effacer un compte : désactiver, rendre anonyme, garder ce que la loi impose, d'accord ? Et combien d'années garder un mandat après sa fin ? <a href="#Q-JEF-15" class="carte-lien">Q-JEF-15</a></span><span class="pos">🤝 Oui (<span class="id">Q-ACC-08</span>). ℹ️ 10 ans pour les paiements, comme le sujet.</span></li>
+        <li data-prio="temps"><span><b>23.</b> <span title="Si le temps le permet">⏳</span> Un chasseur ou un manager peut-il saisir un bien à la main, ou les biens viennent-ils seulement de l'import ? <a href="#Q-JEF-24" class="carte-lien">Q-JEF-24</a></span><span class="pos">🤝 Sinon, import par Airflow (votre note sur <span class="id">Q-ACC-09</span>).</span></li>
+      </ul>
+    </div>
+    <div class="bloc-entretien" data-bloc="f">
+      <h3>📋 Jeff PO : des oui d'un mot</h3>
+      <p>Pour finir : il confirme, ou il est informé.</p>
+      <ul class="entretien">
+        <li data-prio="conf"><span><b>24.</b> <span title="Un oui d'un mot">✔️</span> Pour information : un prix pile sur une limite prend la tranche du dessus (200 000 € → 35 %). <a href="#Q-JEF-19" class="carte-lien">Q-JEF-19</a></span><span class="pos">✅ Déjà fait et testé (<span class="id">Q-REM-01</span>).</span></li>
+        <li data-prio="conf"><span><b>25.</b> <span title="Un oui d'un mot">✔️</span> Chaque paiement garde sa note et le détail du calcul : d'accord ? <a href="#Q-JEF-20" class="carte-lien">Q-JEF-20</a></span><span class="pos">ℹ️ Le sujet l'exige déjà.</span></li>
+        <li data-prio="conf"><span><b>26.</b> <span title="Un oui d'un mot">✔️</span> Validez-vous nos décisions d'architecture (ADR) en une seule séance, après vos réponses ? <a href="#Q-JEF-25" class="carte-lien">Q-JEF-25</a></span><span class="pos">🤝 Jeff est le PO (<span class="id">Q-PRO-01</span>).</span></li>
+        <li data-prio="conf"><span><b>27.</b> <span title="Un oui d'un mot">✔️</span> La pertinence des biens, les types d'offre et les droits des chasseurs-IA attendent le parcours IA : d'accord ? <a href="https://claude.ai/artifact/WWVtxpDWxvD4Wf8rWnytUp" target="_blank" rel="noopener" class="carte-lien">Q-SCH-08</a> + <a href="https://claude.ai/artifact/WWVtxpDWxvD4Wf8rWnytUp" target="_blank" rel="noopener" class="carte-lien">Q-ACC-14</a> <span class="sous">(page principale)</span></span><span class="pos">🤝 Reporter au parcours IA (réponses du 05/10 et du 06/10).</span></li>
+        <li data-prio="conf"><span><b>28.</b> <span title="Un oui d'un mot">✔️</span> Les livrables 1 (audit) et 3 (architecture) : nous les planifions après cet entretien. Une date à respecter ? <a href="https://claude.ai/artifact/WWVtxpDWxvD4Wf8rWnytUp" target="_blank" rel="noopener" class="carte-lien">Q-PRO-07</a> <span class="sous">(page principale)</span></span><span class="pos">🤝 Planifier après l'entretien (votre note sur <span class="id">Q-PRO-07</span>).</span></li>
+      </ul>
     </div>
   </section>
 
   <section>
     <h2>En deux mots : c'est quoi, une question pour Jeff ?</h2>
     <div class="clair">
-      <p>🧑‍💼 <strong>Jeff joue le client.</strong> Il dit ce que l'entreprise veut ; nous, on dit comment le faire.</p>
+      <p>🧑‍💼 <strong>Jeff joue tous les rôles, sauf le développement</strong> : le client, et le PO (celui qui tranche pour le client). Il dit ce que l'entreprise veut ; nous, l'équipe, on dit comment le faire.</p>
       <div>
         <p>Deux familles de questions :</p>
         <ul>
@@ -218,7 +326,7 @@
         <p>💡 <strong>Mon avis : les lui poser en une fois, notre position en face.</strong></p>
         <ul>
           <li>➕ On arrive avec des propositions, pas des questions ouvertes : il répond d'un mot.</li>
-          <li>➖ 26, c'est beaucoup : commencer par les <b>8 cartes 🗄️</b> (Q-JEF-01, Q-JEF-03, Q-JEF-06, Q-JEF-13, Q-JEF-26, Q-JEF-18, Q-JEF-21, Q-JEF-23), qui bloquent le lot de migration.</li>
+          <li>➖ 26, c'est beaucoup pour un entretien court : la <a href="#entretien">liste pour l'entretien</a> les range en blocs, les ⭐ d'abord. Les <b>8 cartes 🗄️</b> (Q-JEF-01, Q-JEF-03, Q-JEF-06, Q-JEF-13, Q-JEF-26, Q-JEF-18, Q-JEF-21, Q-JEF-23), qui bloquent le lot de migration, sont toutes ⭐.</li>
         </ul>
       </div>
       <details class="technique"><summary>🔧 Le détail technique</summary>
@@ -234,6 +342,7 @@
       <div class="chiffre"><b>56</b><span>cartes du registre qu'elles couvrent</span></div>
       <div class="chiffre"><b>31</b><span>de ces cartes ont votre réponse</span></div>
       <div class="chiffre"><b>8</b><span>peuvent changer la base : à poser d'abord</span></div>
+      <div class="chiffre"><b>10</b><span>⭐ à poser absolument, dans la liste pour l'entretien</span></div>
       <div class="chiffre"><b>34</b><span>de ces cartes se cochent ici, sous leur question</span></div>
     </div>
     <ul class="sous" style="font-size:.95rem">
@@ -432,9 +541,9 @@
       <div class="choix"><label><input type="radio" name="DJ9" value="garder">Je garde</label><label><input type="radio" name="DJ9" value="revoir">À revoir</label></div>
     </div>
     <div class="decision">
-      <div class="tete"><h3>DJ10 · Vos réponses du jour : lues ici, pas encore au registre</h3><span class="puce doc">📝 ce rapport</span></div>
+      <div class="tete"><h3>DJ10 · Vos réponses du jour : lues ici d'abord, puis au registre</h3><span class="puce doc">📝 ce rapport</span></div>
       <dl class="grille">
-        <dt class="net">💬 En clair</dt><dd>Les cartes de cette page montrent vos réponses du 2026-10-06. Le registre (le fichier .md) n'a reçu que les nouvelles questions pour Jeff ; vos réponses y seront reportées à l'étape suivante.</dd>
+        <dt class="net">💬 En clair</dt><dd>Les cartes de cette page ont montré vos réponses du 2026-10-06 avant le registre (le fichier .md). ✅ <b>Rattrapé le 2026-10-06</b> : le registre les a reçues (commit f257051), la page principale aussi (version 12).</dd>
         <dt class="plus">➕ Le bon côté</dt><dd>Ce rapport est à jour tout de suite, comme demandé.</dd>
         <dt class="moins">➖ Le moins bon</dt><dd>D'ici là, le registre et la page principale ont un temps de retard.</dd>
       </dl>
@@ -448,6 +557,24 @@
       </dl>
       </details>
       <div class="choix"><label><input type="radio" name="DJ10" value="garder">Je garde</label><label><input type="radio" name="DJ10" value="revoir">À revoir</label></div>
+    </div>
+    <div class="decision">
+      <div class="tete"><h3>DJ11 · La liste pour l'entretien : blocs, ordre et ⭐ choisis seul</h3><span class="puce doc">📝 ce rapport</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>Pour un entretien court : 28 lignes en 6 blocs, dans l'ordre d'une conversation : l'argent, la note, le mandat, l'ancienne base, les comptes, puis les oui d'un mot du PO. ⭐ veut dire : à poser absolument.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>Si le temps manque, le filtre ⭐ donne la version courte : 10 questions.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>Les ⭐ sont mon choix : une question que vous jugez vitale peut être en ⏳.</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Le problème</dt><dd>Vous avez demandé une liste simple, répartie par section, pour un entretien court ; Jeff ne remplit pas la page, on lui parle (2026-10-06).</dd>
+        <dt>Mon choix</dt><dd>⭐ : les 8 questions 🗄️, plus Q-JEF-05 (sans sa grille, rien à coder) et Q-JEF-14 (un oui règle 11 cartes). ✔️ : les confirmations, l'information Q-JEF-19, et les 3 cartes 📋 PO de la page principale (Q-SCH-08 et Q-ACC-14 regroupées : une seule réponse les règle). ⏳ : le reste. Q-JEF-23 (la facture) rejoint l'argent, Q-JEF-18 (l'avis du client) le mandat.</dd>
+        <dt>Écarté</dt><dd>Ranger par priorité seule : la conversation sauterait d'un sujet à l'autre. Garder les 8 thèmes du rapport : trois d'entre eux n'ont qu'une ou deux questions.</dd>
+        <dt>Le prix</dt><dd>Aucun : les cartes ne bougent pas.</dd>
+        <dt>Défaire</dt><dd>« À revoir », et dire dans le commentaire quelle question change de marque ou de bloc.</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="DJ11" value="garder">Je garde</label><label><input type="radio" name="DJ11" value="revoir">À revoir</label></div>
     </div>
   </section>
 
@@ -1616,6 +1743,8 @@
       <li><time>10-05</time><span><b>Ce rapport</b> · 20 questions pour Jeff, dont 1 ajoutée (Q-JEF-20).</span></li>
       <li><time>10-06</time><span><b>Réponses</b> · 27 nouvelles, 2 changées (Q-MAN-05, Q-ACC-11), 7 notes sans case cochée.</span></li>
       <li><time>10-06</time><span><b>Ce rapport</b> · 26 questions : 6 ajoutées (Q-JEF-21 à 26), 3 complétées (Q-JEF-13, 15, 19).</span></li>
+      <li><time>10-06</time><span><b>Registre</b> · vos réponses du jour reportées (f257051) ; page principale en version 12.</span></li>
+      <li><time>10-06</time><span><b>Ce rapport</b> · la liste pour l'entretien : 28 lignes, 10 ⭐, avec des filtres. Jeff joue tous les rôles sauf le développement.</span></li>
     </ul>
   </section>
 
@@ -1790,4 +1919,37 @@
     appliquer();
     if (location.hash) { viser(location.hash); document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView(); }
   })();
+</script>
+<script>
+/* Liste pour l'entretien (2026-10-06) : filtre par priorité et par bloc ; les deux se combinent. */
+(() => {
+  const sec = document.getElementById("entretien");
+  if (!sec) return;
+  const items = [...sec.querySelectorAll("li[data-prio]")];
+  const blocs = [...sec.querySelectorAll(".bloc-entretien")];
+  const etat = { prio: "toutes", bloc: "tous" };
+  const compte = document.getElementById("entretien-compte");
+  function appliquer() {
+    let n = 0;
+    for (const li of items) {
+      const voir = (etat.prio === "toutes" || li.dataset.prio === etat.prio)
+        && (etat.bloc === "tous" || li.closest(".bloc-entretien").dataset.bloc === etat.bloc);
+      li.hidden = !voir;
+      if (voir) n++;
+    }
+    for (const b of blocs) b.hidden = !b.querySelector("li[data-prio]:not([hidden])");
+    for (const b of sec.querySelectorAll("[data-prio-choix]")) b.setAttribute("aria-current", String(b.dataset.prioChoix === etat.prio));
+    for (const b of sec.querySelectorAll("[data-bloc-choix]")) b.setAttribute("aria-current", String(b.dataset.blocChoix === etat.bloc));
+    compte.textContent = n ? n + (n > 1 ? " questions affichées" : " question affichée") + ", sur " + items.length + "."
+      : "Aucune question pour ces deux filtres : choisissez « Toutes » ou « Tous les blocs ».";
+  }
+  sec.addEventListener("click", e => {
+    const b = e.target.closest("[data-prio-choix], [data-bloc-choix]");
+    if (!b) return;
+    if (b.dataset.prioChoix) etat.prio = b.dataset.prioChoix; else etat.bloc = b.dataset.blocChoix;
+    appliquer();
+  });
+  document.getElementById("filtres-entretien").hidden = false;
+  appliquer();
+})();
 </script>
