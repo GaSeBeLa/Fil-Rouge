@@ -230,3 +230,7 @@ de ce que le code dit déjà.
   agence (Q-REM-02) comme par un collègue (Q-REM-14) : le registre ne donnait
   qu'un exemple et laissait « un ou deux ? » ouvert (ligne 134). Tranché à
   LOT3 ; le cas « collègue » se déduit de l'autre mandat vendu.
+- **2026-10-07** — **trigger d'exclusivité : le couple parent-enfant exclu dans
+  les deux sens**, et un mandat `'canceled'` ignoré. Q-MAN-02 n'excluait que le
+  parent : mesuré à LOT4, la mise à jour du parent après son renouvellement
+  était alors refusée (mutant « enfants non exclus » : le test tombe).

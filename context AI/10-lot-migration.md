@@ -184,8 +184,9 @@ LOT5 à LOT10 peuvent changer d'ordre.
 ---
 
 <!-- FICHE:LOT4 -->
-## LOT4 [ ] — Mandat : six mois exacts et exclusivité
+## LOT4 [x] — Mandat : six mois exacts et exclusivité
 
+**Session** : f6db559a-cd2c-449e-a160-bd4fd8d0475c
 **Dépend de** : `LOT3`.
 **Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql` (table `mandate` et le trigger d'exclusivité), `docker/init-v3/02_migration.sql`, `docker/migrations/v2-vers-v3/04_mandat-duree-exclusivite.sql`, `API/src/app/models/mandate_model.py`, `API/tests/integration/test_constraints_db.py`, `docker/init-v3/README.md` ; le registre (cartes Q-MAN-01, Q-MAN-02) — et rien d'autre.
 
