@@ -33,8 +33,8 @@ la tâche les nomme.
 
 | Fichier | Lire quand |
 |---|---|
-| `docker/init-v2/01_create_fil_rouge_immobilier.sql` | on touche une table, une colonne, une contrainte — **18 tables, euros** |
-| `docker/init-v2/README.md` | on doute d'un choix du schéma v2 : euros, migration, hypothèses assumées, points ouverts |
+| `docker/init-v3/01_create_fil_rouge_immobilier.sql` | on touche une table, une colonne, une contrainte — **18 tables, euros** |
+| `docker/init-v3/README.md` | on doute d'un choix du schéma : euros, migration, hypothèses assumées, points ouverts ; changements v3 par thème |
 | `API/README.md` | on installe ou on lance l'API |
 | `API/src/app/main.py` | on cherche où va un bout de code — son en-tête décrit les trois couches |
 | `user-stories/<NN>_*.feature` | on vérifie une règle métier |

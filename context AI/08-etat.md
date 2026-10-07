@@ -10,11 +10,13 @@
 *(au 2026-09-21 — remplace l'état du 2026-09-07 ; l'historique est au journal)*
 
 - **Base de données** — schéma `fil_rouge_immobilier` (**18 tables**, montants
-  en **euros**) dans `docker/init-v2/`, monté par `docker/docker-compose.yml`
-  depuis le 2026-09-21. Chaîne complète `01` → `02` → `03` vérifiée sur
-  PostgreSQL 16 : 0 erreur, 2 556 biens, 1 976 photos, 18 clients. Les choix,
-  les hypothèses et les 6 points ouverts sont dans `docker/init-v2/README.md`.
-  `docker/init/` (12 tables, K€) reste intact mais n'est plus monté.
+  en **euros**) dans `docker/init-v3/`, monté par `docker/docker-compose.yml`
+  depuis le 2026-10-07 (chantier LOT). `docker/init-v2/`, monté du 2026-09-21
+  au 2026-10-07, est **figé**, gardé pour le banc. Chaîne complète `01` → `02`
+  → `03` vérifiée sur PostgreSQL 16 : 0 erreur, 2 556 biens, 1 976 photos,
+  18 clients. Les choix, les hypothèses et les 6 points ouverts sont dans
+  `docker/init-v3/README.md`. `docker/init/` (12 tables, K€) reste intact mais
+  n'est plus monté.
   *(au 2026-10-05)* Prix, budgets, bornes du barème et part fixe en
   `INTEGER` ; honoraires et paiement en `NUMERIC(12,2)` ; tranches du barème
   bornées `'[]'` (Q-REM-01).

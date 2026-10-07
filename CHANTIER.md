@@ -30,7 +30,7 @@ pas quinze — celles qu'on regrette de ne pas avoir écrites.
 - **Les deux dossiers `../Fil-Rouge-EISI-Data-IA-26-D04-StarterPack*/` ne se
   modifient jamais**, ni **`docker/docker-compose.yml`** sans le oui de
   l'utilisateur.
-- Le schéma de référence est `docker/init-v2/01_create_fil_rouge_immobilier.sql` :
+- Le schéma de référence est `docker/init-v3/01_create_fil_rouge_immobilier.sql` :
   tout modèle SQLModel s'y confronte par grep. **Tout montant est en euros**
   (`CLAUDE.md`, règle 4).
 - Prose et commentaires de code en français ; noms de code en anglais. Le code

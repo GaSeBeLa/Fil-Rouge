@@ -89,8 +89,9 @@ LOT5 à LOT10 peuvent changer d'ordre.
 ---
 
 <!-- FICHE:LOT1 -->
-## LOT1 [ ] — Créer init-v3 et basculer le montage
+## LOT1 [x] — Créer init-v3 et basculer le montage
 
+**Session** : f6db559a-cd2c-449e-a160-bd4fd8d0475c
 **Dépend de** : rien.
 **Fichiers** : `docker/init-v2/*` (lu), `docker/init-v3/*` (créé), `docker/docker-compose.yml` (une ligne), `docker/create_test_db.sh`, `CLAUDE.md`, `CHANTIER.md`, `context AI/00-INDEX.md`, `context AI/08-etat.md`, `API/README.md`, `API/src/app/models/__init__.py`, `hunter_model.py`, `parameters_fees_model.py`, `search_request_model.py`, `API/tests/integration/conftest.py`, `API/tests/integration/test_constraints_db.py` — et rien d'autre.
 

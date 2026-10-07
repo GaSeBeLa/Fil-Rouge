@@ -2,7 +2,7 @@
 ## Résultat
 Une base v2 migrée et une base v3 neuve ont le même schéma (banc IDENTIQUES), et pytest est vert.
 ## Notes
-- LOT1 : Crée init-v3, copie de v2, et bascule le montage de docker-compose. Ne dépend de rien.
+- LOT1 : diff -r : 1 ligne (en-tête README, 5 lignes de diff) · compose 1 insertion(+), 1 deletion(-) · montage lu : ligne v3 · pytest 123 passed avant et après · init-v2 restant : 5 fichiers justifiés
 - LOT2 : Le banc qui compare base neuve et base migrée. Dépend de LOT1 ; toutes les fiches s'en servent.
 - LOT3 : Statuts de fin du mandat, signature, offre signée. Dépend de LOT2.
 - LOT4 : Mandat de 6 mois exacts, trigger d'exclusivité activé. Dépend de LOT3.

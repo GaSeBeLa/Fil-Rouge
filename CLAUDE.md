@@ -11,8 +11,9 @@ modifiés**.
 ## Où on en est — en cinq lignes
 
 - Le schéma PostgreSQL (**18 tables**, montants en **euros**) est posé dans
-  `docker/init-v2/` et monté par `docker compose`. `docker/init/` (12 tables,
-  K€) est l'ancien schéma, gardé intact, plus monté.
+  `docker/init-v3/` et monté par `docker compose` (chantier LOT, 2026-10-07).
+  `docker/init-v2/` est **figé**, gardé pour le banc ; `docker/init/`
+  (12 tables, K€) est l'ancien schéma, gardé intact, plus monté.
 - L'API expose un CRUD complet en trois couches (routes / services /
   repositories) sur les **18 tables** ; le routeur commun revalide l'entrée
   (`422` avant la base). 91 opérations vérifiées en `200` contre la base.
@@ -33,9 +34,10 @@ modifiés**.
 2. **Mesurer avant de corriger**, et afficher les comptes bruts à côté du
    verdict — un instrument muet rend son propre échec indiagnosticable.
 3. **Les deux dossiers `../Fil-Rouge-EISI-Data-IA-26-D04-StarterPack*/` ne se
-   modifient jamais**, et `docker/init-v2/01_create_fil_rouge_immobilier.sql`
+   modifient jamais**, et `docker/init-v3/01_create_fil_rouge_immobilier.sql`
    est le schéma de référence : tout modèle SQLModel s'y confronte par grep.
-4. **Tout montant est en euros** — jamais en K€ (`docker/init-v2/README.md`
+   `docker/init-v2/` est figé : il ne se modifie plus.
+4. **Tout montant est en euros** — jamais en K€ (`docker/init-v3/README.md`
    §1). Deux types depuis le 2026-10-05 (Q-REM-01) : prix, budgets, bornes du
    barème et part fixe en **`INTEGER`** (`int`) ; honoraires et paiement en
    **`NUMERIC(12,2)`** (`Decimal`), car le sujet arrondit au centime.
@@ -60,8 +62,8 @@ et seulement dans ce cas, ouvrir l'index.
 | lancer l'API et son Swagger | `docker compose up -d api` depuis `docker/`, puis http://localhost:8000/docs |
 | créer un module, chercher où va un bout de code | `API/src/app/main.py` — son en-tête décrit les trois couches |
 | vérifier une règle métier | `user-stories/<NN>_*.feature` |
-| vérifier une table, une colonne, une contrainte | `docker/init-v2/01_create_fil_rouge_immobilier.sql` |
-| comprendre un choix du schéma v2 (euros, migration, hypothèses) | `docker/init-v2/README.md` |
+| vérifier une table, une colonne, une contrainte | `docker/init-v3/01_create_fil_rouge_immobilier.sql` |
+| comprendre un choix du schéma (euros, migration, hypothèses, changements v3) | `docker/init-v3/README.md` |
 | relire une décision d'architecture (ADR) | **Confluence**, espace `GaSeBeLa1` — [wiki du projet](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/overview?homepageId=15008134). Le dossier `decisions/` du dépôt est **vide**, rien n'y est écrit |
 | ouvrir un chantier, ou le découper en fiches | **lancer `/vlp:chantier`** — la méthode vit dans le kit, pas ici |
 | relire une fiche `C1` à `C5` | `context AI/09-contraintes-mpd.md` — chantier **clos** le 2026-09-11, ne se rejoue pas |

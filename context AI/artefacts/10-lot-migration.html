@@ -21,9 +21,9 @@
     <p>Une base v2 migrée et une base v3 neuve ont le même schéma (banc IDENTIQUES), et pytest est vert.</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">12 fiches · 0 faite · en cours : LOT1</p>
+    <p class="mono" style="margin-top:.5rem">12 fiches · 1 faite · en cours : LOT2</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -38,11 +38,12 @@
     <h2>Les fiches, dans l'ordre des dépendances</h2>
     <!-- ZONE:fiches — data-etat vaut faite | encours | bloquee ; absent = à faire -->
     <ul class="fiches">
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">LOT1</span></span>
-        <details open><summary><span class="titre">Créer init-v3 et basculer le montage</span><span class="etat">En cours</span></summary>
-        <span class="note">Crée init-v3, copie de v2, et bascule le montage de docker-compose. Ne dépend de rien.</span></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">LOT2</span></span>
-        <details><summary><span class="titre">Écrire le banc « base neuve = base migrée »</span><span class="etat">Après LOT1</span></summary>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">LOT1</span></span>
+        <details><summary><span class="titre">Créer init-v3 et basculer le montage</span><span class="etat">Faite</span></summary>
+        <span class="note">diff -r : 1 ligne (en-tête README, 5 lignes de diff) · compose 1 insertion(+), 1 deletion(-) · montage lu : ligne v3 · pytest 123 passed avant et après · init-v2 restant : 5 fichiers justifiés</span></details>
+        <span class="cout mono">≈5,8M (5 775 497) · 47 tours · 2,46 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">LOT2</span></span>
+        <details open><summary><span class="titre">Écrire le banc « base neuve = base migrée »</span><span class="etat">En cours</span></summary>
         <span class="note">Le banc qui compare base neuve et base migrée. Dépend de LOT1 ; toutes les fiches s'en servent.</span></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">LOT3</span></span>
         <details><summary><span class="titre">Mandat : statuts de fin et signature</span><span class="etat">Après LOT2</span></summary>
@@ -75,6 +76,8 @@
         <details><summary><span class="titre">Ajouter le rôle en lecture seule</span><span class="etat">Après LOT11</span></summary>
         <span class="note">Rôle en lecture seule, si Jeff a dit oui. Dépend de LOT11.</span></details></li>
     </ul>
+    <p class="mono cout-hors">Hors fiches : ≈7,0M (6 967 755) · 40 tours · 4,45 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈12,7M (12 743 252) · 87 tours · 6,91 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 
