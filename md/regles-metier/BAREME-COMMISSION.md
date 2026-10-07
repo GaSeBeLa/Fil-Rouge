@@ -1,6 +1,6 @@
 # Calcul du barème de commission du chasseur
 
-> Synthèse déduite du [`Readme.md`](../../Fil-Rouge-EISI-Data-IA-26-D04-StarterPack%20-%20BASE/Readme.md) (section « Le contexte ») et des user stories [`00_regles_metier_mandat_remuneration.feature`](../user-stories/00_regles_metier_mandat_remuneration.feature) et [`07_chasseur_remuneration_et_performance.feature`](../user-stories/07_chasseur_remuneration_et_performance.feature).
+> Synthèse déduite du [`Readme.md`](../../../Fil-Rouge-EISI-Data-IA-26-D04-StarterPack%20-%20BASE/Readme.md) (section « Le contexte ») et des user stories [`00_regles_metier_mandat_remuneration.feature`](../../user-stories/00_regles_metier_mandat_remuneration.feature) et [`07_chasseur_remuneration_et_performance.feature`](../../user-stories/07_chasseur_remuneration_et_performance.feature).
 >
 > ⚠️ C'est une **synthèse fonctionnelle de travail**, pas un livrable officiel : elle sert de point de départ à la modélisation (`baremes_commission`) et documente ce qui est explicitement donné par le sujet vs. ce qui reste un choix de conception à tracer (journal de décisions).
 
