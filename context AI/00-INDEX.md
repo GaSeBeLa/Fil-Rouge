@@ -21,8 +21,7 @@ a l'air proche.
 
 | Fichier | Lire quand |
 |---|---|
-| `09-contraintes-mpd.md` | on relit une fiche `C1` à `C5` — chantier **clos** le 2026-09-11 : les contraintes qui manquent au MPD |
-| `10-lot-migration.md` | on joue une fiche `LOT*` — chantier **ouvert** « Lot de migration (schéma v3) », `LOT1..LOT12` |
+| `00-INDEX-archive.md` | on relit un chantier clos — chacun y a sa ligne, triée par numéro |
 | `09-annexe-*.md` | produits par les fiches `C*` — ne s'ouvrent que si une fiche les nomme |
 | *(hors dossier)* `livrables/2-modelisation/09-rapport-ecarts-contraintes.md` | le livrable du chantier `C` : écarts entre le MPD et les règles métier |
 

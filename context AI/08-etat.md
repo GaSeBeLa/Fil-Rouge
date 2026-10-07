@@ -50,7 +50,6 @@ ordonné par ce qui débloque le reste.
 
 | # | Chantier | Ce qu'il apporte | Coût estimé | Dépend de |
 |---|---|---|---|---|
-| 1 | Lot de migration de la base | **un seul lot, par thème** (Q11, Q12) : les changements décidés au registre, 4e série comprise (droits par rôle, reprise des anciens mandats, auteur d'un bien, CHECK 20-60 %, Eircode…). Pour chacun : schéma `01`, modèle, migration, tests, README du schéma. Ouvert le 2026-10-07 : nouveau dossier `docker/init-v3/`, 12 fiches `LOT` ; le rôle en lecture seule attend Jeff (LOT12) | 💡 ~8 à 10 fiches | rien |
 | 2 | API : auth, RGPD et règles métier | les **outils d'auth** côté back (connexion, token, rôles, droits, Argon2), l'**anonymisation** d'un compte, une **clé d'API par programme**, les règles « contrôlées par l'API », et le calcul de rémunération branché sur la base (55 cas déjà verts) ; la **grille de notes** (Q-JEF-05) et la **durée X** (Q-ACC-21), à proposer par le groupe (sortis du lot le 2026-10-07) | 💡 ~5 à 7 fiches | 1 |
 | 3 | Seed de démo | des données de démo générées (faker), cohérentes avec le nouveau schéma ; le décor, pas la preuve : les tests restent la preuve | 💡 2-3 fiches | 1 |
 | 4 | Les ADR | **une fiche par ADR**, chacune relue (Q15) ; chaque ADR cite ses cartes et ses sources, puis se copie à la main sur Confluence | 💡 ~25 fiches | 1..3 |
@@ -274,3 +273,11 @@ de ce que le code dit déjà.
   `02` (ligne `'Reader'`), `create_test_db.sh` (charge le `04`) et
   `test_isolation.py` (liste des rôles). Test par `SET LOCAL ROLE`, sans mot
   de passe. Base de dev passée par la migration `12`, sans `down -v`.
+- **2026-10-07** — **chantier LOT clos** (LOT1 → LOT12, 12 fiches) : schéma
+  **v3** (19 tables, euros) dans `docker/init-v3/`, migrations
+  `docker/migrations/v2-vers-v3/` 03 → 12, banc `compare_v2_v3.sh`
+  IDENTIQUES — 561 faits, **187 tests**. Laissé ouvert : les 3 règles
+  multi-tables à écrire dans l'API (Q-MAN-06), le contrôle du rôle `'Reader'`
+  par l'API (avec l'auth), l'expiration de `MAND-0013` à `0015` par
+  l'application, les hypothèses 2, 3 et 7 de `init-v3/README.md` §7.
+  Chantier : 116 219 396.

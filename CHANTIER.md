@@ -13,9 +13,9 @@
 - **chantiers possibles** : context AI/08-etat.md
 - **fichier d'état** : context AI/08-etat.md
 - **index** : context AI/00-INDEX.md
-- **fichier de fiches courant** : context AI/10-lot-migration.md (LOT1..LOT12)
+- **fichier de fiches courant** : aucun
 - **artefact feuille de route** : https://claude.ai/artifact/Wu5xkSJUtfbjuhFdbvUq3C
-- **artefact du chantier** : https://claude.ai/artifact/1azNjWvWyhj74aqwbDryEa
+- **artefact du chantier** : aucun
 - **livraison** : aucune — le code tourne en local (`docker compose up -d`
   depuis `docker/`)
 - **vérification** : depuis `docker/`, `docker compose exec -T api python -m pytest -q`

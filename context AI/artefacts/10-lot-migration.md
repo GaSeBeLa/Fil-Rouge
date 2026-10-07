@@ -24,3 +24,6 @@ Une base v2 migrée et une base v3 neuve ont le même schéma (banc IDENTIQUES),
 - 2026-10-07 : Auteur d'un bien : estate.id_author vers user, facultatif (vide = import), clé seule ; le rôle se vérifie dans l'API (questionnaire de LOT9, carte Q-ACC-09).
 - 2026-10-07 : Reprise des mandats : demandes 'launched' sous mandat (18) ; échus à la date fixe de l'audit, 25/07/2026 (6) ; Nina Girard reprise avec demande, critère et mandat (questionnaire de LOT10).
 ## Bilan
+- Livré : schéma PostgreSQL v3 (19 tables) dans docker/init-v3/, migrations v2→v3 03 à 12, banc base neuve = base migrée, 187 tests
+- Surpris : les données réelles contredisaient souvent la fiche (demandes en confirmed, CRLF, Eircode) : compter avant d'écrire a évité trois erreurs
+- Estimé : estimé non noté · cadré 12 · joué 12 fiches 48,04 $

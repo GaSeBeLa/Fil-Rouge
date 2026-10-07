@@ -10,7 +10,9 @@
 des données ; aucun n'est appliqué. Le chantier crée `docker/init-v3/`, les y
 applique par thème, et prouve qu'une base v2 migrée égale une base v3 neuve.
 
-**Fait.** Rien. Ouvert le 2026-10-07, cadré en 12 fiches, `LOT1` à jouer.
+**CLOS** le 2026-10-07. Ne se rejoue pas — ne sert plus qu'à relire son socle.
+
+**Fait.** LOT1..LOT12 (2026-10-07) : schéma PostgreSQL v3 (19 tables) dans docker/init-v3/, migrations v2→v3 03 à 12, banc base neuve = base migrée, 187 tests — estimé non noté · cadré 12 · joué 12 fiches 48,04 $.
 
 **Session** : cc3da4f0-917c-419b-81f6-b7df8f9aa6a0
 

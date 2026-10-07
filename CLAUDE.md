@@ -33,6 +33,7 @@ modifiés**.
 - `normalised/` porte la normalisation des annonces et son rapport d'anomalies.
 - `livrables/2-modelisation/` porte trois rapports du chantier `C` ; les trois
   autres livrables sont vides. Détail daté dans `context AI/08-etat.md`.
+- Clos le 2026-10-07 : schéma v3 (19 tables, euros) posé dans docker/init-v3/, migrations v2→v3 et banc ; rôle en lecture seule fil_rouge_reader (chantier LOT).
 
 ## Cinq règles non négociables
 
@@ -74,7 +75,7 @@ et seulement dans ce cas, ouvrir l'index.
 | relire une décision d'architecture (ADR) | **Confluence**, espace `GaSeBeLa1` — [wiki du projet](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/overview?homepageId=15008134). Le dossier `decisions/` du dépôt est **vide**, rien n'y est écrit |
 | ouvrir un chantier, ou le découper en fiches | **lancer `/vlp:chantier`** — la méthode vit dans le kit, pas ici |
 | relire une fiche `C1` à `C5` | `context AI/09-contraintes-mpd.md` — chantier **clos** le 2026-09-11, ne se rejoue pas |
-| jouer une fiche `LOT1` à `LOT12` | **lancer `/vlp:tache LOT<n>`** — chantier **en cours** « Lot de migration (schéma v3) », fiches dans `context AI/10-lot-migration.md` |
+| relire une fiche `LOT1` à `LOT12` | `context AI/10-lot-migration.md` — chantier « Lot de migration (schéma v3) » **clos** le 2026-10-07, ne se rejoue pas |
 | reprendre après une longue interruption | `context AI/08-etat.md` |
 
 ## Économie de contexte
