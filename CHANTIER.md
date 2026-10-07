@@ -18,9 +18,9 @@
 - **artefact du chantier** : https://claude.ai/artifact/1azNjWvWyhj74aqwbDryEa
 - **livraison** : aucune — le code tourne en local (`docker compose up -d`
   depuis `docker/`)
-- **vérification** : `cd API && python -m pytest -q` — la session lance la
-  commande et lit son verdict ; les tests d'intégration demandent la base de
-  test `fil_rouge_test` (`API/README.md` § Tests)
+- **vérification** : depuis `docker/`, `docker compose exec -T api python -m pytest -q`
+  — la session la lance et lit son verdict ; base de test `fil_rouge_test` recréée
+  par `bash docker/create_test_db.sh` (`API/README.md` § Tests)
 
 ## Contraintes d'écriture
 

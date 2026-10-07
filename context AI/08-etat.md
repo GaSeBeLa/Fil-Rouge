@@ -238,3 +238,7 @@ de ce que le code dit déjà.
   retirés** avec la facture (Q-JEF-23) ; le registre ne les tranchait pas.
   Restent `'refused'`, `'announced'`, `'scheduled'`, `'paid'`, et les deux
   dates `announced_at`, `scheduled_for` (Q-REM-17). Tranché à LOT5.
+- **2026-10-07** — **les 9 décisions du rapport LOT1→LOT5 gardées** par
+  Sébastien (`md/rapport-lot1-a-lot5-2026-10-07.html`, cartes D1 à D9 — pas les
+  D1-D9 du schéma). Reportées au registre (Q-REM-03, 14, 17, Q-MAN-02 ; ADR B,
+  J, L) ; fiche LOT4 et vérification de `CHANTIER.md` corrigées.

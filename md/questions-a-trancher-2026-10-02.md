@@ -119,7 +119,7 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 | D1 à D4 | ✅ **garder** | Rien à défaire. |
 | Q-REM-01 | ✅ **Tranchée et faite le 2026-10-05** : prix et bornes du barème en **`INTEGER`** (euros entiers, sans chiffre entre parenthèses), `EXCLUDE` du barème en `'[]'`. Le « numeric(12) » du 2026-10-02 était une erreur de formulation. | Tranches `[0 ; 199 999]`, `[200 000 ; 349 999]`… : ni trou ni chevauchement ; base, code (`rem.py:241`) et tableau du sujet (l. 173-174) d'accord. Mesuré : `price_eur` = 2 556 prix, 0 avec centimes, max 406 042 €. `INTEGER` va jusqu'à 2 147 483 647 ([doc PostgreSQL 16](https://www.postgresql.org/docs/16/datatype-numeric.html), lue le 2026-10-05). ✅ Fait : schéma (`c896e39`, `abbc84e`), modèles en `int` (`d3c128c`), 422 sur un prix à virgule (`fea3c9f`) ; testé sur une base temporaire (01, 02, 03 passent ; chevauchement refusé) ; 123 tests passent. D3 (adaptateur) inutile ; Jeff informé par Q-JEF-19. Gardent leurs centimes : honoraires et paiement, `NUMERIC(12,2)` (`F10:253`). |
 | Q-REM-02 | ✅ **statut-mandat** (pas l'option recommandée) | Nouveau statut de fin sur `mandate` ; peut servir aussi à **Q-REM-14**. ⚠️ S'écarte de `RCR:100` (motif du refus dans `paiements`) : à écrire dans l'ADR. |
-| Q-REM-03 | ✅ **colonne** — « à documenter et à confirmer avec Jeff » | `payment.performance_score`. |
+| Q-REM-03 | ✅ **colonne** — « à documenter et à confirmer avec Jeff » | `payment.performance_score`. ✅ **LOT5, 2026-10-07** : `NUMERIC(4,1)`, de 0 à 100, vide sur un refus, non exigé ailleurs — rapport LOT1→LOT5, carte D8, gardée. |
 | Q-REM-04 | ✅ **jsonb** | `payment.calculation_details JSONB`. |
 | Q-REM-05 | ✅ **table** | Table `remuneration_parameters` + CHECK `01:758-759` relâchés. |
 | Q-REM-06 | ✅ **recalcul** | Code du sujet intact ; écart à `F10:293` dans l'ADR ; Q-JEF-17. |
@@ -131,10 +131,10 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 | Q-REM-12 | ✅ **c3** | C3 codée dans `sale_service`. |
 | Q-INF-06 | ✅ **valider dans le routeur commun** (2026-10-05) | Fait : `_validated` (`crud_router.py`) — prix à virgule et champ manquant en 422 ; commits `d3c128c`, `fea3c9f`. |
 | Q-REM-13 | ✅ **cle** (2026-10-05, pas l'option recommandée) | Clé de `sale` vers `parameters_fees` (💡 ex. `sale.id_parameters_fees`) ; `02` n'insère aucune vente, rien à remplir. **Amende ADR-019** (proposé, « sans clé »). ⚠️ ADR-019 est « accepté » dans la copie du journal d'ADR de Confluence lue le 2026-10-06 : un nouvel ADR le remplace, on ne l'amende pas. |
-| Q-REM-14 | ✅ **statut** (2026-10-05) | Statut de fin sur `mandate` (`01:405-407`), ex. `'lost'`. 🟡 Un seul statut pour Q-REM-02 et Q-REM-14, ou deux ? |
+| Q-REM-14 | ✅ **statut** (2026-10-05) | Statut de fin sur `mandate` (`01:405-407`), ex. `'lost'`. ✅ **Un seul : `'lost'`**, pour Q-REM-02 et Q-REM-14 — tranché à LOT3, gardé le 2026-10-07 (rapport LOT1→LOT5, carte D2). |
 | Q-REM-15 | ✅ **seed** (2026-10-05) | Le seed fait commencer le barème par défaut en 2025 ; `rem.py:298` garde 2026. |
 | Q-REM-16 | ✅ **hypothese** (2026-10-05) | `hire_date` = date de création du compte (`02:24-26`), dite en soutenance ; Jeff dira s'il a mieux (Q-JEF-10). |
-| Q-REM-17 | ✏️ **Revue le 2026-10-07** (voir 🆕 4e série) · ✅ **colonnes** (2026-10-05) | `announced_at`, `invoice_submitted_at`, `verified_at`, `scheduled_for` et `invoice_reference` sur `payment`. 💡 Un CHECK par date, comme `chk_paid` (`01:765-767`). Q-ACC-11, répondue le 2026-10-05 (`colonne`), rejoint ce lot. ✏️ **2026-10-06** : Q-ACC-11 changée (une table des factures) : `invoice_reference`, `invoice_submitted_at` et `verified_at` quittent `payment`, **à reprendre**. |
+| Q-REM-17 | ✏️ **Revue le 2026-10-07** (voir 🆕 4e série) · ✅ **colonnes** (2026-10-05) | `announced_at`, `invoice_submitted_at`, `verified_at`, `scheduled_for` et `invoice_reference` sur `payment`. 💡 Un CHECK par date, comme `chk_paid` (`01:765-767`). Q-ACC-11, répondue le 2026-10-05 (`colonne`), rejoint ce lot. ✏️ **2026-10-06** : Q-ACC-11 changée (une table des factures) : `invoice_reference`, `invoice_submitted_at` et `verified_at` quittent `payment`, **à reprendre**. ✅ **LOT5, 2026-10-07** : `announced_at` et `scheduled_for` gardées, un CHECK chacune ; statuts `'invoice_submitted'` et `'verified'` retirés — rapport LOT1→LOT5, cartes D6 et D7, gardées. |
 | Q-REM-18 | ✅ **acter** (2026-10-05) | ADR X01 (option B) à écrire. À mettre à jour avec lui : `08-etat.md` (l. 80, 195) et `API/README.md:151`, qui attendent encore « l'arbitrage de X01 ». |
 | Q-REM-19 | 🧑‍💼 **Confirmée par Jeff le 2026-10-07** · ✅ **oui** (2026-10-05, pas l'option recommandée) | `CHECK (final_rate BETWEEN 0.20 AND 0.60)` à la place de `01:755`. ⚠️ **Tension avec Q-REM-05** : on relâche deux réglages (`01:758-759`) et on en grave deux autres ; si Jeff change 20 % ou 60 % (Q-JEF-01), base à recréer. À revoir après sa réponse. |
 | Q-PAR-01 | ✅ **sujet** (2026-10-05) | À valider par Jeff (Q-JEF-01). |
@@ -147,7 +147,7 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 | Q-PAR-08 | ✅ **garder** (2026-10-05) | Jeff : Q-JEF-01. |
 | Q-PAR-09 | ✏️ **Revue le 2026-10-07** (voir 🆕 4e série) · ✅ **manager** (2026-10-05) | ⚠️ Ne colle pas avec la recommandation de Q-ACC-07 (« la direction seule ») ; 💡 la direction fixe le barème par défaut, le manager les barèmes nominatifs. Jeff dira d'abord s'il en veut (Q-JEF-16, en deux temps). Va dans le RACI (`RCR:329`). |
 | Q-MAN-01 | ✅ **Activer** (2026-10-05) | CHECK « exactement 6 mois » à la place de celui de `ends_at` (`01:412-414`), SQL prêt (`01:435-445`). Fin de mois : à écrire dans l'ADR L. |
-| Q-MAN-02 | ✅ **Corriger, activer, l'annulation libère tout de suite** (2026-10-05) | Trigger corrigé (parent exclu, `IS DISTINCT FROM`) et activé (`01:450-499`). D7 : Jeff confirme (Q-JEF-06). |
+| Q-MAN-02 | ✅ **Corriger, activer, l'annulation libère tout de suite** (2026-10-05) | Trigger corrigé (parent exclu, `IS DISTINCT FROM`) et activé (`01:450-499`). D7 : Jeff confirme (Q-JEF-06). ✏️ **LOT4** : parent **et** enfant d'un renouvellement exclus l'un pour l'autre ; règle par client — rapport LOT1→LOT5, cartes D3 et D4, gardées le 2026-10-07. |
 | Q-MAN-03 | ✅ **Imposer « sans vente » dans l'API, sans limite de nombre** (2026-10-05) | Code seul, dans l'API. Jeff : Q-JEF-07. |
 | Q-MAN-04 | ✅ **Valider les deux** (2026-10-05) | La vente pointe vers le nouveau mandat ; le délai part de la 1re signature : le code remonte `id_mandate_parent`. |
 | Q-MAN-05 | ✏️ **Changée le 2026-10-06**, voir plus bas. Avant : « Poser un CHECK d'égalité » (2026-10-05) — « le mandat doit être signé par les deux partie, donc il faudrait rajouter  is_hunter_signed et date signature reflèterais la signature des deux ? qu'en pense tu ? a modifié les schemas et bdd » | CHECK case ↔ date ; `02:218` et `02:225` à corriger. Ta question (signature du chasseur) devient **Q-MAN-09**. |
@@ -354,7 +354,7 @@ numéros de `01` relus le 2026-10-05) :
 - table `remuneration_parameters`, CHECK `01:758-759` relâchés (Q-REM-05) ;
 - `final_rate` dans `chk_refused` (Q-REM-10 ; `01:782-787`) ;
 - clé de `sale` vers `parameters_fees` (Q-REM-13) ;
-- ~~4 dates et `invoice_reference` sur `payment` (Q-REM-17)~~ — ✏️ 2026-10-07 : facture hors périmètre ; `invoice_reference`, `invoice_submitted_at`, `verified_at` et la table des factures **retirés** ; `announced_at`, `scheduled_for` à revoir ;
+- ~~4 dates et `invoice_reference` sur `payment` (Q-REM-17)~~ — ✏️ 2026-10-07 : facture hors périmètre ; `invoice_reference`, `invoice_submitted_at`, `verified_at` et la table des factures **retirés** ; `announced_at`, `scheduled_for` ✅ gardées à LOT5, statuts de facture retirés ;
 - `CHECK (final_rate BETWEEN 0.20 AND 0.60)` (Q-REM-19 ; `01:755`) — ✅ validé par Jeff le 2026-10-07 (Q-JEF-01).
 - 2e série du 2026-10-05 :
   - CHECK « exactement 6 mois » à la place de celui de `ends_at` (déjà rédigé dans le TODO U05) (Q-MAN-01 ; `01:412-414`, `01:435-445`) ;
@@ -393,7 +393,7 @@ Simple pense-bête ; 💡 regroupement proposé, numéros donnés sur Confluence
 | ADR | Ce qu'il acte | Questions | État |
 |---|---|---|---|
 | A | Types monétaires : prix en INTEGER, bornes du barème incluses | Q-REM-01 | décidé et fait le 2026-10-05 — remplace « tout montant en NUMERIC(12,2) » |
-| B | Vente perdue : statut de fin du mandat | Q-REM-02, Q-REM-14 | décidé — **amende ADR-024** (motif de refus sur payment), écart à `RCR:100` ; ✅ Jeff : « rien pour personne » (Q-JEF-03, 2026-10-07) |
+| B | Vente perdue : statut de fin du mandat | Q-REM-02, Q-REM-14 | décidé — **amende ADR-024** (motif de refus sur payment), écart à `RCR:100` ; ✅ Jeff : « rien pour personne » (Q-JEF-03, 2026-10-07) ; un seul statut `'lost'` (LOT3, rapport LOT1→LOT5, carte D2) |
 | C | Traçabilité du calcul : figer la note et les entrées | Q-REM-03, Q-REM-04, Q-REM-11 | décidé — ✅ confirmé par Jeff (Q-JEF-20, 2026-10-07) |
 | D | Paramètres de rémunération en table versionnée | Q-REM-05, Q-REM-19 | décidé — relâche deux CHECK ; Q-REM-19 en ajoute un (20-60 %), ✅ validé par Jeff (Q-JEF-01, 2026-10-07) |
 | E | Note recalculée à chaque vente | Q-REM-06 | décidé — écart à `F10:293` ; ✅ validé par Jeff (Q-JEF-17, 2026-10-07) |
@@ -401,9 +401,9 @@ Simple pense-bête ; 💡 regroupement proposé, numéros donnés sur Confluence
 | G | Validation de l'entrée dans le routeur commun | Q-INF-06 | décidé et fait le 2026-10-05 |
 | H | X01 : ancienneté et performance majorent le taux | Q-REM-18 | décidé le 2026-10-05 — « il suffit de l'acter » (`09-dec:303-324`) |
 | I | Vente reliée à sa grille d'honoraires | Q-REM-13 | décidé — remplace ADR-019 (« sans clé »), ⚠️ « accepté » sur Confluence d'après la copie du 2026-10-06 : un nouvel ADR, pas un amendement |
-| J | Étapes du paiement, **sans facture** | Q-REM-17, Q-ACC-11 | ✏️ 2026-10-07 : facture **hors périmètre** (Jeff) — table des factures et 3 colonnes retirées ; dates restantes à revoir ; **écart au sujet** (`F07:17-27`, `Readme.md:132-133`, `RCR:288`) |
+| J | Étapes du paiement, **sans facture** | Q-REM-17, Q-ACC-11 | ✏️ 2026-10-07 : facture **hors périmètre** (Jeff) — table des factures et 3 colonnes retirées ; ✅ LOT5 : `announced_at` et `scheduled_for` gardées, statuts `'invoice_submitted'` et `'verified'` retirés (rapport LOT1→LOT5, cartes D6, D7) ; **écart au sujet** (`F07:17-27`, `Readme.md:132-133`, `RCR:288`) |
 | K | Paramètres proposés, validés par Jeff | Q-PAR-01 à 04, 06 à 08, 10, 11, 13 | ✅ validés par Jeff (Q-JEF-01, 02, 03, 2026-10-07) |
-| L | Règles du mandat : 6 mois exacts, exclusivité, renouvellement, annulation | Q-MAN-01, Q-MAN-02, Q-MAN-03, Q-MAN-04, Q-MAN-07 | décidé le 2026-10-05 — ✅ confirmé par Jeff : Q-JEF-06 (annulation), Q-JEF-07 (renouvellement), 2026-10-07 |
+| L | Règles du mandat : 6 mois exacts, exclusivité, renouvellement, annulation | Q-MAN-01, Q-MAN-02, Q-MAN-03, Q-MAN-04, Q-MAN-07 | décidé le 2026-10-05 — ✅ confirmé par Jeff : Q-JEF-06 (annulation), Q-JEF-07 (renouvellement), 2026-10-07 ; ✏️ LOT4 : parent et enfant d'un renouvellement exclus l'un pour l'autre (rapport LOT1→LOT5, carte D3) |
 | M | Règles qui croisent plusieurs tables : dans l'API, chacune testée | Q-MAN-06 | décidé le 2026-10-05 |
 | N | Localisation sur criteria : remplace ADR-009 | Q-SCH-02, Q-MIG-08 | décidé — et sur ADR-009, la ligne « modifié le …, par l'ADR xx » demandée le 2026-10-05, à la synchro Confluence ; 🆕 la colonne quartier (Q-MIG-08) |
 | O | Statuts de la demande et de l'offre | Q-SCH-03, Q-SCH-04 | décidé — ferme D4 et D5 |

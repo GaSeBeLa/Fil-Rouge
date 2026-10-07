@@ -50,7 +50,7 @@ Un test de **refus** tombe quand la contrainte est retirée (`DROP CONSTRAINT`,
 |---|---|---|
 | base de test (lit le dossier monté) | `bash docker/create_test_db.sh` | sort 0 |
 | SQL sur la base de test | depuis `docker/` : `docker compose exec -T db sh -c 'psql -U "$POSTGRES_USER" -d fil_rouge_test -c "<SQL>"'` | — |
-| tests | `cd API && python -m pytest -q` | 0 failed ; compte brut au compte rendu |
+| tests | depuis `docker/` : `docker compose exec -T api python -m pytest -q` (sqlmodel manque sur la machine) | 0 failed ; compte brut au compte rendu |
 | typage | `pyright <fichiers .py touchés>` | 0 errors, compté avant et après |
 | banc | `bash docker/compare_v2_v3.sh` (créé par LOT2) | `IDENTIQUES`, sort 0 |
 
@@ -203,7 +203,7 @@ LOT5 à LOT10 peuvent changer d'ordre.
   registre, « Défauts du sujet ». Ne le « corrige » pas.
 
 **Critère de fin**
-- Tests nommés : 6 mois accepté, 7 mois refusé ; 2e exclusif actif sur le même bien refusé ; accepté après annulation du 1er ; renouvellement (parent) accepté.
+- Tests nommés : 6 mois accepté, 7 mois refusé ; 2e exclusif actif pour le même client refusé (✏️ 2026-10-07 : la règle Q-MAN-02 vaut par client, pas par bien) ; accepté après annulation du 1er ; renouvellement (parent) accepté.
 - Mutants : CHECK v2 remis → le test « 7 mois refusé » tombe ; `DROP TRIGGER` → le test « 2e exclusif refusé » tombe.
 - Banc `IDENTIQUES` ; pytest 0 failed (compte brut) ; pyright 0 errors.
 <!-- /FICHE -->
