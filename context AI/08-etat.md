@@ -213,3 +213,10 @@ de ce que le code dit déjà.
   tests rouges. `123 passed`. pyright : aucune erreur de plus. Commits
   `d3c128c` (modèles en `int`), `fea3c9f` (validation). ⚠️ Toute l'équipe
   doit faire `docker compose down -v`, puis `bash docker/create_test_db.sh`.
+- **2026-10-07** — **`CHANTIER.md` est remis à la racine** (Q13, Q15 : le
+  kit `vlp` mène le lot de migration, l'API, puis les ADR). La suppression du
+  2026-09-21 reposait sur un malentendu : la méthode vit dans le plugin, mais
+  le projet garde son `CHANTIER.md` — sans lui, la carte du kit répond
+  `AUCUN_PROJET`. Repris de `2448614` et mis à jour (schéma `init-v2`, euros,
+  `docker-compose.yml`). Mesuré : `vlp.py renvois` → `CHANTIER.md 48/50`,
+  12 renvois, 0 absent.

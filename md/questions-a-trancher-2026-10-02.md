@@ -261,7 +261,7 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 | Q-REM-03, Q-REM-04 | 🧑‍💼 confirmé (Q-JEF-20) | Rien. |
 | Q-PRO-01, Q-PRO-03 | 🧑‍💼 confirmé (Q-JEF-25) : il est le PO ; ADR validés en une séance | Rien. |
 | 🆕 Rôle en lecture seule | 👥 Q14 : **les deux** — un rôle PostgreSQL (`GRANT SELECT`) et un rôle applicatif « lecteur » | 🟡 À demander à Jeff sur Discord. Mot de passe du rôle dans `docker/.env`, jamais dans git. |
-| Plan d'action | 👥 Q11 : **un seul lot** ; Q12 : **par thème** ; Q13, Q15 : kit vlp, 🟡 à confirmer par toi à midi ; D1 : ADR après, le code cite les Q-xx ; D2 : schémas = `01` + modèles + `livrables/2-modelisation` + MPD ; D3 : tests et pyright par thème | Dernière étape : **déployer sur ton VPS**, une fois la base réparée. |
+| Plan d'action | 👥 Q11 : **un seul lot** ; Q12 : **par thème** ; Q13, Q15 : **kit vlp**, confirmé le 2026-10-07 (étapes 2-3, puis une fiche par ADR) ; `CHANTIER.md` remis au dépôt le 2026-10-07 ; D1 : ADR après, le code cite les Q-xx ; D2 : schémas = `01` + modèles + `livrables/2-modelisation` + MPD ; D3 : tests et pyright par thème | Dernière étape : **déployer sur ton VPS**, une fois la base réparée. |
 | Q-PRO-05 | — | 🟡 Reste ouverte (« le FIX »). |
 
 **💬 Avis demandés dans tes notes du 2026-10-06** — 💡 ce sont mes avis, pas
