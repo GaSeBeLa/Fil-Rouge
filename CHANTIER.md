@@ -14,7 +14,7 @@
 - **fichier d'état** : context AI/08-etat.md
 - **index** : context AI/00-INDEX.md
 - **fichier de fiches courant** : aucun
-- **artefact feuille de route** : https://claude.ai/code/artifact/f21ec12e-cd17-4c53-9289-3c5ef94a2907
+- **artefact feuille de route** : https://claude.ai/artifact/Wu5xkSJUtfbjuhFdbvUq3C
 - **artefact du chantier** : aucun
 - **livraison** : aucune — le code tourne en local (`docker compose up -d`
   depuis `docker/`)

@@ -48,11 +48,15 @@ ordonné par ce qui débloque le reste.
 
 | # | Chantier | Ce qu'il apporte | Coût estimé | Dépend de |
 |---|---|---|---|---|
-| 1 | ~~Base de test isolée + tests d'intégration CRUD~~ ✅ **fait le 2026-10-02** | `fil_rouge_test` + 22 tests d'intégration (voir journal) | — | rien |
-| 2 | Règles métier mandat / rémunération / barème | implémente les US 00 et 07 dans la couche `services/`, avec leurs tests ; reprend `U02` et `U05` laissés commentés dans le `01`. 🟡 **Calcul pur fait le 2026-10-02** (55 cas verts) ; reste le branchement base et les règles de mandat | 4–6 fiches | 1 ✅ |
-| 3 | Livrable 2 — modélisation (MCD/MLD) | reconstruit le modèle depuis le SQL existant, pour `livrables/2-modelisation/` | 3–4 fiches | rien |
-| 4 | Livrable 1 — audit des données | rapport de normalisation à partir de `normalised/rapport_anomalies.txt` | 3–4 fiches | rien |
-| 5 | Livrable 3 — architecture | documente les trois couches et les choix (pas de PATCH, bases génériques) | 2–3 fiches | 1 |
+| 1 | Lot de migration de la base | **un seul lot, par thème** (Q11, Q12) : les changements décidés au registre, 4e série comprise (droits par rôle, reprise des anciens mandats, auteur d'un bien, CHECK 20-60 %, Eircode…). Pour chacun : schéma `01`, modèle, migration, tests, README du schéma. Avant d'ouvrir : la réponse de Jeff sur le rôle en lecture seule, la grille de notes et la durée X | 💡 ~8 à 10 fiches | rien |
+| 2 | API : auth, RGPD et règles métier | les **outils d'auth** côté back (connexion, token, rôles, droits, Argon2), l'**anonymisation** d'un compte, une **clé d'API par programme**, les règles « contrôlées par l'API », et le calcul de rémunération branché sur la base (55 cas déjà verts) | 💡 ~5 à 7 fiches | 1 |
+| 3 | Seed de démo | des données de démo générées (faker), cohérentes avec le nouveau schéma ; le décor, pas la preuve : les tests restent la preuve | 💡 2-3 fiches | 1 |
+| 4 | Les ADR | **une fiche par ADR**, chacune relue (Q15) ; chaque ADR cite ses cartes et ses sources, puis se copie à la main sur Confluence | 💡 ~25 fiches | 1..3 |
+| 5 | Doc d'équipe | matrice des droits, RACI, registre RGPD, rapport de tests | 💡 3-4 fiches | 1..2 |
+| 6 | Livrable 2 — modélisation (MCD/MLD) | reconstruit le modèle depuis le schéma réparé, pour `livrables/2-modelisation/` | 3–4 fiches | 1 |
+| 7 | Livrable 1 — audit des données | rapport de normalisation à partir de `normalised/rapport_anomalies.txt` | 3–4 fiches | rien |
+| 8 | Livrable 3 — architecture | documente les trois couches et les choix (pas de PATCH, bases génériques, auth côté back) | 2–3 fiches | 2 |
+| 9 | Déploiement sur le VPS | mettre l'API et la base réparée sur le VPS de l'utilisateur ; hôte, accès et méthode **à demander avant d'agir**, aucun secret dans le dépôt | 🟡 à cadrer | 1..8 |
 
 ## Journal des décisions
 
