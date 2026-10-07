@@ -235,18 +235,19 @@ body.vlp-lit { padding-bottom:9rem; }
 <div class="page" data-format="gros" data-cle="filrouge-2026-10-05-jeff-v1">
 
   <header style="display:flex;flex-direction:column;gap:.8rem">
-    <p class="mono sous">Fil Rouge Immobilier · 2026-10-05, mis à jour le 2026-10-06 · rapport à part · registre md/questions-a-trancher-2026-10-02.md, partie 2</p>
+    <p class="mono sous">Fil Rouge Immobilier · 2026-10-05, mis à jour le 2026-10-06 et le 2026-10-07 · rapport à part · registre md/questions-a-trancher-2026-10-02.md, partie 2</p>
     <h1>Questions pour Jeff</h1>
     <span class="jauge">🟢 Ça tient, mais…</span>
     <ul>
+      <li>✅ <b>Entretien fait le 2026-10-07.</b> La réponse de Jeff est dans chaque carte (encadré 🧑‍💼), vos <b>71 réponses</b> sont cochées, et tout est reporté au registre (4e série).</li>
       <li>✅ <b>26 questions</b> qui ne se tranchent qu'avec Jeff, ou après sa réponse. Chacune porte <b>notre position</b>, tirée de vos réponses.</li>
       <li>🆕 <b>Mis à jour le 2026-10-06</b>, d'après vos réponses du jour : <b>6 questions ajoutées</b> (Q-JEF-21 à 26), <b>3 complétées</b> (Q-JEF-13, 15, 19). Elles portent la puce 🆕 ; le pourquoi est dans les décisions DJ7 à DJ10.</li>
       <li>🆕 Sous elles, les <b>34 cartes du registre</b> que seul Jeff tranche, venues de la page principale avec leurs cases et vos <b>13 réponses</b>.</li>
       <li>🟡 Pour chaque question : la poser, la reformuler, ou non. Plus <b>11 décisions</b> prises seul, à valider.</li>
       <li>🔗 Dans les cartes encore ouvertes, chaque source citée est un <b>lien</b> vers le fichier, à la ligne près : voir <a href="#sources">les abréviations</a>.</li>
-      <li>⚠️ <b>5 points coincent</b> encore entre vos réponses : voir « Ce qui coince ».</li>
+      <li>✅ Les <b>5 points qui coinçaient</b> sont réglés depuis l'entretien : voir « Ce qui coince ».</li>
       <li>🎤 <b>La liste pour l'entretien</b> : 28 lignes en 6 blocs, dont <b>10 ⭐ à poser absolument</b>, avec des filtres : <a href="#entretien">la liste</a>.</li>
-      <li>➡️ Après l'entretien : la réponse de Jeff dans le commentaire de chaque carte, puis copier en bas de page.</li>
+      <li>✅ Après l'entretien : réponses de Jeff reportées dans les cartes (2026-10-07).</li>
     </ul>
     <nav aria-label="Sommaire"><ul>
       <li><a href="#contexte">Contexte</a></li>
@@ -271,7 +272,7 @@ body.vlp-lit { padding-bottom:9rem; }
         <ul>
           <li>✅ <strong>D1 à D4, Q-REM-01 à 19, Q-PAR-01 à 09, Q-MAN-01 à 09, 17 cartes Q-SCH, 4 cartes Q-MIG, 7 cartes Q-ACC, Q-INF-01 à 08 et 7 cartes Q-PRO</strong> : répondues, le 2026-10-02, le 2026-10-05 et le 2026-10-06.</li>
           <li>📝 <strong>7 cartes ont une note sans case cochée</strong> : elles restent ouvertes, votre note est montrée telle quelle.</li>
-          <li>➡️ <strong>Ensuite, l'entretien avec Jeff</strong> : cette page, et sa <a href="#entretien">liste pour l'entretien</a>.</li>
+          <li>✅ <strong>L'entretien avec Jeff : fait le 2026-10-07</strong>. Ses réponses sont dans les cartes et dans la <a href="#entretien">liste pour l'entretien</a>.</li>
           <li>🗓️ <strong>Après</strong> : le lot de migration (un seul <span class="mono">docker compose down -v</span>), puis les ADR, une fois toutes les réponses reçues.</li>
         </ul>
       </div>
@@ -319,64 +320,64 @@ body.vlp-lit { padding-bottom:9rem; }
       <h3>💶 Ce que touche le chasseur</h3>
       <p>L'argent d'abord : le cœur du sujet.</p>
       <ul class="entretien">
-        <li data-prio="abs"><span><b>1.</b> <span title="À poser absolument">⭐</span> Validez-vous les chiffres que le sujet propose : honoraires, parts du chasseur, poids de la note, bonus, bornes, arrondis ? <a href="#Q-JEF-01" class="carte-lien">Q-JEF-01</a></span><span class="pos">🤝 Nous les gardons tous. Un oui règle <b>8 cartes</b> (Q-PAR).</span></li>
-        <li data-prio="abs"><span><b>2.</b> <span title="À poser absolument">⭐</span> Mandat non exclusif, le client achète par une autre agence : notre chasseur touche-t-il quelque chose ? Et l'entreprise ? <a href="#Q-JEF-03" class="carte-lien">Q-JEF-03</a></span><span class="pos">🤝 Rien pour le chasseur, motif tracé (<span class="id">Q-PAR-02</span>) ; pas de vente chez nous (<span class="id">Q-REM-02</span>).</span></li>
-        <li data-prio="abs"><span><b>3.</b> <span title="À poser absolument">⭐</span> Une facture du chasseur refusée puis renvoyée : garder chaque envoi ? Nous proposons une table des factures, reliée au paiement : ça vous convient ? <a href="#Q-JEF-23" class="carte-lien">Q-JEF-23</a></span><span class="pos">🤝 La table (<span class="id">Q-ACC-11</span>, réponse du 06/10). S'il ne veut que la dernière facture : retour à une colonne sur le paiement.</span></li>
-        <li data-prio="conf"><span><b>4.</b> <span title="Un oui d'un mot">✔️</span> Le barème par palier est-il voulu, avec son saut d'environ 600 € à 350 000 € ? <a href="#Q-JEF-02" class="carte-lien">Q-JEF-02</a></span><span class="pos">🤝 Palier (<span class="id">Q-PAR-03</span>).</span></li>
-        <li data-prio="conf"><span><b>5.</b> <span title="Un oui d'un mot">✔️</span> Les honoraires sont-ils hors taxes (HT) ? <a href="#Q-JEF-04" class="carte-lien">Q-JEF-04</a></span><span class="pos">💡 HT, comme le sujet.</span></li>
+        <li data-prio="abs"><span><b>1.</b> <span title="À poser absolument">⭐</span> Validez-vous les chiffres que le sujet propose : honoraires, parts du chasseur, poids de la note, bonus, bornes, arrondis ? <a href="#Q-JEF-01" class="carte-lien">Q-JEF-01</a></span><span class="pos">🤝 Nous les gardons tous. Un oui règle <b>8 cartes</b> (Q-PAR).</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : Il valide tous les paramètres proposés.</span></li>
+        <li data-prio="abs"><span><b>2.</b> <span title="À poser absolument">⭐</span> Mandat non exclusif, le client achète par une autre agence : notre chasseur touche-t-il quelque chose ? Et l'entreprise ? <a href="#Q-JEF-03" class="carte-lien">Q-JEF-03</a></span><span class="pos">🤝 Rien pour le chasseur, motif tracé (<span class="id">Q-PAR-02</span>) ; pas de vente chez nous (<span class="id">Q-REM-02</span>).</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : Rien pour personne : ni le chasseur, ni l'entreprise.</span></li>
+        <li data-prio="abs"><span><b>3.</b> <span title="À poser absolument">⭐</span> Une facture du chasseur refusée puis renvoyée : garder chaque envoi ? Nous proposons une table des factures, reliée au paiement : ça vous convient ? <a href="#Q-JEF-23" class="carte-lien">Q-JEF-23</a></span><span class="pos">🤝 La table (<span class="id">Q-ACC-11</span>, réponse du 06/10). S'il ne veut que la dernière facture : retour à une colonne sur le paiement.</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : Facture hors périmètre. Choix du groupe (Q3) : aucune trace de facture en base.</span></li>
+        <li data-prio="conf"><span><b>4.</b> <span title="Un oui d'un mot">✔️</span> Le barème par palier est-il voulu, avec son saut d'environ 600 € à 350 000 € ? <a href="#Q-JEF-02" class="carte-lien">Q-JEF-02</a></span><span class="pos">🤝 Palier (<span class="id">Q-PAR-03</span>).</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : Il valide notre position (ci-dessus), sans changement. Le barème par palier.</span></li>
+        <li data-prio="conf"><span><b>5.</b> <span title="Un oui d'un mot">✔️</span> Les honoraires sont-ils hors taxes (HT) ? <a href="#Q-JEF-04" class="carte-lien">Q-JEF-04</a></span><span class="pos">💡 HT, comme le sujet.</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : Il valide notre position (ci-dessus), sans changement. Honoraires HT.</span></li>
       </ul>
     </div>
     <div class="bloc-entretien" data-bloc="b">
       <h3>📊 La note du chasseur</h3>
       <p>Elle fixe le bonus de performance.</p>
       <ul class="entretien">
-        <li data-prio="abs"><span><b>6.</b> <span title="À poser absolument">⭐</span> Un mandat fini sans vente doit faire baisser la note : validez-vous le taux de transformation (ventes ÷ mandats) ? Et quelle note pour quel taux ? <a href="#Q-JEF-05" class="carte-lien">Q-JEF-05</a></span><span class="pos">🤝 Taux de transformation (<span class="id">Q-PAR-05</span>). Sans sa grille de notes, <b>rien à coder</b>.</span></li>
-        <li data-prio="temps"><span><b>7.</b> <span title="Si le temps le permet">⏳</span> Sur 12 mois, quelles ventes et quels mandats comptent ? Un mandat annulé compte-t-il ? <a href="#Q-JEF-09" class="carte-lien">Q-JEF-09</a></span><span class="pos">🤝 Les ventes non refusées, les mandats signés sans les renouvellements. Annulé : pas tranché. Lié à la question 6.</span></li>
-        <li data-prio="temps"><span><b>8.</b> <span title="Si le temps le permet">⏳</span> Pour payer une vente : note recalculée sur cette vente, ou dernière note gardée ? <a href="#Q-JEF-17" class="carte-lien">Q-JEF-17</a></span><span class="pos">🤝 Recalculée à chaque vente (<span class="id">Q-REM-06</span>), comme le code du sujet.</span></li>
-        <li data-prio="temps"><span><b>9.</b> <span title="Si le temps le permet">⏳</span> La note « visites » compte-t-elle toutes les visites du client, sur tous les biens du mandat, jusqu'à l'acte ? Moins il y en a, mieux c'est ? <a href="#Q-JEF-08" class="carte-lien">Q-JEF-08</a></span><span class="pos">🤝 Oui (<span class="id">Q-REM-07</span>, et votre note : moins de visites, meilleure note).</span></li>
-        <li data-prio="temps"><span><b>10.</b> <span title="Si le temps le permet">⏳</span> Avez-vous la vraie date d'embauche des chasseurs ? <a href="#Q-JEF-10" class="carte-lien">Q-JEF-10</a></span><span class="pos">🤝 Sinon, la date de création du compte, dite en soutenance (<span class="id">Q-REM-16</span>).</span></li>
+        <li data-prio="abs"><span><b>6.</b> <span title="À poser absolument">⭐</span> Un mandat fini sans vente doit faire baisser la note : validez-vous le taux de transformation (ventes ÷ mandats) ? Et quelle note pour quel taux ? <a href="#Q-JEF-05" class="carte-lien">Q-JEF-05</a></span><span class="pos">🤝 Taux de transformation (<span class="id">Q-PAR-05</span>). Sans sa grille de notes, <b>rien à coder</b>.</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : Pas de grille de sa part : le groupe propose la sienne, marquée « proposition du groupe ».</span></li>
+        <li data-prio="temps"><span><b>7.</b> <span title="Si le temps le permet">⏳</span> Sur 12 mois, quelles ventes et quels mandats comptent ? Un mandat annulé compte-t-il ? <a href="#Q-JEF-09" class="carte-lien">Q-JEF-09</a></span><span class="pos">🤝 Les ventes non refusées, les mandats signés sans les renouvellements. Annulé : pas tranché. Lié à la question 6.</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : Il valide notre position (ci-dessus), sans changement.</span></li>
+        <li data-prio="temps"><span><b>8.</b> <span title="Si le temps le permet">⏳</span> Pour payer une vente : note recalculée sur cette vente, ou dernière note gardée ? <a href="#Q-JEF-17" class="carte-lien">Q-JEF-17</a></span><span class="pos">🤝 Recalculée à chaque vente (<span class="id">Q-REM-06</span>), comme le code du sujet.</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : Il valide notre position (ci-dessus), sans changement. Recalculer à chaque vente.</span></li>
+        <li data-prio="temps"><span><b>9.</b> <span title="Si le temps le permet">⏳</span> La note « visites » compte-t-elle toutes les visites du client, sur tous les biens du mandat, jusqu'à l'acte ? Moins il y en a, mieux c'est ? <a href="#Q-JEF-08" class="carte-lien">Q-JEF-08</a></span><span class="pos">🤝 Oui (<span class="id">Q-REM-07</span>, et votre note : moins de visites, meilleure note).</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : Il valide notre position (ci-dessus), sans changement.</span></li>
+        <li data-prio="temps"><span><b>10.</b> <span title="Si le temps le permet">⏳</span> Avez-vous la vraie date d'embauche des chasseurs ? <a href="#Q-JEF-10" class="carte-lien">Q-JEF-10</a></span><span class="pos">🤝 Sinon, la date de création du compte, dite en soutenance (<span class="id">Q-REM-16</span>).</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : Il valide notre position (ci-dessus), sans changement. L'hypothèse se garde, et se dit en soutenance.</span></li>
       </ul>
     </div>
     <div class="bloc-entretien" data-bloc="c">
       <h3>📝 Le mandat et le client</h3>
       <p>Les règles du mandat, et l'avis du client sur un bien.</p>
       <ul class="entretien">
-        <li data-prio="abs"><span><b>11.</b> <span title="À poser absolument">⭐</span> Un client annule son mandat exclusif : peut-il signer tout de suite avec un autre chasseur ? <a href="#Q-JEF-06" class="carte-lien">Q-JEF-06</a></span><span class="pos">🤝 Oui, l'annulation libère tout de suite (<span class="id">Q-MAN-02</span>).</span></li>
-        <li data-prio="abs"><span><b>12.</b> <span title="À poser absolument">⭐</span> L'intérêt du client pour un bien proposé : une note de 1 à 5, ou haute / moyenne / basse ? <a href="#Q-JEF-18" class="carte-lien">Q-JEF-18</a></span><span class="pos">💡 De 1 à 5 (<span class="id">Q-SCH-05</span>, pas encore répondue).</span></li>
-        <li data-prio="temps"><span><b>13.</b> <span title="Si le temps le permet">⏳</span> Combien de renouvellements au plus ? Et le délai part-il de la première signature ? <a href="#Q-JEF-07" class="carte-lien">Q-JEF-07</a></span><span class="pos">🤝 Sans limite de nombre (<span class="id">Q-MAN-03</span>) ; délai depuis la première signature (<span class="id">Q-MAN-04</span>).</span></li>
-        <li data-prio="conf"><span><b>14.</b> <span title="Un oui d'un mot">✔️</span> Dans votre exemple, le mandat de Bruno est-il un mandat renouvelé ? <a href="#Q-JEF-11" class="carte-lien">Q-JEF-11</a></span><span class="pos">🤝 Oui, c'est notre lecture.</span></li>
+        <li data-prio="abs"><span><b>11.</b> <span title="À poser absolument">⭐</span> Un client annule son mandat exclusif : peut-il signer tout de suite avec un autre chasseur ? <a href="#Q-JEF-06" class="carte-lien">Q-JEF-06</a></span><span class="pos">🤝 Oui, l'annulation libère tout de suite (<span class="id">Q-MAN-02</span>).</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : Oui : l'annulation libère le client tout de suite.</span></li>
+        <li data-prio="abs"><span><b>12.</b> <span title="À poser absolument">⭐</span> L'intérêt du client pour un bien proposé : une note de 1 à 5, ou haute / moyenne / basse ? <a href="#Q-JEF-18" class="carte-lien">Q-JEF-18</a></span><span class="pos">💡 De 1 à 5 (<span class="id">Q-SCH-05</span>, pas encore répondue).</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : De 1 à 5.</span></li>
+        <li data-prio="temps"><span><b>13.</b> <span title="Si le temps le permet">⏳</span> Combien de renouvellements au plus ? Et le délai part-il de la première signature ? <a href="#Q-JEF-07" class="carte-lien">Q-JEF-07</a></span><span class="pos">🤝 Sans limite de nombre (<span class="id">Q-MAN-03</span>) ; délai depuis la première signature (<span class="id">Q-MAN-04</span>).</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : Il valide notre position (ci-dessus), sans changement.</span></li>
+        <li data-prio="conf"><span><b>14.</b> <span title="Un oui d'un mot">✔️</span> Dans votre exemple, le mandat de Bruno est-il un mandat renouvelé ? <a href="#Q-JEF-11" class="carte-lien">Q-JEF-11</a></span><span class="pos">🤝 Oui, c'est notre lecture.</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : Il confirme : Bruno a un mandat renouvelé.</span></li>
       </ul>
     </div>
     <div class="bloc-entretien" data-bloc="d">
       <h3>🗃️ Votre ancienne base</h3>
       <p>Lui seul connaît ses données.</p>
       <ul class="entretien">
-        <li data-prio="abs"><span><b>15.</b> <span title="À poser absolument">⭐</span> Quatre points sur les mandats repris : le vrai client du mandat 13, le sens de « suspendu » et « termine », les 6 mandats échus, et la pause d'un mandat. <a href="#Q-JEF-13" class="carte-lien">Q-JEF-13</a></span><span class="pos">📋 Les quatre sous-questions sont sur la carte.</span></li>
-        <li data-prio="abs"><span><b>16.</b> <span title="À poser absolument">⭐</span> Pouvez-vous fournir ce qui manque : le téléphone de 3 clients, l'adresse de 18 clients, le budget minimum de 17 demandes ? <a href="#Q-JEF-26" class="carte-lien">Q-JEF-26</a></span><span class="pos">🤝 Sinon, « non renseigné », sans rien inventer.</span></li>
-        <li data-prio="temps"><span><b>17.</b> <span title="Si le temps le permet">⏳</span> La colonne <span class="mono">taux_commission</span> (de 2,00 à 3,25) : un pourcentage du prix, ou des honoraires ? <a href="#Q-JEF-12" class="carte-lien">Q-JEF-12</a></span><span class="pos">ℹ️ Rien ne bloque : la réponse nourrit l'audit.</span></li>
+        <li data-prio="abs"><span><b>15.</b> <span title="À poser absolument">⭐</span> Quatre points sur les mandats repris : le vrai client du mandat 13, le sens de « suspendu » et « termine », les 6 mandats échus, et la pause d'un mandat. <a href="#Q-JEF-13" class="carte-lien">Q-JEF-13</a></span><span class="pos">📋 Les quatre sous-questions sont sur la carte.</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : Oui à nos positions : le client du mandat 13 est Nina Girard ; termine → completed ; suspendu → canceled ; les 6 échus → expired ; pas de pause, pas de nouvel état.</span></li>
+        <li data-prio="abs"><span><b>16.</b> <span title="À poser absolument">⭐</span> Pouvez-vous fournir ce qui manque : le téléphone de 3 clients, l'adresse de 18 clients, le budget minimum de 17 demandes ? <a href="#Q-JEF-26" class="carte-lien">Q-JEF-26</a></span><span class="pos">🤝 Sinon, « non renseigné », sans rien inventer.</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : Les manques sont voulus. Ne pas supprimer les anciennes données ; on peut fausser les autres (modifier le script fourni).</span></li>
+        <li data-prio="temps"><span><b>17.</b> <span title="Si le temps le permet">⏳</span> La colonne <span class="mono">taux_commission</span> (de 2,00 à 3,25) : un pourcentage du prix, ou des honoraires ? <a href="#Q-JEF-12" class="carte-lien">Q-JEF-12</a></span><span class="pos">ℹ️ Rien ne bloque : la réponse nourrit l'audit.</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : Il valide notre position (ci-dessus), sans changement. % des honoraires, non migré.</span></li>
       </ul>
     </div>
     <div class="bloc-entretien" data-bloc="e">
       <h3>🔐 Comptes, droits et RGPD</h3>
       <p>Qui fait quoi, et ce qu'on garde.</p>
       <ul class="entretien">
-        <li data-prio="abs"><span><b>18.</b> <span title="À poser absolument">⭐</span> La couche du dessus lira-t-elle le mot de passe dans notre base ? Sinon, nous le retirons. <a href="#Q-JEF-21" class="carte-lien">Q-JEF-21</a></span><span class="pos">🤝 Le groupe penche pour le retirer (vos notes sur <span class="id">Q-ACC-18</span> et <span class="id">Q-MIG-11</span>).</span></li>
-        <li data-prio="abs"><span><b>19.</b> <span title="À poser absolument">⭐</span> Validez-vous notre tableau : qui a le droit de faire quoi ? <a href="#Q-JEF-14" class="carte-lien">Q-JEF-14</a></span><span class="pos">📋 Le tableau est sur la carte. Un oui règle <b>11 cartes</b>.</span></li>
-        <li data-prio="temps"><span><b>20.</b> <span title="Si le temps le permet">⏳</span> Voulez-vous des barèmes propres à un chasseur ? Si oui, qui les crée et les valide ? <a href="#Q-JEF-16" class="carte-lien">Q-JEF-16</a></span><span class="pos">🤝 Le manager, inscrit dans le RACI (<span class="id">Q-PAR-09</span>). ⚠️ Lié à la question 19.</span></li>
-        <li data-prio="temps"><span><b>21.</b> <span title="Si le temps le permet">⏳</span> La clé d'API : une seule, ou une par programme ? Et comment vous les remettre ? <a href="#Q-JEF-22" class="carte-lien">Q-JEF-22</a></span><span class="pos">🤝 La faire (<span class="id">Q-ACC-19</span>). 💡 Une par programme.</span></li>
-        <li data-prio="temps"><span><b>22.</b> <span title="Si le temps le permet">⏳</span> Effacer un compte : désactiver, rendre anonyme, garder ce que la loi impose, d'accord ? Et combien d'années garder un mandat après sa fin ? <a href="#Q-JEF-15" class="carte-lien">Q-JEF-15</a></span><span class="pos">🤝 Oui (<span class="id">Q-ACC-08</span>). ℹ️ 10 ans pour les paiements, comme le sujet.</span></li>
-        <li data-prio="temps"><span><b>23.</b> <span title="Si le temps le permet">⏳</span> Un chasseur ou un manager peut-il saisir un bien à la main, ou les biens viennent-ils seulement de l'import ? <a href="#Q-JEF-24" class="carte-lien">Q-JEF-24</a></span><span class="pos">🤝 Sinon, import par Airflow (votre note sur <span class="id">Q-ACC-09</span>).</span></li>
+        <li data-prio="abs"><span><b>18.</b> <span title="À poser absolument">⭐</span> La couche du dessus lira-t-elle le mot de passe dans notre base ? Sinon, nous le retirons. <a href="#Q-JEF-21" class="carte-lien">Q-JEF-21</a></span><span class="pos">🤝 Le groupe penche pour le retirer (vos notes sur <span class="id">Q-ACC-18</span> et <span class="id">Q-MIG-11</span>).</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : Réglée par sa réponse à Q-JEF-14 : les outils d'authentification sont à nous, donc le mot de passe se garde, haché en Argon2.</span></li>
+        <li data-prio="abs"><span><b>19.</b> <span title="À poser absolument">⭐</span> Validez-vous notre tableau : qui a le droit de faire quoi ? <a href="#Q-JEF-14" class="carte-lien">Q-JEF-14</a></span><span class="pos">📋 Le tableau est sur la carte. Un oui règle <b>11 cartes</b>.</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : « on doit fournir les outils pour une bonne gestion de l'authentification (route de connextion, token, session, role, droit, etc.) , mais l'on ne doit pas crée la page de login en elle même. » ➡️ L'authentification revient, côté back.</span></li>
+        <li data-prio="temps"><span><b>20.</b> <span title="Si le temps le permet">⏳</span> Voulez-vous des barèmes propres à un chasseur ? Si oui, qui les crée et les valide ? <a href="#Q-JEF-16" class="carte-lien">Q-JEF-16</a></span><span class="pos">🤝 Le manager, inscrit dans le RACI (<span class="id">Q-PAR-09</span>). ⚠️ Lié à la question 19.</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : La direction.</span></li>
+        <li data-prio="temps"><span><b>21.</b> <span title="Si le temps le permet">⏳</span> La clé d'API : une seule, ou une par programme ? Et comment vous les remettre ? <a href="#Q-JEF-22" class="carte-lien">Q-JEF-22</a></span><span class="pos">🤝 La faire (<span class="id">Q-ACC-19</span>). 💡 Une par programme.</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : Il valide notre position (ci-dessus), sans changement. Une clé par programme.</span></li>
+        <li data-prio="temps"><span><b>22.</b> <span title="Si le temps le permet">⏳</span> Effacer un compte : désactiver, rendre anonyme, garder ce que la loi impose, d'accord ? Et combien d'années garder un mandat après sa fin ? <a href="#Q-JEF-15" class="carte-lien">Q-JEF-15</a></span><span class="pos">🤝 Oui (<span class="id">Q-ACC-08</span>). ℹ️ 10 ans pour les paiements, comme le sujet.</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : Ajouter une route, ou modifier la route DELETE, pour seulement anonymiser les données personnelles d'une personne. La durée X : le groupe la propose.</span></li>
+        <li data-prio="temps"><span><b>23.</b> <span title="Si le temps le permet">⏳</span> Un chasseur ou un manager peut-il saisir un bien à la main, ou les biens viennent-ils seulement de l'import ? <a href="#Q-JEF-24" class="carte-lien">Q-JEF-24</a></span><span class="pos">🤝 Sinon, import par Airflow (votre note sur <span class="id">Q-ACC-09</span>).</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : Oui, un bien peut être saisi à la main (hors marché, courant dans l'immobilier). Choix du groupe (Q8) : par le chasseur et le manager.</span></li>
       </ul>
     </div>
     <div class="bloc-entretien" data-bloc="f">
       <h3>📋 Jeff PO : des oui d'un mot</h3>
       <p>Pour finir : il confirme, ou il est informé.</p>
       <ul class="entretien">
-        <li data-prio="conf"><span><b>24.</b> <span title="Un oui d'un mot">✔️</span> Pour information : un prix pile sur une limite prend la tranche du dessus (200 000 € → 35 %). <a href="#Q-JEF-19" class="carte-lien">Q-JEF-19</a></span><span class="pos">✅ Déjà fait et testé (<span class="id">Q-REM-01</span>).</span></li>
-        <li data-prio="conf"><span><b>25.</b> <span title="Un oui d'un mot">✔️</span> Chaque paiement garde sa note et le détail du calcul : d'accord ? <a href="#Q-JEF-20" class="carte-lien">Q-JEF-20</a></span><span class="pos">ℹ️ Le sujet l'exige déjà.</span></li>
-        <li data-prio="conf"><span><b>26.</b> <span title="Un oui d'un mot">✔️</span> Validez-vous nos décisions d'architecture (ADR) en une seule séance, après vos réponses ? <a href="#Q-JEF-25" class="carte-lien">Q-JEF-25</a></span><span class="pos">🤝 Jeff est le PO (<span class="id">Q-PRO-01</span>).</span></li>
-        <li data-prio="conf"><span><b>27.</b> <span title="Un oui d'un mot">✔️</span> La pertinence des biens, les types d'offre et les droits des chasseurs-IA attendent le parcours IA : d'accord ? <a href="https://claude.ai/artifact/WWVtxpDWxvD4Wf8rWnytUp" target="_blank" rel="noopener" class="carte-lien">Q-SCH-08</a> + <a href="https://claude.ai/artifact/WWVtxpDWxvD4Wf8rWnytUp" target="_blank" rel="noopener" class="carte-lien">Q-ACC-14</a> <span class="sous">(page principale)</span></span><span class="pos">🤝 Reporter au parcours IA (réponses du 05/10 et du 06/10).</span></li>
-        <li data-prio="conf"><span><b>28.</b> <span title="Un oui d'un mot">✔️</span> Les livrables 1 (audit) et 3 (architecture) : nous les planifions après cet entretien. Une date à respecter ? <a href="https://claude.ai/artifact/WWVtxpDWxvD4Wf8rWnytUp" target="_blank" rel="noopener" class="carte-lien">Q-PRO-07</a> <span class="sous">(page principale)</span></span><span class="pos">🤝 Planifier après l'entretien (votre note sur <span class="id">Q-PRO-07</span>).</span></li>
+        <li data-prio="conf"><span><b>24.</b> <span title="Un oui d'un mot">✔️</span> Pour information : un prix pile sur une limite prend la tranche du dessus (200 000 € → 35 %). <a href="#Q-JEF-19" class="carte-lien">Q-JEF-19</a></span><span class="pos">✅ Déjà fait et testé (<span class="id">Q-REM-01</span>).</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : Informé ; pas d'objection.</span></li>
+        <li data-prio="conf"><span><b>25.</b> <span title="Un oui d'un mot">✔️</span> Chaque paiement garde sa note et le détail du calcul : d'accord ? <a href="#Q-JEF-20" class="carte-lien">Q-JEF-20</a></span><span class="pos">ℹ️ Le sujet l'exige déjà.</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : Il valide notre position (ci-dessus), sans changement.</span></li>
+        <li data-prio="conf"><span><b>26.</b> <span title="Un oui d'un mot">✔️</span> Validez-vous nos décisions d'architecture (ADR) en une seule séance, après vos réponses ? <a href="#Q-JEF-25" class="carte-lien">Q-JEF-25</a></span><span class="pos">🤝 Jeff est le PO (<span class="id">Q-PRO-01</span>).</span><span class="pos">🧑‍💼 <b>Jeff, le 2026-10-07</b> : Il valide notre position (ci-dessus), sans changement. Il est le PO ; les ADR se valident en une séance.</span></li>
+        <li data-prio="conf"><span><b>27.</b> <span title="Un oui d'un mot">✔️</span> La pertinence des biens, les types d'offre et les droits des chasseurs-IA attendent le parcours IA : d'accord ? <a href="https://claude.ai/artifact/WWVtxpDWxvD4Wf8rWnytUp" target="_blank" rel="noopener" class="carte-lien">Q-SCH-08</a> + <a href="https://claude.ai/artifact/WWVtxpDWxvD4Wf8rWnytUp" target="_blank" rel="noopener" class="carte-lien">Q-ACC-14</a> <span class="sous">(page principale)</span></span><span class="pos">🤝 Reporter au parcours IA (réponses du 05/10 et du 06/10).</span><span class="pos">🟡 Pas de réponse notée le 2026-10-07.</span></li>
+        <li data-prio="conf"><span><b>28.</b> <span title="Un oui d'un mot">✔️</span> Les livrables 1 (audit) et 3 (architecture) : nous les planifions après cet entretien. Une date à respecter ? <a href="https://claude.ai/artifact/WWVtxpDWxvD4Wf8rWnytUp" target="_blank" rel="noopener" class="carte-lien">Q-PRO-07</a> <span class="sous">(page principale)</span></span><span class="pos">🤝 Planifier après l'entretien (votre note sur <span class="id">Q-PRO-07</span>).</span><span class="pos">🟡 Pas de réponse notée le 2026-10-07.</span></li>
       </ul>
     </div>
   </section>
@@ -480,7 +481,7 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt>Défaire</dt><dd>Reprendre le libellé du registre, partie 2, version du 2026-10-02.</dd>
       </dl>
       </details>
-      <div class="choix"><label><input type="radio" name="DJ1" value="garder">Je garde</label><label><input type="radio" name="DJ1" value="revoir">À revoir</label></div>
+      <div class="choix"><label><input type="radio" name="DJ1" value="garder" checked>Je garde</label><label><input type="radio" name="DJ1" value="revoir">À revoir</label></div>
     </div>
     <div class="decision">
       <div class="tete"><h3>DJ2 · Q-JEF-16 posée en deux temps</h3><span class="puce doc">📝 ce rapport</span></div>
@@ -498,7 +499,7 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt>Défaire</dt><dd>Reprendre « Qui crée un barème propre à un chasseur, et qui le valide ? ».</dd>
       </dl>
       </details>
-      <div class="choix"><label><input type="radio" name="DJ2" value="garder">Je garde</label><label><input type="radio" name="DJ2" value="revoir">À revoir</label></div>
+      <div class="choix"><label><input type="radio" name="DJ2" value="garder" checked>Je garde</label><label><input type="radio" name="DJ2" value="revoir">À revoir</label></div>
     </div>
     <div class="decision">
       <div class="tete"><h3>DJ3 · Une question ajoutée : Q-JEF-20</h3><span class="puce doc">📝 ce rapport</span></div>
@@ -516,7 +517,7 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt>Défaire</dt><dd>Cocher « Ne pas la poser ».</dd>
       </dl>
       </details>
-      <div class="choix"><label><input type="radio" name="DJ3" value="garder">Je garde</label><label><input type="radio" name="DJ3" value="revoir">À revoir</label></div>
+      <div class="choix"><label><input type="radio" name="DJ3" value="garder" checked>Je garde</label><label><input type="radio" name="DJ3" value="revoir">À revoir</label></div>
     </div>
     <div class="decision">
       <div class="tete"><h3>DJ4 · Les arrondis ajoutés à Q-JEF-01</h3><span class="puce doc">📝 ce rapport</span></div>
@@ -534,7 +535,7 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt>Défaire</dt><dd>Retirer la ligne « Arrondis ».</dd>
       </dl>
       </details>
-      <div class="choix"><label><input type="radio" name="DJ4" value="garder">Je garde</label><label><input type="radio" name="DJ4" value="revoir">À revoir</label></div>
+      <div class="choix"><label><input type="radio" name="DJ4" value="garder" checked>Je garde</label><label><input type="radio" name="DJ4" value="revoir">À revoir</label></div>
     </div>
     <div class="decision">
       <div class="tete"><h3>DJ5 · Les 34 cartes que seul Jeff tranche vivent ici</h3><span class="puce doc">📝 ce rapport</span></div>
@@ -552,7 +553,7 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt>Défaire</dt><dd>Régénérer les deux pages avec la version 9 des générateurs.</dd>
       </dl>
       </details>
-      <div class="choix"><label><input type="radio" name="DJ5" value="garder">Je garde</label><label><input type="radio" name="DJ5" value="revoir">À revoir</label></div>
+      <div class="choix"><label><input type="radio" name="DJ5" value="garder" checked>Je garde</label><label><input type="radio" name="DJ5" value="revoir">À revoir</label></div>
     </div>
     <div class="decision">
       <div class="tete"><h3>DJ6 · Les cases préparent ; le commentaire garde la réponse de Jeff</h3><span class="puce doc">📝 ce rapport</span></div>
@@ -570,7 +571,7 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt>Défaire</dt><dd>Une version 2 avec des cases « réponse de Jeff ».</dd>
       </dl>
       </details>
-      <div class="choix"><label><input type="radio" name="DJ6" value="garder">Je garde</label><label><input type="radio" name="DJ6" value="revoir">À revoir</label></div>
+      <div class="choix"><label><input type="radio" name="DJ6" value="garder" checked>Je garde</label><label><input type="radio" name="DJ6" value="revoir">À revoir</label></div>
     </div>
     <div class="decision">
       <div class="tete"><h3>DJ7 · 6 questions ajoutées, tirées de vos réponses du 2026-10-06</h3><span class="puce doc">📝 ce rapport</span></div>
@@ -588,7 +589,7 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt>Défaire</dt><dd>Cocher « Ne pas la poser » sur la carte.</dd>
       </dl>
       </details>
-      <div class="choix"><label><input type="radio" name="DJ7" value="garder">Je garde</label><label><input type="radio" name="DJ7" value="revoir">À revoir</label></div>
+      <div class="choix"><label><input type="radio" name="DJ7" value="garder" checked>Je garde</label><label><input type="radio" name="DJ7" value="revoir">À revoir</label></div>
     </div>
     <div class="decision">
       <div class="tete"><h3>DJ8 · 3 questions complétées : Q-JEF-13, 15 et 19</h3><span class="puce doc">📝 ce rapport</span></div>
@@ -606,7 +607,7 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt>Défaire</dt><dd>Reprendre ces trois cartes dans la version du 2026-10-05 (commit ab7afe1).</dd>
       </dl>
       </details>
-      <div class="choix"><label><input type="radio" name="DJ8" value="garder">Je garde</label><label><input type="radio" name="DJ8" value="revoir">À revoir</label></div>
+      <div class="choix"><label><input type="radio" name="DJ8" value="garder" checked>Je garde</label><label><input type="radio" name="DJ8" value="revoir">À revoir</label></div>
     </div>
     <div class="decision">
       <div class="tete"><h3>DJ9 · Ce qui ne devient pas une question pour Jeff</h3><span class="puce doc">📝 ce rapport</span></div>
@@ -624,7 +625,7 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt>Défaire</dt><dd>« À revoir », et nommer la carte dans le commentaire.</dd>
       </dl>
       </details>
-      <div class="choix"><label><input type="radio" name="DJ9" value="garder">Je garde</label><label><input type="radio" name="DJ9" value="revoir">À revoir</label></div>
+      <div class="choix"><label><input type="radio" name="DJ9" value="garder" checked>Je garde</label><label><input type="radio" name="DJ9" value="revoir">À revoir</label></div>
     </div>
     <div class="decision">
       <div class="tete"><h3>DJ10 · Vos réponses du jour : lues ici d'abord, puis au registre</h3><span class="puce doc">📝 ce rapport</span></div>
@@ -642,7 +643,7 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt>Défaire</dt><dd>Rien à défaire : l'étape suivante le rattrape.</dd>
       </dl>
       </details>
-      <div class="choix"><label><input type="radio" name="DJ10" value="garder">Je garde</label><label><input type="radio" name="DJ10" value="revoir">À revoir</label></div>
+      <div class="choix"><label><input type="radio" name="DJ10" value="garder" checked>Je garde</label><label><input type="radio" name="DJ10" value="revoir">À revoir</label></div>
     </div>
     <div class="decision">
       <div class="tete"><h3>DJ11 · La liste pour l'entretien : blocs, ordre et ⭐ choisis seul</h3><span class="puce doc">📝 ce rapport</span></div>
@@ -660,7 +661,7 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt>Défaire</dt><dd>« À revoir », et dire dans le commentaire quelle question change de marque ou de bloc.</dd>
       </dl>
       </details>
-      <div class="choix"><label><input type="radio" name="DJ11" value="garder">Je garde</label><label><input type="radio" name="DJ11" value="revoir">À revoir</label></div>
+      <div class="choix"><label><input type="radio" name="DJ11" value="garder" checked>Je garde</label><label><input type="radio" name="DJ11" value="revoir">À revoir</label></div>
     </div>
   </section>
 
@@ -699,8 +700,12 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Q-REM-19 (réponse : oui) grave <b>20 % et 60 %</b> dans la base : si Jeff change ces bornes, <b>base à recréer</b>.</li><li>Q-REM-05 (réponse : table) : ses chiffres remplissent la table des paramètres. En changer un = une ligne.</li><li>📝 Ensuite, l'ADR K : « paramètres proposés, validés par Jeff le … ».</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p><a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L59" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 59 — sujet du prof, sur GitHub"><span class="mono">RCR:59</span></a> : « Ce que ce document propose (à valider avec le client) : toutes les valeurs numériques ». Tableau D1 à D9 : <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L316-L330" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, lignes 316-330 — sujet du prof, sur GitHub"><span class="mono">RCR:316-330</span></a>. Tranches : <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L171-L177" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, lignes 171-177 — sujet du prof, sur GitHub"><span class="mono">RCR:171-177</span></a>. Ancienneté : « 0 % → +10 % (plafond à 5 ans) » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L207" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 207 — sujet du prof, sur GitHub"><span class="mono">RCR:207</span></a>). Plancher et plafond : <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L215" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 215 — sujet du prof, sur GitHub"><span class="mono">RCR:215</span></a> ; le pire cas est 30 % × 0,80 = 24 %. Arrondis : <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L223-L229" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, lignes 223-229 — sujet du prof, sur GitHub"><span class="mono">RCR:223-229</span></a>. Grilles : <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L143-L147" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, lignes 143-147 — sujet du prof, sur GitHub"><span class="mono">RCR:143-147</span></a>. L'arrondi du <b>montant</b> au centime est une <b>règle</b> (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/10_calcul_remuneration_chasseur.feature#L253" target="_blank" rel="noopener" title="user-stories/10_calcul_remuneration_chasseur.feature, ligne 253 — sujet du prof, sur GitHub"><span class="mono">F10:253</span></a>) : pas en question. CHECK prévu par R21 : <a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L747-L754" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, lignes 747-754 — notre dépôt, sur GitHub"><span class="mono">01:747-754</span></a>.</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : il <b>valide tous</b> les paramètres proposés.</li>
+        <li>✅ Votre choix : <b>La poser telle quelle</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-01" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Son oui rend les chiffres officiels : en soutenance, on cite sa validation.</span><span>➖ Une longue liste : la lui montrer écrite, pas la lire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-01" value="poser" checked><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Son oui rend les chiffres officiels : en soutenance, on cite sa validation.</span><span>➖ Une longue liste : la lui montrer écrite, pas la lire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-01" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-01" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Rien à attendre : tout est déjà codé.</span><span>➖ On présenterait des propositions comme des exigences du client : l'erreur que le sujet signale (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L40" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 40 — sujet du prof, sur GitHub"><span class="mono">RCR:40</span></a>).</span></span></span></label>
       </div>
@@ -719,6 +724,8 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="repondu"><ul>
         <li>✅ Réponse du 2026-10-05 : <b>Valeurs du sujet</b></li>
         <li>📝 <b>ADR à écrire</b> — K · Paramètres proposés, validés par Jeff — après toutes les réponses (tableau « ADR à écrire » de la page principale)</li>
+      
+        <li>🧑‍💼 <b>Validée par Jeff le 2026-10-07</b> (Q-JEF-01)</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-PAR-01" value="sujet" checked><span><b>Valeurs du sujet (recommandé)</b>Rien ne change.<span class="arg">➕ Déjà codé et testé ; rien à refaire.</span><span class="arg">➖ Ce ne sont que des propositions du sujet, pas des règles.</span></span></label>
@@ -737,6 +744,8 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="repondu"><ul>
         <li>✅ Réponse du 2026-10-05 : <b>12 mois glissants</b></li>
         <li>📝 <b>ADR à écrire</b> — K · Paramètres proposés, validés par Jeff — après toutes les réponses (tableau « ADR à écrire » de la page principale)</li>
+      
+        <li>🧑‍💼 <b>Validée par Jeff le 2026-10-07</b> (Q-JEF-01)</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-PAR-04" value="12" checked><span><b>12 mois glissants (recommandé)</b>Rien ne change.<span class="arg">➕ Colle au vrai besoin de l'entreprise.</span><span class="arg">➖ Code, tests ou données à changer.</span></span></label>
@@ -757,6 +766,9 @@ body.vlp-lit { padding-bottom:9rem; }
         <li>📝 Commentaire : « les valeurs sont donné par le client, dont on fait confiance. »</li>
         <li>⚠️ Nuance sur la note : le sujet dit ces valeurs « proposés, non imposés par le métier » (<span class=mono>F10:3-5</span>). Elles deviennent celles du client quand Jeff dit oui.</li>
         <li>📝 <b>ADR à écrire</b> — K · Paramètres proposés, validés par Jeff — après toutes les réponses (tableau « ADR à écrire » de la page principale)</li>
+      
+        <li>🧑‍💼 <b>Validée par Jeff le 2026-10-07</b> (Q-JEF-01)</li>
+        <li>📝 Votre note : « les valeurs sont donné par le client, dont on fait confiance. »</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-PAR-06" value="sujet" checked><span><b>Valeurs du sujet (recommandé)</b>Rien ne change.<span class="arg">➕ Déjà codé et testé ; rien à refaire.</span><span class="arg">➖ Ce ne sont que des propositions du sujet, pas des règles.</span></span></label>
@@ -777,6 +789,8 @@ body.vlp-lit { padding-bottom:9rem; }
         <li>✅ Réponse du 2026-10-05 : <b>Valeurs du sujet</b></li>
         <li>✅ Cohérent avec Q-REM-05 (table) : ces valeurs sortent des CHECK.</li>
         <li>📝 <b>ADR à écrire</b> — K · Paramètres proposés, validés par Jeff — après toutes les réponses (tableau « ADR à écrire » de la page principale)</li>
+      
+        <li>🧑‍💼 <b>Validée par Jeff le 2026-10-07</b> (Q-JEF-01)</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-PAR-07" value="sujet" checked><span><b>Valeurs du sujet (recommandé)</b>Rien ne change.<span class="arg">➕ Déjà codé et testé ; rien à refaire.</span><span class="arg">➖ Ce ne sont que des propositions du sujet, pas des règles.</span></span></label>
@@ -795,6 +809,8 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="repondu"><ul>
         <li>✅ Réponse du 2026-10-05 : <b>Garder</b></li>
         <li>📝 <b>ADR à écrire</b> — K · Paramètres proposés, validés par Jeff — après toutes les réponses (tableau « ADR à écrire » de la page principale)</li>
+      
+        <li>🧑‍💼 <b>Validée par Jeff le 2026-10-07</b> (Q-JEF-01)</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-PAR-08" value="garder" checked><span><b>Garder (recommandé)</b>Il protège si la grille baisse un jour.<span class="arg">➕ Protège le chasseur si la grille baisse un jour.</span><span class="arg">➖ Une règle qui ne sert pas aujourd'hui.</span></span></label>
@@ -802,7 +818,7 @@ body.vlp-lit { padding-bottom:9rem; }
       </div>
     </div>
     <div class="question" id="Q-PAR-10">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-PAR-10 · Tranches et taux : 30 / 35 / 40 / 45 / 50 %</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-PAR-10 · Tranches et taux : 30 / 35 / 40 / 45 / 50 %</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li><a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L171-L177" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, lignes 171-177 — sujet du prof, sur GitHub"><span class=mono>RCR:171-177</span></a>.</li>
@@ -810,13 +826,16 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>Plus le bien est cher, plus la part du chasseur est grande : 30 % à 50 %.</li>
       </ul></div>
+      <div class="repondu"><ul>
+        <li>✅ Réponse du 2026-10-07 : <b>Valeurs du sujet</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-PAR-10" value="sujet"><span><b>Valeurs du sujet (recommandé)</b>Rien ne change.<span class="arg">➕ Déjà codé et testé ; rien à refaire.</span><span class="arg">➖ Ce ne sont que des propositions du sujet, pas des règles.</span></span></label>
+        <label><input type="radio" name="Q-PAR-10" value="sujet" checked><span><b>Valeurs du sujet (recommandé)</b>Rien ne change.<span class="arg">➕ Déjà codé et testé ; rien à refaire.</span><span class="arg">➖ Ce ne sont que des propositions du sujet, pas des règles.</span></span></label>
         <label><input type="radio" name="Q-PAR-10" value="autre"><span><b>Autres valeurs</b>Des lignes de commission_scale.<span class="arg">➕ Colle au vrai besoin de l'entreprise.</span><span class="arg">➖ Code, tests ou données à changer.</span></span></label>
       </div>
     </div>
     <div class="question" id="Q-PAR-11">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-PAR-11 · Arrondi du score (1 déc.) et du taux (4 déc.)</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-PAR-11 · Arrondi du score (1 déc.) et du taux (4 déc.)</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li><a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L223-L229" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, lignes 223-229 — sujet du prof, sur GitHub"><span class=mono>RCR:223-229</span></a>.</li>
@@ -825,13 +844,16 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>Précision des arrondis : note à 1 chiffre après la virgule, taux à 4.</li>
       </ul></div>
+      <div class="repondu"><ul>
+        <li>✅ Réponse du 2026-10-07 : <b>Valeurs du sujet</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-PAR-11" value="sujet"><span><b>Valeurs du sujet (recommandé)</b>Le code le fait déjà.<span class="arg">➕ Déjà codé et testé ; rien à refaire.</span><span class="arg">➖ Ce ne sont que des propositions du sujet, pas des règles.</span></span></label>
+        <label><input type="radio" name="Q-PAR-11" value="sujet" checked><span><b>Valeurs du sujet (recommandé)</b>Le code le fait déjà.<span class="arg">➕ Déjà codé et testé ; rien à refaire.</span><span class="arg">➖ Ce ne sont que des propositions du sujet, pas des règles.</span></span></label>
         <label><input type="radio" name="Q-PAR-11" value="autre"><span><b>Autre précision</b>Code et tests à revoir.<span class="arg">➕ Colle au vrai besoin de l'entreprise.</span><span class="arg">➖ Code, tests ou données à changer.</span></span></label>
       </div>
     </div>
     <div class="question" id="Q-PAR-13">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-PAR-13 · Grilles de notes : délai, visites, exclusivité 100 / 60</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-PAR-13 · Grilles de notes : délai, visites, exclusivité 100 / 60</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li><a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/10_calcul_remuneration_chasseur.feature#L107-L138" target="_blank" rel="noopener" title="user-stories/10_calcul_remuneration_chasseur.feature, lignes 107-138 — sujet du prof, sur GitHub"><span class=mono>F10:107-138</span></a>, <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L143-L147" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, lignes 143-147 — sujet du prof, sur GitHub"><span class=mono>RCR:143-147</span></a>.</li>
@@ -840,8 +862,11 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>Comment chaque critère est noté : par exemple, 100 points en exclusif, 60 en non exclusif.</li>
       </ul></div>
+      <div class="repondu"><ul>
+        <li>✅ Réponse du 2026-10-07 : <b>Valeurs du sujet</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-PAR-13" value="sujet"><span><b>Valeurs du sujet (recommandé)</b>Rien ne change.<span class="arg">➕ Déjà codé et testé ; rien à refaire.</span><span class="arg">➖ Ce ne sont que des propositions du sujet, pas des règles.</span></span></label>
+        <label><input type="radio" name="Q-PAR-13" value="sujet" checked><span><b>Valeurs du sujet (recommandé)</b>Rien ne change.<span class="arg">➕ Déjà codé et testé ; rien à refaire.</span><span class="arg">➖ Ce ne sont que des propositions du sujet, pas des règles.</span></span></label>
         <label><input type="radio" name="Q-PAR-13" value="autre"><span><b>Autres grilles</b>Un paramètre.<span class="arg">➕ Colle au vrai besoin de l'entreprise.</span><span class="arg">➖ Code, tests ou données à changer.</span></span></label>
       </div>
     </div>
@@ -855,8 +880,12 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>S'il veut un barème progressif : <b>calcul et 55 cas de test à refaire</b>.</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p><a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/10_calcul_remuneration_chasseur.feature#L166" target="_blank" rel="noopener" title="user-stories/10_calcul_remuneration_chasseur.feature, ligne 166 — sujet du prof, sur GitHub"><span class="mono">F10:166</span></a> : « Règle: Le taux de base est celui de la tranche de montant du barème en vigueur, sans progressivité entre tranches ». <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L181" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 181 — sujet du prof, sur GitHub"><span class="mono">RCR:181</span></a> : « un saut d'environ 600 € de rémunération pour 1 € de prix supplémentaire ». Calcul : à 350 000 €, honoraires = 3 000 + 2,5 % × 350 000 = 11 750 € ; 5 % de 11 750 € = 587,50 €, avant les bonus.</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : il valide notre position (ci-dessus), sans changement. Le barème <b>par palier</b>.</li>
+        <li>✅ Votre choix : <b>La poser telle quelle</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-02" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Une confirmation suffit : le code et les tests suivent déjà le palier.</span><span>➖ Le saut de 600 € peut le faire changer d'avis : calcul et tests à refaire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-02" value="poser" checked><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Une confirmation suffit : le code et les tests suivent déjà le palier.</span><span>➖ Le saut de 600 € peut le faire changer d'avis : calcul et tests à refaire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-02" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-02" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Le sujet en fait une règle (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/10_calcul_remuneration_chasseur.feature#L166" target="_blank" rel="noopener" title="user-stories/10_calcul_remuneration_chasseur.feature, ligne 166 — sujet du prof, sur GitHub"><span class="mono">F10:166</span></a>).</span><span>➖ Le sujet la range aussi dans ses « Décisions à trancher » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L315" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 315 — sujet du prof, sur GitHub"><span class="mono">RCR:315</span></a> ; D3 : <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L323" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 323 — sujet du prof, sur GitHub"><span class="mono">:323</span></a>) : un jury peut demander qui l'a validée.</span></span></span></label>
       </div>
@@ -876,6 +905,8 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="repondu"><ul>
         <li>✅ Réponse du 2026-10-05 : <b>Palier</b></li>
         <li>📝 <b>ADR à écrire</b> — K · Paramètres proposés, validés par Jeff — après toutes les réponses (tableau « ADR à écrire » de la page principale)</li>
+      
+        <li>🧑‍💼 <b>Validée par Jeff le 2026-10-07</b> (Q-JEF-02)</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-PAR-03" value="palier" checked><span><b>Palier (recommandé)</b>Les 55 tests restent justes.<span class="arg">➕ Simple à expliquer ; les 55 tests restent justes.</span><span class="arg">➖ Le saut de 600 € à la frontière.</span></span></label>
@@ -892,8 +923,12 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>⚠️ S'il veut une <b>indemnité</b> : un paiement exige une vente (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L760" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, ligne 760 — notre dépôt, sur GitHub"><span class="mono">01:760</span></a>). Or Q-REM-02 n'enregistre pas de vente : <b>choix à revoir</b>.</li><li>S'il dit que l'entreprise touche des honoraires : il faut une vente, avec une 3e origine (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L657-L658" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, lignes 657-658 — notre dépôt, sur GitHub"><span class="mono">01:657-658</span></a> n'en a que 2).</li><li>S'il confirme « rien » : votre choix tient, le lot de migration peut partir.</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p>Tableau des cas : <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L94-L96" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, lignes 94-96 — sujet du prof, sur GitHub"><span class="mono">RCR:94-96</span></a>. « Un chasseur d'une autre agence » : cas impossible en exclusif, non rémunéré en non exclusif. <span class="mono">sale.fees_amount &gt; 0</span> (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L656" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, ligne 656 — notre dépôt, sur GitHub"><span class="mono">01:656</span></a>) ; <span class="mono">sale_origin</span> : 'hunter' ou 'client_alone' (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L657-L658" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, lignes 657-658 — notre dépôt, sur GitHub"><span class="mono">01:657-658</span></a>) ; <span class="mono">payment.id_sale</span> obligatoire (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L760" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, ligne 760 — notre dépôt, sur GitHub"><span class="mono">01:760</span></a>). Statuts du mandat : <a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L405-L407" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, lignes 405-407 — notre dépôt, sur GitHub"><span class="mono">01:405-407</span></a>.</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : <b>rien pour personne</b> : ni le chasseur, ni l'entreprise.</li>
+        <li>✅ Votre choix : <b>La poser telle quelle</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-03" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Sa réponse décide où ranger ce cas dans la base, <b>avant</b> le lot de migration.</span><span>➖ S'il veut une indemnité, Q-REM-02 est à revoir.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-03" value="poser" checked><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Sa réponse décide où ranger ce cas dans la base, <b>avant</b> le lot de migration.</span><span>➖ S'il veut une indemnité, Q-REM-02 est à revoir.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-03" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-03" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Le sujet propose déjà « rien ».</span><span>➖ Le lot de migration partirait sur une supposition que le sujet dit ambiguë.</span></span></span></label>
       </div>
@@ -914,6 +949,9 @@ body.vlp-lit { padding-bottom:9rem; }
         <li>✅ Réponse du 2026-10-05 : <b>Rien, motif tracé</b></li>
         <li>⚠️ Si Jeff veut une indemnité, Q-REM-02 est à revoir : un paiement exige une vente (<span class=mono>01:760</span>).</li>
         <li>📝 <b>ADR à écrire</b> — K · Paramètres proposés, validés par Jeff — après toutes les réponses (tableau « ADR à écrire » de la page principale)</li>
+      
+        <li>🧑‍💼 <b>Validée par Jeff le 2026-10-07</b> (Q-JEF-03)</li>
+        <li>🧑‍💼 Jeff : « rien pour personne ».</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-PAR-02" value="rien" checked><span><b>Rien, motif tracé (recommandé)</b>Ce que fait le code.<span class="arg">➕ Simple, et le motif reste écrit.</span><span class="arg">➖ Un chasseur qui a travaillé ne touche rien.</span></span></label>
@@ -930,8 +968,12 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Rien s'il confirme. S'il dit TTC : la base de toute la paie change.</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p><a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L131" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 131 — sujet du prof, sur GitHub"><span class="mono">RCR:131</span></a> : « H est un montant HT ». La même ligne range la TVA dans le cycle de paiement, pas dans le calcul de la part.</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : il valide notre position (ci-dessus), sans changement. Honoraires <b>HT</b>.</li>
+        <li>✅ Votre choix : <b>La poser telle quelle</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-04" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Un mot suffit, et on cite sa confirmation.</span><span>➖ Une question de plus, pour une réponse presque sûre.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-04" value="poser" checked><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Un mot suffit, et on cite sa confirmation.</span><span>➖ Une question de plus, pour une réponse presque sûre.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-04" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-04" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Le sujet l'affirme : c'est une règle.</span><span>➖ Aucun, sauf s'il pensait TTC.</span></span></span></label>
       </div>
@@ -950,8 +992,12 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Sans sa grille, votre choix ne peut pas être codé.</li><li>Le critère « mandats signés » (15 % de la note) change de formule : les cas de test qui l'utilisent sont à refaire.</li><li>Lié à Q-JEF-09 : avec ce taux, compter un mandat annulé fait <b>baisser</b> la note.</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p><a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/Readme.md?plain=1#L135" target="_blank" rel="noopener" title="Readme.md, ligne 135 — sujet du prof, sur GitHub"><span class="mono">Readme.md:135</span></a> : « Les indicateurs de performance sont alors recalculés à la baisse ». <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/10_calcul_remuneration_chasseur.feature#L295-L300" target="_blank" rel="noopener" title="user-stories/10_calcul_remuneration_chasseur.feature, lignes 295-300 — sujet du prof, sur GitHub"><span class="mono">F10:295-300</span></a> : « Un mandat arrivé à échéance sans vente dégrade le score du chasseur ». Aujourd'hui S₄ = <span class="mono">min(100 ; mandats × 10)</span> (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L146" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 146 — sujet du prof, sur GitHub"><span class="mono">RCR:146</span></a>) : un mandat de plus ne fait jamais baisser la note. Le taux remplace <b>S₄ seulement</b> (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L160" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 160 — sujet du prof, sur GitHub"><span class="mono">RCR:160</span></a>) : les 5 poids restent. ⚠️ Deux lectures du dénominateur, à lui faire trancher : mandats <b>signés</b> sur 12 mois (la note baisse dès la signature, et remonte à la vente), ou mandats <b>clos</b>, vendus ou échus (la note baisse pile à l'échéance, comme <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/10_calcul_remuneration_chasseur.feature#L295-L300" target="_blank" rel="noopener" title="user-stories/10_calcul_remuneration_chasseur.feature, lignes 295-300 — sujet du prof, sur GitHub"><span class="mono">F10:295-300</span></a>).</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : pas de grille de sa part : <b>le groupe propose la sienne</b>, marquée « proposition du groupe ».</li>
+        <li>✅ Votre choix : <b>La poser telle quelle</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-05" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Avec votre choix, un mandat sans vente fait baisser la note, comme le veut le sujet. Il ne manque que sa grille.</span><span>➖ S'il refuse, on garde « séparés », et la phrase du sujet reste fausse : à dire en soutenance.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-05" value="poser" checked><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Avec votre choix, un mandat sans vente fait baisser la note, comme le veut le sujet. Il ne manque que sa grille.</span><span>➖ S'il refuse, on garde « séparés », et la phrase du sujet reste fausse : à dire en soutenance.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-05" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-05" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ On peut proposer une grille nous-mêmes, marquée « proposition du groupe ».</span><span>➖ On inventerait un chiffre qui touche la paie : c'est au client de le donner.</span></span></span></label>
       </div>
@@ -976,6 +1022,10 @@ body.vlp-lit { padding-bottom:9rem; }
         <li>⚠️ Il manque la <b>grille de notes</b> du taux : le sujet n'en donne pas (<span class=mono>RCR:160</span>). Demandée à Jeff.</li>
         <li>ℹ️ Le taux remplace le critère « mandats signés » (S₄) seulement ; les 5 poids restent.</li>
         <li>📝 <b>ADR à écrire</b> — F · Définition des critères de performance — après toutes les réponses (tableau « ADR à écrire » de la page principale)</li>
+      
+        <li>🧑‍💼 <b>Validée par Jeff le 2026-10-07</b> (Q-JEF-05)</li>
+        <li>🧑‍💼 Jeff n'a pas de grille : ➡️ <b>le groupe propose la sienne</b>.</li>
+        <li>📝 Votre note : « demandé a jeff comment le score baisse, le calcule ? » — à expliquer dans l'ADR F.</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-PAR-05" value="separes"><span><b>Séparés (recommandé)</b>Les 55 tests restent justes.<span class="arg">➕ Déjà codé.</span><span class="arg">➖ Rien ne pénalise un chasseur qui signe sans vendre.</span></span></label>
@@ -992,8 +1042,12 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Le compte des visites, dans le code.</li><li>Lié à Q-JEF-14 : qui enregistre une visite (Q-ACC-13).</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p>Grille : 3 visites ou moins → 100 ; plus de 15 → 0 (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L147" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 147 — sujet du prof, sur GitHub"><span class="mono">RCR:147</span></a>). « moins il y en a, plus la rémunération monte » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L55" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 55 — sujet du prof, sur GitHub"><span class="mono">RCR:55</span></a>). Types de visite en base : 'hunter' et 'client' (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L635" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, ligne 635 — notre dépôt, sur GitHub"><span class="mono">01:635</span></a>).</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : il valide notre position (ci-dessus), sans changement.</li>
+        <li>✅ Votre choix : <b>La poser telle quelle</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-08" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Ce compte change la note, donc la paie : mieux vaut sa règle que la nôtre.</span><span>➖ Aucun gros : une phrase à valider.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-08" value="poser" checked><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Ce compte change la note, donc la paie : mieux vaut sa règle que la nôtre.</span><span>➖ Aucun gros : une phrase à valider.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-08" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-08" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Notre lecture colle au texte du sujet.</span><span>➖ Si un chasseur conteste sa note, on n'a que notre lecture.</span></span></span></label>
       </div>
@@ -1017,6 +1071,10 @@ body.vlp-lit { padding-bottom:9rem; }
         <li>📝 Commentaire : « plus un client visite, meilleure est la note ? Ça devrait être l&#x27;inverse : moins il visite, meilleure est la note, vu que le hunter a bien ciblé le besoin. »</li>
         <li>✅ Ta remarque est juste : mon ancien argument « gonfle la note » était <b>faux</b>, corrigé ci-dessous.</li>
         <li>📝 <b>ADR à écrire</b> — F · Définition des critères de performance — après toutes les réponses (tableau « ADR à écrire » de la page principale)</li>
+      
+        <li>🧑‍💼 <b>Validée par Jeff le 2026-10-07</b> (Q-JEF-08)</li>
+        <li>📝 Votre note : « plus un client visite, meilleure est la note ? Ça devrait être l'inverse : moins il visite, meilleure est la note, vu que le hunter a bien ciblé le besoin. »</li>
+        <li>🟡 Le sens du critère est à vérifier dans le code du sujet, avant l'ADR F.</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-REM-07" value="client-tous" checked><span><b>Visites du client, tous les biens du mandat, jusqu'au jour de l'acte (recommandé)</b>Lecture littérale de F10:259.<span class="arg">➕ Colle à la phrase du sujet ; mesure tout le chemin du client jusqu'à l'achat, donc la justesse du ciblage.</span><span class="arg">➖ Un client indécis qui veut tout voir fait baisser la note du chasseur, sans faute de sa part.</span></span></label>
@@ -1034,8 +1092,12 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Le compte des ventes et des mandats, dans le code.</li><li>⚠️ Lié à Q-JEF-05 : avec la formule actuelle, compter un mandat annulé <b>gonfle</b> la note (signer, puis annuler). Avec le taux de transformation, il la <b>fait baisser</b>.</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p>S₃ = <span class="mono">min(100 ; ventes × 20)</span>, S₄ = <span class="mono">min(100 ; mandats × 10)</span> (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L145-L146" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, lignes 145-146 — sujet du prof, sur GitHub"><span class="mono">RCR:145-146</span></a>). La vente en cours n'est pas comptée (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L470" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 470 — sujet du prof, sur GitHub"><span class="mono">RCR:470</span></a>, cité au registre).</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : il valide notre position (ci-dessus), sans changement.</li>
+        <li>✅ Votre choix : <b>La poser telle quelle</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-09" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Deux réponses à confirmer, et un trou à combler : les mandats annulés.</span><span>➖ La réponse dépend aussi de Q-JEF-05 : poser les deux ensemble.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-09" value="poser" checked><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Deux réponses à confirmer, et un trou à combler : les mandats annulés.</span><span>➖ La réponse dépend aussi de Q-JEF-05 : poser les deux ensemble.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-09" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-09" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Nos deux réponses tiennent seules.</span><span>➖ Les mandats annulés restent sans règle.</span></span></span></label>
       </div>
@@ -1055,6 +1117,8 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="repondu"><ul>
         <li>✅ Réponse du 2026-10-02 : <b>Les ventes non refusées</b></li>
         <li>📝 <b>ADR à écrire</b> — F · Définition des critères de performance — après toutes les réponses (tableau « ADR à écrire » de la page principale)</li>
+      
+        <li>🧑‍💼 <b>Validée par Jeff le 2026-10-07</b> (Q-JEF-09)</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-REM-08" value="non-refusees" checked><span><b>Les ventes non refusées (recommandé)</b>« Ventes réussies » = celles qui ouvrent un droit.<span class="arg">➕ Seules les ventes qui ont réussi comptent : logique pour une prime.</span><span class="arg">➖ Il faut lire le statut des paiements.</span></span></label>
@@ -1075,6 +1139,8 @@ body.vlp-lit { padding-bottom:9rem; }
         <li>✅ Réponse du 2026-10-02 : <b>Signés, sans les renouvellements</b></li>
         <li>🟡 Le sort des mandats annulés reste à demander à Jeff.</li>
         <li>📝 <b>ADR à écrire</b> — F · Définition des critères de performance — après toutes les réponses (tableau « ADR à écrire » de la page principale)</li>
+      
+        <li>🧑‍💼 <b>Validée par Jeff le 2026-10-07</b> (Q-JEF-09)</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-REM-09" value="signes-sans-renouv" checked><span><b>Signés, sans les renouvellements (recommandé)</b>Un mandat renouvelé 3 fois ne compte pas 4 fois. Annulés : à Jeff.<span class="arg">➕ Un client = un mandat ; pas de prime pour un simple renouvellement.</span><span class="arg">➖ Il faut remonter la chaîne des renouvellements.</span></span></label>
@@ -1091,8 +1157,12 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>S'il veut la note gardée : <b>calculette et 55 cas à réécrire</b>.</li><li>📝 ADR E.</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p><a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/10_calcul_remuneration_chasseur.feature#L289-L293" target="_blank" rel="noopener" title="user-stories/10_calcul_remuneration_chasseur.feature, lignes 289-293 — sujet du prof, sur GitHub"><span class="mono">F10:289-293</span></a> : scénario « Les indicateurs de performance sont recalculés après le paiement ». Sa dernière ligne : « Et le nouveau score sert de base au calcul de la prochaine rémunération ».</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : il valide notre position (ci-dessus), sans changement. Recalculer <b>à chaque vente</b>.</li>
+        <li>✅ Votre choix : <b>La poser telle quelle</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-17" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Seul lui peut choisir entre deux textes du sujet.</span><span>➖ S'il choisit la note gardée, la calculette est à réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-17" value="poser" checked><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Seul lui peut choisir entre deux textes du sujet.</span><span>➖ S'il choisit la note gardée, la calculette est à réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-17" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-17" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Le code du sujet recalcule déjà : rien à faire.</span><span>➖ On choisit entre deux textes du sujet sans le client.</span></span></span></label>
       </div>
@@ -1106,8 +1176,12 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>S'il a les dates : la migration (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/02_migration.sql#L24-L26" target="_blank" rel="noopener" title="docker/init-v2/02_migration.sql, lignes 24-26 — notre dépôt, sur GitHub"><span class="mono">02:24-26</span></a>) est à corriger.</li><li>Sinon, l'hypothèse reste, dite en soutenance.</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p><a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/02_migration.sql#L24-L26" target="_blank" rel="noopener" title="docker/init-v2/02_migration.sql, lignes 24-26 — notre dépôt, sur GitHub"><span class="mono">02:24-26</span></a> : « hire_date » est repris de « user ».created_at, sur 6 lignes. Le fichier le dit : « C'est une HYPOTHÈSE de migration, pas une donnée d'origine ».</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : il valide notre position (ci-dessus), sans changement. L'hypothèse se garde, et se dit en soutenance.</li>
+        <li>✅ Votre choix : <b>La poser telle quelle</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-10" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Une donnée que seul lui peut donner.</span><span>➖ Aucun : s'il ne l'a pas, on garde l'hypothèse.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-10" value="poser" checked><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Une donnée que seul lui peut donner.</span><span>➖ Aucun : s'il ne l'a pas, on garde l'hypothèse.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-10" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-10" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ L'hypothèse est écrite, et sera dite.</span><span>➖ Le bonus d'ancienneté peut être faux.</span></span></span></label>
       </div>
@@ -1127,6 +1201,8 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="repondu"><ul>
         <li>✅ Réponse du 2026-10-05 : <b>Garder l'hypothèse, la dire en soutenance</b></li>
         <li>➡️ <span class=mono>hire_date</span> = date de création du compte (<span class=mono>02:24-26</span>), à dire en soutenance. Jeff dira s'il a mieux.</li>
+      
+        <li>🧑‍💼 <b>Validée par Jeff le 2026-10-07</b> (Q-JEF-10)</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-REM-16" value="hypothese" checked><span><b>Garder l'hypothèse, la dire en soutenance (recommandé)</b>Rien ne change.<span class="arg">➕ Rien ne bloque.</span><span class="arg">➖ Le bonus peut être faux.</span></span></label>
@@ -1144,6 +1220,8 @@ body.vlp-lit { padding-bottom:9rem; }
       </ul></div>
       <div class="repondu"><ul>
         <li>🔁 <b>Doublon de Q-REM-16</b> (marqué le 2026-10-05) : même hypothèse sur hire_date ; Q-REM-16 répondue « Garder l'hypothèse, la dire en soutenance ». Réponse <b>reportée</b> : « Garder l'hypothèse ». Répondre sur Q-REM-16.</li>
+      
+        <li>🧑‍💼 <b>Validée par Jeff le 2026-10-07</b> (Q-JEF-10)</li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-MIG-02" value="garder" checked><span><b>Garder l'hypothèse (recommandé)</b>Rien.<span class="arg">➕ Rien ne bloque.</span><span class="arg">➖ Bonus d'ancienneté peut-être faux.</span></span></label>
@@ -1165,8 +1243,12 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>La règle d'exclusivité (un trigger déjà écrit, éteint) s'active dans le lot de migration : sa condition dépend de cette réponse.</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p>Trigger commenté : <a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L474-L497" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, lignes 474-497 — notre dépôt, sur GitHub"><span class="mono">01:474-497</span></a>. ❌ Tel quel, il bloque le renouvellement, car rien n'exclut le mandat parent : correctif proposé en Q-MAN-02.</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : oui : l'annulation libère le client <b>tout de suite</b>.</li>
+        <li>✅ Votre choix : <b>La poser telle quelle</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-06" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ La règle d'exclusivité s'écrit d'après sa réponse, dans le même lot de migration.</span><span>➖ Aucun gros.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-06" value="poser" checked><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ La règle d'exclusivité s'écrit d'après sa réponse, dans le même lot de migration.</span><span>➖ Aucun gros.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-06" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-06" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ On peut prendre seuls l'option la plus souple.</span><span>➖ Une règle de contrat décidée sans le client.</span></span></span></label>
       </div>
@@ -1180,8 +1262,12 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>La règle de renouvellement, dans le code.</li><li>Le calcul du délai remonte la chaîne des mandats renouvelés.</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p>La grille de délai va au-delà de 48 semaines (« &gt; 48 : 0 », <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L143" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 143 — sujet du prof, sur GitHub"><span class="mono">RCR:143</span></a>) : il faut au moins un renouvellement pour l'atteindre. Délai depuis la première signature : <a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/livrables/2-modelisation/09-contraintes-a-coder.md?plain=1#L207-L210" target="_blank" rel="noopener" title="livrables/2-modelisation/09-contraintes-a-coder.md, lignes 207-210 — notre dépôt, sur GitHub"><span class="mono">09-contraintes-a-coder.md:207-210</span></a>.</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : il valide notre position (ci-dessus), sans changement.</li>
+        <li>✅ Votre choix : <b>La poser telle quelle</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-07" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Sa réponse fixe la règle, et le délai de la note en dépend.</span><span>➖ Aucun gros.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-07" value="poser" checked><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Sa réponse fixe la règle, et le délai de la note en dépend.</span><span>➖ Aucun gros.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-07" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-07" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Le sujet ne fixe pas de limite : on n'en invente pas.</span><span>➖ Un mandat pourrait durer des années sans que personne l'ait voulu.</span></span></span></label>
       </div>
@@ -1195,8 +1281,12 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Rien s'il confirme. Sinon, l'exemple officiel contredit la règle : à remonter au sujet.</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p>Situation de Bruno : <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L237" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 237 — sujet du prof, sur GitHub"><span class="mono">RCR:237</span></a>. Dates du calcul : <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L697" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 697 — sujet du prof, sur GitHub"><span class="mono">RCR:697</span></a>, <span class="mono">date_fin_mandat=date(2026, 8, 14)</span>. Un mandat dure 6 mois (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L98" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 98 — sujet du prof, sur GitHub"><span class="mono">RCR:98</span></a>).</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : il confirme : Bruno a un mandat <b>renouvelé</b>.</li>
+        <li>✅ Votre choix : <b>La poser telle quelle</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-11" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Un mot suffit, et une contradiction apparente du sujet se ferme.</span><span>➖ Une question de plus.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-11" value="poser" checked><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Un mot suffit, et une contradiction apparente du sujet se ferme.</span><span>➖ Une question de plus.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-11" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-11" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Notre lecture est argumentée.</span><span>➖ Si on se trompe, un exemple officiel contredit notre règle.</span></span></span></label>
       </div>
@@ -1215,8 +1305,12 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>La colonne n'est pas migrée : rien ne bloque. Sa réponse nourrit l'audit.</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p>Valeurs mesurées dans la source : 2,00 · 2,50 · 2,75 · 3,00 · 3,25 (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/README.md?plain=1#L136" target="_blank" rel="noopener" title="docker/init-v2/README.md, ligne 136 — notre dépôt, sur GitHub"><span class="mono">docker/init-v2/README.md:136</span></a>). ⚠️ Le sujet écrit « 2,50–3,25 % » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L256" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 256 — sujet du prof, sur GitHub"><span class="mono">RCR:256</span></a>) : il oublie 2,00. Au-delà de 400 000 €, 3,25 % du prix dépasserait les honoraires eux-mêmes (3 000 € + 2,5 %).</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : il valide notre position (ci-dessus), sans changement. <b>% des honoraires</b>, non migré.</li>
+        <li>✅ Votre choix : <b>La poser telle quelle</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-12" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Seul lui sait ; sa réponse ferme un constat d'audit.</span><span>➖ Aucun.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-12" value="poser" checked><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Seul lui sait ; sa réponse ferme un constat d'audit.</span><span>➖ Aucun.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-12" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-12" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ La colonne n'est pas migrée : rien ne bloque.</span><span>➖ Un constat d'audit reste sans explication.</span></span></span></label>
       </div>
@@ -1224,7 +1318,7 @@ body.vlp-lit { padding-bottom:9rem; }
     <div class="rattachees" aria-label="Cartes du registre sous Q-JEF-12">
       <h3>↳ 1 carte(s) du registre sous Q-JEF-12 : à cocher ici seulement</h3>
     <div class="question" id="Q-MIG-01">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-MIG-01 · Sens de taux_commission (2,00 à 3,25)</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-MIG-01 · Sens de taux_commission (2,00 à 3,25)</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>3,25 % du prix dépasserait les honoraires (anomalie A2 du sujet).</li>
@@ -1233,8 +1327,11 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>Une ancienne colonne vaut 2 à 3,25. Pourcentage de quoi ? Si c'est du prix, le chasseur gagnerait plus que l'entreprise.</li>
       </ul></div>
+      <div class="repondu"><ul>
+        <li>✅ Réponse du 2026-10-07 : <b>% des honoraires, non migré</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-MIG-01" value="honoraires"><span><b>% des honoraires, non migré (recommandé)</b>Rien.<span class="arg">➕ Cohérent avec les montants.</span><span class="arg">➖ Hypothèse.</span></span></label>
+        <label><input type="radio" name="Q-MIG-01" value="honoraires" checked><span><b>% des honoraires, non migré (recommandé)</b>Rien.<span class="arg">➕ Cohérent avec les montants.</span><span class="arg">➖ Hypothèse.</span></span></label>
         <label><input type="radio" name="Q-MIG-01" value="prix"><span><b>% du prix</b>Incohérent avec les montants.<span class="arg">➕ Lecture littérale.</span><span class="arg">➖ Incohérent.</span></span></label>
       </div>
     </div>
@@ -1248,8 +1345,12 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>La migration (<span class="mono">02</span>) : une ligne pour le mandat 13, la traduction des statuts, l'état des 6 mandats.</li><li>🆕 S'il veut ces états : des valeurs de plus dans la liste des états de la demande (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L287-L288" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, lignes 287-288 — notre dépôt, sur GitHub"><span class="mono">01:287-288</span></a>) ou du mandat (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L405-L407" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, lignes 405-407 — notre dépôt, sur GitHub"><span class="mono">01:405-407</span></a>), dans le lot de migration. <b>Base à recréer</b>.</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p>Mandat 13 écarté : <a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/02_migration.sql#L167" target="_blank" rel="noopener" title="docker/init-v2/02_migration.sql, ligne 167 — notre dépôt, sur GitHub"><span class="mono">02:167</span></a>, « client_id=3 est un chasseur ». Statuts d'origine : <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/fixtures/PgSQL.sql#L26" target="_blank" rel="noopener" title="fixtures/PgSQL.sql, ligne 26 — sujet du prof, sur GitHub"><span class="mono">PgSQL.sql:26</span></a> du sujet. En attendant : termine → completed ; suspendu → canceled, pour les mandats d'origine <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/fixtures/PgSQL.sql#L143" target="_blank" rel="noopener" title="fixtures/PgSQL.sql, ligne 143 — sujet du prof, sur GitHub"><span class="mono">PgSQL.sql:143</span></a> et <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/fixtures/PgSQL.sql#L156" target="_blank" rel="noopener" title="fixtures/PgSQL.sql, ligne 156 — sujet du prof, sur GitHub"><span class="mono">:156</span></a>. États du mandat en base, sans « suspendu » : <a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L405-L407" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, lignes 405-407 — notre dépôt, sur GitHub"><span class="mono">01:405-407</span></a>. États de la demande : <a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L287-L288" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, lignes 287-288 — notre dépôt, sur GitHub"><span class="mono">01:287-288</span></a>. Recherche « suspend » faite le 2026-10-06 dans <span class="mono">02</span> et <span class="mono">docker/init-v2/README.md</span> : 0 résultat.</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : <b>oui à nos positions</b> : le client du mandat 13 est <b>Nina Girard</b> ; termine → completed ; suspendu → canceled ; les <b>6 échus</b> → expired ; pas de pause, pas de nouvel état.</li>
+        <li>✅ Votre choix : <b>La poser telle quelle</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-13" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Des réponses qui corrigent la migration, fixent les états, et nourrissent l'audit.</span><span>➖ Quatre questions en une : les séparer à l'oral.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-13" value="poser" checked><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Des réponses qui corrigent la migration, fixent les états, et nourrissent l'audit.</span><span>➖ Quatre questions en une : les séparer à l'oral.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-13" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-13" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ La migration tourne déjà avec nos hypothèses.</span><span>➖ Un mandat perdu, deux statuts devinés, et peut-être un état qui manque.</span></span></span></label>
       </div>
@@ -1257,7 +1358,7 @@ body.vlp-lit { padding-bottom:9rem; }
     <div class="rattachees" aria-label="Cartes du registre sous Q-JEF-13">
       <h3>↳ 3 carte(s) du registre sous Q-JEF-13 : à cocher ici seulement</h3>
     <div class="question" id="Q-MIG-10">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-MIG-10 · 6 mandats « actif » déjà échus au 25/07/2026</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-MIG-10 · 6 mandats « actif » déjà échus au 25/07/2026</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>Le piège du sujet.</li>
@@ -1265,13 +1366,17 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>6 mandats « actifs » sont déjà finis : le piège du sujet.</li>
       </ul></div>
+      <div class="repondu"><ul>
+        <li>✅ Réponse du 2026-10-07 : <b>Les passer en 'expired'</b></li>
+        <li>🧑‍💼 Jeff confirme : les 6 mandats passent en <b>expired</b>.</li>
+      </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-MIG-10" value="audit"><span><b>Constat d'audit ; demander à Jeff (recommandé)</b>Rien.<span class="arg">➕ Bon point d'audit.</span><span class="arg">➖ Statut faux en base.</span></span></label>
-        <label><input type="radio" name="Q-MIG-10" value="expirer"><span><b>Les passer en 'expired'</b>02 modifié.<span class="arg">➕ Base juste.</span><span class="arg">➖ On tranche à la place du client.</span></span></label>
+        <label><input type="radio" name="Q-MIG-10" value="expirer" checked><span><b>Les passer en 'expired'</b>02 modifié.<span class="arg">➕ Base juste.</span><span class="arg">➖ On tranche à la place du client.</span></span></label>
       </div>
     </div>
     <div class="question" id="Q-MIG-12">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-MIG-12 · Mandat 13 ignoré : son client est un chasseur</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-MIG-12 · Mandat 13 ignoré : son client est un chasseur</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li><a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/02_migration.sql#L167" target="_blank" rel="noopener" title="docker/init-v2/02_migration.sql, ligne 167 — notre dépôt, sur GitHub"><span class=mono>02:167</span></a>.</li>
@@ -1280,13 +1385,18 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>Le client du mandat 13 est un chasseur : on l'a ignoré.</li>
       </ul></div>
+      <div class="repondu"><ul>
+        <li>✅ Réponse du 2026-10-07 : <b>Demander si c'est Nina Girard</b></li>
+        <li>🧑‍💼 Jeff : oui, le client est <b>Nina Girard</b>.</li>
+        <li>📝 Votre note : « refaire un compte client et un compte hunter pour nina ? compte séparer ? » ➡️ Sa fiche client existe déjà dans les fixtures (PgSQL.sql:103, rôle client) : le mandat 13 s'y rattache, sans compte en plus.</li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-MIG-12" value="demander"><span><b>Demander si c'est Nina Girard (recommandé)</b>Une ligne dans 02 si oui.<span class="arg">➕ Mandat peut-être récupéré.</span><span class="arg">➖ Attente.</span></span></label>
+        <label><input type="radio" name="Q-MIG-12" value="demander" checked><span><b>Demander si c'est Nina Girard (recommandé)</b>Une ligne dans 02 si oui.<span class="arg">➕ Mandat peut-être récupéré.</span><span class="arg">➖ Attente.</span></span></label>
         <label><input type="radio" name="Q-MIG-12" value="ignorer"><span><b>Laisser ignoré</b>Un mandat perdu.<span class="arg">➕ Rien à faire.</span><span class="arg">➖ Un mandat perdu.</span></span></label>
       </div>
     </div>
     <div class="question" id="Q-MIG-13">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-MIG-13 · Sens de « suspendu » et « termine »</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-MIG-13 · Sens de « suspendu » et « termine »</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li><a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/fixtures/PgSQL.sql#L26" target="_blank" rel="noopener" title="fixtures/PgSQL.sql, ligne 26 — sujet du prof, sur GitHub"><span class=mono>PgSQL.sql:26</span></a> du sujet.</li>
@@ -1294,8 +1404,13 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>Que veulent dire « suspendu » et « terminé » dans l'ancienne base ?</li>
       </ul></div>
+      <div class="repondu"><ul>
+        <li>✅ Réponse du 2026-10-07 : <b>Demander ; en attendant termine → completed</b></li>
+        <li>🧑‍💼 Jeff valide nos positions : termine → completed, suspendu → canceled, pas de pause. La traduction s'écrit dans 02 et son README.</li>
+        <li>📝 Votre note : « noté comme a vérifié apres implémentation ».</li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-MIG-13" value="demander"><span><b>Demander ; en attendant termine → completed (recommandé)</b>Rien.<span class="arg">➕ Rien ne bloque.</span><span class="arg">➖ Hypothèse.</span></span></label>
+        <label><input type="radio" name="Q-MIG-13" value="demander" checked><span><b>Demander ; en attendant termine → completed (recommandé)</b>Rien.<span class="arg">➕ Rien ne bloque.</span><span class="arg">➖ Hypothèse.</span></span></label>
         <label><input type="radio" name="Q-MIG-13" value="autre"><span><b>Autre lecture</b>02 modifié.<span class="arg">➕ Exact.</span><span class="arg">➖ Migration modifiée.</span></span></label>
       </div>
     </div>
@@ -1309,8 +1424,12 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>S'il les fournit : la migration les reprend, et plus aucune valeur factice. <b>Base à recréer</b>, dans le lot de migration.</li><li>Sinon : les valeurs « non renseigné » du lot de migration, écrites dans le README.</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p>Téléphones absents : <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/fixtures/PgSQL.sql#L94" target="_blank" rel="noopener" title="fixtures/PgSQL.sql, ligne 94 — sujet du prof, sur GitHub"><span class="mono">PgSQL.sql:94</span></a>, <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/fixtures/PgSQL.sql#L100" target="_blank" rel="noopener" title="fixtures/PgSQL.sql, ligne 100 — sujet du prof, sur GitHub"><span class="mono">:100</span></a>, <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/fixtures/PgSQL.sql#L106" target="_blank" rel="noopener" title="fixtures/PgSQL.sql, ligne 106 — sujet du prof, sur GitHub"><span class="mono">:106</span></a>. La cible les exige (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L184" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, ligne 184 — notre dépôt, sur GitHub"><span class="mono">01:184</span></a>) : la migration met 0000000000, pour ces 3 clients et pour le faux manager (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/02_migration.sql#L128" target="_blank" rel="noopener" title="docker/init-v2/02_migration.sql, ligne 128 — notre dépôt, sur GitHub"><span class="mono">02:128</span></a>). Adresse laissée vide, car « on ne connaît pas la vraie adresse postale » (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/02_migration.sql#L146-L147" target="_blank" rel="noopener" title="docker/init-v2/02_migration.sql, lignes 146-147 — notre dépôt, sur GitHub"><span class="mono">02:146-147</span></a>) ; un code postal français a 5 chiffres (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L210" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, ligne 210 — notre dépôt, sur GitHub"><span class="mono">01:210</span></a>). Budget : la source n'a que <span class="mono">budget_max</span> (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/fixtures/PgSQL.sql#L71" target="_blank" rel="noopener" title="fixtures/PgSQL.sql, ligne 71 — sujet du prof, sur GitHub"><span class="mono">PgSQL.sql:71</span></a>) ; la migration recopie le maximum dans le minimum, 17 fois (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/02_migration.sql#L192-L208" target="_blank" rel="noopener" title="docker/init-v2/02_migration.sql, lignes 192-208 — notre dépôt, sur GitHub"><span class="mono">02:192-208</span></a>).</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : les manques sont <b>voulus</b>. Ne pas supprimer les anciennes données ; on peut fausser les autres (modifier le script fourni).</li>
+        <li>✅ Votre choix : <b>La poser telle quelle</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-26" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Avec ses données, plus aucune valeur factice.</span><span>➖ Il ne les a peut-être pas : c'est une base d'exemple.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-26" value="poser" checked><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Avec ses données, plus aucune valeur factice.</span><span>➖ Il ne les a peut-être pas : c'est une base d'exemple.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-26" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-26" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Les valeurs « non renseigné » suffisent, et se documentent.</span><span>➖ Des trous qu'il aurait pu combler.</span></span></span></label>
       </div>
@@ -1319,7 +1438,7 @@ body.vlp-lit { padding-bottom:9rem; }
 
   <section id="j4">
     <h2>Les choix à trancher · Les droits, le RGPD et les barèmes</h2>
-    <p class="sous">L'authentification n'est pas à nous (Jeff, 22/09). Les droits métier, eux, restent un livrable.</p>
+    <p class="sous">✏️ 2026-10-07 : l'authentification revient, <b>côté back</b> (outils, pas de page de login), dit Jeff à l'entretien. Avant : « pas à nous » (22/09). Les droits métier restent un livrable.</p>
     <div class="question" id="Q-JEF-14">
       <div class="tete"><h3>🧑‍💼 Q-JEF-14 · Qui a le droit de faire quoi ?</h3><span class="puces"><span class="puce doc">📝 doc et livrables</span></span></div>
       <dl class="grille">
@@ -1342,8 +1461,12 @@ body.vlp-lit { padding-bottom:9rem; }
           <tr><td class="n">Q-ACC-15</td><td>Un chasseur peut-il créer une demande ?</td><td>💡 Non : la demande vient du client</td></tr>
         </tbody></table></div>
       <details class="technique"><summary>🔧 Le détail technique</summary><p>Questions d'ADR-027 (Q1 à Q6) et matrice §6, reprises au registre (Q-ACC-02 à 15). Jeff, le 2026-09-22 : « vous ne gérez pas l'auth, c'est géré au dessus » (<span class="mono">md/adr-026-perimetre-authentification.md</span>).</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : « on doit fournir les outils pour une bonne gestion de l'authentification (route de connextion, token, session, role, droit, etc.) , mais l'on ne doit pas crée la page de login en elle même. » ➡️ L'authentification revient, <b>côté back</b>.</li>
+        <li>✅ Votre choix : <b>La poser telle quelle</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-14" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ La matrice des droits est un livrable : validée par le client, elle se défend.</span><span>➖ Dix lignes : lui montrer le tableau écrit.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-14" value="poser" checked><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ La matrice des droits est un livrable : validée par le client, elle se défend.</span><span>➖ Dix lignes : lui montrer le tableau écrit.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-14" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-14" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ On peut décider seuls, au moindre droit.</span><span>➖ Le jury peut demander d'où viennent ces droits.</span></span></span></label>
       </div>
@@ -1361,6 +1484,8 @@ body.vlp-lit { padding-bottom:9rem; }
       </ul></div>
       <div class="repondu"><ul>
         <li>🔁 <b>Doublon de Q-JEF-14</b> (marqué le 2026-10-05) : la question des droits est posée à Jeff dans le rapport à part (Q-JEF-14). Réponse <b>reportée</b> : « Oui, en une question nette ». Répondre sur Q-JEF-14.</li>
+      
+        <li>🧑‍💼 <b>Validée par Jeff le 2026-10-07</b></li>
       </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-ACC-01" value="oui" checked><span><b>Oui, en une question nette (recommandé)</b>Q-JEF-14.<span class="arg">➕ Le 22/09, la question était noyée dans l'auth : une question nette aura une vraie réponse.</span><span class="arg">➖ Une question de plus pour Jeff.</span></span></label>
@@ -1368,7 +1493,7 @@ body.vlp-lit { padding-bottom:9rem; }
       </div>
     </div>
     <div class="question" id="Q-ACC-02">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-02 · Que voit le manager ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-ACC-02 · Que voit le manager ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>ADR-027 Q1.</li>
@@ -1376,13 +1501,16 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>Une case de la matrice des droits : qui peut faire cette action dans l'application.</li>
       </ul></div>
+      <div class="repondu"><ul>
+        <li>✅ Réponse du 2026-10-07 : <b>Ses chasseurs et leurs paiements</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-ACC-02" value="ses"><span><b>Ses chasseurs et leurs paiements (recommandé)</b>Matrice.<span class="arg">➕ Moindre droit ; chaque manager voit son équipe.</span><span class="arg">➖ Un manager qui remplace un collègue ne voit rien.</span></span></label>
+        <label><input type="radio" name="Q-ACC-02" value="ses" checked><span><b>Ses chasseurs et leurs paiements (recommandé)</b>Matrice.<span class="arg">➕ Moindre droit ; chaque manager voit son équipe.</span><span class="arg">➖ Un manager qui remplace un collègue ne voit rien.</span></span></label>
         <label><input type="radio" name="Q-ACC-02" value="tout"><span><b>Tout</b>Matrice.<span class="arg">➕ Simple.</span><span class="arg">➖ Données de paie visibles par tous les managers.</span></span></label>
       </div>
     </div>
     <div class="question" id="Q-ACC-03">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-03 · Qui enregistre la vente ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-ACC-03 · Qui enregistre la vente ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>ADR-027 Q2.</li>
@@ -1390,13 +1518,17 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>Une case de la matrice des droits : qui peut faire cette action dans l'application.</li>
       </ul></div>
+      <div class="repondu"><ul>
+        <li>✅ Réponse du 2026-10-07 : <b>Le manager</b></li>
+        <li>📝 Votre note : « explique mieux » ; tranchée ensuite par Q10 de la page d'incohérences : <b>le manager</b> enregistre la vente.</li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-ACC-03" value="manager"><span><b>Le manager (recommandé)</b>Matrice.<span class="arg">➕ Un contrôle avant que la paie se déclenche.</span><span class="arg">➖ Le manager devient un goulot.</span></span></label>
+        <label><input type="radio" name="Q-ACC-03" value="manager" checked><span><b>Le manager (recommandé)</b>Matrice.<span class="arg">➕ Un contrôle avant que la paie se déclenche.</span><span class="arg">➖ Le manager devient un goulot.</span></span></label>
         <label><input type="radio" name="Q-ACC-03" value="chasseur"><span><b>Le chasseur</b>Matrice.<span class="arg">➕ Rapide.</span><span class="arg">➖ Le chasseur déclare sa propre prime.</span></span></label>
       </div>
     </div>
     <div class="question" id="Q-ACC-04">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-04 · Qui fait avancer la facture ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>⛔ Q-ACC-04 · Qui fait avancer la facture ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>ADR-027 Q3.</li>
@@ -1404,13 +1536,17 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>Une case de la matrice des droits : qui peut faire cette action dans l'application.</li>
       </ul></div>
+      <div class="repondu"><ul>
+        <li>⛔ <b>Sans objet</b> (2026-10-07) : la facture est hors périmètre (Jeff).</li>
+        <li>📝 Votre note : « création et gestion de la facture sont hors scope ».</li>
+      </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-ACC-04" value="partage"><span><b>Le chasseur dépose, le manager vérifie (recommandé)</b>Matrice.<span class="arg">➕ Suit les étapes du paiement : dépôt puis vérification par quelqu'un d'autre.</span><span class="arg">➖ Deux rôles à coder.</span></span></label>
         <label><input type="radio" name="Q-ACC-04" value="manager"><span><b>Le manager seul</b>Matrice.<span class="arg">➕ Un seul rôle.</span><span class="arg">➖ Le chasseur ne peut pas déposer sa facture.</span></span></label>
       </div>
     </div>
     <div class="question" id="Q-ACC-05">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-05 · Le client voit-il tout le catalogue ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-ACC-05 · Le client voit-il tout le catalogue ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>ADR-027 Q4.</li>
@@ -1418,13 +1554,16 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>Une case de la matrice des droits : qui peut faire cette action dans l'application.</li>
       </ul></div>
+      <div class="repondu"><ul>
+        <li>✅ Réponse du 2026-10-07 : <b>Non : les biens proposés pour lui</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-ACC-05" value="non"><span><b>Non : les biens proposés pour lui (recommandé)</b>Matrice.<span class="arg">➕ Le client voit ce qu'on lui propose : c'est le service vendu.</span><span class="arg">➖ Moins de liberté pour le client.</span></span></label>
+        <label><input type="radio" name="Q-ACC-05" value="non" checked><span><b>Non : les biens proposés pour lui (recommandé)</b>Matrice.<span class="arg">➕ Le client voit ce qu'on lui propose : c'est le service vendu.</span><span class="arg">➖ Moins de liberté pour le client.</span></span></label>
         <label><input type="radio" name="Q-ACC-05" value="oui"><span><b>Oui</b>Matrice.<span class="arg">➕ Plus ouvert.</span><span class="arg">➖ Le client peut contourner le chasseur.</span></span></label>
       </div>
     </div>
     <div class="question" id="Q-ACC-06">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-06 · Le chasseur voit-il son barème ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-ACC-06 · Le chasseur voit-il son barème ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>ADR-027 Q5.</li>
@@ -1432,13 +1571,17 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>Une case de la matrice des droits : qui peut faire cette action dans l'application.</li>
       </ul></div>
+      <div class="repondu"><ul>
+        <li>✅ Réponse du 2026-10-07 : <b>Oui</b></li>
+        <li>📝 Votre note : « a confirmé, mais sans doute que oui ? » 🟡 À confirmer avec Jeff.</li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-ACC-06" value="oui"><span><b>Oui (recommandé)</b>Sa paie doit se comprendre.<span class="arg">➕ Le chasseur comprend sa paie ; moins de litiges.</span><span class="arg">➖ Sa grille devient connue.</span></span></label>
+        <label><input type="radio" name="Q-ACC-06" value="oui" checked><span><b>Oui (recommandé)</b>Sa paie doit se comprendre.<span class="arg">➕ Le chasseur comprend sa paie ; moins de litiges.</span><span class="arg">➖ Sa grille devient connue.</span></span></label>
         <label><input type="radio" name="Q-ACC-06" value="non"><span><b>Non</b>Matrice.<span class="arg">➕ Grille confidentielle.</span><span class="arg">➖ Paie incompréhensible pour lui.</span></span></label>
       </div>
     </div>
     <div class="question" id="Q-ACC-07">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-07 · Qui fixe barèmes et honoraires ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-ACC-07 · Qui fixe barèmes et honoraires ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>ADR-027 Q6.</li>
@@ -1446,13 +1589,16 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>Une case de la matrice des droits : qui peut faire cette action dans l'application.</li>
       </ul></div>
+      <div class="repondu"><ul>
+        <li>✅ Réponse du 2026-10-07 : <b>La direction seule</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-ACC-07" value="direction"><span><b>La direction seule (recommandé)</b>Matrice.<span class="arg">➕ Une seule source pour l'argent.</span><span class="arg">➖ Plus lent.</span></span></label>
+        <label><input type="radio" name="Q-ACC-07" value="direction" checked><span><b>La direction seule (recommandé)</b>Matrice.<span class="arg">➕ Une seule source pour l'argent.</span><span class="arg">➖ Plus lent.</span></span></label>
         <label><input type="radio" name="Q-ACC-07" value="manager"><span><b>Le manager aussi</b>Matrice.<span class="arg">➕ Souple.</span><span class="arg">➖ Chaque équipe peut avoir ses règles.</span></span></label>
       </div>
     </div>
     <div class="question" id="Q-ACC-10">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-10 · Qui affecte une demande à un chasseur ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-ACC-10 · Qui affecte une demande à un chasseur ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>Matrice §6.</li>
@@ -1460,13 +1606,16 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>Une case de la matrice des droits : qui peut faire cette action dans l'application.</li>
       </ul></div>
+      <div class="repondu"><ul>
+        <li>✅ Réponse du 2026-10-07 : <b>Le manager</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-ACC-10" value="manager"><span><b>Le manager (recommandé)</b>Matrice.<span class="arg">➕ Il connaît la charge de chacun.</span><span class="arg">➖ Travail manuel.</span></span></label>
+        <label><input type="radio" name="Q-ACC-10" value="manager" checked><span><b>Le manager (recommandé)</b>Matrice.<span class="arg">➕ Il connaît la charge de chacun.</span><span class="arg">➖ Travail manuel.</span></span></label>
         <label><input type="radio" name="Q-ACC-10" value="auto"><span><b>Automatique</b>Règle à écrire.<span class="arg">➕ Rapide.</span><span class="arg">➖ Une règle d'affectation à inventer.</span></span></label>
       </div>
     </div>
     <div class="question" id="Q-ACC-12">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-12 · Qui crée le compte client ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-ACC-12 · Qui crée le compte client ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>Matrice §6.</li>
@@ -1474,13 +1623,17 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>Une case de la matrice des droits : qui peut faire cette action dans l'application.</li>
       </ul></div>
+      <div class="repondu"><ul>
+        <li>✅ Réponse du 2026-10-07 : <b>Le client, par sa demande en ligne</b></li>
+        <li>📝 Votre note : « a confirmé avec jeff ? » 🟡 À confirmer.</li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-ACC-12" value="client"><span><b>Le client, par sa demande en ligne (recommandé)</b>Matrice.<span class="arg">➕ Le parcours commence par sa demande en ligne.</span><span class="arg">➖ Comptes en double possibles.</span></span></label>
+        <label><input type="radio" name="Q-ACC-12" value="client" checked><span><b>Le client, par sa demande en ligne (recommandé)</b>Matrice.<span class="arg">➕ Le parcours commence par sa demande en ligne.</span><span class="arg">➖ Comptes en double possibles.</span></span></label>
         <label><input type="radio" name="Q-ACC-12" value="manager"><span><b>Le manager</b>Matrice.<span class="arg">➕ Contrôle.</span><span class="arg">➖ Plus lent.</span></span></label>
       </div>
     </div>
     <div class="question" id="Q-ACC-13">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-13 · Qui enregistre une visite du client ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-ACC-13 · Qui enregistre une visite du client ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>Matrice §6.</li>
@@ -1488,13 +1641,17 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>Une case de la matrice des droits : qui peut faire cette action dans l'application.</li>
       </ul></div>
+      <div class="repondu"><ul>
+        <li>✅ Réponse du 2026-10-07 : <b>Le chasseur qui l'accompagne</b></li>
+        <li>📝 Votre note : « a confirmé » 🟡 À confirmer.</li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-ACC-13" value="chasseur"><span><b>Le chasseur qui l'accompagne (recommandé)</b>Matrice.<span class="arg">➕ Il est présent à la visite.</span><span class="arg">➖ Il a intérêt à ne pas tout déclarer : moins de visites = meilleure note.</span></span></label>
+        <label><input type="radio" name="Q-ACC-13" value="chasseur" checked><span><b>Le chasseur qui l'accompagne (recommandé)</b>Matrice.<span class="arg">➕ Il est présent à la visite.</span><span class="arg">➖ Il a intérêt à ne pas tout déclarer : moins de visites = meilleure note.</span></span></label>
         <label><input type="radio" name="Q-ACC-13" value="client"><span><b>Le client</b>Matrice.<span class="arg">➕ Preuve côté client.</span><span class="arg">➖ Le client ne le fera pas toujours.</span></span></label>
       </div>
     </div>
     <div class="question" id="Q-ACC-15">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-15 · Un chasseur peut-il créer une demande ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-ACC-15 · Un chasseur peut-il créer une demande ?</h3><span class="puces"><span class="puce doc">📝 doc / ADR</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>Matrice §6.</li>
@@ -1502,9 +1659,13 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>Une case de la matrice des droits : qui peut faire cette action dans l'application.</li>
       </ul></div>
+      <div class="repondu"><ul>
+        <li>✅ Réponse du 2026-10-07 : <b>Oui</b></li>
+        <li>Précisé par Q7 de la page d'incohérences : <b>seulement pour un client qui a déjà un compte</b>. Une ligne dans la matrice ADR-027.</li>
+      </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-ACC-15" value="non"><span><b>Non : la demande vient du client (recommandé)</b>Matrice.<span class="arg">➕ La demande vient du client : c'est le parcours décrit.</span><span class="arg">➖ Un client au téléphone doit tout saisir lui-même.</span></span></label>
-        <label><input type="radio" name="Q-ACC-15" value="oui"><span><b>Oui</b>Matrice.<span class="arg">➕ Pratique.</span><span class="arg">➖ Demandes sans accord du client.</span></span></label>
+        <label><input type="radio" name="Q-ACC-15" value="oui" checked><span><b>Oui</b>Matrice.<span class="arg">➕ Pratique.</span><span class="arg">➖ Demandes sans accord du client.</span></span></label>
       </div>
     </div>
     </div>
@@ -1517,8 +1678,12 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>S'il dit oui : la matrice des droits donne la création de biens à ce rôle. Aujourd'hui, elle dit « Aucun rôle humain ne crée un bien » (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/md/matrice-droits-crud-par-role.md?plain=1#L237" target="_blank" rel="noopener" title="md/matrice-droits-crud-par-role.md, ligne 237 — notre dépôt, sur GitHub"><span class="mono">md/matrice-droits-crud-par-role.md:237</span></a>).</li><li>S'il dit oui : une colonne d'auteur sur les biens dirait qui a saisi quoi (carte Q-ACC-09).</li><li>S'il dit non : l'import seul, sous un compte technique.</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p>Parcours : <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/05_chasseur_selection_quotidienne_biens.feature#L14-L17" target="_blank" rel="noopener" title="user-stories/05_chasseur_selection_quotidienne_biens.feature, lignes 14-17 — sujet du prof, sur GitHub"><span class="mono">F05:14-17</span></a>. L'outil du sujet génère des annonces factices « simulant plusieurs sources » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/Readme.md?plain=1#L46" target="_blank" rel="noopener" title="Readme.md, ligne 46 — sujet du prof, sur GitHub"><span class="mono">Readme.md:46</span></a>). La table <span class="mono">estate</span> n'a aucune colonne d'auteur (carte Q-ACC-09). Airflow : 0 résultat dans le sujet et dans notre dépôt (recherche du 2026-10-06) : c'est un choix du groupe, à acter dans un ADR. Lancement d'un traitement, à la main, par son API ou selon un planning : <a href="https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html" target="_blank" rel="noopener">doc officielle d'Airflow, section « Running Dags »</a> (version 3.3.2, lue le 2026-10-06).</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : oui, un bien peut être <b>saisi à la main</b> (hors marché, courant dans l'immobilier). Choix du groupe (Q8) : par le chasseur et le manager.</li>
+        <li>✅ Votre choix : <b>La poser telle quelle</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-24" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Une règle du métier que seul lui connaît ; elle fixe la matrice des droits.</span><span>➖ Aucun gros.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-24" value="poser" checked><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Une règle du métier que seul lui connaît ; elle fixe la matrice des droits.</span><span>➖ Aucun gros.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-24" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-24" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Le sujet ne décrit que l'import : on peut s'en tenir là.</span><span>➖ Si ses chasseurs saisissent des biens, notre matrice les en empêche.</span></span></span></label>
       </div>
@@ -1532,8 +1697,12 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Le registre RGPD, un livrable. Plus tard : une tâche d'anonymisation.</li><li>🆕 La procédure d'effacement, écrite dans le registre RGPD : qui la fait (l'admin), ce qu'on garde, et combien de temps.</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p><a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGISTRE-RGPD.md?plain=1#L27" target="_blank" rel="noopener" title="documents utiles/REGISTRE-RGPD.md, ligne 27 — sujet du prof, sur GitHub"><span class="mono">REGISTRE-RGPD.md:27</span></a> : « Durée du mandat + X ans (obligations légales) ». <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGISTRE-RGPD.md?plain=1#L28" target="_blank" rel="noopener" title="documents utiles/REGISTRE-RGPD.md, ligne 28 — sujet du prof, sur GitHub"><span class="mono">:28</span></a> : « Tant que le compte est actif ». <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGISTRE-RGPD.md?plain=1#L29" target="_blank" rel="noopener" title="documents utiles/REGISTRE-RGPD.md, ligne 29 — sujet du prof, sur GitHub"><span class="mono">:29</span></a> : « 10 ans (obligation comptable) ». <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGISTRE-RGPD.md?plain=1#L30" target="_blank" rel="noopener" title="documents utiles/REGISTRE-RGPD.md, ligne 30 — sujet du prof, sur GitHub"><span class="mono">:30</span></a> : une ligne « … » à compléter. Le tableau est un « modèle à remplir » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGISTRE-RGPD.md?plain=1#L21" target="_blank" rel="noopener" title="documents utiles/REGISTRE-RGPD.md, ligne 21 — sujet du prof, sur GitHub"><span class="mono">:21</span></a>). Désactiver : la colonne <span class="mono">user.is_activated</span> existe (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L161" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, ligne 161 — notre dépôt, sur GitHub"><span class="mono">01:161</span></a>), vide pour les 25 comptes repris ; les clés étrangères de <span class="mono">01</span> refusent d'effacer une ligne encore citée (carte Q-ACC-08).</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : ajouter une route, ou modifier la route DELETE, pour <b>seulement anonymiser</b> les données personnelles d'une personne. La durée X : le groupe la propose.</li>
+        <li>✅ Votre choix : <b>La poser telle quelle</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-15" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ La durée et la procédure sont au client ; sa réponse complète le registre.</span><span>➖ Il peut ne pas savoir : venir avec notre proposition.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-15" value="poser" checked><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ La durée et la procédure sont au client ; sa réponse complète le registre.</span><span>➖ Il peut ne pas savoir : venir avec notre proposition.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-15" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-15" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ On peut proposer une durée courante, marquée « proposée ».</span><span>➖ Une durée inventée, dans un registre légal.</span></span></span></label>
       </div>
@@ -1541,7 +1710,7 @@ body.vlp-lit { padding-bottom:9rem; }
     <div class="rattachees" aria-label="Cartes du registre sous Q-JEF-15">
       <h3>↳ 1 carte(s) du registre sous Q-JEF-15 : à cocher ici seulement</h3>
     <div class="question" id="Q-ACC-21">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-ACC-21 · Durée de conservation avant anonymisation</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-ACC-21 · Durée de conservation avant anonymisation</h3><span class="puces"><span class="puce moyen">🧑‍💼 attend Jeff</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff</b></p>
       <ul>
         <li>Le sujet donne « 10 ans (obligation comptable) » pour les paiements (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGISTRE-RGPD.md?plain=1#L29" target="_blank" rel="noopener" title="documents utiles/REGISTRE-RGPD.md, ligne 29 — sujet du prof, sur GitHub"><span class=mono>REGISTRE-RGPD.md:29</span></a>).</li>
@@ -1550,8 +1719,12 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>Combien de temps garder les données personnelles (RGPD) ?</li>
       </ul></div>
+      <div class="repondu"><ul>
+        <li>✅ Réponse du 2026-10-07 : <b>10 ans pour les paiements, X à demander</b></li>
+        <li>🧑‍💼 Jeff : une route qui <b>anonymise seulement</b> les données personnelles. La durée X : <b>le groupe la propose</b>, avec sa source, marquée « proposée ».</li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-ACC-21" value="10-plus-x"><span><b>10 ans pour les paiements, X à demander (recommandé)</b>Registre RGPD.<span class="arg">➕ 10 ans vient du sujet ; seul X manque.</span><span class="arg">➖ Attente de Jeff.</span></span></label>
+        <label><input type="radio" name="Q-ACC-21" value="10-plus-x" checked><span><b>10 ans pour les paiements, X à demander (recommandé)</b>Registre RGPD.<span class="arg">➕ 10 ans vient du sujet ; seul X manque.</span><span class="arg">➖ Attente de Jeff.</span></span></label>
         <label><input type="radio" name="Q-ACC-21" value="autre"><span><b>Autre</b>Registre RGPD.<span class="arg">➕ Selon Jeff.</span><span class="arg">➖ Registre à refaire.</span></span></label>
       </div>
     </div>
@@ -1565,8 +1738,12 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Une colonne de <span class="mono">estate_proposed</span>, dans le lot de migration.</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p>Brouillon commenté : <a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L624-L627" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, lignes 624-627 — notre dépôt, sur GitHub"><span class="mono">01:624-627</span></a>, <span class="mono">client_priority SMALLINT CHECK (client_priority BETWEEN 1 AND 5)</span>.</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : de <b>1 à 5</b>.</li>
+        <li>✅ Votre choix : <b>La poser telle quelle</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-18" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Une colonne du lot de migration en dépend.</span><span>➖ Aucun gros.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-18" value="poser" checked><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Une colonne du lot de migration en dépend.</span><span>➖ Aucun gros.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-18" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-18" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ 1 à 5 est simple, et se trie.</span><span>➖ Une échelle qu'il ne reconnaîtra peut-être pas.</span></span></span></label>
       </div>
@@ -1574,7 +1751,7 @@ body.vlp-lit { padding-bottom:9rem; }
     <div class="rattachees" aria-label="Cartes du registre sous Q-JEF-18">
       <h3>↳ 1 carte(s) du registre sous Q-JEF-18 : à cocher ici seulement</h3>
     <div class="question" id="Q-SCH-05">
-      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>🟡 Q-SCH-05 · D6 : échelle de priorité du client</h3><span class="puces"><span class="puce ko">🗄️ change la BDD</span></span></div>
+      <div class="tete" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;justify-content:space-between"><h3>✅ Q-SCH-05 · D6 : échelle de priorité du client</h3><span class="puces"><span class="puce ko">🗄️ change la BDD</span></span></div>
       <p class="qui">Qui tranche : <b>🧑‍💼 Jeff (Q-JEF-18)</b></p>
       <ul>
         <li>Brouillon commenté (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L624-L627" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, lignes 624-627 — notre dépôt, sur GitHub"><span class=mono>01:624-627</span></a>).</li>
@@ -1583,8 +1760,12 @@ body.vlp-lit { padding-bottom:9rem; }
       <div class="clair"><p class="clair-t">🗣️ En clair</p><ul>
         <li>Le client peut dire ce qui compte le plus pour lui. Sur quelle échelle ?</li>
       </ul></div>
+      <div class="repondu"><ul>
+        <li>✅ Réponse du 2026-10-07 : <b>1 à 5</b></li>
+        <li>🧑‍💼 Jeff : de <b>1 à 5</b>. ➡️ Une colonne SMALLINT dans le lot.</li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-SCH-05" value="1-5"><span><b>1 à 5 (recommandé)</b>Une colonne SMALLINT.<span class="arg">➕ Facile à trier.</span><span class="arg">➖ Moins parlant.</span></span></label>
+        <label><input type="radio" name="Q-SCH-05" value="1-5" checked><span><b>1 à 5 (recommandé)</b>Une colonne SMALLINT.<span class="arg">➕ Facile à trier.</span><span class="arg">➖ Moins parlant.</span></span></label>
         <label><input type="radio" name="Q-SCH-05" value="texte"><span><b>haute / moyenne / basse</b>Une colonne texte + CHECK.<span class="arg">➕ Lisible.</span><span class="arg">➖ Trois niveaux seulement.</span></span></label>
       </div>
     </div>
@@ -1598,8 +1779,12 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Rien dans la base : <span class="mono">commission_scale.id_hunter</span> existe déjà.</li><li>Le « qui » va dans le RACI (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L329" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 329 — sujet du prof, sur GitHub"><span class="mono">RCR:329</span></a>, D9).</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p><a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L186-L193" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, lignes 186-193 — sujet du prof, sur GitHub"><span class="mono">RCR:186-193</span></a> : un barème par défaut, et un barème nominatif qui « le surcharge quand il existe ». Base : « id_hunter NULL = barème par défaut ; renseigné = barème propre au chasseur » (commentaire de <span class="mono">commission_scale</span>).</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : <b>la direction</b>.</li>
+        <li>✅ Votre choix : <b>La poser telle quelle</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-16" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ S'il n'en veut pas : une règle de moins à coder et à défendre.</span><span>➖ Deux questions en une.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-16" value="poser" checked><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ S'il n'en veut pas : une règle de moins à coder et à défendre.</span><span>➖ Deux questions en une.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-16" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-16" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ La base sait déjà le faire.</span><span>➖ Qui fixe la grille d'un chasseur touche à sa paie : c'est au client.</span></span></span></label>
       </div>
@@ -1619,10 +1804,14 @@ body.vlp-lit { padding-bottom:9rem; }
         <li>✅ Réponse du 2026-10-05 : <b>Le manager, inscrit dans le RACI</b></li>
         <li>⚠️ Ne colle pas avec la recommandation de Q-ACC-07 (« la direction seule »). 💡 La direction fixe le barème par défaut, le manager les barèmes nominatifs.</li>
         <li>🧑‍💼 Jeff dira d'abord s'il veut des barèmes nominatifs.</li>
+      
+        <li>✅ Réponse du 2026-10-07 : <b>La direction seule</b></li>
+        <li>✏️ <b>Changée le 2026-10-07</b> : la direction (avant : le manager).</li>
+        <li>🧑‍💼 Jeff : <b>la direction</b> (Q-JEF-16).</li>
       </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-PAR-09" value="manager" checked><span><b>Le manager, inscrit dans le RACI (recommandé)</b>Rien ne change dans la base.<span class="arg">➕ Il connaît ses chasseurs.</span><span class="arg">➖ Risque de favoritisme.</span></span></label>
-        <label><input type="radio" name="Q-PAR-09" value="direction"><span><b>La direction seule</b>Idem.<span class="arg">➕ Contrôle central.</span><span class="arg">➖ Plus lent.</span></span></label>
+        <label><input type="radio" name="Q-PAR-09" value="manager"><span><b>Le manager, inscrit dans le RACI (recommandé)</b>Rien ne change dans la base.<span class="arg">➕ Il connaît ses chasseurs.</span><span class="arg">➖ Risque de favoritisme.</span></span></label>
+        <label><input type="radio" name="Q-PAR-09" value="direction" checked><span><b>La direction seule</b>Idem.<span class="arg">➕ Contrôle central.</span><span class="arg">➖ Plus lent.</span></span></label>
       </div>
     </div>
     </div>
@@ -1630,7 +1819,7 @@ body.vlp-lit { padding-bottom:9rem; }
 
   <section id="j5">
     <h2>Les choix à trancher · Le mot de passe et la clé d'API</h2>
-    <p class="sous">L'authentification n'est pas à nous (Jeff, 22/09). Deux restes à trancher avec lui : ce que notre base garde, et ce que notre API vérifie.</p>
+    <p class="sous">✏️ 2026-10-07 : l'authentification revient, <b>côté back</b> (Jeff, entretien) ; le mot de passe se garde. Avant : « pas à nous » (22/09).</p>
     <div class="question" id="Q-JEF-21">
       <div class="tete"><h3>🧑‍💼 Q-JEF-21 · Notre base doit-elle garder un mot de passe pour chaque compte ?</h3><span class="puces"><span class="puce neuf">🆕 ajoutée le 2026-10-06</span><span class="puce ko">🗄️ peut changer la base</span></span></div>
       <dl class="grille">
@@ -1640,9 +1829,13 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>S'il en a besoin : on garde la colonne et son hachage ; le registre RGPD la liste, comme le modèle du sujet (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGISTRE-RGPD.md?plain=1#L28" target="_blank" rel="noopener" title="documents utiles/REGISTRE-RGPD.md, ligne 28 — sujet du prof, sur GitHub"><span class="mono">REGISTRE-RGPD.md:28</span></a>).</li><li>Sinon : la colonne (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L160" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, ligne 160 — notre dépôt, sur GitHub"><span class="mono">01:160</span></a>) et son code partent dans le lot de migration : <b>4 fichiers</b> d'API, <b>8 fichiers</b> de tests, <b>27 lignes</b> de <span class="mono">02</span>. 📝 Un ADR le dira.</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p>Jeff, le 22/09 : <a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/md/adr-026-perimetre-authentification.md?plain=1#L42-L53" target="_blank" rel="noopener" title="md/adr-026-perimetre-authentification.md, lignes 42-53 — notre dépôt, sur GitHub"><span class="mono">md/adr-026-perimetre-authentification.md:42-53</span></a>. Les données d'origine n'ont <b>pas</b> de mot de passe (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/fixtures/PgSQL.sql#L62-L73" target="_blank" rel="noopener" title="fixtures/PgSQL.sql, lignes 62-73 — sujet du prof, sur GitHub"><span class="mono">PgSQL.sql:62-73</span></a>) : la migration en met un faux, qui bloque toute connexion (<a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/02_migration.sql#L93-L94" target="_blank" rel="noopener" title="docker/init-v2/02_migration.sql, lignes 93-94 — notre dépôt, sur GitHub"><span class="mono">02:93-94</span></a>), sur 25 comptes. Le modèle de registre RGPD du sujet cite « mot de passe (haché) » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGISTRE-RGPD.md?plain=1#L28" target="_blank" rel="noopener" title="documents utiles/REGISTRE-RGPD.md, ligne 28 — sujet du prof, sur GitHub"><span class="mono">REGISTRE-RGPD.md:28</span></a>) et demande des « mots de passe hachés » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGISTRE-RGPD.md?plain=1#L37" target="_blank" rel="noopener" title="documents utiles/REGISTRE-RGPD.md, ligne 37 — sujet du prof, sur GitHub"><span class="mono">:37</span></a>) ; c'est un « modèle à remplir » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGISTRE-RGPD.md?plain=1#L21" target="_blank" rel="noopener" title="documents utiles/REGISTRE-RGPD.md, ligne 21 — sujet du prof, sur GitHub"><span class="mono">:21</span></a>). Compté le 2026-10-06 (recherche de « password ») : <span class="mono">API/src</span>, 4 fichiers, sans compter <span class="mono">database.py</span> (le mot de passe de la base elle-même) ; <span class="mono">API/tests</span>, 8 fichiers et 62 lignes ; <span class="mono">02</span>, 27 lignes ; plus <a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/migrations/2026-09-22_hunter_manager.sql#L46-L48" target="_blank" rel="noopener" title="docker/migrations/2026-09-22_hunter_manager.sql, lignes 46-48 — notre dépôt, sur GitHub"><span class="mono">docker/migrations/2026-09-22_hunter_manager.sql:46-48</span></a>.</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : réglée par sa réponse à Q-JEF-14 : les outils d'authentification sont à nous, donc le mot de passe <b>se garde</b>, haché en Argon2.</li>
+        <li>✅ Votre choix : <b>La reformuler</b></li>
+      </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-JEF-21" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Lui seul sait si la couche du dessus lit notre mot de passe : sa réponse tranche entre votre note et notre brouillon d'ADR-026.</span><span>➖ Une question sur l'authentification, qu'il a dite hors de notre périmètre.</span></span></span></label>
-        <label><input type="radio" name="Q-JEF-21" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-21" value="reformuler" checked><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-21" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ On garde la colonne, comme le dit notre brouillon d'ADR-026 : rien à changer.</span><span>➖ On garde, ou on retire, une donnée personnelle sans savoir si quelqu'un s'en sert.</span></span></span></label>
       </div>
     </div>
@@ -1655,8 +1848,12 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Le code : un contrôle de la clé sur le routeur commun des 18 ressources ; les 4 endroits où les tests créent leur client d'API montrent la clé (carte Q-ACC-19).</li><li>📝 Ferme l'option 4, « non tranchée », d'ADR-026 et d'ADR-027.</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p>Jeff, le 22/09 : <a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/md/adr-026-perimetre-authentification.md?plain=1#L51-L53" target="_blank" rel="noopener" title="md/adr-026-perimetre-authentification.md, lignes 51-53 — notre dépôt, sur GitHub"><span class="mono">md/adr-026-perimetre-authentification.md:51-53</span></a>. Aucune clé aujourd'hui : rien dans <span class="mono">API/src</span> (recherche de « api key », 2026-10-06). FastAPI fournit <span class="mono">APIKeyHeader</span>, dans <span class="mono">fastapi.security</span> : vérifié le 2026-10-05 dans les deux versions installées (carte Q-ACC-19), aucune dépendance à ajouter. Une « vérification de provenance » serait une autre piste : n'accepter que certaines adresses, par exemple.</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : il valide notre position (ci-dessus), sans changement. <b>Une clé par programme</b>.</li>
+        <li>✅ Votre choix : <b>La poser telle quelle</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-22" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Il répond sur sa propre idée : combien de clés, et comment les remettre.</span><span>➖ Un travail de plus, qu'il disait non demandé à ce stade.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-22" value="poser" checked><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Il répond sur sa propre idée : combien de clés, et comment les remettre.</span><span>➖ Un travail de plus, qu'il disait non demandé à ce stade.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-22" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-22" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ On la fait à notre façon : une clé par programme.</span><span>➖ Il attendait peut-être autre chose : une vérification de provenance plutôt qu'une clé.</span></span></span></label>
       </div>
@@ -1665,7 +1862,7 @@ body.vlp-lit { padding-bottom:9rem; }
 
   <section id="j6">
     <h2>Les choix à trancher · La facture du chasseur</h2>
-    <p class="sous">Le chasseur envoie sa facture avant d'être payé. Le sujet ne dit pas quoi faire d'une facture refusée.</p>
+    <p class="sous">✏️ 2026-10-07 : la facture est <b>hors périmètre</b> (Jeff, entretien) ; aucune trace en base. Avant : le chasseur envoie sa facture avant d'être payé.</p>
     <div class="question" id="Q-JEF-23">
       <div class="tete"><h3>🧑‍💼 Q-JEF-23 · Une facture refusée puis renvoyée : faut-il garder chaque envoi ?</h3><span class="puces"><span class="puce neuf">🆕 ajoutée le 2026-10-06</span><span class="puce ko">🗄️ peut changer la base</span></span></div>
       <dl class="grille">
@@ -1675,6 +1872,10 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>S'il dit oui (votre réponse du 06/10) : une table des factures du chasseur, reliée au paiement, dans le lot de migration. <span class="mono">invoice_reference</span>, <span class="mono">invoice_submitted_at</span> et <span class="mono">verified_at</span> quittent le paiement ; <span class="mono">announced_at</span> et <span class="mono">scheduled_for</span> y restent (Q-REM-17).</li><li>S'il ne veut que la dernière facture : la table devient inutile. Retour à votre réponse du 05/10 : <span class="mono">invoice_reference</span> sur le paiement.</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p>Parcours : envoi (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/07_chasseur_remuneration_et_performance.feature#L18-L21" target="_blank" rel="noopener" title="user-stories/07_chasseur_remuneration_et_performance.feature, lignes 18-21 — sujet du prof, sur GitHub"><span class="mono">F07:18-21</span></a>), puis vérification et paiement programmé (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/07_chasseur_remuneration_et_performance.feature#L24-L27" target="_blank" rel="noopener" title="user-stories/07_chasseur_remuneration_et_performance.feature, lignes 24-27 — sujet du prof, sur GitHub"><span class="mono">:24-27</span></a>). Sujet : <a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L284-L289" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, lignes 284-289 — sujet du prof, sur GitHub"><span class="mono">RCR:284-289</span></a>, une table <span class="mono">paiements</span> avec <span class="mono">facture_id</span>. États du paiement : <a class="src" href="https://github.com/GaSeBeLa/Fil-Rouge/blob/52e594137774ab41b2a41a52ffe6afdff5137b79/docker/init-v2/01_create_fil_rouge_immobilier.sql#L730-L733" target="_blank" rel="noopener" title="docker/init-v2/01_create_fil_rouge_immobilier.sql, lignes 730-733 — notre dépôt, sur GitHub"><span class="mono">01:730-733</span></a>. À ne pas confondre avec la facture du particulier (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/user-stories/03_particulier_offre_et_signature.feature#L37-L41" target="_blank" rel="noopener" title="user-stories/03_particulier_offre_et_signature.feature, lignes 37-41 — sujet du prof, sur GitHub"><span class="mono">F03:37-41</span></a>).</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : facture <b>hors périmètre</b>. Choix du groupe (Q3) : aucune trace de facture en base.</li>
+        <li>📝 Votre note : « facture hors scope !! » (aucune case)</li>
+      </ul></div>
       <div class="choix options">
         <label><input type="radio" name="Q-JEF-23" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Son oui confirme la table des factures avant le lot de migration ; son non nous évite une table pour rien.</span><span>➖ Une question de détail de gestion.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-23" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
@@ -1695,8 +1896,12 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Rien s'il est d'accord : c'est fait et testé (<span class="mono">c896e39</span>, <span class="mono">abbc84e</span>, <span class="mono">d3c128c</span>, <span class="mono">fea3c9f</span>).</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p>Le sujet se contredit : « &lt; 200 000 € » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L173" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 173 — sujet du prof, sur GitHub"><span class="mono">RCR:173</span></a>) contre <span class="mono">BETWEEN</span>, qui inclut les deux bouts (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L188" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 188 — sujet du prof, sur GitHub"><span class="mono">RCR:188</span></a>). Base : bornes incluses <span class="mono">'[]'</span>, tranches <span class="mono">[0 ; 199 999]</span>, <span class="mono">[200 000 ; 349 999]</span>…</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : informé ; pas d'objection.</li>
+        <li>✅ Votre choix : <b>L'envoyer pour information</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-19" value="envoyer"><span><b>L'envoyer pour information (recommandé)</b><span class="effet"><span>➕ Il peut corriger tôt si ce n'est pas sa lecture.</span><span>➖ Aucun.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-19" value="envoyer" checked><span><b>L'envoyer pour information (recommandé)</b><span class="effet"><span>➕ Il peut corriger tôt si ce n'est pas sa lecture.</span><span>➖ Aucun.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-19" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-19" value="ne-pas-envoyer"><span><b>Ne pas l'envoyer</b><span class="effet"><span>➕ Une ligne de moins.</span><span>➖ Vous aviez demandé de l'informer.</span></span></span></label>
       </div>
@@ -1710,8 +1915,12 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>Le sujet l'exige déjà : « On stocke donc tous les termes du calcul » (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L292" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 292 — sujet du prof, sur GitHub"><span class="mono">RCR:292</span></a>). Sa réponse ne devrait rien changer au lot de migration.</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p>Colonnes prévues : <span class="mono">payment.performance_score</span> (Q-REM-03) et <span class="mono">payment.calculation_details</span> en JSONB (Q-REM-04). Le sujet liste <span class="mono">score_performance</span> dans <span class="mono">paiements</span> (<a class="src" href="https://github.com/DiginamicFormation/Fil-Rouge-EISI-Data-IA-26-D04-StarterPack/blob/902207e3c72fe5c806f639020e00558d0f592a26/documents%20utiles/REGLES-CALCUL-REMUNERATION.md?plain=1#L286" target="_blank" rel="noopener" title="documents utiles/REGLES-CALCUL-REMUNERATION.md, ligne 286 — sujet du prof, sur GitHub"><span class="mono">RCR:286</span></a>). 📝 ADR C.</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : il valide notre position (ci-dessus), sans changement.</li>
+        <li>✅ Votre choix : <b>La poser telle quelle</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-20" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Vous l'aviez demandé.</span><span>➖ Le sujet l'exige déjà : la réponse est presque sûre.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-20" value="poser" checked><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Vous l'aviez demandé.</span><span>➖ Le sujet l'exige déjà : la réponse est presque sûre.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-20" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-20" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Le sujet l'exige : pas besoin de lui.</span><span>➖ Votre note demandait sa confirmation.</span></span></span></label>
       </div>
@@ -1725,8 +1934,12 @@ body.vlp-lit { padding-bottom:9rem; }
         <dt class="net">🔗 Après sa réponse</dt><dd><ul><li>S'il accepte : la séance, après ses réponses ; le journal passe à jour d'un coup, sur Confluence, à la main.</li><li>S'il refuse : le groupe valide seul, et le dit en soutenance.</li></ul></dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary><p>Confluence l'appelle déjà « PO » : ADR-026, « ANNULE le 22/09/2026 après contact avec PO (Jeff) » (copie du journal lue le 2026-10-06). À accepter : 10 ADR, plus ceux à écrire après toutes les réponses (carte Q-PRO-03).</p></details>
+      <div class="repondu"><ul>
+        <li>🧑‍💼 <b>Réponse de Jeff, entretien du 2026-10-07</b> : il valide notre position (ci-dessus), sans changement. Il est le <b>PO</b> ; les ADR se valident en une séance.</li>
+        <li>✅ Votre choix : <b>La poser telle quelle</b></li>
+      </ul></div>
       <div class="choix options">
-        <label><input type="radio" name="Q-JEF-25" value="poser"><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Ses « oui » font foi en soutenance.</span><span>➖ Une longue séance pour lui.</span></span></span></label>
+        <label><input type="radio" name="Q-JEF-25" value="poser" checked><span><b>La poser telle quelle (recommandé)</b><span class="effet"><span>➕ Ses « oui » font foi en soutenance.</span><span>➖ Une longue séance pour lui.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-25" value="reformuler"><span><b>La reformuler</b><span class="effet"><span>➕ La question colle mieux à ce que vous voulez savoir.</span><span>➖ Dites comment dans le commentaire : sans ça, je ne peux pas la réécrire.</span></span></span></label>
         <label><input type="radio" name="Q-JEF-25" value="ne-pas-poser"><span><b>Ne pas la poser</b><span class="effet"><span>➕ Le groupe peut valider seul.</span><span>➖ Votre réponse disait d'attendre sa confirmation.</span></span></span></label>
       </div>
@@ -1736,6 +1949,7 @@ body.vlp-lit { padding-bottom:9rem; }
   <section id="apres">
     <h2>Ce que le groupe tranchera après Jeff</h2>
     <p class="sous">Des questions du groupe qui attendent sa réponse. Elles se cochent sur la <a href="https://claude.ai/artifact/WWVtxpDWxvD4Wf8rWnytUp" target="_blank" rel="noopener">page principale</a> ; ici, juste ce qui peut changer. Les cartes que seul Jeff tranche ne sont plus dans ce tableau : elles sont sur cette page, sous leur question.</p>
+    <p class="sous">✅ 2026-10-07 : Jeff a répondu. Ce tableau reste pour l'historique ; l'état à jour est au registre (4e série).</p>
     <div class="tableau"><table>
       <thead><tr><th>Carte</th><th>Le sujet</th><th>État</th><th>Attend</th><th>Ce qui peut changer</th></tr></thead>
       <tbody>
@@ -1762,6 +1976,7 @@ body.vlp-lit { padding-bottom:9rem; }
     <p class="sous">Des réponses qui ne collent pas encore avec une autre, ou avec le sujet. Aucune n'est fausse : chacune demande un mot de plus.</p>
     <div class="alerte">
       <h3>⚠️ Q-REM-19 contre Q-REM-05</h3>
+      <p>✅ <b>Réglé le 2026-10-07</b> : Jeff valide 20 % et 60 % (Q-JEF-01) : le CHECK tient.</p>
       <p>💬 <strong>En clair</strong> : Vous sortez deux réglages de la base (Q-REM-05, table), et vous en gravez deux autres (Q-REM-19 : 20 % et 60 %). Ces deux chiffres sont à faire valider par Jeff (Q-JEF-01).</p>
       <ul>
         <li>➖ S'il les change, il faudra recréer la base.</li>
@@ -1773,6 +1988,7 @@ body.vlp-lit { padding-bottom:9rem; }
     </div>
     <div class="alerte">
       <h3>⚠️ Votre note sur Q-PAR-06</h3>
+      <p>✅ <b>Réglé le 2026-10-07</b> : Jeff valide les paramètres (Q-JEF-01) ; votre note : « les valeurs sont donné par le client, dont on fait confiance ».</p>
       <p>💬 <strong>En clair</strong> : Les chiffres ne viennent pas encore du client : le sujet les propose (<span class="mono">F10:3-5</span>). Ils deviennent ceux du client quand Jeff dit oui.</p>
       <ul>
         <li>➖ Sans son oui, en soutenance, on présenterait une proposition comme une exigence (<span class="mono">RCR:40</span>).</li>
@@ -1784,6 +2000,7 @@ body.vlp-lit { padding-bottom:9rem; }
     </div>
     <div class="alerte">
       <h3>⚠️ Q-PAR-05 : pas de grille pour le taux</h3>
+      <p>✅ <b>Réglé le 2026-10-07</b> : Jeff n'a pas de grille (Q-JEF-05) : le groupe propose la sienne.</p>
       <p>💬 <strong>En clair</strong> : Le taux de transformation n'a pas de grille de notes dans le sujet.</p>
       <ul>
         <li>➖ Impossible de le coder sans elle.</li>
@@ -1795,6 +2012,7 @@ body.vlp-lit { padding-bottom:9rem; }
     </div>
     <div class="alerte">
       <h3>⚠️ Q-PAR-09 contre Q-ACC-07</h3>
+      <p>✅ <b>Réglé le 2026-10-07</b> : les deux disent maintenant <b>la direction</b> ; Jeff aussi (Q-JEF-16).</p>
       <p>💬 <strong>En clair</strong> : Votre Q-PAR-09 dit : le manager crée un barème propre. La carte Q-ACC-07 propose : la direction seule fixe les barèmes.</p>
       <ul>
         <li>➖ Les deux ne tiennent pas ensemble.</li>
@@ -1806,6 +2024,7 @@ body.vlp-lit { padding-bottom:9rem; }
     </div>
     <div class="alerte">
       <h3>⚠️ ADR-025 annulé sur Confluence, mais vos réponses gardent le manager du chasseur</h3>
+      <p>✅ <b>Réglé le 2026-10-07</b> : le lien se garde (Q9) ; un <b>nouvel ADR</b> remplacera ADR-025.</p>
       <p>💬 <strong>En clair</strong> : Sur Confluence, ADR-025 (« Chaque chasseur est rattaché à un manager ») est marqué <b>Annulé</b>. Or vos réponses gardent ce lien : Q-SCH-13 le renomme « Supervises », Q-MIG-04 remplace le faux manager par de vrais. Et Q-JEF-14 demande à Jeff ce que voit le manager (Q-ACC-02).</p>
       <ul>
         <li>➖ Si le lien tombe, les questions sur le manager changent, avant l'entretien.</li>
