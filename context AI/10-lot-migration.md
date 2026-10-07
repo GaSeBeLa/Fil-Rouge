@@ -321,8 +321,9 @@ LOT5 à LOT10 peuvent changer d'ordre.
 ---
 
 <!-- FICHE:LOT9 -->
-## LOT9 [ ] — Biens : énergie et auteur
+## LOT9 [x] — Biens : énergie et auteur
 
+**Session** : 0ceba605-10f5-42b6-9317-73b2243eb990
 **Dépend de** : `LOT8`.
 **Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql` (table `estate`), `docker/init-v3/03_populate_estate.sql`, `docker/migrations/v2-vers-v3/09_biens.sql`, `API/src/app/models/estate_model.py`, `API/tests/integration/test_constraints_db.py`, `docker/init-v3/README.md`, `normalised/annonces_normalised.csv` (lu) ; le registre (cartes Q-MIG-05, Q-MIG-06, Q-ACC-09) — et rien d'autre.
 

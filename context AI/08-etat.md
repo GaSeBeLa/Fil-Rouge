@@ -257,3 +257,7 @@ de ce que le code dit déjà.
   au lieu de s'arrêter (0 en base de dev) ; sur `estate`, un code postal sans
   pays tombe dans `ELSE FALSE`, sans CHECK « needs_country » à part ; l'Eircode
   sans espace vaut aussi sur `estate` (même CASE, Q-SCH-11). Choix de LOT8.
+- **2026-10-07** — **auteur d'un bien : `estate.id_author` → `"user"(id)`**,
+  facultatif (vide = import), `ON DELETE RESTRICT`, **clé seule** : le rôle
+  (chasseur ou manager) se vérifie dans l'API, comme `criteria.id_author`.
+  Tranché par Sébastien au questionnaire de LOT9, reporté sur la carte Q-ACC-09.

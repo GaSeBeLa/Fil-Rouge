@@ -10,7 +10,7 @@ Une base v2 migrée et une base v3 neuve ont le même schéma (banc IDENTIQUES),
 - LOT6 : LOT6 : 4 tests nommés + 10 autres cas, 14/14 tombent sous leur mutant (10 refus, 4 accords) · \dt : 19 tables · banc IDENTIQUES 536 faits · pytest 160 passed (55 rémunération compris) · pyright 12 avant, 12 après ; nouveau modèle 3 (sqlmodel absent de l'hôte)
 - LOT7 : Tests nommés : 0612345678 refusé, +33612345678 et +33000000000 acceptés (3 tables), priorité 0 et 6 refusées, 1 et 5 acceptées ; 6 mutants, chacun fait tomber ses tests (3, 3, 6, 2, 2, 1 failed). grep is_cartet : 0 ligne. Banc IDENTIQUES — 545 faits ; pytest 173 passed, 0 failed ; pyright 19 errors avant, 19 après (sqlmodel absent de la machine).
 - LOT8 : Recompte : 2 556 codes postaux de biens sur 2 556 à 5 chiffres. Biens 'FR' : 2 556 sur 2 556 sur les deux bases du banc (critères identiques, même md5). Tests nommés : FR 3100 refusé, 31000 accepté ; Eircode D02 X285 refusé, D02X285 accepté (estate, client, criteria) ; 3 mutants, chacun fait tomber ses tests (2, 2, 6 failed). Banc IDENTIQUES — 559 faits ; pytest 181 passed, 0 failed ; pyright 9 errors avant, 9 après (sqlmodel absent de la machine).
-- LOT9 : Biens : classe énergie, colonne d'auteur. Dépend de LOT8.
+- LOT9 : count(energy_class) : 1 623 et energy_class NULL : 933 sur les deux bases du banc (même md5), égaux au recompte du CSV. grep energetic_score : 0 ligne. Test nommé : auteur inconnu refusé (409), auteur connu accepté ; le mutant DROP estate_id_author_fkey fait tomber 1 test, le bon. Banc IDENTIQUES — 561 faits ; pytest 183 passed, 0 failed ; pyright 3 errors avant, 3 après (sqlmodel absent de la machine).
 - LOT10 : Anciens mandats : échus, Nina Girard, statuts traduits. Dépend de LOT3.
 - LOT11 : README, CLAUDE.md, base de dev recréée, message à l'équipe. Dépend de LOT3 à LOT10.
 - LOT12 : Rôle en lecture seule, si Jeff a dit oui. Dépend de LOT11.
@@ -21,4 +21,5 @@ Une base v2 migrée et une base v3 neuve ont le même schéma (banc IDENTIQUES),
 - 2026-10-07 : remuneration_parameters versionnée par effective_from + UNIQUE (comme Q-SCH-17) ; bornes relâchées au domaine d'un taux (0 à 1, -1 à 1, RCR:59, 199, 203) — tranché par Sébastien à LOT6
 - 2026-10-07 : Téléphone : regex E.164 souple d'ADR-007 lue comme + exigé, 2 à 15 chiffres, un espace ou un tiret entre deux (choix de LOT7) ; client_priority sur estate_proposed (D6).
 - 2026-10-07 : Eircode avec espace : la migration 08 retire l'espace au lieu de s'arrêter ; sur estate, un code postal sans pays est refusé par le CASE (ELSE FALSE) ; Eircode sans espace aussi sur estate (choix de LOT8).
+- 2026-10-07 : Auteur d'un bien : estate.id_author vers user, facultatif (vide = import), clé seule ; le rôle se vérifie dans l'API (questionnaire de LOT9, carte Q-ACC-09).
 ## Bilan
