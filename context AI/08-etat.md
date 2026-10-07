@@ -247,3 +247,9 @@ de ce que le code dit déjà.
   `valid_from` / `valid_until` (lettre de Q-REM-05) ; **bornes relâchées au
   domaine d'un taux** (0 à 1, −1 à 1, `RCR:59, 199, 203`). Tranché par
   Sébastien à LOT6, reporté sur la carte Q-REM-05.
+- **2026-10-07** — **téléphone : `'^\+[1-9]([ -]?[0-9]){1,14}$'`**. ADR-007
+  (Confluence, lu à LOT7) dit « regex E.164 souple » sans la donner, et veut
+  tolérer « espaces, tirets » : `+` exigé, 2 à 15 chiffres, un espace ou un
+  tiret entre deux. Choix de LOT7, pas du registre ; le strict E.164 (sans
+  séparateur) reste l'alternative. `client_priority` va sur `estate_proposed`
+  (D6), dont la fiche ne listait pas le modèle.

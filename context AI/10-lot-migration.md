@@ -268,8 +268,9 @@ LOT5 à LOT10 peuvent changer d'ordre.
 ---
 
 <!-- FICHE:LOT7 -->
-## LOT7 [ ] — Personnes : coordonnées, priorité, dates
+## LOT7 [x] — Personnes : coordonnées, priorité, dates
 
+**Session** : 0ceba605-10f5-42b6-9317-73b2243eb990
 **Dépend de** : `LOT2`.
 **Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql` (tables `client`, `hunter`, `real_estate_manager`, `role`), `docker/init-v3/02_migration.sql`, `docker/migrations/v2-vers-v3/07_personnes.sql`, `API/src/app/models/` (`client_model.py`, `hunter_model.py`, `real_estate_manager_model.py`, `role_model.py`), `API/tests/integration/test_constraints_db.py`, `docker/init-v3/README.md` ; le registre (cartes Q-SCH-01, Q-SCH-18, Q-PRO-08, Q-MIG-07, Q-SCH-05, Q-SCH-09, Q-SCH-10) — et rien d'autre.
 
