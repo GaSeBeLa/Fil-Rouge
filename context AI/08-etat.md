@@ -226,3 +226,7 @@ de ce que le code dit déjà.
   `AUCUN_PROJET`. Repris de `2448614` et mis à jour (schéma `init-v2`, euros,
   `docker-compose.yml`). Mesuré : `vlp.py renvois` → `CHANTIER.md 48/50`,
   12 renvois, 0 absent.
+- **2026-10-07** — **un seul statut `'lost'`** pour la vente perdue, hors
+  agence (Q-REM-02) comme par un collègue (Q-REM-14) : le registre ne donnait
+  qu'un exemple et laissait « un ou deux ? » ouvert (ligne 134). Tranché à
+  LOT3 ; le cas « collègue » se déduit de l'autre mandat vendu.

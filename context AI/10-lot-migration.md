@@ -157,8 +157,9 @@ LOT5 à LOT10 peuvent changer d'ordre.
 ---
 
 <!-- FICHE:LOT3 -->
-## LOT3 [ ] — Mandat : statuts de fin et signature
+## LOT3 [x] — Mandat : statuts de fin et signature
 
+**Session** : f6db559a-cd2c-449e-a160-bd4fd8d0475c
 **Dépend de** : `LOT2`.
 **Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql` (tables `mandate`, `estate_proposed`), `docker/init-v3/02_migration.sql`, `docker/migrations/v2-vers-v3/03_mandat-statuts.sql`, `API/src/app/models/mandate_model.py`, `estate_proposed_model.py`, `API/tests/integration/test_constraints_db.py`, `docker/init-v3/README.md` ; le registre (cartes Q-REM-02, Q-REM-14, Q-MAN-05, Q-MAN-07, Q-MAN-09, Q-SCH-04) — et rien d'autre.
 
