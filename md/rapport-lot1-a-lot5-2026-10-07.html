@@ -1,0 +1,1329 @@
+<meta charset="utf-8">
+<title>Rapport LOT1 à LOT5</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    --fond:#f3e8d4; --carte:#faf1e2; --trait:#dcd0b7; --texte:#50433b; --doux:#6e6151;
+    --accent:#2f5d8c; --ok:#2c6e48; --ok-fond:#e4f0e2; --warn:#8a5a0c; --warn-fond:#fbe9cc;
+    --ko:#9c3431; --ko-fond:#f8e0da; --q-fond:#fbe4d2;
+    /* le bord d'un bouton ou d'une option, à 3:1 sur les trois fonds : un cran plus foncé que celui de
+       vlp.css (#92846b), qui tombe à 2,99:1 sur --q-fond (calculé le 2026-10-07, formule WCAG) */
+    --bord-bouton:#908269;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--fond); color:var(--texte); font-family:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif; font-size:18px; letter-spacing:.05em; line-height:1.7; padding-inline:16px; text-align:left; }
+  .page { max-width:46rem; margin:0 auto; padding-block:2.5rem 4rem; display:flex; flex-direction:column; gap:2.6rem; }
+  h1,h2,h3 { margin:0; text-wrap:balance; line-height:1.25; }
+  h1 { font-size:2.1rem; }
+  h2 { font-size:1.35rem; color:var(--accent); }
+  h3 { font-size:1.08rem; }
+  p { margin:0; }
+  ul { margin:0; padding-left:1.2rem; display:flex; flex-direction:column; gap:.35rem; }
+  .mono, .fil time, td.n, textarea { letter-spacing:normal; }
+  .mono { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:max(.85em, 15px); font-variant-numeric:tabular-nums; }
+  section { display:flex; flex-direction:column; gap:1rem; }
+  .sous { color:var(--doux); }
+  .jauge { align-self:flex-start; display:inline-flex; gap:.5rem; align-items:center; padding:.35rem .8rem; border-radius:6px; background:var(--ok-fond); color:var(--ok); font-weight:700; }
+  .jauge.moyen { background:var(--warn-fond); color:var(--warn); }
+  .jauge.ko { background:var(--ko-fond); color:var(--ko); }
+  /* un gros chiffre ne se coupe jamais : sa tuile s'élargit à lui, et passe à la ligne s'il le faut */
+  .chiffres { display:flex; flex-wrap:wrap; gap:.75rem; }
+  .chiffre { flex:1 1 12rem; background:var(--carte); border:1px solid var(--trait); border-radius:8px; padding:.8rem 1rem; display:flex; flex-direction:column; gap:.1rem; }
+  .chiffre b { font-size:1.6rem; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .insecable { white-space:nowrap; }
+  .chiffre span { color:var(--doux); font-size:1rem; line-height:1.4; }
+  .decision { background:var(--carte); border:1px solid var(--trait); border-radius:8px; padding:1rem 1.1rem; display:flex; flex-direction:column; gap:.6rem; }
+  .decision .tete { display:flex; flex-wrap:wrap; gap:.5rem; align-items:baseline; justify-content:space-between; }
+  .puce { font-size:.9375rem; font-weight:700; padding:.1rem .5rem; border-radius:4px; white-space:nowrap; }
+  .puce.faible { background:var(--ok-fond); color:var(--ok); }
+  .puce.moyen { background:var(--warn-fond); color:var(--warn); }
+  .grille { display:grid; grid-template-columns:9rem 1fr; gap:.25rem .9rem; margin:0; }
+  .grille dt { color:var(--doux); font-size:1rem; }
+  .grille dd { margin:0; }
+  .choix { display:flex; flex-wrap:wrap; gap:.5rem; padding-top:.3rem; border-top:1px dashed var(--trait); }
+  .choix label { display:inline-flex; align-items:center; gap:.5rem; padding:.3rem .75rem; border:2px solid var(--bord-bouton); border-radius:999px; cursor:pointer; font-size:.95rem; background:var(--carte); }
+  .choix.options { flex-direction:column; }
+  .choix.options label { border-radius:8px; align-items:flex-start; }
+  .choix.options label > span > b:first-child { display:block; }
+  .choix input { accent-color:var(--accent); width:22px; height:22px; margin:0; flex:none; }
+  .choix.options input { margin-top:.15rem; }
+  .choix label:has(input:checked) { border-color:var(--accent); box-shadow:inset 0 0 0 1px var(--accent); background:var(--q-fond); }
+  .choix:not(.options) label:has(input:checked)::after,
+  .choix.options label:has(input:checked) > span > b:first-child::after { content:"✓"; margin-left:.35rem; color:var(--accent); font-weight:700; }
+  /* l'option conseillée (le script lit « recommandé » entre parenthèses dans son libellé) : une étiquette, un bord
+     en pointillé */
+  .choix label.conseil { border-style:dashed; border-color:var(--accent); }
+  .choix label.conseil:has(input:checked) { border-style:solid; }
+  .etiquette-conseil { display:inline-block; margin-left:.4rem; padding:0 .45rem; border-radius:4px; background:var(--accent); color:var(--carte); font-size:.9375rem; font-weight:700; white-space:nowrap; }
+  .choix label:focus-within { outline:2px solid var(--accent); outline-offset:2px; }
+  .question { background:var(--q-fond); border-radius:8px; padding:1rem 1.1rem; display:flex; flex-direction:column; gap:.6rem; }
+  .alerte { background:var(--warn-fond); border-radius:8px; padding:1rem 1.1rem; display:flex; flex-direction:column; gap:.5rem; }
+  .erreur { background:var(--ko-fond); border-radius:8px; padding:1rem 1.1rem; display:flex; flex-direction:column; gap:.5rem; }
+  .fil { list-style:none; padding:0; gap:0; }
+  .fil li { display:grid; grid-template-columns:3.6rem 1fr; gap:.8rem; padding:.55rem 0; border-top:1px solid var(--trait); }
+  .fil time { font-family:"IBM Plex Mono",monospace; color:var(--doux); font-size:.9375rem; padding-top:.15rem; }
+  .tableau { overflow-x:auto; }
+  table { border-collapse:collapse; width:100%; font-size:.95rem; }
+  th { text-align:left; color:var(--doux); font-weight:700; font-size:.9375rem; padding:.4rem .7rem .4rem 0; border-bottom:2px solid var(--trait); }
+  td { padding:.6rem .7rem .6rem 0; border-bottom:1px solid var(--trait); vertical-align:top; }
+  td.n { font-family:"IBM Plex Mono",monospace; white-space:nowrap; }
+  a { color:var(--accent); }
+  button { font:inherit; font-weight:700; color:var(--carte); background:var(--accent); border:0; border-radius:6px; padding:.6rem 1.1rem; cursor:pointer; }
+  button:focus-visible { outline:2px solid var(--texte); outline-offset:2px; }
+  textarea { width:100%; min-height:8rem; font-family:"IBM Plex Mono",monospace; font-size:.9375rem; background:var(--carte); color:var(--texte); border:1px solid var(--trait); border-radius:6px; padding:.6rem; }
+  .ligne { display:flex; flex-wrap:wrap; gap:.8rem; align-items:center; }
+  .note summary, .explique summary { display:inline-block; list-style:none; cursor:pointer; color:var(--accent); font-weight:700; font-size:.95rem; padding:.2rem .7rem; border:1px dashed var(--trait); border-radius:6px; }
+  .note summary::-webkit-details-marker, .explique summary::-webkit-details-marker { display:none; }
+  .note summary:focus-visible, .explique summary:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .note textarea { display:block; margin-top:.5rem; min-height:4.5rem; font-family:inherit; font-size:.95rem; line-height:1.5; }
+  .explique > p, .explique > .explication, .explique > .ligne { margin-top:.5rem; }
+  .explique > p:empty { display:none; }
+  .explique > p.niveau { margin-top:.25rem; font-size:.9375rem; }
+  .explication { white-space:pre-line; background:var(--fond); border:1px solid var(--trait); border-radius:6px; padding:.6rem .8rem; }
+  .clair { background:var(--carte); border:1px solid var(--trait); border-radius:8px; padding:1rem 1.1rem; display:flex; flex-direction:column; gap:.9rem; }
+  .grille dt.net { color:var(--texte); font-weight:700; }
+  .grille dt.plus { color:var(--ok); font-weight:700; }
+  .grille dt.moins { color:var(--ko); font-weight:700; }
+  .technique { border-top:1px dashed var(--trait); padding-top:.5rem; }
+  .technique summary { cursor:pointer; color:var(--doux); font-weight:700; font-size:.95rem; }
+  .technique summary:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .technique > .grille, .technique > p { margin-top:.6rem; }
+  .effet { display:flex; flex-direction:column; gap:.15rem; }
+  @media (max-width:480px) { .grille { grid-template-columns:1fr; } .grille dt { margin-top:.4rem; } }
+  /* Lire et répondre plus vite (2026-10-07) — tout est posé par le script. La barre de suivi, collée en haut
+     de l'écran : la page descend de sa hauteur (--haut-suivi, mesurée par le script). */
+  body { --haut-suivi:0px; }
+  body.avec-suivi { padding-top:calc(var(--haut-suivi) + 12px); }
+  body.avec-suivi :is(section, .question, .decision, [id]) { scroll-margin-top:calc(var(--haut-suivi) + 1rem); }
+  .barre-suivi { position:fixed; top:0; left:0; right:0; z-index:9; background:var(--carte); border-bottom:2px solid var(--accent); box-shadow:0 2px 6px rgba(80,67,59,.1); padding:calc(.5rem + env(safe-area-inset-top, 0px)) 16px .5rem; }
+  .barre-suivi .dedans { max-width:46rem; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; gap:.4rem .8rem; }
+  .compte-suivi { font-weight:700; white-space:nowrap; }
+  .barre-suivi progress { flex:1 1 5rem; height:6px; -webkit-appearance:none; appearance:none; border:0; border-radius:3px; background:var(--trait); overflow:hidden; }
+  .barre-suivi progress::-webkit-progress-bar { background:var(--trait); }
+  .barre-suivi progress::-webkit-progress-value { background:var(--accent); }
+  .barre-suivi progress::-moz-progress-bar { background:var(--accent); }
+  .etat-suivi { flex-basis:100%; font-size:.9375rem; color:var(--doux); }
+  .etat-suivi:empty { display:none; }
+  .barre-suivi button, .ecouter-carte, .suivante { font:inherit; font-size:.9375rem; font-weight:700; line-height:1.4; white-space:nowrap; color:var(--accent); background:var(--carte); border:1px solid var(--bord-bouton); border-radius:6px; padding:.3rem .8rem; cursor:pointer; }
+  .barre-suivi .copier-suivi { color:var(--carte); background:var(--accent); border-color:var(--accent); }
+  :is(.barre-suivi button, .ecouter-carte, .suivante, .une-ligne):focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  /* « 🔊 Écouter » à droite du titre de chaque carte */
+  .tete-carte { display:flex; gap:.6rem; align-items:flex-start; justify-content:space-between; }
+  .tete-carte > h3 { flex:1; min-width:0; }
+  .decision .tete > .tete-carte { flex:1 1 16rem; }
+  /* « Suivante » sous une carte répondue ; la carte repliée tient en une ligne, titre → réponse, un clic la rouvre */
+  .une-ligne, .suivante { display:none; }
+  :is(.question, .decision):has(input:checked):not(.repliee) > .suivante { display:inline-block; align-self:flex-start; }
+  :is(.question, .decision).repliee { padding-block:.45rem; background:var(--carte); border:1px solid var(--trait); border-left:4px solid var(--ok); }
+  .repliee > :not(.une-ligne) { display:none; }
+  .repliee > .une-ligne { display:flex; }
+  .une-ligne { width:100%; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:.2rem .8rem; font:inherit; font-weight:400; line-height:1.5; text-align:left; color:var(--texte); background:none; border:0; padding:.15rem 0; cursor:pointer; }
+  .une-ligne .choisie { color:var(--ok); font-weight:700; }
+  /* La version courte, éteinte d'office : body.courte replie ce que le script a marqué « long » */
+  .bascule-courte { align-self:flex-start; display:inline-flex; gap:.5rem; align-items:center; cursor:pointer; font-size:.95rem; font-weight:700; color:var(--accent); }
+  .bascule-courte input { accent-color:var(--accent); width:20px; height:20px; margin:0; flex:none; }
+  .bascule-courte:focus-within { outline:2px solid var(--accent); outline-offset:2px; border-radius:4px; }
+  .aide-courte, .replie-court { display:none; font-size:.9375rem; }
+  body.courte .aide-courte, body.courte .replie-court { display:block; }
+  body.courte .page .long { display:none; }
+  /* Format « gros rapport » (data-format="gros" sur la page) : une section par onglet. */
+  .page[data-format="gros"] [hidden] { display:none !important; }
+  .vue { background:var(--carte); border:1px solid var(--trait); border-radius:8px; padding:.7rem 1rem; }
+  .vue > summary { cursor:pointer; font-weight:700; color:var(--accent); }
+  .vue > summary:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .commandes { display:flex; flex-direction:column; gap:.6rem; margin-top:.7rem; }
+  .commandes .rangee { display:flex; flex-wrap:wrap; gap:.4rem; }
+  .commandes button { font-size:.95rem; font-weight:400; color:var(--texte); background:var(--fond); border:1px solid var(--trait); padding:.25rem .7rem; text-align:left; line-height:1.4; }
+  .commandes button[aria-current="true"] { color:var(--carte); background:var(--accent); border-color:var(--accent); font-weight:700; }
+  .commandes .compte { white-space:nowrap; }
+  .commandes label { display:inline-flex; gap:.4rem; align-items:center; cursor:pointer; font-size:.95rem; }
+  .commandes input { accent-color:var(--accent); }
+  .flottant { position:fixed; z-index:5; background:var(--carte); border:1px solid var(--trait); border-radius:8px; padding:.7rem .9rem; overflow:auto; }
+  .flottant > p { font-weight:700; color:var(--accent); }
+  .flottant .rangee { flex-direction:column; align-items:stretch; }
+  #ouvrir-menu { position:fixed; z-index:6; right:16px; bottom:16px; box-shadow:0 2px 6px rgba(80,67,59,.25); }
+  /* Grand écran : colonne fixe à gauche, comme un site de doc ; la page se décale pour ne jamais être
+     recouverte. 1080 px = colonne 16 rem + page 46 rem + marges (16 + 32 + 16 px). */
+  @media (min-width:1080px) {
+    /* la colonne commence sous la barre de suivi (--haut-suivi vaut 0 sans elle) */
+    .flottant { top:calc(1rem + var(--haut-suivi)); left:16px; width:16rem; max-height:calc(100vh - 2rem - var(--haut-suivi)); }
+    body.avec-colonne { padding-left:calc(16rem + 48px); }
+    #ouvrir-menu { display:none; }
+    /* la barre du lecteur (LECTEUR, plus bas) et celle de suivi suivent la page décalée */
+    body.avec-colonne .barre-lecture, body.avec-colonne .barre-suivi { padding-left:calc(16rem + 48px); }
+    body.vlp-lit .flottant { max-height:calc(100vh - 8rem - var(--haut-suivi)); }
+  }
+  /* Les onglets remplacent le sommaire de liens : le garder ferait doublon. Sans JavaScript, il reste. */
+  body.avec-colonne .page nav[aria-label="Sommaire"] { display:none; }
+  @media (max-width:1079px) {
+    .flottant { right:16px; bottom:4.6rem; width:min(20rem, calc(100vw - 32px)); max-height:calc(100vh - 6rem - var(--haut-suivi)); box-shadow:0 2px 10px rgba(80,67,59,.3); }
+    .flottant:not(.ouvert) { display:none; }
+    .page[data-format="gros"] { padding-bottom:6rem; }
+    /* pendant la lecture, le bouton « Sections » et son menu passent au-dessus de la barre du lecteur */
+    body.vlp-lit #ouvrir-menu { bottom:10.5rem; }
+    body.vlp-lit .flottant { bottom:13rem; max-height:calc(100vh - 14rem - var(--haut-suivi)); }
+  }
+/* LECTEUR — début. Le lecteur à voix haute (son script : LECTEUR dans vlp.js), copié à l'octet dans
+   vlp.css et dans le style de rapport-choix.html ; test-vlp.py vérifie les deux copies. Les jetons
+   ont un repli pour les deux palettes : --surface ou --carte, --line ou --trait. */
+.lecteur { display:flex; flex-wrap:wrap; align-items:center; gap:.4rem .9rem; margin:.3rem 0; }
+/* caché pendant qu'on prend le texte de la page : sans cette règle, display:flex l'emporte sur hidden */
+.lecteur[hidden],.barre-lecture[hidden] { display:none; }
+.lecteur .suivi,.barre-lecture .ou,.barre-lecture .etiquette { font-size:.9375rem; color:var(--doux); }
+.principal { display:inline-flex; align-items:center; gap:.5rem; font:inherit; font-size:1rem; font-weight:700; color:var(--surface, var(--carte)); background:var(--accent); border:1px solid var(--accent); border-radius:6px; padding:.4rem 1rem .4rem .8rem; min-height:2.6rem; cursor:pointer; }
+.principal svg { flex:none; }
+.principal:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+.vitesses { display:inline-flex; flex-wrap:wrap; border:1px solid var(--bord-bouton, var(--doux)); border-radius:6px; overflow:hidden; }
+.vitesses button { font-family:"IBM Plex Mono",monospace; font-weight:400; letter-spacing:normal; font-size:.9375rem; min-height:2.5rem; padding:0 .7rem; border:0; border-right:1px solid var(--line, var(--trait)); border-radius:0; background:var(--surface, var(--carte)); color:var(--texte); cursor:pointer; }
+.vitesses button:last-child { border-right:0; }
+.vitesses button[aria-pressed="true"] { background:var(--accent); color:var(--surface, var(--carte)); }
+.vitesses button:focus-visible { outline:2px solid var(--accent); outline-offset:-4px; }
+.barre-lecture { position:fixed; left:0; right:0; bottom:0; z-index:10; background:var(--surface, var(--carte)); border-top:2px solid var(--accent); box-shadow:0 -2px 6px rgba(80,67,59,.08); padding:.6rem 16px calc(.6rem + env(safe-area-inset-bottom, 0px)); }
+.barre-lecture .dedans { max-width:46rem; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; gap:.5rem .9rem; }
+.barre-lecture progress { flex-basis:100%; height:5px; -webkit-appearance:none; appearance:none; border:0; border-radius:3px; background:var(--line, var(--trait)); overflow:hidden; }
+.barre-lecture progress::-webkit-progress-bar { background:var(--line, var(--trait)); }
+.barre-lecture progress::-webkit-progress-value { background:var(--accent); }
+.barre-lecture progress::-moz-progress-bar { background:var(--accent); }
+body.vlp-lit { padding-bottom:9rem; }
+/* LECTEUR — fin */
+</style>
+
+<div class="page" data-cle="fil-rouge-2026-10-07-lot1-a-5" data-format="gros">
+
+  <header style="display:flex;flex-direction:column;gap:.8rem">
+    <p class="mono sous">Fil Rouge Immobilier · 2026-10-07 · commits de 13:51 à 14:57, heures lues</p>
+    <h1>Lot de migration v3 : les cinq premières fiches</h1>
+    <span class="jauge">🟢 Ça tient, mais…</span>
+    <ul>
+      <li>✅ <strong>5 fiches sur 12</strong> sont faites : le schéma v3 existe, et le <strong>mandat</strong> et le <strong>paiement</strong> suivent les décisions du registre.</li>
+      <li>✅ <strong>145 tests</strong> passent (123 au départ).</li>
+      <li>✅ <strong>18 pièges</strong> posés exprès dans la base : les tests les ont <strong>tous</strong> détectés.</li>
+      <li>🟡 <strong>9 décisions</strong> prises en séance, à valider par le groupe : une case par carte.</li>
+      <li>⚠️ Sur une base de dev restée en v2, la route <strong>/payments répond 500</strong>.</li>
+      <li>➡️ Rien n'est <strong>poussé</strong> sur GitHub : le push se demande à part.</li>
+    </ul>
+  </header>
+
+  <section>
+    <h2>Le contexte : où on en est</h2>
+    <div class="clair">
+      <p>🧰 <strong>Fil Rouge Immobilier</strong> : notre projet EISI, une API (FastAPI et PostgreSQL) pour un service de chasse immobilière.</p>
+      <p>🏗️ <strong>Le chantier en cours : LOT</strong>, « Lot de migration (schéma v3) ». Son but : <strong>appliquer au schéma</strong> les décisions déjà prises, et <strong>prouver</strong> qu'une base existante, mise à jour, égale une base neuve.</p>
+      <div>
+        <p>📍 <strong>Où on en est : fiche 5 sur 12.</strong></p>
+        <ul>
+          <li>✅ <strong>LOT1</strong> : le dossier <span class="mono">docker/init-v3/</span> existe, et Docker le lit.</li>
+          <li>✅ <strong>LOT2</strong> : le banc compare une base neuve et une base mise à jour.</li>
+          <li>✅ <strong>LOT3</strong> : le mandat a ses statuts de fin, dont « perdu ».</li>
+          <li>✅ <strong>LOT4</strong> : un mandat dure 6 mois pile, et l'exclusivité est contrôlée.</li>
+          <li>✅ <strong>LOT5</strong> : le paiement perd ses étapes de facture et gagne ses dates.</li>
+          <li>➡️ <strong>Ensuite, LOT6</strong> : paramètres de rémunération et journal des notes.</li>
+          <li>🗓️ <strong>Après</strong> : LOT7 à LOT10 (personnes, localisation, biens, anciens mandats), puis <strong>LOT11</strong> recrée la base de dev de tout le monde, en une fois.</li>
+        </ul>
+      </div>
+      <div>
+        <p>❓ <strong>Pourquoi ce chantier existe</strong></p>
+        <ul>
+          <li>Le registre <span class="mono">md/questions-a-trancher-2026-10-02.md</span> a tranché des dizaines de questions, avec le groupe et avec Jeff (entretien du <strong>2026-10-07</strong>).</li>
+          <li>⚠️ Avant ce chantier, <strong>aucune</strong> de ces décisions n'était appliquée dans le schéma.</li>
+        </ul>
+      </div>
+      <p>📝 <strong>Ce que cette page vous demande</strong> : cocher « je garde » ou « à revoir » sur <strong>9 décisions</strong>, puis copier vos réponses en bas. Les points ouverts sont une simple liste : rien à cocher.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>En deux mots : c'est quoi, une migration de schéma ?</h2>
+    <div class="clair">
+      <p>🏠 <strong>Le schéma, c'est le plan de la maison.</strong> Les tables sont les pièces ; les contraintes sont les règles du lieu, comme « pas plus de six personnes dans le salon ».</p>
+      <div>
+        <p>Il y a <strong>deux façons</strong> d'avoir une maison au nouveau plan :</p>
+        <ul>
+          <li>🆕 <strong>construire neuf</strong> sur le plan v3 : c'est <span class="mono">docker/init-v3/</span> ;</li>
+          <li>🔨 <strong>rénover</strong> une maison v2 déjà habitée : ce sont les fichiers de <span class="mono">docker/migrations/v2-vers-v3/</span>.</li>
+        </ul>
+      </div>
+      <p>🔍 <strong>Le banc</strong> est un contrôleur : il visite les deux maisons et compare tout, pièce par pièce. S'il ne trouve aucune différence, les deux chemins mènent au même endroit.</p>
+      <div>
+        <p>Les mots qui reviennent :</p>
+        <ul>
+          <li><strong>contrainte</strong> : une règle que la base fait respecter seule (un <span class="mono">CHECK</span>, par exemple « le taux est entre 20 et 60 % ») ;</li>
+          <li><strong>trigger</strong> : un petit programme que la base lance à chaque écriture, pour une règle qui regarde d'autres lignes ;</li>
+          <li><strong>test d'intégration</strong> : un test qui passe par l'API et écrit dans une vraie base de test, <span class="mono">fil_rouge_test</span> ;</li>
+          <li><strong>mutant</strong> : un piège. On casse exprès une règle dans la base de test, et on vérifie que le test qui la garde échoue. Un test qui ne tombe pas ne protège rien ;</li>
+          <li><strong>pyright</strong> : un outil qui relit le Python et cherche les erreurs de type.</li>
+        </ul>
+      </div>
+      <p>➡️ <strong>Pourquoi c'est utile</strong> : chacun de nous a une base v2 sur sa machine. Une base neuve et une base mise à jour doivent se comporter <strong>pareil</strong>, sinon un bug n'apparaît que chez une personne.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Les chiffres</h2>
+    <div class="chiffres">
+      <div class="chiffre"><b>5 sur 12</b><span>fiches faites, chacune dans son commit</span></div>
+      <div class="chiffre"><b>145</b><span>tests qui passent, contre 123 au départ</span></div>
+      <div class="chiffre"><b>18 sur 18</b><span>pièges (mutants) détectés par les tests</span></div>
+      <div class="chiffre"><b>507</b><span>éléments comparés par le banc : aucune différence</span></div>
+      <div class="chiffre"><b>3</b><span>fichiers de migration (03, 04, 05)</span></div>
+      <div class="chiffre"><b>16,45 $</b><span>coût mesuré du chantier, pour 205 tours</span></div>
+    </div>
+    <ul class="sous" style="font-size:.95rem">
+      <li>Tests : depuis <span class="mono">docker/</span>, <span class="mono">docker compose exec -T api python -m pytest -q -p no:cacheprovider</span> → « 145 passed ».</li>
+      <li>Banc : <span class="mono">bash docker/compare_v2_v3.sh</span> → « IDENTIQUES — 507 faits comparés ».</li>
+      <li>Mutants : 6 à LOT3, 5 à LOT4, 7 à LOT5 ; chacun posé sur la base de test, puis la base est recréée.</li>
+      <li>Coût : <span class="mono">vlp.py cout "context AI/10-lot-migration.md" --session</span> → « TOTAL ≈37,3M (37 281 683) · 205 tours · 16,45 $ ».</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Ce qui a été fait</h2>
+    <div class="tableau">
+      <table>
+        <thead><tr><th>Commit</th><th>Quoi</th><th>Ce qu'il livre</th><th>Coût</th></tr></thead>
+        <tbody>
+          <tr><td class="n">d51bbf0</td><td><b>LOT1</b><br>Créer init-v3 et basculer le montage</td><td>Le dossier <span class="mono">init-v3</span>, copie de v2, lu par Docker ; v2 figé</td><td class="n">2,61 $</td></tr>
+          <tr><td class="n">a521795</td><td><b>LOT2</b><br>Écrire le banc</td><td><span class="mono">docker/compare_v2_v3.sh</span> : base neuve contre base mise à jour</td><td class="n">1,78 $</td></tr>
+          <tr><td class="n">6003678</td><td><b>LOT3</b><br>Mandat : statuts de fin et signature</td><td>Statut « perdu », case « signé » retirée, annulation sans signature, offre « signée »</td><td class="n">2,83 $</td></tr>
+          <tr><td class="n">c0683e5</td><td><b>LOT4</b><br>Mandat : six mois et exclusivité</td><td>6 mois pile ; le trigger d'exclusivité est branché</td><td class="n">1,90 $</td></tr>
+          <tr><td class="n">c8af2f6</td><td><b>LOT5</b><br>Paiement : note figée, taux borné, dates</td><td>Étapes sans facture, deux dates, taux de 20 à 60 %, score et détails du calcul gardés</td><td class="n">2,88 $</td></tr>
+          <tr><td class="n">—</td><td><b>Hors fiches</b></td><td>Ouverture du chantier, questions, comptes rendus</td><td class="n">4,45 $</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>LOT1 : créer init-v3</h2>
+    <div class="clair">
+      <p>💬 <strong>En clair</strong> : on a photocopié le plan v2 pour en faire le plan v3, puis on a dit à Docker de construire à partir du v3. Le plan v2 ne bouge plus : il sert de point de départ au banc.</p>
+      <div>
+        <p>🧩 <strong>Ce qui change</strong></p>
+        <ul>
+          <li>Le dossier <strong><span class="mono">docker/init-v3/</span></strong> : schéma, reprise des données, biens, README.</li>
+          <li><strong>Une seule ligne</strong> de <span class="mono">docker/docker-compose.yml</span> : le montage passe à <span class="mono">./init-v3</span>, avec l'accord de Sébastien.</li>
+          <li>Les docs (<span class="mono">CLAUDE.md</span>, <span class="mono">CHANTIER.md</span>, l'index, l'état, <span class="mono">API/README.md</span>) pointent vers v3.</li>
+        </ul>
+      </div>
+      <div>
+        <p>🔬 <strong>La preuve</strong></p>
+        <ul>
+          <li>Entre v2 et v3 : <strong>1 seule différence</strong>, l'en-tête du README.</li>
+          <li>pytest : <strong>123 passed</strong>, avant et après.</li>
+        </ul>
+      </div>
+      <p>⚠️ Votre <strong>base de dev n'est pas recréée</strong> : Docker ne relit le dossier monté que sur un volume vide. C'est prévu à <strong>LOT11</strong>, une seule fois pour toute l'équipe.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>LOT2 : le banc</h2>
+    <div class="clair">
+      <p>💬 <strong>En clair</strong> : chaque changement s'écrit <strong>deux fois</strong>, dans le plan neuf et dans la rénovation. Une faute de recopie ne se verrait nulle part. Le banc construit les deux bases et compare leurs listes : colonnes, contraintes, index, triggers, fonctions, nombre de lignes.</p>
+      <div>
+        <p>🔬 <strong>La preuve</strong></p>
+        <ul>
+          <li>Premier passage : <strong>aucune différence, 499</strong> éléments comparés, en 17,8 à 27,4 s.</li>
+          <li>Un piège : une colonne en trop côté v3. Le banc <strong>la trouve et la nomme</strong>.</li>
+          <li>La même colonne écrite au milieu de la table : <strong>aucune différence</strong>. C'est voulu : une rénovation ajoute toujours la colonne en dernier.</li>
+        </ul>
+      </div>
+      <p>⚠️ Le banc <strong>ne compare pas</strong> les droits (<span class="mono">GRANT</span>), les rôles, les vues, les types ni les séquences. Ça comptera à <strong>LOT12</strong> (rôle en lecture seule).</p>
+      <p>🧭 Pourquoi un script à nous plutôt qu'un outil : voir la décision <strong>D1</strong>.</p>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+        <p>Il crée <span class="mono">cmp_v2_migree</span> (<span class="mono">init-v2/*.sql</span> puis chaque migration par ordre de nom) et <span class="mono">cmp_v3_neuve</span> (<span class="mono">init-v3/*.sql</span>), décrit, compare, puis supprime les deux. Il sort 0 si identiques, 1 avec le diff, 2 si un fichier ne se charge pas. Détail : <span class="mono">docker/init-v3/README.md</span> §10.</p>
+      </details>
+    </div>
+  </section>
+
+  <section>
+    <h2>LOT3 : la fin d'un mandat</h2>
+    <div class="clair">
+      <p>💬 <strong>En clair</strong> : un mandat a une fin de vie — fini, expiré, renouvelé, annulé. On ajoute <strong>« perdu »</strong> (<span class="mono">'lost'</span>) : le bien s'est vendu sans nous, personne n'est payé.</p>
+      <div>
+        <p>🧩 <strong>Ce qui change</strong></p>
+        <ul>
+          <li><span class="mono">mandate.status</span> accepte <strong><span class="mono">'lost'</span></strong>, pour la vente hors agence comme pour la vente par un collègue (Q-REM-02, Q-REM-14).</li>
+          <li>La case <span class="mono">is_client_signed</span> est <strong>retirée</strong> : la date de signature dit déjà tout (Q-MAN-05, Q-MAN-09). Retirée aussi des 17 mandats repris.</li>
+          <li>Un client peut <strong>annuler avant de signer</strong> : un mandat <span class="mono">'canceled'</span> sans date est permis (Q-MAN-07).</li>
+          <li>Une offre sur un bien peut être <strong><span class="mono">'signed'</span></strong> (Q-SCH-04).</li>
+        </ul>
+      </div>
+      <div>
+        <p>🔬 <strong>La preuve</strong></p>
+        <ul>
+          <li><strong>6 tests</strong>, et <strong>6 sur 6</strong> tombent sous leur piège.</li>
+          <li>Banc : aucune différence, <strong>498</strong> éléments. pytest : <strong>129 passed</strong>.</li>
+        </ul>
+      </div>
+      <p>🧭 Choix de la fiche : <strong>D2</strong> (un seul statut) et <strong>D5</strong> (date de fin facultative dans l'API).</p>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+        <p>Fichiers : <span class="mono">init-v3/01</span>, <span class="mono">init-v3/02</span>, <span class="mono">docker/migrations/v2-vers-v3/03_mandat-statuts.sql</span>, <span class="mono">mandate_model.py</span>, <span class="mono">estate_proposed_model.py</span>, <span class="mono">test_constraints_db.py</span>. Contrainte <span class="mono">chk_status_signature</span> : seuls <span class="mono">'pending_signature'</span> et <span class="mono">'canceled'</span> se passent de date de signature.</p>
+      </details>
+    </div>
+  </section>
+
+  <section>
+    <h2>LOT4 : six mois et exclusivité</h2>
+    <div class="clair">
+      <p>💬 <strong>En clair</strong> : un mandat dure <strong>exactement 6 mois</strong>, ni 5, ni 7. Et un mandat exclusif, c'est une <strong>chasse gardée</strong> : pendant ce temps, le client ne confie aucun autre mandat. Ces deux règles étaient écrites en commentaire depuis septembre, jamais branchées.</p>
+      <div>
+        <p>🧩 <strong>Ce qui change</strong></p>
+        <ul>
+          <li><span class="mono">chk_mandate_six_months</span> : fin = signature + 6 mois, au jour près (Q-MAN-01).</li>
+          <li>Le trigger <span class="mono">trg_mandate_exclusivity</span> est <strong>branché</strong>, corrigé avant (Q-MAN-02, Q-JEF-06).</li>
+          <li>Un mandat <strong>annulé libère</strong> le client tout de suite.</li>
+        </ul>
+      </div>
+      <div>
+        <p>🔬 <strong>La preuve</strong></p>
+        <ul>
+          <li>Compté avant de brancher, sur les 17 mandats repris : <strong>0</strong> hors des 6 mois, <strong>0</strong> paire en conflit.</li>
+          <li><strong>5 tests</strong>, <strong>5 sur 5</strong> tombent sous leur piège.</li>
+          <li>Banc : aucune différence, <strong>500</strong> éléments. pytest : <strong>134 passed</strong>.</li>
+        </ul>
+      </div>
+      <p>🧭 Choix de la fiche : <strong>D3</strong> (renouvellement) et <strong>D4</strong> (par client, pas par bien).</p>
+      <p>⚠️ Un mandat <span class="mono">'lost'</span> <strong>bloque encore</strong> l'exclusivité : seul <span class="mono">'canceled'</span> est ignoré. Point ouvert.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>LOT5 : le paiement</h2>
+    <div class="clair">
+      <p>💬 <strong>En clair</strong> : le paiement du chasseur suit un parcours, comme un colis : <strong>annoncé → programmé → payé</strong>, ou refusé. On note la date de chaque étape. Et on garde la « photo » du calcul, pour pouvoir le refaire plus tard, même si les chiffres du chasseur ont bougé.</p>
+      <div>
+        <p>🧩 <strong>Ce qui change</strong></p>
+        <ul>
+          <li>Les étapes <span class="mono">'invoice_submitted'</span> et <span class="mono">'verified'</span> sont <strong>retirées</strong> : la facture est hors périmètre (Jeff, Q-JEF-23).</li>
+          <li>Deux dates : <strong><span class="mono">announced_at</span></strong> (chasseur prévenu) et <strong><span class="mono">scheduled_for</span></strong> (jour prévu du virement), Q-REM-17.</li>
+          <li>Le taux final est <strong>entre 20 et 60 %</strong> (Q-REM-19, confirmé par Jeff : Q-JEF-01).</li>
+          <li>Hors refus, le taux final est <strong>obligatoire</strong> (Q-REM-10).</li>
+          <li><strong><span class="mono">performance_score</span></strong> garde le score qui a servi (Q-REM-03).</li>
+          <li><strong><span class="mono">calculation_details</span></strong> garde les 5 notes et les entrées du calcul (Q-REM-04).</li>
+        </ul>
+      </div>
+      <div>
+        <p>🔬 <strong>La preuve</strong></p>
+        <ul>
+          <li><strong>9 tests</strong> (11 cas) : 0,19 et 0,61 refusés ; 0,20 et 0,60 acceptés ; etc.</li>
+          <li><strong>7 sur 7</strong> tombent sous leur piège.</li>
+          <li>Le mot « invoice » : <strong>0 ligne</strong> dans le schéma et l'API.</li>
+          <li>Banc : aucune différence, <strong>507</strong> éléments. pytest : <strong>145 passed</strong>, dont les <strong>55</strong> cas de rémunération.</li>
+        </ul>
+      </div>
+      <p>🧭 Choix de la fiche : <strong>D6</strong>, <strong>D7</strong> et <strong>D8</strong>.</p>
+      <p>⚠️ 20 % et 60 % sont des <strong>paramètres proposés</strong> par le sujet, pas des règles : si Jeff les change, il faudra une migration (tension avec Q-REM-05).</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Les décisions prises en séance — à valider</h2>
+    <p class="sous">Ce sont les choix faits pendant ces cinq fiches. Certains ont été tranchés par Sébastien sur un questionnaire, d'autres par Claude, seul. Chaque carte dit qui a choisi. Cochez ce que vous gardez ; en bas, un bouton copie vos réponses.</p>
+
+    <div class="decision">
+      <div class="tete"><h3>D1 · Le banc est un script à nous</h3><span class="puce faible">outillage</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>Pour comparer deux bases, on a écrit notre propre script (bash et SQL), plutôt que d'installer un outil. Choisi par <strong>Sébastien</strong>, le 2026-10-07.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd><strong>Rien à installer</strong> : il tourne dans le conteneur <span class="mono">db</span>. Il compte aussi les lignes.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>Environ <strong>190 lignes</strong> à maintenir nous-mêmes ; il ne voit ni droits, ni vues, ni types.</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Le problème</dt><dd>Prouver « base neuve = base migrée » à chaque fiche.</dd>
+        <dt>Le choix</dt><dd><span class="mono">docker/compare_v2_v3.sh</span>, 193 lignes au commit <span class="mono">a521795</span>.</dd>
+        <dt>Écarté</dt><dd>migradiff, la suite de migra : pip sur la machine, et le compte des lignes à coder à part. pg-schema-diff (Stripe) : un binaire Go à installer. Licences non vérifiées.</dd>
+        <dt>Sources</dt><dd><a href="https://www.bytebase.com/blog/top-postgres-schema-compare-tools/">bytebase.com, « top postgres schema compare tools »</a> (blog, lu le 2026-10-07) ; <a href="https://github.com/postgresql-tools/migra">github.com/postgresql-tools/migra</a> (dépôt, lu le 2026-10-07). « migra déprécié en 2024 » vient du résumé du moteur de recherche : page non ouverte.</dd>
+        <dt>Défaire</dt><dd>Remplacer le script par un outil : le banc n'est appelé par aucun autre code.</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="D1" value="garder">Je garde</label><label><input type="radio" name="D1" value="revoir">À revoir</label></div>
+    </div>
+
+    <div class="decision">
+      <div class="tete"><h3>D2 · Un seul statut « perdu »</h3><span class="puce moyen">schéma</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>Que le bien soit vendu hors agence ou par un collègue, le mandat finit <strong>« perdu »</strong>. Choisi par <strong>Sébastien</strong>, à LOT3 : le registre laissait « un ou deux statuts ? » ouvert.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd><strong>Simple</strong> : le cas « collègue » se retrouve en regardant l'autre mandat, celui qui a vendu.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>Pour distinguer les deux cas, il faut <strong>croiser</strong> deux mandats.</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Écarté</dt><dd>Deux statuts : <span class="mono">'lost'</span> (hors agence) et <span class="mono">'superseded'</span> (collègue).</dd>
+        <dt>Défaire</dt><dd>Une migration de plus, qui ajoute <span class="mono">'superseded'</span> au <span class="mono">CHECK</span>.</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="D2" value="garder">Je garde</label><label><input type="radio" name="D2" value="revoir">À revoir</label></div>
+    </div>
+
+    <div class="decision">
+      <div class="tete"><h3>D3 · Un renouvellement ne se bloque pas lui-même</h3><span class="puce moyen">schéma</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>Un renouvellement (l'enfant) commence le jour où son parent finit : les deux se touchent. La carte Q-MAN-02 ne laissait passer que le parent. Claude a exclu le couple <strong>dans les deux sens</strong>. Pris par <strong>Claude</strong>, seul.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>On peut <strong>renouveler</strong> un exclusif, puis <strong>clore</strong> le parent.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>La règle va <strong>un peu plus loin</strong> que la carte du registre : à acter.</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Le problème</dt><dd>Mesuré : avec le parent seul exclu, passer le parent à <span class="mono">'completed'</span> après son renouvellement était refusé.</dd>
+        <dt>La preuve</dt><dd>Piège « enfants non exclus » : <span class="mono">test_mandate_renewal_of_exclusive_is_accepted</span> tombe.</dd>
+        <dt>Défaire</dt><dd>Retirer la ligne <span class="mono">m.id_mandate_parent IS DISTINCT FROM NEW.id</span> du trigger, dans <span class="mono">01</span> et dans la migration <span class="mono">04</span>.</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="D3" value="garder">Je garde</label><label><input type="radio" name="D3" value="revoir">À revoir</label></div>
+    </div>
+
+    <div class="decision">
+      <div class="tete"><h3>D4 · L'exclusivité vaut par client</h3><span class="puce faible">schéma</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>La fiche LOT4 disait « même bien » ; le registre (Q-MAN-02) dit « même client ». Claude a suivi <strong>le registre</strong>. Pris par <strong>Claude</strong>, seul.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>Le code suit <strong>la décision</strong>, pas un résumé.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>⚠️ La fiche reste <strong>fausse</strong> tant qu'on ne la corrige pas.</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Le choix</dt><dd>Le trigger compare <span class="mono">id_client</span> ; son message : « U02 : un mandat exclusif interdit tout autre mandat pour ce client sur la periode ».</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="D4" value="garder">Je garde</label><label><input type="radio" name="D4" value="revoir">À revoir</label></div>
+    </div>
+
+    <div class="decision">
+      <div class="tete"><h3>D5 · Date de fin facultative dans l'API</h3><span class="puce faible">API</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>La base acceptait déjà un mandat sans date de fin (jamais signé). L'API, elle, l'exigeait : impossible d'enregistrer une annulation avant signature. Pris par <strong>Claude</strong>, seul.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>L'API dit <strong>la même chose</strong> que la base.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>Rien de connu : c'est la base qui garde la règle.</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Le choix</dt><dd><span class="mono">ends_at: Optional[date] = None</span> dans <span class="mono">mandate_model.py</span>.</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="D5" value="garder">Je garde</label><label><input type="radio" name="D5" value="revoir">À revoir</label></div>
+    </div>
+
+    <div class="decision">
+      <div class="tete"><h3>D6 · Plus d'étape « facture » dans le paiement</h3><span class="puce moyen">schéma</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>Les étapes « facture envoyée » et « facture vérifiée » sont <strong>retirées</strong>. Choisi par <strong>Sébastien</strong>, à LOT5 : le registre ne les tranchait pas.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>Colle à <strong>Jeff</strong> : aucune trace de facture en base. <strong>0 paiement</strong> à reprendre.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>⚠️ <strong>Écart</strong> aux user stories 07 (lignes 17 à 27) : à écrire dans un ADR.</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Écarté</dt><dd>Garder <span class="mono">'verified'</span> au sens « paiement vérifié par l'agence » : sens que personne n'a demandé. Tout garder : contredit Jeff.</dd>
+        <dt>Le choix</dt><dd><span class="mono">CHECK (status IN ('refused', 'announced', 'scheduled', 'paid'))</span>.</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="D6" value="garder">Je garde</label><label><input type="radio" name="D6" value="revoir">À revoir</label></div>
+    </div>
+
+    <div class="decision">
+      <div class="tete"><h3>D7 · Une date par étape du paiement</h3><span class="puce moyen">schéma</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>Chaque étape atteinte a <strong>sa date</strong>, et la garde ensuite. Un refus n'est ni annoncé ni programmé. « Les deux dates » : choisi par <strong>Sébastien</strong>. Les détails ci-dessous : par <strong>Claude</strong>.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>On sait <strong>quand</strong> le chasseur a été prévenu, et <strong>pour quand</strong> le virement est prévu.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>L'<strong>ordre</strong> des dates (annonce avant virement) n'est pas vérifié.</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Le choix</dt><dd><span class="mono">announced_at TIMESTAMP</span> (un instant) ; <span class="mono">scheduled_for DATE</span> (un jour). <span class="mono">chk_announced</span> : remplie pour <span class="mono">'announced'</span>, <span class="mono">'scheduled'</span>, <span class="mono">'paid'</span>, vide pour <span class="mono">'refused'</span>. <span class="mono">chk_scheduled</span> : remplie pour <span class="mono">'scheduled'</span> et <span class="mono">'paid'</span>.</dd>
+        <dt>Le prix</dt><dd>Deux contraintes de plus ; deux pièges, deux tests qui tombent.</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="D7" value="garder">Je garde</label><label><input type="radio" name="D7" value="revoir">À revoir</label></div>
+    </div>
+
+    <div class="decision">
+      <div class="tete"><h3>D8 · Le score figé : de 0 à 100, jamais sur un refus</h3><span class="puce faible">schéma</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>Le score gardé sur le paiement suit les mêmes bornes que le score du chasseur (0 à 100). Il est interdit sur un refus. Il n'est <strong>pas obligatoire</strong> ailleurs : Q-REM-03 ne le dit pas. Pris par <strong>Claude</strong>, seul.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>Rien d'<strong>inventé</strong> : les bornes viennent de <span class="mono">hunter_performance.score</span>.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>Un paiement normal peut être enregistré <strong>sans score</strong>.</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Le choix</dt><dd><span class="mono">performance_score NUMERIC(4,1) CHECK (performance_score BETWEEN 0 AND 100)</span> ; <span class="mono">performance_score IS NULL</span> dans la branche refus de <span class="mono">chk_refused</span>.</dd>
+        <dt>Défaire</dt><dd>Une migration de plus, si le groupe veut le score obligatoire hors refus.</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="D8" value="garder">Je garde</label><label><input type="radio" name="D8" value="revoir">À revoir</label></div>
+    </div>
+
+    <div class="decision">
+      <div class="tete"><h3>D9 · Tests et typage lancés autrement que prévu</h3><span class="puce faible">méthode</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>La commande écrite dans <span class="mono">CHANTIER.md</span> (<span class="mono">cd API &amp;&amp; python -m pytest -q</span>) <strong>ne marche pas</strong> sur la machine : sqlmodel n'y est pas installé. Les tests ont tourné <strong>dans le conteneur</strong> <span class="mono">api</span>. Pris par <strong>Claude</strong>, seul.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>Les tests tournent avec les <strong>vraies versions</strong> de l'API.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>⚠️ pyright ne peut pas tomber à <strong>0 erreur</strong> sur la machine. On a compté avant et après : jamais une erreur de plus (6/6, 3/3, 3/3).</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Le choix</dt><dd>Depuis <span class="mono">docker/</span> : <span class="mono">docker compose exec -T api python -m pytest -q -p no:cacheprovider</span>. Toutes les erreurs pyright viennent de sqlmodel absent de la machine (<span class="mono">reportMissingImports</span>) ; pyright n'est pas dans le conteneur.</dd>
+        <dt>À faire</dt><dd>Corriger la ligne « vérification » de <span class="mono">CHANTIER.md</span>.</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="D9" value="garder">Je garde</label><label><input type="radio" name="D9" value="revoir">À revoir</label></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ce qui a mal tourné</h2>
+
+    <div class="alerte">
+      <h3>⚠️ Sur une base de dev v2, /payments répond 500</h3>
+      <p>💬 <strong>En clair</strong> : l'API connaît déjà les nouvelles colonnes du paiement. Votre base de dev, restée en v2, ne les a pas. Mesuré sur la mienne : <strong>GET /payments → 500</strong> ; GET /mandates, /estates, /estate-proposed → 200.</p>
+      <ul>
+        <li>⚠️ Mesuré sur la <strong>lecture</strong> ; les autres routes du paiement lisent les mêmes colonnes. Jusqu'à <strong>LOT11</strong>, sauf migrations passées.</li>
+        <li>➕ Les <strong>migrations</strong> 03, 04 et 05 sont faites pour ça : passer une base v2 existante en v3.</li>
+        <li>💡 Proposé, <strong>pas essayé</strong> sur une base de dev : les passer dans l'ordre, ou attendre LOT11.</li>
+      </ul>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+        <p>Log de l'API : « column payment.announced_at does not exist ». Commande d'une migration, depuis <span class="mono">docker/</span> : <span class="mono">docker compose exec -T db sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -v ON_ERROR_STOP=1' &lt; migrations/v2-vers-v3/03_mandat-statuts.sql</span>, puis 04, puis 05.</p>
+      </details>
+    </div>
+
+    <div class="alerte">
+      <h3>⚠️ Une date-heure sans fuseau donne une erreur 500</h3>
+      <p>💬 <strong>En clair</strong> : si on envoie « 2030-03-02T09:00:00 » sans préciser le fuseau, l'API plante au lieu de dire « date mal écrite ». Les premiers tests de LOT5 sont tombés là-dessus.</p>
+      <ul>
+        <li>⚠️ C'était <strong>déjà vrai</strong> avant LOT5, pour <span class="mono">paid_at</span> et toute date-heure.</li>
+        <li>➕ Les tests envoient maintenant l'heure <strong>en UTC</strong> (« …Z ») ; rien n'est corrigé dans l'API.</li>
+      </ul>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+        <p>sqlmodel 0.0.47, dans le conteneur : « Datetime values must have timezone information ». L'erreur part à l'écriture, après la validation du routeur : d'où 500 et pas 422. À traiter dans le chantier API.</p>
+      </details>
+    </div>
+
+    <div class="alerte">
+      <h3>⚠️ Une note de la page du chantier était fausse</h3>
+      <p>💬 <strong>En clair</strong> : la note de LOT5 disait « 10 tests nommés ». Recompté : il y en a <strong>9</strong>, pour 11 cas. Corrigé en écrivant ce rapport.</p>
+    </div>
+
+    <div class="alerte">
+      <h3>⚠️ La branche locale et GitHub ont divergé</h3>
+      <p>💬 <strong>En clair</strong> : deux commits de docs existent en double, une fois en local, une fois sur GitHub, avec un numéro différent. Leur contenu est <strong>identique</strong>.</p>
+      <ul>
+        <li>⚠️ Local : <strong>8 commits en avance</strong>, <strong>2 en retard</strong> sur <span class="mono">origin/main</span>.</li>
+        <li>💡 Au push, il faudra fusionner. Pas de conflit attendu, puisque le contenu est le même : <strong>attendu, pas vérifié</strong>.</li>
+      </ul>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+        <p><span class="mono">git patch-id</span> : <span class="mono">b2b3f42</span> et <span class="mono">7b73626</span> → <span class="mono">b37842fddfd7</span> ; <span class="mono">64bf249</span> et <span class="mono">9fcda28</span> → <span class="mono">31943065d254</span>. Aucun merge fait : la demande a été retirée.</p>
+      </details>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ce qui reste ouvert</h2>
+    <div class="clair">
+      <div>
+        <p>🟡 <strong>À trancher par le groupe</strong></p>
+        <ul>
+          <li>Le score figé doit-il être <strong>obligatoire</strong> sur un paiement non refusé ? (D8)</li>
+          <li>Un mandat <strong>perdu</strong> doit-il encore bloquer l'exclusivité, comme aujourd'hui ?</li>
+          <li>Faut-il vérifier l'<strong>ordre des dates</strong> du paiement (annonce, puis virement, puis paiement) ?</li>
+          <li>Quels <strong>noms de clés</strong> dans <span class="mono">calculation_details</span> ? À fixer quand on branchera la calculette sur la base.</li>
+          <li>Si Jeff change <strong>20 % ou 60 %</strong>, le <span class="mono">CHECK</span> change aussi : on l'accepte, ou on passe ces bornes en paramètre (Q-REM-05) ?</li>
+        </ul>
+      </div>
+      <div>
+        <p>➡️ <strong>À faire, sans décision</strong></p>
+        <ul>
+          <li>Registre : mettre à jour la ligne <strong>134</strong> (« un ou deux statuts ? ») et la ligne <strong>137</strong> (Q-REM-17).</li>
+          <li>Fiche LOT4 : remplacer « même bien » par « même client » (D4).</li>
+          <li><span class="mono">CHANTIER.md</span> : corriger la commande de vérification (D9).</li>
+          <li>ADR à noter, pas encore à rédiger : le retrait des étapes de facture, écart aux user stories 07 (D6).</li>
+          <li><span class="mono">init-v3/01</span> ligne 947 et <span class="mono">init-v3/README.md</span> ligne 313 montrent encore <span class="mono">./init-v2</span> en exemple : prévu à LOT11.</li>
+          <li>Le banc ne compare pas les droits : à reprendre à LOT12.</li>
+        </ul>
+      </div>
+      <p>💡 Dans <span class="mono">init-v3/README.md</span> §7, la ligne « Décisions » listait encore D7, U02 et U05, fermées à LOT4. Corrigée à LOT5, dans la même ligne : un petit écart au périmètre de la fiche.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Pour vous, après le prochain push</h2>
+    <div class="clair">
+      <ul>
+        <li>🧪 Avant pytest, recréez la <strong>base de test</strong> : <span class="mono">bash docker/create_test_db.sh</span>. Elle se construit depuis <span class="mono">init-v3</span>.</li>
+        <li>▶️ Lancez les tests <strong>dans le conteneur</strong> : depuis <span class="mono">docker/</span>, <span class="mono">docker compose exec -T api python -m pytest -q</span>.</li>
+        <li>🔍 Le banc : <span class="mono">bash docker/compare_v2_v3.sh</span>, environ <strong>17 s</strong>.</li>
+        <li>⚠️ <strong>Ne recréez pas</strong> votre base de dev (<span class="mono">down -v</span>) avant LOT11 : un seul pour toute l'équipe.</li>
+        <li>⚠️ D'ici là, <strong>/payments répond 500</strong> sur votre base de dev, sauf migrations passées.</li>
+        <li>📖 Ce qui a changé, thème par thème : <span class="mono">docker/init-v3/README.md</span> §0.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Le fil</h2>
+    <p class="sous" style="font-size:.95rem">Heures lues sur les commits du 2026-10-07. Les commits « docs » viennent d'une autre session de travail, en parallèle.</p>
+    <ul class="fil">
+      <li><time>13:51</time><span><b>LOT</b> · chantier ouvert, 12 fiches</span></li>
+      <li><time>14:07</time><span><b>LOT1</b> · init-v3 créé ; Docker relancé en cours de route</span></li>
+      <li><time>14:16</time><span><b>LOT2</b> · banc écrit ; un piège visait une table <span class="mono">photo</span> qui n'existe pas : le banc a rendu le code 2, refait sur <span class="mono">picture</span></span></li>
+      <li><time>14:26</time><span><b>docs</b> · liste des ADR du chantier 4 (autre session)</span></li>
+      <li><time>14:27</time><span><b>LOT3</b> · statuts de fin du mandat</span></li>
+      <li><time>14:39</time><span><b>LOT4</b> · six mois et exclusivité</span></li>
+      <li><time>14:47</time><span><b>docs</b> · page kanban pour l'équipe (autre session)</span></li>
+      <li><time>14:57</time><span><b>LOT5</b> · paiement ; 7 tests d'abord tombés sur les dates sans fuseau</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Vos réponses</h2>
+    <p class="sous">Le bouton copie vos coches et vos commentaires. Envoyez-les à Sébastien, ou collez-les dans la conversation.</p>
+    <div class="ligne"><button type="button" id="copier">Copier mes réponses</button><span id="etat" class="sous" aria-live="polite"></span></div>
+    <textarea id="reponses" readonly aria-label="Vos réponses"></textarea>
+  </section>
+
+  <footer class="sous" style="font-size:.9375rem;border-top:1px solid var(--trait);padding-top:1rem">
+    Dépôt <span class="mono">GaSeBeLa/Fil-Rouge</span> · détail dans <span class="mono">context AI/08-etat.md</span> · <a href="https://claude.ai/artifact/1azNjWvWyhj74aqwbDryEa">page du chantier</a>.
+  </footer>
+</div>
+
+<script>
+// INSECABLE — début. Nombres et dates jamais coupés en fin de ligne, copié à l'octet dans templates/vlp.js
+// et dans le script de templates/rapport-choix.html ; test-vlp.py vérifie que les deux copies sont pareilles.
+// « 5 069 068 », « 2,57 $ », « 47 % », « 41 tours », « 3 s », « 16,3 → 11,7 » reçoivent une espace
+// insécable ; une date (« 2026-09-30 ») ou une plage (« MOR1–MOR14 », « 28–66 ») passe dans un
+// `span.insecable`, que le style garde sur une ligne. À l'affichage seulement : vlp.py écrit des espaces
+// ordinaires, que ses propres lectures de la page attendent. Le texte brut (pre), les scripts, les styles
+// et les champs de saisie n'y passent pas. La flèche, %, s, ms, min, px et les plages de nombres : ajoutés
+// le 2026-10-07, pour les rapports à cartes.
+(() => {
+  const page = document.querySelector(".page");
+  if (!page) return;
+  const insecable = /(\d) (?=\d{3}(?!\d)|[$%→]|(?:tours?|fiches?|tokens|mutants?|appels?|min|ms|px|s|k)(?![\p{L}\p{N}]))|(→) (?=\d)/gu;
+  const bloc = /(\d{4}-\d\d-\d\d|[A-Z]{2,4}\d+–[A-Z]{2,4}\d+|\d+(?:,\d+)?–\d+(?:,\d+)?)/u;
+  const textes = [];
+  const marche = document.createTreeWalker(page, NodeFilter.SHOW_TEXT);
+  for (let n = marche.nextNode(); n; n = marche.nextNode()) {
+    if (!n.parentElement.closest("pre, script, style, textarea")) textes.push(n);
+  }
+  textes.forEach((n) => {
+    const morceaux = n.data.replace(insecable, "$1$2\u00a0").split(bloc);
+    if (morceaux.length === 1) {
+      if (morceaux[0] !== n.data) n.data = morceaux[0];
+      return;
+    }
+    n.replaceWith(...morceaux.map((m, i) => {
+      if (i % 2 === 0) return m;
+      const s = document.createElement("span");
+      s.className = "insecable";
+      s.textContent = m;
+      return s;
+    }));
+  });
+})();
+// INSECABLE — fin
+  const page = document.querySelector(".page");
+  const cle = "rapport:" + (page.dataset.cle || document.title);
+  const titre = document.querySelector("h1").textContent.trim() || document.title;
+  const zone = document.getElementById("reponses");
+  const noms = [...new Set([...document.querySelectorAll('input[type="radio"]')].map(e => e.name))];
+  function lireStock() { try { return JSON.parse(localStorage.getItem(cle) || "{}"); } catch (e) { return {}; } }
+  function ecrireStock(v) { try { localStorage.setItem(cle, JSON.stringify(v)); } catch (e) {} }
+  const notes = {};
+  function texte() {
+    const lignes = ["Mes réponses — " + titre + " :"];
+    for (const n of noms) {
+      const c = document.querySelector('input[name="' + n + '"]:checked');
+      lignes.push("- " + n + " : " + (c ? c.value : "pas répondu"));
+      const note = notes[n].value.trim();
+      if (note) lignes.push("  ↳ " + note.replace(/\s*\n\s*/g, "\n    "));
+    }
+    return lignes.join("\n");
+  }
+  function maj() { zone.value = texte(); }
+  const stock = lireStock();
+  for (const n of noms) {
+    const radio = document.querySelector('input[name="' + n + '"]');
+    const carte = radio.closest(".decision, .question") || radio.parentElement;
+    const bloc = document.createElement("details");
+    const bouton = document.createElement("summary");
+    const champ = document.createElement("textarea");
+    bloc.className = "note";
+    bouton.dataset.muet = "";  // le lecteur ne le dit pas
+    champ.dataset.note = n;
+    champ.setAttribute("aria-label", "Commentaire sur " + n);
+    champ.value = stock["note:" + n] || "";
+    const libelle = () => { bouton.textContent = bloc.open ? "− Replier le commentaire" : champ.value.trim() ? "✏️ Voir mon commentaire" : "+ Ajouter un commentaire"; };
+    bloc.addEventListener("toggle", () => { libelle(); if (bloc.open) champ.focus(); });
+    bloc.append(bouton, champ);
+    carte.appendChild(bloc);
+    notes[n] = champ;
+    libelle();
+    if (!stock[n]) continue;
+    for (const el of document.querySelectorAll('input[name="' + n + '"]')) if (el.value === stock[n]) el.checked = true;
+  }
+  document.addEventListener("change", e => {
+    if (e.target.matches('input[type="radio"]')) { const s = lireStock(); s[e.target.name] = e.target.value; ecrireStock(s); maj(); }
+  });
+  document.addEventListener("input", e => {
+    if (e.target.matches("textarea[data-note]")) { const s = lireStock(); s["note:" + e.target.dataset.note] = e.target.value; ecrireStock(s); maj(); }
+  });
+  // Copie les réponses, et rend le mot affiché à côté du bouton (la barre de suivi le reprend). Presse-papier
+  // refusé ou absent : le texte se sélectionne, à copier au clavier.
+  function copier() {
+    const etat = document.getElementById("etat");
+    return Promise.resolve().then(() => navigator.clipboard.writeText(zone.value)).then(() => "Copié.")
+      .catch(e => { console.warn("rapport — copie refusée, texte sélectionné :", e); zone.focus(); zone.select(); return "Sélectionné : fais Ctrl+C."; })
+      .then(mot => (etat.textContent = mot));
+  }
+  document.getElementById("copier").addEventListener("click", copier);
+  maj();
+
+  /* Lire et répondre plus vite (2026-10-07, choix tranchés sur la page « Des rapports plus beaux et plus malins ») :
+     l'option recommandée prend l'étiquette « 👍 conseillé » ; chaque carte, « 🔊 Écouter » à côté de son titre ;
+     une carte répondue, « Suivante », qui la replie en une ligne (un clic la rouvre) et mène à la prochaine sans
+     réponse ; en haut de l'écran, la barre de suivi ; sous le titre, la version courte, éteinte d'office. */
+  (() => {
+    const cartes = [...page.querySelectorAll(".question, .decision")].filter(c => c.querySelector('input[type="radio"]'));
+    const doux = () => (matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth");
+    const element = (balise, classe, texte) => {
+      const e = document.createElement(balise);
+      if (classe) e.className = classe;
+      if (texte) e.textContent = texte;
+      return e;
+    };
+    const bouton = (classe, texte) => { const b = element("button", classe, texte); b.type = "button"; return b; };
+
+    // L'option conseillée : « recommandé » entre parenthèses quitte le libellé et devient une étiquette, que le lecteur
+    // dit ; la page bâtie par vlp.py chef page ne porte ce mot qu'une fois par option (test-vlp.py le compte)
+    const CONSEIL = /\s*\((recommandé|conseillé)\)/i;
+    for (const b of page.querySelectorAll(".choix label > span > b:first-child")) {
+      if (!CONSEIL.test(b.textContent)) continue;
+      const w = document.createTreeWalker(b, NodeFilter.SHOW_TEXT);
+      for (let n = w.nextNode(); n; n = w.nextNode()) n.data = n.data.replace(CONSEIL, "");
+      b.closest("label").classList.add("conseil");
+      b.append(" ", element("span", "etiquette-conseil", "👍 conseillé"));
+    }
+
+    // « Écouter » une carte : la carte seule passe au lecteur de la page (bloc LECTEUR, plus bas), comme une sélection
+    if (window.speechSynthesis) for (const c of cartes) {
+      const h = c.querySelector("h3");
+      if (!h) continue;
+      const tete = element("div", "tete-carte");
+      const ecouter = bouton("ecouter-carte", "🔊 Écouter");
+      ecouter.setAttribute("aria-label", "Écouter cette carte");
+      ecouter.addEventListener("click", () => {
+        const lecteur = document.querySelector(".lecteur .principal");
+        if (!lecteur) { console.warn("rapport — pas de lecteur à voix haute sur la page"); return; }
+        if (document.body.classList.contains("vlp-lit")) lecteur.click();  // la lecture en cours s'arrête d'abord
+        window.getSelection().selectAllChildren(c);
+        lecteur.click();
+        window.getSelection().removeAllRanges();  // le lecteur a déjà pris le texte
+      });
+      h.before(tete);
+      tete.append(h, ecouter);
+    }
+
+    // La barre de suivi : le compte, la prochaine carte sans réponse (après `depuis`, sinon sous le haut de l'écran), copier
+    const barre = element("div", "barre-suivi");
+    const etat = element("span", "etat-suivi");
+    const dire = texte => { etat.textContent = texte; };
+    const repondue = c => !!c.querySelector('input[type="radio"]:checked');
+    const allerSuivante = depuis => {
+      const ouvertes = cartes.filter(c => !repondue(c));
+      if (!ouvertes.length) { dire("✅ Tout est répondu : tu peux copier."); return; }
+      const cible = (depuis ? ouvertes.find(c => cartes.indexOf(c) > cartes.indexOf(depuis))
+        : ouvertes.find(c => c.offsetParent && c.getBoundingClientRect().top > barre.offsetHeight + 24)) || ouvertes[0];
+      document.dispatchEvent(new CustomEvent("vlp-montrer", { detail: cible }));  // le format gros ouvre son onglet
+      cible.scrollIntoView({ behavior: doux(), block: "start" });
+      cible.querySelector('input[type="radio"]').focus({ preventScroll: true });
+      dire("");
+    };
+    if (cartes.length) {
+      const dedans = element("div", "dedans");
+      const compte = element("span", "compte-suivi");
+      const jauge = document.createElement("progress");
+      const aller = bouton("", "➡️ Suivante sans réponse");
+      const copie = bouton("copier-suivi", "📋 Copier");
+      barre.setAttribute("role", "region");
+      barre.setAttribute("aria-label", "Suivi des réponses");
+      jauge.setAttribute("aria-label", "Cartes répondues");
+      etat.setAttribute("aria-live", "polite");
+      dedans.append(compte, jauge, aller, copie, etat);
+      barre.append(dedans);
+      document.body.prepend(barre);
+      document.body.classList.add("avec-suivi");
+      aller.addEventListener("click", () => allerSuivante(null));
+      copie.addEventListener("click", () => copier().then(dire));
+      const suivi = () => {
+        const n = noms.filter(x => document.querySelector('input[name="' + x + '"]:checked')).length;
+        compte.textContent = n + " sur " + noms.length + " répondues";
+        jauge.max = noms.length;
+        jauge.value = n;
+      };
+      // la page descend de la hauteur de la barre, mesurée tout de suite et police chargée (un onglet caché ne lance
+      // pas l'observateur), puis à chaque fois qu'elle change, quand elle passe sur deux lignes
+      const mesurer = () => document.body.style.setProperty("--haut-suivi", barre.offsetHeight + "px");
+      mesurer();
+      document.fonts?.ready.then(mesurer);
+      new ResizeObserver(mesurer).observe(barre);
+      document.addEventListener("change", e => { if (e.target.matches('input[type="radio"]')) suivi(); });
+      suivi();
+    }
+
+    // « Suivante » : la carte répondue se replie en une ligne, titre → réponse ; un clic sur la ligne la rouvre
+    for (const c of cartes) {
+      const ligne = bouton("une-ligne");
+      const titre = element("span");
+      const choisie = element("span", "choisie");
+      ligne.append(titre, choisie);
+      ligne.addEventListener("click", () => { c.classList.remove("repliee"); c.querySelector('input[type="radio"]:checked')?.focus(); });
+      const suivante = bouton("suivante", "Suivante ➡️");
+      suivante.addEventListener("click", () => {
+        const h = c.querySelector("h3");
+        const label = c.querySelector('input[type="radio"]:checked').closest("label");
+        const libelle = (label.querySelector("b") || label).cloneNode(true);
+        libelle.querySelectorAll(".etiquette-conseil").forEach(x => x.remove());
+        titre.textContent = "✅ " + (h ? h.textContent.replace(/^[^\p{L}\p{N}]+/u, "").trim() : "");
+        choisie.textContent = "→ " + libelle.textContent.trim();
+        c.classList.add("repliee");
+        ligne.focus({ preventScroll: true });  // la carte suivante prend la main, s'il en reste une
+        allerSuivante(c);
+      });
+      c.prepend(ligne);
+      c.append(suivante);
+    }
+
+    // La version courte : ne restent que l'en-tête, les titres, les lignes « 💬 en clair », les options et toute ligne
+    // qui porte ⚠️ ; le reste reçoit la classe « long », que body.courte replie. Une section vide le dit.
+    const PARLE = /^\s*💬|⚠/u;
+    const TOUJOURS = "h3, .tete, .tete-carte, .choix, .note, .explique, .suivante, .une-ligne";
+    const plier = el => el.classList.add("long");
+    const trier = racine => {  // vrai si quelque chose reste visible dans `racine`
+      let reste = false;
+      for (const el of racine.children) {
+        let garde = false;
+        if (el.matches("h2")) continue;
+        if (el.matches(TOUJOURS)) garde = true;
+        else if (el.matches("dl")) {
+          for (const dt of el.querySelectorAll(":scope > dt")) {
+            const dd = dt.nextElementSibling?.matches("dd") ? dt.nextElementSibling : null;
+            if (dt.matches(".net") || PARLE.test(dt.textContent + " " + (dd ? dd.textContent : ""))) garde = true;
+            else { plier(dt); if (dd) plier(dd); }
+          }
+        } else if (el.matches("ul, ol")) {
+          for (const li of el.children) if (PARLE.test(li.textContent)) garde = true; else plier(li);
+        } else if (el.matches("div:not(.chiffres, .tableau)")) garde = trier(el);
+        else garde = el.matches("p, h4") && PARLE.test(el.textContent);
+        if (garde) reste = true; else plier(el);
+      }
+      return reste;
+    };
+    const fixe = document.getElementById("reponses").closest("section");
+    for (const s of page.querySelectorAll(":scope > section")) {
+      if (s === fixe || trier(s)) continue;
+      const vide = element("p", "replie-court sous", "✂️ Repliée en version courte");
+      vide.dataset.muet = "";  // le lecteur ne le dit pas
+      const h2 = s.querySelector(":scope > h2");
+      if (h2) h2.after(vide); else s.prepend(vide);
+    }
+    page.querySelector(":scope > footer")?.classList.add("long");
+    const CLE_COURTE = "vlp-courte";  // une préférence de lecture, la même pour tous les rapports
+    const bascule = element("label", "bascule-courte");
+    const coche = document.createElement("input");
+    const aide = element("p", "aide-courte sous",
+      "Ne restent que les lignes en clair, les options et les alertes — rien n'est effacé, décoche pour tout revoir");
+    coche.type = "checkbox";
+    try { coche.checked = localStorage.getItem(CLE_COURTE) === "1"; }
+    catch (e) { console.warn("rapport — version courte gardée illisible :", e); }
+    bascule.dataset.muet = aide.dataset.muet = "";
+    bascule.append(coche, element("span", "", "✂️ Version courte"));
+    coche.addEventListener("change", () => {
+      document.body.classList.toggle("courte", coche.checked);
+      try { localStorage.setItem(CLE_COURTE, coche.checked ? "1" : "0"); }
+      catch (e) { console.warn("rapport — version courte non gardée :", e); }
+    });
+    const h1 = page.querySelector("header h1");
+    if (h1) h1.after(bascule, aide); else page.querySelector("header")?.append(bascule, aide);
+    document.body.classList.toggle("courte", coche.checked);
+  })();
+
+  /* Explique-moi, éteint sauf data-explique sur la page : sous chaque carte, un repli « Explique-moi cette carte »
+     demande à Claude, à son ouverture, de la réexpliquer en mots simples (capacité sample, payée sur le compte de qui
+     clique) ; « Écouter l'explication » la passe au lecteur. Sans Claude joignable, rien n'apparaît ; un accès refusé
+     retire les autres replis, et la page ne redemande jamais. Le prompt envoie l'en-tête et la carte, repli compris. */
+  if ("explique" in page.dataset) (async () => {
+    let sample = null;
+    try { sample = window.claude ? await window.claude.use("sample") : null; }
+    catch (e) { console.warn("Explique-moi : capacité sample illisible —", e); }
+    if (!sample) return;
+    const MOTS = {
+      not_granted: "Accès refusé : la page ne demandera plus rien à Claude.",
+      sampling_disabled: "Demander à Claude est coupé pour ce compte.",
+      rate_limited: "Trop de demandes d'un coup : attends un peu, puis réessaie.",
+      session_expired: "Ta session Claude a expiré : recharge la page.",
+      prompt_too_large: "La carte est trop longue pour une seule demande.",
+      refused: "Claude a refusé de répondre.",
+      empty_completion: "La réponse est revenue vide.",
+      upstream_error: "Le service a eu un souci : réessaie plus tard."
+    };
+    const FIN = ["not_granted", "sampling_disabled", "not_declared", "capability_disabled", "capability_removed"];
+    // le niveau qui a répondu (la plateforme ne donne pas le nom du modèle) ; l'Explique-moi demande « default »
+    const NIVEAUX = { quick: "rapide (quick)", default: "équilibré (default)", complex: "le plus capable (complex)" };
+    const brut = (el, sans) => {
+      const c = el.cloneNode(true);
+      c.querySelectorAll(sans).forEach(x => x.remove());
+      c.querySelectorAll("dt").forEach(x => x.after(" : "));  // « Le problème : … », pas « Le problèmela … »
+      c.querySelectorAll("dd, li, p, h1, h2, h3, label, summary, div, td, .puce").forEach(x => x.after("\n"));
+      return c.textContent.replace(/[ \t]+/g, " ").replace(/\s*\n\s*/g, "\n").trim();
+    };
+    const entete = brut(page.querySelector("header"), ".lecteur, .bascule-courte, .aide-courte").slice(0, 2000);
+    const replis = [];
+    for (const n of noms) {
+      const note = notes[n].parentElement;
+      const carte = note.parentElement;
+      const repli = document.createElement("details");
+      const resume = document.createElement("summary");
+      const etat = document.createElement("p");
+      const reponse = document.createElement("div");
+      const niveau = document.createElement("p");
+      const ligne = document.createElement("div");
+      const ecouter = document.createElement("button");
+      const relancer = document.createElement("button");
+      repli.className = "explique";
+      resume.dataset.muet = "";
+      etat.className = "sous";
+      etat.setAttribute("aria-live", "polite");
+      reponse.className = "explication";
+      niveau.className = "sous niveau";
+      niveau.dataset.muet = "";  // discret : le lecteur ne le dit pas
+      ligne.className = "ligne";
+      ecouter.type = relancer.type = "button";
+      ecouter.textContent = "🔊 Écouter l'explication";
+      relancer.textContent = "Réessayer";
+      reponse.hidden = niveau.hidden = ecouter.hidden = relancer.hidden = true;
+      ligne.append(ecouter, relancer);
+      repli.append(resume, etat, reponse, niveau, ligne);
+      carte.insertBefore(repli, note);
+      replis.push(repli);
+      let demande = false;
+      const libelle = () => { resume.textContent = repli.open ? "− Replier l'explication" : "💬 Explique-moi cette carte"; };
+      const demander = async () => {
+        demande = true;
+        relancer.hidden = ecouter.hidden = niveau.hidden = true;
+        reponse.hidden = false;
+        reponse.textContent = "";
+        etat.textContent = "Claude réfléchit… (de 5 à 60 secondes)";
+        const consigne =
+          "Tu expliques une carte d'un rapport de travail à une personne qui a une dyslexie très sévère ; " +
+          "elle écoute souvent la réponse en synthèse vocale.\n" +
+          "Réponds en français, en 8 lignes au plus, qui commencent par « - ». Une idée par ligne, des phrases " +
+          "courtes, des mots simples.\n" +
+          "Commence par une image simple de la vie de tous les jours, si elle aide. Puis dis ce que la carte " +
+          "demande ou décide, et ce que chaque option change, concrètement.\n" +
+          "Un mot technique s'explique entre parenthèses. N'invente rien qui ne soit dans le rapport. " +
+          "Pas de titre, pas de gras, pas d'émoji.\n\n" +
+          "L'en-tête du rapport :\n" + entete + "\n\nLa carte :\n" +
+          brut(carte, ".note, .explique, .une-ligne, .suivante, .ecouter-carte").slice(0, 8000);
+        try {
+          const r = await sample(consigne, { onText: ({ text }) => { reponse.textContent = text; etat.textContent = "Claude écrit…"; } });
+          reponse.textContent = r.text;
+          etat.textContent = r.truncated ? "Réponse coupée avant la fin." : "";
+          niveau.textContent = "Répondu par le niveau " + (NIVEAUX[r.modelTierApplied] || r.modelTierApplied) + ".";
+          niveau.hidden = !r.modelTierApplied;
+          ecouter.hidden = !document.querySelector(".lecteur .principal");
+        } catch (e) {
+          console.warn("Explique-moi : sample a échoué —", e.code, e.message);
+          reponse.textContent = e.text || "";
+          reponse.hidden = !e.text;
+          etat.textContent = "❌ " + (MOTS[e.code] || "L'explication n'a pas marché (" + e.code + ").");
+          if (FIN.includes(e.code)) replis.filter(x => x !== repli).forEach(x => x.remove());
+          else relancer.hidden = false;
+        }
+      };
+      repli.addEventListener("toggle", () => { libelle(); if (repli.open && !demande) demander(); });
+      relancer.addEventListener("click", demander);
+      ecouter.addEventListener("click", () => {
+        const lecteur = document.querySelector(".lecteur .principal");
+        if (document.body.classList.contains("vlp-lit")) lecteur.click();  // la lecture en cours s'arrête d'abord
+        window.getSelection().selectAllChildren(reponse);
+        lecteur.click();
+      });
+      libelle();
+    }
+  })();
+
+  /* Format « gros rapport », éteint sauf data-format="gros" sur la page. Lit la page telle quelle : une section = un onglet ; la section
+     « Tes réponses » reste toujours visible. Une carte « à répondre » : elle a des boutons radio à elle
+     et aucun n'est coché (réponse du registre ou coche gardée dans ton navigateur). */
+  if (page.dataset.format === "gros") (() => {
+    const cleVue = "vue:" + (page.dataset.cle || document.title);
+    const lire = () => { try { return JSON.parse(localStorage.getItem(cleVue) || "{}"); } catch (e) { return {}; } };
+    const ecrire = v => { try { localStorage.setItem(cleVue, JSON.stringify(v)); } catch (e) {} };
+    const fixe = document.getElementById("reponses").closest("section");
+    const sections = [...page.querySelectorAll(":scope > section")].filter(s => s !== fixe);
+    sections.forEach((s, i) => { if (!s.id) s.id = "s-" + i; });
+    const nom = s => (s.querySelector("h2")?.textContent || s.id).trim();
+    const cartes = [...page.querySelectorAll(".question, .decision")].map(c => ({
+      c, radios: [...c.querySelectorAll('input[type="radio"]')].filter(r => r.closest(".question, .decision") === c)
+    })).filter(x => x.radios.length);
+    const aRepondre = x => !x.radios.some(r => r.checked);
+    let vue = Object.assign({ onglet: sections[0].id, ouvertes: false }, lire());
+    if (vue.onglet !== "tout" && !sections.some(s => s.id === vue.onglet)) vue.onglet = sections[0].id;
+
+    function appliquer() {
+      const ouvertes = new Set(cartes.filter(aRepondre).map(x => x.c));
+      for (const x of cartes) x.c.hidden = vue.ouvertes && !ouvertes.has(x.c);
+      for (const s of sections) {
+        const n = cartes.filter(x => s.contains(x.c) && ouvertes.has(x.c)).length;
+        const vide = vue.ouvertes && n === 0;
+        s.hidden = (vue.onglet !== "tout" && vue.onglet !== s.id) || (vue.onglet === "tout" && vide);
+        for (const b of document.querySelectorAll('[data-onglet="' + s.id + '"]')) {
+          b.querySelector(".compte").textContent = n ? " · " + n + " à répondre" : "";
+        }
+      }
+      for (const b of document.querySelectorAll("[data-onglet]")) b.setAttribute("aria-current", b.dataset.onglet === vue.onglet ? "true" : "false");
+      for (const c of document.querySelectorAll("[data-filtre]")) c.checked = vue.ouvertes;
+      const actif = sections.find(s => s.id === vue.onglet);
+      const vides = document.querySelectorAll(".vide-ouvertes");
+      for (const v of vides) v.remove();
+      if (actif && vue.ouvertes && cartes.some(x => actif.contains(x.c)) && !cartes.some(x => actif.contains(x.c) && ouvertes.has(x.c))) {
+        const p = document.createElement("p");
+        p.className = "vide-ouvertes sous";
+        p.textContent = "✅ Rien à répondre dans cette section. Décoche « à répondre seulement » pour tout revoir.";
+        actif.querySelector("h2").after(p);
+      }
+      ecrire(vue);
+    }
+    function choisir(id) { vue.onglet = id; appliquer(); }
+
+    function commandes() {
+      const bloc = document.createElement("div");
+      bloc.className = "commandes";
+      const filtre = document.createElement("label");
+      filtre.innerHTML = '<input type="checkbox" data-filtre> À répondre seulement';
+      filtre.querySelector("input").addEventListener("change", e => { vue.ouvertes = e.target.checked; appliquer(); });
+      const rangee = document.createElement("div");
+      rangee.className = "rangee";
+      const ajouter = (id, texte) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.dataset.onglet = id;
+        b.innerHTML = '<span></span><span class="compte"></span>';
+        b.firstChild.textContent = texte;
+        b.addEventListener("click", () => { choisir(id); document.querySelector(".flottant")?.classList.remove("ouvert"); page.scrollIntoView(); });
+        rangee.append(b);
+      };
+      for (const s of sections) ajouter(s.id, nom(s));
+      ajouter("tout", "📜 Tout afficher");
+      bloc.append(filtre, rangee);
+      return bloc;
+    }
+
+    const haut = document.createElement("details");
+    haut.className = "vue";
+    // Ouvert d'office, même à côté de la colonne de gauche (voulu le 2026-10-06) ; ton choix est retenu.
+    haut.open = "haut" in vue ? vue.haut : true;
+    haut.innerHTML = "<summary>🗂️ Sections et filtres</summary>";
+    haut.append(commandes());
+    haut.addEventListener("toggle", () => { vue.haut = haut.open; ecrire(vue); });
+    page.querySelector("header").after(haut);
+
+    const flottant = document.createElement("nav");
+    flottant.className = "flottant";
+    flottant.setAttribute("aria-label", "Sections");
+    flottant.innerHTML = "<p>🗂️ Sections</p>";
+    flottant.append(commandes());
+    document.body.append(flottant);
+    document.body.classList.add("avec-colonne");  // décale la page derrière la colonne (style ci-dessus)
+    const bouton = document.createElement("button");
+    bouton.type = "button";
+    bouton.id = "ouvrir-menu";
+    bouton.textContent = "🗂️ Sections";
+    bouton.setAttribute("aria-expanded", "false");
+    bouton.addEventListener("click", () => { const o = flottant.classList.toggle("ouvert"); bouton.setAttribute("aria-expanded", String(o)); });
+    document.body.append(bouton);
+
+    // Un lien interne (#Q-MIG-09, #sources…), ou la barre de suivi (évènement vlp-montrer), ouvre d'abord l'onglet
+    // qui contient sa cible.
+    function viser(hash) {
+      const cible = hash && document.getElementById(decodeURIComponent(hash.slice(1)));
+      if (cible) montrer(cible);
+    }
+    document.addEventListener("vlp-montrer", e => montrer(e.detail));
+    function montrer(cible) {
+      const s = sections.find(x => x.contains(cible));
+      if (!s) return;
+      if (s.hidden) { if (vue.onglet === "tout") vue.ouvertes = false; else vue.onglet = s.id; }
+      if (cible.closest("[hidden]")) vue.ouvertes = false;  // une carte déjà répondue, cachée par le filtre
+      appliquer();
+    }
+    document.addEventListener("click", e => { const a = e.target.closest('a[href^="#"]'); if (a) viser(a.getAttribute("href")); });
+    window.addEventListener("hashchange", () => { viser(location.hash); document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView(); });
+    appliquer();
+    if (location.hash) { viser(location.hash); document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView(); }
+  })();
+
+// LECTEUR — début. Le lecteur à voix haute, copié à l'octet dans templates/vlp.js et dans le script de
+// templates/rapport-choix.html ; test-vlp.py vérifie que les deux copies sont pareilles (2026-10-06).
+// La voix du navigateur (Web Speech, sans paquet ; essayée dans le cadre d'un artefact le 2026-10-06)
+// lit la sélection s'il y en a une, sinon le texte visible de la page — une carte repliée ne se lit
+// pas. Un morceau par ligne ou par phrase : certains navigateurs coupent une lecture trop longue.
+// Au repos, un seul bouton « Écouter » sous le titre. Pendant la lecture, une barre collée en bas de
+// l'écran : Arrêter, cinq vitesses en un clic (gardées dans le navigateur), « phrase n sur N », la
+// progression. Une vitesse changée en pleine lecture reprend la phrase en cours ; Échap arrête. Ce
+// qui se passe s'affiche à côté du bouton, et une erreur part en console.
+(() => {
+  const page = document.querySelector(".page");
+  const entete = page && page.querySelector("header");
+  const voix = window.speechSynthesis;
+  if (!entete || !voix) return;
+  // l'émoji part avec ses liants invisibles (U+FE0F, U+200D), sinon il en reste une « phrase » muette
+  const sansEmoji = (t) => t.replace(/[\p{Extended_Pictographic}️‍]/gu, "").trim();
+  const VITESSES = [0.75, 1, 1.25, 1.5, 2];
+  const CLE_VITESSE = "vlp-vitesse";
+  let vitesse = 1.25; // plus vite que la normale (1), à sa demande du 2026-10-06
+  try {
+    const gardee = Number(localStorage.getItem(CLE_VITESSE));
+    if (VITESSES.includes(gardee)) vitesse = gardee;
+  } catch (e) { console.warn("lecteur — vitesse gardée illisible :", e); }
+  const ICONES = {
+    ecouter: '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.6 6a8.6 8.6 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
+    arreter: '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2" fill="currentColor"/></svg>',
+  };
+  let morceaux = [];
+  let choisi = "";
+  let encours = -1; // le morceau qui se lit, -1 hors lecture
+  let lit = false;
+  let numero = 0; // la dernière lecture lancée : une ancienne ne parle plus à sa place
+  const element = (balise, classe, texte) => {
+    const e = document.createElement(balise);
+    if (classe) e.className = classe;
+    if (texte) e.textContent = texte;
+    return e;
+  };
+  const principaux = [];
+  const principal = () => {
+    const b = element("button", "principal");
+    b.type = "button";
+    b.addEventListener("click", () => (lit ? arreter("Arrêté.") : ecouter()));
+    principaux.push(b);
+    return b;
+  };
+
+  const lecteur = element("div", "lecteur");
+  const suivi = element("span", "suivi");
+  suivi.setAttribute("aria-live", "polite");
+  lecteur.append(principal(), suivi);
+  const titre = entete.querySelector("h1");
+  if (titre) titre.after(lecteur);
+  else entete.append(lecteur);
+
+  const barre = element("div", "barre-lecture");
+  barre.hidden = true;
+  barre.setAttribute("role", "region");
+  barre.setAttribute("aria-label", "Lecture en cours");
+  const dedans = element("div", "dedans");
+  const vitesses = element("span", "vitesses");
+  vitesses.setAttribute("role", "group");
+  vitesses.setAttribute("aria-label", "Vitesse de lecture");
+  VITESSES.forEach((v) => {
+    const b = element("button", "", v.toLocaleString("fr-FR"));
+    b.type = "button";
+    b.dataset.vitesse = String(v);
+    b.addEventListener("click", () => changer(v));
+    vitesses.append(b);
+  });
+  const ou = element("span", "ou");
+  const avance = document.createElement("progress");
+  dedans.append(principal(), element("span", "etiquette", "Vitesse"), vitesses, ou, avance);
+  barre.append(dedans);
+  document.body.append(barre);
+
+  const rendre = () => {
+    principaux.forEach((b) => {
+      b.innerHTML = (lit ? ICONES.arreter : ICONES.ecouter) + "<span>" + (lit ? "Arrêter" : "Écouter") + "</span>";
+    });
+    vitesses.querySelectorAll("button").forEach((b) => {
+      b.setAttribute("aria-pressed", String(Number(b.dataset.vitesse) === vitesse));
+    });
+    barre.hidden = !lit;
+    document.body.classList.toggle("vlp-lit", lit);
+    ou.textContent = lit && encours >= 0 ? "Phrase " + (encours + 1) + " sur " + morceaux.length : "";
+    avance.max = Math.max(morceaux.length, 1);
+    avance.value = Math.max(encours + 1, 0);
+  };
+  const fin = (texte) => {
+    lit = false;
+    encours = -1;
+    suivi.textContent = texte;
+    rendre();
+  };
+  const arreter = (texte) => {
+    numero++;
+    voix.cancel();
+    fin(texte);
+  };
+  const lancer = (depart) => {
+    voix.cancel();
+    const tour = ++numero;
+    const fr = voix.getVoices().find((v) => v.lang.toLowerCase().startsWith("fr"));
+    let parti = false;
+    morceaux.slice(depart).forEach((m, k) => {
+      const i = depart + k;
+      const phrase = new SpeechSynthesisUtterance(m);
+      phrase.lang = "fr-FR";
+      phrase.rate = vitesse;
+      if (fr) phrase.voice = fr;
+      phrase.onstart = () => {
+        if (tour !== numero) return;
+        encours = i;
+        if (!parti) suivi.textContent = choisi ? "Lecture de la sélection…" : "Lecture de la page…";
+        parti = true;
+        rendre();
+      };
+      if (i === morceaux.length - 1) phrase.onend = () => {
+        if (tour === numero) fin("Lecture finie.");
+      };
+      phrase.onerror = (e) => {
+        if (tour !== numero || e.error === "interrupted" || e.error === "canceled") return;
+        console.warn("lecteur — voix en erreur :", e.error);
+        fin("Erreur de la voix : " + e.error);
+      };
+      voix.speak(phrase);
+    });
+    lit = true;
+    if (!depart) suivi.textContent = "Lancement…";
+    rendre();
+    setTimeout(() => {
+      if (parti || tour !== numero) return;
+      console.warn("lecteur — la voix n'a pas démarré en 3 s");
+      fin("La voix n'a pas démarré.");
+    }, 3000);
+  };
+  const ecouter = () => {
+    choisi = String(window.getSelection() || "").trim();
+    suivi.textContent = "";
+    lecteur.hidden = true; // le lecteur ne se lit pas lui-même
+    const brut = choisi || page.innerText;
+    lecteur.hidden = false;
+    // ne se disent pas : un bouton, ni ce qui porte data-muet (le libellé d'un repli de commande)
+    const etiquettes = new Set([...page.querySelectorAll("button, [data-muet]")]
+      .filter((b) => !lecteur.contains(b))
+      .map((b) => sansEmoji(b.textContent)));
+    morceaux = sansEmoji(brut)
+      .split(/\n+|(?<=[.!?;:])\s+/)
+      .map((m) => m.trim())
+      .filter((m) => /[\p{L}\p{N}]/u.test(m) && !etiquettes.has(m)); // sans lettre ni chiffre, rien à dire
+    if (!morceaux.length) { fin("Rien à lire."); return; }
+    lancer(0);
+  };
+  const changer = (v) => {
+    vitesse = v;
+    try { localStorage.setItem(CLE_VITESSE, String(vitesse)); }
+    catch (e) { console.warn("lecteur — vitesse non gardée :", e); }
+    rendre();
+    if (lit && encours >= 0) lancer(encours);
+  };
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && lit) arreter("Arrêté."); });
+  rendre();
+})();
+// LECTEUR — fin
+</script>
