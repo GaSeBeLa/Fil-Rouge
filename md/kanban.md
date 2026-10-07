@@ -7,9 +7,10 @@
 ## En bref
 
 - Un tableau **kanban** pour suivre le développement, dans **GitHub Projects**.
-- Il appartiendra à l'organisation **GaSeBeLa**, lié au dépôt **Fil-Rouge**.
+- ✅ **Le tableau** : <https://github.com/orgs/GaSeBeLa/projects/1>
+  - Créé le 2026-10-07 dans l'organisation **GaSeBeLa**, lié au dépôt
+    **Fil-Rouge**. Projet **privé** : visible des membres de l'organisation.
 - **5 colonnes** : Backlog → À faire → En cours → En revue → Fait.
-- ⏳ Le tableau **n'est pas encore créé** : son lien sera ajouté ici.
 - 🟡 **Une décision à prendre ensemble** : quelles cartes on met au départ (§ 5).
 
 ## 1. Pourquoi un kanban
@@ -25,7 +26,7 @@
 
 | Outil | Gratuit | Pour | Contre |
 |---|---|---|---|
-| ✅ **GitHub Projects** (choisi) | 🟡 à confirmer à la création | à côté du **code** : une PR qui dit `Closes #12` ferme la carte | chacun a besoin d'un **compte GitHub** avec accès au projet |
+| ✅ **GitHub Projects** (choisi) | ✅ créé sur l'offre **free** de l'organisation | à côté du **code** : une PR qui dit `Closes #12` ferme la carte | chacun a besoin d'un **compte GitHub** avec accès au projet |
 | Jira | ✅ jusqu'à 10 utilisateurs | même site Atlassian que **Confluence** (les ADR) | ❌ **accès refusé (403)** le 2026-10-07 |
 | Trello | ✅ jusqu'à 10 collaborateurs | le plus **simple** | séparé du code et des ADR |
 | Un fichier `KANBAN.md` | ✅ | aucun outil | pas de glisser-déposer ; un commit par déplacement |
@@ -79,8 +80,9 @@
 |---|---|
 | Choisir l'outil | ✅ GitHub Projects |
 | Choisir les colonnes | ✅ les 5 du § 3 |
-| Créer le tableau | ⏳ en attente : connexion de `gh` (GitHub CLI) au compte qui le crée |
-| Donner le droit d'écrire à chacun | 🟡 après la création |
+| Créer le tableau | ✅ <https://github.com/orgs/GaSeBeLa/projects/1> |
+| Droits des 4 propriétaires de l'organisation | ✅ admins du projet, d'office (doc GitHub) |
+| Droits de Jeff, simple membre de l'organisation | 🟡 lecture ou écriture : à décider |
 | Choisir les cartes de départ | 🟡 à décider ensemble (§ 5) |
 | Écrire les cartes | ➡️ après ce choix |
 
@@ -89,8 +91,7 @@
 1. **Lire** cette page, et réagir sur Discord.
 2. **Choisir a, b ou c** pour les cartes de départ (§ 5).
 3. **Valider ou changer** les règles du § 4.
-4. **Donner votre pseudo GitHub**, pour recevoir le droit d'écrire sur le
-   tableau.
+4. **Ouvrir le tableau** une fois, pour vérifier que vous y avez accès.
 
 ## Sources — consultées le 2026-10-07
 
@@ -99,6 +100,7 @@
   - [Using the built-in automations](https://docs.github.com/en/issues/planning-and-tracking-with-projects/automating-your-project/using-the-built-in-automations) — fermée ou fusionnée → Fait, par défaut.
   - [Linking a pull request to an issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue) — les mots-clés, la branche par défaut.
   - [Customizing the board layout](https://docs.github.com/en/issues/planning-and-tracking-with-projects/customizing-views-in-your-project/customizing-the-board-layout) — la limite de colonne n'empêche rien.
+  - [Managing access to your projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/managing-your-project/managing-access-to-your-projects) — les propriétaires de l'organisation sont admins de chaque projet.
 - Atlassian, doc officielle :
   - [Explore Jira Cloud plans](https://support.atlassian.com/jira-cloud-administration/docs/explore-jira-cloud-plans/) — Jira Free : jusqu'à 10 utilisateurs (lu dans un extrait de recherche).
   - [Collaborator limit for free Workspaces](https://support.atlassian.com/trello/docs/workspace-user-limit/) — Trello Free : 10 collaborateurs par workspace.
