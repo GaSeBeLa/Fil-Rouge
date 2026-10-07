@@ -50,7 +50,7 @@ Un test de **refus** tombe quand la contrainte est retirée (`DROP CONSTRAINT`,
 |---|---|---|
 | base de test (lit le dossier monté) | `bash docker/create_test_db.sh` | sort 0 |
 | SQL sur la base de test | depuis `docker/` : `docker compose exec -T db sh -c 'psql -U "$POSTGRES_USER" -d fil_rouge_test -c "<SQL>"'` | — |
-| tests | depuis `docker/` : `docker compose exec -T api python -m pytest -q` (sqlmodel manque sur la machine) | 0 failed ; compte brut au compte rendu |
+| tests | `cd API && python -m pytest -q` | 0 failed ; compte brut au compte rendu |
 | typage | `pyright <fichiers .py touchés>` | 0 errors, compté avant et après |
 | banc | `bash docker/compare_v2_v3.sh` (créé par LOT2) | `IDENTIQUES`, sort 0 |
 
@@ -89,9 +89,8 @@ LOT5 à LOT10 peuvent changer d'ordre.
 ---
 
 <!-- FICHE:LOT1 -->
-## LOT1 [x] — Créer init-v3 et basculer le montage
+## LOT1 [ ] — Créer init-v3 et basculer le montage
 
-**Session** : f6db559a-cd2c-449e-a160-bd4fd8d0475c
 **Dépend de** : rien.
 **Fichiers** : `docker/init-v2/*` (lu), `docker/init-v3/*` (créé), `docker/docker-compose.yml` (une ligne), `docker/create_test_db.sh`, `CLAUDE.md`, `CHANTIER.md`, `context AI/00-INDEX.md`, `context AI/08-etat.md`, `API/README.md`, `API/src/app/models/__init__.py`, `hunter_model.py`, `parameters_fees_model.py`, `search_request_model.py`, `API/tests/integration/conftest.py`, `API/tests/integration/test_constraints_db.py` — et rien d'autre.
 
@@ -121,9 +120,8 @@ LOT5 à LOT10 peuvent changer d'ordre.
 ---
 
 <!-- FICHE:LOT2 -->
-## LOT2 [x] — Écrire le banc « base neuve = base migrée »
+## LOT2 [ ] — Écrire le banc « base neuve = base migrée »
 
-**Session** : f6db559a-cd2c-449e-a160-bd4fd8d0475c
 **Dépend de** : `LOT1`.
 **Fichiers** : `docker/compare_v2_v3.sh` (créé), `docker/create_test_db.sh` (modèle, lu), `docker/migrations/v2-vers-v3/` (créé, avec un `.gitkeep`), `docker/init-v3/README.md` — et rien d'autre.
 
@@ -157,9 +155,8 @@ LOT5 à LOT10 peuvent changer d'ordre.
 ---
 
 <!-- FICHE:LOT3 -->
-## LOT3 [x] — Mandat : statuts de fin et signature
+## LOT3 [ ] — Mandat : statuts de fin et signature
 
-**Session** : f6db559a-cd2c-449e-a160-bd4fd8d0475c
 **Dépend de** : `LOT2`.
 **Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql` (tables `mandate`, `estate_proposed`), `docker/init-v3/02_migration.sql`, `docker/migrations/v2-vers-v3/03_mandat-statuts.sql`, `API/src/app/models/mandate_model.py`, `estate_proposed_model.py`, `API/tests/integration/test_constraints_db.py`, `docker/init-v3/README.md` ; le registre (cartes Q-REM-02, Q-REM-14, Q-MAN-05, Q-MAN-07, Q-MAN-09, Q-SCH-04) — et rien d'autre.
 
@@ -184,9 +181,8 @@ LOT5 à LOT10 peuvent changer d'ordre.
 ---
 
 <!-- FICHE:LOT4 -->
-## LOT4 [x] — Mandat : six mois exacts et exclusivité
+## LOT4 [ ] — Mandat : six mois exacts et exclusivité
 
-**Session** : f6db559a-cd2c-449e-a160-bd4fd8d0475c
 **Dépend de** : `LOT3`.
 **Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql` (table `mandate` et le trigger d'exclusivité), `docker/init-v3/02_migration.sql`, `docker/migrations/v2-vers-v3/04_mandat-duree-exclusivite.sql`, `API/src/app/models/mandate_model.py`, `API/tests/integration/test_constraints_db.py`, `docker/init-v3/README.md` ; le registre (cartes Q-MAN-01, Q-MAN-02) — et rien d'autre.
 
@@ -203,7 +199,7 @@ LOT5 à LOT10 peuvent changer d'ordre.
   registre, « Défauts du sujet ». Ne le « corrige » pas.
 
 **Critère de fin**
-- Tests nommés : 6 mois accepté, 7 mois refusé ; 2e exclusif actif pour le même client refusé (✏️ 2026-10-07 : la règle Q-MAN-02 vaut par client, pas par bien) ; accepté après annulation du 1er ; renouvellement (parent) accepté.
+- Tests nommés : 6 mois accepté, 7 mois refusé ; 2e exclusif actif sur le même bien refusé ; accepté après annulation du 1er ; renouvellement (parent) accepté.
 - Mutants : CHECK v2 remis → le test « 7 mois refusé » tombe ; `DROP TRIGGER` → le test « 2e exclusif refusé » tombe.
 - Banc `IDENTIQUES` ; pytest 0 failed (compte brut) ; pyright 0 errors.
 <!-- /FICHE -->
@@ -211,9 +207,8 @@ LOT5 à LOT10 peuvent changer d'ordre.
 ---
 
 <!-- FICHE:LOT5 -->
-## LOT5 [x] — Paiement : note figée, taux borné, dates
+## LOT5 [ ] — Paiement : note figée, taux borné, dates
 
-**Session** : f6db559a-cd2c-449e-a160-bd4fd8d0475c
 **Dépend de** : `LOT2`.
 **Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql` (table `payment`), `docker/migrations/v2-vers-v3/05_paiement.sql`, `API/src/app/models/payment_model.py`, `API/tests/integration/test_constraints_db.py`, `docker/init-v3/README.md`, `user-stories/07_*.feature` (lu) ; le registre (cartes Q-REM-03, Q-REM-04, Q-REM-10, Q-REM-17, Q-REM-19) — et rien d'autre.
 
@@ -239,9 +234,8 @@ LOT5 à LOT10 peuvent changer d'ordre.
 ---
 
 <!-- FICHE:LOT6 -->
-## LOT6 [x] — Paramètres de rémunération et journal des notes
+## LOT6 [ ] — Paramètres de rémunération et journal des notes
 
-**Session** : 2d7571c9-43ae-4070-aa12-3b61e30184b2
 **Dépend de** : `LOT5`.
 **Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql` (tables `parameters_fees`, `commission_scale`, `sale`, `hunter_performance`, et la nouvelle `remuneration_parameters`), `docker/init-v3/02_migration.sql`, `docker/migrations/v2-vers-v3/06_parametres.sql`, `API/src/app/models/` (`parameters_fees_model.py`, `commission_scale_model.py`, `sale_model.py`, `hunter_performance_model.py`, `remuneration_parameters_model.py` créé, `__init__.py`), `API/src/app/main.py`, `API/tests/integration/test_constraints_db.py`, `docker/init-v3/README.md` ; le registre (cartes Q-REM-05, Q-REM-13, Q-SCH-06, Q-SCH-15, Q-SCH-17) — et rien d'autre.
 
@@ -268,9 +262,8 @@ LOT5 à LOT10 peuvent changer d'ordre.
 ---
 
 <!-- FICHE:LOT7 -->
-## LOT7 [x] — Personnes : coordonnées, priorité, dates
+## LOT7 [ ] — Personnes : coordonnées, priorité, dates
 
-**Session** : 0ceba605-10f5-42b6-9317-73b2243eb990
 **Dépend de** : `LOT2`.
 **Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql` (tables `client`, `hunter`, `real_estate_manager`, `role`), `docker/init-v3/02_migration.sql`, `docker/migrations/v2-vers-v3/07_personnes.sql`, `API/src/app/models/` (`client_model.py`, `hunter_model.py`, `real_estate_manager_model.py`, `role_model.py`), `API/tests/integration/test_constraints_db.py`, `docker/init-v3/README.md` ; le registre (cartes Q-SCH-01, Q-SCH-18, Q-PRO-08, Q-MIG-07, Q-SCH-05, Q-SCH-09, Q-SCH-10) — et rien d'autre.
 

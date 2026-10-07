@@ -65,6 +65,7 @@ et seulement dans ce cas, ouvrir l'index.
 | relire une décision d'architecture (ADR) | **Confluence**, espace `GaSeBeLa1` — [wiki du projet](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/overview?homepageId=15008134). Le dossier `decisions/` du dépôt est **vide**, rien n'y est écrit |
 | ouvrir un chantier, ou le découper en fiches | **lancer `/vlp:chantier`** — la méthode vit dans le kit, pas ici |
 | relire une fiche `C1` à `C5` | `context AI/09-contraintes-mpd.md` — chantier **clos** le 2026-09-11, ne se rejoue pas |
+| jouer une fiche `LOT1` à `LOT12` | **lancer `/vlp:tache LOT<n>`** — chantier **en cours** « Lot de migration (schéma v3) », fiches dans `context AI/10-lot-migration.md` |
 | reprendre après une longue interruption | `context AI/08-etat.md` |
 
 ## Économie de contexte

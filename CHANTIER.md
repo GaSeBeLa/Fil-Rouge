@@ -13,9 +13,9 @@
 - **chantiers possibles** : context AI/08-etat.md
 - **fichier d'état** : context AI/08-etat.md
 - **index** : context AI/00-INDEX.md
-- **fichier de fiches courant** : aucun
+- **fichier de fiches courant** : context AI/10-lot-migration.md (LOT1..LOT12)
 - **artefact feuille de route** : https://claude.ai/artifact/Wu5xkSJUtfbjuhFdbvUq3C
-- **artefact du chantier** : aucun
+- **artefact du chantier** : https://claude.ai/artifact/1azNjWvWyhj74aqwbDryEa
 - **livraison** : aucune — le code tourne en local (`docker compose up -d`
   depuis `docker/`)
 - **vérification** : `cd API && python -m pytest -q` — la session lance la
@@ -43,6 +43,6 @@ pas quinze — celles qu'on regrette de ne pas avoir écrites.
 
 Chacun a sa ligne dans l'**index** ; sa page reste sur la feuille de route.
 
-Lettres de fiche déjà prises : C. Un nouveau chantier en choisit un autre —
+Lettres de fiche déjà prises : C, LOT. Un nouveau chantier en choisit un autre —
 trois majuscules, jamais réemployées, même après clôture. `/vlp:chantier` le
 propose, l'utilisateur tranche ; c'est cette ligne qui rend le refus possible.

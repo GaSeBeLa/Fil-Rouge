@@ -48,8 +48,8 @@ ordonné par ce qui débloque le reste.
 
 | # | Chantier | Ce qu'il apporte | Coût estimé | Dépend de |
 |---|---|---|---|---|
-| 1 | Lot de migration de la base | **un seul lot, par thème** (Q11, Q12) : les changements décidés au registre, 4e série comprise (droits par rôle, reprise des anciens mandats, auteur d'un bien, CHECK 20-60 %, Eircode…). Pour chacun : schéma `01`, modèle, migration, tests, README du schéma. Avant d'ouvrir : la réponse de Jeff sur le rôle en lecture seule, la grille de notes et la durée X | 💡 ~8 à 10 fiches | rien |
-| 2 | API : auth, RGPD et règles métier | les **outils d'auth** côté back (connexion, token, rôles, droits, Argon2), l'**anonymisation** d'un compte, une **clé d'API par programme**, les règles « contrôlées par l'API », et le calcul de rémunération branché sur la base (55 cas déjà verts) | 💡 ~5 à 7 fiches | 1 |
+| 1 | Lot de migration de la base | **un seul lot, par thème** (Q11, Q12) : les changements décidés au registre, 4e série comprise (droits par rôle, reprise des anciens mandats, auteur d'un bien, CHECK 20-60 %, Eircode…). Pour chacun : schéma `01`, modèle, migration, tests, README du schéma. Ouvert le 2026-10-07 : nouveau dossier `docker/init-v3/`, 12 fiches `LOT` ; le rôle en lecture seule attend Jeff (LOT12) | 💡 ~8 à 10 fiches | rien |
+| 2 | API : auth, RGPD et règles métier | les **outils d'auth** côté back (connexion, token, rôles, droits, Argon2), l'**anonymisation** d'un compte, une **clé d'API par programme**, les règles « contrôlées par l'API », et le calcul de rémunération branché sur la base (55 cas déjà verts) ; la **grille de notes** (Q-JEF-05) et la **durée X** (Q-ACC-21), à proposer par le groupe (sortis du lot le 2026-10-07) | 💡 ~5 à 7 fiches | 1 |
 | 3 | Seed de démo | des données de démo générées (faker), cohérentes avec le nouveau schéma ; le décor, pas la preuve : les tests restent la preuve | 💡 2-3 fiches | 1 |
 | 4 | Les ADR | **une fiche par ADR**, chacune relue (Q15) ; chaque ADR cite ses cartes et ses sources, puis se copie à la main sur Confluence | 💡 ~25 fiches | 1..3 |
 | 5 | Doc d'équipe | matrice des droits, RACI, registre RGPD, rapport de tests | 💡 3-4 fiches | 1..2 |

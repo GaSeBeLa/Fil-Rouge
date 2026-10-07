@@ -25,8 +25,8 @@
     <!-- ZONE:encours — remplacé à chaque ouverture, remis à « aucun » à chaque clôture.
          /tache n'y touche pas : l'avancement fiche par fiche est sur la page du chantier. -->
     <div class="encours">
-      <div class="titre">Aucun chantier ouvert</div>
-      <div>Lancer <span class="mono">/vlp:chantier</span> pour en ouvrir un.</div>
+      <div class="titre">Lot de migration (schéma v3) <span class="badge" data-etat="cours">en cours</span></div>
+      <div>Fiches <span class="mono">LOT1–LOT12</span> — <a href="https://claude.ai/artifact/1azNjWvWyhj74aqwbDryEa">la page du chantier</a></div>
     </div>
   </section>
 
@@ -35,8 +35,8 @@
     <p class="resume-todo"><strong>9 chantiers possibles</strong> · 5 moyens, 3 gros, 1 pas estimé · 7 bloqués · ≈60 fiches estimées</p>
     <!-- ZONE:todo — miroir de la TODO ordonnée du fichier d'état ; le fichier reste la vérité -->
     <ol class="todo">
-          <li class="carte-todo"><span class="gauche"><span class="rang mono">1</span></span><details><summary><span class="titre">Lot de migration de la base</span></summary><div class="detail"><strong>un seul lot, par thème</strong> (Q11, Q12) : les changements décidés au registre, 4e série comprise (droits par rôle, reprise des anciens mandats, auteur d'un bien, CHECK 20-60 %, Eircode…). Pour chacun : schéma <span class="mono">01</span>, modèle, migration, tests, README du schéma. Avant d'ouvrir : la réponse de Jeff sur le rôle en lecture seule, la grille de notes et la durée X</div></details><span class="meta mono">💡 ~8 à 10 fiches</span></li>
-          <li class="carte-todo"><span class="gauche"><span class="rang mono">2</span><span class="dep mono">← 1</span></span><details><summary><span class="titre">API : auth, RGPD et règles métier</span></summary><div class="detail">les <strong>outils d'auth</strong> côté back (connexion, token, rôles, droits, Argon2), l'<strong>anonymisation</strong> d'un compte, une <strong>clé d'API par programme</strong>, les règles « contrôlées par l'API », et le calcul de rémunération branché sur la base (55 cas déjà verts)</div></details><span class="meta mono">💡 ~5 à 7 fiches</span></li>
+          <li class="carte-todo"><span class="gauche"><span class="rang mono">1</span> <span class="badge" data-etat="cours">en cours</span></span><details><summary><span class="titre">Lot de migration de la base</span></summary><div class="detail"><strong>un seul lot, par thème</strong> (Q11, Q12) : les changements décidés au registre, 4e série comprise (droits par rôle, reprise des anciens mandats, auteur d'un bien, CHECK 20-60 %, Eircode…). Pour chacun : schéma <span class="mono">01</span>, modèle, migration, tests, README du schéma. Ouvert le 2026-10-07 : nouveau dossier <span class="mono">docker/init-v3/</span>, 12 fiches <span class="mono">LOT</span> ; le rôle en lecture seule attend Jeff (LOT12)</div></details><span class="meta mono">💡 ~8 à 10 fiches</span></li>
+          <li class="carte-todo"><span class="gauche"><span class="rang mono">2</span><span class="dep mono">← 1</span></span><details><summary><span class="titre">API : auth, RGPD et règles métier</span></summary><div class="detail">les <strong>outils d'auth</strong> côté back (connexion, token, rôles, droits, Argon2), l'<strong>anonymisation</strong> d'un compte, une <strong>clé d'API par programme</strong>, les règles « contrôlées par l'API », et le calcul de rémunération branché sur la base (55 cas déjà verts) ; la <strong>grille de notes</strong> (Q-JEF-05) et la <strong>durée X</strong> (Q-ACC-21), à proposer par le groupe (sortis du lot le 2026-10-07)</div></details><span class="meta mono">💡 ~5 à 7 fiches</span></li>
           <li class="carte-todo"><span class="gauche"><span class="rang mono">3</span><span class="dep mono">← 1</span></span><details><summary><span class="titre">Seed de démo</span></summary><div class="detail">des données de démo générées (faker), cohérentes avec le nouveau schéma ; le décor, pas la preuve : les tests restent la preuve</div></details><span class="meta mono">💡 2-3 fiches</span></li>
           <li class="carte-todo"><span class="gauche"><span class="rang mono">4</span><span class="dep mono">← 1..3</span></span><details><summary><span class="titre">Les ADR</span></summary><div class="detail"><strong>une fiche par ADR</strong>, chacune relue (Q15) ; chaque ADR cite ses cartes et ses sources, puis se copie à la main sur Confluence</div></details><span class="meta mono">💡 ~25 fiches</span></li>
           <li class="carte-todo"><span class="gauche"><span class="rang mono">5</span><span class="dep mono">← 1..2</span></span><details><summary><span class="titre">Doc d'équipe</span></summary><div class="detail">matrice des droits, RACI, registre RGPD, rapport de tests</div></details><span class="meta mono">💡 3-4 fiches</span></li>
@@ -70,7 +70,7 @@
   </section>
 
   <footer>
-    <span>Lettres de fiche prises : <span class="mono">C</span> (clos)</span>
+    <span>Lettres de fiche prises : <span class="mono">C</span> (clos), <span class="mono">LOT</span> (en cours)</span>
     <span>État détaillé : <span class="mono">context AI/08-etat.md</span></span>
     <span>Mis à jour le <span class="mono">2026-10-07</span></span>
   </footer>
