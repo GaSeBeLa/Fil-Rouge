@@ -253,3 +253,7 @@ de ce que le code dit déjà.
   tiret entre deux. Choix de LOT7, pas du registre ; le strict E.164 (sans
   séparateur) reste l'alternative. `client_priority` va sur `estate_proposed`
   (D6), dont la fiche ne listait pas le modèle.
+- **2026-10-07** — **Eircode avec espace : la migration `08` retire l'espace**
+  au lieu de s'arrêter (0 en base de dev) ; sur `estate`, un code postal sans
+  pays tombe dans `ELSE FALSE`, sans CHECK « needs_country » à part ; l'Eircode
+  sans espace vaut aussi sur `estate` (même CASE, Q-SCH-11). Choix de LOT8.

@@ -21,9 +21,9 @@
     <p>Une base v2 migrée et une base v3 neuve ont le même schéma (banc IDENTIQUES), et pytest est vert.</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">12 fiches · 7 faites · en cours : LOT8</p>
+    <p class="mono" style="margin-top:.5rem">12 fiches · 8 faites · en cours : LOT9</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -65,12 +65,13 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">LOT7</span></span>
         <details><summary><span class="titre">Personnes : coordonnées, priorité, dates</span><span class="etat">Faite</span></summary>
         <span class="note">Tests nommés : 0612345678 refusé, +33612345678 et +33000000000 acceptés (3 tables), priorité 0 et 6 refusées, 1 et 5 acceptées ; 6 mutants, chacun fait tomber ses tests (3, 3, 6, 2, 2, 1 failed). grep is_cartet : 0 ligne. Banc IDENTIQUES — 545 faits ; pytest 173 passed, 0 failed ; pyright 19 errors avant, 19 après (sqlmodel absent de la machine).</span></details>
-        <span class="cout mono">≈11,5M (11 491 219) · 65 tours · 5,13 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">LOT8</span></span>
-        <details open><summary><span class="titre">Localisation : pays, codes postaux, secteurs</span><span class="etat">En cours</span></summary>
-        <span class="note">Pays, codes postaux, Eircode, secteurs et quartier. Dépend de LOT7.</span></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">LOT9</span></span>
-        <details><summary><span class="titre">Biens : énergie et auteur</span><span class="etat">Après LOT8</span></summary>
+        <span class="cout mono">≈12,5M (12 454 225) · 69 tours · 5,40 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">LOT8</span></span>
+        <details><summary><span class="titre">Localisation : pays, codes postaux, secteurs</span><span class="etat">Faite</span></summary>
+        <span class="note">Recompte : 2 556 codes postaux de biens sur 2 556 à 5 chiffres. Biens 'FR' : 2 556 sur 2 556 sur les deux bases du banc (critères identiques, même md5). Tests nommés : FR 3100 refusé, 31000 accepté ; Eircode D02 X285 refusé, D02X285 accepté (estate, client, criteria) ; 3 mutants, chacun fait tomber ses tests (2, 2, 6 failed). Banc IDENTIQUES — 559 faits ; pytest 181 passed, 0 failed ; pyright 9 errors avant, 9 après (sqlmodel absent de la machine).</span></details>
+        <span class="cout mono">≈14,6M (14 600 368) · 77 tours · 5,88 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">LOT9</span></span>
+        <details open><summary><span class="titre">Biens : énergie et auteur</span><span class="etat">En cours</span></summary>
         <span class="note">Biens : classe énergie, colonne d'auteur. Dépend de LOT8.</span></details></li>
       <li class="fiche"><span class="gauche"><span class="id">LOT10</span></span>
         <details><summary><span class="titre">Reprendre les anciens mandats</span><span class="etat">À lancer</span></summary>
@@ -83,7 +84,7 @@
         <span class="note">Rôle en lecture seule, si Jeff a dit oui. Dépend de LOT11.</span></details></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈7,0M (6 967 755) · 40 tours · 4,45 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈75,8M (75 783 996) · 399 tours · 32,98 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈91,3M (91 347 370) · 480 tours · 39,13 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 
@@ -100,14 +101,15 @@
     <h2>Journal des décisions</h2>
     <!-- ZONE:journal — une ligne par décision imprévue tranchée en cours de fiche -->
     <ul class="journal">
-      <li><time datetime="2026-10-07">2026-10-07</time><span>2026-10-07 — paiement : statuts 'invoice_submitted' et 'verified' retirés avec la facture ; dates announced_at et scheduled_for gardées (Q-REM-17, LOT5)</span></li>
       <li><time datetime="2026-10-07">2026-10-07</time><span>remuneration_parameters versionnée par effective_from + UNIQUE (comme Q-SCH-17) ; bornes relâchées au domaine d'un taux (0 à 1, -1 à 1, RCR:59, 199, 203) — tranché par Sébastien à LOT6</span></li>
       <li><time datetime="2026-10-07">2026-10-07</time><span>Téléphone : regex E.164 souple d'ADR-007 lue comme + exigé, 2 à 15 chiffres, un espace ou un tiret entre deux (choix de LOT7) ; client_priority sur estate_proposed (D6).</span></li>
+      <li><time datetime="2026-10-07">2026-10-07</time><span>Eircode avec espace : la migration 08 retire l'espace au lieu de s'arrêter ; sur estate, un code postal sans pays est refusé par le CASE (ELSE FALSE) ; Eircode sans espace aussi sur estate (choix de LOT8).</span></li>
     </ul>
-    <details class="journal-ancien"><summary>2 entrées plus anciennes</summary>
+    <details class="journal-ancien"><summary>3 entrées plus anciennes</summary>
     <ul class="journal">
       <li><time datetime="2026-10-07">2026-10-07</time><span>2026-10-07 — un seul statut 'lost' pour la vente perdue, hors agence (Q-REM-02) comme par un collègue (Q-REM-14) : tranché à LOT3</span></li>
       <li><time datetime="2026-10-07">2026-10-07</time><span>2026-10-07 — trigger d'exclusivité : couple parent-enfant exclu dans les deux sens, mandat annulé ignoré (LOT4)</span></li>
+      <li><time datetime="2026-10-07">2026-10-07</time><span>2026-10-07 — paiement : statuts 'invoice_submitted' et 'verified' retirés avec la facture ; dates announced_at et scheduled_for gardées (Q-REM-17, LOT5)</span></li>
     </ul>
     </details>
   </section>

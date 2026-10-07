@@ -294,8 +294,9 @@ LOT5 à LOT10 peuvent changer d'ordre.
 ---
 
 <!-- FICHE:LOT8 -->
-## LOT8 [ ] — Localisation : pays, codes postaux, secteurs
+## LOT8 [x] — Localisation : pays, codes postaux, secteurs
 
+**Session** : 0ceba605-10f5-42b6-9317-73b2243eb990
 **Dépend de** : `LOT7`.
 **Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql` (tables `client`, `criteria`, `estate`), `docker/init-v3/02_migration.sql`, `docker/init-v3/03_populate_estate.sql`, `docker/migrations/v2-vers-v3/08_localisation.sql`, `API/src/app/models/` (`client_model.py`, `criteria_model.py`, `estate_model.py`), `API/tests/integration/test_constraints_db.py`, `docker/init-v3/README.md` ; le registre (cartes Q-SCH-11, Q-SCH-12, Q-MIG-08, Q-MIG-09) — et rien d'autre.
 
