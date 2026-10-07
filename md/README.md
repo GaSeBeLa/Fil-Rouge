@@ -17,10 +17,12 @@
 
 - Les fichiers sont rangés dans les **6 sous-dossiers** ci-dessous
   (décidé le 2026-10-07, fait après le lot de migration).
-- ⚠️ `docker/init-v2/README.md` est **figé** et cite deux fichiers à leur
-  ancienne place : un **petit fichier de renvoi** y reste.
-  - [`adr-024-motif-refus-remuneration.md`](adr-024-motif-refus-remuneration.md) → [`adr/adr-024-motif-refus-remuneration.md`](adr/adr-024-motif-refus-remuneration.md)
-  - [`securite-mots-de-passe-et-droits.md`](securite-mots-de-passe-et-droits.md) → [`securite/securite-mots-de-passe-et-droits.md`](securite/securite-mots-de-passe-et-droits.md)
+- Plus aucun fichier à la racine de `md/`, sauf cet index (renvois retirés
+  le 2026-10-07).
+- ⚠️ `docker/init-v2/README.md`, **figé**, cite encore deux anciens chemins
+  (lignes 325 et 411) : ce sont maintenant
+  [`adr/adr-024-motif-refus-remuneration.md`](adr/adr-024-motif-refus-remuneration.md)
+  et [`securite/securite-mots-de-passe-et-droits.md`](securite/securite-mots-de-passe-et-droits.md).
 
 ## equipe/ — l'organisation du travail
 
@@ -77,6 +79,7 @@
 | [2026-10-02-minio-images-indisponibles.md](journal/2026-10-02-minio-images-indisponibles.md) | MinIO ne se télécharge plus | 📷 photo du 2026-10-02 |
 | [2026-10-07-plan-action.html](journal/2026-10-07-plan-action.html) | le plan d'action après l'entretien avec Jeff | 📷 photo du 2026-10-07 |
 | [2026-10-07-rapport-lot1-a-lot5.html](journal/2026-10-07-rapport-lot1-a-lot5.html) | le rapport au groupe sur LOT1 à LOT5 | 📷 photo du 2026-10-07 |
+| [2026-10-07-rapport-final-chantier-lot.html](journal/2026-10-07-rapport-final-chantier-lot.html) | le rapport final du chantier LOT (LOT1 à LOT12) | 📷 photo du 2026-10-07 |
 
 ## Les règles de nommage
 
