@@ -211,8 +211,9 @@ LOT5 à LOT10 peuvent changer d'ordre.
 ---
 
 <!-- FICHE:LOT5 -->
-## LOT5 [ ] — Paiement : note figée, taux borné, dates
+## LOT5 [x] — Paiement : note figée, taux borné, dates
 
+**Session** : f6db559a-cd2c-449e-a160-bd4fd8d0475c
 **Dépend de** : `LOT2`.
 **Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql` (table `payment`), `docker/migrations/v2-vers-v3/05_paiement.sql`, `API/src/app/models/payment_model.py`, `API/tests/integration/test_constraints_db.py`, `docker/init-v3/README.md`, `user-stories/07_*.feature` (lu) ; le registre (cartes Q-REM-03, Q-REM-04, Q-REM-10, Q-REM-17, Q-REM-19) — et rien d'autre.
 

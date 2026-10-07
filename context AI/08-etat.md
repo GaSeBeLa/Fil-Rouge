@@ -234,3 +234,7 @@ de ce que le code dit déjà.
   les deux sens**, et un mandat `'canceled'` ignoré. Q-MAN-02 n'excluait que le
   parent : mesuré à LOT4, la mise à jour du parent après son renouvellement
   était alors refusée (mutant « enfants non exclus » : le test tombe).
+- **2026-10-07** — **paiement : statuts `'invoice_submitted'` et `'verified'`
+  retirés** avec la facture (Q-JEF-23) ; le registre ne les tranchait pas.
+  Restent `'refused'`, `'announced'`, `'scheduled'`, `'paid'`, et les deux
+  dates `announced_at`, `scheduled_for` (Q-REM-17). Tranché à LOT5.
