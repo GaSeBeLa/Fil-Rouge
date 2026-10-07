@@ -377,7 +377,7 @@ numéros de `01` relus le 2026-10-05) :
   - `budget_min` à NULL sur les 17 critères ; commentaire de `02:189` corrigé (Q-MIG-09 ; `02:189-208`) ;
   - CHECK de format des téléphones (ADR-007), 3 tables — ✏️ 2026-10-07 : les 4 `0000000000` deviennent `+33000000000`, documenté (Q-MIG-07) (Q-PRO-08 ; `01:184-185`, `01:228-229`, `01:246-247`) ;
 - 🆕 4e série du 2026-10-07 :
-  - 6 mandats échus en `'expired'` (Q-MIG-10) ; mandat 13 rattaché à Nina Girard (Q-MIG-12) ; `suspendu` → `canceled` écrit (Q-MIG-13) ; 17 demandes en `'launched'` (Q-MIG-03) ;
+  - 6 mandats échus en `'expired'` (Q-MIG-10) ; mandat 13 rattaché à Nina Girard (Q-MIG-12) ; `suspendu` → `canceled` écrit (Q-MIG-13) ; 17 demandes en `'launched'` (Q-MIG-03) — **18** depuis LOT10, avec celle de Nina Girard ;
   - colonnes d'énergie vides, `energetic_score` retiré (Q-MIG-05) ;
   - priorité du client en `SMALLINT`, `CHECK` de 1 à 5 (Q-SCH-05) ;
   - colonne d'auteur sur `estate` (Q-ACC-09, Q-JEF-24) ;
