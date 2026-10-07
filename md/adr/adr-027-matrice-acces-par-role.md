@@ -41,7 +41,7 @@ Le sujet, lui, n'a pas bougé. Il exige :
 de nature : document, et non code.
 
 Un premier tableau avait été esquissé (7 lignes, majoritairement des cases
-ouvertes) dans `md/securite-mots-de-passe-et-droits.md` §4.3. Il était
+ouvertes) dans `md/securite/securite-mots-de-passe-et-droits.md` §4.3. Il était
 incomplet : 7 ressources sur 18, et aucune source citée.
 
 ⚠️ **Ce qui ne fonde PAS cet ADR.** L'exigence `ENF-03` — « l'accès aux
@@ -97,7 +97,7 @@ attaquable, et vérifiable par un jury en trente secondes.
    arbitrage de l'équipe, signalé comme tel.
 
 8. **La matrice complète est annexée** :
-   `md/matrice-droits-crud-par-role.md` — 18 tables, 4 rôles, chaque case
+   `md/securite/matrice-droits-crud-par-role.md` — 18 tables, 4 rôles, chaque case
    soit sourcée, soit marquée comme restant à trancher.
 
 **Options envisagées**
@@ -171,5 +171,5 @@ Attendu : **34** et **0**. Mesuré le 22/09/2026 : 34 références au total,
 | L'historique versionné des critères est exigé | `BASE/Readme.md` Phase 2 ; `GLOSSAIRE-METIER.md`, « Version de demande » |
 | Le notaire est hors périmètre du SI | `GLOSSAIRE-METIER.md`, « Acteurs » |
 | Les 4 rôles, `is_activated`, les 3 déclencheurs de performance | `docker/init-v2/01_create_fil_rouge_immobilier.sql` |
-| Le tableau de départ, incomplet | `md/securite-mots-de-passe-et-droits.md` §4.3 |
-| La matrice complète | `md/matrice-droits-crud-par-role.md` |
+| Le tableau de départ, incomplet | `md/securite/securite-mots-de-passe-et-droits.md` §4.3 |
+| La matrice complète | `md/securite/matrice-droits-crud-par-role.md` |

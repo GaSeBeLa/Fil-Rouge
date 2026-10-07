@@ -61,8 +61,8 @@
 
 | Choix | Ce qu'on met | Ce que ça donne |
 |---|---|---|
-| **a** | les **9 chantiers** de la feuille de route ([`context AI/08-etat.md`](../context%20AI/08-etat.md), section « La TODO ordonnée ») | le suivi du dev, simple |
-| **b** | les **11 user stories** ([`user-stories/`](../user-stories/), fichiers `00` à `10`), chacune avec une priorité MoSCoW | le **backlog priorisé** de la grille |
+| **a** | les **9 chantiers** de la feuille de route ([`context AI/08-etat.md`](../../context%20AI/08-etat.md), section « La TODO ordonnée ») | le suivi du dev, simple |
+| **b** | les **11 user stories** ([`user-stories/`](../../user-stories), fichiers `00` à `10`), chacune avec une priorité MoSCoW | le **backlog priorisé** de la grille |
 | **c** | les deux : user stories = backlog, chantiers = travail en cours | les deux usages, mais plus de cartes |
 
 - MoSCoW = **Must**, **Should**, **Could**, **Won't** (doit, devrait, pourrait,

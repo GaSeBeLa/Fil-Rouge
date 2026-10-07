@@ -10,8 +10,8 @@
 > 📅 22 septembre 2026. Couvre les étapes `B1`, `B2` et `B3` du plan.
 >
 > 🛠️ **Pour passer à la pratique**, deux tutos pas-à-pas :
-> `md/tuto-1-hachage-mots-de-passe.md` puis
-> `md/tuto-2-authentification-jwt.md`. Cette note dit *pourquoi* ; les tutos
+> `md/securite/tuto-1-hachage-mots-de-passe.md` puis
+> `md/securite/tuto-2-authentification-jwt.md`. Cette note dit *pourquoi* ; les tutos
 > disent *comment*.
 
 ---
@@ -23,14 +23,14 @@ Le **client** a tranché dans l'après-midi, après la rédaction de cette note 
 > « vous ne gérez pas l'auth, c'est géré au dessus »
 
 Détail, citations complètes et conséquences :
-`md/adr-026-perimetre-authentification.md`.
+`md/adr/adr-026-perimetre-authentification.md`.
 
 | Ce qui tombe | Ce qui reste |
 |---|---|
 | ❌ `§3` — authentification, JWT, login | ✅ `§1` — les mesures du 22/09 |
 | ❌ `§4` — RBAC, ownership, `403` | ✅ `§2` — le hachage Argon2id |
 | ❌ `§5.3` durée du jeton, `§5.5` périmètre, `§5.6` politique de mot de passe | ✅ `§4.1` — le piège IDOR, à savoir expliquer |
-| ❌ `md/tuto-2-authentification-jwt.md` | ✅ `§7` — l'argument RGPD pour la soutenance |
+| ❌ `md/securite/tuto-2-authentification-jwt.md` | ✅ `§7` — l'argument RGPD pour la soutenance |
 
 ➡️ **Le hachage reste justifié**, mais son motif change : ce n'est plus
 « pour se connecter », c'est le *privacy by design* exigé par le sujet.
@@ -38,7 +38,7 @@ Stocker un mot de passe en clair resterait indéfendable.
 
 ➡️ **Le tableau du `§4.3` n'est plus un backlog.** Il est devenu un
 livrable de conception, repris et complété dans
-`md/matrice-droits-crud-par-role.md`.
+`md/securite/matrice-droits-crud-par-role.md`.
 
 💡 **Cette note n'est pas supprimée.** Ses mesures sont justes, son
 vocabulaire aussi, et elle trace une réflexion que le jury peut interroger.
@@ -337,7 +337,7 @@ strict :
   `real_estate_manager(id_user)`, `ON DELETE RESTRICT` ;
 - relation Hunter (1,1) — RealEstateManager (0,n) : un chasseur a toujours
   un manager, un manager peut n'en avoir aucun ;
-- brouillon d'ADR à faire valider : `md/adr-025-lien-chasseur-manager.md`.
+- brouillon d'ADR à faire valider : `md/adr/adr-025-lien-chasseur-manager.md`.
 
 ➡️ **La phrase « son manager » a maintenant un support en base.** La règle
 peut s'écrire — le code est dans `tuto-2`, §8.1.
@@ -403,8 +403,8 @@ suite, sans attendre la réunion.
 
 | Étapes | Tuto correspondant |
 |---|---|
-| 1 à 3 | `md/tuto-1-hachage-mots-de-passe.md` |
-| 4 à 8 | `md/tuto-2-authentification-jwt.md` |
+| 1 à 3 | `md/securite/tuto-1-hachage-mots-de-passe.md` |
+| 4 à 8 | `md/securite/tuto-2-authentification-jwt.md` |
 
 ---
 
@@ -453,7 +453,7 @@ C'est exact, et bien plus difficile à contester.
 | Aucun hachage dans le service | `API/src/app/services/user_service.py` — 7 lignes |
 | L'architecture prévoit la surcharge | `API/src/app/services/base_service.py`, en-tête |
 | Les ~90 routes sont génériques | `API/src/app/routes/crud_router.py` |
-| Lien `hunter` → `real_estate_manager` depuis le 22/09 (absent le matin) | `docker/init-v2/01_create_fil_rouge_immobilier.sql`, table `hunter` ; `md/adr-025-lien-chasseur-manager.md` |
+| Lien `hunter` → `real_estate_manager` depuis le 22/09 (absent le matin) | `docker/init-v2/01_create_fil_rouge_immobilier.sql`, table `hunter` ; `md/adr/adr-025-lien-chasseur-manager.md` |
 | Le rôle `Admin` manquait | `docker/migrations/2026-09-22_role_admin.sql` |
 | Le RGPD n'est pas optionnel | `BASE/Readme.md`, section RGPD |
 | L'exigence d'accès est un **exemple** | `BASE/documents utiles/CAHIER-DES-CHARGES-TECHNIQUE.md`, « Exigences non fonctionnelles (extrait) » |

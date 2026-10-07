@@ -291,7 +291,7 @@ Ils sont **mesurés**, pas corrigés. Un seed ne doit pas les cacher.
 | Exemple de Bruno (73,5 · 46,16 % · 6 231,60 €) | REGLES | 237-254 |
 | Deux critères portent sur la vente en cours | REGLES | 139 |
 | Ventes des 12 mois « hors vente en cours » | REGLES | 470 |
-| Notre note dit « score courant » | `md/schema-tracabilite-remuneration-chasseur_v4.md` | 74 |
+| Notre note dit « score courant » | `md/regles-metier/schema-tracabilite-remuneration-chasseur_v4.md` | 74 |
 | L'équipe avait déjà posé la question du score | `livrables/2-modelisation/09-contraintes-a-coder.md` | 163 |
 | Garder la raison du refus | REGLES | 100, 322, 497 |
 | Secteurs d'origine (Montpellier…) | `BASE/fixtures/PgSQL.sql` | 41-51 |

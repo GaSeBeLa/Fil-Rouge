@@ -4,7 +4,7 @@
 >
 > Repères : ✅ établi, source citée · 💡 proposé · 🟡 à décider · ⚠️ attention.
 >
-> Va avec la page du kanban : [`md/kanban.md`](kanban.md).
+> Va avec la page du kanban : [`md/equipe/kanban.md`](kanban.md).
 
 ## En bref
 

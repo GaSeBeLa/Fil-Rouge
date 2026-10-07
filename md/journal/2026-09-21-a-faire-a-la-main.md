@@ -53,7 +53,7 @@ le CDC ne fait qu'y renvoyer.
 
 Page : *Journal de décisions (ADR)*, espace `GaSeBeLa1`.
 
-1. [ ] Ouvrir `md/adr-024-motif-refus-remuneration.md`.
+1. [ ] Ouvrir `md/adr/adr-024-motif-refus-remuneration.md`.
 2. [ ] ⚠️ **Ne pas copier le haut du fichier.** Le bloc « proposition à relire
    avant publication » est une note pour nous, pas pour Confluence.
    Commencer la sélection à la ligne :
@@ -120,7 +120,7 @@ le 04/09. Elles comprennent des décisions structurantes :
 ### 4.1 Le code et le schéma
 
 - 🤖 Modifier `docker/init-v2/01_create_fil_rouge_immobilier.sql` (table
-  `payment`) — tout est prêt dans `md/adr-024-modifications-a-faire.md`.
+  `payment`) — tout est prêt dans `md/adr/adr-024-modifications-a-faire.md`.
 - 🤖 Modifier `API/src/app/models/payment_model.py`.
 - [ ] Recréer la base pour que le nouveau schéma s'applique, depuis `docker/` :
 
@@ -177,7 +177,7 @@ chose cette semaine, c'est celle-là.
 
 Même page que l'ADR-024 : *Journal de décisions (ADR)*, espace `GaSeBeLa1`.
 
-1. [x] Ouvrir `md/adr-025-lien-chasseur-manager.md`.
+1. [x] Ouvrir `md/adr/adr-025-lien-chasseur-manager.md`.
 2. [x] ⚠️ **Ne pas copier le haut du fichier** : commencer la sélection à la
    ligne `**ADR-025 : Chaque chasseur est rattaché à un manager**`.
 3. [x] ⚠️ Le numéro suppose que l'ADR-024 est bien numéroté 024 (bloc 2.1).
@@ -196,8 +196,8 @@ journal, statut **« accepté »**.
       était pour nous, pas pour le journal : à retirer.
 - [ ] **L'ADR-024 lui-même n'est pas dans le journal.** Entre l'ADR-023 et
       l'ADR-025 se trouve *« ADR-024 — les modifications à faire, en détail »*
-      — c'est le **compagnon technique** (`md/adr-024-modifications-a-faire.md`),
-      pas la décision (`md/adr-024-motif-refus-remuneration.md`, qui commence
+      — c'est le **compagnon technique** (`md/adr/adr-024-modifications-a-faire.md`),
+      pas la décision (`md/adr/adr-024-motif-refus-remuneration.md`, qui commence
       par `**ADR-024 : Traçabilité du refus de rémunération du chasseur**`
       avec date, statut, options). Le journal a donc un **trou** : aucun bloc
       « ADR-024 : … / Statut : … ». À remplacer par le bon fichier — le bloc

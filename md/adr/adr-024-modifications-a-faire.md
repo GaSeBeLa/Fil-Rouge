@@ -17,7 +17,7 @@
 > ❌ **Pas encore fait** : les trois diagrammes MCD/MLD/MPD (§6) et les tests
 > automatiques (§7), qui attendent la base de test isolée (étape `A2`).
 >
-> Compagnon de [`adr-024-motif-refus-remuneration.md`](./adr-024-motif-refus-remuneration.md).
+> Compagnon de [`adr-024-motif-refus-remuneration.md`](adr-024-motif-refus-remuneration.md).
 
 ---
 

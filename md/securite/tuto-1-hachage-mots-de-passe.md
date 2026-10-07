@@ -12,7 +12,7 @@
 > d'intégration FastAPI, lui, est **écrit mais pas exécuté** : c'est à vous de
 > le faire tourner. Sources au §10.
 >
-> 📅 22 septembre 2026. Suite : `md/tuto-2-authentification-jwt.md`.
+> 📅 22 septembre 2026. Suite : `md/securite/tuto-2-authentification-jwt.md`.
 
 ---
 
@@ -195,7 +195,7 @@ requête, jamais en base, jamais en log, jamais en cache.
 
 Les paramètres ci-dessous sont calibrés pour ~250-500 ms sur la machine qui
 exécute l'API (ADR-016). Ils se MESURENT, ils ne se recopient pas : voir
-md/tuto-1-hachage-mots-de-passe.md §2.3.
+md/securite/tuto-1-hachage-mots-de-passe.md §2.3.
 
 Les paramètres sont inscrits DANS l'empreinte produite (format PHC). Les
 durcir plus tard n'invalide donc aucune empreinte existante : c'est ce que
@@ -355,7 +355,7 @@ class UserUpdate(SQLModel):
 ⚠️ **`min_length=12` est une proposition, pas une décision.** L'OWASP
 privilégie la longueur sur la complexité (pas d'obligation de majuscule ou de
 caractère spécial). C'est la question 6 de
-`md/securite-mots-de-passe-et-droits.md` : à trancher en réunion.
+`md/securite/securite-mots-de-passe-et-droits.md` : à trancher en réunion.
 
 Puis exporter dans `API/src/app/models/__init__.py`, à côté de `UserPublic`.
 
@@ -557,7 +557,7 @@ Il faut être clair là-dessus.
 ➡️ **Un mot de passe haché sans authentification ne protège rien du tout.**
 Les ~90 routes restent ouvertes à qui connaît l'URL.
 
-**Suite obligatoire : `md/tuto-2-authentification-jwt.md`.**
+**Suite obligatoire : `md/securite/tuto-2-authentification-jwt.md`.**
 
 ---
 

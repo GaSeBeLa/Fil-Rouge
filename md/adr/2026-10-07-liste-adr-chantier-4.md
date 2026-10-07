@@ -7,7 +7,7 @@ Rien n'est rédigé ici : c'est la liste, pas les ADR.
 
 ## Les ADR prévus — 28 lignes
 
-Source : le pense-bête, `md/questions-a-trancher-2026-10-02.md:393-422`.
+Source : le pense-bête, `md/questions/questions-a-trancher.md:393-422`.
 
 - **A** · Prix en nombres entiers, bornes du barème incluses
 - **B** · Vente perdue : un statut de fin sur le mandat

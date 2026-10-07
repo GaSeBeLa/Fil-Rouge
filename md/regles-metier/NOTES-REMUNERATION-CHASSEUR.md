@@ -1,10 +1,10 @@
 # Notes d'équipe — Règles de calcul de la rémunération du chasseur
 
 > Résumé de travail à partir du document officiel poussé par le prof :
-> [`REGLES-CALCUL-REMUNERATION.md`](<../Fil-Rouge-EISI-Data-IA-26-D04-StarterPack - BASE/documents utiles/REGLES-CALCUL-REMUNERATION.md>)
-> et de sa spécification Gherkin associée [`10_calcul_remuneration_chasseur.feature`](<../Fil-Rouge-EISI-Data-IA-26-D04-StarterPack - BASE/user-stories/10_calcul_remuneration_chasseur.feature>).
+> [`REGLES-CALCUL-REMUNERATION.md`](<../../Fil-Rouge-EISI-Data-IA-26-D04-StarterPack - BASE/documents utiles/REGLES-CALCUL-REMUNERATION.md>)
+> et de sa spécification Gherkin associée [`10_calcul_remuneration_chasseur.feature`](<../../Fil-Rouge-EISI-Data-IA-26-D04-StarterPack - BASE/user-stories/10_calcul_remuneration_chasseur.feature>).
 >
-> ⚠️ Ce document **remplace/complète** [`BAREME-COMMISSION.md`](./BAREME-COMMISSION.md) : celui-ci avait été écrit avant que le prof ne publie les formules et paramètres exacts (poids, tranches, bornes). Certains points qu'on y notait comme « zone à trancher » sont maintenant donnés noir sur blanc.
+> ⚠️ Ce document **remplace/complète** [`BAREME-COMMISSION.md`](BAREME-COMMISSION.md) : celui-ci avait été écrit avant que le prof ne publie les formules et paramètres exacts (poids, tranches, bornes). Certains points qu'on y notait comme « zone à trancher » sont maintenant donnés noir sur blanc.
 
 ## 1. Règle métier vs paramètre — la distinction à retenir
 

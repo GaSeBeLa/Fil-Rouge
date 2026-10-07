@@ -35,7 +35,7 @@ pas quinze — celles qu'on regrette de ne pas avoir écrites.
   (`CLAUDE.md`, règle 4).
 - Prose et commentaires de code en français ; noms de code en anglais. Le code
   cite la carte qui le justifie (`Q-xx`, registre
-  `md/questions-a-trancher-2026-10-02.md`).
+  `md/questions/questions-a-trancher.md`).
 - Aucun secret ni `.env` dans git, aucun chemin absolu dans le code ; du Python
   touché passe `pyright` avant son commit.
 

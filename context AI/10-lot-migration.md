@@ -26,7 +26,7 @@ applique par thème, et prouve qu'une base v2 migrée égale une base v3 neuve.
 | `docker/init-v3/` | la cible : `01` schéma, `02` reprise, `03` biens, `README.md` | monté par `docker-compose.yml` dès LOT1 |
 | `docker/migrations/v2-vers-v3/NN_<thème>.sql` | passe une base v2 **existante** en v3 ; `NN` = numéro de fiche | en-tête comme `docker/migrations/2026-09-22_role_admin.sql` (POURQUOI, POUR QUI, COMMENT) ; une transaction |
 
-**D'où viennent les décisions** : le registre `md/questions-a-trancher-2026-10-02.md`.
+**D'où viennent les décisions** : le registre `md/questions/questions-a-trancher.md`.
 - La liste « **Lot de migration qui en découle** » (grep ce libellé).
 - La carte `#### Q-XXX-NN` de chaque question citée par la fiche (grep son titre).
 - ⚠️ Ses renvois `01:NNN`, `02:NNN` visent **v2** : les lire dans `docker/init-v2/`.

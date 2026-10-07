@@ -228,10 +228,10 @@ de l'acte. `ADR-024` *enregistre* un refus, il ne le *calcule* pas.
 | Le script pour base existante | `docker/migrations/2026-09-21_adr-024_payment_refusal.sql` |
 | Le modèle de l'API | `API/src/app/models/payment_model.py` |
 | Les 10 mesures, en détail | `docker/init-v2/README.md` §8 |
-| La décision et ses options | `md/adr-024-motif-refus-remuneration.md` |
-| Le détail des modifications | `md/adr-024-modifications-a-faire.md` |
-| Les 5 réponses | `md/point-etape-2026-09-21.md` §5 |
-| Ce qui reste à faire à la main | `md/a-faire-a-la-main-2026-09-21.md` |
+| La décision et ses options | `md/adr/adr-024-motif-refus-remuneration.md` |
+| Le détail des modifications | `md/adr/adr-024-modifications-a-faire.md` |
+| Les 5 réponses | `md/journal/2026-09-21-point-etape.md` §5 |
+| Ce qui reste à faire à la main | `md/journal/2026-09-21-a-faire-a-la-main.md` |
 
 **Les 7 commits de la séance :**
 

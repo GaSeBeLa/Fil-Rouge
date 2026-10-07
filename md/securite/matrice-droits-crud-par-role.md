@@ -5,10 +5,10 @@
 >
 > 📌 **Statut : livrable de conception, pas du code.** Le client a mis
 > l'authentification hors périmètre le 22/09 : « vous ne gérez pas l'auth,
-> c'est géré au dessus » (`md/adr-026-perimetre-authentification.md`).
+> c'est géré au dessus » (`md/adr/adr-026-perimetre-authentification.md`).
 > Cette matrice ne sera donc **pas codée** dans l'API. Elle sert à
 > **argumenter** nos choix RGPD et sécurité devant le jury.
-> Brouillon d'ADR associé : `md/adr-027-matrice-acces-par-role.md`.
+> Brouillon d'ADR associé : `md/adr/adr-027-matrice-acces-par-role.md`.
 
 ---
 

@@ -15,7 +15,7 @@
 > **exécutées** le 22/09. Le code d'intégration FastAPI est **écrit mais pas
 > exécuté**. Sources au §11.
 >
-> 📅 22 septembre 2026. Prérequis : `md/tuto-1-hachage-mots-de-passe.md`.
+> 📅 22 septembre 2026. Prérequis : `md/securite/tuto-1-hachage-mots-de-passe.md`.
 
 ---
 
@@ -533,7 +533,7 @@ strict :
 | Colonne | `hunter.id_realestatemanager`, **`NOT NULL`** |
 | Cible | `real_estate_manager(id_user)` — donc un id de `"user"` |
 | Cardinalité | Hunter (1,1) — RealEstateManager (0,n) |
-| ADR | brouillon `md/adr-025-lien-chasseur-manager.md`, à valider |
+| ADR | brouillon `md/adr/adr-025-lien-chasseur-manager.md`, à valider |
 | Base locale d'avant le 22/09 | `docker compose down -v && docker compose up -d`, ou `docker/migrations/2026-09-22_hunter_manager.sql` |
 
 ➡️ C'est ce que la branche `Manager` du §8.1 utilise.
@@ -686,7 +686,7 @@ Les autres ne prouvent que l'authentification.
 | Avertissement si la clé fait moins de 32 octets | mesuré : `InsecureKeyLengthWarning`, RFC 7518 §3.2 |
 | Rate-limiting sur les endpoints d'authentification | Confluence, `ADR-016` |
 | Les ~90 routes viennent d'une seule fabrique | `API/src/app/routes/crud_router.py` |
-| Lien `hunter` → `real_estate_manager` depuis le 22/09 après-midi (absent le matin) | `docker/init-v2/01_create_fil_rouge_immobilier.sql`, table `hunter` ; `md/adr-025-lien-chasseur-manager.md` |
+| Lien `hunter` → `real_estate_manager` depuis le 22/09 après-midi (absent le matin) | `docker/init-v2/01_create_fil_rouge_immobilier.sql`, table `hunter` ; `md/adr/adr-025-lien-chasseur-manager.md` |
 | 0 compte `Manager`, 0 compte `Admin` le matin ; 1 manager placeholder l'après-midi | mesuré en base le 22/09 ; `docker/init-v2/README.md` §3.6 |
 | Aucun ADR sur l'authentification | Confluence, *Journal de décisions* — `ADR-001` à `ADR-024` relus le 22/09 |
 | Aucun secret dans git | `CLAUDE.md` du projet, règle 5 |

@@ -1,5 +1,4 @@
-<meta charset="utf-8">
-<title>Rapport LOT1 à LOT5</title>
+<title>Fil Rouge — Plan d'action</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
   :root {
@@ -189,500 +188,439 @@ body.vlp-lit { padding-bottom:9rem; }
 /* LECTEUR — fin */
 </style>
 
-<div class="page" data-cle="fil-rouge-2026-10-07-lot1-a-5" data-format="gros">
+<div class="page" data-cle="filrouge-2026-10-07-plan-action">
 
   <header style="display:flex;flex-direction:column;gap:.8rem">
-    <p class="mono sous">Fil Rouge Immobilier · 2026-10-07 · commits de 13:51 à 14:57, heures lues</p>
-    <h1>Lot de migration v3 : les cinq premières fiches</h1>
+    <p class="mono sous">Fil Rouge Immobilier · 2026-10-07 · tes 71 réponses au rapport Jeff, croisées avec ta liste du 2026-10-06</p>
+    <h1>Incohérences et plan d'action</h1>
     <span class="jauge">🟢 Ça tient, mais…</span>
     <ul>
-      <li>✅ <strong>5 fiches sur 12</strong> sont faites : le schéma v3 existe, et le <strong>mandat</strong> et le <strong>paiement</strong> suivent les décisions du registre.</li>
-      <li>✅ <strong>145 tests</strong> passent (123 au départ).</li>
-      <li>✅ <strong>18 pièges</strong> posés exprès dans la base : les tests les ont <strong>tous</strong> détectés.</li>
-      <li>🟡 <strong>9 décisions</strong> prises en séance, à valider par le groupe : une case par carte.</li>
-      <li>⚠️ Sur une base de dev restée en v2, la route <strong>/payments répond 500</strong>.</li>
-      <li>➡️ Rien n'est <strong>poussé</strong> sur GitHub : le push se demande à part.</li>
+      <li>✅ Tes <b>71 réponses</b> sont lues : toutes les cartes du rapport Jeff ont la sienne. <b>Une seule change</b> une réponse déjà donnée : Q-PAR-09.</li>
+      <li>⚠️ <b>9 incohérences</b> restent. Deux contredisent <b>le sujet</b> ou <b>Jeff</b> : la facture et l'authentification.</li>
+      <li>🗺️ Un <b>plan en 7 étapes</b> pour appliquer toutes les décisions : base, API, tests, modèles, doc.</li>
+      <li>🟡 Cette page te demande <b>15 choix</b> et <b>3 décisions</b> à valider.</li>
+      <li>➡️ Rien n'est modifié tant que tu n'as pas répondu : pas de code, pas de commit, pas de push.</li>
     </ul>
   </header>
 
   <section>
     <h2>Le contexte : où on en est</h2>
     <div class="clair">
-      <p>🧰 <strong>Fil Rouge Immobilier</strong> : notre projet EISI, une API (FastAPI et PostgreSQL) pour un service de chasse immobilière.</p>
-      <p>🏗️ <strong>Le chantier en cours : LOT</strong>, « Lot de migration (schéma v3) ». Son but : <strong>appliquer au schéma</strong> les décisions déjà prises, et <strong>prouver</strong> qu'une base existante, mise à jour, égale une base neuve.</p>
+      <p>🧰 <strong>Fil Rouge Immobilier</strong> : la base et l'API d'un service de chasse immobilière, projet de groupe.</p>
+      <p>🏗️ <strong>Le travail en cours : les questions à trancher</strong>. Son but : régler les questions ouvertes, puis modifier la base, l'API et les tests <b>d'un seul mouvement</b>.</p>
       <div>
-        <p>📍 <strong>Où on en est : fiche 5 sur 12.</strong></p>
+        <p>📍 <strong>Où on en est</strong></p>
         <ul>
-          <li>✅ <strong>LOT1</strong> : le dossier <span class="mono">docker/init-v3/</span> existe, et Docker le lit.</li>
-          <li>✅ <strong>LOT2</strong> : le banc compare une base neuve et une base mise à jour.</li>
-          <li>✅ <strong>LOT3</strong> : le mandat a ses statuts de fin, dont « perdu ».</li>
-          <li>✅ <strong>LOT4</strong> : un mandat dure 6 mois pile, et l'exclusivité est contrôlée.</li>
-          <li>✅ <strong>LOT5</strong> : le paiement perd ses étapes de facture et gagne ses dates.</li>
-          <li>➡️ <strong>Ensuite, LOT6</strong> : paramètres de rémunération et journal des notes.</li>
-          <li>🗓️ <strong>Après</strong> : LOT7 à LOT10 (personnes, localisation, biens, anciens mandats), puis <strong>LOT11</strong> recrée la base de dev de tout le monde, en une fois.</li>
+          <li>✅ <strong>Page principale</strong> : tes réponses du 2026-10-06 sont reportées (version 12).</li>
+          <li>✅ <strong>Rapport Jeff</strong> : tes 71 réponses de ce jour sont là ; pas encore reportées dans le rapport.</li>
+          <li>➡️ <strong>Ensuite</strong> : trancher cette page, puis appliquer le plan.</li>
         </ul>
       </div>
       <div>
-        <p>❓ <strong>Pourquoi ce chantier existe</strong></p>
+        <p>❓ <strong>Pourquoi cette page existe</strong></p>
         <ul>
-          <li>Le registre <span class="mono">md/questions-a-trancher-2026-10-02.md</span> a tranché des dizaines de questions, avec le groupe et avec Jeff (entretien du <strong>2026-10-07</strong>).</li>
-          <li>⚠️ Avant ce chantier, <strong>aucune</strong> de ces décisions n'était appliquée dans le schéma.</li>
+          <li>Demandé le 2026-10-07 : noter les incohérences, puis proposer un plan pour appliquer <b>toutes les décisions</b> de ces derniers jours.</li>
         </ul>
       </div>
-      <p>📝 <strong>Ce que cette page vous demande</strong> : cocher « je garde » ou « à revoir » sur <strong>9 décisions</strong>, puis copier vos réponses en bas. Les points ouverts sont une simple liste : rien à cocher.</p>
+      <p>📝 <strong>Ce que cette page te demande</strong> : 15 choix, 3 décisions. Le commit et le push se demandent à part, dans la conversation.</p>
     </div>
   </section>
 
   <section>
-    <h2>En deux mots : c'est quoi, une migration de schéma ?</h2>
+    <h2>En deux mots : pourquoi trancher avant de coder ?</h2>
     <div class="clair">
-      <p>🏠 <strong>Le schéma, c'est le plan de la maison.</strong> Les tables sont les pièces ; les contraintes sont les règles du lieu, comme « pas plus de six personnes dans le salon ».</p>
+      <p>🧱 <strong>Comme un plan de maison</strong> : on ne coule pas la dalle tant qu'on hésite sur l'emplacement d'un mur.</p>
       <div>
-        <p>Il y a <strong>deux façons</strong> d'avoir une maison au nouveau plan :</p>
+        <p>Trois mots reviennent :</p>
         <ul>
-          <li>🆕 <strong>construire neuf</strong> sur le plan v3 : c'est <span class="mono">docker/init-v3/</span> ;</li>
-          <li>🔨 <strong>rénover</strong> une maison v2 déjà habitée : ce sont les fichiers de <span class="mono">docker/migrations/v2-vers-v3/</span>.</li>
+          <li><strong>le lot de migration</strong> : tous les changements de la base, faits en une fois ;</li>
+          <li><strong>down -v</strong> : la commande que chacun lance pour repartir d'une base neuve (<span class="mono">docker compose down -v</span>) ;</li>
+          <li><strong>incohérence</strong> : deux réponses qui ne tiennent pas ensemble, ou une réponse qui contredit le sujet.</li>
         </ul>
       </div>
-      <p>🔍 <strong>Le banc</strong> est un contrôleur : il visite les deux maisons et compare tout, pièce par pièce. S'il ne trouve aucune différence, les deux chemins mènent au même endroit.</p>
+      <p>➡️ <strong>Pourquoi c'est utile</strong> : une incohérence laissée passer devient du code à refaire, et une base à recréer chez chacun.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ta question sur Nina, en clair</h2>
+    <div class="clair">
+      <p>💬 Ta note sur Q-MIG-12 : « refaire un compte client et un compte hunter pour Nina ? ». <b>Non, aucun compte à créer</b> : Nina Girard est <b>déjà une cliente</b> dans les données d'origine.</p>
       <div>
-        <p>Les mots qui reviennent :</p>
+        <p>💡 <strong>Mon avis : relier le mandat 13 à Nina, si Jeff confirme que c'est elle.</strong></p>
         <ul>
-          <li><strong>contrainte</strong> : une règle que la base fait respecter seule (un <span class="mono">CHECK</span>, par exemple « le taux est entre 20 et 60 % ») ;</li>
-          <li><strong>trigger</strong> : un petit programme que la base lance à chaque écriture, pour une règle qui regarde d'autres lignes ;</li>
-          <li><strong>test d'intégration</strong> : un test qui passe par l'API et écrit dans une vraie base de test, <span class="mono">fil_rouge_test</span> ;</li>
-          <li><strong>mutant</strong> : un piège. On casse exprès une règle dans la base de test, et on vérifie que le test qui la garde échoue. Un test qui ne tombe pas ne protège rien ;</li>
-          <li><strong>pyright</strong> : un outil qui relit le Python et cherche les erreurs de type.</li>
+          <li>➕ Une seule ligne à changer dans la migration ; le mandat perdu revient.</li>
+          <li>➖ Ça reste une hypothèse tant que Jeff ne l'a pas confirmée (Q-JEF-13).</li>
         </ul>
       </div>
-      <p>➡️ <strong>Pourquoi c'est utile</strong> : chacun de nous a une base v2 sur sa machine. Une base neuve et une base mise à jour doivent se comporter <strong>pareil</strong>, sinon un bug n'apparaît que chez une personne.</p>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+        <p>Nina : <span class="mono">PgSQL.sql:103</span>, rôle <span class="mono">'client'</span>, Montpellier, budget 220 000. Le mandat 13 est écarté parce que son client est un chasseur (<span class="mono">02:167</span>, « client_id=3 est un chasseur »). Ce n'est pas Nina qui est chasseur : c'est le client du mandat qui est faux.</p>
+      </details>
     </div>
   </section>
 
   <section>
     <h2>Les chiffres</h2>
     <div class="chiffres">
-      <div class="chiffre"><b>5 sur 12</b><span>fiches faites, chacune dans son commit</span></div>
-      <div class="chiffre"><b>145</b><span>tests qui passent, contre 123 au départ</span></div>
-      <div class="chiffre"><b>18 sur 18</b><span>pièges (mutants) détectés par les tests</span></div>
-      <div class="chiffre"><b>507</b><span>éléments comparés par le banc : aucune différence</span></div>
-      <div class="chiffre"><b>3</b><span>fichiers de migration (03, 04, 05)</span></div>
-      <div class="chiffre"><b>16,45 $</b><span>coût mesuré du chantier, pour 205 tours</span></div>
+      <div class="chiffre"><b>71</b><span>réponses, une par carte du rapport Jeff</span></div>
+      <div class="chiffre"><b>1</b><span>réponse changée : Q-PAR-09</span></div>
+      <div class="chiffre"><b>9</b><span>incohérences à trancher</span></div>
+      <div class="chiffre"><b>21</b><span>changements de la base prêts, sans attendre Jeff (rôle en lecture seule compris)</span></div>
+      <div class="chiffre"><b>14</b><span>changements qui attendent Jeff, ou un choix de cette page</span></div>
     </div>
     <ul class="sous" style="font-size:.95rem">
-      <li>Tests : depuis <span class="mono">docker/</span>, <span class="mono">docker compose exec -T api python -m pytest -q -p no:cacheprovider</span> → « 145 passed ».</li>
-      <li>Banc : <span class="mono">bash docker/compare_v2_v3.sh</span> → « IDENTIQUES — 507 faits comparés ».</li>
-      <li>Mutants : 6 à LOT3, 5 à LOT4, 7 à LOT5 ; chacun posé sur la base de test, puis la base est recréée.</li>
-      <li>Coût : <span class="mono">vlp.py cout "context AI/10-lot-migration.md" --session</span> → « TOTAL ≈37,3M (37 281 683) · 205 tours · 16,45 $ ».</li>
+      <li>71 et 1 : tes réponses comparées aux cases déjà cochées du rapport, par un script.</li>
+      <li>21 et 14 : le tableau « Ce que le lot contient déjà » de la page principale, plus tes réponses de ce jour et le rôle en lecture seule ; le détail est dans le plan, plus bas.</li>
     </ul>
   </section>
 
   <section>
-    <h2>Ce qui a été fait</h2>
-    <div class="tableau">
-      <table>
-        <thead><tr><th>Commit</th><th>Quoi</th><th>Ce qu'il livre</th><th>Coût</th></tr></thead>
+    <h2>Avant de choisir — le plan en 7 étapes</h2>
+    <p class="sous">Le plan que je propose. Les choix Q11 à Q15, plus bas, en règlent la forme.</p>
+    <div class="tableau"><table>
+      <thead><tr><th>Étape</th><th>Ce qu'elle fait</th><th>Attend</th></tr></thead>
+      <tbody>
+        <tr><td class="n">0</td><td><b>Trancher cette page</b> : les 9 incohérences, et la forme du chantier.</td><td>toi</td></tr>
+        <tr><td class="n">1</td><td><b>Reporter tes réponses</b> : rapport Jeff (71 coches, Q-ACC-03 réécrite, Q-JEF-21, 23 et 26 reformulées), registre, page principale. Mettre à jour la liste pour l'entretien.</td><td>étape 0</td></tr>
+        <tr><td class="n">2</td><td><b>Lot 1 de la base</b> : les <b>21 changements</b> qui n'attendent pas Jeff, dont le rôle en lecture seule. Pour chacun : le schéma <span class="mono">01</span>, le modèle de l'API, la migration <span class="mono">02</span> ou <span class="mono">03</span>, les tests, le README du schéma.</td><td>étape 1</td></tr>
+        <tr><td class="n">3</td><td><b>L'API sans toucher la base</b> : les règles « contrôlées par l'API » (renouvellement sans vente, règles entre tables, montant du paiement), la route d'anonymisation d'un compte. Chacune avec ses tests unitaires et fonctionnels.</td><td>étape 2</td></tr>
+        <tr><td class="n">4</td><td><b>L'entretien avec Jeff</b>, liste à jour.</td><td>Jeff</td></tr>
+        <tr><td class="n">5</td><td><b>Lot 2 de la base</b> : les <b>14 changements</b> qui attendaient Jeff. Puis le seed de démo.</td><td>étape 4</td></tr>
+        <tr><td class="n">6</td><td><b>La doc</b> : les ADR (produits comme le dit Q15), copiés sur Confluence, la matrice des droits, la RACI, le registre RGPD, le modèle de la base (livrables 2), le rapport de tests.</td><td>étape 5</td></tr>
+      </tbody>
+    </table></div>
+    <details class="technique"><summary>🔧 Les 21 changements du lot 1</summary>
+      <div class="tableau"><table>
+        <thead><tr><th>Thème</th><th>Cartes</th></tr></thead>
         <tbody>
-          <tr><td class="n">d51bbf0</td><td><b>LOT1</b><br>Créer init-v3 et basculer le montage</td><td>Le dossier <span class="mono">init-v3</span>, copie de v2, lu par Docker ; v2 figé</td><td class="n">2,61 $</td></tr>
-          <tr><td class="n">a521795</td><td><b>LOT2</b><br>Écrire le banc</td><td><span class="mono">docker/compare_v2_v3.sh</span> : base neuve contre base mise à jour</td><td class="n">1,78 $</td></tr>
-          <tr><td class="n">6003678</td><td><b>LOT3</b><br>Mandat : statuts de fin et signature</td><td>Statut « perdu », case « signé » retirée, annulation sans signature, offre « signée »</td><td class="n">2,83 $</td></tr>
-          <tr><td class="n">c0683e5</td><td><b>LOT4</b><br>Mandat : six mois et exclusivité</td><td>6 mois pile ; le trigger d'exclusivité est branché</td><td class="n">1,90 $</td></tr>
-          <tr><td class="n">c8af2f6</td><td><b>LOT5</b><br>Paiement : note figée, taux borné, dates</td><td>Étapes sans facture, deux dates, taux de 20 à 60 %, score et détails du calcul gardés</td><td class="n">2,88 $</td></tr>
-          <tr><td class="n">—</td><td><b>Hors fiches</b></td><td>Ouverture du chantier, questions, comptes rendus</td><td class="n">4,45 $</td></tr>
+          <tr><td>💶 Paiement et calcul</td><td class="n">Q-REM-03, Q-REM-04, Q-REM-10, Q-REM-13</td></tr>
+          <tr><td>⚙️ Paramètres et barèmes</td><td class="n">Q-REM-05, Q-SCH-15, Q-SCH-17</td></tr>
+          <tr><td>📝 Mandat</td><td class="n">Q-MAN-01, Q-MAN-05 et 09, Q-MAN-06, Q-MAN-07</td></tr>
+          <tr><td>📊 Statuts et journal des notes</td><td class="n">Q-SCH-04, Q-SCH-06</td></tr>
+          <tr><td>🧩 Colonnes simples</td><td class="n">Q-SCH-09, Q-SCH-10, Q-SCH-11</td></tr>
+          <tr><td>🗃️ Données reprises</td><td class="n">Q-MIG-06, Q-MIG-08, Q-MIG-10, Q-MIG-13</td></tr>
+          <tr><td>👀 Rôle en lecture seule</td><td class="n">demandé le 2026-10-07 (Q14 de cette page)</td></tr>
         </tbody>
-      </table>
-    </div>
+      </table></div>
+      <p>Q-MAN-05 et 09 comptent pour un ; Q-MIG-10 suit ton choix « expirer » (voir Q5). Q-MIG-13 : écrire dans le README que « suspendu » devient annulé, ce qui n'est écrit nulle part aujourd'hui.</p>
+    </details>
+    <details class="technique"><summary>🔧 Les 14 changements qui attendent</summary>
+      <div class="tableau"><table>
+        <thead><tr><th>Cartes</th><th>Attend</th></tr></thead>
+        <tbody>
+          <tr><td class="n">Q-REM-02, Q-REM-14</td><td>Q-JEF-03 (vente par une autre agence)</td></tr>
+          <tr><td class="n">Q-REM-19</td><td>Q-JEF-01 (bornes 20 et 60 %)</td></tr>
+          <tr><td class="n">Q-MAN-02</td><td>Q-JEF-06 (exclusivité)</td></tr>
+          <tr><td class="n">Q-REM-17, Q-ACC-11</td><td>Q3 de cette page (la facture)</td></tr>
+          <tr><td class="n">Q-SCH-01, Q-SCH-18, Q-MIG-09</td><td>Q4 de cette page, puis Q-JEF-26</td></tr>
+          <tr><td class="n">Q-PRO-08, Q-MIG-07</td><td>Q4 de cette page (le faux téléphone)</td></tr>
+          <tr><td class="n">Q-SCH-12</td><td>toujours « à confirmer » depuis le 2026-10-05</td></tr>
+          <tr><td class="n">Q-SCH-05</td><td>Q-JEF-18 (priorité de 1 à 5)</td></tr>
+          <tr><td class="n">Q-MIG-03, Q-MIG-12</td><td>Q-JEF-13 (états, mandat 13)</td></tr>
+          <tr><td class="n">Q-ACC-18, Q-MIG-11</td><td>Q2 de cette page, puis Q-JEF-21 (mot de passe)</td></tr>
+          <tr><td class="n">Q-ACC-19</td><td>Q-JEF-22 (une clé d'API ou plusieurs)</td></tr>
+          <tr><td class="n">Q-JEF-24</td><td>Q8 de cette page (qui saisit un bien à la main)</td></tr>
+        </tbody>
+      </table></div>
+      <p>Hors base, dans aucun lot : <span class="mono">docker/docker-compose.yml</span> n'est pas touché.</p>
+    </details>
   </section>
 
   <section>
-    <h2>LOT1 : créer init-v3</h2>
-    <div class="clair">
-      <p>💬 <strong>En clair</strong> : on a photocopié le plan v2 pour en faire le plan v3, puis on a dit à Docker de construire à partir du v3. Le plan v2 ne bouge plus : il sert de point de départ au banc.</p>
-      <div>
-        <p>🧩 <strong>Ce qui change</strong></p>
-        <ul>
-          <li>Le dossier <strong><span class="mono">docker/init-v3/</span></strong> : schéma, reprise des données, biens, README.</li>
-          <li><strong>Une seule ligne</strong> de <span class="mono">docker/docker-compose.yml</span> : le montage passe à <span class="mono">./init-v3</span>, avec l'accord de Sébastien.</li>
-          <li>Les docs (<span class="mono">CLAUDE.md</span>, <span class="mono">CHANTIER.md</span>, l'index, l'état, <span class="mono">API/README.md</span>) pointent vers v3.</li>
-        </ul>
-      </div>
-      <div>
-        <p>🔬 <strong>La preuve</strong></p>
-        <ul>
-          <li>Entre v2 et v3 : <strong>1 seule différence</strong>, l'en-tête du README.</li>
-          <li>pytest : <strong>123 passed</strong>, avant et après.</li>
-        </ul>
-      </div>
-      <p>⚠️ Votre <strong>base de dev n'est pas recréée</strong> : Docker ne relit le dossier monté que sur un volume vide. C'est prévu à <strong>LOT11</strong>, une seule fois pour toute l'équipe.</p>
-    </div>
-  </section>
+    <h2>Les incohérences à trancher</h2>
+    <p class="sous">Une carte par incohérence. Chaque option dit son bon et son moins bon côté.</p>
 
-  <section>
-    <h2>LOT2 : le banc</h2>
-    <div class="clair">
-      <p>💬 <strong>En clair</strong> : chaque changement s'écrit <strong>deux fois</strong>, dans le plan neuf et dans la rénovation. Une faute de recopie ne se verrait nulle part. Le banc construit les deux bases et compare leurs listes : colonnes, contraintes, index, triggers, fonctions, nombre de lignes.</p>
-      <div>
-        <p>🔬 <strong>La preuve</strong></p>
-        <ul>
-          <li>Premier passage : <strong>aucune différence, 499</strong> éléments comparés, en 17,8 à 27,4 s.</li>
-          <li>Un piège : une colonne en trop côté v3. Le banc <strong>la trouve et la nomme</strong>.</li>
-          <li>La même colonne écrite au milieu de la table : <strong>aucune différence</strong>. C'est voulu : une rénovation ajoute toujours la colonne en dernier.</li>
-        </ul>
+    <div class="question">
+      <h3>🟡 Q1 · Tes commentaires sur les cartes Jeff : ses réponses, ou notre position ?</h3>
+      <ul>
+        <li>💬 La décision DJ6, que tu gardes, dit : <b>le commentaire garde la réponse de Jeff</b>.</li>
+        <li>💬 Or tes commentaires sur Q-JEF-14, 15, 23, 24 et 26 ressemblent à des réponses : « facture hors scope », « il peut être saisi à la main ».</li>
+        <li>⚠️ Si ce sont ses réponses, plusieurs cartes se ferment, et l'auth change de périmètre. Sinon, ce sont nos positions, à lui faire valider.</li>
+      </ul>
+      <div class="choix options">
+        <label><input type="radio" name="Q1" value="position"><span><b>Notre position : Jeff n'a pas encore été vu (recommandé)</b><span class="effet"><span>➕ Les cartes restent à poser ; tes commentaires deviennent « notre position ».</span><span>➖ L'entretien reste entier.</span></span></span></label>
+        <label><input type="radio" name="Q1" value="jeff"><span><b>Les réponses de Jeff : il a déjà répondu</b><span class="effet"><span>➕ Ces cartes se ferment ; l'entretien raccourcit.</span><span>➖ Dis où et quand il l'a dit : la source se cite en soutenance.</span></span></span></label>
+        <label><input type="radio" name="Q1" value="melange"><span><b>Un mélange</b><span class="effet"><span>➕ Chaque carte au bon statut.</span><span>➖ Précise lesquelles dans le commentaire.</span></span></span></label>
       </div>
-      <p>⚠️ Le banc <strong>ne compare pas</strong> les droits (<span class="mono">GRANT</span>), les rôles, les vues, les types ni les séquences. Ça comptera à <strong>LOT12</strong> (rôle en lecture seule).</p>
-      <p>🧭 Pourquoi un script à nous plutôt qu'un outil : voir la décision <strong>D1</strong>.</p>
+    </div>
+
+    <div class="question">
+      <h3>🟡 Q2 · L'authentification : à nous, ou au-dessus de nous ?</h3>
+      <ul>
+        <li>💬 Ta note sur Q-JEF-14 : fournir <b>route de connexion, token, session, rôles, droits</b>, sans la page de login.</li>
+        <li>⚠️ Jeff, le 2026-09-22 : « vous ne gérez pas l'auth, c'est géré au dessus ».</li>
+        <li>⚠️ Tes notes du 2026-10-06 disaient aussi : « authentification hors scope » (Q-ACC-17, Q-ACC-18), et un ADR qui annule les mots de passe (Q-MIG-11).</li>
+        <li>💬 Q-JEF-21 est à « reformuler », sans dire comment : cette carte peut le dire.</li>
+      </ul>
+      <div class="choix options">
+        <label><input type="radio" name="Q2" value="demander"><span><b>Le demander à Jeff, en reformulant Q-JEF-21 (recommandé)</b><span class="effet"><span>➕ C'est lui qui a fixé le périmètre : lui seul peut l'élargir. Rien ne bouge avant.</span><span>➖ Le mot de passe et la clé d'API attendent l'entretien.</span></span></span></label>
+        <label><input type="radio" name="Q2" value="hors"><span><b>Rester hors périmètre, comme Jeff l'a dit</b><span class="effet"><span>➕ Conforme au client ; une clé d'API suffit ; le mot de passe peut partir.</span><span>➖ Ta note de ce jour tombe.</span></span></span></label>
+        <label><input type="radio" name="Q2" value="outils"><span><b>Fournir les outils d'auth, sans page de login</b><span class="effet"><span>➕ L'API est prête à brancher.</span><span>➖ Contredit Jeff ; garder le mot de passe et son hachage, rétablir ADR-016, plus de code et de tests.</span></span></span></label>
+      </div>
       <details class="technique"><summary>🔧 Le détail technique</summary>
-        <p>Il crée <span class="mono">cmp_v2_migree</span> (<span class="mono">init-v2/*.sql</span> puis chaque migration par ordre de nom) et <span class="mono">cmp_v3_neuve</span> (<span class="mono">init-v3/*.sql</span>), décrit, compare, puis supprime les deux. Il sort 0 si identiques, 1 avec le diff, 2 si un fichier ne se charge pas. Détail : <span class="mono">docker/init-v3/README.md</span> §10.</p>
+        <p>Jeff, 2026-09-22 : <span class="mono">md/adr/adr-026-perimetre-authentification.md:42-53</span>. Le sujet ne parle d'authentification qu'une fois : « mot de passe (haché) » dans un modèle de registre RGPD à remplir (<span class="mono">REGISTRE-RGPD.md:28</span>). ADR-016 (Argon2) : annulé sur Confluence le 06/10, d'après ta note sur Q-PRO-04.</p>
       </details>
     </div>
-  </section>
 
-  <section>
-    <h2>LOT3 : la fin d'un mandat</h2>
-    <div class="clair">
-      <p>💬 <strong>En clair</strong> : un mandat a une fin de vie — fini, expiré, renouvelé, annulé. On ajoute <strong>« perdu »</strong> (<span class="mono">'lost'</span>) : le bien s'est vendu sans nous, personne n'est payé.</p>
-      <div>
-        <p>🧩 <strong>Ce qui change</strong></p>
-        <ul>
-          <li><span class="mono">mandate.status</span> accepte <strong><span class="mono">'lost'</span></strong>, pour la vente hors agence comme pour la vente par un collègue (Q-REM-02, Q-REM-14).</li>
-          <li>La case <span class="mono">is_client_signed</span> est <strong>retirée</strong> : la date de signature dit déjà tout (Q-MAN-05, Q-MAN-09). Retirée aussi des 17 mandats repris.</li>
-          <li>Un client peut <strong>annuler avant de signer</strong> : un mandat <span class="mono">'canceled'</span> sans date est permis (Q-MAN-07).</li>
-          <li>Une offre sur un bien peut être <strong><span class="mono">'signed'</span></strong> (Q-SCH-04).</li>
-        </ul>
+    <div class="question">
+      <h3>🟡 Q3 · La facture du chasseur : « hors scope », mais le sujet la décrit</h3>
+      <ul>
+        <li>💬 Tes notes de ce jour : « facture hors scope !! » (Q-JEF-23), « création et gestion de la facture sont hors scope » (Q-ACC-04).</li>
+        <li>⚠️ Hier, tu as choisi <b>une table des factures</b> (Q-ACC-11), et Q-REM-17 met la référence et les dates de la facture sur le paiement.</li>
+        <li>⚠️ Le sujet a deux scénarios : « le chasseur envoie sa facture dans le système », puis « le paiement est programmé une fois la facture vérifiée ».</li>
+        <li>💡 On peut ne pas <b>créer</b> ni <b>gérer</b> la facture, et quand même <b>noter</b> qu'elle est arrivée et vérifiée.</li>
+      </ul>
+      <div class="choix options">
+        <label><input type="radio" name="Q3" value="minimum"><span><b>Le minimum sur le paiement : sa référence, sa date d'envoi, sa date de vérification (recommandé)</b><span class="effet"><span>➕ Les deux scénarios du sujet restent couverts, sans gérer la facture elle-même.</span><span>➖ Plus de table des factures (Q-ACC-11 change) ; une facture renvoyée écrase la précédente.</span></span></span></label>
+        <label><input type="radio" name="Q3" value="rien"><span><b>Tout hors scope : aucune trace de facture</b><span class="effet"><span>➕ Moins de colonnes et de code.</span><span>➖ Deux scénarios du sujet non couverts : un écart à faire valider par Jeff.</span></span></span></label>
+        <label><input type="radio" name="Q3" value="table"><span><b>Garder la table des factures, ta réponse d'hier</b><span class="effet"><span>➕ La trace complète de chaque envoi.</span><span>➖ Contredit ta note de ce jour ; une table de plus.</span></span></span></label>
       </div>
-      <div>
-        <p>🔬 <strong>La preuve</strong></p>
-        <ul>
-          <li><strong>6 tests</strong>, et <strong>6 sur 6</strong> tombent sous leur piège.</li>
-          <li>Banc : aucune différence, <strong>498</strong> éléments. pytest : <strong>129 passed</strong>.</li>
-        </ul>
-      </div>
-      <p>🧭 Choix de la fiche : <strong>D2</strong> (un seul statut) et <strong>D5</strong> (date de fin facultative dans l'API).</p>
       <details class="technique"><summary>🔧 Le détail technique</summary>
-        <p>Fichiers : <span class="mono">init-v3/01</span>, <span class="mono">init-v3/02</span>, <span class="mono">docker/migrations/v2-vers-v3/03_mandat-statuts.sql</span>, <span class="mono">mandate_model.py</span>, <span class="mono">estate_proposed_model.py</span>, <span class="mono">test_constraints_db.py</span>. Contrainte <span class="mono">chk_status_signature</span> : seuls <span class="mono">'pending_signature'</span> et <span class="mono">'canceled'</span> se passent de date de signature.</p>
+        <p>Sujet : <span class="mono">user-stories/07_chasseur_remuneration_et_performance.feature:17-27</span> ; <span class="mono">Readme.md:132-133</span> ; un <span class="mono">facture_id</span> dans les paiements proposés (<span class="mono">REGLES-CALCUL-REMUNERATION.md:288</span>) ; « la facturation du chasseur relève du cycle de paiement, pas du calcul de la part » (<span class="mono">:131</span>). Avec l'option 1 : Q-JEF-23 n'est plus à poser, Q-ACC-04 se réduit à « qui marque la facture vérifiée ».</p>
       </details>
     </div>
-  </section>
 
-  <section>
-    <h2>LOT4 : six mois et exclusivité</h2>
-    <div class="clair">
-      <p>💬 <strong>En clair</strong> : un mandat dure <strong>exactement 6 mois</strong>, ni 5, ni 7. Et un mandat exclusif, c'est une <strong>chasse gardée</strong> : pendant ce temps, le client ne confie aucun autre mandat. Ces deux règles étaient écrites en commentaire depuis septembre, jamais branchées.</p>
-      <div>
-        <p>🧩 <strong>Ce qui change</strong></p>
-        <ul>
-          <li><span class="mono">chk_mandate_six_months</span> : fin = signature + 6 mois, au jour près (Q-MAN-01).</li>
-          <li>Le trigger <span class="mono">trg_mandate_exclusivity</span> est <strong>branché</strong>, corrigé avant (Q-MAN-02, Q-JEF-06).</li>
-          <li>Un mandat <strong>annulé libère</strong> le client tout de suite.</li>
-        </ul>
+    <div class="question">
+      <h3>🟡 Q4 · Les données manquantes : vide, valeur inventée, ou script du sujet modifié ?</h3>
+      <ul>
+        <li>💬 Ta note sur Q-JEF-26 : les trous sont <b>faits exprès</b> ; ne rien supprimer ; on peut <b>inventer</b> les autres valeurs, en <b>modifiant le script fourni par Jeff</b>.</li>
+        <li>⚠️ Si les trous sont voulus, lui demander de les combler (Q-JEF-26 « poser ») n'a plus d'objet.</li>
+        <li>⚠️ Hier, tu as choisi de laisser le budget minimum <b>vide</b> (Q-MIG-09). Une valeur inventée le contredit.</li>
+        <li>⚠️ Le script fourni, c'est les données d'origine du sujet. Le modifier, c'est perdre la preuve des trous pour l'audit.</li>
+      </ul>
+      <div class="choix options">
+        <label><input type="radio" name="Q4" value="migration"><span><b>Ne jamais toucher le script du sujet ; tout se règle dans notre migration (recommandé)</b><span class="effet"><span>➕ La source reste intacte pour l'audit ; vide si la colonne l'accepte, valeur inventée et documentée sinon.</span><span>➖ Deux façons d'écrire « inconnu », à expliquer dans le README.</span></span></span></label>
+        <label><input type="radio" name="Q4" value="factice"><span><b>Une valeur inventée partout, dans notre migration</b><span class="effet"><span>➕ Aucune case vide.</span><span>➖ Q-MIG-09 change ; un faux budget se lit comme un vrai.</span></span></span></label>
+        <label><input type="radio" name="Q4" value="script"><span><b>Modifier le script du sujet</b><span class="effet"><span>➕ La migration reste simple.</span><span>➖ L'audit ne peut plus montrer les trous ; une mise à jour du sujet écrase nos changements.</span></span></span></label>
       </div>
-      <div>
-        <p>🔬 <strong>La preuve</strong></p>
-        <ul>
-          <li>Compté avant de brancher, sur les 17 mandats repris : <strong>0</strong> hors des 6 mois, <strong>0</strong> paire en conflit.</li>
-          <li><strong>5 tests</strong>, <strong>5 sur 5</strong> tombent sous leur piège.</li>
-          <li>Banc : aucune différence, <strong>500</strong> éléments. pytest : <strong>134 passed</strong>.</li>
-        </ul>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+        <p>Script du sujet : <span class="mono">fixtures/PgSQL.sql</span> ; notre migration : <span class="mono">docker/init-v2/02_migration.sql</span>. Trous : téléphones <span class="mono">PgSQL.sql:94, :100, :106</span> ; budget minimum absent, <span class="mono">:71</span>. La colonne téléphone est obligatoire (<span class="mono">01:184</span>) : une valeur inventée y est forcée. Q-JEF-26 deviendrait : « ces trous sont voulus ? on les marque non renseigné, d'accord ? ». Le faux téléphone (Q-MIG-07) se règle ici aussi : <span class="mono">+33000000000</span>, au format d'ADR-007.</p>
+      </details>
+    </div>
+
+    <div class="question">
+      <h3>🟡 Q5 · Les 6 mandats échus : tu les passes en « expiré », mais Q-JEF-13 le demande à Jeff</h3>
+      <ul>
+        <li>💬 Q-MIG-10 : tu choisis <b>expirer</b> (je recommandais d'attendre Jeff).</li>
+        <li>⚠️ Q-JEF-13, que tu poses, lui demande justement : « renouvelés, ou finis ? ».</li>
+      </ul>
+      <div class="choix options">
+        <label><input type="radio" name="Q5" value="confirmer"><span><b>Les passer en « expiré » maintenant, et le lui dire comme une confirmation (recommandé)</b><span class="effet"><span>➕ Le lot 1 avance ; Jeff répond d'un mot.</span><span>➖ S'il dit « renouvelés », la migration change au lot 2.</span></span></span></label>
+        <label><input type="radio" name="Q5" value="attendre"><span><b>Attendre Jeff avant de toucher la migration</b><span class="effet"><span>➕ Aucune hypothèse en base.</span><span>➖ Un changement de plus au lot 2.</span></span></span></label>
       </div>
-      <p>🧭 Choix de la fiche : <strong>D3</strong> (renouvellement) et <strong>D4</strong> (par client, pas par bien).</p>
-      <p>⚠️ Un mandat <span class="mono">'lost'</span> <strong>bloque encore</strong> l'exclusivité : seul <span class="mono">'canceled'</span> est ignoré. Point ouvert.</p>
+    </div>
+
+    <div class="question">
+      <h3>🟡 Q6 · Q-PAR-09 : tu passes du manager à la direction</h3>
+      <ul>
+        <li>💬 Le 2026-10-05 : <b>le manager</b> crée un barème propre à un chasseur. Ce jour : <b>la direction</b>.</li>
+        <li>✅ Ça règle une incohérence : Q-ACC-07 dit aussi « la direction seule ».</li>
+        <li>⚠️ La liste pour l'entretien dit encore « le manager » (ligne 20) : à corriger.</li>
+      </ul>
+      <div class="choix options">
+        <label><input type="radio" name="Q6" value="direction"><span><b>Oui, la direction seule (recommandé)</b><span class="effet"><span>➕ Une seule source pour l'argent ; Q-PAR-09 et Q-ACC-07 d'accord.</span><span>➖ Plus lent pour un manager qui veut aider un chasseur.</span></span></span></label>
+        <label><input type="radio" name="Q6" value="partage"><span><b>Partagé : la direction le barème par défaut, le manager les barèmes propres</b><span class="effet"><span>➕ Souple.</span><span>➖ Deux rôles sur l'argent.</span></span></span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <h3>🟡 Q7 · Un chasseur crée une demande : qui crée le compte du client ?</h3>
+      <ul>
+        <li>💬 Q-ACC-15 : <b>oui</b>, un chasseur peut créer une demande (je recommandais non).</li>
+        <li>💬 Q-ACC-12 : <b>le client</b> crée son compte, par sa demande en ligne.</li>
+        <li>⚠️ Un client au téléphone, sans compte : le chasseur crée sa demande, mais pas son compte.</li>
+      </ul>
+      <div class="choix options">
+        <label><input type="radio" name="Q7" value="compte-existant"><span><b>Le chasseur crée une demande seulement pour un client qui a déjà un compte (recommandé)</b><span class="effet"><span>➕ Q-ACC-12 et Q-ACC-15 tiennent ensemble.</span><span>➖ Le client au téléphone doit d'abord créer son compte.</span></span></span></label>
+        <label><input type="radio" name="Q7" value="chasseur-cree"><span><b>Le chasseur peut aussi créer le compte du client</b><span class="effet"><span>➕ Pratique au téléphone.</span><span>➖ Un compte créé sans le client : à justifier pour le RGPD.</span></span></span></label>
+        <label><input type="radio" name="Q7" value="jeff"><span><b>L'ajouter aux questions de Jeff (Q-JEF-14)</b><span class="effet"><span>➕ Le client tranche.</span><span>➖ Une ligne de plus à l'entretien.</span></span></span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <h3>🟡 Q8 · Un bien saisi à la main : par qui ?</h3>
+      <ul>
+        <li>💬 Ta note sur Q-JEF-24 : un bien <b>peut être saisi à la main</b> (hors marché).</li>
+        <li>⚠️ Mais <b>qui</b> le saisit n'est dit nulle part ; la matrice des droits en a besoin.</li>
+      </ul>
+      <div class="choix options">
+        <label><input type="radio" name="Q8" value="chasseur-manager"><span><b>Le chasseur et le manager, avec l'auteur noté sur le bien (recommandé)</b><span class="effet"><span>➕ Le chasseur trouve le bien hors marché ; on sait qui l'a saisi.</span><span>➖ Une colonne de plus sur les biens.</span></span></span></label>
+        <label><input type="radio" name="Q8" value="manager"><span><b>Le manager seul</b><span class="effet"><span>➕ Un contrôle avant d'entrer au catalogue.</span><span>➖ Le chasseur dépend du manager.</span></span></span></label>
+        <label><input type="radio" name="Q8" value="jeff"><span><b>Le demander à Jeff dans Q-JEF-24</b><span class="effet"><span>➕ Le client tranche.</span><span>➖ Une sous-question de plus.</span></span></span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <h3>🟡 Q9 · Le manager du chasseur : ADR-025 est annulé, mais tes réponses gardent le lien</h3>
+      <ul>
+        <li>💬 Sur Confluence, ADR-025 (« chaque chasseur est rattaché à un manager ») est <b>Annulé</b>.</li>
+        <li>⚠️ Ta réponse Q-ACC-02 de ce jour (le manager voit <b>ses</b> chasseurs) a besoin de ce lien. Q-SCH-13 et Q-MIG-04 aussi.</li>
+        <li>💬 Toujours ouvert depuis hier, dans « Ce qui coince » du rapport Jeff.</li>
+      </ul>
+      <div class="choix options">
+        <label><input type="radio" name="Q9" value="garder"><span><b>Garder le lien, réécrire sa raison dans un nouvel ADR (recommandé)</b><span class="effet"><span>➕ Toutes tes réponses tiennent ; la base ne change pas.</span><span>➖ Un ADR à réécrire.</span></span></span></label>
+        <label><input type="radio" name="Q9" value="abandonner"><span><b>Abandonner le lien</b><span class="effet"><span>➕ Conforme à Confluence.</span><span>➖ Q-ACC-02, Q-SCH-13 et Q-MIG-04 à revoir ; base à changer.</span></span></span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <h3>🟡 Q10 · Q-ACC-03 réexpliquée : qui enregistre la vente dans l'application ?</h3>
+      <ul>
+        <li>💬 Tu demandais « explique mieux ». Le jour de l'acte chez le notaire, <b>quelqu'un tape la vente</b> dans l'application : le bien, le prix, la date.</li>
+        <li>💬 Cette saisie <b>déclenche le calcul de la paie</b> du chasseur.</li>
+        <li>⚠️ Si le chasseur la tape lui-même, il déclare sa propre prime.</li>
+      </ul>
+      <div class="choix options">
+        <label><input type="radio" name="Q10" value="manager"><span><b>Le manager (recommandé)</b><span class="effet"><span>➕ Un contrôle avant que la paie parte.</span><span>➖ Le manager devient un passage obligé.</span></span></span></label>
+        <label><input type="radio" name="Q10" value="chasseur"><span><b>Le chasseur</b><span class="effet"><span>➕ Rapide : il est au rendez-vous.</span><span>➖ Il déclare sa propre prime.</span></span></span></label>
+      </div>
     </div>
   </section>
 
   <section>
-    <h2>LOT5 : le paiement</h2>
-    <div class="clair">
-      <p>💬 <strong>En clair</strong> : le paiement du chasseur suit un parcours, comme un colis : <strong>annoncé → programmé → payé</strong>, ou refusé. On note la date de chaque étape. Et on garde la « photo » du calcul, pour pouvoir le refaire plus tard, même si les chiffres du chasseur ont bougé.</p>
-      <div>
-        <p>🧩 <strong>Ce qui change</strong></p>
-        <ul>
-          <li>Les étapes <span class="mono">'invoice_submitted'</span> et <span class="mono">'verified'</span> sont <strong>retirées</strong> : la facture est hors périmètre (Jeff, Q-JEF-23).</li>
-          <li>Deux dates : <strong><span class="mono">announced_at</span></strong> (chasseur prévenu) et <strong><span class="mono">scheduled_for</span></strong> (jour prévu du virement), Q-REM-17.</li>
-          <li>Le taux final est <strong>entre 20 et 60 %</strong> (Q-REM-19, confirmé par Jeff : Q-JEF-01).</li>
-          <li>Hors refus, le taux final est <strong>obligatoire</strong> (Q-REM-10).</li>
-          <li><strong><span class="mono">performance_score</span></strong> garde le score qui a servi (Q-REM-03).</li>
-          <li><strong><span class="mono">calculation_details</span></strong> garde les 5 notes et les entrées du calcul (Q-REM-04).</li>
-        </ul>
+    <h2>Comment mener le chantier</h2>
+    <p class="sous">La forme du plan : quand changer la base, dans quel ordre, avec quel outil.</p>
+
+    <div class="question">
+      <h3>🟡 Q11 · Le lot de migration : un seul, ou deux ?</h3>
+      <ul>
+        <li>💬 Jusqu'ici : <b>un seul lot</b>, donc un seul <span class="mono">down -v</span> chez chacun.</li>
+        <li>💬 Mais 21 changements sont prêts, et la date de l'entretien avec Jeff n'est pas connue.</li>
+      </ul>
+      <div class="choix options">
+        <label><input type="radio" name="Q11" value="deux"><span><b>Deux lots : les 21 prêts maintenant, les 14 après Jeff (recommandé)</b><span class="effet"><span>➕ L'API et les tests avancent sans attendre.</span><span>➖ Deux <span class="mono">down -v</span> chez chacun, annoncés sur Discord.</span></span></span></label>
+        <label><input type="radio" name="Q11" value="un"><span><b>Un seul lot, après l'entretien</b><span class="effet"><span>➕ Un seul <span class="mono">down -v</span>.</span><span>➖ Tout attend Jeff ; utile seulement si l'entretien est très proche.</span></span></span></label>
       </div>
-      <div>
-        <p>🔬 <strong>La preuve</strong></p>
-        <ul>
-          <li><strong>9 tests</strong> (11 cas) : 0,19 et 0,61 refusés ; 0,20 et 0,60 acceptés ; etc.</li>
-          <li><strong>7 sur 7</strong> tombent sous leur piège.</li>
-          <li>Le mot « invoice » : <strong>0 ligne</strong> dans le schéma et l'API.</li>
-          <li>Banc : aucune différence, <strong>507</strong> éléments. pytest : <strong>145 passed</strong>, dont les <strong>55</strong> cas de rémunération.</li>
-        </ul>
+    </div>
+
+    <div class="question">
+      <h3>🟡 Q12 · Découper par thème, ou par couche ?</h3>
+      <ul>
+        <li>💬 Un changement touche jusqu'à cinq endroits : le schéma, le modèle de l'API, la migration, les tests, le README.</li>
+      </ul>
+      <div class="choix options">
+        <label><input type="radio" name="Q12" value="theme"><span><b>Par thème : un thème passe par toutes les couches, un commit par thème (recommandé)</b><span class="effet"><span>➕ Chaque commit marche seul, et s'annule seul.</span><span>➖ On repasse plusieurs fois dans les mêmes fichiers.</span></span></span></label>
+        <label><input type="radio" name="Q12" value="couche"><span><b>Par couche : tout le schéma, puis tous les modèles, puis tous les tests</b><span class="effet"><span>➕ Un fichier ouvert une fois.</span><span>➖ Rien ne marche avant la fin ; un oubli se voit tard.</span></span></span></label>
       </div>
-      <p>🧭 Choix de la fiche : <strong>D6</strong>, <strong>D7</strong> et <strong>D8</strong>.</p>
-      <p>⚠️ 20 % et 60 % sont des <strong>paramètres proposés</strong> par le sujet, pas des règles : si Jeff les change, il faudra une migration (tension avec Q-REM-05).</p>
+    </div>
+
+    <div class="question">
+      <h3>🟡 Q13 · Avec quel outil mener les étapes 2 et 3 ?</h3>
+      <ul>
+        <li>💬 Ton kit vlp découpe un chantier en fiches, et les enchaîne une à une, chacune relue avant son commit.</li>
+        <li>⚠️ Il pose un fichier <span class="mono">CHANTIER.md</span> et un dossier de contexte dans le dépôt du groupe.</li>
+      </ul>
+      <div class="choix options">
+        <label><input type="radio" name="Q13" value="vlp"><span><b>Le kit vlp : une fiche par thème, enchaînées (recommandé)</b><span class="effet"><span>➕ Fait pour ça : une fiche, une relecture, un commit.</span><span>➖ Des fichiers du kit dans le dépôt partagé ; à dire à l'équipe.</span></span></span></label>
+        <label><input type="radio" name="Q13" value="conversation"><span><b>À la main, dans une conversation, thème par thème</b><span class="effet"><span>➕ Rien de plus dans le dépôt.</span><span>➖ Plus lent ; pas de relecture séparée.</span></span></span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <h3>🟡 Q14 · Le rôle en lecture seule : dans la base, ou dans l'application ?</h3>
+      <ul>
+        <li>💬 Ta demande : un rôle qui peut <b>seulement consulter</b> les données, sans rien modifier.</li>
+        <li>💬 Il peut vivre à deux endroits : dans <b>PostgreSQL</b> (un compte de la base qui n'a que le droit de lire), ou dans la <b>table des rôles</b> de l'application, à côté de client, chasseur et manager.</li>
+        <li>⚠️ L'authentification est au-dessus de nous (Jeff, 2026-09-22) : un rôle de l'application ne protège que si la couche du dessus le respecte.</li>
+      </ul>
+      <div class="choix options">
+        <label><input type="radio" name="Q14" value="base"><span><b>Un compte PostgreSQL en lecture seule (recommandé)</b><span class="effet"><span>➕ La base elle-même refuse toute écriture ; utile pour consulter, ou pour un outil d'analyse.</span><span>➖ Un mot de passe de plus, dans <span class="mono">docker/.env</span>, jamais dans le dépôt.</span></span></span></label>
+        <label><input type="radio" name="Q14" value="appli"><span><b>Un rôle « lecteur » dans l'application</b><span class="effet"><span>➕ Visible dans la matrice des droits, à côté des autres rôles.</span><span>➖ Ne protège rien chez nous : c'est la couche du dessus qui l'applique.</span></span></span></label>
+        <label><input type="radio" name="Q14" value="les-deux"><span><b>Les deux</b><span class="effet"><span>➕ Protégé dans la base, et décrit dans la matrice.</span><span>➖ Deux choses à tenir à jour.</span></span></span></label>
+      </div>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+        <p>Option 1 : un script d'initialisation crée le rôle, avec <span class="mono">GRANT SELECT</span> sur toutes les tables et les tables à venir (<span class="mono">ALTER DEFAULT PRIVILEGES</span>). <span class="mono">docker/docker-compose.yml</span> n'est pas touché. Option 2 : une ligne dans la table <span class="mono">role</span>, et une colonne dans <span class="mono">md/securite/matrice-droits-crud-par-role.md</span>. Dans les deux cas : à dire à Jeff, pour information.</p>
+      </details>
+    </div>
+
+    <div class="question">
+      <h3>🟡 Q15 · Les ADR : avec quel outil les produire ?</h3>
+      <ul>
+        <li>💬 Ta demande : « idem pour la génération des ADR ».</li>
+        <li>💬 Le pense-bête compte <b>25 ADR</b> à écrire (A à Z, sans X), après l'entretien avec Jeff.</li>
+        <li>💬 Ils vivent sur Confluence, copiés à la main.</li>
+      </ul>
+      <div class="choix options">
+        <label><input type="radio" name="Q15" value="vlp"><span><b>Comme le code : le kit vlp, une fiche par ADR, chacune relue (recommandé)</b><span class="effet"><span>➕ Même méthode ; chaque ADR cite ses cartes et ses sources, relu avant d'être gardé.</span><span>➖ La copie sur Confluence reste à la main.</span></span></span></label>
+        <label><input type="radio" name="Q15" value="lot"><span><b>Tous d'un coup, dans une conversation, puis relus par toi</b><span class="effet"><span>➕ Plus rapide.</span><span>➖ 25 ADR à relire d'un bloc ; une erreur passe plus facilement.</span></span></span></label>
+      </div>
     </div>
   </section>
 
   <section>
-    <h2>Les décisions prises en séance — à valider</h2>
-    <p class="sous">Ce sont les choix faits pendant ces cinq fiches. Certains ont été tranchés par Sébastien sur un questionnaire, d'autres par Claude, seul. Chaque carte dit qui a choisi. Cochez ce que vous gardez ; en bas, un bouton copie vos réponses.</p>
+    <h2>Les décisions prises seul — à valider</h2>
+    <p class="sous">Des choix faits en écrivant ce plan, sans te demander. Coche ce que tu gardes.</p>
 
     <div class="decision">
-      <div class="tete"><h3>D1 · Le banc est un script à nous</h3><span class="puce faible">outillage</span></div>
+      <div class="tete"><h3>D1 · Les ADR s'écrivent après Jeff ; le code cite la question en attendant</h3><span class="puce faible">doc</span></div>
       <dl class="grille">
-        <dt class="net">💬 En clair</dt><dd>Pour comparer deux bases, on a écrit notre propre script (bash et SQL), plutôt que d'installer un outil. Choisi par <strong>Sébastien</strong>, le 2026-10-07.</dd>
-        <dt class="plus">➕ Le bon côté</dt><dd><strong>Rien à installer</strong> : il tourne dans le conteneur <span class="mono">db</span>. Il compte aussi les lignes.</dd>
-        <dt class="moins">➖ Le moins bon</dt><dd>Environ <strong>190 lignes</strong> à maintenir nous-mêmes ; il ne voit ni droits, ni vues, ni types.</dd>
+        <dt class="net">💬 En clair</dt><dd>On code le lot 1 avant d'écrire ses ADR. Chaque commit cite sa carte (ex. Q-SCH-06) : l'ADR la reprendra.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>Ta règle tient : les ADR après toutes les réponses, Jeff compris.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>Pendant un temps, du code existe sans son ADR.</dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary>
       <dl class="grille">
-        <dt>Le problème</dt><dd>Prouver « base neuve = base migrée » à chaque fiche.</dd>
-        <dt>Le choix</dt><dd><span class="mono">docker/compare_v2_v3.sh</span>, 193 lignes au commit <span class="mono">a521795</span>.</dd>
-        <dt>Écarté</dt><dd>migradiff, la suite de migra : pip sur la machine, et le compte des lignes à coder à part. pg-schema-diff (Stripe) : un binaire Go à installer. Licences non vérifiées.</dd>
-        <dt>Sources</dt><dd><a href="https://www.bytebase.com/blog/top-postgres-schema-compare-tools/">bytebase.com, « top postgres schema compare tools »</a> (blog, lu le 2026-10-07) ; <a href="https://github.com/postgresql-tools/migra">github.com/postgresql-tools/migra</a> (dépôt, lu le 2026-10-07). « migra déprécié en 2024 » vient du résumé du moteur de recherche : page non ouverte.</dd>
-        <dt>Défaire</dt><dd>Remplacer le script par un outil : le banc n'est appelé par aucun autre code.</dd>
+        <dt>Le problème</dt><dd>Le lot 1 précède l'entretien ; tes ADR attendent toutes les réponses (dit le 2026-10-05).</dd>
+        <dt>Mon choix</dt><dd>Message de commit et README citent la carte ; pense-bête « ADR à écrire » tenu à jour.</dd>
+        <dt>Écarté</dt><dd>Écrire les ADR du lot 1 tout de suite : contraire à ta consigne.</dd>
+        <dt>Le prix</dt><dd>Rien.</dd>
+        <dt>Défaire</dt><dd>Écrire les ADR du lot 1 avant de le coder.</dd>
       </dl>
       </details>
       <div class="choix"><label><input type="radio" name="D1" value="garder">Je garde</label><label><input type="radio" name="D1" value="revoir">À revoir</label></div>
     </div>
 
     <div class="decision">
-      <div class="tete"><h3>D2 · Un seul statut « perdu »</h3><span class="puce moyen">schéma</span></div>
+      <div class="tete"><h3>D2 · « Schémas » = le schéma SQL, les modèles de l'API et le modèle de la base des livrables</h3><span class="puce moyen">périmètre</span></div>
       <dl class="grille">
-        <dt class="net">💬 En clair</dt><dd>Que le bien soit vendu hors agence ou par un collègue, le mandat finit <strong>« perdu »</strong>. Choisi par <strong>Sébastien</strong>, à LOT3 : le registre laissait « un ou deux statuts ? » ouvert.</dd>
-        <dt class="plus">➕ Le bon côté</dt><dd><strong>Simple</strong> : le cas « collègue » se retrouve en regardant l'autre mandat, celui qui a vendu.</dd>
-        <dt class="moins">➖ Le moins bon</dt><dd>Pour distinguer les deux cas, il faut <strong>croiser</strong> deux mandats.</dd>
+        <dt class="net">💬 En clair</dt><dd>Tu as cité « schémas ». J'y range trois choses : le fichier <span class="mono">01</span>, les modèles Python de l'API, et les documents du modèle de la base.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>Rien n'est oublié : une colonne changée l'est partout.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>Si tu pensais à autre chose (un diagramme précis), dis-le en commentaire.</dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary>
       <dl class="grille">
-        <dt>Écarté</dt><dd>Deux statuts : <span class="mono">'lost'</span> (hors agence) et <span class="mono">'superseded'</span> (collègue).</dd>
-        <dt>Défaire</dt><dd>Une migration de plus, qui ajoute <span class="mono">'superseded'</span> au <span class="mono">CHECK</span>.</dd>
+        <dt>Le problème</dt><dd>Le dépôt n'a pas de dossier « schemas » : <span class="mono">API/src/app/models</span> (18 modèles) sert de schéma à l'API.</dd>
+        <dt>Mon choix</dt><dd><span class="mono">docker/init-v2/01_create_fil_rouge_immobilier.sql</span>, <span class="mono">API/src/app/models/</span>, <span class="mono">livrables/2-modelisation/</span> et <span class="mono">context AI/09-*-mpd.md</span>.</dd>
+        <dt>Écarté</dt><dd>Seulement <span class="mono">01</span> : les modèles et la doc divergeraient.</dd>
+        <dt>Le prix</dt><dd>Plus de fichiers par thème.</dd>
+        <dt>Défaire</dt><dd>Réduire la liste.</dd>
       </dl>
       </details>
       <div class="choix"><label><input type="radio" name="D2" value="garder">Je garde</label><label><input type="radio" name="D2" value="revoir">À revoir</label></div>
     </div>
 
     <div class="decision">
-      <div class="tete"><h3>D3 · Un renouvellement ne se bloque pas lui-même</h3><span class="puce moyen">schéma</span></div>
+      <div class="tete"><h3>D3 · Chaque thème passe ses tests et pyright avant son commit</h3><span class="puce faible">code</span></div>
       <dl class="grille">
-        <dt class="net">💬 En clair</dt><dd>Un renouvellement (l'enfant) commence le jour où son parent finit : les deux se touchent. La carte Q-MAN-02 ne laissait passer que le parent. Claude a exclu le couple <strong>dans les deux sens</strong>. Pris par <strong>Claude</strong>, seul.</dd>
-        <dt class="plus">➕ Le bon côté</dt><dd>On peut <strong>renouveler</strong> un exclusif, puis <strong>clore</strong> le parent.</dd>
-        <dt class="moins">➖ Le moins bon</dt><dd>La règle va <strong>un peu plus loin</strong> que la carte du registre : à acter.</dd>
+        <dt class="net">💬 En clair</dt><dd>Un thème n'est fini que si ses tests passent sur une base neuve, et si pyright ne trouve aucune erreur de plus.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>Chaque commit est sûr ; le sujet demande des tests unitaires et fonctionnels.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>Plus long par thème : une base à recréer pour tester.</dd>
       </dl>
       <details class="technique"><summary>🔧 Le détail technique</summary>
       <dl class="grille">
-        <dt>Le problème</dt><dd>Mesuré : avec le parent seul exclu, passer le parent à <span class="mono">'completed'</span> après son renouvellement était refusé.</dd>
-        <dt>La preuve</dt><dd>Piège « enfants non exclus » : <span class="mono">test_mandate_renewal_of_exclusive_is_accepted</span> tombe.</dd>
-        <dt>Défaire</dt><dd>Retirer la ligne <span class="mono">m.id_mandate_parent IS DISTINCT FROM NEW.id</span> du trigger, dans <span class="mono">01</span> et dans la migration <span class="mono">04</span>.</dd>
+        <dt>Le problème</dt><dd>Un changement de base casse vite un test ou un modèle ailleurs.</dd>
+        <dt>Mon choix</dt><dd><span class="mono">bash docker/create_test_db.sh</span>, puis la suite de tests de <span class="mono">API/tests</span>, puis pyright sur les fichiers touchés, compte avant et après.</dd>
+        <dt>Écarté</dt><dd>Tester à la fin du lot : un oubli se voit trop tard.</dd>
+        <dt>Le prix</dt><dd>Quelques minutes par thème.</dd>
+        <dt>Défaire</dt><dd>Tester à la fin du lot seulement.</dd>
       </dl>
       </details>
       <div class="choix"><label><input type="radio" name="D3" value="garder">Je garde</label><label><input type="radio" name="D3" value="revoir">À revoir</label></div>
     </div>
-
-    <div class="decision">
-      <div class="tete"><h3>D4 · L'exclusivité vaut par client</h3><span class="puce faible">schéma</span></div>
-      <dl class="grille">
-        <dt class="net">💬 En clair</dt><dd>La fiche LOT4 disait « même bien » ; le registre (Q-MAN-02) dit « même client ». Claude a suivi <strong>le registre</strong>. Pris par <strong>Claude</strong>, seul.</dd>
-        <dt class="plus">➕ Le bon côté</dt><dd>Le code suit <strong>la décision</strong>, pas un résumé.</dd>
-        <dt class="moins">➖ Le moins bon</dt><dd>⚠️ La fiche reste <strong>fausse</strong> tant qu'on ne la corrige pas.</dd>
-      </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary>
-      <dl class="grille">
-        <dt>Le choix</dt><dd>Le trigger compare <span class="mono">id_client</span> ; son message : « U02 : un mandat exclusif interdit tout autre mandat pour ce client sur la periode ».</dd>
-      </dl>
-      </details>
-      <div class="choix"><label><input type="radio" name="D4" value="garder">Je garde</label><label><input type="radio" name="D4" value="revoir">À revoir</label></div>
-    </div>
-
-    <div class="decision">
-      <div class="tete"><h3>D5 · Date de fin facultative dans l'API</h3><span class="puce faible">API</span></div>
-      <dl class="grille">
-        <dt class="net">💬 En clair</dt><dd>La base acceptait déjà un mandat sans date de fin (jamais signé). L'API, elle, l'exigeait : impossible d'enregistrer une annulation avant signature. Pris par <strong>Claude</strong>, seul.</dd>
-        <dt class="plus">➕ Le bon côté</dt><dd>L'API dit <strong>la même chose</strong> que la base.</dd>
-        <dt class="moins">➖ Le moins bon</dt><dd>Rien de connu : c'est la base qui garde la règle.</dd>
-      </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary>
-      <dl class="grille">
-        <dt>Le choix</dt><dd><span class="mono">ends_at: Optional[date] = None</span> dans <span class="mono">mandate_model.py</span>.</dd>
-      </dl>
-      </details>
-      <div class="choix"><label><input type="radio" name="D5" value="garder">Je garde</label><label><input type="radio" name="D5" value="revoir">À revoir</label></div>
-    </div>
-
-    <div class="decision">
-      <div class="tete"><h3>D6 · Plus d'étape « facture » dans le paiement</h3><span class="puce moyen">schéma</span></div>
-      <dl class="grille">
-        <dt class="net">💬 En clair</dt><dd>Les étapes « facture envoyée » et « facture vérifiée » sont <strong>retirées</strong>. Choisi par <strong>Sébastien</strong>, à LOT5 : le registre ne les tranchait pas.</dd>
-        <dt class="plus">➕ Le bon côté</dt><dd>Colle à <strong>Jeff</strong> : aucune trace de facture en base. <strong>0 paiement</strong> à reprendre.</dd>
-        <dt class="moins">➖ Le moins bon</dt><dd>⚠️ <strong>Écart</strong> aux user stories 07 (lignes 17 à 27) : à écrire dans un ADR.</dd>
-      </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary>
-      <dl class="grille">
-        <dt>Écarté</dt><dd>Garder <span class="mono">'verified'</span> au sens « paiement vérifié par l'agence » : sens que personne n'a demandé. Tout garder : contredit Jeff.</dd>
-        <dt>Le choix</dt><dd><span class="mono">CHECK (status IN ('refused', 'announced', 'scheduled', 'paid'))</span>.</dd>
-      </dl>
-      </details>
-      <div class="choix"><label><input type="radio" name="D6" value="garder">Je garde</label><label><input type="radio" name="D6" value="revoir">À revoir</label></div>
-    </div>
-
-    <div class="decision">
-      <div class="tete"><h3>D7 · Une date par étape du paiement</h3><span class="puce moyen">schéma</span></div>
-      <dl class="grille">
-        <dt class="net">💬 En clair</dt><dd>Chaque étape atteinte a <strong>sa date</strong>, et la garde ensuite. Un refus n'est ni annoncé ni programmé. « Les deux dates » : choisi par <strong>Sébastien</strong>. Les détails ci-dessous : par <strong>Claude</strong>.</dd>
-        <dt class="plus">➕ Le bon côté</dt><dd>On sait <strong>quand</strong> le chasseur a été prévenu, et <strong>pour quand</strong> le virement est prévu.</dd>
-        <dt class="moins">➖ Le moins bon</dt><dd>L'<strong>ordre</strong> des dates (annonce avant virement) n'est pas vérifié.</dd>
-      </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary>
-      <dl class="grille">
-        <dt>Le choix</dt><dd><span class="mono">announced_at TIMESTAMP</span> (un instant) ; <span class="mono">scheduled_for DATE</span> (un jour). <span class="mono">chk_announced</span> : remplie pour <span class="mono">'announced'</span>, <span class="mono">'scheduled'</span>, <span class="mono">'paid'</span>, vide pour <span class="mono">'refused'</span>. <span class="mono">chk_scheduled</span> : remplie pour <span class="mono">'scheduled'</span> et <span class="mono">'paid'</span>.</dd>
-        <dt>Le prix</dt><dd>Deux contraintes de plus ; deux pièges, deux tests qui tombent.</dd>
-      </dl>
-      </details>
-      <div class="choix"><label><input type="radio" name="D7" value="garder">Je garde</label><label><input type="radio" name="D7" value="revoir">À revoir</label></div>
-    </div>
-
-    <div class="decision">
-      <div class="tete"><h3>D8 · Le score figé : de 0 à 100, jamais sur un refus</h3><span class="puce faible">schéma</span></div>
-      <dl class="grille">
-        <dt class="net">💬 En clair</dt><dd>Le score gardé sur le paiement suit les mêmes bornes que le score du chasseur (0 à 100). Il est interdit sur un refus. Il n'est <strong>pas obligatoire</strong> ailleurs : Q-REM-03 ne le dit pas. Pris par <strong>Claude</strong>, seul.</dd>
-        <dt class="plus">➕ Le bon côté</dt><dd>Rien d'<strong>inventé</strong> : les bornes viennent de <span class="mono">hunter_performance.score</span>.</dd>
-        <dt class="moins">➖ Le moins bon</dt><dd>Un paiement normal peut être enregistré <strong>sans score</strong>.</dd>
-      </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary>
-      <dl class="grille">
-        <dt>Le choix</dt><dd><span class="mono">performance_score NUMERIC(4,1) CHECK (performance_score BETWEEN 0 AND 100)</span> ; <span class="mono">performance_score IS NULL</span> dans la branche refus de <span class="mono">chk_refused</span>.</dd>
-        <dt>Défaire</dt><dd>Une migration de plus, si le groupe veut le score obligatoire hors refus.</dd>
-      </dl>
-      </details>
-      <div class="choix"><label><input type="radio" name="D8" value="garder">Je garde</label><label><input type="radio" name="D8" value="revoir">À revoir</label></div>
-    </div>
-
-    <div class="decision">
-      <div class="tete"><h3>D9 · Tests et typage lancés autrement que prévu</h3><span class="puce faible">méthode</span></div>
-      <dl class="grille">
-        <dt class="net">💬 En clair</dt><dd>La commande écrite dans <span class="mono">CHANTIER.md</span> (<span class="mono">cd API &amp;&amp; python -m pytest -q</span>) <strong>ne marche pas</strong> sur la machine : sqlmodel n'y est pas installé. Les tests ont tourné <strong>dans le conteneur</strong> <span class="mono">api</span>. Pris par <strong>Claude</strong>, seul.</dd>
-        <dt class="plus">➕ Le bon côté</dt><dd>Les tests tournent avec les <strong>vraies versions</strong> de l'API.</dd>
-        <dt class="moins">➖ Le moins bon</dt><dd>⚠️ pyright ne peut pas tomber à <strong>0 erreur</strong> sur la machine. On a compté avant et après : jamais une erreur de plus (6/6, 3/3, 3/3).</dd>
-      </dl>
-      <details class="technique"><summary>🔧 Le détail technique</summary>
-      <dl class="grille">
-        <dt>Le choix</dt><dd>Depuis <span class="mono">docker/</span> : <span class="mono">docker compose exec -T api python -m pytest -q -p no:cacheprovider</span>. Toutes les erreurs pyright viennent de sqlmodel absent de la machine (<span class="mono">reportMissingImports</span>) ; pyright n'est pas dans le conteneur.</dd>
-        <dt>À faire</dt><dd>Corriger la ligne « vérification » de <span class="mono">CHANTIER.md</span>.</dd>
-      </dl>
-      </details>
-      <div class="choix"><label><input type="radio" name="D9" value="garder">Je garde</label><label><input type="radio" name="D9" value="revoir">À revoir</label></div>
-    </div>
   </section>
 
   <section>
-    <h2>Ce qui a mal tourné</h2>
-
-    <div class="alerte">
-      <h3>⚠️ Sur une base de dev v2, /payments répond 500</h3>
-      <p>💬 <strong>En clair</strong> : l'API connaît déjà les nouvelles colonnes du paiement. Votre base de dev, restée en v2, ne les a pas. Mesuré sur la mienne : <strong>GET /payments → 500</strong> ; GET /mandates, /estates, /estate-proposed → 200.</p>
-      <ul>
-        <li>⚠️ Mesuré sur la <strong>lecture</strong> ; les autres routes du paiement lisent les mêmes colonnes. Jusqu'à <strong>LOT11</strong>, sauf migrations passées.</li>
-        <li>➕ Les <strong>migrations</strong> 03, 04 et 05 sont faites pour ça : passer une base v2 existante en v3.</li>
-        <li>💡 Proposé, <strong>pas essayé</strong> sur une base de dev : les passer dans l'ordre, ou attendre LOT11.</li>
-      </ul>
-      <details class="technique"><summary>🔧 Le détail technique</summary>
-        <p>Log de l'API : « column payment.announced_at does not exist ». Commande d'une migration, depuis <span class="mono">docker/</span> : <span class="mono">docker compose exec -T db sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -v ON_ERROR_STOP=1' &lt; migrations/v2-vers-v3/03_mandat-statuts.sql</span>, puis 04, puis 05.</p>
-      </details>
-    </div>
-
-    <div class="alerte">
-      <h3>⚠️ Une date-heure sans fuseau donne une erreur 500</h3>
-      <p>💬 <strong>En clair</strong> : si on envoie « 2030-03-02T09:00:00 » sans préciser le fuseau, l'API plante au lieu de dire « date mal écrite ». Les premiers tests de LOT5 sont tombés là-dessus.</p>
-      <ul>
-        <li>⚠️ C'était <strong>déjà vrai</strong> avant LOT5, pour <span class="mono">paid_at</span> et toute date-heure.</li>
-        <li>➕ Les tests envoient maintenant l'heure <strong>en UTC</strong> (« …Z ») ; rien n'est corrigé dans l'API.</li>
-      </ul>
-      <details class="technique"><summary>🔧 Le détail technique</summary>
-        <p>sqlmodel 0.0.47, dans le conteneur : « Datetime values must have timezone information ». L'erreur part à l'écriture, après la validation du routeur : d'où 500 et pas 422. À traiter dans le chantier API.</p>
-      </details>
-    </div>
-
-    <div class="alerte">
-      <h3>⚠️ Une note de la page du chantier était fausse</h3>
-      <p>💬 <strong>En clair</strong> : la note de LOT5 disait « 10 tests nommés ». Recompté : il y en a <strong>9</strong>, pour 11 cas. Corrigé en écrivant ce rapport.</p>
-    </div>
-
-    <div class="alerte">
-      <h3>⚠️ La branche locale et GitHub ont divergé</h3>
-      <p>💬 <strong>En clair</strong> : deux commits de docs existent en double, une fois en local, une fois sur GitHub, avec un numéro différent. Leur contenu est <strong>identique</strong>.</p>
-      <ul>
-        <li>⚠️ Local : <strong>8 commits en avance</strong>, <strong>2 en retard</strong> sur <span class="mono">origin/main</span>.</li>
-        <li>💡 Au push, il faudra fusionner. Pas de conflit attendu, puisque le contenu est le même : <strong>attendu, pas vérifié</strong>.</li>
-      </ul>
-      <details class="technique"><summary>🔧 Le détail technique</summary>
-        <p><span class="mono">git patch-id</span> : <span class="mono">b2b3f42</span> et <span class="mono">7b73626</span> → <span class="mono">b37842fddfd7</span> ; <span class="mono">64bf249</span> et <span class="mono">9fcda28</span> → <span class="mono">31943065d254</span>. Aucun merge fait : la demande a été retirée.</p>
-      </details>
-    </div>
-  </section>
-
-  <section>
-    <h2>Ce qui reste ouvert</h2>
-    <div class="clair">
-      <div>
-        <p>🟡 <strong>À trancher par le groupe</strong></p>
-        <ul>
-          <li>Le score figé doit-il être <strong>obligatoire</strong> sur un paiement non refusé ? (D8)</li>
-          <li>Un mandat <strong>perdu</strong> doit-il encore bloquer l'exclusivité, comme aujourd'hui ?</li>
-          <li>Faut-il vérifier l'<strong>ordre des dates</strong> du paiement (annonce, puis virement, puis paiement) ?</li>
-          <li>Quels <strong>noms de clés</strong> dans <span class="mono">calculation_details</span> ? À fixer quand on branchera la calculette sur la base.</li>
-          <li>Si Jeff change <strong>20 % ou 60 %</strong>, le <span class="mono">CHECK</span> change aussi : on l'accepte, ou on passe ces bornes en paramètre (Q-REM-05) ?</li>
-        </ul>
-      </div>
-      <div>
-        <p>➡️ <strong>À faire, sans décision</strong></p>
-        <ul>
-          <li>Registre : mettre à jour la ligne <strong>134</strong> (« un ou deux statuts ? ») et la ligne <strong>137</strong> (Q-REM-17).</li>
-          <li>Fiche LOT4 : remplacer « même bien » par « même client » (D4).</li>
-          <li><span class="mono">CHANTIER.md</span> : corriger la commande de vérification (D9).</li>
-          <li>ADR à noter, pas encore à rédiger : le retrait des étapes de facture, écart aux user stories 07 (D6).</li>
-          <li><span class="mono">init-v3/01</span> ligne 947 et <span class="mono">init-v3/README.md</span> ligne 313 montrent encore <span class="mono">./init-v2</span> en exemple : prévu à LOT11.</li>
-          <li>Le banc ne compare pas les droits : à reprendre à LOT12.</li>
-        </ul>
-      </div>
-      <p>💡 Dans <span class="mono">init-v3/README.md</span> §7, la ligne « Décisions » listait encore D7, U02 et U05, fermées à LOT4. Corrigée à LOT5, dans la même ligne : un petit écart au périmètre de la fiche.</p>
-    </div>
-  </section>
-
-  <section>
-    <h2>Pour vous, après le prochain push</h2>
-    <div class="clair">
-      <ul>
-        <li>🧪 Avant pytest, recréez la <strong>base de test</strong> : <span class="mono">bash docker/create_test_db.sh</span>. Elle se construit depuis <span class="mono">init-v3</span>.</li>
-        <li>▶️ Lancez les tests <strong>dans le conteneur</strong> : depuis <span class="mono">docker/</span>, <span class="mono">docker compose exec -T api python -m pytest -q</span>.</li>
-        <li>🔍 Le banc : <span class="mono">bash docker/compare_v2_v3.sh</span>, environ <strong>17 s</strong>.</li>
-        <li>⚠️ <strong>Ne recréez pas</strong> votre base de dev (<span class="mono">down -v</span>) avant LOT11 : un seul pour toute l'équipe.</li>
-        <li>⚠️ D'ici là, <strong>/payments répond 500</strong> sur votre base de dev, sauf migrations passées.</li>
-        <li>📖 Ce qui a changé, thème par thème : <span class="mono">docker/init-v3/README.md</span> §0.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section>
-    <h2>Le fil</h2>
-    <p class="sous" style="font-size:.95rem">Heures lues sur les commits du 2026-10-07. Les commits « docs » viennent d'une autre session de travail, en parallèle.</p>
-    <ul class="fil">
-      <li><time>13:51</time><span><b>LOT</b> · chantier ouvert, 12 fiches</span></li>
-      <li><time>14:07</time><span><b>LOT1</b> · init-v3 créé ; Docker relancé en cours de route</span></li>
-      <li><time>14:16</time><span><b>LOT2</b> · banc écrit ; un piège visait une table <span class="mono">photo</span> qui n'existe pas : le banc a rendu le code 2, refait sur <span class="mono">picture</span></span></li>
-      <li><time>14:26</time><span><b>docs</b> · liste des ADR du chantier 4 (autre session)</span></li>
-      <li><time>14:27</time><span><b>LOT3</b> · statuts de fin du mandat</span></li>
-      <li><time>14:39</time><span><b>LOT4</b> · six mois et exclusivité</span></li>
-      <li><time>14:47</time><span><b>docs</b> · page kanban pour l'équipe (autre session)</span></li>
-      <li><time>14:57</time><span><b>LOT5</b> · paiement ; 7 tests d'abord tombés sur les dates sans fuseau</span></li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Vos réponses</h2>
-    <p class="sous">Le bouton copie vos coches et vos commentaires. Envoyez-les à Sébastien, ou collez-les dans la conversation.</p>
+    <h2>Tes réponses</h2>
+    <p class="sous">Le bouton copie tes coches et tes commentaires. Colle-les dans la conversation.</p>
     <div class="ligne"><button type="button" id="copier">Copier mes réponses</button><span id="etat" class="sous" aria-live="polite"></span></div>
-    <textarea id="reponses" readonly aria-label="Vos réponses"></textarea>
+    <textarea id="reponses" readonly aria-label="Tes réponses"></textarea>
   </section>
 
   <footer class="sous" style="font-size:.9375rem;border-top:1px solid var(--trait);padding-top:1rem">
-    Dépôt <span class="mono">GaSeBeLa/Fil-Rouge</span> · détail dans <span class="mono">context AI/08-etat.md</span> · <a href="https://claude.ai/artifact/1azNjWvWyhj74aqwbDryEa">page du chantier</a>.
+    Dépôt <span class="mono">GaSeBeLa/Fil-Rouge</span> · tes réponses : rapport Jeff (<span class="mono">md/questions/questions-pour-jeff.html</span>) · registre <span class="mono">md/questions/questions-a-trancher.md</span>.
   </footer>
 </div>
+
 
 <script>
 // INSECABLE — début. Nombres et dates jamais coupés en fin de ligne, copié à l'octet dans templates/vlp.js

@@ -27,7 +27,7 @@
 Le MPD porte une table `role`, une colonne `user.email` et une colonne
 `user.password`. L'équipe avait donc ouvert un chantier sécurité :
 hachage Argon2id (`ADR-016`), puis authentification JWT et contrôle d'accès
-par rôle. Le plan est décrit dans `md/securite-mots-de-passe-et-droits.md`
+par rôle. Le plan est décrit dans `md/securite/securite-mots-de-passe-et-droits.md`
 (étapes `B1` à `B3b`).
 
 Aucune user story ne couvre l'authentification ni les droits d'accès.
@@ -95,11 +95,11 @@ un utilisateur est donc, littéralement, au-dessus de nous.
 
 **Conséquences**
 
-- Les étapes `4` à `8` du plan de `md/securite-mots-de-passe-et-droits.md`
-  sont caduques, ainsi que `md/tuto-2-authentification-jwt.md`. Les deux
+- Les étapes `4` à `8` du plan de `md/securite/securite-mots-de-passe-et-droits.md`
+  sont caduques, ainsi que `md/securite/tuto-2-authentification-jwt.md`. Les deux
   documents sont conservés : leurs mesures et leur vocabulaire restent
   justes, et ils tracent une réflexion que le jury peut interroger.
-- `md/matrice-droits-crud-par-role.md` change de statut : livrable de
+- `md/securite/matrice-droits-crud-par-role.md` change de statut : livrable de
   **conception**, plus backlog d'implémentation. Ses cases 🟡 restent à
   trancher, mais pour la documentation, pas pour du code.
 - La motivation de l'`ADR-025` (lien chasseur → manager) s'affaiblit :

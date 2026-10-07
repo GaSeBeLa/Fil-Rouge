@@ -159,7 +159,7 @@ de ce que le code dit déjà.
   `hunter.id_realestatemanager NOT NULL`, FK vers `real_estate_manager(id_user)`.
   Choix du groupe appuyé sur l'exemple ENF-03 du sujet — un exemple de
   rédaction, pas une exigence du client — à acter : brouillon
-  `md/adr-025-lien-chasseur-manager.md`. Les 6 chasseurs migrés sont rattachés
+  `md/adr/adr-025-lien-chasseur-manager.md`. Les 6 chasseurs migrés sont rattachés
   à un **manager placeholder** (user 25), hypothèse documentée au README
   init-v2 §3.6. Mesuré, PostgreSQL 16, base neuve **et** base migrée par
   `docker/migrations/2026-09-22_hunter_manager.sql` (rejouable) : 7 cas
@@ -170,7 +170,7 @@ de ce que le code dit déjà.
   le 2026-09-11, `quay.io` exige un compte) : tout `docker compose up -d`
   échoue. Le compose n'est pas modifié ; on lance `docker compose up -d db api`.
   Aucun code n'utilisait MinIO. Remplaçant à choisir en groupe. Détail et
-  sources : `md/minio-images-indisponibles-2026-10-02.md`.
+  sources : `md/journal/2026-10-02-minio-images-indisponibles.md`.
 - **2026-10-02** — **premiers tests unitaires** : 43 tests ajoutés (6
   fichiers), `44 passed` en 3,75 s dans le conteneur `api`. Hors méthode
   chantier, à la demande de l'utilisateur. Isolation par `unittest.mock` et
@@ -208,7 +208,7 @@ de ce que le code dit déjà.
   Mesuré : `price_eur` = 2 556 prix, 0 avec centimes ; dans une base
   temporaire, `01` → `02` → `03` sans erreur, chaque prix limite dans
   exactement une tranche, chevauchement refusé. Commits `c896e39`, `abbc84e`.
-  Registre : `md/questions-a-trancher-2026-10-02.md`.
+  Registre : `md/questions/questions-a-trancher.md`.
 - **2026-10-05** — **le routeur commun valide l'entrée** (Q-INF-06). Mesuré :
   un modèle de table SQLModel ne valide pas ce que FastAPI lui passe —
   `199999.5` était arrondi en silence à `200000` (tranche du dessus),
@@ -238,7 +238,7 @@ de ce que le code dit déjà.
   Restent `'refused'`, `'announced'`, `'scheduled'`, `'paid'`, et les deux
   dates `announced_at`, `scheduled_for` (Q-REM-17). Tranché à LOT5.
 - **2026-10-07** — **les 9 décisions du rapport LOT1→LOT5 gardées** par
-  Sébastien (`md/rapport-lot1-a-lot5-2026-10-07.html`, cartes D1 à D9 — pas les
+  Sébastien (`md/journal/2026-10-07-rapport-lot1-a-lot5.html`, cartes D1 à D9 — pas les
   D1-D9 du schéma). Reportées au registre (Q-REM-03, 14, 17, Q-MAN-02 ; ADR B,
   J, L) ; fiche LOT4 et vérification de `CHANTIER.md` corrigées.
 - **2026-10-07** — **`remuneration_parameters` versionnée par
