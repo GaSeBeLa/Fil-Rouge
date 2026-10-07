@@ -10,16 +10,22 @@ modifiés**.
 
 ## Où on en est — en cinq lignes
 
-- Le schéma PostgreSQL (**18 tables**, montants en **euros**) est posé dans
-  `docker/init-v3/` et monté par `docker compose` (chantier LOT, 2026-10-07).
-  `docker/init-v2/` est **figé**, gardé pour le banc ; `docker/init/`
-  (12 tables, K€) est l'ancien schéma, gardé intact, plus monté.
+- Le schéma PostgreSQL **v3** (**19 tables**, montants en **euros**) est posé
+  dans `docker/init-v3/` et monté par `docker compose` : chantier LOT, LOT1 à
+  LOT11 faits le 2026-10-07 ; LOT12 (rôle en lecture seule) attend Jeff.
+  Changements par thème : `docker/init-v3/README.md` §0. `docker/init-v2/` est
+  **figé**, gardé pour le banc `docker/compare_v2_v3.sh` ;
+  `docker/migrations/v2-vers-v3/` mène une base v2 existante au même schéma ;
+  `docker/init/` (12 tables, K€) est l'ancien schéma, plus monté.
+- **Pour l'équipe, après un pull** : depuis `docker/`,
+  `docker compose down -v && docker compose up -d` (⚠️ efface la base de dev
+  locale), puis `bash docker/create_test_db.sh`.
 - L'API expose un CRUD complet en trois couches (routes / services /
-  repositories) sur les **18 tables** ; le routeur commun revalide l'entrée
-  (`422` avant la base). 91 opérations vérifiées en `200` contre la base.
-  **123 tests** : 99 unitaires sans base (dont les 55 cas de rémunération),
-  24 d'intégration sur la base de test isolée `fil_rouge_test`
-  (`docker/create_test_db.sh`) — voir `API/README.md` § Tests.
+  repositories) sur les **19 tables** ; le routeur commun revalide l'entrée
+  (`422` avant la base). 91 opérations vérifiées en `200` contre la base
+  (mesuré avant LOT6). **183 tests** : 99 unitaires sans base (dont les 55
+  cas de rémunération), 84 d'intégration sur la base de test isolée
+  `fil_rouge_test` (`docker/create_test_db.sh`) — voir `API/README.md` § Tests.
 - Les user stories Gherkin (`user-stories/`) couvrent le parcours actuel et le
   futur parcours IA. Seul le **calcul de rémunération** est implémenté
   (`services/remuneration.py`, code du sujet, non branché sur la base).

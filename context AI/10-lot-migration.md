@@ -372,8 +372,9 @@ LOT5 à LOT10 peuvent changer d'ordre.
 ---
 
 <!-- FICHE:LOT11 -->
-## LOT11 [ ] — Clore le schéma v3
+## LOT11 [x] — Clore le schéma v3
 
+**Session** : 0ceba605-10f5-42b6-9317-73b2243eb990
 **Dépend de** : `LOT3` à `LOT10`.
 **Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql` (3 commentaires), `docker/init-v3/README.md`, `CLAUDE.md`, le registre (liste « Lot de migration qui en découle », carte Q-MAN-06) — et rien d'autre.
 
