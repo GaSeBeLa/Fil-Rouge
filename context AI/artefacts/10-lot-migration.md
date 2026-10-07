@@ -3,7 +3,7 @@
 Une base v2 migrée et une base v3 neuve ont le même schéma (banc IDENTIQUES), et pytest est vert.
 ## Notes
 - LOT1 : diff -r : 1 ligne (en-tête README, 5 lignes de diff) · compose 1 insertion(+), 1 deletion(-) · montage lu : ligne v3 · pytest 123 passed avant et après · init-v2 restant : 5 fichiers justifiés
-- LOT2 : Le banc qui compare base neuve et base migrée. Dépend de LOT1 ; toutes les fiches s'en servent.
+- LOT2 : banc IDENTIQUES, 499 faits, code 0, 17,8 à 27,4 s · mutant role.mutant : code 1, diff le nomme · contre-épreuve au milieu du CREATE TABLE : IDENTIQUES · script maison choisi · pytest 123 passed
 - LOT3 : Statuts de fin du mandat, signature, offre signée. Dépend de LOT2.
 - LOT4 : Mandat de 6 mois exacts, trigger d'exclusivité activé. Dépend de LOT3.
 - LOT5 : Paiement : note figée, taux entre 20 et 60 %, choix des dates. Dépend de LOT2.

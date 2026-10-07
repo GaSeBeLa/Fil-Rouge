@@ -121,8 +121,9 @@ LOT5 à LOT10 peuvent changer d'ordre.
 ---
 
 <!-- FICHE:LOT2 -->
-## LOT2 [ ] — Écrire le banc « base neuve = base migrée »
+## LOT2 [x] — Écrire le banc « base neuve = base migrée »
 
+**Session** : f6db559a-cd2c-449e-a160-bd4fd8d0475c
 **Dépend de** : `LOT1`.
 **Fichiers** : `docker/compare_v2_v3.sh` (créé), `docker/create_test_db.sh` (modèle, lu), `docker/migrations/v2-vers-v3/` (créé, avec un `.gitkeep`), `docker/init-v3/README.md` — et rien d'autre.
 

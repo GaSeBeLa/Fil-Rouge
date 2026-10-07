@@ -21,9 +21,9 @@
     <p>Une base v2 migrée et une base v3 neuve ont le même schéma (banc IDENTIQUES), et pytest est vert.</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">12 fiches · 1 faite · en cours : LOT2</p>
+    <p class="mono" style="margin-top:.5rem">12 fiches · 2 faites · en cours : LOT3</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -41,24 +41,25 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">LOT1</span></span>
         <details><summary><span class="titre">Créer init-v3 et basculer le montage</span><span class="etat">Faite</span></summary>
         <span class="note">diff -r : 1 ligne (en-tête README, 5 lignes de diff) · compose 1 insertion(+), 1 deletion(-) · montage lu : ligne v3 · pytest 123 passed avant et après · init-v2 restant : 5 fichiers justifiés</span></details>
-        <span class="cout mono">≈5,8M (5 775 497) · 47 tours · 2,46 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">LOT2</span></span>
-        <details open><summary><span class="titre">Écrire le banc « base neuve = base migrée »</span><span class="etat">En cours</span></summary>
-        <span class="note">Le banc qui compare base neuve et base migrée. Dépend de LOT1 ; toutes les fiches s'en servent.</span></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">LOT3</span></span>
-        <details><summary><span class="titre">Mandat : statuts de fin et signature</span><span class="etat">Après LOT2</span></summary>
+        <span class="cout mono">≈6,2M (6 207 766) · 50 tours · 2,61 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">LOT2</span></span>
+        <details><summary><span class="titre">Écrire le banc « base neuve = base migrée »</span><span class="etat">Faite</span></summary>
+        <span class="note">banc IDENTIQUES, 499 faits, code 0, 17,8 à 27,4 s · mutant role.mutant : code 1, diff le nomme · contre-épreuve au milieu du CREATE TABLE : IDENTIQUES · script maison choisi · pytest 123 passed</span></details>
+        <span class="cout mono">≈4,0M (3 963 192) · 23 tours · 1,72 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">LOT3</span></span>
+        <details open><summary><span class="titre">Mandat : statuts de fin et signature</span><span class="etat">En cours</span></summary>
         <span class="note">Statuts de fin du mandat, signature, offre signée. Dépend de LOT2.</span></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">LOT4</span></span>
         <details><summary><span class="titre">Mandat : six mois exacts et exclusivité</span><span class="etat">Après LOT3</span></summary>
         <span class="note">Mandat de 6 mois exacts, trigger d'exclusivité activé. Dépend de LOT3.</span></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">LOT5</span></span>
-        <details><summary><span class="titre">Paiement : note figée, taux borné, dates</span><span class="etat">Après LOT2</span></summary>
+      <li class="fiche"><span class="gauche"><span class="id">LOT5</span></span>
+        <details><summary><span class="titre">Paiement : note figée, taux borné, dates</span><span class="etat">À lancer</span></summary>
         <span class="note">Paiement : note figée, taux entre 20 et 60 %, choix des dates. Dépend de LOT2.</span></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">LOT6</span></span>
         <details><summary><span class="titre">Paramètres de rémunération et journal des notes</span><span class="etat">Après LOT5</span></summary>
         <span class="note">Table des paramètres, grilles d'honoraires, journal des notes. Dépend de LOT5.</span></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">LOT7</span></span>
-        <details><summary><span class="titre">Personnes : coordonnées, priorité, dates</span><span class="etat">Après LOT2</span></summary>
+      <li class="fiche"><span class="gauche"><span class="id">LOT7</span></span>
+        <details><summary><span class="titre">Personnes : coordonnées, priorité, dates</span><span class="etat">À lancer</span></summary>
         <span class="note">Clients et personnel : adresses, téléphones, priorité 1 à 5. Dépend de LOT2.</span></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">LOT8</span></span>
         <details><summary><span class="titre">Localisation : pays, codes postaux, secteurs</span><span class="etat">Après LOT7</span></summary>
@@ -77,7 +78,7 @@
         <span class="note">Rôle en lecture seule, si Jeff a dit oui. Dépend de LOT11.</span></details></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈7,0M (6 967 755) · 40 tours · 4,45 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈12,7M (12 743 252) · 87 tours · 6,91 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈17,1M (17 138 713) · 113 tours · 8,78 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 
