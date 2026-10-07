@@ -348,8 +348,9 @@ LOT5 à LOT10 peuvent changer d'ordre.
 ---
 
 <!-- FICHE:LOT10 -->
-## LOT10 [ ] — Reprendre les anciens mandats
+## LOT10 [x] — Reprendre les anciens mandats
 
+**Session** : 0ceba605-10f5-42b6-9317-73b2243eb990
 **Dépend de** : `LOT3`.
 **Fichiers** : `docker/init-v3/02_migration.sql`, `docker/migrations/v2-vers-v3/10_reprise-mandats.sql`, `docker/init-v3/README.md`, `PgSQL.sql` du StarterPack (lu ; `find` pour son chemin) ; le registre (cartes Q-MIG-03, Q-MIG-10, Q-MIG-12, Q-MIG-13) — et rien d'autre.
 

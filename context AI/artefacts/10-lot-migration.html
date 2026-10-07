@@ -21,9 +21,9 @@
     <p>Une base v2 migrée et une base v3 neuve ont le même schéma (banc IDENTIQUES), et pytest est vert.</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">12 fiches · 9 faites · en cours : LOT10</p>
+    <p class="mono" style="margin-top:.5rem">12 fiches · 10 faites · en cours : LOT11</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -73,19 +73,20 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">LOT9</span></span>
         <details><summary><span class="titre">Biens : énergie et auteur</span><span class="etat">Faite</span></summary>
         <span class="note">count(energy_class) : 1 623 et energy_class NULL : 933 sur les deux bases du banc (même md5), égaux au recompte du CSV. grep energetic_score : 0 ligne. Test nommé : auteur inconnu refusé (409), auteur connu accepté ; le mutant DROP estate_id_author_fkey fait tomber 1 test, le bon. Banc IDENTIQUES — 561 faits ; pytest 183 passed, 0 failed ; pyright 3 errors avant, 3 après (sqlmodel absent de la machine).</span></details>
-        <span class="cout mono">≈4,6M (4 647 627) · 22 tours · 1,63 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">LOT10</span></span>
-        <details open><summary><span class="titre">Reprendre les anciens mandats</span><span class="etat">En cours</span></summary>
-        <span class="note">Anciens mandats : échus, Nina Girard, statuts traduits. Dépend de LOT3.</span></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">LOT11</span></span>
-        <details><summary><span class="titre">Clore le schéma v3</span><span class="etat">Après LOT10</span></summary>
+        <span class="cout mono">≈4,9M (4 875 570) · 23 tours · 1,70 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">LOT10</span></span>
+        <details><summary><span class="titre">Reprendre les anciens mandats</span><span class="etat">Faite</span></summary>
+        <span class="note">Sur les deux bases du banc (même md5) : les 6 mandats échus en 'expired' = 6 (8 'expired' au total, avec les 2 'expire' de la source) ; client du mandat 13 = Nina Girard ; demandes en 'launched' = 18, et non 17 : le mandat 13 ajoute la sienne (tranché au questionnaire). Mutant sans l'UPDATE des échus : cmp_v2_migree rend 0. Banc IDENTIQUES — 561 faits ; pytest 183 passed, 0 failed ; aucun Python touché.</span></details>
+        <span class="cout mono">≈5,5M (5 464 612) · 21 tours · 2,02 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">LOT11</span></span>
+        <details open><summary><span class="titre">Clore le schéma v3</span><span class="etat">En cours</span></summary>
         <span class="note">README, CLAUDE.md, base de dev recréée, message à l'équipe. Dépend de LOT3 à LOT10.</span></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">LOT12</span></span>
         <details><summary><span class="titre">Ajouter le rôle en lecture seule</span><span class="etat">Après LOT11</span></summary>
         <span class="note">Rôle en lecture seule, si Jeff a dit oui. Dépend de LOT11.</span></details></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈7,0M (6 967 755) · 40 tours · 4,45 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈96,4M (96 372 300) · 504 tours · 40,86 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈102,1M (102 064 855) · 526 tours · 42,95 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 
@@ -102,16 +103,17 @@
     <h2>Journal des décisions</h2>
     <!-- ZONE:journal — une ligne par décision imprévue tranchée en cours de fiche -->
     <ul class="journal">
-      <li><time datetime="2026-10-07">2026-10-07</time><span>Téléphone : regex E.164 souple d'ADR-007 lue comme + exigé, 2 à 15 chiffres, un espace ou un tiret entre deux (choix de LOT7) ; client_priority sur estate_proposed (D6).</span></li>
       <li><time datetime="2026-10-07">2026-10-07</time><span>Eircode avec espace : la migration 08 retire l'espace au lieu de s'arrêter ; sur estate, un code postal sans pays est refusé par le CASE (ELSE FALSE) ; Eircode sans espace aussi sur estate (choix de LOT8).</span></li>
       <li><time datetime="2026-10-07">2026-10-07</time><span>Auteur d'un bien : estate.id_author vers user, facultatif (vide = import), clé seule ; le rôle se vérifie dans l'API (questionnaire de LOT9, carte Q-ACC-09).</span></li>
+      <li><time datetime="2026-10-07">2026-10-07</time><span>Reprise des mandats : demandes 'launched' sous mandat (18) ; échus à la date fixe de l'audit, 25/07/2026 (6) ; Nina Girard reprise avec demande, critère et mandat (questionnaire de LOT10).</span></li>
     </ul>
-    <details class="journal-ancien"><summary>4 entrées plus anciennes</summary>
+    <details class="journal-ancien"><summary>5 entrées plus anciennes</summary>
     <ul class="journal">
       <li><time datetime="2026-10-07">2026-10-07</time><span>2026-10-07 — un seul statut 'lost' pour la vente perdue, hors agence (Q-REM-02) comme par un collègue (Q-REM-14) : tranché à LOT3</span></li>
       <li><time datetime="2026-10-07">2026-10-07</time><span>2026-10-07 — trigger d'exclusivité : couple parent-enfant exclu dans les deux sens, mandat annulé ignoré (LOT4)</span></li>
       <li><time datetime="2026-10-07">2026-10-07</time><span>2026-10-07 — paiement : statuts 'invoice_submitted' et 'verified' retirés avec la facture ; dates announced_at et scheduled_for gardées (Q-REM-17, LOT5)</span></li>
       <li><time datetime="2026-10-07">2026-10-07</time><span>remuneration_parameters versionnée par effective_from + UNIQUE (comme Q-SCH-17) ; bornes relâchées au domaine d'un taux (0 à 1, -1 à 1, RCR:59, 199, 203) — tranché par Sébastien à LOT6</span></li>
+      <li><time datetime="2026-10-07">2026-10-07</time><span>Téléphone : regex E.164 souple d'ADR-007 lue comme + exigé, 2 à 15 chiffres, un espace ou un tiret entre deux (choix de LOT7) ; client_priority sur estate_proposed (D6).</span></li>
     </ul>
     </details>
   </section>

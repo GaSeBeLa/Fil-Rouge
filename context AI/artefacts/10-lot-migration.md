@@ -11,7 +11,7 @@ Une base v2 migrée et une base v3 neuve ont le même schéma (banc IDENTIQUES),
 - LOT7 : Tests nommés : 0612345678 refusé, +33612345678 et +33000000000 acceptés (3 tables), priorité 0 et 6 refusées, 1 et 5 acceptées ; 6 mutants, chacun fait tomber ses tests (3, 3, 6, 2, 2, 1 failed). grep is_cartet : 0 ligne. Banc IDENTIQUES — 545 faits ; pytest 173 passed, 0 failed ; pyright 19 errors avant, 19 après (sqlmodel absent de la machine).
 - LOT8 : Recompte : 2 556 codes postaux de biens sur 2 556 à 5 chiffres. Biens 'FR' : 2 556 sur 2 556 sur les deux bases du banc (critères identiques, même md5). Tests nommés : FR 3100 refusé, 31000 accepté ; Eircode D02 X285 refusé, D02X285 accepté (estate, client, criteria) ; 3 mutants, chacun fait tomber ses tests (2, 2, 6 failed). Banc IDENTIQUES — 559 faits ; pytest 181 passed, 0 failed ; pyright 9 errors avant, 9 après (sqlmodel absent de la machine).
 - LOT9 : count(energy_class) : 1 623 et energy_class NULL : 933 sur les deux bases du banc (même md5), égaux au recompte du CSV. grep energetic_score : 0 ligne. Test nommé : auteur inconnu refusé (409), auteur connu accepté ; le mutant DROP estate_id_author_fkey fait tomber 1 test, le bon. Banc IDENTIQUES — 561 faits ; pytest 183 passed, 0 failed ; pyright 3 errors avant, 3 après (sqlmodel absent de la machine).
-- LOT10 : Anciens mandats : échus, Nina Girard, statuts traduits. Dépend de LOT3.
+- LOT10 : Sur les deux bases du banc (même md5) : les 6 mandats échus en 'expired' = 6 (8 'expired' au total, avec les 2 'expire' de la source) ; client du mandat 13 = Nina Girard ; demandes en 'launched' = 18, et non 17 : le mandat 13 ajoute la sienne (tranché au questionnaire). Mutant sans l'UPDATE des échus : cmp_v2_migree rend 0. Banc IDENTIQUES — 561 faits ; pytest 183 passed, 0 failed ; aucun Python touché.
 - LOT11 : README, CLAUDE.md, base de dev recréée, message à l'équipe. Dépend de LOT3 à LOT10.
 - LOT12 : Rôle en lecture seule, si Jeff a dit oui. Dépend de LOT11.
 ## Journal
@@ -22,4 +22,5 @@ Une base v2 migrée et une base v3 neuve ont le même schéma (banc IDENTIQUES),
 - 2026-10-07 : Téléphone : regex E.164 souple d'ADR-007 lue comme + exigé, 2 à 15 chiffres, un espace ou un tiret entre deux (choix de LOT7) ; client_priority sur estate_proposed (D6).
 - 2026-10-07 : Eircode avec espace : la migration 08 retire l'espace au lieu de s'arrêter ; sur estate, un code postal sans pays est refusé par le CASE (ELSE FALSE) ; Eircode sans espace aussi sur estate (choix de LOT8).
 - 2026-10-07 : Auteur d'un bien : estate.id_author vers user, facultatif (vide = import), clé seule ; le rôle se vérifie dans l'API (questionnaire de LOT9, carte Q-ACC-09).
+- 2026-10-07 : Reprise des mandats : demandes 'launched' sous mandat (18) ; échus à la date fixe de l'audit, 25/07/2026 (6) ; Nina Girard reprise avec demande, critère et mandat (questionnaire de LOT10).
 ## Bilan

@@ -261,3 +261,9 @@ de ce que le code dit déjà.
   facultatif (vide = import), `ON DELETE RESTRICT`, **clé seule** : le rôle
   (chasseur ou manager) se vérifie dans l'API, comme `criteria.id_author`.
   Tranché par Sébastien au questionnaire de LOT9, reporté sur la carte Q-ACC-09.
+- **2026-10-07** — **reprise des mandats** (questionnaire de LOT10) : les
+  demandes étaient en `'confirmed'` (la fiche les croyait en `'launched'`) ;
+  **`'launched'` sous mandat**, les 18. Échus comptés à la **date fixe de
+  l'audit**, 25/07/2026 : 6 ; `MAND-0013`, `0014`, `0015`, finis depuis,
+  restent `'active'` (à l'application de les expirer). Nina Girard reprise
+  avec **demande + critère + mandat** : 18 de chaque. Tranché par Sébastien.
