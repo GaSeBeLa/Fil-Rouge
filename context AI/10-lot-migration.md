@@ -398,8 +398,9 @@ LOT5 à LOT10 peuvent changer d'ordre.
 ---
 
 <!-- FICHE:LOT12 -->
-## LOT12 [ ] — Ajouter le rôle en lecture seule
+## LOT12 [x] — Ajouter le rôle en lecture seule
 
+**Session** : 0ceba605-10f5-42b6-9317-73b2243eb990
 **Dépend de** : `LOT11`.
 **Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql` (table `role`), un script d'init `docker/init-v3/04_*` si le mot de passe doit venir de l'environnement, `docker/.env.exemple`, `docker/migrations/v2-vers-v3/12_role-lecture-seule.sql`, `API/src/app/models/role_model.py`, `API/tests/integration/test_constraints_db.py`, `docker/init-v3/README.md` ; le registre (ligne « Rôle en lecture seule ») — et rien d'autre.
 

@@ -267,3 +267,10 @@ de ce que le code dit déjà.
   l'audit**, 25/07/2026 : 6 ; `MAND-0013`, `0014`, `0015`, finis depuis,
   restent `'active'` (à l'application de les expirer). Nina Girard reprise
   avec **demande + critère + mandat** : 18 de chaque. Tranché par Sébastien.
+- **2026-10-07** — **rôle en lecture seule** (LOT12, Q14) : oui de Jeff sur
+  Discord, à justifier au jury (`docker/init-v3/README.md` §0). Mot de passe
+  par **une ligne de `docker-compose.yml`** (`POSTGRES_READER_PASSWORD`, vide
+  = `NOLOGIN`), oui de Sébastien. Hors liste de la fiche, nécessaires :
+  `02` (ligne `'Reader'`), `create_test_db.sh` (charge le `04`) et
+  `test_isolation.py` (liste des rôles). Test par `SET LOCAL ROLE`, sans mot
+  de passe. Base de dev passée par la migration `12`, sans `down -v`.

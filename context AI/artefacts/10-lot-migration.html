@@ -21,9 +21,9 @@
     <p>Une base v2 migrée et une base v3 neuve ont le même schéma (banc IDENTIQUES), et pytest est vert.</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">12 fiches · 11 faites · en cours : LOT12</p>
+    <p class="mono" style="margin-top:.5rem">12 fiches · 12 faites</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -81,13 +81,14 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">LOT11</span></span>
         <details><summary><span class="titre">Clore le schéma v3</span><span class="etat">Faite</span></summary>
         <span class="note">Banc IDENTIQUES — 561 faits ; pytest 183 passed, 0 failed (123 avant le chantier) ; pyright 48 errors sur 23 fichiers, toutes d'environnement (sqlmodel/argon2 absents de la machine) ; docker compose ps : db healthy ; \dt : 19 tables ; registre 31 lignes, 31 au README §0 (Q14 en attente, LOT12)</span></details>
-        <span class="cout mono">≈8,7M (8 673 417) · 30 tours · 2,75 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">LOT12</span></span>
-        <details open><summary><span class="titre">Ajouter le rôle en lecture seule</span><span class="etat">En cours</span></summary>
-        <span class="note">Rôle en lecture seule, si Jeff a dit oui. Dépend de LOT11.</span></details></li>
+        <span class="cout mono">≈8,9M (8 859 707) · 32 tours · 2,82 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">LOT12</span></span>
+        <details><summary><span class="titre">Ajouter le rôle en lecture seule</span><span class="etat">Faite</span></summary>
+        <span class="note">Connecté en fil_rouge_reader : SELECT ok (5 rôles), INSERT « permission denied for table role » ; base de dev 19/19 tables lisibles, 0 modifiable ; test_reader_role_cannot_write[insert] tombe sous le mutant GRANT INSERT ; banc IDENTIQUES — 561 faits ; pytest 187 passed, 0 failed ; pyright 4 errors avant, 4 après (sqlmodel absent de la machine)</span></details>
+        <span class="cout mono">≈4,4M (4 383 631) · 34 tours · 1,98 $</span></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈7,0M (6 967 755) · 40 tours · 4,45 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈111,0M (111 017 791) · 557 tours · 45,77 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈115,6M (115 587 712) · 593 tours · 47,82 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 

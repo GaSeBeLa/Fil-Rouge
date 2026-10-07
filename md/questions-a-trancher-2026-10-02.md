@@ -260,7 +260,7 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 | Q-REM-01 | 🧑‍💼 informé (Q-JEF-19), pas d'objection | Rien. |
 | Q-REM-03, Q-REM-04 | 🧑‍💼 confirmé (Q-JEF-20) | Rien. |
 | Q-PRO-01, Q-PRO-03 | 🧑‍💼 confirmé (Q-JEF-25) : il est le PO ; ADR validés en une séance | Rien. |
-| 🆕 Rôle en lecture seule | 👥 Q14 : **les deux** — un rôle PostgreSQL (`GRANT SELECT`) et un rôle applicatif « lecteur » | 🟡 À demander à Jeff sur Discord. Mot de passe du rôle dans `docker/.env`, jamais dans git. |
+| 🆕 Rôle en lecture seule | 👥 Q14 : **les deux** — un rôle PostgreSQL (`GRANT SELECT`) et un rôle applicatif « lecteur » | ✅ Jeff, Discord, 2026-10-07 : oui, « si vous l'expliquez et que ça sert à quelque chose et que c'est cohérent ». Fait à LOT12 : `fil_rouge_reader` (`SELECT` seul) et `'Reader'` dans `role` ; justification dans `docker/init-v3/README.md` §0. Mot de passe dans `docker/.env`, jamais dans git. |
 | Plan d'action | 👥 Q11 : **un seul lot** ; Q12 : **par thème** ; Q13, Q15 : **kit vlp**, confirmé le 2026-10-07 (étapes 2-3, puis une fiche par ADR) ; `CHANTIER.md` remis au dépôt le 2026-10-07 ; D1 : ADR après, le code cite les Q-xx ; D2 : schémas = `01` + modèles + `livrables/2-modelisation` + MPD ; D3 : tests et pyright par thème | Dernière étape : **déployer sur ton VPS**, une fois la base réparée. |
 | Q-PRO-05 | — | 🟡 Reste ouverte (« le FIX »). |
 
@@ -381,9 +381,9 @@ numéros de `01` relus le 2026-10-05) :
   - colonnes d'énergie vides, `energetic_score` retiré (Q-MIG-05) ;
   - priorité du client en `SMALLINT`, `CHECK` de 1 à 5 (Q-SCH-05) ;
   - colonne d'auteur sur `estate` (Q-ACC-09, Q-JEF-24) ;
-  - rôle PostgreSQL en lecture seule (Q14) — 🟡 après la réponse de Jeff sur Discord ;
+  - rôle en lecture seule, PostgreSQL et applicatif (Q14) — ✅ LOT12, accord de Jeff sur Discord le 2026-10-07 ;
   - mot de passe gardé, Argon2 (Q-JEF-14) : rien à retirer.
-- ✅ Plus rien n'attend Jeff (entretien du 2026-10-07), sauf le rôle en lecture seule (Q14, Discord).
+- ✅ Plus rien n'attend Jeff : entretien du 2026-10-07, puis Q14 sur Discord le même jour.
 - ✅ Déjà fait, hors lot : Q-REM-01 (prix en `INTEGER`), qui demande lui aussi un `down -v`.
 
 **ADR à écrire — plus tard** ⏸️ : rien n'est rédigé maintenant ; les ADR
@@ -418,7 +418,7 @@ Simple pense-bête ; 💡 regroupement proposé, numéros donnés sur Confluence
 | Y | Authentification : outils côté back, mot de passe, clé d'API | Q-ACC-19, Q-MIG-11, Q-ACC-17, Q-ACC-18 | ✏️ 2026-10-07 : outils d'auth côté back, pas de page de login (Jeff, Q-JEF-14) ; mot de passe gardé, Argon2 ; une clé par programme (Q-JEF-22) ; remplace notre brouillon `md/adr-026-…` (numéro déjà pris) ; 🟡 « dé-annuler » ADR-016 et ADR-026 de Confluence, à vérifier |
 | Z | Lien chasseur → manager : la raison réécrite | Q-ACC-20 | ✏️ 2026-10-07 (Q9) : lien gardé, **nouvel ADR** qui remplace ADR-025 (« Annulé » sur Confluence, copie du 2026-10-06) |
 | AA | Droits par rôle : réponses du groupe | Q-ACC-02 à 07, 10, 12, 13, 15, Q-PAR-09 | 🆕 2026-10-07 — pas d'ADR propre : la matrice ADR-027 se met à jour ; 🟡 Q-ACC-06, 12, 13 à confirmer avec Jeff |
-| AB | Rôle en lecture seule | Q14 du plan | 🆕 2026-10-07 — rôle PostgreSQL + rôle applicatif ; 🟡 à demander à Jeff sur Discord |
+| AB | Rôle en lecture seule | Q14 du plan | 🆕 2026-10-07 — rôle PostgreSQL + rôle applicatif ; ✅ oui de Jeff sur Discord, fait à LOT12 |
 | AC | Reprise des anciens mandats : Nina, statuts, échus | Q-MIG-03, Q-MIG-10, Q-MIG-12, Q-MIG-13 | 🆕 2026-10-07 — confirmé par Jeff (Q-JEF-13) ; 💡 peut rejoindre l'ADR U |
 
 Pas d'ADR propre : Q-REM-10 (un CHECK), Q-REM-12 (C3 déjà écrite), Q-REM-15
