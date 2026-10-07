@@ -574,6 +574,9 @@ Voici ce qui ne colle pas avec la base.
 #### Q-REM-05 — Les paramètres de performance et de modulation : en table ou en code ?
 
 - ✅ **Répondue le 2026-10-02 : « Table versionnée + relâcher les CHECK »** · 👥 **Groupe**
+- ✏️ **Précisée le 2026-10-07 (LOT6)**, deux points que la réponse laissait ouverts :
+  - versions : **`effective_from` + `UNIQUE`**, comme `parameters_fees` (Q-SCH-17), à la place de `valid_from` / `valid_until` de l'option A ;
+  - bornes relâchées : **domaine d'un taux** — ancienneté de 0 à 1, performance de −1 à 1 ; justifié par `RCR:59` (paramètres), `RCR:199` (a ≥ 0), `RCR:203` (1 + a + p > 0).
 - **Constat** :
   - **aucune table** pour les poids, les paliers, les notes, les points, la
     fenêtre de 12 mois (`rem.py:92-105`) ;

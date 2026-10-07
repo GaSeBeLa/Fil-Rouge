@@ -239,8 +239,9 @@ LOT5 à LOT10 peuvent changer d'ordre.
 ---
 
 <!-- FICHE:LOT6 -->
-## LOT6 [ ] — Paramètres de rémunération et journal des notes
+## LOT6 [x] — Paramètres de rémunération et journal des notes
 
+**Session** : 2d7571c9-43ae-4070-aa12-3b61e30184b2
 **Dépend de** : `LOT5`.
 **Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql` (tables `parameters_fees`, `commission_scale`, `sale`, `hunter_performance`, et la nouvelle `remuneration_parameters`), `docker/init-v3/02_migration.sql`, `docker/migrations/v2-vers-v3/06_parametres.sql`, `API/src/app/models/` (`parameters_fees_model.py`, `commission_scale_model.py`, `sale_model.py`, `hunter_performance_model.py`, `remuneration_parameters_model.py` créé, `__init__.py`), `API/src/app/main.py`, `API/tests/integration/test_constraints_db.py`, `docker/init-v3/README.md` ; le registre (cartes Q-REM-05, Q-REM-13, Q-SCH-06, Q-SCH-15, Q-SCH-17) — et rien d'autre.
 

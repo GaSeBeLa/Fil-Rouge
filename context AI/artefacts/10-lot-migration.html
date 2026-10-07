@@ -21,9 +21,9 @@
     <p>Une base v2 migrée et une base v3 neuve ont le même schéma (banc IDENTIQUES), et pytest est vert.</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">12 fiches · 5 faites · en cours : LOT6</p>
+    <p class="mono" style="margin-top:.5rem">12 fiches · 6 faites · en cours : LOT7</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -57,12 +57,13 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">LOT5</span></span>
         <details><summary><span class="titre">Paiement : note figée, taux borné, dates</span><span class="etat">Faite</span></summary>
         <span class="note">9 tests nommés (11 cas), 7/7 tombent sous leur mutant · grep invoice : 0 ligne · banc IDENTIQUES 507 faits · pytest 145 passed (55 rémunération compris) · pyright 3 avant, 3 après (sqlmodel absent de l'hôte)</span></details>
-        <span class="cout mono">≈5,6M (5 566 914) · 34 tours · 2,88 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">LOT6</span></span>
-        <details open><summary><span class="titre">Paramètres de rémunération et journal des notes</span><span class="etat">En cours</span></summary>
-        <span class="note">Table des paramètres, grilles d'honoraires, journal des notes. Dépend de LOT5.</span></details></li>
-      <li class="fiche"><span class="gauche"><span class="id">LOT7</span></span>
-        <details><summary><span class="titre">Personnes : coordonnées, priorité, dates</span><span class="etat">À lancer</span></summary>
+        <span class="cout mono">≈5,7M (5 726 508) · 35 tours · 2,94 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">LOT6</span></span>
+        <details><summary><span class="titre">Paramètres de rémunération et journal des notes</span><span class="etat">Faite</span></summary>
+        <span class="note">LOT6 : 4 tests nommés + 10 autres cas, 14/14 tombent sous leur mutant (10 refus, 4 accords) · \dt : 19 tables · banc IDENTIQUES 536 faits · pytest 160 passed (55 rémunération compris) · pyright 12 avant, 12 après ; nouveau modèle 3 (sqlmodel absent de l'hôte)</span></details>
+        <span class="cout mono">≈26,1M (26 085 523) · 125 tours · 11,10 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">LOT7</span></span>
+        <details open><summary><span class="titre">Personnes : coordonnées, priorité, dates</span><span class="etat">En cours</span></summary>
         <span class="note">Clients et personnel : adresses, téléphones, priorité 1 à 5. Dépend de LOT2.</span></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">LOT8</span></span>
         <details><summary><span class="titre">Localisation : pays, codes postaux, secteurs</span><span class="etat">Après LOT7</span></summary>
@@ -81,7 +82,7 @@
         <span class="note">Rôle en lecture seule, si Jeff a dit oui. Dépend de LOT11.</span></details></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈7,0M (6 967 755) · 40 tours · 4,45 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈37,3M (37 281 683) · 205 tours · 16,45 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈63,5M (63 526 800) · 331 tours · 27,61 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 
@@ -98,10 +99,15 @@
     <h2>Journal des décisions</h2>
     <!-- ZONE:journal — une ligne par décision imprévue tranchée en cours de fiche -->
     <ul class="journal">
-      <li><time datetime="2026-10-07">2026-10-07</time><span>2026-10-07 — un seul statut 'lost' pour la vente perdue, hors agence (Q-REM-02) comme par un collègue (Q-REM-14) : tranché à LOT3</span></li>
       <li><time datetime="2026-10-07">2026-10-07</time><span>2026-10-07 — trigger d'exclusivité : couple parent-enfant exclu dans les deux sens, mandat annulé ignoré (LOT4)</span></li>
       <li><time datetime="2026-10-07">2026-10-07</time><span>2026-10-07 — paiement : statuts 'invoice_submitted' et 'verified' retirés avec la facture ; dates announced_at et scheduled_for gardées (Q-REM-17, LOT5)</span></li>
+      <li><time datetime="2026-10-07">2026-10-07</time><span>remuneration_parameters versionnée par effective_from + UNIQUE (comme Q-SCH-17) ; bornes relâchées au domaine d'un taux (0 à 1, -1 à 1, RCR:59, 199, 203) — tranché par Sébastien à LOT6</span></li>
     </ul>
+    <details class="journal-ancien"><summary>1 entrée plus ancienne</summary>
+    <ul class="journal">
+      <li><time datetime="2026-10-07">2026-10-07</time><span>2026-10-07 — un seul statut 'lost' pour la vente perdue, hors agence (Q-REM-02) comme par un collègue (Q-REM-14) : tranché à LOT3</span></li>
+    </ul>
+    </details>
   </section>
 
   <footer>

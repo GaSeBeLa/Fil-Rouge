@@ -242,3 +242,8 @@ de ce que le code dit déjà.
   Sébastien (`md/rapport-lot1-a-lot5-2026-10-07.html`, cartes D1 à D9 — pas les
   D1-D9 du schéma). Reportées au registre (Q-REM-03, 14, 17, Q-MAN-02 ; ADR B,
   J, L) ; fiche LOT4 et vérification de `CHANTIER.md` corrigées.
+- **2026-10-07** — **`remuneration_parameters` versionnée par
+  `effective_from` + `UNIQUE`**, comme `parameters_fees` (Q-SCH-17), et non
+  `valid_from` / `valid_until` (lettre de Q-REM-05) ; **bornes relâchées au
+  domaine d'un taux** (0 à 1, −1 à 1, `RCR:59, 199, 203`). Tranché par
+  Sébastien à LOT6, reporté sur la carte Q-REM-05.
