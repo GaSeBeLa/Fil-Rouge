@@ -105,7 +105,8 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
   Q-ACC-17, 18, Q-PRO-05) : elles **restent ouvertes**. Mes avis, demandés dans
   13 notes, sont plus bas (💬 Avis demandés) : 💡 des avis, pas des règles.
 - ➡️ Les cartes 🧑‍💼 restent à confirmer par Jeff : **rapport à part**
-  `md/questions/questions-pour-jeff.html` (voir partie 2). Les 34 cartes que
+  `md/questions/2026-10-07-questions-pour-jeff.html` (voir partie 2 ; nom daté le
+  2026-10-08). Les 34 cartes que
   seul Jeff tranche s'y cochent, et nulle part ailleurs, depuis le 2026-10-05.
   🆕 2026-10-06 : Jeff **ne remplit pas** ce rapport. Le groupe lui pose les
   questions **en entretien** ; l'équipe y note ses réponses.
@@ -1121,7 +1122,10 @@ Sources :
 
 ## 2. Questions que seul Jeff peut trancher
 
-➡️ **Rapport à part, depuis le 2026-10-05** : `md/questions/questions-pour-jeff.html`
+➡️ **Rapport à part, depuis le 2026-10-05** : `md/questions/2026-10-07-questions-pour-jeff.html`
+(daté le 2026-10-08 : c'est la photo de l'entretien du 2026-10-07).
+🆕 **2026-10-08** : les questions sur les **notifications** (Q-JEF-27 à 29) ont leur
+page, `md/questions/questions-pour-jeff-notifications.html`.
 (artifact « Fil Rouge — Questions pour Jeff »). Chaque question y porte **notre position**,
 tirée des réponses, et ce que sa réponse change. Elles se cochent **là-bas
 seulement** : la page principale n'a plus que le lien.

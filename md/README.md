@@ -37,7 +37,8 @@
 |---|---|---|
 | [questions-a-trancher.md](questions/questions-a-trancher.md) | le **registre** : chaque question et sa réponse | 📌 vivant |
 | [questions-a-trancher.html](questions/questions-a-trancher.html) | la page à cartes des mêmes questions | 📌 vivant |
-| [questions-pour-jeff.html](questions/questions-pour-jeff.html) | les questions pour Jeff (client et PO) | 📌 vivant |
+| [questions-pour-jeff-notifications.html](questions/questions-pour-jeff-notifications.html) | les questions pour Jeff sur les **notifications** (Q-JEF-27 à 29) | 📌 vivant |
+| [2026-10-07-questions-pour-jeff.html](questions/2026-10-07-questions-pour-jeff.html) | les 26 questions de l'entretien avec Jeff (Q-JEF-01 à 26) | 📷 photo du 2026-10-07 |
 
 ## adr/ — les propositions d'ADR
 
