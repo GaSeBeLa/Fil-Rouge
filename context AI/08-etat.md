@@ -286,3 +286,8 @@ de ce que le code dit déjà.
   (`88ab154`, `8024210`) sans migration ni modèle (23 tests rouges, banc
   DIFFÉRENTES). Complétés en `6fc494f` : migrations 03 → 13, banc
   IDENTIQUES — 562 faits, **190 tests**.
+- **2026-10-08** — **migration 14** (G2, groupe) : `remuneration_parameters`
+  devient **`hunter_rate_parameters`** (séquence, clé primaire,
+  `uq_hunter_rate_effective_from`, modèle `HunterRateParameters`, route
+  `/hunter-rate-parameters`). L'ancien nom se confondait avec
+  `parameters_fees`. Banc IDENTIQUES — 562 faits, **190 tests**.
