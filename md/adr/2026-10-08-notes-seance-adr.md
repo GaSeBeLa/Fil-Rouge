@@ -29,6 +29,8 @@
 | 5 | Seed des 3 tables de paramètres, et service qui les lit | Sébastien (« oui pour le seed », « fais le service ») | Matière pour l'ADR D (paramètres en table datée) |
 | 6 | **Plusieurs médias (audio, vidéo) par note d'avis** : table `review_media`, relation 1-N (option 2) | Gabriel a posé la question, Sébastien a choisi (« option 2 ») | Nouvel ADR (voir § 4) ; le scénario 06 dit « des commentaires audio et des vidéos » |
 
+| 7 | **Garder la petite note du trigger d'exclusivité** sur la table `Mandate` du MPD | Sébastien (« oui on garde la petite note ») | Pas de symbole Merise pour un trigger : c'est une **convention d'équipe** (note libre sous la table), à dire ainsi à l'oral |
+
 - ✅ Décisions 2 et 3 appliquées dans le code : commit `6be4e56` (SQL v3, test, docs) et migration 16 (`4b16839`).
 - ✅ Décision 6 appliquée dans le code : commit `f27123d` (SQL v3, migration 17, modèle, route `/review-media`, 3 tests).
 - ⚠️ Sources de 2, 3 et 6 : des messages Discord. Aucune trace écrite ailleurs.
