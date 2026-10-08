@@ -27,9 +27,11 @@
 | 3 | **Pas d'avenants** | Gabriel (« on veut pas des avenants ») | `id_mandate_parent` reste `UNIQUE`. ADR-013 prévoyait les avenants : à dire noir sur blanc |
 | 4 | Les 5 regroupements de la liste (I+Q, K→D, AC→U, AA+AB→ADR-027, Eircode→N) | accord de principe de Sébastien | 🟡 **à faire relire par le groupe** |
 | 5 | Seed des 3 tables de paramètres, et service qui les lit | Sébastien (« oui pour le seed », « fais le service ») | Matière pour l'ADR D (paramètres en table datée) |
+| 6 | **Plusieurs médias (audio, vidéo) par note d'avis** : table `review_media`, relation 1-N (option 2) | Gabriel a posé la question, Sébastien a choisi (« option 2 ») | Nouvel ADR (voir § 4) ; le scénario 06 dit « des commentaires audio et des vidéos » |
 
-- ✅ Décisions 2 et 3 appliquées dans le code : commit `6be4e56` (SQL v3, test, docs).
-- ⚠️ Sources de 2 et 3 : des messages Discord. Aucune trace écrite ailleurs.
+- ✅ Décisions 2 et 3 appliquées dans le code : commit `6be4e56` (SQL v3, test, docs) et migration 16 (`4b16839`).
+- ✅ Décision 6 appliquée dans le code : commit `f27123d` (SQL v3, migration 17, modèle, route `/review-media`, 3 tests).
+- ⚠️ Sources de 2, 3 et 6 : des messages Discord. Aucune trace écrite ailleurs.
 
 ## 3. Ce que le code dit déjà (à citer dans les ADR)
 
@@ -50,6 +52,7 @@
 | Renouvellement : `renewed` sur l'ancien, pas d'avenant | **ADR L** (règles du mandat, numéro proposé 039) | **ADR-010 et ADR-013** → passent en « remplacé par » |
 | Exclusivité par trigger, pas par `EXCLUDE` | **ADR L** (039) | rien |
 | Qui lit les paramètres : un service qui construit le `Parametrage` | **ADR D** (034) | rien |
+| Plusieurs médias par note d'avis : table `review_media` (1-N) au lieu de 2 colonnes | à ranger avec **P** (journal des notes du chasseur, 042) ou **à part** 🟡 | rien d'écrit (aucun ADR ne parlait des médias) |
 
 💡 L'ADR L grossit : 6 mois, exclusivité, renouvellement, annulation, plus ces deux points. 🟡 À décider : un seul ADR, ou deux (mandat : durée et exclusivité / renouvellement).
 
@@ -65,6 +68,13 @@
 6. 🟡 **« renewed ⇒ un successeur existe »** : aucune contrainte simple ne le dit. L'API, un trigger, ou on assume ?
 7. ⚠️ **Noms de tables périmés** possibles dans les ADR D et I (`remuneration_parameters` est devenu `hunter_rate_parameters`).
 8. 🟡 **F et V attendent** : la grille de performance (F, sens du critère « visites » à vérifier), la durée d'effacement d'un compte (V, à proposer avec sa source).
+
+9. 🟡 **Diagramme MPD : une V8 à faire** (V7 est en retard sur le dépôt) :
+   - retirer `media_url`, `media_type` et `chk_media` de `Estate_SearchRequest` ;
+   - ajouter la table `ReviewMedia` (5 colonnes) et le lien `Estate_SearchRequest` (0,n) — « Accompanies » — (1,1) `ReviewMedia` ;
+   - ajouter sur `Mandate` la note du trigger d'exclusivité ; garder le `UNIQUE` sur `id_mandate_parent`, ne pas remettre `chk_renewed`.
+   - Le verbe « Accompanies » est un choix de Claude : le groupe peut préférer « Illustrates ».
+10. ⚠️ **Le banc `bash docker/compare_v2_v3.sh` rend « DIFFÉRENTES »** pour une seule raison : le seed `05_parametres.sql` remplit 3 tables en base neuve (1 / 5 / 1 lignes), pas en base migrée. Les schémas sont **identiques** (571 faits de chaque côté). Il manque une migration de seed, ou on assume l'écart.
 
 ## 6. Ordre de travail proposé
 
@@ -85,5 +95,5 @@
 - ❌ ADR-010 et ADR-013 relus **sur Confluence** : lus seulement à travers les notes du dépôt.
 - ❌ Image du diagramme V7 : non relue ; le PDF et le XML V6 ont été lus.
 - ❌ `questions-a-trancher.md` : lu en partie (1 437 lignes).
-- ⚠️ Les tests tournent en local (202 passés) et dans le conteneur `api` (7 tests sautés, normal : il ne voit pas `docker/`).
+- ⚠️ Les tests tournent en local (205 passés) et dans le conteneur `api` (7 tests sautés, normal : il ne voit pas `docker/`).
 - ⚠️ `requirements.txt` ne fixe aucune version : SQLAlchemy 2.1 casse la connexion, il faut `sqlalchemy<2.1`. Non corrigé.
