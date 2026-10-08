@@ -24,8 +24,8 @@ modifiés**.
 - L'API expose un CRUD complet en trois couches (routes / services /
   repositories) sur les **19 tables** ; le routeur commun revalide l'entrée
   (`422` avant la base). 91 opérations vérifiées en `200` contre la base
-  (mesuré avant LOT6). **190 tests** (au 2026-10-08) : 99 unitaires sans base
-  (dont les 55 cas de rémunération), 91 d'intégration sur la base de test isolée
+  (mesuré avant LOT6). **193 tests** (au 2026-10-08) : 99 unitaires sans base
+  (dont les 55 cas de rémunération), 94 d'intégration sur la base de test isolée
   `fil_rouge_test` (`docker/create_test_db.sh`) — voir `API/README.md` § Tests.
 - Les user stories Gherkin (`user-stories/`) couvrent le parcours actuel et le
   futur parcours IA. Seul le **calcul de rémunération** est implémenté

@@ -27,9 +27,9 @@
   ressources, 18/18 en `200`. *(au 2026-10-05)* Prix en `int`, honoraires et
   paiement en `Decimal` ; le routeur commun revalide l'entrée du `POST` et du
   `PUT` (`422` avant la base).
-- **Tests** *(au 2026-10-08)* — **190 tests**, `190 passed`, lancés dans le
+- **Tests** *(au 2026-10-08)* — **193 tests**, `193 passed`, lancés dans le
   conteneur `api` : 99 unitaires sans PostgreSQL (dont les 55 cas de
-  rémunération), 91 d'intégration sur la base de test isolée
+  rémunération), 94 d'intégration sur la base de test isolée
   `fil_rouge_test` (`docker/create_test_db.sh`).
 - **Calcul de rémunération** *(au 2026-10-02)* — `services/remuneration.py`,
   code de référence du sujet recopié tel quel ; fonction pure, **pas encore
@@ -291,3 +291,8 @@ de ce que le code dit déjà.
   `uq_hunter_rate_effective_from`, modèle `HunterRateParameters`, route
   `/hunter-rate-parameters`). L'ancien nom se confondait avec
   `parameters_fees`. Banc IDENTIQUES — 562 faits, **190 tests**.
+- **2026-10-08** — **migration 15** (G1, groupe) :
+  `payment.id_hunter_rate_parameters`, la version des réglages qui a servi
+  au calcul ; NULL sur un refus, exigée sinon (`chk_refused`). Base de dev :
+  0 paiement, 0 version. Banc IDENTIQUES — 564 faits, **193 tests** (3 tests
+  G1, vérifiés en mutant : 3 échecs sans la règle).
