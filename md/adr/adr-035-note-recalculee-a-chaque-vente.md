@@ -123,7 +123,7 @@ Aucune. Ce qui reste est du code à écrire (Conséquences) et le contenu d'ADR-
 | Affirmation | Source |
 |---|---|
 | Le code du sujet recalcule le score à partir de la vente | `documents utiles/REGLES-CALCUL-REMUNERATION.md:618-619` (StarterPack) ; notre copie, `API/src/app/services/remuneration.py:275-276`, « recopié tel quel » (l. 10-14) |
-| Le critère « mandats » remplacé par le taux de transformation | Q-PAR-05, `md/questions/questions-a-trancher.md:145` ; `remuneration.py:214` ; ADR-048 |
+| Le critère « mandats signés » noté par le taux de transformation (sa notation change, pas le critère) | Q-PAR-05, `md/questions/questions-a-trancher.md:145` ; `remuneration.py:214` ; ADR-048 |
 | Entrées : « hors vente en cours » | même fichier, l. 137-140 |
 | Score avant taux, tout à la date de l'acte | `documents utiles/REGLES-CALCUL-REMUNERATION.md:84` (StarterPack) |
 | Portée et poids des 5 critères ; la phrase dit « Deux critères », le tableau en marque trois | `REGLES-CALCUL-REMUNERATION.md:139-147` |
