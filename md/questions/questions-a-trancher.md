@@ -81,7 +81,7 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 |---|---|---|---|
 | Unité monétaire | ✅ **euro** ; depuis le 2026-10-05 (Q-REM-01) : prix, budgets et barème en `INTEGER`, honoraires et paiement en `NUMERIC(12,2)` | 2026-09-21, revu 2026-10-05 | `context AI/08-etat.md:98-104`, `CLAUDE.md` règle 4 |
 | Acte après la fin du mandat | ✅ **refusé, sauf renouvellement** | 2026-09-11 | `09-dec:122-178` |
-| Mandat renouvelé | ✅ `'renewed'` marque le **nouveau** mandat | — | `09-dec:96-118`, `01:427` |
+| Mandat renouvelé | ✅ `'renewed'` marque l'**ancien** mandat (révisé le 2026-10-08, sans avenant) ; avant : le nouveau | — | `09-dec:96-118`, `01:465-470` |
 | Fin de mandat | ✅ `ends_at` **stocké** | 2026-09-11 | `09-dec:222` |
 | Chaque chasseur a un manager | ✅ ADR-025, **accepté sur Confluence** — ⚠️ **« Annulé »** dans la copie du journal d'ADR de Confluence lue le 2026-10-06. ✏️ 2026-10-07 (Q9) : le lien **se garde**, un **nouvel ADR** remplace ADR-025 (Q-ACC-20) | 2026-09-22, revu 2026-10-07 | `md/journal/2026-09-21-a-faire-a-la-main.md:189-190` |
 | Authentification | ✏️ **Réouverte** : on fournit les **outils côté back** (route de connexion, token, session, rôles, droits), **pas la page de login** ; mot de passe gardé, haché en Argon2. Avant : ❌ hors périmètre (Jeff, 22/09) | 2026-09-22, revu 2026-10-07 | Jeff, entretien du 2026-10-07 (Q-JEF-14) ; avant : `md/adr-026-…:62-80` |

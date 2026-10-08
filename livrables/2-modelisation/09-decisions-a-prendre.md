@@ -93,7 +93,14 @@
 
 ## Déjà tranché
 
-### D8 — Que désigne le statut `'renewed'` ? → le **nouveau** mandat
+### D8 — Que désigne le statut `'renewed'` ? → l'**ancien** mandat (révisé le 2026-10-08)
+
+> ✏️ **Révisé le 2026-10-08** (Gabriel, pour le groupe, sur Discord) : `'renewed'`
+> est le statut de l'**ancien** mandat ; le nouveau pointe vers le précédent
+> par `id_mandate_parent`, et **pas d'avenant** (`UNIQUE` sur `id_mandate_parent`).
+> `chk_renewed` est retiré (`init-v3/01_create…sql`). Cela remplace ADR-010 et
+> ADR-013 : ADR à écrire. Le texte ci-dessous est l'ancienne décision, gardé
+> pour la trace.
 
 **Code** : `U07`
 **Tranché par** : les ADR (acceptés).
