@@ -29,7 +29,7 @@
 >   rapprocher (`md/adr/2026-10-08-notes-seance-adr.md:112`).
 > * Le commentaire `docker/init-v3/01_create_fil_rouge_immobilier.sql:454-455`
 >   attribue « figer la date » à ADR-018. C'est ADR-023 : ADR-018 porte sur la
->   performance énergétique (copie du journal, l. 490 et l. 764).
+>   performance énergétique (journal Confluence : titres d'ADR-018 et d'ADR-023).
 > * Si le groupe confirme la Décision 5 : le code à changer est listé dans les
 >   Conséquences. Rien n'a été touché.
 >

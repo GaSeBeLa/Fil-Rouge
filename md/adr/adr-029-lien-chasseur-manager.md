@@ -60,7 +60,7 @@ Le 07/10, le groupe a tranché la Q9 : garder le lien, et écrire sa raison dans
 1. **Abandonner le lien.** Avantage : conforme au statut « Annulé ». Inconvénients : Q-ACC-02, Q-SCH-13 et Q-MIG-04 sont à revoir, et la base à changer. Écartée par la Q9.
 2. **Déduire le manager des demandes** (`search_request.id_realestatemanager`). Avantage : pas de colonne en plus. Écartée dès ADR-025 : un chasseur sans demande n'a alors aucun manager, et deux demandes peuvent en donner deux. C'est toujours vrai : la colonne de la demande accepte le vide.
 3. **Un lien facultatif (0,1).** Avantage : souple. Écartée dès ADR-025 : la base ne garantit plus la règle, tout repose sur l'API.
-4. **Garder ADR-025 et corriger sa raison sur place.** Avantage : pas de nouveau numéro. Écartée : ADR-025 a été accepté, et le groupe ne réécrit jamais un ADR accepté (ADR-023, copie du journal, l. 804). Le sujet dit : « **Ne jamais effacer** un ADR : s'il est remplacé, marquer « remplacé par ADR-XXX ». » (`JOURNAL-DE-DECISIONS.md:72`).
+4. **Garder ADR-025 et corriger sa raison sur place.** Avantage : pas de nouveau numéro. Écartée : ADR-025 a été accepté, et le groupe ne réécrit jamais un ADR accepté (ADR-023, Conséquences). Le sujet dit : « **Ne jamais effacer** un ADR : s'il est remplacé, marquer « remplacé par ADR-XXX ». » (`JOURNAL-DE-DECISIONS.md:72`).
 5. **Garder le lien tel qu'il est en base, et écrire sa raison dans un nouvel ADR.** **Retenue** (Q9).
 
 **Décision**
@@ -97,7 +97,7 @@ Le 07/10, le groupe a tranché la Q9 : garder le lien, et écrire sa raison dans
 |---|---|---|
 | Garder ou abandonner le lien ? | Garder | `md/questions/questions-a-trancher.md:259` (réponse du groupe à Q-ACC-20, Q9) ; texte de l'option : `md/journal/2026-10-07-plan-action.html:461` |
 | Quelle raison ? | L'organisation de l'entreprise | `questions-a-trancher.md:259` |
-| Remplacer ou amender ADR-025 ? | Remplacer, par un nouvel ADR | `questions-a-trancher.md:259`, `:420` ; `documents utiles/JOURNAL-DE-DECISIONS.md:72` ; ADR-023, copie du journal, l. 804 |
+| Remplacer ou amender ADR-025 ? | Remplacer, par un nouvel ADR | `questions-a-trancher.md:259`, `:420` ; `documents utiles/JOURNAL-DE-DECISIONS.md:72` ; ADR-023, Conséquences (journal Confluence) |
 | ENF-03 est-elle une exigence ? | Le sujet dit les deux. Cet ADR ne s'appuie pas dessus, donc la question ne le bloque pas | `CAHIER-DES-CHARGES-TECHNIQUE.md:45`, `:74`, `:92`, `:97` ; `REGLES-CALCUL-REMUNERATION.md:296`, `:763` ; `questions-a-trancher.md:457` |
 | Quel nom sur le MPD ? | « Supervises » (Q-SCH-13, 05/10) | `questions-a-trancher.md:168` |
 | Le manager de la demande et celui du chasseur doivent-ils coïncider ? | Non, déduit : le groupe a choisi de renommer le lien (Q-SCH-13), pas d'ajouter une contrainte. ADR-025 laissait ce choix : « À assumer, ou renommer » | journal Confluence, ADR-025, « Conséquences » ; `questions-a-trancher.md:168` |
@@ -131,4 +131,4 @@ Aucune.
 | Filtre « ses chasseurs » codable avec l'authentification | `md/securite/tuto-2-authentification-jwt.md:493-500` ; ADR-028 |
 | Parcours IA reporté | `questions-a-trancher.md:186` (Q-ACC-14) |
 | Modèle d'ADR : statuts, « ne jamais effacer » | `documents utiles/JOURNAL-DE-DECISIONS.md:22`, `:72` (StarterPack) |
-| « on ne réécrit jamais un ADR accepté » : convention du groupe | ADR-023, copie du journal Confluence du 07/10/2026, l. 804 |
+| « on ne réécrit jamais un ADR accepté » : convention du groupe | ADR-023, Conséquences (journal Confluence, copie du 07/10/2026) |

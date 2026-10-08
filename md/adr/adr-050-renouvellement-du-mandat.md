@@ -105,7 +105,7 @@ Une sous-décision par bloc. L'option retenue est marquée **retenue** ; les aut
 4. Un mandat se renouvelle à l'échéance, **seulement sans vente** (`00_…feature:40`). Ce contrôle relève de l'API (Q-MAN-03) : **à coder**.
 5. **Sans limite** de nombre (Q-MAN-03, Q-JEF-07).
 6. La vente pointe vers le **dernier** mandat de la chaîne (Q-MAN-04). Un mandat a au plus une vente (`sale.id_mandate` est `UNIQUE`, `01:763`).
-7. Le délai entre la signature du mandat et l'acte est l'un des cinq critères de la note du chasseur (`REGLES-CALCUL-REMUNERATION.md:55`). Il part de la **première** signature (Q-MAN-04). Le code **devra** remonter la chaîne `id_mandate_parent` pour la trouver : pas encore codé (`questions-a-trancher.md:841`). ADR-010 le prévoyait déjà (copie du journal, l. 254).
+7. Le délai entre la signature du mandat et l'acte est l'un des cinq critères de la note du chasseur (`REGLES-CALCUL-REMUNERATION.md:55`). Il part de la **première** signature (Q-MAN-04). Le code **devra** remonter la chaîne `id_mandate_parent` pour la trouver : pas encore codé (`questions-a-trancher.md:841`). ADR-010 le prévoyait déjà (ADR-010, Conséquences).
 8. **Acte signé après la fin.**
    * La date de l'acte se compare à `ends_at` du mandat de la vente, donc du dernier de la chaîne.
    * Après cette date : pas de rémunération (`10_calcul_remuneration_chasseur.feature:45-50`). Le paiement est refusé, motif `'mandate_expired'` : voir ADR-024.
@@ -158,7 +158,7 @@ Pendant un renouvellement, l'exclusivité ne bloque pas : le trigger exclut le p
 
 1. **Cette fiche remplace-t-elle ADR-013 en entier ?**
    **Non : seulement sa partie `Mandate`.** Déduit, pas décidé.
-   * ADR-013 couvre aussi `Criteria` : son titre dit « Tables Criteria et Mandate » (copie du journal, l. 310).
+   * ADR-013 couvre aussi `Criteria` : son titre dit « Tables Criteria et Mandate » (ADR-013, titre).
    * `criteria.id_previous_version` existe toujours (`01:399-400`).
    * Le sujet demande d'historiser les versions de la demande (`Readme.md:234`).
 2. **« `'renewed'` ⇒ un successeur existe » : où le garantir ?**
@@ -189,9 +189,9 @@ Aucune.
 | Renouvelable à l'échéance, si aucune vente n'a abouti | `00_regles_metier_mandat_remuneration.feature:40` ; `Readme.md:73` ; `GLOSSAIRE-METIER.md:14` |
 | Acte après la fin : aucun droit, sauf renouvellement | `REGLES-CALCUL-REMUNERATION.md:98` ; `10_calcul_remuneration_chasseur.feature:45-50` ; ancienne décision D3, `09-decisions-a-prendre.md:129-185` |
 | Pas d'avenant dans le sujet | recherche « avenant » dans le StarterPack, 08/10/2026 : 0 fichier |
-| ADR-010 : clé réflexive, « remonter cette chaîne » | journal de décisions Confluence (page 15466509), copie du 07/10/2026, l. 234-254 |
-| ADR-013 : `Criteria` et `Mandate`, versions et avenants | même copie, l. 310-338 |
-| ADR-004, ADR-023 | même copie, l. 85-88 et l. 764-804 |
+| ADR-010 : clé réflexive, « remonter cette chaîne » | journal de décisions Confluence (page 15466509), copie du 07/10/2026, ADR-010 |
+| ADR-013 : `Criteria` et `Mandate`, versions et avenants | même copie, ADR-013 |
+| ADR-004, ADR-023 | même copie, ADR-004 (Statut) et ADR-023 |
 | Ancienne décision D8 et `chk_renewed` | `09-decisions-a-prendre.md:96-125` |
 | `'renewed'` sur l'ancien ; pas d'avenant | Gabriel, Discord, 08/10/2026 (`md/adr/2026-10-08-notes-seance-adr.md:26-27`) ; `01:465-470` ; commits `6be4e56`, `4b16839` |
 | Sans vente, sans limite ; vente sur le nouveau ; délai depuis la 1re signature | Q-MAN-03, Q-MAN-04 (`questions-a-trancher.md:822-841`) ; Jeff, Q-JEF-07 (`2026-10-07-questions-pour-jeff.html:347`) |

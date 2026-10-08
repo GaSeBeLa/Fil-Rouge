@@ -136,12 +136,12 @@ Aucune. Les trois sujets sont tranchés par le groupe et déjà dans le code.
 
 | Affirmation | Source |
 |---|---|
-| ADR-009 : clés `id_town` / `id_area` sur `SearchRequest`, `id_area` NULLABLE, accepté | journal Confluence (copie du 07/10/2026), ADR-009, l. 209-232 |
+| ADR-009 : clés `id_town` / `id_area` sur `SearchRequest`, `id_area` NULLABLE, accepté | journal Confluence (copie du 07/10/2026), ADR-009 |
 | ADR-020 : 10 pays couverts | même copie, ADR-020 ; `docker/init-v3/01_create_fil_rouge_immobilier.sql:202` |
-| ADR-021 ne tranche pas entre les deux approches | même copie, ADR-021, l. 684 |
-| ADR-021 et ADR-022 écrivent l'Eircode avec un espace | même copie, l. 667 et l. 742 |
-| ADR-022 : un format Eircode révisé se reporte sur les deux tables | même copie, ADR-022, l. 758 |
-| ADR-021 : l'API formate NL/GB/IE avant insertion | même copie, ADR-021, l. 680 |
+| ADR-021 ne tranche pas entre les deux approches | même copie, ADR-021, Conséquences |
+| ADR-021 et ADR-022 écrivent l'Eircode avec un espace | même copie, ADR-021 et ADR-022, Décision |
+| ADR-022 : un format Eircode révisé se reporte sur les deux tables | même copie, ADR-022, Conséquences |
+| ADR-021 : l'API formate NL/GB/IE avant insertion | même copie, ADR-021, Conséquences |
 | Conflit N2, ses trois options | `livrables/2-modelisation/09-decisions-a-prendre.md:233-251` |
 | Q-SCH-02 : garder `criteria`, un ADR remplace ADR-009 ; la ligne sur ADR-009 | `md/questions/questions-a-trancher.md:158` |
 | Q-MIG-08 : « ajoute dans criteraia, sector nullable , idem dans estate » (06/10/2026) | même registre, l. 181 |

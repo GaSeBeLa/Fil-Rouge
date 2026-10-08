@@ -17,7 +17,7 @@
 >    des charges v2.0, décalé d'un rang sur le journal. Q-PRO-04 a tranché ce
 >    décalage le 06/10/2026 : « Le journal Confluence fait foi »
 >    (`md/questions/questions-a-trancher.md:200`). Le journal place ADR-024
->    juste après ADR-023 (copie du 07/10/2026, l. 764 et 810).
+>    juste après ADR-023 (copie du 07/10/2026 : la page d'ADR-024 suit ADR-023).
 > 2. **Le statut n'est pas « Annulé » : il est « proposé ».** Aucune source
 >    écrite n'annule cet ADR, aucune ne l'accepte. Le registre dit « en base
 >    mais pas actée (ADR-024 « proposé ») » (`questions-a-trancher.md:1109`).
@@ -37,7 +37,7 @@
 >    dit, mot pour mot : « **Ne jamais effacer** un ADR : s'il est remplacé,
 >    marquer « remplacé par ADR-XXX ». » (`JOURNAL-DE-DECISIONS.md:72`). Le mot
 >    « accepté » n'y est pas. La convention « on ne réécrit jamais un ADR
->    accepté » vient du groupe (ADR-023, copie du journal, l. 804). ADR-024 n'a
+>    accepté » vient du groupe (ADR-023, Conséquences). ADR-024 n'a
 >    jamais été accepté (point 2) : il se finit sous son numéro.
 >
 > 🧹 **À faire ailleurs** (des tâches, pas la décision) :
@@ -183,5 +183,5 @@ Aucune. La question de l'exclusivité d'un mandat `'lost'` est traitée dans ADR
 | À finir, avec B dedans | `md/adr/2026-10-07-liste-adr-chantier-4.md:55-56` |
 | Exclusivité d'un mandat `'lost'` | ADR-039, Questions tranchées n° 1 |
 | Modèle d'ADR ; micro-décisions ; « ne jamais effacer » | `documents utiles/JOURNAL-DE-DECISIONS.md:13`, `:22`, `:72` (StarterPack) |
-| « on ne réécrit jamais un ADR accepté » : convention du groupe | ADR-023, copie du journal Confluence du 07/10/2026, l. 804 |
+| « on ne réécrit jamais un ADR accepté » : convention du groupe | ADR-023, Conséquences (journal Confluence, copie du 07/10/2026) |
 | MPD v8 : `'lost'` et `chk_refused` avec la version des réglages | MPD v8 du 08/10/2026 (fichier `v8.drawio.xml` reçu sur Discord, hors dépôt), lu le 08/10/2026 |

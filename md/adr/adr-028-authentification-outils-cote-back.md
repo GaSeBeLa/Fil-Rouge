@@ -24,8 +24,8 @@
 >   en vigueur (Laurence, Discord, 08/10/2026). Reste à retirer « à confirmer »
 >   sur la page : une retouche, pas une décision.
 > * **Qui cite « ADR-026 » pour « pas d'authentification » ?** Sur Confluence,
->   ADR-027 seul (copie du journal du 07/10, l. 1186, 1221, 1224). ADR-025 ne le
->   cite pas (l. 1104-1142 : 0 occurrence). Dans le dépôt : `API/README.md:251`.
+>   ADR-027 seul (ADR-027 du 22/09 : Contexte et Options). ADR-025 ne le
+>   cite pas (ADR-025 : 0 occurrence). Dans le dépôt : `API/README.md:251`.
 >   L'erreur vient du brouillon local numéroté 026, jamais publié sous ce numéro.
 >
 > 🧹 **À faire ailleurs** (des tâches, pas la décision) :
