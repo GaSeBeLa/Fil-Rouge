@@ -36,14 +36,18 @@ Raison : le modèle du prof impose de marquer « remplacé par ADR-XXX » (`docu
 
 | N° proposé | Lettres | Sujet | Remplace ou amende | Sources |
 |---|---|---|---|---|
-| **028** | Y | Authentification : outils côté back, mot de passe gardé en Argon2, une clé par programme | ADR-016 et ADR-026 | Q-JEF-14, Q-JEF-22 ; `questions-a-trancher.md:419` |
+| **028** | Y | Authentification : outils côté back, mot de passe gardé en Argon2, une clé par programme | **complète** ADR-016 et ADR-026 (remis en vigueur, voir ci-dessous) | Q-JEF-14, Q-JEF-22 ; `questions-a-trancher.md:419` |
 | **029** | Z | Lien chasseur → manager, raison réécrite | ADR-025 | Q-ACC-20 ; `:420` |
 | **030** | I + Q | Vente reliée à sa grille d'honoraires, grilles « en vigueur à partir du » | ADR-019 | Q-REM-13, Q-SCH-17 ; `:404`, `:412` |
 | **031** | N (+ Eircode) | Localisation sur `criteria`, colonne quartier, Eircode sans espace | ADR-009 ; amende ADR-021 | Q-SCH-02, Q-MIG-08, Q-SCH-12 ; `:409` |
 | **032** | A | Types monétaires : prix en `INTEGER`, euro | ADR-012 | Q-REM-01 ; `:396` ; `2026-10-07-liste-adr-chantier-4.md:45-49` |
 | **024** | B | Vente perdue : statut `'lost'` sur le mandat | **finit ADR-024**, pas de numéro neuf | Q-REM-02, Q-REM-14 ; `:397` |
 
-- ⚠️ **Y dépend d'une vérification** : la liste note « dé-annuler » ADR-016 et ADR-026 (« il me semble », `questions-a-trancher.md:260`). 🟡 À vérifier sur Confluence avant d'écrire Y. Si l'équipe les remet en « accepté », Y ne les remplace plus.
+- ✏️ **Corrigé le 2026-10-08, après la réponse de Laurence sur Discord** : ADR-016 et ADR-026 **sont remis en vigueur**, donc Y **ne les remplace pas**.
+  - Les fichiers vont dans ce sens : l'authentification est rouverte par Jeff le 2026-10-07 (`questions-a-trancher.md:87`, `:257`) ; mot de passe gardé en Argon2 = contenu d'ADR-016 ; 12 caractères gardés (Q-ACC-17) = contenu d'ADR-026 ; le groupe répond « dé-annuler » (`:260`).
+  - 🟡 La décision du groupe est dite par Laurence sur Discord. Je ne l'ai pas vue écrite ailleurs ; « il me semble » (`:260`) reste la seule trace dans les fichiers.
+  - ➡️ ADR-016 et ADR-026 repassent en **« accepté »**, avec une note : « annulé le 22/09, remis en vigueur le 08/10 (Jeff, 07/10) ». Rien n'est effacé (`JOURNAL-DE-DECISIONS.md:72`).
+  - ➡️ Y (ADR-028) traite seulement le **nouveau** : outils d'authentification côté back, clé par programme. Il **complète** 016 et 026.
 
 ### Groupe 2 — déjà décidés, à mettre par écrit
 
@@ -82,13 +86,14 @@ Raison : le modèle du prof impose de marquer « remplacé par ADR-XXX » (`docu
 | **024** | Le finir, avec B dedans ; changer le titre « Annulé » et la phrase « validé par le groupe » | `2026-10-07-liste-adr-chantier-4.md:55-56` |
 | **027** | Le réécrire (il est « proposé ») : l'authentification revient (Q-JEF-14), la matrice se met à jour (AA), le rôle lecture seule entre (AB) | `:52-54` ; `questions-a-trancher.md:421-422` |
 | **004** | Reste « remplacé par ADR-023 » | Déjà bon : c'est le seul « remplacé » qui suit le modèle du prof |
-| **009, 012, 016, 019, 025, 026** | Passent en « remplacé par ADR-0xx » **quand** leur remplaçant est écrit | Règle du prof (`JOURNAL-DE-DECISIONS.md:72`) |
+| **009, 012, 019, 025** | Passent en « remplacé par ADR-0xx » **quand** leur remplaçant est écrit | Règle du prof (`JOURNAL-DE-DECISIONS.md:72`) |
+| **016, 026** | Repassent en « accepté », avec une note « annulé le 22/09, remis en vigueur le 08/10 » | Remis en vigueur (Laurence, Discord, 2026-10-08) ; ADR-028 les complète sans les remplacer |
 
 ## 5. Le mot « Annulé »
 
 - ⚠️ Le modèle du prof ne connaît que **proposé / accepté / remplacé par ADR-YYY** (`documents utiles/JOURNAL-DE-DECISIONS.md:22`).
 - ⚠️ « Annulé » n'y existe pas. La liste le note déjà (`2026-10-07-liste-adr-chantier-4.md:73-75`).
-- 💡 **Proposition** : quand Y, Z et B sont écrits, 016, 025, 026 et 024 passent en « remplacé par ». Sur Confluence, le dossier « Annulé / Remplacé » devient « Remplacé ».
+- 💡 **Proposition** : quand Z et B sont écrits, 025 et 024 passent en « remplacé par ». 016 et 026 repassent en « accepté » (remis en vigueur). Sur Confluence, le dossier « Annulé / Remplacé » devient « Remplacé », et les pages 016 et 026 en sortent pour retourner dans « Accepté ».
 - 🟡 **À trancher** : si le groupe garde « Refusé » pour les options écartées, il faut dire à quoi il sert (aujourd'hui aucun ADR n'est refusé).
 
 ## 6. Ce que je n'ai pas vérifié
