@@ -714,8 +714,8 @@ body.vlp-lit { padding-bottom:9rem; }
         <li>2️⃣ Depuis <span class="mono">docker/</span> : <span class="mono">docker compose down -v</span> puis <span class="mono">docker compose up -d</span>. ⚠️ Cela <strong>efface</strong> votre base de dev locale.</li>
         <li>3️⃣ Attendez <span class="mono">healthy</span> dans <span class="mono">docker compose ps</span> : il n'arrive plus qu'à la fin de l'init.</li>
         <li>4️⃣ Depuis la racine : <span class="mono">bash docker/create_test_db.sh</span>.</li>
-        <li>5️⃣ Depuis <span class="mono">docker/</span> : <span class="mono">docker compose exec -T api python -m pytest -q</span> → attendu <strong>187 passed</strong>.</li>
-        <li>🔁 Garder votre base v2 ? Passez <span class="mono">docker/migrations/v2-vers-v3/</span>, de 03 à 12, dans l'ordre.</li>
+        <li>5️⃣ Depuis <span class="mono">docker/</span> : <span class="mono">docker compose exec -T api python -m pytest -q</span> → attendu <strong>190 passed</strong> (187 au 2026-10-07 ; 3 tests ajoutés le 2026-10-08).</li>
+        <li>🔁 Garder votre base v2 ? Passez <span class="mono">docker/migrations/v2-vers-v3/</span>, de 03 à <strong>13</strong>, dans l'ordre (la 13 ajoutée le 2026-10-08).</li>
         <li>📖 Ce qui a changé, thème par thème : <span class="mono">docker/init-v3/README.md</span> §0. Les notes de l'équipe : <span class="mono">md/README.md</span>.</li>
       </ul>
     </div>

@@ -27,9 +27,9 @@
   ressources, 18/18 en `200`. *(au 2026-10-05)* Prix en `int`, honoraires et
   paiement en `Decimal` ; le routeur commun revalide l'entrée du `POST` et du
   `PUT` (`422` avant la base).
-- **Tests** *(au 2026-10-05)* — **123 tests**, `123 passed`, lancés dans le
+- **Tests** *(au 2026-10-08)* — **190 tests**, `190 passed`, lancés dans le
   conteneur `api` : 99 unitaires sans PostgreSQL (dont les 55 cas de
-  rémunération), 24 d'intégration sur la base de test isolée
+  rémunération), 91 d'intégration sur la base de test isolée
   `fil_rouge_test` (`docker/create_test_db.sh`).
 - **Calcul de rémunération** *(au 2026-10-02)* — `services/remuneration.py`,
   code de référence du sujet recopié tel quel ; fonction pure, **pas encore
@@ -281,3 +281,8 @@ de ce que le code dit déjà.
   par l'API (avec l'auth), l'expiration de `MAND-0013` à `0015` par
   l'application, les hypothèses 2, 3 et 7 de `init-v3/README.md` §7.
   Chantier : 116 219 396.
+- **2026-10-08** — **migration 13** : `user.is_activated` `NOT NULL DEFAULT
+  FALSE` et `chk_criteria_district_needs_town`, posés dans `01` par CaBaSS
+  (`88ab154`, `8024210`) sans migration ni modèle (23 tests rouges, banc
+  DIFFÉRENTES). Complétés en `6fc494f` : migrations 03 → 13, banc
+  IDENTIQUES — 562 faits, **190 tests**.
