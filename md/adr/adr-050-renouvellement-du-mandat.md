@@ -172,6 +172,7 @@ Pendant un renouvellement, l'exclusivité ne bloque pas : le trigger exclut le p
    * Point d'étape du 21/09/2026, question 5 (`md/journal/2026-09-21-point-etape.md:116`).
 4. **Acte signé après la fin d'un mandat non renouvelé : la vente est-elle refusée ?**
    **Non : elle s'enregistre, et c'est le paiement qui est refusé.** Le détail est dans ADR-024. Déduit, pas décidé.
+   🟡 **Laissée en « proposé » le 09/10/2026** (Sébastien, Discord) : cas très particulier, à trancher plus tard, avec Jeff si possible. Gabriel défend l'autre voie : aucun acte sans mandat valide, donc la vente est refusée. Le sujet ne dit que « aucun droit » (`10_calcul_remuneration_chasseur.feature:45-50`).
    * Un paiement exige une vente (`payment.id_sale NOT NULL`, `01:932`). Le motif `'mandate_expired'` n'aurait sinon aucune ligne où vivre (`01:893-901`).
    * Le commentaire du schéma dit « non refuser sèchement » (`01:781-784`).
 5. **Le mandat de Bruno, dans l'exemple du sujet, est-il un renouvellement ?**

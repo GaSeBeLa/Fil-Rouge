@@ -47,6 +47,7 @@ Réglées dans les fiches, elles relèvent de `JOURNAL-DE-DECISIONS.md:13` (« p
 Ils ne sont pas dans cette liste.
 
 * Q-ACC-06, Q-ACC-12 et Q-ACC-13 (ADR-027) : à confirmer par Jeff à la séance de validation (Q-JEF-25).
+* S4, partie « acte après la fin du mandat » : la vente s'enregistre-t-elle, ou est-elle refusée (voie de Gabriel) ? Laissée en « proposé » le 09/10/2026 par Sébastien, à trancher plus tard, avec Jeff si possible.
 * D1b (exclusivité par recherche, ADR-039, question ouverte 1) : question envoyée à Jeff le 09/10/2026, réponse attendue.
 
 ## 4. Ce qui est déjà confirmé le 09/10/2026
