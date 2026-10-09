@@ -164,7 +164,7 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 | Q-SCH-09 | ✅ **Ajouter** (2026-10-05) | `created_at` sur `client`, `hunter`, `real_estate_manager`, `role` (`01:169-170`). |
 | Q-SCH-10 | ✅ **Renommer maintenant** (2026-10-05) | `is_cartet` → `is_carte_t` : colonne, modèle, migration (`01:257-260`). |
 | Q-SCH-11 | ✅ **Contrôler** (2026-10-05, pas l'option recommandée) | Mesuré : 2 556 codes postaux sur 2 556 au format français ; mais `country_iso` vide sur tous les biens (`01:512-513`) : `'FR'` d'abord, puis le CHECK. |
-| Q-SCH-12 | 🧑‍💼 **Confirmée par Jeff le 2026-10-07** · ✅ **Sans espace** (2026-10-05, pas l'option recommandée) | ⚠️ **À confirmer.** CHECK de `01:215` (client) et `01:391` (criteria) ; GB et NL gardent leur espace (`01:213-214`). |
+| Q-SCH-12 | 👥 **Confirmée par le groupe le 2026-10-07** · ✅ **Sans espace** (2026-10-05, pas l'option recommandée) | ⚠️ **À confirmer.** CHECK de `01:215` (client) et `01:391` (criteria) ; GB et NL gardent leur espace (`01:213-214`). |
 | Q-SCH-13 | ✅ **« Supervises », et l'écrire** (2026-10-05) | Diagramme et README du schéma (`docker/init-v2/README.md:429-433`). |
 | Q-SCH-14 | ✅ **Accepter comme limite** (2026-10-05) | Rien. ADR T. |
 | Q-SCH-15 | ✅ **Resserrer la tranche à > 0** (2026-10-05) | CHECK de `01:697`. |

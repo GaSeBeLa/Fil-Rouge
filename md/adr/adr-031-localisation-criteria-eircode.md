@@ -38,7 +38,7 @@
 * **Statut :** proposé
 * **Décideurs :**
   * le groupe : Q-SCH-02 et Q-SCH-12 le 05/10/2026, Q-MIG-08 le 06/10/2026 ;
-  * confirmation de l'Eircode le 07/10/2026 : **auteur non noté**. Le registre dit « Confirmée par Jeff » (`questions-a-trancher.md:167`) et le README du schéma aussi (`docker/init-v3/README.md:73`) ; le même registre la range côté groupe (`:255`). La carte ne nomme personne, et le rapport d'entretien de Jeff n'a aucune carte sur l'Eircode.
+  * confirmation de l'Eircode le 07/10/2026 : **par le groupe**, précisé par Sébastien le 2026-10-09 (Discord). Le registre (`questions-a-trancher.md:167`) et le README du schéma (`docker/init-v3/README.md:73`) disaient « Jeff » : corrigés le même jour. La carte ne nomme personne, et le rapport d'entretien de Jeff n'a aucune carte sur l'Eircode.
 * **Remplace :** ADR-009 (caractère optionnel du secteur, `id_area` NULLABLE)
 * **Amende :** ADR-021 (format de l'Eircode, colonne quartier) et ADR-022 (format de l'Eircode, par déduction : voir « Questions tranchées »)
 
@@ -146,7 +146,7 @@ Aucune. Les trois sujets sont tranchés par le groupe et déjà dans le code.
 | Q-SCH-02 : garder `criteria`, un ADR remplace ADR-009 ; la ligne sur ADR-009 | `md/questions/questions-a-trancher.md:158` |
 | Q-MIG-08 : « ajoute dans criteraia, sector nullable , idem dans estate » (06/10/2026) | même registre, l. 181 |
 | Q-SCH-12 : sans espace (05/10/2026), pas l'option recommandée ; qui tranche : le groupe | même registre, l. 167 ; `questions-a-trancher.html:1297-1316` |
-| Confirmation de l'Eircode le 07/10/2026 : « par Jeff » (registre l. 167, README l. 73), « 👥 » groupe (registre l. 255) ; la carte ne nomme personne | `questions-a-trancher.md:167`, `:255` ; `docker/init-v3/README.md:73` ; `questions-a-trancher.html:1312` |
+| Confirmation de l'Eircode le 07/10/2026 : par le groupe (Sébastien, Discord, 2026-10-09) ; registre l. 167 et README l. 73 corrigés (ils disaient « Jeff »), registre l. 255 « 👥 » inchangé | `questions-a-trancher.md:167`, `:255` ; `docker/init-v3/README.md:73` ; `questions-a-trancher.html:1312` |
 | Le rapport d'entretien de Jeff n'a aucune carte sur l'Eircode | `md/questions/2026-10-07-questions-pour-jeff.html` : 0 occurrence de « eircode » et « irland » ; « postal » 3 fois, toutes sur le code postal français des clients repris (carte Q-JEF-26, l. 1421-1426) |
 | « Au lot, sans réserve » : la confirmation s'applique au lot | `questions-a-trancher.md:255` |
 | La carte ne vise que l'Irlande ; GB et NL gardent leur espace | `questions-a-trancher.html:1297`, `:1309` ; `docker/init-v3/README.md:73` |
