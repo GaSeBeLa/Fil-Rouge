@@ -12,7 +12,7 @@ Légende de la colonne « Réponse » : à remplir par le groupe (Oui, Non, À r
 | N° | Fiche | La déduction | Pourquoi elle engage le groupe | Réponse |
 |---|---|---|---|---|
 | S1 | ADR-027 | « La direction », c'est le rôle `Admin` : il tient aussi la comptabilité et le support. | Aucun 6e rôle. Décide qui voit les paiements (D3). | Oui (09/10/2026) |
-| S2 | ADR-027 | Plus aucune route `DELETE` sur les 20 ressources (« proposition de l'équipe, adoptée avec la fiche »). | Change l'API pour tout le monde. Code non fait. | Oui, à préciser (commentaire « on delete, on anonymise » contraire à M) (09/10/2026) |
+| S2 | ADR-027 | Plus aucune route `DELETE` sur les 20 ressources (« proposition de l'équipe, adoptée avec la fiche »). | Change l'API pour tout le monde. Code non fait. | Oui (09/10/2026) : plus de route DELETE, seulement l'anonymisation (S3) ; précisé par Sébastien |
 | S3 | ADR-049 | L'effacement passe par une route à part, `POST /users/{id}/anonymize`, réservée à l'`Admin`. Même règle pour un chasseur ou un manager. Ce que rien n'oblige à garder est rendu anonyme tout de suite. | Choix RGPD à défendre à l'oral. Code non fait. | Oui (09/10/2026) |
 | S4 | ADR-050 | Le renouvellement se fait dans l'API, en une transaction : il crée le successeur et passe l'ancien à `'renewed'`. Une vente après la fin du mandat s'enregistre, et c'est le paiement qui est refusé. | Règle métier du mandat. Rien n'est codé. | Oui ; la partie « acte après la fin » reste proposée, à voir avec Jeff (09/10/2026) |
 | S5 | ADR-041 | Une demande naît `'confirmed'`. Après un refus du vendeur, la nouvelle offre est une nouvelle ligne. | Cycle de vie de la demande et de l'offre. | Oui (09/10/2026) |

@@ -121,7 +121,7 @@ Sous-choix déjà tranché, le rôle en lecture seule (Q14) :
    * ✅ **Un compte ne se supprime pas.** L'`Admin` le désactive et le rend anonyme (Q-ACC-08, `reg:183`). Le détail est dans ADR-049.
    * ✅ **Une ligne citée par une autre ne se supprime pas.** La base la refuse : 38 clés en `ON DELETE RESTRICT` sur 38 (`01`, recompté le 08/10/2026).
    * ⚠️ **Une ligne que rien ne cite se supprime encore.** Un compte libre se supprime : réponse 200 (`API/tests/integration/test_users_db.py:89-92`). Cinq tables ne sont citées par aucune clé : `picture`, `review_media`, `estate_proposed`, `visit`, `hunter_performance`.
-   * 💡 **Proposition de l'équipe, adoptée avec la fiche : plus aucune route DELETE**, sur les 20 ressources. Le registre ne le demandait que pour les comptes, « ou à justifier » (`reg:303`). Lié à ADR-049. Déduit — demande du code, non fait.
+   * 💡 **Proposition de l'équipe, adoptée avec la fiche : plus aucune route DELETE**, sur les 20 ressources. ✅ Confirmé par le groupe le 09/10/2026 (S2) : plus aucune route DELETE ; l'effacement passe seulement par la route d'anonymisation (S3). Le registre ne le demandait que pour les comptes, « ou à justifier » (`reg:303`). Lié à ADR-049. Déduit — demande du code, non fait.
 5. ✅ **Trois écritures fermées à tous**, l'`Admin` compris, reprises du texte du 22/09 (ADR-027 du 22/09/2026, Décision, point 6) :
    * `criteria` ne se modifie pas : chaque changement crée une nouvelle version (`01:323-324`) ;
    * `hunter_performance` n'est jamais saisi à la main : le système l'écrit, sur trois déclencheurs (`01:1007-1008`) ;
