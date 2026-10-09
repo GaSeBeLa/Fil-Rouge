@@ -23,7 +23,7 @@
 > ℹ️ **Acte notarié : d'où vient « annoncé par Sébastien ».** Des notes de
 > session de Claude du 02/10/2026, pas d'un fichier du dépôt. Le registre dit
 > seulement « annoncé le 2026-10-02 (qui l'a décidé n'est pas noté) » (`:62`).
-> Sébastien peut préciser d'un mot : décidé par le groupe, ou par Jeff.
+> Précisé par Sébastien le 2026-10-09 (Discord) : décidé par Jeff.
 >
 > 🧹 **À faire ailleurs** (des tâches, pas la décision) :
 >
@@ -59,7 +59,7 @@
 * **Décideurs :**
   * l'équipe projet, réponses du groupe : Q-SCH-07 « Ne pas créer, hors MVP », Q-SCH-14 « Accepter comme limite », Q-MAN-08 « Reporter » ;
   * cartes du PO, réponse du groupe « Reporter au parcours IA » : Q-SCH-08, Q-ACC-14. Le PO, c'est Jeff (Q-PRO-01) : il les confirme à la séance de validation des ADR (Q-JEF-25) ;
-  * acte notarié : annoncé par Sébastien le 02/10/2026. Décidé par le groupe ou par Jeff : ce n'est pas noté (registre `:62`) ;
+  * acte notarié : annoncé par Sébastien le 02/10/2026. Décidé par Jeff, précisé par Sébastien le 2026-10-09 (Discord) ; le registre ne le note pas encore (`:62`) ;
   * limite 7 : 💡 proposée par cet ADR, le 08/10/2026, puis réécrite le 2026-10-09 : Sébastien dit que le groupe compte importer les annonces par un flux Airflow. Toujours proposée, pas acceptée : le groupe la prend en acceptant l'ADR.
 * **Remplace :** aucun ADR.
 * **Complète :** ADR-029, Décision 5 (pas d'historique des managers) : la limite est décidée là-bas ; ici, on dit ce qu'on en dit au jury.
