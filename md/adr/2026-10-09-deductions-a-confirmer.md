@@ -38,9 +38,14 @@ Réglées dans les fiches, elles relèvent de `JOURNAL-DE-DECISIONS.md:13` (« p
 * ADR-040 : 409 avec le message de la règle ; un test d'intégration par règle ; « un compte, un seul profil » dans l'API.
 * ADR-042 : `scored_at` date la note.
 * ADR-043 : pas de vrai code postal inventé.
-* ADR-047 : l'import ne passe pas par l'API.
-* ADR-049 : DELETE reste un vrai DELETE ; les colonnes obligatoires reçoivent une valeur neutre.
+* ADR-049 : l'anonymisation ne passe pas par DELETE (route à part, voir S3) ; les colonnes obligatoires reçoivent une valeur neutre.
 * ADR-051 : le verbe « Accompanies » au MPD (v8 reçue sur Discord le 08/10/2026).
+
+Revue du 09/10/2026 (Sébastien a demandé de refaire la liste) :
+
+* ADR-047, « l'import ne passe pas par l'API » : **retiré de la liste**. Le flux Airflow (D8, accepté) peut changer ce point ; il se décide avec « où vit le flux », reporté après les cours de ML et de data science. Si le flux passe par l'API, `POST /estates` (auteur obligatoire, S11) demandera un compte technique ou une route d'import (remarque d'Améthyste).
+* ADR-049 : reformulé. L'ancienne phrase « DELETE reste un vrai DELETE » semblait contredire S2 (plus de route DELETE). Elle veut dire : on n'anonymise pas par DELETE.
+* Les 11 autres lignes ont été relues dans leurs fiches : toujours valables.
 
 ## 3. Les points déjà prévus pour Jeff
 
