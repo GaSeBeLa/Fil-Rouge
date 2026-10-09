@@ -101,7 +101,7 @@ Sur le dénominateur du taux (sous-choix de l'option 3) :
    * **Le numérateur :** parmi ces chaînes, celles qui finissent par une vente dont le paiement n'est pas refusé (Q-REM-08). Le taux reste entre 0 et 1.
    * **Aucune chaîne au dénominateur :** note 0. Un critère d'activité sans activité vaut 0, comme S₃ et S₄ du sujet (`0 × 20`, `0 × 10`, RCR:145-146).
    * **Mandat annulé après signature :** il compte ; un mandat jamais signé, non. Tranchée par déduction ; confirmée par Sébastien le 2026-10-09 (Discord).
-8. **La note du journal hors d'une vente** (mandat échu, note de départ). Tranchée par déduction — à confirmer par le groupe (Questions tranchées). Demande du code, non fait.
+8. **La note du journal hors d'une vente** (mandat échu, note de départ). Tranchée par déduction ; confirmée par Sébastien le 2026-10-09 (Discord). Demande du code, non fait.
    * **Note de départ (`'initial'`) : 50**, le pivot. « Le pivot à 50 est le point d'équilibre » (RCR:213). Elle ne sert qu'à l'affichage (ADR-035, `md/adr/adr-035-note-recalculee-a-chaque-vente.md:114`).
    * **À l'échéance :** reprendre les cinq notes du dernier paiement payé, gardées dans `payment.calculation_details` (`01:928-931`). Recompter les deux critères d'activité (ventes, taux) à la date de l'échéance. Garder les trois notes de vente.
    * **Échéance avant toute vente payée :** les trois notes de vente valent 50 ; les deux critères d'activité sont recomptés.
