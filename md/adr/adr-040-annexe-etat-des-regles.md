@@ -25,8 +25,8 @@
 >
 > ✏️ **Tiré d'ADR-040 par l'arbitre le 08/10/2026**, et complété : règles
 > d'ADR-041 et d'ADR-042 (A16, B7, B8), d'ADR-035 (A17), d'ADR-038 (B9) ;
-> précisions d'ADR-033 et d'ADR-034 (A5, B5, B6) ; B2 marquée « à confirmer
-> par le groupe ».
+> précisions d'ADR-033 et d'ADR-034 (A5, B5, B6) ; B2 confirmée par
+> Sébastien le 2026-10-09.
 
 ## A. Règles qui croisent plusieurs tables (objet d'ADR-040)
 
@@ -55,7 +55,7 @@
 | # | Règle | D'où elle vient | État au 08/10/2026 |
 |---|---|---|---|
 | B1 | Exclusivité : un mandat exclusif bloque tout autre mandat du client sur la période. | ADR-039 | ✅ codé, par trigger (`01:522-550`) ; testé (`test_constraints_db.py:311-353`) |
-| B2 | Un mandat `'completed'` ou `'lost'` libère le client tout de suite. Tranchée par déduction — à confirmer par le groupe. | ADR-039, Décision 5 | ❌ pas codé : le trigger n'ignore que `'canceled'` (`01:526`, `:533`). À changer dans le trigger, pas dans l'API, si le groupe confirme. |
+| B2 | Un mandat `'completed'` ou `'lost'` libère le client tout de suite. Tranchée par déduction — confirmée par Sébastien le 2026-10-09 (Discord). | ADR-039, Décision 5 | ❌ pas codé : le trigger n'ignore que `'canceled'` (`01:526`, `:533`). À changer dans le trigger, pas dans l'API, si le groupe confirme. |
 | B3 | `'renewed'` ⇒ un successeur existe. | ADR-050 | ❌ pas codé : `PUT /mandates/{id}` accepte `'renewed'` sans successeur |
 | B4 | Le délai se compte depuis la première signature : remonter `id_mandate_parent`. | ADR-050 ; Q-MAN-04 | ❌ pas codé |
 | B5 | Les honoraires ne changent plus (C3). ADR-033 l'étend au prix, à la date de l'acte, à la grille et à l'origine de la vente. | Q-REM-12 ; `09-contraintes-a-coder.md:110-117` ; ADR-033, Décision 5 | ❌ pas codé : `API/src/app/services/sale_service.py` n'a que le CRUD |
@@ -77,7 +77,7 @@
 
 ## Hors API, pour mémoire : deux `CHECK` attendus
 
-* `chk_refused` : score et détail exigés hors refus, détail vide sur un refus. ADR-033, Décision 3 — **à confirmer par le groupe** (elle renverse le 3e point de la carte D8). Demande une migration.
+* `chk_refused` : score et détail exigés hors refus, détail vide sur un refus. ADR-033, Décision 3 — **confirmée par Sébastien le 2026-10-09 (Discord)** (elle renverse le 3e point de la carte D8). Demande une migration.
 * L'ordre des dates du paiement : `announced_at::date <= scheduled_for` et `announced_at <= paid_at` (💡 forme proposée). ADR-038, Conséquences — déduit. Demande une migration.
 
 ## Sources de l'annexe

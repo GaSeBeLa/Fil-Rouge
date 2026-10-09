@@ -11,8 +11,8 @@
 > sujet.** Relu le 08/10/2026 par deux relecteurs (sources ; oral et jury) et un
 > arbitre. Aucune question ne reste ouverte.
 >
-> ⚠️ **La Décision 3 attend le oui du groupe.** Score et détail exigés hors
-> refus : retenue par déduction. Elle renverse le 3e point de la carte D8 du
+> ✅ **La Décision 3 est confirmée par Sébastien le 2026-10-09 (Discord).** Score
+> et détail exigés hors refus : retenue par déduction. Elle renverse le 3e point de la carte D8 du
 > rapport LOT1→LOT5 (« Il n'est pas obligatoire ailleurs »), prise par Claude
 > seul et gardée par Sébastien le 07/10/2026
 > (`md/journal/2026-10-07-rapport-lot1-a-lot5.html:542` ;
@@ -33,7 +33,7 @@
 >   contredit par ADR-035.
 > * `md/journal/2026-10-07-rapport-lot1-a-lot5.html:624` et `:627` laissent deux
 >   questions 🟡 au groupe (score exigé, noms des clés). La première est la
->   Décision 3, à confirmer. La seconde est une micro-décision, réglée par
+>   Décision 3, confirmée le 2026-10-09. La seconde est une micro-décision, réglée par
 >   déduction dans les Conséquences.
 > * Si le groupe confirme la Décision 3 : mettre à jour le registre
 >   (`questions-a-trancher.md:123`, « non exigé ailleurs »).
@@ -110,8 +110,8 @@ D. Garder la version des réglages du taux (G1)
 
 E. Exiger le score et le détail hors refus ? (carte D8, lot 5)
 
-1. **Non : facultatifs hors refus.** C'est le 3e point de la carte D8, et le schéma d'aujourd'hui. Avantage : rien à faire. Inconvénient : « Un paiement normal peut être enregistré sans score » (`rapport-lot1-a-lot5.html:544`). **Écartée par déduction — à confirmer par le groupe.**
-2. **Oui : exigés hors refus, vides sur un refus.** Avantage : un paiement versé s'explique toujours. Inconvénients : une migration de plus ; des tests à compléter. **Retenue par déduction — à confirmer par le groupe.**
+1. **Non : facultatifs hors refus.** C'est le 3e point de la carte D8, et le schéma d'aujourd'hui. Avantage : rien à faire. Inconvénient : « Un paiement normal peut être enregistré sans score » (`rapport-lot1-a-lot5.html:544`). **Écartée par déduction — confirmée par Sébastien le 2026-10-09 (Discord).**
+2. **Oui : exigés hors refus, vides sur un refus.** Avantage : un paiement versé s'explique toujours. Inconvénients : une migration de plus ; des tests à compléter. **Retenue par déduction — confirmée par Sébastien le 2026-10-09 (Discord).**
 
 **Décision**
 
@@ -137,7 +137,7 @@ E. Exiger le score et le détail hors refus ? (carte D8, lot 5)
 | en plus : la version des réglages du taux | `payment.id_hunter_rate_parameters` (G1) | rien |
 
 2. `calculation_details` porte au moins les 5 notes (délai, exclusivité, ventes, mandats, visites) et les 4 entrées : nombre de visites, années d'ancienneté, ventes et mandats sur 12 mois (Q-REM-04 ; `API/src/app/services/remuneration.py:137-140`). Son contenu exact : voir les Conséquences.
-3. **Retenue par déduction — à confirmer par le groupe ; renverse le 3e point de la carte D8 ; demande une migration.** Hors refus, `performance_score` et `calculation_details` seront exigés. Sur un refus, ils resteront vides. Aujourd'hui, le schéma ne les exige pas (`chk_refused`, `01:965-983`). Les raisons sont dans la Justification.
+3. **Retenue par déduction — confirmée par Sébastien le 2026-10-09 (Discord) ; renverse le 3e point de la carte D8 ; demande une migration.** Hors refus, `performance_score` et `calculation_details` seront exigés. Sur un refus, ils resteront vides. Aujourd'hui, le schéma ne les exige pas (`chk_refused`, `01:965-983`). Les raisons sont dans la Justification.
 4. Une fois le paiement écrit, seuls `status` et les dates d'étape (`announced_at`, `scheduled_for`, `paid_at`) devront changer. Tous les autres termes du tableau devront rester tels quels. Pas encore codé.
 5. Les termes rangés sur la vente ne devront plus se modifier : les honoraires (C3, Q-REM-12), et aussi le prix, la date de l'acte, la grille et l'origine de la vente (déduit, voir les questions tranchées). Pas encore codé.
 6. Le montant ne sera vérifié que par l'API : il sortira de `rem.py`, et un test d'intégration comparera `amount` à `final_rate × fees_amount` arrondi (Q-REM-11). Pas de trigger. Pas encore codé.
@@ -150,12 +150,12 @@ E. Exiger le score et le détail hors refus ? (carte D8, lot 5)
 * Une colonne JSONB suffit : ces valeurs se relisent, elles ne se requêtent pas.
 * Le contrôle du montant reste à un seul endroit, le code du sujet (Q-REM-11).
 * Le client l'a confirmé : Jeff « valide notre position (ci-dessus), sans changement » (`md/questions/2026-10-07-questions-pour-jeff.html:1919`).
-* **Décision 3, à confirmer par le groupe.** Les arguments :
+* **Décision 3, confirmée par Sébastien le 2026-10-09 (Discord).** Les arguments :
   * Le client a validé « Chaque paiement gardera la note de performance du chasseur, et le détail du calcul » (`2026-10-07-questions-pour-jeff.html:1912`, réponse l. 1919). Un paiement sans score ne la garderait pas.
   * Le sujet compte le score parmi les éléments conservés (`F10:287`).
   * Le taux final est déjà exigé dès l'annonce (Q-REM-10, `01:962-963`). Or le score se calcule avant le taux (`RCR:84`) : un taux connu suppose un score connu.
   * Sur un refus, rien n'est calculé : le code rend un refus sans notes (`remuneration.py:269-270`). D'où « vides sur un refus » (ADR-024).
-  * Contre : D8 dit vrai, aucune réponse du groupe n'exige le score en toutes lettres (« Q-REM-03 ne le dit pas »). L'obligation est une déduction : d'où le oui du groupe attendu.
+  * Contre : D8 dit vrai, aucune réponse du groupe n'exige le score en toutes lettres (« Q-REM-03 ne le dit pas »). L'obligation est une déduction ; Sébastien l'a confirmée le 2026-10-09.
   * Les deux premiers points de D8 restent : bornes de 0 à 100, score interdit sur un refus.
 
 **Conséquences**
