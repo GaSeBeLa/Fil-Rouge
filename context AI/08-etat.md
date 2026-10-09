@@ -27,10 +27,10 @@
   ressources, 18/18 en `200`. *(au 2026-10-05)* Prix en `int`, honoraires et
   paiement en `Decimal` ; le routeur commun revalide l'entrée du `POST` et du
   `PUT` (`422` avant la base).
-- **Tests** *(au 2026-10-08)* — **193 tests**, `193 passed`, lancés dans le
-  conteneur `api` : 99 unitaires sans PostgreSQL (dont les 55 cas de
-  rémunération), 94 d'intégration sur la base de test isolée
-  `fil_rouge_test` (`docker/create_test_db.sh`).
+- **Tests** *(au 2026-10-09)* — **215 tests**, `215 passed` (après S7,
+  commit `c5e5842`), dont les 55 cas de rémunération sans PostgreSQL, et
+  l'intégration sur la base de test isolée `fil_rouge_test`
+  (`docker/create_test_db.sh`).
 - **Calcul de rémunération** *(au 2026-10-02)* — `services/remuneration.py`,
   code de référence du sujet recopié tel quel ; fonction pure, **pas encore
   branchée sur la base**.
@@ -50,9 +50,9 @@ ordonné par ce qui débloque le reste.
 
 | # | Chantier | Ce qu'il apporte | Coût estimé | Dépend de |
 |---|---|---|---|---|
-| 2 | API : auth, RGPD et règles métier | les **outils d'auth** côté back (connexion, token, rôles, droits, Argon2), l'**anonymisation** d'un compte, une **clé d'API par programme**, les règles « contrôlées par l'API », et le calcul de rémunération branché sur la base (55 cas déjà verts) ; la **grille de notes** (Q-JEF-05) et la **durée X** (Q-ACC-21), à proposer par le groupe (sortis du lot le 2026-10-07) | 💡 ~5 à 7 fiches | 1 |
+| 2 | API : auth, RGPD et règles métier | les **outils d'auth** côté back (connexion, token, rôles, droits, Argon2), l'**anonymisation** d'un compte, une **clé d'API par programme**, les règles « contrôlées par l'API », et le calcul de rémunération branché sur la base (55 cas déjà verts) ; la **grille de notes** (Q-JEF-05) et la **durée X** (Q-ACC-21), à proposer par le groupe (sortis du lot le 2026-10-07). Décidé par les ADR du 2026-10-09, **à coder** : JWT 60 min (ADR-052) ; plus de route `DELETE`, une route d'anonymisation (ADR-049) ; renouvellement (ADR-050) ; `'launched'` à la signature (ADR-044) ; versions de barème non modifiables (ADR-030, 034) ; ordre des dates du paiement (ADR-038) ; auteur sur `POST /estates` (ADR-047) ; droits sur les médias (ADR-051). Déjà codé : `needs_renovation` à deux états, budgets travaux retirés (ADR-032, migration 21) | 💡 ~5 à 7 fiches | 1 |
 | 3 | Seed de démo | des données de démo générées (faker), cohérentes avec le nouveau schéma ; le décor, pas la preuve : les tests restent la preuve | 💡 2-3 fiches | 1 |
-| 4 | Les ADR | **une fiche par ADR**, chacune relue (Q15) ; chaque ADR cite ses cartes et ses sources, puis se copie à la main sur Confluence | 💡 ~25 fiches | 1..3 |
+| 4 | Les ADR | **une fiche par ADR**, chacune relue (Q15) ; chaque ADR cite ses cartes et ses sources, puis se copie sur Confluence. ✅ **Fait le 2026-10-09** : **27 ADR** (024, 027 à 052) + **2 annexes**, réponses du groupe intégrées (S1 à S12, M), publiés sur Confluence, dossier « Proposé » ; bandeau « remplacé par » sur ADR-012, ADR-019 et l'ancien ADR-027. Reste : validation de Jeff ; S4 (acte après la fin) et D1b avec lui ; S10 après les cours d'IA ; D8 après les cours ML/data | 🟢 rédigés, à valider | 1..3 |
 | 5 | Doc d'équipe | matrice des droits, RACI, registre RGPD, rapport de tests | 💡 3-4 fiches | 1..2 |
 | 6 | Livrable 2 — modélisation (MCD/MLD) | reconstruit le modèle depuis le schéma réparé, pour `livrables/2-modelisation/` | 3–4 fiches | 1 |
 | 7 | Livrable 1 — audit des données | rapport de normalisation à partir de `normalised/rapport_anomalies.txt` | 3–4 fiches | rien |
