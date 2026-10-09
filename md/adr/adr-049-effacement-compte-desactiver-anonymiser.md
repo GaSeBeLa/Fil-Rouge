@@ -117,7 +117,7 @@ Sous-choix sur la route, laissé par le client (Q-JEF-15) :
 | Prénom, nom | `NOT NULL` : `client` (`01:197-200`), `hunter` (`01:272-275`), `real_estate_manager` (`01:250-253`) | à la fin du plus long délai qui la concerne (point 5) ; tout de suite si aucun | « Anonyme » |
 
 8. ✅ **Même règle pour un chasseur ou un manager** (déduit de Q-ACC-08, qui ne distingue pas les rôles, `reg:183` ; et de `REGISTRE-RGPD.md:29`). Un chasseur a des paiements : son nom reste 10 ans (point 5). Sa date d'embauche, `NOT NULL`, sert au calcul de l'ancienneté (`01:284`) : elle suit le paiement.
-9. 💡 **La seconde étape, à la fin d'un délai :** la même route, rappelée par l'`Admin`, à la demande. Plus tard, un traitement planifié. Proposition de l'équipe, adoptée avec la fiche.
+9. 💡 **La seconde étape, à la fin d'un délai :** la même route, rappelée par l'`Admin`, à la demande. Plus tard, un traitement planifié. Proposition de l'équipe, adoptée avec la fiche. ✅ Le traitement planifié est **reporté à une éventuelle V2** (Sébastien, Discord, 09/10/2026) : dans le MVP, l'`Admin` relance la route à la main.
 10. 💡 **Fermer DELETE sur toutes les ressources**, proposition de l'équipe, adoptée avec la fiche (ADR-027, point 4). Le registre ne le demandait que pour les comptes, « ou à justifier » (`reg:303`). Demande du code, non fait.
 
 **Justification**
