@@ -122,7 +122,7 @@ id_author            INTEGER
   * l'import laisse la colonne vide (`docker/init-v3/03_populate_estate.sql:10-11`).
 * **Tests.** Un auteur inconnu est refusé (409). Un auteur connu est accepté (201) (`API/tests/integration/test_constraints_db.py:120-128`).
 * **À coder dans l'API :** vérifier que l'auteur est un chasseur ou un manager (rapport final du chantier LOT, `2026-10-07-rapport-final-chantier-lot.html:668`). Aucun contrôle de rôle n'est codé aujourd'hui.
-* **`POST /estates` devra exiger un auteur**, déduit : la route existe (`API/src/app/routes/crud_router.py:88-93`), et l'import ne passe pas par elle. Un bien posté sans auteur se lirait comme importé.
+* **`POST /estates` devra exiger un auteur**, déduit, ✅ confirmé par le groupe le 09/10/2026 (S11) : la route existe (`API/src/app/routes/crud_router.py:88-93`), et l'import ne passe pas par elle. Un bien posté sans auteur se lirait comme importé. En base, `id_author` reste facultatif. 🟡 À revoir avec D8 : si le flux Airflow passe un jour par l'API, il faudra un compte technique ou une route d'import (remarque d'Améthyste, 09/10/2026).
 * **Supprimer un auteur est refusé** (`ON DELETE RESTRICT`). Cela va avec la règle du groupe : désactiver un compte plutôt que le supprimer (Q-ACC-08, `questions-a-trancher.md:1037`).
 * **L'import aujourd'hui.** Lancer l'import, c'est créer la base : le script `03` est joué à ce moment (`docker/docker-compose.yml:17`). Il n'écrit pas par l'API, donc aucun rôle de l'application n'a besoin du droit de créer un bien pour l'import.
 * **Référence d'un bien saisi à la main.** La base exige une référence unique et non vide (`01_…sql:561-562`). Son format n'est pas fixé. Micro-décision, hors ADR (`JOURNAL-DE-DECISIONS.md:13`).

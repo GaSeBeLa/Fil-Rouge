@@ -11,18 +11,18 @@ Légende de la colonne « Réponse » : à remplir par le groupe (Oui, Non, À r
 
 | N° | Fiche | La déduction | Pourquoi elle engage le groupe | Réponse |
 |---|---|---|---|---|
-| S1 | ADR-027 | « La direction », c'est le rôle `Admin` : il tient aussi la comptabilité et le support. | Aucun 6e rôle. Décide qui voit les paiements (D3). | |
-| S2 | ADR-027 | Plus aucune route `DELETE` sur les 20 ressources (« proposition de l'équipe, adoptée avec la fiche »). | Change l'API pour tout le monde. Code non fait. | |
-| S3 | ADR-049 | L'effacement passe par une route à part, `POST /users/{id}/anonymize`, réservée à l'`Admin`. Même règle pour un chasseur ou un manager. Ce que rien n'oblige à garder est rendu anonyme tout de suite. | Choix RGPD à défendre à l'oral. Code non fait. | |
-| S4 | ADR-050 | Le renouvellement se fait dans l'API, en une transaction : il crée le successeur et passe l'ancien à `'renewed'`. Une vente après la fin du mandat s'enregistre, et c'est le paiement qui est refusé. | Règle métier du mandat. Rien n'est codé. | |
-| S5 | ADR-041 | Une demande naît `'confirmed'`. Après un refus du vendeur, la nouvelle offre est une nouvelle ligne. | Cycle de vie de la demande et de l'offre. | |
-| S6 | ADR-044 | La demande passe à `'launched'` quand le client signe le mandat. | Déclencheur d'un statut. Pas codé. | |
-| S7 | ADR-032 | La règle de rapprochement d'ADR-012 (prix + travaux contre budget + budget de rénovation) est abandonnée : elle ne peut pas se calculer. | Retire une règle de recherche de biens. Oui (09/10/2026, Sébastien). Étendu : budgets travaux retirés du schéma, `needs_renovation` en deux états `NOT NULL DEFAULT FALSE`. |
-| S8 | ADR-034 et ADR-030 | Une version de réglages ou une grille d'honoraires déjà utilisée ne se corrige pas : on insère une nouvelle version datée. Les réglages du taux valent pour tous les chasseurs. | Règle de rémunération. Contrôle à coder dans l'API. | |
-| S9 | ADR-038 | L'ordre des dates du paiement est vérifié par un `CHECK` (annonce avant virement). La date où l'entreprise reçoit les honoraires n'est pas stockée. | Une migration. Un écart assumé au sujet. | |
-| S10 | ADR-045 | Un chasseur-IA a les droits du rôle `'Hunter'`. La réaffectation d'un chasseur reste une limite assumée (report). | Ce qu'on dit sur l'IA au jury. | |
-| S11 | ADR-046 et ADR-047 | Les 1 623 biens qui ont une lettre DPE reçoivent `energy_class_scheme = 'FR-DPE-2021'`. `POST /estates` exige un auteur. | Données et API à modifier. | |
-| S12 | ADR-051 | Le média d'une note d'avis est une adresse, pas un fichier en base. Le chasseur l'écrit, le client le lit. | Droits à ajouter à la matrice d'ADR-027. | |
+| S1 | ADR-027 | « La direction », c'est le rôle `Admin` : il tient aussi la comptabilité et le support. | Aucun 6e rôle. Décide qui voit les paiements (D3). | Oui (09/10/2026) |
+| S2 | ADR-027 | Plus aucune route `DELETE` sur les 20 ressources (« proposition de l'équipe, adoptée avec la fiche »). | Change l'API pour tout le monde. Code non fait. | Oui, à préciser (commentaire « on delete, on anonymise » contraire à M) (09/10/2026) |
+| S3 | ADR-049 | L'effacement passe par une route à part, `POST /users/{id}/anonymize`, réservée à l'`Admin`. Même règle pour un chasseur ou un manager. Ce que rien n'oblige à garder est rendu anonyme tout de suite. | Choix RGPD à défendre à l'oral. Code non fait. | Oui (09/10/2026) |
+| S4 | ADR-050 | Le renouvellement se fait dans l'API, en une transaction : il crée le successeur et passe l'ancien à `'renewed'`. Une vente après la fin du mandat s'enregistre, et c'est le paiement qui est refusé. | Règle métier du mandat. Rien n'est codé. | Oui ; la partie « acte après la fin » reste proposée, à voir avec Jeff (09/10/2026) |
+| S5 | ADR-041 | Une demande naît `'confirmed'`. Après un refus du vendeur, la nouvelle offre est une nouvelle ligne. | Cycle de vie de la demande et de l'offre. | Oui (09/10/2026) |
+| S6 | ADR-044 | La demande passe à `'launched'` quand le client signe le mandat. | Déclencheur d'un statut. Pas codé. | Oui (09/10/2026) |
+| S7 | ADR-032 | La règle de rapprochement d'ADR-012 (prix + travaux contre budget + budget de rénovation) est abandonnée : elle ne peut pas se calculer. | Retire une règle de recherche de biens. | Oui (09/10/2026, Sébastien). Étendu : budgets travaux retirés du schéma, `needs_renovation` en deux états `NOT NULL DEFAULT FALSE`. |
+| S8 | ADR-034 et ADR-030 | Une version de réglages ou une grille d'honoraires déjà utilisée ne se corrige pas : on insère une nouvelle version datée. Les réglages du taux valent pour tous les chasseurs. | Règle de rémunération. Contrôle à coder dans l'API. | Oui (09/10/2026) |
+| S9 | ADR-038 | L'ordre des dates du paiement est vérifié par un `CHECK` (annonce avant virement). La date où l'entreprise reçoit les honoraires n'est pas stockée. | Une migration. Un écart assumé au sujet. | Oui (forme du CHECK retenue) (09/10/2026) |
+| S10 | ADR-045 | Un chasseur-IA a les droits du rôle `'Hunter'`. La réaffectation d'un chasseur reste une limite assumée (report). | Ce qu'on dit sur l'IA au jury. | À revoir : droits reportés après les cours d'IA ; l'IA soumet, l'humain valide (09/10/2026) |
+| S11 | ADR-046 et ADR-047 | Les 1 623 biens qui ont une lettre DPE reçoivent `energy_class_scheme = 'FR-DPE-2021'`. `POST /estates` exige un auteur. | Données et API à modifier. | Oui ; auteur à revoir avec D8 si Airflow passe par l'API (09/10/2026) |
+| S12 | ADR-051 | Le média d'une note d'avis est une adresse, pas un fichier en base. Le chasseur l'écrit, le client le lit. | Droits à ajouter à la matrice d'ADR-027. | Oui (09/10/2026) |
 
 ## 2. Les micro-décisions techniques
 
@@ -46,6 +46,8 @@ Revue du 09/10/2026 (Sébastien a demandé de refaire la liste) :
 * ADR-047, « l'import ne passe pas par l'API » : **retiré de la liste**. Le flux Airflow (D8, accepté) peut changer ce point ; il se décide avec « où vit le flux », reporté après les cours de ML et de data science. Si le flux passe par l'API, `POST /estates` (auteur obligatoire, S11) demandera un compte technique ou une route d'import (remarque d'Améthyste).
 * ADR-049 : reformulé. L'ancienne phrase « DELETE reste un vrai DELETE » semblait contredire S2 (plus de route DELETE). Elle veut dire : on n'anonymise pas par DELETE.
 * Les 11 autres lignes ont été relues dans leurs fiches : toujours valables.
+
+**Réponse à M (09/10/2026, Sébastien) : oui**, sur la liste refaite (11 lignes).
 
 ## 3. Les points déjà prévus pour Jeff
 

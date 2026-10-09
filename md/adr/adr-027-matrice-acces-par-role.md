@@ -116,7 +116,7 @@ Sous-choix déjà tranché, le rôle en lecture seule (Q14) :
 
 1. ✅ **Cinq rôles**, ceux de la table `role` : `Admin`, `Client`, `Hunter`, `Manager`, `Reader` (`01:164`).
 2. ✅ **Deux contrôles**, dans cet ordre. Le rôle : ce type d'utilisateur a-t-il droit à ce type de donnée ? Puis l'appartenance : cette ligne est-elle la sienne ? Ils viennent après la clé d'API du programme appelant (ADR-028).
-3. ✅ **La direction, c'est le rôle `Admin`** (déduit, voir Questions tranchées). Il tient aussi la comptabilité et le support de l'exemple du sujet (déduit de même, `REGISTRE-RGPD.md:28-29`).
+3. ✅ **La direction, c'est le rôle `Admin`** (déduit, voir Questions tranchées). ✅ Confirmé par le groupe le 09/10/2026 (S1). Il tient aussi la comptabilité et le support de l'exemple du sujet (déduit de même, `REGISTRE-RGPD.md:28-29`).
 4. **Supprimer : trois cas.**
    * ✅ **Un compte ne se supprime pas.** L'`Admin` le désactive et le rend anonyme (Q-ACC-08, `reg:183`). Le détail est dans ADR-049.
    * ✅ **Une ligne citée par une autre ne se supprime pas.** La base la refuse : 38 clés en `ON DELETE RESTRICT` sur 38 (`01`, recompté le 08/10/2026).
@@ -172,7 +172,7 @@ Sous-choix déjà tranché, le rôle en lecture seule (Q14) :
 | Question | Réponse | Source |
 |---|---|---|
 | Quels rôles ? | Les 5 de la base. `Reader` : « consulter dans l'API sans modifier » | `01:164` ; `docker/init-v3/README.md:134` |
-| Qui est « la direction » ? | `Admin`, déduit. Les rôles sont fixés par un `CHECK`. La direction n'est pas le manager : Q-PAR-09 est passée « du manager » à « la direction ». Ni client, ni chasseur, ni lecteur. Et le groupe confie déjà à l'admin des tâches de direction (anonymiser, lancer l'import). Un 6e rôle demanderait de changer le `CHECK` : personne ne l'a demandé. Comptabilité et support, absents des rôles, vont à l'`Admin` de même (déduit) | `01:164` ; `reg:246`, `:251`, `:183-184` ; `REGISTRE-RGPD.md:28-29` |
+| Qui est « la direction » ? | `Admin`, déduit. ✅ Confirmé par le groupe le 09/10/2026 (S1). Les rôles sont fixés par un `CHECK`. La direction n'est pas le manager : Q-PAR-09 est passée « du manager » à « la direction ». Ni client, ni chasseur, ni lecteur. Et le groupe confie déjà à l'admin des tâches de direction (anonymiser, lancer l'import). Un 6e rôle demanderait de changer le `CHECK` : personne ne l'a demandé. Comptabilité et support, absents des rôles, vont à l'`Admin` de même (déduit) | `01:164` ; `reg:246`, `:251`, `:183-184` ; `REGISTRE-RGPD.md:28-29` |
 | Que voit le manager ? | Ses chasseurs et leurs paiements. Il enregistre la vente, affecte la demande, peut saisir un bien. Le reste de sa colonne : proposition de l'équipe (Décision, point 10) | Q-ACC-02, 03, 10 (`reg:241-242`, `:247`) ; Q8 (`reg:252`) |
 | Le client voit-il tout le catalogue ? | Non : les biens proposés pour lui | Q-ACC-05 (`reg:244`) ; P4 (`Readme.md:99`) |
 | Le chasseur voit-il son barème ? | Oui, le barème par défaut et le sien. À confirmer par Jeff à la validation de cet ADR (Q-JEF-25). Appui du sujet : « Afin que chaque chasseur puisse vérifier son montant » | Q-ACC-06 (`reg:245`) ; `F10:11` ; `01:787-788` (`id_hunter` vide = barème par défaut) |

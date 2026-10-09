@@ -193,7 +193,7 @@ Partie 3 — Rangé ailleurs, pas redécidé ici
   * L'expiration écrit une note `'mandate_expired'`, une seule par mandat (`uq_perf_mandate`, `01:1020` ; ADR-042 ; C6, `09-contraintes-a-coder.md:190`, `:217-219`). La baisse elle-même relève d'ADR-048 (ADR-050, Conséquences).
   * Le comment se choisit en codant. 💡 Piste : une opération du service des mandats passe en `'expired'` tout mandat `'active'` dont `ends_at` est passée ; une route réservée au manager l'appelle ; rejouée, elle ne change rien de plus ; un test d'intégration la couvre. La règle se range avec les règles du mandat (ADR-039).
   * Aujourd'hui, `MandateService` n'a aucune règle (`API/src/app/services/mandate_service.py:1-8`).
-* ➡️ **Reste à coder : `energy_class_scheme = 'FR-DPE-2021'`** sur les 1 623 biens qui ont une lettre (ADR-018). Déduit — demande du code, non fait. Une ligne dans `03_populate_estate.sql` pour une base neuve ; une dans `docker/migrations/v2-vers-v3/09_biens.sql` pour une base v2 ; un test.
+* ➡️ **Reste à coder : `energy_class_scheme = 'FR-DPE-2021'`** sur les 1 623 biens qui ont une lettre (ADR-018). ✅ Confirmé par le groupe le 09/10/2026 (S11). Déduit — demande du code, non fait. Une ligne dans `03_populate_estate.sql` pour une base neuve ; une dans `docker/migrations/v2-vers-v3/09_biens.sql` pour une base v2 ; un test.
 * ➡️ **Reste à écrire : le faker forké** du script du sujet, pour tester les contraintes.
 * **Soutenance**
   * « Comment migrez-vous sans perdre de données ? » (`TRAME-SOUTENANCE.md:32`). 💡 Réponse : la source reste intacte. Ses 24 utilisateurs et ses 18 mandats sont repris, le mandat 13 compris. Chaque trou est compté et documenté.

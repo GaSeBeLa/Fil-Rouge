@@ -115,10 +115,10 @@ Le message de Gabriel n'est pas recopié dans le dépôt : ses options exactes n
 | Question | Réponse | Source |
 |---|---|---|
 | Au MPD, « Accompanies » ou « Illustrates » ? Les notes disent : « Le verbe « Accompanies » est un choix de Claude : le groupe peut préférer « Illustrates ». » | « Accompanies ». Déduit : c'est le verbe de la v8 du MPD, reçue sur Discord le 08/10/2026 (15 h 04). | déduit de `2026-10-08-notes-seance-adr.md:78`, `:107-108` |
-| Le fichier audio ou vidéo va-t-il dans la base ? | Non : une adresse. Déduit : `media_url TEXT`, comme `picture.url` ; ADR-015 range ces objets dans un stockage objet. | déduit de `01:647`, `01:677` ; ADR-015, Contexte (journal Confluence) |
+| Le fichier audio ou vidéo va-t-il dans la base ? | Non : une adresse. ✅ Confirmé par le groupe le 09/10/2026 (S12). Déduit : `media_url TEXT`, comme `picture.url` ; ADR-015 range ces objets dans un stockage objet. | déduit de `01:647`, `01:677` ; ADR-015, Contexte (journal Confluence) |
 | Combien de médias par note ? | Pas de plafond. Le sujet dit « des », sans nombre ; aucun `CHECK` ne limite. | `06_…feature:14` ; `01:670-681` |
 | Des images ? | Non : audio ou vidéo seulement. Les photos d'un bien vont dans `picture`. | `06_…feature:14` ; `01:678` ; `test_constraints_db.py:399` ; `01:644-649` |
-| Qui écrit un média ? Qui le lit ? | Le chasseur l'écrit ; le client le lit. Déduit : les droits de la note s'étendent à ses médias. À écrire dans la matrice (ADR-027). | déduit de `06_…feature:14-15` (« je peux y joindre », « mise à disposition de mon client ») et de `md/securite/matrice-droits-crud-par-role.md:172`, `:185` |
+| Qui écrit un média ? Qui le lit ? | Le chasseur l'écrit ; le client le lit. ✅ Confirmé par le groupe le 09/10/2026 (S12). Déduit : les droits de la note s'étendent à ses médias. À écrire dans la matrice (ADR-027). | déduit de `06_…feature:14-15` (« je peux y joindre », « mise à disposition de mon client ») et de `md/securite/matrice-droits-crud-par-role.md:172`, `:185` |
 
 **Questions ouvertes** 🟡
 

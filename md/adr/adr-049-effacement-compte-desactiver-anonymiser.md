@@ -147,7 +147,7 @@ Sous-choix sur la route, laissé par le client (Q-JEF-15) :
 |---|---|---|
 | Supprimer ou désactiver ? | Désactiver, puis rendre anonyme | Q-ACC-08 (`reg:183`) |
 | Qui le fait ? | L'admin | Q-ACC-08 (`reg:183`) |
-| Par quoi ? | Une route à part, `POST /users/{id}/anonymize`. Tranchée par déduction : un DELETE qui anonymise contredirait ses tests. Jeff laissait le choix | Q-JEF-15 (`reg:253`, `:1170` ; `jeff.html:1701`) ; `test_users_db.py:89-92` |
+| Par quoi ? | Une route à part, `POST /users/{id}/anonymize`. Tranchée par déduction : un DELETE qui anonymise contredirait ses tests. ✅ Confirmé par le groupe le 09/10/2026 (S3). Jeff laissait le choix | Q-JEF-15 (`reg:253`, `:1170` ; `jeff.html:1701`) ; `test_users_db.py:89-92` |
 | Combien de temps pour les paiements ? | 10 ans | `REGISTRE-RGPD.md:29` ; référentiel CNIL (« obligation comptable de 10 ans ») ; groupe, « 10 ans + X » (`reg:253`) |
 | Combien vaut X, pour les mandats ? | 10 ans. Tranchée par les sources, avec une déduction : la société signe des mandats de recherche (`Readme.md:73`) ; l'arrêt de 2014 range les mandats de recherche dans le registre des mandats ; le schéma prévoit la carte professionnelle du chasseur (`01:287-290`). Limite : l'article 1 de la loi n° 70-9 n'a pas été lu. Jeff laisse X au groupe : c'est la proposition de l'équipe, adoptée avec la fiche ; confirmée par Sébastien le 2026-10-09 (Discord) | décret, article 72 ; arrêt de 2014 ; Q-JEF-15 (`jeff.html:1701`) |
 | Pourquoi pas 5 ans (article 2224) ? | Une prescription borne le temps d'agir en justice ; elle ne raccourcit pas une obligation de conserver | Code civil, article 2224 ; décret, article 72 ; référentiel CNIL, § 7 |

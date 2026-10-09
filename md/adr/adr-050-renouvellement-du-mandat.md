@@ -162,7 +162,7 @@ Pendant un renouvellement, l'exclusivité ne bloque pas : le trigger exclut le p
    * `criteria.id_previous_version` existe toujours (`01:399-400`).
    * Le sujet demande d'historiser les versions de la demande (`Readme.md:234`).
 2. **« `'renewed'` ⇒ un successeur existe » : où le garantir ?**
-   **Dans l'API, par l'opération de renouvellement elle-même.** Elle crée le successeur et passe l'ancien à `'renewed'`, dans la même transaction. Déduit, pas décidé. Rien n'est codé.
+   **Dans l'API, par l'opération de renouvellement elle-même.** Elle crée le successeur et passe l'ancien à `'renewed'`, dans la même transaction. ✅ Confirmé par le groupe le 09/10/2026 (S4). Rien n'est codé.
    * Q-MAN-03 met le contrôle du renouvellement dans `mandate_service` (`questions-a-trancher.md:830`).
    * Le bloc « Renouveler un mandat » du livrable des contraintes (`09-contraintes-a-coder.md:225-233`).
    * Le principe des règles sur plusieurs tables, dans l'API (Q-MAN-06, ADR-040).
