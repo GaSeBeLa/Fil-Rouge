@@ -138,7 +138,7 @@ Ce qui reste couvert : le chasseur prévenu (l. 10-15), le paiement programmé (
   * 💡 Forme proposée : `announced_at::date <= scheduled_for` et `announced_at <= paid_at`. `paid_at` reste libre face à `scheduled_for` : un virement peut partir avant ou après le jour prévu.
   * À faire : le `CHECK`, une migration v2 → v3, un test refusé et un accepté.
 * **Q-ACC-04** (« Qui fait avancer la facture dans ses états ? ») devient sans objet (`questions-a-trancher.md:243`).
-* **La date où l'entreprise reçoit les honoraires** (`F07:12`) n'est pas stockée. `sale` n'a que `signature_date` (`01:756`). Déduit : elle relève de l'acte notarié, hors périmètre (`questions-a-trancher.md:62`, `:722`).
+* **La date où l'entreprise reçoit les honoraires** (`F07:12`) n'est pas stockée. `sale` n'a que `signature_date` (`01:756`). Déduit : elle relève de l'acte notarié, hors périmètre (`questions-a-trancher.md:62`, `:722`). ✅ **Confirmé le 09/10/2026** (Améthyste, accord de Sébastien, Discord) : l'encaissement des honoraires par l'agence est **hors périmètre, géré par la comptabilité**. Le chasseur n'a pas besoin de cette date : il est prévenu par `payment.announced_at` (`Readme.md:132`, point 10).
 * **Notifications :** `announced_at` pourrait servir de trace « chasseur prévenu ». C'est la question Q-JEF-29, posée à Jeff le 08/10/2026, sans réponse (`md/questions/questions-pour-jeff-notifications.html:393-399`). Hors de cet ADR.
 * **Si Jeff remet la facture dans le périmètre**, cet ADR sera remplacé. La table des factures (Q-ACC-11) en serait le point de départ.
 * **Journal :** aucun ADR existant n'est remplacé. ADR-024 écarte la facture de son périmètre (ADR-024, Conséquences).
