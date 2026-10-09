@@ -106,7 +106,7 @@ Sous-choix déjà tranchés par le client :
 6. ✅ Déduit des points 1 et 4 : **deux contrôles**, qui ne se remplacent pas. La clé dit quel programme appelle. Le token dit quelle personne agit.
 7. ✅ Les rôles sont les **5 valeurs** de la table `role` : `Admin`, `Client`, `Hunter`, `Manager`, `Reader`. `Reader` consulte sans modifier.
 8. ✅ Le « qui a le droit de faire quoi » est la matrice d'ADR-027, à réécrire. Cet ADR fournit l'outil ; ADR-027 en fixe le contenu.
-9. 🟡 Le type de token et de session reste à choisir (question ouverte 1). 💡 Ce choix mérite son propre ADR, avec sa durée d'expiration (le tuto 2 le disait déjà, `tuto-2-authentification-jwt.md:105-106`).
+9. 🟡 Le type de token et de session : Sébastien a retenu un JWT de 60 minutes le 2026-10-09 (question ouverte 1), à écrire dans son propre ADR. 💡 Ce choix mérite son propre ADR, avec sa durée d'expiration (le tuto 2 le disait déjà, `tuto-2-authentification-jwt.md:105-106`).
 
 **Justification**
 
@@ -152,6 +152,7 @@ Sous-choix déjà tranchés par le client :
      * le client dit « token, session » sans choisir.
    * Pourquoi ça ne suffit pas : aucune décision du groupe n'est écrite. Discord n'a pas été relu au-delà des notes du jour.
    * 💡 Proposition : un **JWT** signé en `HS256` avec `pyjwt`, la bibliothèque de la doc FastAPI (tuto 2, §2, source consultée le 22/09/2026) ; durée **60 minutes**, sans jeton de rafraîchissement (`securite-mots-de-passe-et-droits.md:370-371`) ; l'utilisateur **relu en base à chaque appel** (tuto 2, §5, `:370-383`). Ce dernier point corrige le défaut du JWT : un compte désactivé ou rétrogradé perd ses droits tout de suite, sans attendre l'expiration. La « session » de Jeff serait alors la durée de vie du token.
+   * ✅ Choisi par Sébastien le 2026-10-09 (Discord, « option 1 ») : JWT, 60 minutes, utilisateur relu en base à chaque appel. Reste à écrire : le futur ADR (ADR-052) qui fixe le mécanisme, et l'accord du groupe.
    * 💡 Ce choix mérite **son propre ADR** (tuto 2, `:105-106` : « ce choix mérite un ADR, avec sa durée d'expiration »). ADR-028 garde le périmètre ; le futur ADR fixera le mécanisme.
 
 **Sources**
