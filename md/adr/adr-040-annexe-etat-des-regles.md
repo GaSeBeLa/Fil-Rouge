@@ -55,7 +55,7 @@
 | # | Règle | D'où elle vient | État au 08/10/2026 |
 |---|---|---|---|
 | B1 | Exclusivité : un mandat exclusif bloque tout autre mandat du client sur la période. | ADR-039 | ✅ codé, par trigger (`01:522-550`) ; testé (`test_constraints_db.py:311-353`) |
-| B2 | Un mandat `'completed'` ou `'lost'` libère le client tout de suite. Tranchée par déduction — confirmée par Sébastien le 2026-10-09 (Discord). | ADR-039, Décision 5 | ❌ pas codé : le trigger n'ignore que `'canceled'` (`01:526`, `:533`). À changer dans le trigger, pas dans l'API, si le groupe confirme. |
+| B2 | Un mandat `'completed'` ou `'lost'` libère le client tout de suite. Tranchée par déduction — confirmée par Sébastien le 2026-10-09 (Discord). | ADR-039, Décision 5 | ✅ codé le 2026-10-09 : le trigger ignore `'canceled'`, `'completed'` et `'lost'` (migration 19, 2 tests). |
 | B3 | `'renewed'` ⇒ un successeur existe. | ADR-050 | ❌ pas codé : `PUT /mandates/{id}` accepte `'renewed'` sans successeur |
 | B4 | Le délai se compte depuis la première signature : remonter `id_mandate_parent`. | ADR-050 ; Q-MAN-04 | ❌ pas codé |
 | B5 | Les honoraires ne changent plus (C3). ADR-033 l'étend au prix, à la date de l'acte, à la grille et à l'origine de la vente. | Q-REM-12 ; `09-contraintes-a-coder.md:110-117` ; ADR-033, Décision 5 | ❌ pas codé : `API/src/app/services/sale_service.py` n'a que le CRUD |

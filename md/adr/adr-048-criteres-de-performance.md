@@ -142,8 +142,8 @@ Sur le dénominateur du taux (sous-choix de l'option 3) :
 | Quelle fenêtre ? | Douze mois glissants avant l'acte | RCR:139 ; Q-PAR-04 (`reg:760`) |
 | Pourquoi le taux fait-il baisser la note ? | Déduit : avec S₄, un mandat de plus ajoute des points. Avec le taux, un mandat sans vente grossit le dénominateur seul | RCR:146, `:160` ; `jeff.html:994` ; F10:298-300 |
 | Où le sujet place-t-il la baisse ? | À l'échéance, quand le chasseur est invité à renouveler. D'où le dénominateur à la première issue | F07:37-41 ; `Readme.md:135` ; F10:295-300 |
-| Un mandat annulé après signature compte-t-il ? | Oui : il a été signé, et Q-REM-09 compte les mandats signés. Un mandat jamais signé ne compte pas. Tranchée par déduction — à confirmer par le groupe. Jeff ne l'a pas tranché : il a validé une position qui le laissait ouvert | Q-REM-09 (`reg:640-646`) ; `jeff.html:1089`, `:1091`, `:1092`, `:1096` |
-| Que vaut la note hors d'une vente ? | Départ : 50. À l'échéance : les trois notes de vente du dernier paiement, ou 50 sans paiement ; les deux critères d'activité recomptés. Tranchée par déduction — à confirmer par le groupe | RCR:139, `:143-147` (portée), `:145-146`, `:213` ; `01:928-931`, `:1007-1008` |
+| Un mandat annulé après signature compte-t-il ? | Oui : il a été signé, et Q-REM-09 compte les mandats signés. Un mandat jamais signé ne compte pas. Tranchée par déduction ; confirmée par Sébastien le 2026-10-09 (Discord). Jeff ne l'a pas tranché : il a validé une position qui le laissait ouvert | Q-REM-09 (`reg:640-646`) ; `jeff.html:1089`, `:1091`, `:1092`, `:1096` |
+| Que vaut la note hors d'une vente ? | Départ : 50. À l'échéance : les trois notes de vente du dernier paiement, ou 50 sans paiement ; les deux critères d'activité recomptés. Tranchée par déduction ; confirmée par Sébastien le 2026-10-09 (Discord) | RCR:139, `:143-147` (portée), `:145-146`, `:213` ; `01:928-931`, `:1007-1008` |
 
 **Questions ouvertes** 🟡
 

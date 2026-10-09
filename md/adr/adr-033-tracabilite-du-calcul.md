@@ -60,7 +60,7 @@
   * l'équipe projet, le 02/10/2026 : cartes Q-REM-03 (« Ajouter payment.performance_score »), Q-REM-04 (« Une colonne JSONB calculation_details »), Q-REM-11 (« L'API seule, avec un test d'intégration ») et Q-REM-12 (« Appliquer C3 dans sale_service ») ;
   * l'équipe projet, le 08/10/2026 : décision G1 (le paiement pointe sa version de réglages) ;
   * le client, Jeff, à l'entretien du 07/10/2026 : confirmé (Q-JEF-20) ;
-  * 🟡 la Décision 3 attend le oui du groupe : elle revient sur le 3e point de la carte D8 (lot 5, 07/10/2026).
+  * ✅ la Décision 3 est confirmée par Sébastien le 2026-10-09 (Discord) : elle revient sur le 3e point de la carte D8 (lot 5, 07/10/2026).
 * **Complète :** ADR-024 (un refus ne porte aucun terme du calcul) et ADR-030 (la vente pointe sa grille d'honoraires)
 
 Abréviations : RCR = `documents utiles/REGLES-CALCUL-REMUNERATION.md` ; F10 = `user-stories/10_calcul_remuneration_chasseur.feature` (StarterPack) ; `01` = `docker/init-v3/01_create_fil_rouge_immobilier.sql`.
@@ -162,7 +162,7 @@ E. Exiger le score et le détail hors refus ? (carte D8, lot 5)
 
 * **Schéma :** fait à LOT5 pour le score et le détail (`01:923-931` ; migration `docker/migrations/v2-vers-v3/05_paiement.sql:66-72`). G1 : `01:936-942` et `chk_refused` (l. 975, 983), migration `15_paiement-reglages-taux.sql`, commit `7fc63ed`.
 * **Tests :** un refus avec un score, 409 (`API/tests/integration/test_constraints_db.py:565-568`) ; G1, trois tests (l. 571-589) ; le détail se relit tel quel (l. 603-624).
-* **Décision 3, si le groupe la confirme — déduit, demande du code, non fait :** exiger `performance_score` et `calculation_details` hors refus, et `calculation_details` vide sur un refus, dans `chk_refused` (`01:965-983`). Une migration v2 → v3 de plus. `payment_payload` des tests envoie un score, pas de détail (l. 507-531) : à compléter.
+* **Décision 3, confirmée par Sébastien le 2026-10-09 (Discord) — codée le 2026-10-09 (migration 20) :** exiger `performance_score` et `calculation_details` hors refus, et `calculation_details` vide sur un refus, dans `chk_refused` (`01:965-983`). Une migration v2 → v3 de plus. `payment_payload` des tests envoie un score, pas de détail (l. 507-531) : à compléter.
 * **Contenu du détail — déduit, demande du code, non fait.** Une micro-décision (`JOURNAL-DE-DECISIONS.md:13`), réglée ainsi :
   * Le détail garde les 5 notes, et chaque entrée du type `Vente` que rien d'autre ne fige. Le sujet : « Le type `Vente` est la liste minimale des données d'entrée du calcul » (`RCR:766`) ; « tous les termes du calcul » (`RCR:292`).
   * Déjà figés ailleurs : le chasseur (`payment.id_hunter`) ; le prix, la date de l'acte et l'origine (sur la vente, point 5).
@@ -190,7 +190,7 @@ E. Exiger le score et le détail hors refus ? (carte D8, lot 5)
 
 **Questions ouvertes** 🟡
 
-Aucune. La Décision 3 attend le oui du groupe (voir Décideurs). Le contenu du détail est une micro-décision, réglée dans les Conséquences.
+Aucune. La Décision 3 est confirmée par Sébastien le 2026-10-09 (Discord) (voir Décideurs). Le contenu du détail est une micro-décision, réglée dans les Conséquences.
 
 **Sources**
 

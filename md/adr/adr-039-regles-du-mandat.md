@@ -114,7 +114,7 @@ Une sous-décision par bloc. L'option retenue est marquée **retenue** ; les aut
 4. **Annulation.**
    * `'canceled'` est permis sans date de signature (`chk_status_signature`, `01:474-478`).
    * Un mandat `'canceled'` libère le client tout de suite : il ne bloque personne, et rien ne le bloque (`01:509-510`, `:525-527`, `:533`).
-5. **Mandat clos.** Un mandat `'completed'` ou `'lost'` libère lui aussi le client tout de suite. Tranchée par déduction — confirmée par Sébastien le 2026-10-09 (Discord) (Questions tranchées, n° 1). ⚠️ **Pas encore dans le code** : aujourd'hui, le trigger n'ignore que `'canceled'` (`01:526`, `:533`).
+5. **Mandat clos.** Un mandat `'completed'` ou `'lost'` libère lui aussi le client tout de suite. Tranchée par déduction — confirmée par Sébastien le 2026-10-09 (Discord) (Questions tranchées, n° 1). ✅ Dans le code depuis le 2026-10-09 : le trigger ignore `'canceled'`, `'completed'` et `'lost'` (migration 19).
    * `'expired'` et `'renewed'` ne posent pas la question : ils viennent à l'échéance (`00_…feature:40`), quand la période est finie (déduit). La liste des statuts : `01:446-449`.
 
 **Justification**
@@ -145,7 +145,7 @@ Une sous-décision par bloc. L'option retenue est marquée **retenue** ; les aut
 **Questions tranchées par les sources**
 
 1. **Un mandat clos avant sa fin (`'completed'` ou `'lost'`) bloque-t-il encore le client jusqu'à `ends_at` ?**
-   **Non : il le libère tout de suite, comme l'annulation. Tranchée par déduction — confirmée par Sébastien le 2026-10-09 (Discord).** Elle demande un changement de code (trigger, migration, tests : voir Conséquences).
+   **Non : il le libère tout de suite, comme l'annulation. Tranchée par déduction — confirmée par Sébastien le 2026-10-09 (Discord).** Elle est dans le code depuis le 2026-10-09 (trigger, migration 19, 2 tests).
    * Le client a déjà lu « pendant la durée du mandat » comme « tant que le mandat est en vigueur » : un mandat annulé libère tout de suite (Jeff, Q-JEF-06, `md/questions/2026-10-07-questions-pour-jeff.html:345`). Un mandat clos n'est plus en vigueur non plus.
    * L'exclusivité sert la rémunération du chasseur : « Un mandat exclusif garantit la rémunération même en cas de découverte autonome » (`00_…feature:15`). Un mandat clos n'a plus rien à protéger. Un mandat a au plus une vente (`sale.id_mandate UNIQUE`, `01:763`). Sur un mandat `'lost'`, personne n'est payé (Q-JEF-03).
    * L'achat clôt la relation (`03_particulier_offre_et_signature.feature:8`). Le sujet prévoit ensuite des « offres régulières de services » (`03_…feature:43` ; `Readme.md:104`). Bloquer le client jusqu'à `ends_at` irait contre.

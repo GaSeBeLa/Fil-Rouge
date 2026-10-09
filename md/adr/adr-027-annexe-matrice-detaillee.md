@@ -47,7 +47,7 @@ Abréviations : `01` = `docker/init-v3/01_create_fil_rouge_immobilier.sql` ; `re
 | `hunter` | **R** son chasseur ✅ P2 | **R** le sien · **U** ses coordonnées ✅ déduit | **R** ses chasseurs ✅ Q-ACC-02 | **C R U** 💡 · rendre anonyme ✅ déduit de Q-ACC-08 (ADR-049) |
 | `real_estate_manager` | — 💡 | **R** son manager 💡 | **R** le sien · **U** ses coordonnées ✅ déduit | **C R U** 💡 · rendre anonyme ✅ déduit de Q-ACC-08 (ADR-049) |
 
-« ✅ déduit » sur son propre compte : chacun consulte et corrige ses données (`REGISTRE-RGPD.md:38`) ; le rôle et l'activation, seul l'`Admin` les change (Q-ACC-08 ; moindre privilège, `docker/init-v3/README.md:138`). Tranchée par déduction — à confirmer par le groupe.
+« ✅ déduit » sur son propre compte : chacun consulte et corrige ses données (`REGISTRE-RGPD.md:38`) ; le rôle et l'activation, seul l'`Admin` les change (Q-ACC-08 ; moindre privilège, `docker/init-v3/README.md:138`). Tranchée par déduction ; confirmée par Sébastien le 2026-10-09 (Discord).
 
 ## 2. La demande et le mandat
 
