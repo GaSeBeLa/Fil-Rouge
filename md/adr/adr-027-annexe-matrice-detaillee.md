@@ -1,8 +1,9 @@
 # ADR-027 — annexe : la matrice détaillée, état au 08/10/2026
 
-> 📋 **Annexe d'un brouillon, pas un document publié.** Elle détaille la
-> Décision d'ADR-027 réécrit (`md/adr/adr-027-matrice-acces-par-role.md`),
-> case par case. Rien ne s'écrit sur Confluence depuis ce fichier.
+> 📋 **Annexe d'ADR-027, pas un ADR.** Elle détaille la Décision d'ADR-027
+> réécrit (`md/adr/adr-027-matrice-acces-par-role.md`), case par case.
+> Publiée sur Confluence le 09/10/2026, dossier « Proposé », comme sa fiche ;
+> ce fichier reste la source.
 >
 > ➡️ **Sa place finale** est `md/securite/matrice-droits-crud-par-role.md`,
 > datée du 02/10 et périmée : la remplacer par ce contenu est une tâche pour
