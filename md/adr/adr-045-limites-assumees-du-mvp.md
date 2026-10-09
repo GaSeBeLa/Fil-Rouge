@@ -60,7 +60,7 @@
   * l'équipe projet, réponses du groupe : Q-SCH-07 « Ne pas créer, hors MVP », Q-SCH-14 « Accepter comme limite », Q-MAN-08 « Reporter » ;
   * cartes du PO, réponse du groupe « Reporter au parcours IA » : Q-SCH-08, Q-ACC-14. Le PO, c'est Jeff (Q-PRO-01) : il les confirme à la séance de validation des ADR (Q-JEF-25) ;
   * acte notarié : annoncé par Sébastien le 02/10/2026. Décidé par Jeff, précisé par Sébastien le 2026-10-09 (Discord) ; le registre ne le note pas encore (`:62`) ;
-  * limite 7 : 💡 proposée par cet ADR, le 08/10/2026, puis réécrite le 2026-10-09 : Sébastien dit que le groupe compte importer les annonces par un flux Airflow. Toujours proposée, pas acceptée : le groupe la prend en acceptant l'ADR.
+  * limite 7 : 💡 proposée par cet ADR, le 08/10/2026, puis réécrite le 2026-10-09 : Sébastien dit que le groupe compte importer les annonces par un flux Airflow. Acceptée par le groupe le 2026-10-09 (Sébastien, Discord) ; l'ADR-045 dans son ensemble reste « proposé ».
 * **Remplace :** aucun ADR.
 * **Complète :** ADR-029, Décision 5 (pas d'historique des managers) : la limite est décidée là-bas ; ici, on dit ce qu'on en dit au jury.
 * **Voir aussi :** ADR-044 (seul le client signe le mandat : limite dite là-bas) ; ADR-038 (pas de facture : écart au sujet) ; ADR-047 (biens saisis à la main).
@@ -102,7 +102,7 @@ B. Chaque limite (options des cartes)
 | 4. Historique des managers (Q-SCH-14) | « Historiser » : une table de plus | « Accepter comme limite » |
 | 5. Refus d'une demande (Q-MAN-08) | une table `search_request_refusal` (demande, chasseur, date) : rien à brancher tant que l'affectation n'était pas décidée | « Reporter » |
 | 6. Droits des chasseurs-IA (Q-ACC-14) | « Maintenant », dans la matrice : « une règle écrite sans savoir ce que fait un chasseur-IA » | « Reporter au parcours IA » |
-| 7. Import des annonces | 💡 un seul chargement, sans dédoublonnage : écarté le 2026-10-09, le groupe prévoit un flux | 💡 un import par flux orchestré (Airflow), tri, mise en forme et dédoublonnage en map/reduce. Proposé par Sébastien le 2026-10-09 ; pas encore accepté |
+| 7. Import des annonces | 💡 un seul chargement, sans dédoublonnage : écarté le 2026-10-09, le groupe prévoit un flux | 💡 un import par flux orchestré (Airflow), tri, mise en forme et dédoublonnage en map/reduce. Proposé par Sébastien et accepté par le groupe le 2026-10-09 |
 
 Sources des options : fiches de `md/questions/questions-a-trancher.html`, l. 1204-1220 (Q-SCH-07), 1223-1238 (Q-SCH-08), 1336-1351 (Q-SCH-14), 1035-1058 (Q-MAN-08), 1843-1867 (Q-ACC-14) ; ADR-047 pour la ligne 7.
 
@@ -161,7 +161,7 @@ Pour chacune : ce qu'on ne fait pas ; ce qui se passe à la place, y compris « 
    * ✅ Pourquoi : le sujet dit peu de ce qu'il fera. Deux missions : « épauler les chasseurs humains », travailler dans les zones sans chasseur (`Readme.md:166-169`). Les chasseurs-IA doivent pouvoir « opérer seuls » (`09_futur_chasseur_assistance_ia.feature:6-7`) : la lecture seule, que le sujet veut pour une IA branchée sur la base (`Readme.md:282`), ne leur suffira pas.
    * ✅ Renvoi : la Phase 4, avec le « schéma du programme d'IA » (`Readme.md:257`).
    * 💡 Au jury, à la question « Comment évitez-vous qu'une IA branchée sur la base cause des dégâts ? » (`TRAME-SOUTENANCE.md:34`) : « Une IA qui lit la base passe par le rôle en lecture seule `fil_rouge_reader`. Un chasseur-IA doit agir : ses droits sont reportés au parcours IA. Nous ne les fixons pas sans savoir ce qu'il fera. » Répondre « reporté, et pourquoi », pas « défini » (fiche Q-ACC-14).
-7. **💡 Les annonces : un import par flux orchestré, avec dédoublonnage** (ADR-047). Proposée le 2026-10-09 par Sébastien (Discord), pas encore acceptée.
+7. **💡 Les annonces : un import par flux orchestré, avec dédoublonnage** (ADR-047). Proposée par Sébastien, acceptée par le groupe le 2026-10-09 (Discord).
    * 💡 On fait : un flux de données orchestré par Airflow importe les annonces ; des étapes map/reduce font le tri, la mise en forme et le dédoublonnage. Le sujet ne l'exige pas (« Airflow » n'y apparaît pas) : c'est un choix du groupe, que `outils/Readme.md` rend plausible (flux volontairement hétérogène, de plusieurs sources).
    * 🟡 À préciser avant d'accepter : où vit ce flux (dans le dépôt, quel dossier), et ce qu'il fait d'un bien saisi à la main qui arriverait aussi par l'import (`estate.reference` est `UNIQUE`, `01:561`).
    * ✅ État actuel du dépôt : les 2 556 biens sont chargés une fois, à la création de la base (`docker/init-v3/03_populate_estate.sql`). Un nouveau bien entre à la main, par un chasseur ou un manager (ADR-047). Recharger un autre CSV n'est pas outillé : `03` est une copie retouchée, et « le script de retouche n'est pas dans le dépôt » (`questions-a-trancher.md:180`). Le flux ci-dessus reste à écrire.
@@ -173,7 +173,7 @@ Pour chacune : ce qu'on ne fait pas ; ce qui se passe à la place, y compris « 
 
 **Justification**
 
-* Six limites viennent d'une décision datée : cinq cartes tranchées par le groupe, et l'annonce du 02/10/2026 pour l'acte notarié (voir Décideurs). La septième est 💡 proposée par cet ADR.
+* Six limites viennent d'une décision datée : cinq cartes tranchées par le groupe, et l'annonce du 02/10/2026 pour l'acte notarié (voir Décideurs). La septième, proposée par cet ADR, a été réécrite et acceptée par le groupe le 2026-10-09.
 * La forme suit le sujet : chaque exclusion dit ce qui se passe « si ça arrive quand même » (`Gherkin.md:722`).
 * Aucune n'est un oubli : chacune a sa raison et son renvoi. Pour l'acte notarié, le renvoi est « hors SI ».
 * Le notaire est le cas le plus net : le sujet lui-même le sort du calcul (`REGLES-CALCUL-REMUNERATION.md:130`).

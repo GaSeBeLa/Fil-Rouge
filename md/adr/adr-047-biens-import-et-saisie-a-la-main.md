@@ -11,7 +11,7 @@
 > sujet.** Relu le 08/10/2026 par deux relecteurs (sources ; oral et jury) et un
 > arbitre. Les passages marqués « déduit » sont une lecture des sources, pas une
 > décision du groupe. Aucune question ne reste ouverte : l'import régulier des
-> annonces est devenu la limite 7 d'ADR-045 (💡 proposée ; réécrite le 2026-10-09 : le groupe prévoit un flux Airflow).
+> annonces est devenu la limite 7 d'ADR-045 (réécrite et acceptée par le groupe le 2026-10-09 : un flux Airflow).
 >
 > 🗂️ **Sur la page d'ADR-027 (Confluence, « proposé », 22/09/2026)** : sa
 > question n° 8, « L'import des biens tourne sous quel compte ? », avec la
@@ -126,7 +126,7 @@ id_author            INTEGER
 * **Supprimer un auteur est refusé** (`ON DELETE RESTRICT`). Cela va avec la règle du groupe : désactiver un compte plutôt que le supprimer (Q-ACC-08, `questions-a-trancher.md:1037`).
 * **L'import aujourd'hui.** Lancer l'import, c'est créer la base : le script `03` est joué à ce moment (`docker/docker-compose.yml:17`). Il n'écrit pas par l'API, donc aucun rôle de l'application n'a besoin du droit de créer un bien pour l'import.
 * **Référence d'un bien saisi à la main.** La base exige une référence unique et non vide (`01_…sql:561-562`). Son format n'est pas fixé. Micro-décision, hors ADR (`JOURNAL-DE-DECISIONS.md:13`).
-* **Import par flux orchestré, avec dédoublonnage** (ADR-045, limite 7, 💡 proposée le 2026-10-09, pas encore acceptée). Aujourd'hui le dépôt ne charge les annonces qu'une fois (`03`) ; le flux reste à écrire. Un bien saisi à la main pourrait aussi arriver par l'import : à régler. Le sujet range le dédoublonnage dans le futur parcours IA (`Readme.md:193`).
+* **Import par flux orchestré, avec dédoublonnage** (ADR-045, limite 7, proposée puis acceptée par le groupe le 2026-10-09). Aujourd'hui le dépôt ne charge les annonces qu'une fois (`03`) ; le flux reste à écrire. Un bien saisi à la main pourrait aussi arriver par l'import : à régler. Le sujet range le dédoublonnage dans le futur parcours IA (`Readme.md:193`).
 
 **Questions tranchées par les sources**
 
@@ -140,7 +140,7 @@ id_author            INTEGER
    Non, déduit : l'import est un script SQL joué sous `POSTGRES_USER` (`docker/docker-compose.yml:8`, `:17`), pas un appel à l'API.
 
 5. **Un import régulier des nouvelles annonces entre-t-il dans le projet (Airflow) ?**
-   Oui, 💡 proposé le 2026-10-09 par Sébastien (Discord) : un flux Airflow, avec tri, mise en forme et dédoublonnage en map/reduce. C'est la limite 7 d'ADR-045, pas encore acceptée (le groupe la prend en acceptant cet ADR-045). La version du 08/10 disait non, en lisant la note du groupe comme conditionnelle : « si non les biens vont être importer via un script dans Airflow » (Q-ACC-09) ; Jeff avait dit oui à la saisie à la main. Le sujet n'impose aucun outil : « Airflow » n'y apparaît pas, c'est un choix du groupe.
+   Oui, accepté par le groupe le 2026-10-09 (proposé par Sébastien, Discord) : un flux Airflow, avec tri, mise en forme et dédoublonnage en map/reduce. C'est la limite 7 d'ADR-045, acceptée par le groupe le 2026-10-09 ; l'ADR-045 dans son ensemble reste « proposé ». La version du 08/10 disait non, en lisant la note du groupe comme conditionnelle : « si non les biens vont être importer via un script dans Airflow » (Q-ACC-09) ; Jeff avait dit oui à la saisie à la main. Le sujet n'impose aucun outil : « Airflow » n'y apparaît pas, c'est un choix du groupe.
 
 **Questions ouvertes** 🟡
 
@@ -154,7 +154,7 @@ Aucune.
 | Annonces factices, « plusieurs sources différentes » | `outils/Readme.md:6` ; `Readme.md:46` (StarterPack) |
 | Dédoublonnage dans le futur parcours IA | `Readme.md:193` (StarterPack) |
 | « Airflow » absent du sujet | recherche du 08/10/2026 dans le StarterPack : 0 fichier |
-| Import par flux Airflow, dédoublonnage : limite 7 | ADR-045 (proposé) ; message de Sébastien, Discord, 2026-10-09 |
+| Import par flux Airflow, dédoublonnage : limite 7 | ADR-045 (limite 7 acceptée le 2026-10-09) ; message de Sébastien, Discord, 2026-10-09 |
 | `03` copie retouchée ; le script de retouche n'est pas dans le dépôt | `md/questions/questions-a-trancher.md:180` |
 | Jeff, Q-JEF-24 : saisie à la main permise ; choix du groupe Q8 : chasseur et manager | `md/questions/2026-10-07-questions-pour-jeff.html:1682` ; `md/questions/questions-a-trancher.md:252`, `:1175` |
 | Options de Q8 | `md/journal/2026-10-07-plan-action.html:447-449` |
