@@ -185,7 +185,7 @@ Sous-choix déjà tranché, le rôle en lecture seule (Q14) :
 | L'import des biens tourne sous quel compte ? | Lancé par l'admin (ADR-047), joué sous le compte PostgreSQL du conteneur, pas par l'API. Le bien importé n'a pas d'auteur. Saisi à la main : le chasseur ou le manager, auteur noté | Q-ACC-09 (`reg:184`) ; ADR-047 ; `01:624-629` ; Q8 (`reg:252`) |
 | La priorité du client (D6) ? | Une colonne de 1 à 5 sur le bien proposé, donnée par le client | `01:706-709` ; H6 (`Readme.md:128`, « commenté et priorisé ») |
 | Désactiver plutôt que supprimer ? | Oui, pour un compte. Les autres lignes : Décision, point 4 | Q-ACC-08 (`reg:183`) ; ADR-049 |
-| Son propre compte ? | Chacun lit et corrige le sien. Le rôle et l'activation, seul l'`Admin` les change. Tranchée par déduction — à confirmer par le groupe | `REGISTRE-RGPD.md:38` (« consulter, corriger ») ; Q-ACC-08 ; moindre privilège, `docker/init-v3/README.md:138` |
+| Son propre compte ? | Chacun lit et corrige le sien. Le rôle et l'activation, seul l'`Admin` les change. Tranchée par déduction ; confirmée par Sébastien le 2026-10-09 (Discord) | `REGISTRE-RGPD.md:38` (« consulter, corriger ») ; Q-ACC-08 ; moindre privilège, `docker/init-v3/README.md:138` |
 | Un rôle en lecture seule ? | Les deux niveaux, oui de Jeff, posé à LOT12 | `reg:264` ; `docker/init-v3/README.md:125-153` |
 | Qui crée un barème propre à un chasseur ? | Pas ici : dans la RACI | `reg:251`, `:427` ; RCR:329 |
 
