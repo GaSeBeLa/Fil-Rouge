@@ -1,0 +1,1231 @@
+<title>ADR Fil-Rouge du 8 octobre</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    --fond:#f3e8d4; --carte:#faf1e2; --trait:#dcd0b7; --texte:#50433b; --doux:#6e6151;
+    --accent:#2f5d8c; --ok:#2c6e48; --ok-fond:#e4f0e2; --warn:#8a5a0c; --warn-fond:#fbe9cc;
+    --ko:#9c3431; --ko-fond:#f8e0da; --q-fond:#fbe4d2;
+    /* le bord d'un bouton ou d'une option, à 3:1 sur les trois fonds : un cran plus foncé que celui de
+       vlp.css (#92846b), qui tombe à 2,99:1 sur --q-fond (calculé le 2026-10-07, formule WCAG) */
+    --bord-bouton:#908269;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--fond); color:var(--texte); font-family:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif; font-size:18px; letter-spacing:.05em; line-height:1.7; padding-inline:16px; text-align:left; }
+  .page { max-width:46rem; margin:0 auto; padding-block:2.5rem 4rem; display:flex; flex-direction:column; gap:2.6rem; }
+  h1,h2,h3 { margin:0; text-wrap:balance; line-height:1.25; }
+  h1 { font-size:2.1rem; }
+  h2 { font-size:1.35rem; color:var(--accent); }
+  h3 { font-size:1.08rem; }
+  p { margin:0; }
+  ul { margin:0; padding-left:1.2rem; display:flex; flex-direction:column; gap:.35rem; }
+  .mono, .fil time, td.n, textarea { letter-spacing:normal; }
+  .mono { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:max(.85em, 15px); font-variant-numeric:tabular-nums; }
+  section { display:flex; flex-direction:column; gap:1rem; }
+  .sous { color:var(--doux); }
+  .jauge { align-self:flex-start; display:inline-flex; gap:.5rem; align-items:center; padding:.35rem .8rem; border-radius:6px; background:var(--ok-fond); color:var(--ok); font-weight:700; }
+  .jauge.moyen { background:var(--warn-fond); color:var(--warn); }
+  .jauge.ko { background:var(--ko-fond); color:var(--ko); }
+  /* un gros chiffre ne se coupe jamais : sa tuile s'élargit à lui, et passe à la ligne s'il le faut */
+  .chiffres { display:flex; flex-wrap:wrap; gap:.75rem; }
+  .chiffre { flex:1 1 12rem; background:var(--carte); border:1px solid var(--trait); border-radius:8px; padding:.8rem 1rem; display:flex; flex-direction:column; gap:.1rem; }
+  .chiffre b { font-size:1.6rem; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .insecable { white-space:nowrap; }
+  .chiffre span { color:var(--doux); font-size:1rem; line-height:1.4; }
+  .decision { background:var(--carte); border:1px solid var(--trait); border-radius:8px; padding:1rem 1.1rem; display:flex; flex-direction:column; gap:.6rem; }
+  .decision .tete { display:flex; flex-wrap:wrap; gap:.5rem; align-items:baseline; justify-content:space-between; }
+  .puce { font-size:.9375rem; font-weight:700; padding:.1rem .5rem; border-radius:4px; white-space:nowrap; }
+  .puce.faible { background:var(--ok-fond); color:var(--ok); }
+  .puce.moyen { background:var(--warn-fond); color:var(--warn); }
+  .grille { display:grid; grid-template-columns:9rem 1fr; gap:.25rem .9rem; margin:0; }
+  .grille dt { color:var(--doux); font-size:1rem; }
+  .grille dd { margin:0; }
+  .choix { display:flex; flex-wrap:wrap; gap:.5rem; padding-top:.3rem; border-top:1px dashed var(--trait); }
+  .choix label { display:inline-flex; align-items:center; gap:.5rem; padding:.3rem .75rem; border:2px solid var(--bord-bouton); border-radius:999px; cursor:pointer; font-size:.95rem; background:var(--carte); }
+  .choix.options { flex-direction:column; }
+  .choix.options label { border-radius:8px; align-items:flex-start; }
+  .choix.options label > span > b:first-child { display:block; }
+  .choix input { accent-color:var(--accent); width:22px; height:22px; margin:0; flex:none; }
+  .choix.options input { margin-top:.15rem; }
+  .choix label:has(input:checked) { border-color:var(--accent); box-shadow:inset 0 0 0 1px var(--accent); background:var(--q-fond); }
+  .choix:not(.options) label:has(input:checked)::after,
+  .choix.options label:has(input:checked) > span > b:first-child::after { content:"✓"; margin-left:.35rem; color:var(--accent); font-weight:700; }
+  /* l'option conseillée (le script lit « recommandé » entre parenthèses dans son libellé) : une étiquette, un bord
+     en pointillé */
+  .choix label.conseil { border-style:dashed; border-color:var(--accent); }
+  .choix label.conseil:has(input:checked) { border-style:solid; }
+  .etiquette-conseil { display:inline-block; margin-left:.4rem; padding:0 .45rem; border-radius:4px; background:var(--accent); color:var(--carte); font-size:.9375rem; font-weight:700; white-space:nowrap; }
+  .choix label:focus-within { outline:2px solid var(--accent); outline-offset:2px; }
+  .question { background:var(--q-fond); border-radius:8px; padding:1rem 1.1rem; display:flex; flex-direction:column; gap:.6rem; }
+  .alerte { background:var(--warn-fond); border-radius:8px; padding:1rem 1.1rem; display:flex; flex-direction:column; gap:.5rem; }
+  .erreur { background:var(--ko-fond); border-radius:8px; padding:1rem 1.1rem; display:flex; flex-direction:column; gap:.5rem; }
+  .fil { list-style:none; padding:0; gap:0; }
+  .fil li { display:grid; grid-template-columns:3.6rem 1fr; gap:.8rem; padding:.55rem 0; border-top:1px solid var(--trait); }
+  .fil time { font-family:"IBM Plex Mono",monospace; color:var(--doux); font-size:.9375rem; padding-top:.15rem; }
+  .tableau { overflow-x:auto; }
+  table { border-collapse:collapse; width:100%; font-size:.95rem; }
+  th { text-align:left; color:var(--doux); font-weight:700; font-size:.9375rem; padding:.4rem .7rem .4rem 0; border-bottom:2px solid var(--trait); }
+  td { padding:.6rem .7rem .6rem 0; border-bottom:1px solid var(--trait); vertical-align:top; }
+  td.n { font-family:"IBM Plex Mono",monospace; white-space:nowrap; }
+  a { color:var(--accent); }
+  button { font:inherit; font-weight:700; color:var(--carte); background:var(--accent); border:0; border-radius:6px; padding:.6rem 1.1rem; cursor:pointer; }
+  button:focus-visible { outline:2px solid var(--texte); outline-offset:2px; }
+  textarea { width:100%; min-height:8rem; font-family:"IBM Plex Mono",monospace; font-size:.9375rem; background:var(--carte); color:var(--texte); border:1px solid var(--trait); border-radius:6px; padding:.6rem; }
+  .ligne { display:flex; flex-wrap:wrap; gap:.8rem; align-items:center; }
+  .note summary, .explique summary { display:inline-block; list-style:none; cursor:pointer; color:var(--accent); font-weight:700; font-size:.95rem; padding:.2rem .7rem; border:1px dashed var(--trait); border-radius:6px; }
+  .note summary::-webkit-details-marker, .explique summary::-webkit-details-marker { display:none; }
+  .note summary:focus-visible, .explique summary:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .note textarea { display:block; margin-top:.5rem; min-height:4.5rem; font-family:inherit; font-size:.95rem; line-height:1.5; }
+  .explique > p, .explique > .explication, .explique > .ligne { margin-top:.5rem; }
+  .explique > p:empty { display:none; }
+  .explique > p.niveau { margin-top:.25rem; font-size:.9375rem; }
+  .explication { white-space:pre-line; background:var(--fond); border:1px solid var(--trait); border-radius:6px; padding:.6rem .8rem; }
+  .clair { background:var(--carte); border:1px solid var(--trait); border-radius:8px; padding:1rem 1.1rem; display:flex; flex-direction:column; gap:.9rem; }
+  .grille dt.net { color:var(--texte); font-weight:700; }
+  .grille dt.plus { color:var(--ok); font-weight:700; }
+  .grille dt.moins { color:var(--ko); font-weight:700; }
+  .technique { border-top:1px dashed var(--trait); padding-top:.5rem; }
+  .technique summary { cursor:pointer; color:var(--doux); font-weight:700; font-size:.95rem; }
+  .technique summary:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .technique > .grille, .technique > p { margin-top:.6rem; }
+  .effet { display:flex; flex-direction:column; gap:.15rem; }
+  @media (max-width:480px) { .grille { grid-template-columns:1fr; } .grille dt { margin-top:.4rem; } }
+  /* Lire et répondre plus vite (2026-10-07) — tout est posé par le script. La barre de suivi, collée en haut
+     de l'écran : la page descend de sa hauteur (--haut-suivi, mesurée par le script). */
+  body { --haut-suivi:0px; }
+  body.avec-suivi { padding-top:calc(var(--haut-suivi) + 12px); }
+  body.avec-suivi :is(section, .question, .decision, [id]) { scroll-margin-top:calc(var(--haut-suivi) + 1rem); }
+  .barre-suivi { position:fixed; top:0; left:0; right:0; z-index:9; background:var(--carte); border-bottom:2px solid var(--accent); box-shadow:0 2px 6px rgba(80,67,59,.1); padding:calc(.5rem + env(safe-area-inset-top, 0px)) 16px .5rem; }
+  .barre-suivi .dedans { max-width:46rem; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; gap:.4rem .8rem; }
+  .compte-suivi { font-weight:700; white-space:nowrap; }
+  .barre-suivi progress { flex:1 1 5rem; height:6px; -webkit-appearance:none; appearance:none; border:0; border-radius:3px; background:var(--trait); overflow:hidden; }
+  .barre-suivi progress::-webkit-progress-bar { background:var(--trait); }
+  .barre-suivi progress::-webkit-progress-value { background:var(--accent); }
+  .barre-suivi progress::-moz-progress-bar { background:var(--accent); }
+  .etat-suivi { flex-basis:100%; font-size:.9375rem; color:var(--doux); }
+  .etat-suivi:empty { display:none; }
+  .barre-suivi button, .ecouter-carte, .suivante { font:inherit; font-size:.9375rem; font-weight:700; line-height:1.4; white-space:nowrap; color:var(--accent); background:var(--carte); border:1px solid var(--bord-bouton); border-radius:6px; padding:.3rem .8rem; cursor:pointer; }
+  .barre-suivi .copier-suivi { color:var(--carte); background:var(--accent); border-color:var(--accent); }
+  :is(.barre-suivi button, .ecouter-carte, .suivante, .une-ligne):focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  /* « 🔊 Écouter » à droite du titre de chaque carte */
+  .tete-carte { display:flex; gap:.6rem; align-items:flex-start; justify-content:space-between; }
+  .tete-carte > h3 { flex:1; min-width:0; }
+  .decision .tete > .tete-carte { flex:1 1 16rem; }
+  /* « Suivante » sous une carte répondue ; la carte repliée tient en une ligne, titre → réponse, un clic la rouvre */
+  .une-ligne, .suivante { display:none; }
+  :is(.question, .decision):has(input:checked):not(.repliee) > .suivante { display:inline-block; align-self:flex-start; }
+  :is(.question, .decision).repliee { padding-block:.45rem; background:var(--carte); border:1px solid var(--trait); border-left:4px solid var(--ok); }
+  .repliee > :not(.une-ligne) { display:none; }
+  .repliee > .une-ligne { display:flex; }
+  .une-ligne { width:100%; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:.2rem .8rem; font:inherit; font-weight:400; line-height:1.5; text-align:left; color:var(--texte); background:none; border:0; padding:.15rem 0; cursor:pointer; }
+  .une-ligne .choisie { color:var(--ok); font-weight:700; }
+  /* La version courte, éteinte d'office : body.courte replie ce que le script a marqué « long » */
+  .bascule-courte { align-self:flex-start; display:inline-flex; gap:.5rem; align-items:center; cursor:pointer; font-size:.95rem; font-weight:700; color:var(--accent); }
+  .bascule-courte input { accent-color:var(--accent); width:20px; height:20px; margin:0; flex:none; }
+  .bascule-courte:focus-within { outline:2px solid var(--accent); outline-offset:2px; border-radius:4px; }
+  .aide-courte, .replie-court { display:none; font-size:.9375rem; }
+  body.courte .aide-courte, body.courte .replie-court { display:block; }
+  body.courte .page .long { display:none; }
+  /* Format « gros rapport » (data-format="gros" sur la page) : une section par onglet. */
+  .page[data-format="gros"] [hidden] { display:none !important; }
+  .vue { background:var(--carte); border:1px solid var(--trait); border-radius:8px; padding:.7rem 1rem; }
+  .vue > summary { cursor:pointer; font-weight:700; color:var(--accent); }
+  .vue > summary:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .commandes { display:flex; flex-direction:column; gap:.6rem; margin-top:.7rem; }
+  .commandes .rangee { display:flex; flex-wrap:wrap; gap:.4rem; }
+  .commandes button { font-size:.95rem; font-weight:400; color:var(--texte); background:var(--fond); border:1px solid var(--trait); padding:.25rem .7rem; text-align:left; line-height:1.4; }
+  .commandes button[aria-current="true"] { color:var(--carte); background:var(--accent); border-color:var(--accent); font-weight:700; }
+  .commandes .compte { white-space:nowrap; }
+  .commandes label { display:inline-flex; gap:.4rem; align-items:center; cursor:pointer; font-size:.95rem; }
+  .commandes input { accent-color:var(--accent); }
+  .flottant { position:fixed; z-index:5; background:var(--carte); border:1px solid var(--trait); border-radius:8px; padding:.7rem .9rem; overflow:auto; }
+  .flottant > p { font-weight:700; color:var(--accent); }
+  .flottant .rangee { flex-direction:column; align-items:stretch; }
+  #ouvrir-menu { position:fixed; z-index:6; right:16px; bottom:16px; box-shadow:0 2px 6px rgba(80,67,59,.25); }
+  /* Grand écran : colonne fixe à gauche, comme un site de doc ; la page se décale pour ne jamais être
+     recouverte. 1080 px = colonne 16 rem + page 46 rem + marges (16 + 32 + 16 px). */
+  @media (min-width:1080px) {
+    /* la colonne commence sous la barre de suivi (--haut-suivi vaut 0 sans elle) */
+    .flottant { top:calc(1rem + var(--haut-suivi)); left:16px; width:16rem; max-height:calc(100vh - 2rem - var(--haut-suivi)); }
+    body.avec-colonne { padding-left:calc(16rem + 48px); }
+    #ouvrir-menu { display:none; }
+    /* la barre du lecteur (LECTEUR, plus bas) et celle de suivi suivent la page décalée */
+    body.avec-colonne .barre-lecture, body.avec-colonne .barre-suivi { padding-left:calc(16rem + 48px); }
+    body.vlp-lit .flottant { max-height:calc(100vh - 8rem - var(--haut-suivi)); }
+  }
+  /* Les onglets remplacent le sommaire de liens : le garder ferait doublon. Sans JavaScript, il reste. */
+  body.avec-colonne .page nav[aria-label="Sommaire"] { display:none; }
+  @media (max-width:1079px) {
+    .flottant { right:16px; bottom:4.6rem; width:min(20rem, calc(100vw - 32px)); max-height:calc(100vh - 6rem - var(--haut-suivi)); box-shadow:0 2px 10px rgba(80,67,59,.3); }
+    .flottant:not(.ouvert) { display:none; }
+    .page[data-format="gros"] { padding-bottom:6rem; }
+    /* pendant la lecture, le bouton « Sections » et son menu passent au-dessus de la barre du lecteur */
+    body.vlp-lit #ouvrir-menu { bottom:10.5rem; }
+    body.vlp-lit .flottant { bottom:13rem; max-height:calc(100vh - 14rem - var(--haut-suivi)); }
+  }
+/* LECTEUR — début. Le lecteur à voix haute (son script : LECTEUR dans vlp.js), copié à l'octet dans
+   vlp.css et dans le style de rapport-choix.html ; test-vlp.py vérifie les deux copies. Les jetons
+   ont un repli pour les deux palettes : --surface ou --carte, --line ou --trait. */
+.lecteur { display:flex; flex-wrap:wrap; align-items:center; gap:.4rem .9rem; margin:.3rem 0; }
+/* caché pendant qu'on prend le texte de la page : sans cette règle, display:flex l'emporte sur hidden */
+.lecteur[hidden],.barre-lecture[hidden] { display:none; }
+.lecteur .suivi,.barre-lecture .ou,.barre-lecture .etiquette { font-size:.9375rem; color:var(--doux); }
+.principal { display:inline-flex; align-items:center; gap:.5rem; font:inherit; font-size:1rem; font-weight:700; color:var(--surface, var(--carte)); background:var(--accent); border:1px solid var(--accent); border-radius:6px; padding:.4rem 1rem .4rem .8rem; min-height:2.6rem; cursor:pointer; }
+.principal svg { flex:none; }
+.principal:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+.vitesses { display:inline-flex; flex-wrap:wrap; border:1px solid var(--bord-bouton, var(--doux)); border-radius:6px; overflow:hidden; }
+.vitesses button { font-family:"IBM Plex Mono",monospace; font-weight:400; letter-spacing:normal; font-size:.9375rem; min-height:2.5rem; padding:0 .7rem; border:0; border-right:1px solid var(--line, var(--trait)); border-radius:0; background:var(--surface, var(--carte)); color:var(--texte); cursor:pointer; }
+.vitesses button:last-child { border-right:0; }
+.vitesses button[aria-pressed="true"] { background:var(--accent); color:var(--surface, var(--carte)); }
+.vitesses button:focus-visible { outline:2px solid var(--accent); outline-offset:-4px; }
+.barre-lecture { position:fixed; left:0; right:0; bottom:0; z-index:10; background:var(--surface, var(--carte)); border-top:2px solid var(--accent); box-shadow:0 -2px 6px rgba(80,67,59,.08); padding:.6rem 16px calc(.6rem + env(safe-area-inset-bottom, 0px)); }
+.barre-lecture .dedans { max-width:46rem; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; gap:.5rem .9rem; }
+.barre-lecture progress { flex-basis:100%; height:5px; -webkit-appearance:none; appearance:none; border:0; border-radius:3px; background:var(--line, var(--trait)); overflow:hidden; }
+.barre-lecture progress::-webkit-progress-bar { background:var(--line, var(--trait)); }
+.barre-lecture progress::-webkit-progress-value { background:var(--accent); }
+.barre-lecture progress::-moz-progress-bar { background:var(--accent); }
+body.vlp-lit { padding-bottom:9rem; }
+/* LECTEUR — fin */
+</style>
+
+<div class="page" data-cle="filrouge-2026-10-08-adr">
+
+  <header style="display:flex;flex-direction:column;gap:.8rem">
+    <p class="mono sous">Fil-Rouge · 08/10/2026 · commits de 18:27 à 19:38, heures lues</p>
+    <h1>Les ADR du 8 octobre : ce qui est fait, ce qui reste à trancher</h1>
+    <span class="jauge">🟢 Ça tient, mais…</span>
+    <ul>
+      <li>✅ <strong>26 fiches de décision</strong> (ADR-024, puis 027 à 051) sont écrites, plus <strong>2 annexes</strong>.</li>
+      <li>✅ Chaque fiche a été relue par <strong>deux relecteurs</strong>, puis finalisée par <strong>un arbitre</strong>.</li>
+      <li>✅ Tout est <strong>commité en local</strong>, en 6 commits. <strong>Rien n'est poussé</strong>, rien n'est sur Confluence.</li>
+      <li>🟡 La page te demande de valider <strong>8 décisions</strong> prises par déduction, et de répondre à <strong>3 questions</strong>, dont 2 d'un mot.</li>
+      <li>⚠️ <strong>Rien n'est codé</strong> : les fiches disent ce qui <strong>devra</strong> l'être. Les tests n'ont pas été relancés (Docker arrêté).</li>
+      <li>➡️ Hors de la page : le <strong>push</strong> attend ton oui ; les statuts des anciens ADR se reportent <strong>à la main</strong> sur Confluence.</li>
+    </ul>
+  </header>
+
+  <section>
+    <h2>Le contexte : où on en est</h2>
+    <div class="clair">
+      <p>🧰 <strong>Fil-Rouge</strong> : le système d'information d'une agence de chasseurs immobiliers. Projet de groupe, à défendre à l'oral.</p>
+      <p>🏗️ <strong>Le chantier du jour : les ADR</strong>. Son but : écrire chaque décision du groupe sur une fiche, avec ce qui a été écarté et pourquoi.</p>
+      <div>
+        <p>📍 <strong>Où on en est : lot 4 sur 4.</strong></p>
+        <ul>
+          <li>✅ <strong>Lot 1</strong> (8 fiches) : refus de paiement, authentification, chasseur et manager, honoraires, localisation, montants, période et renouvellement du mandat.</li>
+          <li>✅ <strong>Lot 2</strong> (7 fiches) : le calcul de la rémunération et le paiement.</li>
+          <li>✅ <strong>Lot 3</strong> (8 fiches) : statuts, adresse, signature, limites du MVP, données reprises, biens, médias.</li>
+          <li>✅ <strong>Lot 4</strong> (3 fiches) : qui a le droit de faire quoi, la note du chasseur, l'effacement d'un compte.</li>
+          <li>🗓️ <strong>Après</strong> : le groupe accepte les fiches, Jeff les valide en une séance (Q-JEF-25), puis on les colle sur Confluence.</li>
+        </ul>
+      </div>
+      <div>
+        <p>❓ <strong>Pourquoi ce travail existe</strong></p>
+        <ul>
+          <li>Le sujet demande un journal de décisions (<span class="mono">JOURNAL-DE-DECISIONS.md</span>, StarterPack).</li>
+          <li>Les notes de séance du 08/10 listaient <strong>23 sujets</strong> d'ADR à écrire.</li>
+        </ul>
+      </div>
+      <p>📝 <strong>Ce que cette page te demande</strong> : garder ou revoir 8 décisions, répondre à 3 questions. Le push se demande à part, dans la conversation.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>En deux mots : c'est quoi, un ADR ?</h2>
+    <div class="clair">
+      <p>🩺 <strong>Une fiche de décision.</strong> Elle dit ce qu'on a choisi, ce qu'on a écarté, et pourquoi. Quelqu'un qui n'était pas là doit pouvoir la défendre.</p>
+      <div>
+        <p>Les mots de la page :</p>
+        <ul>
+          <li><strong>proposé</strong> : la fiche attend le oui du groupe. Les 26 fiches sont « proposé ».</li>
+          <li><strong>remplacé par ADR-0XX</strong> : une ancienne fiche n'est jamais effacée ; on écrit qui la remplace (<span class="mono">JOURNAL-DE-DECISIONS.md:72</span>).</li>
+          <li><strong>tranché par déduction</strong> : aucune source ne le dit mot pour mot, mais les sources y mènent. Le groupe doit dire oui.</li>
+          <li><strong>proposition de l'équipe</strong> : Jeff a laissé ce choix au groupe ; il est adopté avec la fiche.</li>
+        </ul>
+      </div>
+      <p>➡️ <strong>Pourquoi c'est utile</strong> : à l'oral, chaque choix a sa fiche, ses sources, et sa phrase pour le jury.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Les chiffres</h2>
+    <div class="chiffres">
+      <div class="chiffre"><b>26</b><span>fiches finies, plus 2 annexes</span></div>
+      <div class="chiffre"><b>178</b><span>questions tranchées par les sources ou par déduction</span></div>
+      <div class="chiffre"><b>1</b><span>question vraiment ouverte (jeton ou session)</span></div>
+      <div class="chiffre"><b>8</b><span>déductions qui attendent le oui du groupe</span></div>
+    </div>
+    <ul class="sous" style="font-size:.95rem">
+      <li>26 : les fichiers <span class="mono">md/adr/adr-0NN-*.md</span> qui ont un titre « ### ADR-0 », annexes et anciens brouillons (025, 026) exclus.</li>
+      <li>178 : lignes des tableaux « Questions tranchées », comptées par un script. ADR-039, écrit en liste, compte pour 1 : le vrai total est un peu plus haut.</li>
+      <li>1 et 8 : sections « Questions ouvertes » des 26 fiches, et recherche de « à confirmer par le groupe ».</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Les 26 fiches</h2>
+    <p class="sous">Le texte complet est dans le dépôt, dossier <span class="mono">md/adr/</span>, un fichier par fiche.</p>
+    <div class="tableau">
+      <table>
+        <thead><tr><th>N°</th><th>La décision, en clair</th><th>Lien avec les anciens ADR</th><th>Lot</th></tr></thead>
+        <tbody>
+          <tr><td class="n">024</td><td>Un paiement refusé garde son motif ; une vente perdue se note sur le mandat.</td><td>finit l'ADR-024 « Annulé » par erreur</td><td class="n">1</td></tr>
+          <tr><td class="n">027</td><td>Qui a le droit de faire quoi : cinq rôles, on vérifie le rôle puis la ligne ; un compte ne se supprime pas.</td><td>réécrit (il n'était que proposé) ; matrice en annexe</td><td class="n">4</td></tr>
+          <tr><td class="n">028</td><td>L'authentification revient côté back : connexion, mot de passe gardé, une clé d'API par programme.</td><td>complète 016 et 026</td><td class="n">1</td></tr>
+          <tr><td class="n">029</td><td>Chaque chasseur a un manager ; la raison est réécrite.</td><td>remplace 025</td><td class="n">1</td></tr>
+          <tr><td class="n">030</td><td>La vente pointe la grille d'honoraires qui a servi ; une grille vaut « à partir du ».</td><td>remplace 019</td><td class="n">1</td></tr>
+          <tr><td class="n">031</td><td>La localisation d'une recherche vit sur les critères ; l'Eircode s'écrit sans espace.</td><td>remplace 009 ; amende 021 et 022</td><td class="n">1</td></tr>
+          <tr><td class="n">032</td><td>Prix, budgets et barème en euros entiers ; honoraires et paiement au centime.</td><td>remplace 012</td><td class="n">1</td></tr>
+          <tr><td class="n">033</td><td>Un paiement garde tous les termes de son calcul, figés à la date de l'acte.</td><td>complète 024 et 030</td><td class="n">2</td></tr>
+          <tr><td class="n">034</td><td>Les paramètres de la rémunération vivent dans trois tables datées, aux valeurs du sujet.</td><td>complète 024 et 030</td><td class="n">2</td></tr>
+          <tr><td class="n">035</td><td>La note d'un paiement se recalcule à partir de la vente.</td><td>complète 033</td><td class="n">2</td></tr>
+          <tr><td class="n">036</td><td>L'entrée de l'API est vérifiée une fois, dans le routeur commun (422, puis 409).</td><td>complète 032</td><td class="n">2</td></tr>
+          <tr><td class="n">037</td><td>L'ancienneté et la performance majorent le taux ; elles ne choisissent pas le barème.</td><td>—</td><td class="n">2</td></tr>
+          <tr><td class="n">038</td><td>Le paiement a trois étapes datées et aucune facture : un écart assumé au sujet.</td><td>complète 024</td><td class="n">2</td></tr>
+          <tr><td class="n">039</td><td>Le mandat dure 6 mois exacts ; l'exclusivité tient par un trigger ; un mandat annulé ou fini libère le client.</td><td>s'appuie sur 023</td><td class="n">1</td></tr>
+          <tr><td class="n">040</td><td>Les règles qui croisent plusieurs tables se codent dans l'API, chacune avec son test ; seule l'exclusivité est un trigger.</td><td>complète 005 ; état des 32 règles en annexe</td><td class="n">2</td></tr>
+          <tr><td class="n">041</td><td>La demande a quatre statuts ; l'offre gagne l'état « signée ».</td><td>ferme D4 et D5 du livrable</td><td class="n">3</td></tr>
+          <tr><td class="n">042</td><td>Les notes du chasseur forment un journal daté ; la dernière est la note actuelle.</td><td>ferme D9 du livrable</td><td class="n">3</td></tr>
+          <tr><td class="n">043</td><td>L'adresse du client : tout ou rien ; valeurs factices pour les 18 clients repris.</td><td>complète 022</td><td class="n">3</td></tr>
+          <tr><td class="n">044</td><td>Seul le client signe le mandat ; la date de signature est la seule trace.</td><td>complète 003</td><td class="n">3</td></tr>
+          <tr><td class="n">045</td><td>Sept limites assumées du MVP, et ce qu'on en dit au jury.</td><td>complète 029</td><td class="n">3</td></tr>
+          <tr><td class="n">046</td><td>Données reprises : vide si la colonne l'accepte, sinon une valeur factice documentée.</td><td>complète 007 ; s'appuie sur 018</td><td class="n">3</td></tr>
+          <tr><td class="n">047</td><td>Les biens sont importés par l'admin, ou saisis à la main ; l'auteur est noté.</td><td>répond à la question 8 de l'ancien 027</td><td class="n">3</td></tr>
+          <tr><td class="n">048</td><td>La note du chasseur : cinq critères ; moins de visites vaut mieux ; « mandats signés » noté par le taux de transformation.</td><td>complète 035 et 050</td><td class="n">4</td></tr>
+          <tr><td class="n">049</td><td>Effacer un compte : le désactiver, rendre anonyme ce que rien n'oblige à garder, le reste à la fin de son délai.</td><td>complète 027 et 028</td><td class="n">4</td></tr>
+          <tr><td class="n">050</td><td>Le renouvellement : une chaîne sans branche, « renouvelé » sur l'ancien mandat, pas d'avenant.</td><td>complète 010 ; amende 013 ; remplace D8 du livrable</td><td class="n">1</td></tr>
+          <tr><td class="n">051</td><td>Une note d'avis peut porter plusieurs médias (audio, vidéo).</td><td>—</td><td class="n">3</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Les anciens ADR dont le statut change</h2>
+    <p class="sous">À reporter à la main sur la page Confluence du journal. Je n'y ai rien écrit.</p>
+    <div class="tableau">
+      <table>
+        <thead><tr><th>ADR</th><th>Aujourd'hui</th><th>Devient</th></tr></thead>
+        <tbody>
+          <tr><td class="n">009</td><td>accepté</td><td><strong>remplacé par ADR-031</strong></td></tr>
+          <tr><td class="n">012</td><td>accepté</td><td><strong>remplacé par ADR-032</strong></td></tr>
+          <tr><td class="n">019</td><td>accepté</td><td><strong>remplacé par ADR-030</strong></td></tr>
+          <tr><td class="n">025</td><td>accepté</td><td><strong>remplacé par ADR-029</strong></td></tr>
+          <tr><td class="n">024</td><td>« Annulé » (erreur de collage)</td><td><strong>proposé</strong>, avec le texte fini du dépôt</td></tr>
+          <tr><td class="n">027</td><td>proposé</td><td>proposé, <strong>texte remplacé</strong> par la réécriture du lot 4</td></tr>
+          <tr><td class="n">026</td><td>« à confirmer »</td><td><strong>accepté</strong> : remis en vigueur le 08/10 par Laurence, pour le groupe (commit 076316b)</td></tr>
+          <tr><td class="n">003, 005, 007, 010, 016, 022</td><td>accepté</td><td>inchangé ; une ligne « complété par » (voir le tableau des fiches)</td></tr>
+          <tr><td class="n">013, 021, 022</td><td>accepté</td><td>inchangé ; une ligne « amendé par » (013 par 050 ; 021 et 022 par 031)</td></tr>
+          <tr><td class="n">018</td><td>accepté</td><td>inchangé : il <strong>s'applique</strong> (ADR-046 s'appuie dessus)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul class="sous" style="font-size:.95rem">
+      <li>« Ne jamais effacer un ADR » vient du sujet (<span class="mono">JOURNAL-DE-DECISIONS.md:72</span>). « On ne réécrit jamais un ADR accepté » vient du groupe (ADR-023, Conséquences).</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Les décisions prises par déduction — à valider</h2>
+    <p class="sous">Aucune source ne les dit mot pour mot, mais les sources y mènent. Une décision du groupe ne se prend pas sans lui : coche ce que tu gardes. En bas, un bouton copie tes réponses.</p>
+
+    <div class="decision">
+      <div class="tete"><h3>D1 · Un mandat fini (vente faite ou perdue) libère le client tout de suite</h3><span class="puce moyen">ADR-039 · code à changer</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>Aujourd'hui, seul un mandat <strong>annulé</strong> laisse le client libre de signer avec un autre chasseur. Un mandat fini le bloque encore jusqu'à sa date de fin. La fiche dit : <strong>fini = libre</strong>, comme annulé.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>Le client peut revenir acheter avec l'agence (le sujet veut lui revendre). Un mandat fini n'a plus rien à protéger.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>⚠️ Il faut changer le trigger, écrire une migration et 2 tests. Personne du groupe ne l'a dit : c'est déduit.</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Le problème</dt><dd>Le trigger <span class="mono">trg_mandate_exclusivity</span> n'ignore que <span class="mono">'canceled'</span> (<span class="mono">01:526</span>, <span class="mono">:533</span>).</dd>
+        <dt>La déduction</dt><dd>Jeff : « l'annulation libère le client tout de suite » (<span class="mono">questions-pour-jeff.html:345</span>) ; une vente par mandat (<span class="mono">sale.id_mandate</span> UNIQUE, <span class="mono">01:763</span>) ; le sujet veut revendre au client (<span class="mono">Readme.md:104</span>).</dd>
+        <dt>Écarté</dt><dd>Bloquer le client jusqu'à la date de fin, même après la vente.</dd>
+        <dt>Où</dt><dd>ADR-039, Décision 5 ; annexe d'ADR-040, règle B2.</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="D1" value="garder">Je garde</label><label><input type="radio" name="D1" value="revoir">À revoir</label></div>
+    </div>
+
+    <div class="decision">
+      <div class="tete"><h3>D2 · Chaque paiement versé garde sa note et le détail de son calcul</h3><span class="puce moyen">ADR-033 · revient sur la carte D8</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>Au lot 5, la note et le détail du calcul ont été posés <strong>facultatifs</strong> sur un paiement. La fiche les rend <strong>obligatoires</strong>, sauf sur un paiement refusé. ⚠️ C'est revenir sur la carte D8, que le groupe avait gardée.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>Un paiement versé s'explique toujours, au chasseur comme au jury. Jeff : « Chaque paiement gardera la note ».</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>Une migration de plus, et des tests à compléter.</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Le problème</dt><dd>La carte D8 dit « Il n'est pas obligatoire ailleurs » ; elle avait été « Pris par Claude, seul » (<span class="mono">md/journal/2026-10-07-rapport-lot1-a-lot5.html:542</span>), puis gardée (registre l. 123).</dd>
+        <dt>La déduction</dt><dd>Jeff, <span class="mono">questions-pour-jeff.html:1912</span> ; <span class="mono">F10:287</span> ; le taux final est déjà exigé (Q-REM-10).</dd>
+        <dt>Le prix</dt><dd>Modifier <span class="mono">chk_refused</span> (<span class="mono">01:965-983</span>) par une migration.</dd>
+        <dt>Défaire</dt><dd>Garder les colonnes facultatives : l'option 1 de la fiche.</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="D2" value="garder">Je garde</label><label><input type="radio" name="D2" value="revoir">À revoir</label></div>
+    </div>
+
+    <div class="decision">
+      <div class="tete"><h3>D3 · Le rôle « lecteur » ne voit pas les paiements</h3><span class="puce moyen">ADR-027 · droits</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>Le sujet donne deux exemples de qui voit l'argent d'un chasseur : <strong>le chasseur et son manager</strong> (ENF-03) ; <strong>la comptabilité et la direction</strong> (registre RGPD). La fiche prend les deux. Le rôle <span class="mono">Reader</span> (un auditeur) n'est dans aucun : il ne voit pas les paiements.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>Le montant et l'IBAN restent entre peu de mains. Ça se défend en trente secondes.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>⚠️ En base, le rôle <span class="mono">fil_rouge_reader</span> lit encore tout, paiements compris : du code à écrire pour aligner. Le relecteur « Oral » voyait l'inverse ; l'arbitre a tranché ainsi.</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Sources</dt><dd><span class="mono">REGLES-CALCUL-REMUNERATION.md:763</span>, <span class="mono">:296</span> ; <span class="mono">REGISTRE-RGPD.md:29</span> ; <span class="mono">04_role-lecture-seule.sql:51</span>.</dd>
+        <dt>Écarté</dt><dd>Reader voit dans l'API tout ce que voit <span class="mono">fil_rouge_reader</span> en base.</dd>
+        <dt>Où</dt><dd>ADR-027, Décision, point 8.</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="D3" value="garder">Je garde</label><label><input type="radio" name="D3" value="revoir">À revoir</label></div>
+    </div>
+
+    <div class="decision">
+      <div class="tete"><h3>D4 · Chacun lit et corrige son propre compte ; seul l'Admin change le rôle et l'activation</h3><span class="puce faible">ADR-027 · droits</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>Un utilisateur voit et corrige ses données (nom, téléphone…). Il ne peut ni se donner un autre rôle, ni se réactiver.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>Le RGPD le demande : « consulter, corriger ». Chacun n'a que le droit dont il a besoin.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>Rien n'est codé : les contrôles de rôle et de ligne restent à écrire.</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Sources</dt><dd><span class="mono">REGISTRE-RGPD.md:38</span> ; Q-ACC-08 ; <span class="mono">docker/init-v3/README.md:138</span>.</dd>
+        <dt>Où</dt><dd>ADR-027, Questions tranchées ; annexe d'ADR-027.</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="D4" value="garder">Je garde</label><label><input type="radio" name="D4" value="revoir">À revoir</label></div>
+    </div>
+
+    <div class="decision">
+      <div class="tete"><h3>D5 · Un mandat signé puis annulé compte dans le taux de transformation</h3><span class="puce faible">ADR-048 · note du chasseur</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>La note du chasseur compare ses ventes à ses mandats signés. Un mandat <strong>signé puis annulé</strong> compte ; un mandat <strong>jamais signé</strong>, non.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>On ne peut pas signer puis annuler pour soigner sa note.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>Un chasseur perd des points pour une annulation qui ne vient pas de lui. Jeff ne l'a pas tranché.</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Sources</dt><dd>Q-REM-09, « les mandats signés » (registre l. 640-646) ; <span class="mono">questions-pour-jeff.html:1089-1096</span>.</dd>
+        <dt>Où</dt><dd>ADR-048, Décision, point 7.</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="D5" value="garder">Je garde</label><label><input type="radio" name="D5" value="revoir">À revoir</label></div>
+    </div>
+
+    <div class="decision">
+      <div class="tete"><h3>D6 · Sans vente, la note part de 50 et se recalcule à chaque fin de mandat</h3><span class="puce faible">ADR-048 · note du chasseur</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>Un nouveau chasseur commence à <strong>50 sur 100</strong>, le point d'équilibre du sujet. Quand un mandat finit sans vente, la note se recalcule : les notes de l'activité bougent, celles de la vente non.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>Le sujet place le pivot à 50, et veut que la note baisse quand un mandat arrive à échéance.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>Du code à écrire, avec l'expiration des mandats. C'est une déduction.</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Sources</dt><dd><span class="mono">REGLES-CALCUL-REMUNERATION.md:213</span> (pivot), <span class="mono">:143-147</span> (portée des critères) ; <span class="mono">F07:37-41</span> ; <span class="mono">F10:298-300</span>.</dd>
+        <dt>Où</dt><dd>ADR-048, Décision, point 8.</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="D6" value="garder">Je garde</label><label><input type="radio" name="D6" value="revoir">À revoir</label></div>
+    </div>
+
+    <div class="decision">
+      <div class="tete"><h3>D7 · Garder 10 ans les mandats et les paiements d'un compte effacé</h3><span class="puce moyen">ADR-049 · RGPD</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>Un client demande à effacer son compte : on le désactive, et on efface tout de suite ce que rien n'oblige à garder. Les <strong>mandats</strong> et les <strong>paiements</strong> restent <strong>10 ans</strong> : un décret l'impose aux agents immobiliers, la comptabilité aussi.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>Une seule durée pour tout ce que la loi impose. La source est officielle (Légifrance).</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>⚠️ Il faut que l'agence soit soumise à ce décret : c'est déduit. La loi n° 70-9, article 1, n'a pas été lue.</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Sources</dt><dd>Décret 72-678, article 72 : « Les mandats et le registre des mandats sont conservés pendant dix ans. » (<a href="https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000033202014">Légifrance</a>, doc officielle, lue le 08/10/2026). Mandats de recherche compris : Cass. 1re civ., 10/12/2014, n° 13-24.352 (<a href="https://www.legifrance.gouv.fr/juri/id/JURITEXT000029899112/">Légifrance</a>).</dd>
+        <dt>Écarté</dt><dd>5 ans (article 2224 du Code civil) : un délai pour agir en justice ne raccourcit pas une obligation de garder.</dd>
+        <dt>Statut</dt><dd>Jeff : « La durée X : le groupe la propose » (<span class="mono">questions-pour-jeff.html:1701</span>). C'est une proposition de l'équipe.</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="D7" value="garder">Je garde</label><label><input type="radio" name="D7" value="revoir">À revoir</label></div>
+    </div>
+
+    <div class="decision">
+      <div class="tete"><h3>D8 · Les annonces sont chargées une seule fois, sans chasse aux doublons</h3><span class="puce faible">ADR-045 · limite du MVP</span></div>
+      <dl class="grille">
+        <dt class="net">💬 En clair</dt><dd>Les <strong>2 556 biens</strong> sont chargés à la création de la base. On ne recharge pas d'annonces chaque jour, et on ne cherche pas les biens en double. Un nouveau bien se saisit à la main.</dd>
+        <dt class="plus">➕ Le bon côté</dt><dd>Les annonces sont factices, tirées de l'outil du sujet : il n'y a pas de vrai flux à suivre. Le sujet range le dédoublonnage dans le parcours IA.</dd>
+        <dt class="moins">➖ Le moins bon</dt><dd>⚠️ Le passage du CSV au fichier de chargement n'est pas dans le dépôt : recharger d'autres annonces n'est pas outillé. Aucune carte du groupe ne porte cette limite.</dd>
+      </dl>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+      <dl class="grille">
+        <dt>Sources</dt><dd><span class="mono">Readme.md:193</span> ; <span class="mono">questions-a-trancher.md:180</span> ; <span class="mono">03_populate_estate.sql</span>.</dd>
+        <dt>Où</dt><dd>ADR-045, limite 7 ; ADR-047.</dd>
+      </dl>
+      </details>
+      <div class="choix"><label><input type="radio" name="D8" value="garder">Je garde</label><label><input type="radio" name="D8" value="revoir">À revoir</label></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Les questions à trancher</h2>
+    <p class="sous">Seulement ce qu'aucune source ni aucune déduction ne règle. Chaque option dit son bon et son moins bon côté.</p>
+
+    <div class="question">
+      <h3>🟡 Q1 · Pour la connexion : un jeton, ou une session rangée en base ?</h3>
+      <ul>
+        <li>💬 Jeff veut les outils de connexion côté back : « route de connextion, token, session » [sic]. Il ne choisit pas.</li>
+        <li>💬 Le sujet n'en dit rien. Le dépôt a un tuto qui propose un jeton (JWT), sans trancher.</li>
+        <li>💬 ADR-028 garde la question ouverte : le choix mérite sa propre fiche, avec sa durée.</li>
+      </ul>
+      <div class="choix options">
+        <label><input type="radio" name="Q1" value="jwt-60-min"><span><b>Un jeton (JWT), valable 60 minutes, le compte relu en base à chaque appel (recommandé)</b><span class="effet"><span>➕ Le tuto 2 du dépôt l'explique déjà ; un compte désactivé perd ses droits tout de suite.</span><span>➖ Une fiche de plus à écrire (ADR-052) ; une lecture en base à chaque appel.</span></span></span></label>
+        <label><input type="radio" name="Q1" value="session-en-base"><span><b>Une session rangée en base</b><span class="effet"><span>➕ Se coupe d'un geste, côté serveur.</span><span>➖ Une table de plus ; rien n'est préparé dans le dépôt.</span></span></span></label>
+        <label><input type="radio" name="Q1" value="plus-tard"><span><b>Décider plus tard, en codant</b><span class="effet"><span>➕ Rien à faire ce soir.</span><span>➖ ADR-028 garde une question ouverte devant le jury.</span></span></span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <h3>🟡 Q2 · L'acte notarié hors périmètre : qui l'a décidé ?</h3>
+      <ul>
+        <li>💬 Tu l'as annoncé le 02/10/2026. Le registre dit « qui l'a décidé n'est pas noté » (<span class="mono">questions-a-trancher.md:62</span>).</li>
+        <li>💬 ADR-045 écrit pour l'instant : « annoncé par Sébastien le 02/10/2026 ».</li>
+      </ul>
+      <div class="choix options">
+        <label><input type="radio" name="Q2" value="groupe"><span><b>Le groupe</b><span class="effet"><span>➕ La fiche nomme le décideur.</span><span>➖ Rien.</span></span></span></label>
+        <label><input type="radio" name="Q2" value="jeff"><span><b>Jeff</b><span class="effet"><span>➕ La fiche nomme le décideur, et c'est une parole du client.</span><span>➖ Rien.</span></span></span></label>
+        <label><input type="radio" name="Q2" value="je-ne-sais-plus"><span><b>Je ne sais plus</b><span class="effet"><span>➕ On garde « annoncé par Sébastien ».</span><span>➖ Le jury peut demander qui a tranché.</span></span></span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <h3>🟡 Q3 · L'Eircode sans espace, confirmé le 07/10 : par qui ?</h3>
+      <ul>
+        <li>💬 Le registre dit « Confirmée par Jeff » (<span class="mono">questions-a-trancher.md:167</span>), et la range aussi côté groupe (<span class="mono">:255</span>).</li>
+        <li>💬 ADR-031 écrit pour l'instant : « auteur non noté ».</li>
+      </ul>
+      <div class="choix options">
+        <label><input type="radio" name="Q3" value="jeff"><span><b>Jeff</b><span class="effet"><span>➕ On corrige la ligne 255 du registre.</span><span>➖ Rien.</span></span></span></label>
+        <label><input type="radio" name="Q3" value="groupe"><span><b>Le groupe</b><span class="effet"><span>➕ On corrige la ligne 167 du registre et le README du schéma.</span><span>➖ Rien.</span></span></span></label>
+        <label><input type="radio" name="Q3" value="je-ne-sais-plus"><span><b>Je ne sais plus</b><span class="effet"><span>➕ On garde « auteur non noté ».</span><span>➖ Deux sources du dépôt se contredisent encore.</span></span></span></label>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ce qui attend Jeff, à la séance de validation des ADR</h2>
+    <p class="sous">Déjà prévu (Q-JEF-25) : ce ne sont pas des questions pour toi.</p>
+    <ul>
+      <li>✅ Q-ACC-06 : le chasseur voit son barème (ADR-027).</li>
+      <li>✅ Q-ACC-12 : le client crée son compte lui-même (ADR-027).</li>
+      <li>✅ Q-ACC-13 : le chasseur enregistre ses visites (ADR-027).</li>
+      <li>✅ Les reports de Q-SCH-08 et Q-ACC-14 (ADR-045).</li>
+      <li>➡️ Et la validation des 26 fiches, en une séance.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Ce que la relecture a trouvé hors des fiches</h2>
+    <p class="sous">À ranger en tâches pour l'équipe. Rien n'a été modifié.</p>
+    <ul>
+      <li>⚠️ <strong>Sécurité</strong> : le rôle en lecture seule de la base lit les empreintes de mot de passe (<span class="mono">04_role-lecture-seule.sql:51</span>). Une tâche à part a été proposée.</li>
+      <li>⚠️ <strong>31 règles sur 32</strong> qui croisent plusieurs tables ne sont pas codées. Seule l'exclusivité l'est (annexe d'ADR-040).</li>
+      <li>⚠️ Le seed des paramètres commence au <strong>01/01/2026</strong>, mais des mandats repris datent de 2025 : une vente de 2025 n'aurait pas de barème (ADR-034).</li>
+      <li>⚠️ <span class="mono">PUT /mandates/{id}</span> accepte « renouvelé » sans mandat suivant (annexe d'ADR-040, règle B3).</li>
+      <li>➡️ À coder, demandé par le sujet : l'<strong>expiration des mandats</strong>, et <span class="mono">energy_class_scheme = 'FR-DPE-2021'</span> sur les <strong>1 623</strong> biens qui ont une lettre (ADR-046).</li>
+      <li>➡️ Le montant d'offre conseillé par le chasseur n'a pas de colonne (ADR-041).</li>
+      <li>🧹 Documents périmés : « 19 tables » (il y en a <strong>20</strong>), « 17 critères » (il y en a <strong>18</strong>), la matrice des droits de <span class="mono">md/securite/</span>, la ligne 431 du registre.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Ce qui a mal tourné</h2>
+    <div class="alerte">
+      <h3>⚠️ Ma consigne citait mal le modèle du prof</h3>
+      <p>💬 <strong>En clair</strong> : j'avais écrit « ne jamais effacer un ADR <strong>accepté</strong> ». Le modèle du prof ne dit pas « accepté ».</p>
+      <ul>
+        <li>➖ Trois fiches du lot 1 l'ont recopié.</li>
+        <li>➕ Le relecteur « Sources » l'a vu ; l'arbitre a corrigé avant le commit, et la consigne des lots suivants aussi.</li>
+      </ul>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+        <p>Texte exact : <span class="mono">JOURNAL-DE-DECISIONS.md:72</span>. Le mot « accepté » vient du groupe : ADR-023, Conséquences. Fiches touchées : 024, 028, 029.</p>
+      </details>
+    </div>
+    <div class="alerte">
+      <h3>⚠️ Des renvois vers une copie que personne d'autre n'a</h3>
+      <p>💬 <strong>En clair</strong> : les lots 1 et 3 citaient des numéros de ligne de ma copie du journal Confluence. Cette copie n'est pas dans le dépôt.</p>
+      <ul>
+        <li>➖ Un lecteur ne pouvait pas suivre ces renvois.</li>
+        <li>➕ Tous remplacés par « ADR-0XX, section » ; contrôle par recherche : 0 restant.</li>
+      </ul>
+      <details class="technique"><summary>🔧 Le détail technique</summary>
+        <p>Commits <span class="mono">b6b17a1</span> (lot 1) et <span class="mono">6492752</span> (lot 3). Remplacements par script, chacun exigé une seule fois dans son fichier.</p>
+      </details>
+    </div>
+  </section>
+
+  <section>
+    <h2>Le fil</h2>
+    <p class="sous" style="font-size:.95rem">Heures lues sur les commits du 08/10/2026. Tous sont locaux.</p>
+    <ul class="fil">
+      <li><time>18:27</time><span><b>9ab1d10</b> · lot 1, relu et arbitré</span></li>
+      <li><time>19:29</time><span><b>37ae48a</b> · lot 2 (calcul et paiement), relu et arbitré</span></li>
+      <li><time>19:34</time><span><b>6492752</b> · lot 3 (statuts, adresse, limites du MVP), relu et arbitré</span></li>
+      <li><time>19:34</time><span><b>b6b17a1</b> · lot 1 : renvois au journal par ADR et section</span></li>
+      <li><time>19:38</time><span><b>8adffb7</b> · lot 4 (droits, performance, effacement), relu et arbitré</span></li>
+      <li><time>19:38</time><span><b>e72d2fb</b> · ADR-035 aligné sur ADR-048</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Tes réponses</h2>
+    <p class="sous">Le bouton copie tes coches et tes commentaires. Colle-les dans la conversation.</p>
+    <div class="ligne"><button type="button" id="copier">Copier mes réponses</button><span id="etat" class="sous" aria-live="polite"></span></div>
+    <textarea id="reponses" readonly aria-label="Tes réponses"></textarea>
+  </section>
+
+  <footer class="sous" style="font-size:.9375rem;border-top:1px solid var(--trait);padding-top:1rem">
+    Dépôt <span class="mono">Fil-Rouge</span> · le texte des 26 fiches : <span class="mono">md/adr/</span> · branche <span class="mono">main</span>, en local.
+  </footer>
+</div>
+
+<script>
+// INSECABLE — début. Nombres et dates jamais coupés en fin de ligne, copié à l'octet dans templates/vlp.js
+// et dans le script de templates/rapport-choix.html ; test-vlp.py vérifie que les deux copies sont pareilles.
+// « 5 069 068 », « 2,57 $ », « 47 % », « 41 tours », « 3 s », « 16,3 → 11,7 » reçoivent une espace
+// insécable ; une date (« 2026-09-30 ») ou une plage (« MOR1–MOR14 », « 28–66 ») passe dans un
+// `span.insecable`, que le style garde sur une ligne. À l'affichage seulement : vlp.py écrit des espaces
+// ordinaires, que ses propres lectures de la page attendent. Le texte brut (pre), les scripts, les styles
+// et les champs de saisie n'y passent pas. La flèche, %, s, ms, min, px et les plages de nombres : ajoutés
+// le 2026-10-07, pour les rapports à cartes.
+(() => {
+  const page = document.querySelector(".page");
+  if (!page) return;
+  const insecable = /(\d) (?=\d{3}(?!\d)|[$%→]|(?:tours?|fiches?|tokens|mutants?|appels?|min|ms|px|s|k)(?![\p{L}\p{N}]))|(→) (?=\d)/gu;
+  const bloc = /(\d{4}-\d\d-\d\d|[A-Z]{2,4}\d+–[A-Z]{2,4}\d+|\d+(?:,\d+)?–\d+(?:,\d+)?)/u;
+  const textes = [];
+  const marche = document.createTreeWalker(page, NodeFilter.SHOW_TEXT);
+  for (let n = marche.nextNode(); n; n = marche.nextNode()) {
+    if (!n.parentElement.closest("pre, script, style, textarea")) textes.push(n);
+  }
+  textes.forEach((n) => {
+    const morceaux = n.data.replace(insecable, "$1$2\u00a0").split(bloc);
+    if (morceaux.length === 1) {
+      if (morceaux[0] !== n.data) n.data = morceaux[0];
+      return;
+    }
+    n.replaceWith(...morceaux.map((m, i) => {
+      if (i % 2 === 0) return m;
+      const s = document.createElement("span");
+      s.className = "insecable";
+      s.textContent = m;
+      return s;
+    }));
+  });
+})();
+// INSECABLE — fin
+  const page = document.querySelector(".page");
+  const cle = "rapport:" + (page.dataset.cle || document.title);
+  const titre = document.querySelector("h1").textContent.trim() || document.title;
+  const zone = document.getElementById("reponses");
+  const noms = [...new Set([...document.querySelectorAll('input[type="radio"]')].map(e => e.name))];
+  function lireStock() { try { return JSON.parse(localStorage.getItem(cle) || "{}"); } catch (e) { return {}; } }
+  function ecrireStock(v) { try { localStorage.setItem(cle, JSON.stringify(v)); } catch (e) {} }
+  const notes = {};
+  function texte() {
+    const lignes = ["Mes réponses — " + titre + " :"];
+    for (const n of noms) {
+      const c = document.querySelector('input[name="' + n + '"]:checked');
+      lignes.push("- " + n + " : " + (c ? c.value : "pas répondu"));
+      const note = notes[n].value.trim();
+      if (note) lignes.push("  ↳ " + note.replace(/\s*\n\s*/g, "\n    "));
+    }
+    return lignes.join("\n");
+  }
+  function maj() { zone.value = texte(); }
+  const stock = lireStock();
+  for (const n of noms) {
+    const radio = document.querySelector('input[name="' + n + '"]');
+    const carte = radio.closest(".decision, .question") || radio.parentElement;
+    const bloc = document.createElement("details");
+    const bouton = document.createElement("summary");
+    const champ = document.createElement("textarea");
+    bloc.className = "note";
+    bouton.dataset.muet = "";  // le lecteur ne le dit pas
+    champ.dataset.note = n;
+    champ.setAttribute("aria-label", "Commentaire sur " + n);
+    champ.value = stock["note:" + n] || "";
+    const libelle = () => { bouton.textContent = bloc.open ? "− Replier le commentaire" : champ.value.trim() ? "✏️ Voir mon commentaire" : "+ Ajouter un commentaire"; };
+    bloc.addEventListener("toggle", () => { libelle(); if (bloc.open) champ.focus(); });
+    bloc.append(bouton, champ);
+    carte.appendChild(bloc);
+    notes[n] = champ;
+    libelle();
+    if (!stock[n]) continue;
+    for (const el of document.querySelectorAll('input[name="' + n + '"]')) if (el.value === stock[n]) el.checked = true;
+  }
+  document.addEventListener("change", e => {
+    if (e.target.matches('input[type="radio"]')) { const s = lireStock(); s[e.target.name] = e.target.value; ecrireStock(s); maj(); }
+  });
+  document.addEventListener("input", e => {
+    if (e.target.matches("textarea[data-note]")) { const s = lireStock(); s["note:" + e.target.dataset.note] = e.target.value; ecrireStock(s); maj(); }
+  });
+  // Copie les réponses, et rend le mot affiché à côté du bouton (la barre de suivi le reprend). Presse-papier
+  // refusé ou absent : le texte se sélectionne, à copier au clavier.
+  function copier() {
+    const etat = document.getElementById("etat");
+    return Promise.resolve().then(() => navigator.clipboard.writeText(zone.value)).then(() => "Copié.")
+      .catch(e => { console.warn("rapport — copie refusée, texte sélectionné :", e); zone.focus(); zone.select(); return "Sélectionné : fais Ctrl+C."; })
+      .then(mot => (etat.textContent = mot));
+  }
+  document.getElementById("copier").addEventListener("click", copier);
+  maj();
+
+  /* Lire et répondre plus vite (2026-10-07, choix tranchés sur la page « Des rapports plus beaux et plus malins ») :
+     l'option recommandée prend l'étiquette « 👍 conseillé » ; chaque carte, « 🔊 Écouter » à côté de son titre ;
+     une carte répondue, « Suivante », qui la replie en une ligne (un clic la rouvre) et mène à la prochaine sans
+     réponse ; en haut de l'écran, la barre de suivi ; sous le titre, la version courte, éteinte d'office. */
+  (() => {
+    const cartes = [...page.querySelectorAll(".question, .decision")].filter(c => c.querySelector('input[type="radio"]'));
+    const doux = () => (matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth");
+    const element = (balise, classe, texte) => {
+      const e = document.createElement(balise);
+      if (classe) e.className = classe;
+      if (texte) e.textContent = texte;
+      return e;
+    };
+    const bouton = (classe, texte) => { const b = element("button", classe, texte); b.type = "button"; return b; };
+
+    // L'option conseillée : « recommandé » entre parenthèses quitte le libellé et devient une étiquette, que le lecteur
+    // dit ; la page bâtie par vlp.py chef page ne porte ce mot qu'une fois par option (test-vlp.py le compte)
+    const CONSEIL = /\s*\((recommandé|conseillé)\)/i;
+    for (const b of page.querySelectorAll(".choix label > span > b:first-child")) {
+      if (!CONSEIL.test(b.textContent)) continue;
+      const w = document.createTreeWalker(b, NodeFilter.SHOW_TEXT);
+      for (let n = w.nextNode(); n; n = w.nextNode()) n.data = n.data.replace(CONSEIL, "");
+      b.closest("label").classList.add("conseil");
+      b.append(" ", element("span", "etiquette-conseil", "👍 conseillé"));
+    }
+
+    // « Écouter » une carte : la carte seule passe au lecteur de la page (bloc LECTEUR, plus bas), comme une sélection
+    if (window.speechSynthesis) for (const c of cartes) {
+      const h = c.querySelector("h3");
+      if (!h) continue;
+      const tete = element("div", "tete-carte");
+      const ecouter = bouton("ecouter-carte", "🔊 Écouter");
+      ecouter.setAttribute("aria-label", "Écouter cette carte");
+      ecouter.addEventListener("click", () => {
+        const lecteur = document.querySelector(".lecteur .principal");
+        if (!lecteur) { console.warn("rapport — pas de lecteur à voix haute sur la page"); return; }
+        if (document.body.classList.contains("vlp-lit")) lecteur.click();  // la lecture en cours s'arrête d'abord
+        window.getSelection().selectAllChildren(c);
+        lecteur.click();
+        window.getSelection().removeAllRanges();  // le lecteur a déjà pris le texte
+      });
+      h.before(tete);
+      tete.append(h, ecouter);
+    }
+
+    // La barre de suivi : le compte, la prochaine carte sans réponse (après `depuis`, sinon sous le haut de l'écran), copier
+    const barre = element("div", "barre-suivi");
+    const etat = element("span", "etat-suivi");
+    const dire = texte => { etat.textContent = texte; };
+    const repondue = c => !!c.querySelector('input[type="radio"]:checked');
+    const allerSuivante = depuis => {
+      const ouvertes = cartes.filter(c => !repondue(c));
+      if (!ouvertes.length) { dire("✅ Tout est répondu : tu peux copier."); return; }
+      const cible = (depuis ? ouvertes.find(c => cartes.indexOf(c) > cartes.indexOf(depuis))
+        : ouvertes.find(c => c.offsetParent && c.getBoundingClientRect().top > barre.offsetHeight + 24)) || ouvertes[0];
+      document.dispatchEvent(new CustomEvent("vlp-montrer", { detail: cible }));  // le format gros ouvre son onglet
+      cible.scrollIntoView({ behavior: doux(), block: "start" });
+      cible.querySelector('input[type="radio"]').focus({ preventScroll: true });
+      dire("");
+    };
+    if (cartes.length) {
+      const dedans = element("div", "dedans");
+      const compte = element("span", "compte-suivi");
+      const jauge = document.createElement("progress");
+      const aller = bouton("", "➡️ Suivante sans réponse");
+      const copie = bouton("copier-suivi", "📋 Copier");
+      barre.setAttribute("role", "region");
+      barre.setAttribute("aria-label", "Suivi des réponses");
+      jauge.setAttribute("aria-label", "Cartes répondues");
+      etat.setAttribute("aria-live", "polite");
+      dedans.append(compte, jauge, aller, copie, etat);
+      barre.append(dedans);
+      document.body.prepend(barre);
+      document.body.classList.add("avec-suivi");
+      aller.addEventListener("click", () => allerSuivante(null));
+      copie.addEventListener("click", () => copier().then(dire));
+      const suivi = () => {
+        const n = noms.filter(x => document.querySelector('input[name="' + x + '"]:checked')).length;
+        compte.textContent = n + " sur " + noms.length + " répondues";
+        jauge.max = noms.length;
+        jauge.value = n;
+      };
+      // la page descend de la hauteur de la barre, mesurée tout de suite et police chargée (un onglet caché ne lance
+      // pas l'observateur), puis à chaque fois qu'elle change, quand elle passe sur deux lignes
+      const mesurer = () => document.body.style.setProperty("--haut-suivi", barre.offsetHeight + "px");
+      mesurer();
+      document.fonts?.ready.then(mesurer);
+      new ResizeObserver(mesurer).observe(barre);
+      document.addEventListener("change", e => { if (e.target.matches('input[type="radio"]')) suivi(); });
+      suivi();
+    }
+
+    // « Suivante » : la carte répondue se replie en une ligne, titre → réponse ; un clic sur la ligne la rouvre
+    for (const c of cartes) {
+      const ligne = bouton("une-ligne");
+      const titre = element("span");
+      const choisie = element("span", "choisie");
+      ligne.append(titre, choisie);
+      ligne.addEventListener("click", () => { c.classList.remove("repliee"); c.querySelector('input[type="radio"]:checked')?.focus(); });
+      const suivante = bouton("suivante", "Suivante ➡️");
+      suivante.addEventListener("click", () => {
+        const h = c.querySelector("h3");
+        const label = c.querySelector('input[type="radio"]:checked').closest("label");
+        const libelle = (label.querySelector("b") || label).cloneNode(true);
+        libelle.querySelectorAll(".etiquette-conseil").forEach(x => x.remove());
+        titre.textContent = "✅ " + (h ? h.textContent.replace(/^[^\p{L}\p{N}]+/u, "").trim() : "");
+        choisie.textContent = "→ " + libelle.textContent.trim();
+        c.classList.add("repliee");
+        ligne.focus({ preventScroll: true });  // la carte suivante prend la main, s'il en reste une
+        allerSuivante(c);
+      });
+      c.prepend(ligne);
+      c.append(suivante);
+    }
+
+    // La version courte : ne restent que l'en-tête, les titres, les lignes « 💬 en clair », les options et toute ligne
+    // qui porte ⚠️ ; le reste reçoit la classe « long », que body.courte replie. Une section vide le dit.
+    const PARLE = /^\s*💬|⚠/u;
+    const TOUJOURS = "h3, .tete, .tete-carte, .choix, .note, .explique, .suivante, .une-ligne";
+    const plier = el => el.classList.add("long");
+    const trier = racine => {  // vrai si quelque chose reste visible dans `racine`
+      let reste = false;
+      for (const el of racine.children) {
+        let garde = false;
+        if (el.matches("h2")) continue;
+        if (el.matches(TOUJOURS)) garde = true;
+        else if (el.matches("dl")) {
+          for (const dt of el.querySelectorAll(":scope > dt")) {
+            const dd = dt.nextElementSibling?.matches("dd") ? dt.nextElementSibling : null;
+            if (dt.matches(".net") || PARLE.test(dt.textContent + " " + (dd ? dd.textContent : ""))) garde = true;
+            else { plier(dt); if (dd) plier(dd); }
+          }
+        } else if (el.matches("ul, ol")) {
+          for (const li of el.children) if (PARLE.test(li.textContent)) garde = true; else plier(li);
+        } else if (el.matches("div:not(.chiffres, .tableau)")) garde = trier(el);
+        else garde = el.matches("p, h4") && PARLE.test(el.textContent);
+        if (garde) reste = true; else plier(el);
+      }
+      return reste;
+    };
+    const fixe = document.getElementById("reponses").closest("section");
+    for (const s of page.querySelectorAll(":scope > section")) {
+      if (s === fixe || trier(s)) continue;
+      const vide = element("p", "replie-court sous", "✂️ Repliée en version courte");
+      vide.dataset.muet = "";  // le lecteur ne le dit pas
+      const h2 = s.querySelector(":scope > h2");
+      if (h2) h2.after(vide); else s.prepend(vide);
+    }
+    page.querySelector(":scope > footer")?.classList.add("long");
+    const CLE_COURTE = "vlp-courte";  // une préférence de lecture, la même pour tous les rapports
+    const bascule = element("label", "bascule-courte");
+    const coche = document.createElement("input");
+    const aide = element("p", "aide-courte sous",
+      "Ne restent que les lignes en clair, les options et les alertes — rien n'est effacé, décoche pour tout revoir");
+    coche.type = "checkbox";
+    try { coche.checked = localStorage.getItem(CLE_COURTE) === "1"; }
+    catch (e) { console.warn("rapport — version courte gardée illisible :", e); }
+    bascule.dataset.muet = aide.dataset.muet = "";
+    bascule.append(coche, element("span", "", "✂️ Version courte"));
+    coche.addEventListener("change", () => {
+      document.body.classList.toggle("courte", coche.checked);
+      try { localStorage.setItem(CLE_COURTE, coche.checked ? "1" : "0"); }
+      catch (e) { console.warn("rapport — version courte non gardée :", e); }
+    });
+    const h1 = page.querySelector("header h1");
+    if (h1) h1.after(bascule, aide); else page.querySelector("header")?.append(bascule, aide);
+    document.body.classList.toggle("courte", coche.checked);
+  })();
+
+  /* Explique-moi, éteint sauf data-explique sur la page : sous chaque carte, un repli « Explique-moi cette carte »
+     demande à Claude, à son ouverture, de la réexpliquer en mots simples (capacité sample, payée sur le compte de qui
+     clique) ; « Écouter l'explication » la passe au lecteur. Sans Claude joignable, rien n'apparaît ; un accès refusé
+     retire les autres replis, et la page ne redemande jamais. Le prompt envoie l'en-tête et la carte, repli compris. */
+  if ("explique" in page.dataset) (async () => {
+    let sample = null;
+    try { sample = window.claude ? await window.claude.use("sample") : null; }
+    catch (e) { console.warn("Explique-moi : capacité sample illisible —", e); }
+    if (!sample) return;
+    const MOTS = {
+      not_granted: "Accès refusé : la page ne demandera plus rien à Claude.",
+      sampling_disabled: "Demander à Claude est coupé pour ce compte.",
+      rate_limited: "Trop de demandes d'un coup : attends un peu, puis réessaie.",
+      session_expired: "Ta session Claude a expiré : recharge la page.",
+      prompt_too_large: "La carte est trop longue pour une seule demande.",
+      refused: "Claude a refusé de répondre.",
+      empty_completion: "La réponse est revenue vide.",
+      upstream_error: "Le service a eu un souci : réessaie plus tard."
+    };
+    const FIN = ["not_granted", "sampling_disabled", "not_declared", "capability_disabled", "capability_removed"];
+    // le niveau qui a répondu (la plateforme ne donne pas le nom du modèle) ; l'Explique-moi demande « default »
+    const NIVEAUX = { quick: "rapide (quick)", default: "équilibré (default)", complex: "le plus capable (complex)" };
+    const brut = (el, sans) => {
+      const c = el.cloneNode(true);
+      c.querySelectorAll(sans).forEach(x => x.remove());
+      c.querySelectorAll("dt").forEach(x => x.after(" : "));  // « Le problème : … », pas « Le problèmela … »
+      c.querySelectorAll("dd, li, p, h1, h2, h3, label, summary, div, td, .puce").forEach(x => x.after("\n"));
+      return c.textContent.replace(/[ \t]+/g, " ").replace(/\s*\n\s*/g, "\n").trim();
+    };
+    const entete = brut(page.querySelector("header"), ".lecteur, .bascule-courte, .aide-courte").slice(0, 2000);
+    const replis = [];
+    for (const n of noms) {
+      const note = notes[n].parentElement;
+      const carte = note.parentElement;
+      const repli = document.createElement("details");
+      const resume = document.createElement("summary");
+      const etat = document.createElement("p");
+      const reponse = document.createElement("div");
+      const niveau = document.createElement("p");
+      const ligne = document.createElement("div");
+      const ecouter = document.createElement("button");
+      const relancer = document.createElement("button");
+      repli.className = "explique";
+      resume.dataset.muet = "";
+      etat.className = "sous";
+      etat.setAttribute("aria-live", "polite");
+      reponse.className = "explication";
+      niveau.className = "sous niveau";
+      niveau.dataset.muet = "";  // discret : le lecteur ne le dit pas
+      ligne.className = "ligne";
+      ecouter.type = relancer.type = "button";
+      ecouter.textContent = "🔊 Écouter l'explication";
+      relancer.textContent = "Réessayer";
+      reponse.hidden = niveau.hidden = ecouter.hidden = relancer.hidden = true;
+      ligne.append(ecouter, relancer);
+      repli.append(resume, etat, reponse, niveau, ligne);
+      carte.insertBefore(repli, note);
+      replis.push(repli);
+      let demande = false;
+      const libelle = () => { resume.textContent = repli.open ? "− Replier l'explication" : "💬 Explique-moi cette carte"; };
+      const demander = async () => {
+        demande = true;
+        relancer.hidden = ecouter.hidden = niveau.hidden = true;
+        reponse.hidden = false;
+        reponse.textContent = "";
+        etat.textContent = "Claude réfléchit… (de 5 à 60 secondes)";
+        const consigne =
+          "Tu expliques une carte d'un rapport de travail à une personne qui a une dyslexie très sévère ; " +
+          "elle écoute souvent la réponse en synthèse vocale.\n" +
+          "Réponds en français, en 8 lignes au plus, qui commencent par « - ». Une idée par ligne, des phrases " +
+          "courtes, des mots simples.\n" +
+          "Commence par une image simple de la vie de tous les jours, si elle aide. Puis dis ce que la carte " +
+          "demande ou décide, et ce que chaque option change, concrètement.\n" +
+          "Un mot technique s'explique entre parenthèses. N'invente rien qui ne soit dans le rapport. " +
+          "Pas de titre, pas de gras, pas d'émoji.\n\n" +
+          "L'en-tête du rapport :\n" + entete + "\n\nLa carte :\n" +
+          brut(carte, ".note, .explique, .une-ligne, .suivante, .ecouter-carte").slice(0, 8000);
+        try {
+          const r = await sample(consigne, { onText: ({ text }) => { reponse.textContent = text; etat.textContent = "Claude écrit…"; } });
+          reponse.textContent = r.text;
+          etat.textContent = r.truncated ? "Réponse coupée avant la fin." : "";
+          niveau.textContent = "Répondu par le niveau " + (NIVEAUX[r.modelTierApplied] || r.modelTierApplied) + ".";
+          niveau.hidden = !r.modelTierApplied;
+          ecouter.hidden = !document.querySelector(".lecteur .principal");
+        } catch (e) {
+          console.warn("Explique-moi : sample a échoué —", e.code, e.message);
+          reponse.textContent = e.text || "";
+          reponse.hidden = !e.text;
+          etat.textContent = "❌ " + (MOTS[e.code] || "L'explication n'a pas marché (" + e.code + ").");
+          if (FIN.includes(e.code)) replis.filter(x => x !== repli).forEach(x => x.remove());
+          else relancer.hidden = false;
+        }
+      };
+      repli.addEventListener("toggle", () => { libelle(); if (repli.open && !demande) demander(); });
+      relancer.addEventListener("click", demander);
+      ecouter.addEventListener("click", () => {
+        const lecteur = document.querySelector(".lecteur .principal");
+        if (document.body.classList.contains("vlp-lit")) lecteur.click();  // la lecture en cours s'arrête d'abord
+        window.getSelection().selectAllChildren(reponse);
+        lecteur.click();
+      });
+      libelle();
+    }
+  })();
+
+  /* Format « gros rapport », éteint sauf data-format="gros" sur la page. Lit la page telle quelle : une section = un onglet ; la section
+     « Tes réponses » reste toujours visible. Une carte « à répondre » : elle a des boutons radio à elle
+     et aucun n'est coché (réponse du registre ou coche gardée dans ton navigateur). */
+  if (page.dataset.format === "gros") (() => {
+    const cleVue = "vue:" + (page.dataset.cle || document.title);
+    const lire = () => { try { return JSON.parse(localStorage.getItem(cleVue) || "{}"); } catch (e) { return {}; } };
+    const ecrire = v => { try { localStorage.setItem(cleVue, JSON.stringify(v)); } catch (e) {} };
+    const fixe = document.getElementById("reponses").closest("section");
+    const sections = [...page.querySelectorAll(":scope > section")].filter(s => s !== fixe);
+    sections.forEach((s, i) => { if (!s.id) s.id = "s-" + i; });
+    const nom = s => (s.querySelector("h2")?.textContent || s.id).trim();
+    const cartes = [...page.querySelectorAll(".question, .decision")].map(c => ({
+      c, radios: [...c.querySelectorAll('input[type="radio"]')].filter(r => r.closest(".question, .decision") === c)
+    })).filter(x => x.radios.length);
+    const aRepondre = x => !x.radios.some(r => r.checked);
+    let vue = Object.assign({ onglet: sections[0].id, ouvertes: false }, lire());
+    if (vue.onglet !== "tout" && !sections.some(s => s.id === vue.onglet)) vue.onglet = sections[0].id;
+
+    function appliquer() {
+      const ouvertes = new Set(cartes.filter(aRepondre).map(x => x.c));
+      for (const x of cartes) x.c.hidden = vue.ouvertes && !ouvertes.has(x.c);
+      for (const s of sections) {
+        const n = cartes.filter(x => s.contains(x.c) && ouvertes.has(x.c)).length;
+        const vide = vue.ouvertes && n === 0;
+        s.hidden = (vue.onglet !== "tout" && vue.onglet !== s.id) || (vue.onglet === "tout" && vide);
+        for (const b of document.querySelectorAll('[data-onglet="' + s.id + '"]')) {
+          b.querySelector(".compte").textContent = n ? " · " + n + " à répondre" : "";
+        }
+      }
+      for (const b of document.querySelectorAll("[data-onglet]")) b.setAttribute("aria-current", b.dataset.onglet === vue.onglet ? "true" : "false");
+      for (const c of document.querySelectorAll("[data-filtre]")) c.checked = vue.ouvertes;
+      const actif = sections.find(s => s.id === vue.onglet);
+      const vides = document.querySelectorAll(".vide-ouvertes");
+      for (const v of vides) v.remove();
+      if (actif && vue.ouvertes && cartes.some(x => actif.contains(x.c)) && !cartes.some(x => actif.contains(x.c) && ouvertes.has(x.c))) {
+        const p = document.createElement("p");
+        p.className = "vide-ouvertes sous";
+        p.textContent = "✅ Rien à répondre dans cette section. Décoche « à répondre seulement » pour tout revoir.";
+        actif.querySelector("h2").after(p);
+      }
+      ecrire(vue);
+    }
+    function choisir(id) { vue.onglet = id; appliquer(); }
+
+    function commandes() {
+      const bloc = document.createElement("div");
+      bloc.className = "commandes";
+      const filtre = document.createElement("label");
+      filtre.innerHTML = '<input type="checkbox" data-filtre> À répondre seulement';
+      filtre.querySelector("input").addEventListener("change", e => { vue.ouvertes = e.target.checked; appliquer(); });
+      const rangee = document.createElement("div");
+      rangee.className = "rangee";
+      const ajouter = (id, texte) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.dataset.onglet = id;
+        b.innerHTML = '<span></span><span class="compte"></span>';
+        b.firstChild.textContent = texte;
+        b.addEventListener("click", () => { choisir(id); document.querySelector(".flottant")?.classList.remove("ouvert"); page.scrollIntoView(); });
+        rangee.append(b);
+      };
+      for (const s of sections) ajouter(s.id, nom(s));
+      ajouter("tout", "📜 Tout afficher");
+      bloc.append(filtre, rangee);
+      return bloc;
+    }
+
+    const haut = document.createElement("details");
+    haut.className = "vue";
+    // Ouvert d'office, même à côté de la colonne de gauche (voulu le 2026-10-06) ; ton choix est retenu.
+    haut.open = "haut" in vue ? vue.haut : true;
+    haut.innerHTML = "<summary>🗂️ Sections et filtres</summary>";
+    haut.append(commandes());
+    haut.addEventListener("toggle", () => { vue.haut = haut.open; ecrire(vue); });
+    page.querySelector("header").after(haut);
+
+    const flottant = document.createElement("nav");
+    flottant.className = "flottant";
+    flottant.setAttribute("aria-label", "Sections");
+    flottant.innerHTML = "<p>🗂️ Sections</p>";
+    flottant.append(commandes());
+    document.body.append(flottant);
+    document.body.classList.add("avec-colonne");  // décale la page derrière la colonne (style ci-dessus)
+    const bouton = document.createElement("button");
+    bouton.type = "button";
+    bouton.id = "ouvrir-menu";
+    bouton.textContent = "🗂️ Sections";
+    bouton.setAttribute("aria-expanded", "false");
+    bouton.addEventListener("click", () => { const o = flottant.classList.toggle("ouvert"); bouton.setAttribute("aria-expanded", String(o)); });
+    document.body.append(bouton);
+
+    // Un lien interne (#Q-MIG-09, #sources…), ou la barre de suivi (évènement vlp-montrer), ouvre d'abord l'onglet
+    // qui contient sa cible.
+    function viser(hash) {
+      const cible = hash && document.getElementById(decodeURIComponent(hash.slice(1)));
+      if (cible) montrer(cible);
+    }
+    document.addEventListener("vlp-montrer", e => montrer(e.detail));
+    function montrer(cible) {
+      const s = sections.find(x => x.contains(cible));
+      if (!s) return;
+      if (s.hidden) { if (vue.onglet === "tout") vue.ouvertes = false; else vue.onglet = s.id; }
+      if (cible.closest("[hidden]")) vue.ouvertes = false;  // une carte déjà répondue, cachée par le filtre
+      appliquer();
+    }
+    document.addEventListener("click", e => { const a = e.target.closest('a[href^="#"]'); if (a) viser(a.getAttribute("href")); });
+    window.addEventListener("hashchange", () => { viser(location.hash); document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView(); });
+    appliquer();
+    if (location.hash) { viser(location.hash); document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView(); }
+  })();
+
+// LECTEUR — début. Le lecteur à voix haute, copié à l'octet dans templates/vlp.js et dans le script de
+// templates/rapport-choix.html ; test-vlp.py vérifie que les deux copies sont pareilles (2026-10-06).
+// La voix du navigateur (Web Speech, sans paquet ; essayée dans le cadre d'un artefact le 2026-10-06)
+// lit la sélection s'il y en a une, sinon le texte visible de la page — une carte repliée ne se lit
+// pas. Un morceau par ligne ou par phrase : certains navigateurs coupent une lecture trop longue.
+// Au repos, un seul bouton « Écouter » sous le titre. Pendant la lecture, une barre collée en bas de
+// l'écran : Arrêter, cinq vitesses en un clic (gardées dans le navigateur), « phrase n sur N », la
+// progression. Une vitesse changée en pleine lecture reprend la phrase en cours ; Échap arrête. Ce
+// qui se passe s'affiche à côté du bouton, et une erreur part en console.
+(() => {
+  const page = document.querySelector(".page");
+  const entete = page && page.querySelector("header");
+  const voix = window.speechSynthesis;
+  if (!entete || !voix) return;
+  // l'émoji part avec ses liants invisibles (U+FE0F, U+200D), sinon il en reste une « phrase » muette
+  const sansEmoji = (t) => t.replace(/[\p{Extended_Pictographic}️‍]/gu, "").trim();
+  const VITESSES = [0.75, 1, 1.25, 1.5, 2];
+  const CLE_VITESSE = "vlp-vitesse";
+  let vitesse = 1.25; // plus vite que la normale (1), à sa demande du 2026-10-06
+  try {
+    const gardee = Number(localStorage.getItem(CLE_VITESSE));
+    if (VITESSES.includes(gardee)) vitesse = gardee;
+  } catch (e) { console.warn("lecteur — vitesse gardée illisible :", e); }
+  const ICONES = {
+    ecouter: '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.6 6a8.6 8.6 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
+    arreter: '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2" fill="currentColor"/></svg>',
+  };
+  let morceaux = [];
+  let choisi = "";
+  let encours = -1; // le morceau qui se lit, -1 hors lecture
+  let lit = false;
+  let numero = 0; // la dernière lecture lancée : une ancienne ne parle plus à sa place
+  const element = (balise, classe, texte) => {
+    const e = document.createElement(balise);
+    if (classe) e.className = classe;
+    if (texte) e.textContent = texte;
+    return e;
+  };
+  const principaux = [];
+  const principal = () => {
+    const b = element("button", "principal");
+    b.type = "button";
+    b.addEventListener("click", () => (lit ? arreter("Arrêté.") : ecouter()));
+    principaux.push(b);
+    return b;
+  };
+
+  const lecteur = element("div", "lecteur");
+  const suivi = element("span", "suivi");
+  suivi.setAttribute("aria-live", "polite");
+  lecteur.append(principal(), suivi);
+  const titre = entete.querySelector("h1");
+  if (titre) titre.after(lecteur);
+  else entete.append(lecteur);
+
+  const barre = element("div", "barre-lecture");
+  barre.hidden = true;
+  barre.setAttribute("role", "region");
+  barre.setAttribute("aria-label", "Lecture en cours");
+  const dedans = element("div", "dedans");
+  const vitesses = element("span", "vitesses");
+  vitesses.setAttribute("role", "group");
+  vitesses.setAttribute("aria-label", "Vitesse de lecture");
+  VITESSES.forEach((v) => {
+    const b = element("button", "", v.toLocaleString("fr-FR"));
+    b.type = "button";
+    b.dataset.vitesse = String(v);
+    b.addEventListener("click", () => changer(v));
+    vitesses.append(b);
+  });
+  const ou = element("span", "ou");
+  const avance = document.createElement("progress");
+  dedans.append(principal(), element("span", "etiquette", "Vitesse"), vitesses, ou, avance);
+  barre.append(dedans);
+  document.body.append(barre);
+
+  const rendre = () => {
+    principaux.forEach((b) => {
+      b.innerHTML = (lit ? ICONES.arreter : ICONES.ecouter) + "<span>" + (lit ? "Arrêter" : "Écouter") + "</span>";
+    });
+    vitesses.querySelectorAll("button").forEach((b) => {
+      b.setAttribute("aria-pressed", String(Number(b.dataset.vitesse) === vitesse));
+    });
+    barre.hidden = !lit;
+    document.body.classList.toggle("vlp-lit", lit);
+    ou.textContent = lit && encours >= 0 ? "Phrase " + (encours + 1) + " sur " + morceaux.length : "";
+    avance.max = Math.max(morceaux.length, 1);
+    avance.value = Math.max(encours + 1, 0);
+  };
+  const fin = (texte) => {
+    lit = false;
+    encours = -1;
+    suivi.textContent = texte;
+    rendre();
+  };
+  const arreter = (texte) => {
+    numero++;
+    voix.cancel();
+    fin(texte);
+  };
+  const lancer = (depart) => {
+    voix.cancel();
+    const tour = ++numero;
+    const fr = voix.getVoices().find((v) => v.lang.toLowerCase().startsWith("fr"));
+    let parti = false;
+    morceaux.slice(depart).forEach((m, k) => {
+      const i = depart + k;
+      const phrase = new SpeechSynthesisUtterance(m);
+      phrase.lang = "fr-FR";
+      phrase.rate = vitesse;
+      if (fr) phrase.voice = fr;
+      phrase.onstart = () => {
+        if (tour !== numero) return;
+        encours = i;
+        if (!parti) suivi.textContent = choisi ? "Lecture de la sélection…" : "Lecture de la page…";
+        parti = true;
+        rendre();
+      };
+      if (i === morceaux.length - 1) phrase.onend = () => {
+        if (tour === numero) fin("Lecture finie.");
+      };
+      phrase.onerror = (e) => {
+        if (tour !== numero || e.error === "interrupted" || e.error === "canceled") return;
+        console.warn("lecteur — voix en erreur :", e.error);
+        fin("Erreur de la voix : " + e.error);
+      };
+      voix.speak(phrase);
+    });
+    lit = true;
+    if (!depart) suivi.textContent = "Lancement…";
+    rendre();
+    setTimeout(() => {
+      if (parti || tour !== numero) return;
+      console.warn("lecteur — la voix n'a pas démarré en 3 s");
+      fin("La voix n'a pas démarré.");
+    }, 3000);
+  };
+  const ecouter = () => {
+    choisi = String(window.getSelection() || "").trim();
+    suivi.textContent = "";
+    lecteur.hidden = true; // le lecteur ne se lit pas lui-même
+    const brut = choisi || page.innerText;
+    lecteur.hidden = false;
+    // ne se disent pas : un bouton, ni ce qui porte data-muet (le libellé d'un repli de commande)
+    const etiquettes = new Set([...page.querySelectorAll("button, [data-muet]")]
+      .filter((b) => !lecteur.contains(b))
+      .map((b) => sansEmoji(b.textContent)));
+    morceaux = sansEmoji(brut)
+      .split(/\n+|(?<=[.!?;:])\s+/)
+      .map((m) => m.trim())
+      .filter((m) => /[\p{L}\p{N}]/u.test(m) && !etiquettes.has(m)); // sans lettre ni chiffre, rien à dire
+    if (!morceaux.length) { fin("Rien à lire."); return; }
+    lancer(0);
+  };
+  const changer = (v) => {
+    vitesse = v;
+    try { localStorage.setItem(CLE_VITESSE, String(vitesse)); }
+    catch (e) { console.warn("lecteur — vitesse non gardée :", e); }
+    rendre();
+    if (lit && encours >= 0) lancer(encours);
+  };
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && lit) arreter("Arrêté."); });
+  rendre();
+})();
+// LECTEUR — fin
+</script>
