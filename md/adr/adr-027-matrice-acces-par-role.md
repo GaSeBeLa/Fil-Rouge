@@ -46,9 +46,10 @@
 >   (l. 17, l. 66) ; états de facture `invoice_submitted`, `verified`
 >   (l. 209-213) ; « Aucun rôle humain ne crée un bien » (l. 237). À remplacer
 >   par l'annexe de cette fiche.
-> * `docker/init-v3/04_role-lecture-seule.sql:51` donne à `fil_rouge_reader`
->   `SELECT` sur toutes les tables, mot de passe compris. Signalé à part (voir
->   Conséquences). Rien n'a été touché.
+> * `docker/init-v3/04_role-lecture-seule.sql:51` donnait à `fil_rouge_reader`
+>   `SELECT` sur toutes les tables, mot de passe compris. Corrigé le 2026-10-09
+>   (rapport « Rôle lecteur et mots de passe », L1 A, L2 A, L3 A) : le mot de
+>   passe est fermé par un droit par colonne, voir Conséquences.
 > * « 19 tables » dans `docker/init-v3/README.md:13`, `:133` et `CLAUDE.md:13`,
 >   `:25`, `:36`. Le schéma en a 20 depuis `review_media` (compté le
 >   08/10/2026 : 20 `CREATE TABLE`).
@@ -159,7 +160,7 @@ Sous-choix déjà tranché, le rôle en lecture seule (Q14) :
 * **Routes DELETE :** les 20 routeurs ont une route DELETE (`API/src/app/routes/crud_router.py:104-110`). Elles contredisent le point 4 pour les comptes. Les fermer est proposé (point 4) ; leurs tests (`test_users_db.py:89-104`) seront alors à réécrire (ADR-049). Demande du code, non fait.
 * **`POST /hunter-performances` est ouvert** : il contredit le point 5 (ADR-035, Conséquences).
 * **Conflit d'intérêts sur les visites :** le chasseur enregistre la visite (Q-ACC-13), et moins de visites donne une meilleure note (ADR-048). La carte le disait : « Il a intérêt à ne pas tout déclarer » (`jeff.html:1649`). 💡 Contre-pouvoir : le client lit ses visites, le manager celles de son équipe.
-* **Limite du rôle PostgreSQL :** `fil_rouge_reader` lit toutes les tables (`04_role-lecture-seule.sql:51`). Il lit donc `"user".password`, les paiements, les comptes désactivés : plus que `Reader` dans l'API (points 7, 8 et 10). L'API ne renvoie jamais le mot de passe ; un accès direct, si. L'empreinte Argon2 ne concerne que les comptes créés par l'API : les comptes repris ont un mot de passe factice, qui n'est pas une empreinte (`API/src/app/utils/security.py:41-43` ; `docker/init-v3/README.md:322-328`). Restreindre ses droits en base : déduit — demande du code, non fait, signalé à part. Piste, non vérifiée : un droit par colonne sur `"user"`.
+* **Limite du rôle PostgreSQL :** `fil_rouge_reader` lit toutes les tables (`04_role-lecture-seule.sql:51`). Depuis le 2026-10-09, il ne lit plus `"user".password` : la table est rouverte colonne par colonne, sans le mot de passe (`04_role-lecture-seule.sql`, fin du fichier ; migration `18_role-lecture-seule-sans-mot-de-passe.sql` pour une base déjà créée). Il lit encore les paiements et les comptes désactivés : plus que `Reader` dans l'API (points 8 et 10) ; question à part, non tranchée. `SELECT *` sur `"user"` lui est refusé. Correctif écrit mais pas encore exécuté (Docker arrêté le 2026-10-09).
 * 💡 **Pour une IA ou une analyse :** lire une copie anonymisée (OLAP), pas la base de production, comme le dit le sujet (`documents utiles/SOUVERAINETE-SECURITE-IA.md:16`, StarterPack). Non décidé ici.
 * **Comptes désactivés en attente d'anonymisation :** traités dans ADR-049.
 * **Barème propre à un chasseur** (Q-PAR-09, décision D9 du sujet) : il va dans la RACI, pas ici (`reg:427` ; RCR:329).
@@ -214,7 +215,7 @@ Où l'on a cherché, pour les cases du point 10 : les parcours (`Readme.md:94-13
 | 5 rôles | `docker/init-v3/01_create_fil_rouge_immobilier.sql:164` |
 | 20 tables, 38 clés `RESTRICT`, 0 `CASCADE` ; 5 tables citées par aucune clé | même fichier, compté le 08/10/2026 |
 | Un compte libre se supprime (200) ; un compte cité, 409 | `API/tests/integration/test_users_db.py:89-92`, `:95-104` |
-| `fil_rouge_reader` : `SELECT` sur toutes les tables | `docker/init-v3/04_role-lecture-seule.sql:49-52` |
+| `fil_rouge_reader` : `SELECT` sur toutes les tables | `docker/init-v3/04_role-lecture-seule.sql:49-52` ; `"user"` sans `password` (fin du fichier) |
 | L'API ne renvoie jamais le mot de passe | `API/src/app/models/user_model.py:35-46` |
 | Comptes repris : mot de passe factice | `API/src/app/utils/security.py:41-43` ; `docker/init-v3/README.md:322-328` |
 | Critères versionnés | `01:323-324` ; `GLOSSAIRE-METIER.md`, « Version de demande » (StarterPack) |
