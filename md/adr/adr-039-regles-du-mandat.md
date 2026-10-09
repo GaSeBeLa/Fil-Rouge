@@ -158,7 +158,7 @@ Une sous-décision par bloc. L'option retenue est marquée **retenue** ; les aut
 
 1. **L'exclusivité vaut-elle par client ou par recherche ?** 🟡 À faire confirmer par Jeff.
    * Aujourd'hui le trigger compare les mandats du **même client** (`01:529-539`) : un exclusif bloque tout autre mandat du client sur la période.
-   * 💡 Proposition (Gabriel puis Sébastien, 2026-10-09, Discord) : l'exclusivité vaut **par recherche**. Un client peut signer plusieurs exclusifs sur des **recherches différentes** ; sur une même recherche, un exclusif exclut tout autre mandat qui se chevauche. Le trigger ajouterait `m.id_search_request = NEW.id_search_request` (`mandate.id_search_request`, `01:454`).
+   * 💡 Proposition (Gabriel puis Sébastien, 2026-10-09, Discord) : l'exclusivité vaut **par recherche**. Un client peut signer plusieurs exclusifs sur des **recherches différentes** ; sur une même recherche, un exclusif exclut tout autre mandat qui se chevauche. Le trigger ajouterait `m.id_search_request = NEW.id_search_request` (`mandate.id_search_request`, `01:463`).
    * Le sujet dit « aucun autre chasseur ne peut agir pour le compte d'Alice pendant la durée du mandat » (`00_…feature:20`), dans un contexte d'**une** demande de recherche (`:11`) : les deux lectures sont possibles.
    * ⚠️ Limite à écrire si adoptée : un client pourrait déposer une seconde recherche quasi identique pour contourner l'exclusivité.
    * Statut : 💡 proposée, pas acceptée. Rien n'est changé dans le trigger tant que Jeff n'a pas confirmé.
