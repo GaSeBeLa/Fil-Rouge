@@ -126,7 +126,7 @@ id_author            INTEGER
 * **Supprimer un auteur est refusé** (`ON DELETE RESTRICT`). Cela va avec la règle du groupe : désactiver un compte plutôt que le supprimer (Q-ACC-08, `questions-a-trancher.md:1037`).
 * **L'import aujourd'hui.** Lancer l'import, c'est créer la base : le script `03` est joué à ce moment (`docker/docker-compose.yml:17`). Il n'écrit pas par l'API, donc aucun rôle de l'application n'a besoin du droit de créer un bien pour l'import.
 * **Référence d'un bien saisi à la main.** La base exige une référence unique et non vide (`01_…sql:561-562`). Son format n'est pas fixé. Micro-décision, hors ADR (`JOURNAL-DE-DECISIONS.md:13`).
-* **Import par flux orchestré, avec dédoublonnage** (ADR-045, limite 7, proposée puis acceptée par le groupe le 2026-10-09). Aujourd'hui le dépôt ne charge les annonces qu'une fois (`03`) ; le flux reste à écrire. Un bien saisi à la main pourrait aussi arriver par l'import : à régler. Le sujet range le dédoublonnage dans le futur parcours IA (`Readme.md:193`).
+* **Import par flux orchestré, avec dédoublonnage** (ADR-045, limite 7, proposée puis acceptée par le groupe le 2026-10-09). Aujourd'hui le dépôt ne charge les annonces qu'une fois (`03`) ; le flux reste à écrire. Un bien saisi à la main pourrait aussi arriver par l'import : à régler, avec l'endroit où vit le flux, après les cours de machine learning et de data science (Sébastien, 2026-10-09). Le sujet range le dédoublonnage dans le futur parcours IA (`Readme.md:193`).
 
 **Questions tranchées par les sources**
 
