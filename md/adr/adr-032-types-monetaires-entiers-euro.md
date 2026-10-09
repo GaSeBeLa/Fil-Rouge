@@ -74,9 +74,9 @@ B. Le type des prix et des bornes du barème (Q-REM-01)
 **Décision**
 
 1. Tout montant est en **euros**. Jamais en K€.
-2. **`INTEGER`, euros entiers**, pour les prix, les budgets, les bornes du barème et la part fixe. Dix colonnes :
+2. **`INTEGER`, euros entiers**, pour les prix, les budgets, les bornes du barème et la part fixe. Huit colonnes (les deux budgets travaux ont été retirés, S7) :
    * `estate.price`, `estate_proposed.amount_proposition`, `sale.purchase_amount` ;
-   * `criteria.budget_min`, `budget_max`, `renovation_budget_min`, `renovation_budget_max` ;
+   * `criteria.budget_min`, `budget_max` ;
    * `commission_scale.amount_min`, `amount_max` ; `parameters_fees.fixed_amount`.
 3. **`NUMERIC(12,2)`, au centime**, pour les honoraires `sale.fees_amount` et la rémunération `payment.amount`.
 4. Une tranche du barème **inclut ses deux bornes** : `numrange(amount_min, amount_max, '[]')` dans les deux `EXCLUDE` de `commission_scale`. Un prix égal à la borne basse d'une tranche tombe dans cette tranche : 200 000 € donne 35 %. Un prix égal à la borne haute reste dans la sienne : 199 999 € donne 30 %.
@@ -100,7 +100,7 @@ B. Le type des prix et des bornes du barème (Q-REM-01)
 * **Tests** : un prix à virgule rend 422 et rien n'est écrit (`API/tests/integration/test_constraints_db.py:86-93`). Sans ce contrôle, PostgreSQL arrondissait 199 999,5 en silence à 200 000 (même fichier, l. 86-88). 199 999 € donne 30 %, 200 000 € donne 35 % (`test_remuneration.py:191-196`).
 * **Pas de script de migration** pour ce changement : il a demandé de recréer la base (`docker compose down -v`, `questions-a-trancher.md:388`).
 * **Écart à un exemple du sujet** : ses schémas d'exemple mettent `decimal budget_max` sur le client (`documents utiles/MCD-MERISE.md:44-57`, `OLTP.md:31-36`). Ce sont des exemples ; le glossaire place le budget dans la demande. À dire en soutenance.
-* **Ce qui reste d'ADR-012** : la fourchette de budget et le budget travaux. Ils passent sur `criteria`, et le budget travaux devient lui aussi une fourchette (min, max). Sa règle de rapprochement n'est pas reprise : voir « Questions tranchées », dernière ligne.
+* **Ce qui reste d'ADR-012** : la fourchette de budget d'achat, sur `criteria`. ✅ **Confirmé le 09/10/2026 (Sébastien ; deux états proposés par Améthyste)** : la règle de rapprochement est abandonnée et les budgets travaux `renovation_budget_min` et `renovation_budget_max` sont **retirés** du schéma (migration 21), car aucune règle ne les lit et le sujet n'en parle pas. `needs_renovation` reste sur `estate` et `criteria`, en **deux états** : `BOOLEAN NOT NULL DEFAULT FALSE` (`FALSE` : pas de bien à rénover ; `TRUE` : le client accepte un bien avec travaux). Tout le reste sur la rénovation est hors MVP.
 * **Journal** : ADR-012 n'est pas effacé. Il passe à « remplacé par ADR-032 » (`documents utiles/JOURNAL-DE-DECISIONS.md:72`).
 
 **Questions tranchées par les sources**
@@ -113,7 +113,7 @@ B. Le type des prix et des bornes du barème (Q-REM-01)
 | La part fixe des honoraires : entière ou au centime ? | Entière : le sujet donne « 3000,00 », soit 3 000. | `10_calcul_remuneration_chasseur.feature:19-20` ; `01:745-746` |
 | Un prix saisi avec des centimes : arrondi ou refusé ? | Refusé, 422 (Q-INF-06). | `test_constraints_db.py:86-93` |
 | Quel arrondi pour les montants au centime ? | Au centime, au demi supérieur. | `REGLES-CALCUL-REMUNERATION.md:229` ; `remuneration.py:44-46` |
-| La règle de rapprochement d'ADR-012 (« additionner le prix de vente et l'estimation des travaux du bien, puis comparer ce total à la somme du `max_budget` et du `renovation_budget` ») : on la garde ? | **Non, elle tombe avec ADR-012.** Déduit, pas décidé : elle ne peut pas se calculer, car `estate` n'a pas d'estimation des travaux, seulement `needs_renovation BOOLEAN`. Les deux fourchettes restent des critères de recherche. Si la sélection des biens se code un jour, son propre ADR fixera la règle. | journal Confluence, ADR-012, Conséquences ; `01:610` ; le sujet ne parle jamais de budget travaux (recherche « travaux », « rénovation », « budget » dans le StarterPack ; seul `08_futur_particulier_assistance_ia.feature:15` cite « budget », sans règle) ; aucun code de rapprochement dans `API/` |
+| La règle de rapprochement d'ADR-012 (« additionner le prix de vente et l'estimation des travaux du bien, puis comparer ce total à la somme du `max_budget` et du `renovation_budget` ») : on la garde ? | **Non, elle tombe avec ADR-012.** ✅ Confirmé par le groupe le 09/10/2026 (S7). Raison : elle ne peut pas se calculer, car `estate` n'a pas d'estimation des travaux, seulement `needs_renovation BOOLEAN`. Les deux fourchettes restent des critères de recherche. Si la sélection des biens se code un jour, son propre ADR fixera la règle. | journal Confluence, ADR-012, Conséquences ; `01:611` ; le sujet ne parle jamais de budget travaux (recherche « travaux », « rénovation », « budget » dans le StarterPack ; seul `08_futur_particulier_assistance_ia.feature:15` cite « budget », sans règle) ; aucun code de rapprochement dans `API/` |
 
 **Questions ouvertes** 🟡
 
@@ -124,7 +124,7 @@ Aucune.
 | Affirmation | Source |
 |---|---|
 | ADR-012 : trois budgets Numeric sur `Client` ; règle de rapprochement | journal Confluence, copie du 07/10/2026, ADR-012, Décision et Conséquences |
-| `estate` n'a pas d'estimation des travaux, seulement `needs_renovation BOOLEAN` | `docker/init-v3/01_create_fil_rouge_immobilier.sql:610` |
+| `estate` n'a pas d'estimation des travaux, seulement `needs_renovation BOOLEAN` | `docker/init-v3/01_create_fil_rouge_immobilier.sql:611` |
 | Aucun ADR ne porte l'euro ; ADR-012 dépassé | `md/adr/2026-10-07-liste-adr-chantier-4.md:45-49` |
 | K€ retenus le 11/09/2026 | `livrables/2-modelisation/09-decisions-a-prendre.md:263-306` |
 | L'euro le 21/09/2026, trois mesures | `context AI/08-etat.md:108-114` ; `docker/init-v3/README.md:157-194` ; commit `44f9054` |
