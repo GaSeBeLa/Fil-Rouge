@@ -111,7 +111,7 @@ Sous-choix sur la route, laissé par le client (Q-JEF-15) :
 | Email | `"user".email`, `NOT NULL UNIQUE` (`01:171`) | tout de suite | `anonyme-<id>@exemple.invalid`, unique par construction |
 | Mot de passe | `"user".password`, `NOT NULL` (`01:172`) | tout de suite | une valeur qui n'est pas une empreinte Argon2 : aucune connexion possible, comme les comptes repris (`API/src/app/utils/security.py:41-43`) |
 | Téléphone | `phone_number`, `NOT NULL`, format imposé : `client` (`01:205-206`, `:221-222`), `hunter` (`01:276-277`, `:299-300`), `real_estate_manager` (`01:254-255`, `:263-264`) | tout de suite | `+33000000000`, la valeur factice déjà admise (`01:189-190`, Q-MIG-07) |
-| Adresse, complément, code postal, ville, pays | `client` (`01:201`, `:207-215`) | tout de suite | vides, toutes ensemble (`01:227-229`) |
+| Adresse, complément, code postal, ville, pays | `client` (`01:201`, `:207-215`) | tout de suite | adresse `'anonyme'`, code postal `'00000'`, ville `'anonyme'`, pays `'FR'` ; complément vidé. L'adresse est obligatoire depuis ADR-053 (P3) ; valeur validée par Sébastien le 12/10/2026 |
 | Naissance, genre, situation familiale, enfants | `client` (`01:203`, `:216-219`) | tout de suite | vides |
 | Textes écrits par la personne | `estate_proposed.comment_client` (`01:688`) ; `criteria.change_reason` quand elle en est l'auteur (`01:328`) | tout de suite | vides |
 | Prénom, nom | `NOT NULL` : `client` (`01:197-200`), `hunter` (`01:272-275`), `real_estate_manager` (`01:250-253`) | à la fin du plus long délai qui la concerne (point 5) ; tout de suite si aucun | « Anonyme » |

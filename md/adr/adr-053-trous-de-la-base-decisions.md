@@ -19,7 +19,7 @@
 | P | Le trou | Choix | Où |
 |---|---|---|---|
 | P2 | Deux comptes au même email, à la majuscule près ; aucun format | Index unique sur `lower(email)` et `CHECK` de format, **et** `EmailStr` dans l'API | base + API |
-| P3 | Un client sans adresse | Adresse **obligatoire** : `NOT NULL` sur `address`, `postal_code`, `town`, `country_iso` | base |
+| P3 | Un client sans adresse | Adresse **obligatoire** : `NOT NULL` sur `address`, `postal_code`, `town`, `country_iso`. ✅ Codé le 12/10 (migration 23) | base |
 | P12 | Un mandat sur la demande d'un autre client | `UNIQUE (id, id_client)` sur `search_request`, clé étrangère composite depuis `mandate` | base |
 | P13 | Le renouvellement contourne l'exclusivité | Corriger le trigger : le parent n'est exempté que si l'enfant est signé **à son échéance** | base (trigger existant) |
 | P16 | 251 biens ont plus de chambres que de pièces | Contrôle **à la saisie** ; les 251 restent tels quels | API |
@@ -52,14 +52,14 @@ Le sens des deux valeurs est écrit en base : `COMMENT ON COLUMN visit.visitor_t
 **Ce que ces choix changent dans les ADR déjà écrits**
 
 * **ADR-022 et ADR-043 (P3).** L'adresse passe de « tout ou rien » à **obligatoire**. ADR-043 Décision 4 (« ses trois champs, ou aucun ») tombe. Les 18 clients repris gardent leurs valeurs factices (ADR-043 Décisions 2 et 3).
-* **ADR-049 (P3).** L'anonymisation ne peut plus **vider** l'adresse (`adr-049:114`) : elle met une adresse neutre, comme pour le téléphone. 🟡 La valeur reste à fixer ; `'non renseigné'` et `00000` sont déjà admis pour les clients repris.
+* **ADR-049 (P3).** L'anonymisation ne peut plus **vider** l'adresse (`adr-049:114`) : elle met une adresse neutre, comme pour le téléphone. Valeur retenue : `'anonyme'`, `'00000'`, `'anonyme'`, `'FR'` (Sébastien, Discord, 12/10/2026). `'anonyme'` plutôt que `'non renseigné'` : on distingue « effacé à sa demande » de « jamais connu ». Le pays est forcé à `'FR'` : `00000` n'est valable qu'au format français (`01`, `ck_client_postal_code_format`).
 * **ADR-039, Décision 2 (P13).** Le trigger n'exempte plus le parent et l'enfant sans condition : seulement quand l'enfant est signé à l'échéance du parent. Cela met dans la base la règle « à l'échéance » d'ADR-050 Décision 4.
 * **ADR-048 (P23).** Le critère compte les visites `'client'` ; la « visite de repérage » du chasseur (l. 94) est la visite 1 de la règle ci-dessus, sur un bien déjà choisi par le client.
 
 **Conséquences**
 
-* **Rien n'est codé** par cet ADR, sauf le commentaire de `visit.visitor_type`. Les choix « base » et « API » deviennent des tâches.
-* **P3 :** les tests à compléter (`client_payload`, `API/tests/integration/test_constraints_db.py:64-72`) ; le formulaire de création du client demande l'adresse.
+* **Codé** : le commentaire de `visit.visitor_type` (migration 22) et P3 (migration 23). Les autres choix « base » et « API » deviennent des tâches.
+* **P3, fait le 12/10/2026 :** `NOT NULL` dans `01` et la migration 23, jouées sur `fil_rouge_immobilier` ; le tout-ou-rien et `ck_client_postal_code_needs_country` retirés ; le modèle `Client` de l'API rend les quatre champs obligatoires (422 s'il en manque un) ; tests : champ manquant, `NOT NULL` en SQL, adresse neutre acceptée. Reste : le formulaire de création du client demande l'adresse.
 * **P13 :** la version testée de la condition est dans le rapport de vérification (§ 2, P13), avec `COALESCE` et dans les deux sens. Un renouvellement signé **avant** l'échéance sera refusé, conforme à `00_…feature:40`.
 * **P12 et P13 :** chacun demande d'abord une contrainte `UNIQUE` sur la table visée.
 * **P24 :** comparer à `clock_timestamp()` ou dans l'API, pas à `now()` (même piège que P34).
@@ -67,13 +67,15 @@ Le sens des deux valeurs est écrit en base : `COMMENT ON COLUMN visit.visitor_t
 **Questions ouvertes** 🟡
 
 1. **P18, le nombre d'étages d'une maison.** Les 2 556 biens à importer sont **tous** des maisons, chalets ou châteaux : aucun appartement (`normalised/annonces/annonces.csv`, colonne `type_bien`). La source n'a **aucune colonne** de nombre d'étages, et aucun titre ni description ne le dit (recherche de « plain-pied », « R+1 », « étages », « niveaux » : 0). Ajouter `nb_floors` ferait une colonne **vide partout**, qu'aucune source ne demande. 💡 Proposé : ne pas l'ajouter.
-2. **P3 :** l'adresse neutre de l'anonymisation.
+2. ~~**P3 :** l'adresse neutre de l'anonymisation.~~ ✅ Tranchée le 12/10/2026 : `'anonyme'`, `'00000'`, `'anonyme'`, `'FR'` (Sébastien, Discord).
 
 **Sources**
 
 | Affirmation | Source |
 |---|---|
 | Les 13 choix | Sébastien, réponses à la page à cartes, Discord, 12/10/2026 |
+| L'adresse neutre de l'anonymisation | Sébastien, Discord, 12/10/2026 (« j'accepte ta proposition ») |
+| Les 18 clients ont adresse, code postal, ville et pays ; tous en France | `fil_rouge_immobilier`, compté le 12/10/2026 : `18\|18\|18\|18\|18`, 0 hors `FR` |
 | Le flux des sources est retenu ; la visite du chasseur avant la proposition est écartée | Gabriel, Discord, 12/10/2026 |
 | La visite 2 se fait avec le chasseur, et c'est elle qui compte pour la rémunération | Gabriel, Discord, 12/10/2026 |
 | Le client choisit les biens à faire visiter par son chasseur ; le chasseur visite les biens choisis | `02_particulier_recherche_et_visites.feature:14-23` ; `Readme.md:99-100` |
