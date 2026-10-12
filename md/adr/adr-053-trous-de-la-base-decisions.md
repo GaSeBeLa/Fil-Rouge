@@ -3,7 +3,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 12/10/2026
-* **Statut :** proposé
+* **Statut :** accepté (groupe, Discord, 12/10/2026)
 * **Décideurs :** Sébastien a coché les 13 cartes le 12/10/2026 (page à cartes « Les trous de la base à trancher », réponses collées sur Discord). La règle des visites suit le flux des sources, vérifié et retenu par le groupe le même jour (Gabriel, Discord).
 * **Complète :** ADR-022 et ADR-043 (adresse du client) ; ADR-039, Décision 2 (exclusivité) ; ADR-048 (critère des visites)
 * **Voir aussi :** ADR-034 (réglages du taux) ; ADR-040 (où vit une règle) ; ADR-045 (limites du MVP) ; ADR-049 (anonymisation) ; ADR-050 (renouvellement)
@@ -23,7 +23,7 @@
 | P12 | Un mandat sur la demande d'un autre client | `UNIQUE (id, id_client)` sur `search_request`, clé étrangère composite depuis `mandate`. ✅ Codé le 12/10 (migration 28) | base |
 | P13 | Le renouvellement contourne l'exclusivité | Corriger le trigger : le parent n'est exempté que si l'enfant est signé **à son échéance**. ✅ Codé le 12/10 (migration 29) | base (trigger existant) |
 | P16 | 251 biens ont plus de chambres que de pièces | Contrôle **à la saisie** ; les 251 restent tels quels | API |
-| P18 | Sens de `floor` | `floor` = **l'étage du logement**, le sens de la source | doc |
+| P18 | Sens de `floor` | `floor` = **l'étage du logement**, le sens de la source ; pas de `nb_floors`. ✅ Écrit en base le 12/10 (`COMMENT ON COLUMN`, migration 37) | base (commentaire) |
 | P21 | Deux offres acceptées sur un mandat | **Rien** : ADR-045 reste ; `sale.id_mandate` `UNIQUE` garde une seule vente | — |
 | P23 | Une visite sur un bien jamais proposé | Vérifié pour les visites `'client'` seulement | API |
 | P24 | Visite prévue ou faite ? | On n'enregistre que les visites **faites** : pas de date future. ✅ Codé le 12/10 (migration 33) | base |
@@ -58,7 +58,7 @@ Le sens des deux valeurs est écrit en base : `COMMENT ON COLUMN visit.visitor_t
 
 **Conséquences**
 
-* **Codé le 12/10/2026** (« go » de Sébastien) : le commentaire de `visit.visitor_type` (migration 22) et tous les choix « base » : P3 (23), P2 (24), P12 (28), P13 (29), P24 (33), P36 (36). Chaque migration est jouée sur `fil_rouge_immobilier` ; tests dans `API/tests/integration/test_trous_audit_db.py`.
+* **Codé le 12/10/2026** (« go » de Sébastien) : le commentaire de `visit.visitor_type` (migration 22) et tous les choix « base » : P3 (23), P2 (24), P12 (28), P13 (29), P24 (33), P36 (36), et le sens de `floor` (P18, 37). Chaque migration est jouée sur `fil_rouge_immobilier` ; tests dans `API/tests/integration/test_trous_audit_db.py`.
 * **Avec eux, les réparations prêtes de l'audit qui se font en base** : P6 (25), P8 (26), P9 (27), P15 (30), P17 (31, coordonnées seulement), P22 (32), P34 (34), P35 (35).
 * **Reste pour le chantier API** : les choix « API » (P16, P23, P25, P28, P29, et `EmailStr` de P2) et les réparations prêtes qui se font dans l'API (P5, P19, P20, P27, P32, P33). Leur solution est décrite dans l'audit, pas écrite.
 * **Laissé de côté** : P10, aucune source ne lie type de bien et typologie.
