@@ -32,7 +32,7 @@
 
 **Conséquences**
 
-* **Code :** fait le 12/10/2026 (fiche API1) : `POST /auth/login`, `GET /auth/me` et la dépendance `get_current_user` (`API/src/app/routes/auth_router.py`), jeton dans `API/src/app/utils/security.py`, `pyjwt` dans `API/requirements.txt`. Les routes CRUD ne l'exigent pas encore : fiche API2.
+* **Code :** fait le 12/10/2026 (fiche API1) : `POST /auth/login`, `GET /auth/me` et la dépendance `get_current_user` (`API/src/app/utils/current_user.py`), jeton dans `API/src/app/utils/security.py`, `pyjwt` dans `API/requirements.txt`. Toutes les routes CRUD l'exigent depuis la fiche API2 (12/10/2026).
 * **Où brancher :** une dépendance posée sur `build_crud_router` vaut pour toutes les routes CRUD (ADR-028).
 * **Compte désactivé :** il perd ses droits au prochain appel (ADR-049).
 * **Prix :** une lecture en base de plus à chaque appel.
