@@ -59,7 +59,7 @@ Le sens des deux valeurs est écrit en base : `COMMENT ON COLUMN visit.visitor_t
 **Conséquences**
 
 * **Codé** : le commentaire de `visit.visitor_type` (migration 22) et P3 (migration 23). Les autres choix « base » et « API » deviennent des tâches.
-* **P3, fait le 12/10/2026 :** `NOT NULL` dans `01` et la migration 23, jouées sur `fil_rouge_immobilier` ; le tout-ou-rien et `ck_client_postal_code_needs_country` retirés ; le modèle `Client` de l'API rend les quatre champs obligatoires (422 s'il en manque un) ; tests : champ manquant, `NOT NULL` en SQL, adresse neutre acceptée. Reste : le formulaire de création du client demande l'adresse.
+* **P3, fait le 12/10/2026 :** `NOT NULL` dans `01` et la migration 23, jouées sur `fil_rouge_immobilier` ; le tout-ou-rien et `ck_client_postal_code_needs_country` retirés ; le modèle `Client` de l'API rend les quatre champs obligatoires (422 s'il en manque un) ; tests : champ manquant, `NOT NULL` en SQL, adresse neutre acceptée. Rien d'autre à faire : le front est hors du périmètre (Sébastien, Discord, 12/10/2026), et l'API refuse déjà un client sans adresse.
 * **P13 :** la version testée de la condition est dans le rapport de vérification (§ 2, P13), avec `COALESCE` et dans les deux sens. Un renouvellement signé **avant** l'échéance sera refusé, conforme à `00_…feature:40`.
 * **P12 et P13 :** chacun demande d'abord une contrainte `UNIQUE` sur la table visée.
 * **P24 :** comparer à `clock_timestamp()` ou dans l'API, pas à `now()` (même piège que P34).
