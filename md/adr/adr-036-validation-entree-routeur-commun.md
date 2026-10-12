@@ -53,7 +53,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 08/10/2026 (décision et code : 05/10/2026)
-* **Statut :** proposé
+* **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
 * **Décideurs :** le groupe (carte Q-INF-06, réponse « Valider dans le routeur commun », 05/10/2026) ; le code est du même jour (commit `fea3c9f`, Sébastien)
 * **Complète :** ADR-032 (un prix à virgule est refusé en 422)
 * **Voir aussi :** ADR-040 (règles qui croisent plusieurs tables, proposé) ; ADR-016 (mot de passe : les modèles propres à `/users`) ; ADR-021, ADR-022, ADR-031 (normaliser un code postal avant d'écrire)

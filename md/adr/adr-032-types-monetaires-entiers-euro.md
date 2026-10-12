@@ -30,7 +30,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 08/10/2026 (l'euro : 21/09/2026 ; les entiers et les bornes incluses : 05/10/2026)
-* **Statut :** proposé
+* **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
 * **Décideurs :** l'équipe projet (carte Q-REM-01, « Groupe », tranchée le 05/10/2026) ; le client (Jeff) informé le 07/10/2026, sans objection (Q-JEF-19)
 * **Remplace :** ADR-012 (« Définition des budgets min, max et renovation (Table Client) », accepté, 19/08/2026). Les budgets du client passent sur `criteria`, en entiers.
 

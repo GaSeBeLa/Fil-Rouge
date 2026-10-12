@@ -37,7 +37,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 08/10/2026 (décision du groupe : 02/10/2026)
-* **Statut :** proposé
+* **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
 * **Décideurs :** l'équipe projet — réponse du groupe du 02/10/2026 à la carte Q-REM-06 (« Recalculer à chaque vente ») ; validée par Jeff, client, à l'entretien du 07/10/2026 (Q-JEF-17). Avant : position de Sébastien du 21/09/2026, « à valider par le groupe »
 * **Complète :** ADR-033 (le score calculé est figé sur le paiement)
 * **Écart au sujet :** `F10:293`, assumé (voir Contexte)

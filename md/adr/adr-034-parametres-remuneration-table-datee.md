@@ -58,7 +58,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 08/10/2026 (décisions : 02/10, 05/10, 07/10 et 08/10/2026)
-* **Statut :** proposé
+* **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
 * **Décideurs :**
   * le groupe : Q-REM-05 « Table versionnée + relâcher les CHECK » (02/10/2026) ; Q-REM-19 « Activer le CHECK 0,20-0,60 » (05/10/2026) ; les réponses aux cartes Q-PAR (05/10 et 07/10/2026) ; G1 et G2 (08/10/2026) ;
   * Sébastien : les versions « à partir du » et les bornes de domaine (LOT6, 07/10/2026) ; le seed et le service (« oui pour le seed », « fais le service », 08/10/2026, notes du jour) ;

@@ -3,7 +3,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 09/10/2026
-* **Statut :** proposé
+* **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
 * **Décideurs :** Sébastien a choisi l'option 1 le 09/10/2026 (Discord, réponse à la question 1 d'ADR-028) ; le groupe l'accepte avec cet ADR.
 * **Complète :** ADR-028 (authentification côté back, question ouverte 1) ; ADR-016 (Argon2) ; ADR-026 (robustesse des mots de passe)
 * **Voir aussi :** ADR-027 (qui a le droit de faire quoi) ; ADR-049 (désactiver un compte)

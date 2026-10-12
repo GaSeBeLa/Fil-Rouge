@@ -55,7 +55,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 08/10/2026 (décisions du groupe : 02/10/2026 et 08/10/2026)
-* **Statut :** proposé
+* **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
 * **Décideurs :**
   * l'équipe projet, le 02/10/2026 : cartes Q-REM-03 (« Ajouter payment.performance_score »), Q-REM-04 (« Une colonne JSONB calculation_details »), Q-REM-11 (« L'API seule, avec un test d'intégration ») et Q-REM-12 (« Appliquer C3 dans sale_service ») ;
   * l'équipe projet, le 08/10/2026 : décision G1 (le paiement pointe sa version de réglages) ;

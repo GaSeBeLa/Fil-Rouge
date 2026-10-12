@@ -43,7 +43,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 08/10/2026 (réponse du groupe : 06/10/2026 et 07/10/2026 ; client : 07/10/2026)
-* **Statut :** proposé
+* **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
 * **Décideurs :**
   * l'équipe projet : « lorsqu'il y a une demande de suppression de compte, admin va rendre anonyme les données du compte et passé [sic] le compte en inactif . tout ca pour la RGPD. » (Q-ACC-08, 06/10/2026) ; « 10 ans + X » (07/10/2026) ;
   * le client (Jeff, formateur jouant le commanditaire et le PO) : « ajouter une route, ou modifier la route DELETE, pour seulement anonymiser les données personnelles d'une personne. La durée X : le groupe la propose. » (Q-JEF-15, réponse notée par l'équipe le 07/10/2026).

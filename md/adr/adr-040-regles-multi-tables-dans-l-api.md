@@ -48,7 +48,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 08/10/2026 (décision du groupe : 05/10/2026)
-* **Statut :** proposé
+* **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
 * **Décideurs :**
   * le groupe (carte Q-MAN-06, réponse « Toutes dans l'API, chacune testée », 05/10/2026) ;
   * pour l'exception du trigger : le groupe (Q-MAN-02, ADR-039).

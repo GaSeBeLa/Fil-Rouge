@@ -35,7 +35,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 08/10/2026 (décisions du groupe : 05/10/2026 et 06/10/2026 ; Eircode confirmé le 07/10/2026)
-* **Statut :** proposé
+* **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
 * **Décideurs :**
   * le groupe : Q-SCH-02 et Q-SCH-12 le 05/10/2026, Q-MIG-08 le 06/10/2026 ;
   * confirmation de l'Eircode le 07/10/2026 : **par le groupe**, précisé par Sébastien le 2026-10-09 (Discord). Le registre (`questions-a-trancher.md:167`) et le README du schéma (`docker/init-v3/README.md:73`) disaient « Jeff » : corrigés le même jour. La carte ne nomme personne, et le rapport d'entretien de Jeff n'a aucune carte sur l'Eircode.

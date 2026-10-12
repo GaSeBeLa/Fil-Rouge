@@ -36,7 +36,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 08/10/2026 (décision du groupe : 07/10/2026)
-* **Statut :** proposé
+* **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
 * **Décideurs :** l'équipe projet (réponse « garder » à la Q9 de la page d'incohérences du 07/10, carte Q-ACC-20)
 * **Remplace :** ADR-025 (« Chaque chasseur est rattaché à un manager », 22/09/2026). ADR-025 passe à « remplacé par ADR-029 ».
 

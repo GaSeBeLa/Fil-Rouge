@@ -50,7 +50,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 08/10/2026 (décision du groupe : 08/10/2026)
-* **Statut :** proposé
+* **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
 * **Décideurs :** Sébastien (« option 2 »), sur une question de Gabriel — Discord, 08/10/2026 (`md/adr/2026-10-08-notes-seance-adr.md:30`). Seule trace écrite : ces notes, qui citent Discord (l. 36).
 * **Remplace :** aucun ADR. Aucun ADR ne parlait des médias (même fichier, l. 57).
 

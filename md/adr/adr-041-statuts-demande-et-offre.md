@@ -47,7 +47,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 08/10/2026 (décisions du groupe : 05/10/2026)
-* **Statut :** proposé
+* **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
 * **Décideurs :**
   * le groupe — réponses du 05/10/2026 aux cartes Q-SCH-03 (« Acter les 4 statuts ») et Q-SCH-04 (« Ajouter 'signed' ») ;
   * pour la reprise des demandes : Sébastien, au questionnaire de LOT10 (07/10/2026), d'après la réponse de Jeff à Q-JEF-13 (« pas de nouvel état »).

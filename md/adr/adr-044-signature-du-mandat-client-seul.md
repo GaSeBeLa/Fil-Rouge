@@ -39,7 +39,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 08/10/2026 (décisions du groupe : 06/10/2026)
-* **Statut :** proposé
+* **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
 * **Décideurs :** le groupe, Q-MAN-05 et Q-MAN-09, le 06/10/2026
 * **Complète :** ADR-003 « Choix Signature du contrat » (qui reste « accepté »)
 * **S'appuie sur :** ADR-039 (un mandat annulé peut n'avoir jamais été signé) et ADR-050 (un renouvellement est un nouveau mandat, donc une nouvelle signature)

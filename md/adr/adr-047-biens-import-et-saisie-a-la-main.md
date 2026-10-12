@@ -40,7 +40,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 08/10/2026 (décisions : 06/10/2026, 07/10/2026)
-* **Statut :** proposé
+* **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
 * **Décideurs :**
   * Jeff, client, entretien du 07/10/2026 : un bien peut être saisi à la main (Q-JEF-24) ;
   * le groupe : qui lance l'import, l'admin (Q-ACC-09, 06/10/2026) ; qui saisit à la main, le chasseur et le manager (Q8, 07/10/2026) ;

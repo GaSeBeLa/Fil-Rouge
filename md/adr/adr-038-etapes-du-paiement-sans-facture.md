@@ -38,7 +38,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 08/10/2026 (décisions : 05/10, 06/10 et 07/10/2026)
-* **Statut :** proposé
+* **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
 * **Décideurs :**
   * le client, Jeff (aussi PO, Q-PRO-01) : « facture hors périmètre », entretien du 07/10/2026 (Q-JEF-23, réponse notée par l'équipe) ;
   * le groupe : Q3 du plan d'action, « aucune trace de facture en base » (07/10/2026) ; Q-REM-17, une colonne de date par étape (05/10/2026) ;

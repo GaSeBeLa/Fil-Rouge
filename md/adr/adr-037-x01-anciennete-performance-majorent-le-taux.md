@@ -44,7 +44,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 08/10/2026 (décision du groupe : 05/10/2026)
-* **Statut :** proposé
+* **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
 * **Décideurs :** l'équipe projet — réponse du groupe du 05/10/2026 à la carte Q-REM-18 (« Acter B dans un ADR maintenant »). Le constat « il suffit de l'acter » date du 11/09/2026 (`livrables/2-modelisation/09-decisions-a-prendre.md:15`, `:329`). X01 n'a pas été posée à Jeff ; il a validé les chiffres de l'option retenue (Q-JEF-01)
 * **Ferme :** la contradiction X01 entre nos deux notes d'équipe (`livrables/2-modelisation/09-rapport-ecarts-contraintes.md:103` ; options : `09-decisions-a-prendre.md:310-331`)
 

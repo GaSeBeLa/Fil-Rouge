@@ -55,7 +55,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 08/10/2026 (décisions : 02/10/2026 pour l'acte notarié ; 05/10/2026 pour Q-SCH-07, Q-SCH-08, Q-SCH-14 ; 06/10/2026 pour Q-MAN-08 et Q-ACC-14)
-* **Statut :** proposé
+* **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
 * **Décideurs :**
   * l'équipe projet, réponses du groupe : Q-SCH-07 « Ne pas créer, hors MVP », Q-SCH-14 « Accepter comme limite », Q-MAN-08 « Reporter » ;
   * cartes du PO, réponse du groupe « Reporter au parcours IA » : Q-SCH-08, Q-ACC-14. Le PO, c'est Jeff (Q-PRO-01) : il les confirme à la séance de validation des ADR (Q-JEF-25) ;

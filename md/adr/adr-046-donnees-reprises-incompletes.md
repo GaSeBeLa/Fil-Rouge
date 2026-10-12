@@ -56,7 +56,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 08/10/2026 (décisions : 06/10/2026 pour Q-MIG-06 et Q-MIG-09 ; 07/10/2026 pour la Q4 du groupe, les réponses de Jeff et la mise en œuvre à LOT10)
-* **Statut :** proposé
+* **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
 * **Décideurs :**
   * Jeff, client et PO (Q-PRO-01), entretien du 07/10/2026 : Q-JEF-26 (« les manques sont voulus ») et Q-JEF-13 (« oui à nos positions ») ;
   * l'équipe projet : réponse à la Q4 du plan d'action (07/10/2026) ; Q-MIG-06 et Q-MIG-09 (06/10/2026) ; Q-MIG-10, Q-MIG-12, Q-MIG-13, posées à Jeff ; ADR-018 (accepté, 07/09/2026) pour `energy_class_scheme` ;

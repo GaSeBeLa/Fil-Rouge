@@ -47,7 +47,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 08/10/2026 (décision du groupe : 05/10/2026)
-* **Statut :** proposé
+* **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
 * **Décideurs :** le groupe — réponse du 05/10/2026 à la carte Q-SCH-06. La case cochée était « tsrange » ; le commentaire dit « ni « garder », ni tsrange ». Le registre retient le commentaire : « le commentaire fait foi » (`md/questions/questions-a-trancher.md:102`, `:161`, `:438`).
 * **Remplace :** aucun ADR. Ferme la décision D9 de `livrables/2-modelisation/09-decisions-a-prendre.md`.
 * **Lien :** suit ADR-035 (lettre E, proposé) : la note est recalculée à chaque vente (Q-REM-06).

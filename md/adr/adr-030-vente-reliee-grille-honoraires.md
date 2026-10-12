@@ -29,7 +29,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 08/10/2026 (décisions du groupe : 05/10/2026)
-* **Statut :** proposé
+* **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
 * **Décideurs :** l'équipe projet — réponses du groupe du 05/10/2026 aux cartes Q-REM-13 (« Ajouter une clé ») et Q-SCH-17 (« Par construction : une grille vaut jusqu'à la suivante »)
 * **Remplace :** ADR-019 (« Absence de clé étrangère entre Sale et Parameters_Fees », accepté, 10/09/2026)
 
