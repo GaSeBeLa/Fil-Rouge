@@ -40,7 +40,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 08/10/2026 (décisions du groupe : 05/10/2026 et 06/10/2026 ; réponse de Jeff : 07/10/2026)
-* **Statut :** proposé
+* **Statut :** accepté (groupe, Discord, 12/10/2026)
 * **Décideurs :**
   * le groupe : Q-SCH-01 le 05/10/2026, Q-SCH-18 le 06/10/2026 ;
   * Jeff, client, entretien du 07/10/2026 : les manques des anciennes données sont voulus (Q-JEF-26).

@@ -43,7 +43,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 08/10/2026 (réponses du groupe : 02/10/2026 et 05/10/2026 ; client : 07/10/2026)
-* **Statut :** proposé
+* **Statut :** accepté (groupe, Discord, 12/10/2026)
 * **Décideurs :**
   * l'équipe projet : quelles visites, ventes et mandats comptent (Q-REM-07, 08, 09, le 02/10/2026) ; le taux de transformation (Q-PAR-05, le 05/10/2026) ;
   * le client (Jeff, formateur jouant le commanditaire et le PO), le 07/10/2026 : il valide les trois comptes « sans changement » (Q-JEF-08, Q-JEF-09) ; il n'a pas de grille pour le taux, « le groupe propose la sienne » (Q-JEF-05).

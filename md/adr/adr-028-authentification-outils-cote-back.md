@@ -62,7 +62,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 08/10/2026 (décision du client : 07/10/2026)
-* **Statut :** proposé
+* **Statut :** accepté (groupe, Discord, 12/10/2026)
 * **Décideurs :**
   * le client (Jeff, formateur jouant le commanditaire et le PO), pour le périmètre ;
   * l'équipe projet, pour la mise en œuvre (réponse « outils » à la Q2 de la page d'incohérences du 07/10).
