@@ -18,19 +18,19 @@
 
 | P | Le trou | Choix | Où |
 |---|---|---|---|
-| P2 | Deux comptes au même email, à la majuscule près ; aucun format | Index unique sur `lower(email)` et `CHECK` de format, **et** `EmailStr` dans l'API | base + API |
+| P2 | Deux comptes au même email, à la majuscule près ; aucun format | Index unique sur `lower(email)` et `CHECK` de format, **et** `EmailStr` dans l'API. ✅ Base codée le 12/10 (migration 24) ; `EmailStr` : chantier API | base + API |
 | P3 | Un client sans adresse | Adresse **obligatoire** : `NOT NULL` sur `address`, `postal_code`, `town`, `country_iso`. ✅ Codé le 12/10 (migration 23) | base |
-| P12 | Un mandat sur la demande d'un autre client | `UNIQUE (id, id_client)` sur `search_request`, clé étrangère composite depuis `mandate` | base |
-| P13 | Le renouvellement contourne l'exclusivité | Corriger le trigger : le parent n'est exempté que si l'enfant est signé **à son échéance** | base (trigger existant) |
+| P12 | Un mandat sur la demande d'un autre client | `UNIQUE (id, id_client)` sur `search_request`, clé étrangère composite depuis `mandate`. ✅ Codé le 12/10 (migration 28) | base |
+| P13 | Le renouvellement contourne l'exclusivité | Corriger le trigger : le parent n'est exempté que si l'enfant est signé **à son échéance**. ✅ Codé le 12/10 (migration 29) | base (trigger existant) |
 | P16 | 251 biens ont plus de chambres que de pièces | Contrôle **à la saisie** ; les 251 restent tels quels | API |
 | P18 | Sens de `floor` | `floor` = **l'étage du logement**, le sens de la source | doc |
 | P21 | Deux offres acceptées sur un mandat | **Rien** : ADR-045 reste ; `sale.id_mandate` `UNIQUE` garde une seule vente | — |
 | P23 | Une visite sur un bien jamais proposé | Vérifié pour les visites `'client'` seulement | API |
-| P24 | Visite prévue ou faite ? | On n'enregistre que les visites **faites** : pas de date future | base |
+| P24 | Visite prévue ou faite ? | On n'enregistre que les visites **faites** : pas de date future. ✅ Codé le 12/10 (migration 33) | base |
 | P25 | Visite hors du mandat | Contrôle des **dates** du mandat ; le statut n'est pas regardé | API |
 | P28 | Le mandat reste `active` après la vente | L'API le passe à `completed` dans la transaction de la vente | API |
 | P29 | Réglages du taux absurdes | Validation Pydantic à la création d'une version ; ADR-034 Décision 3 reste | API |
-| P36 | Plusieurs notes `initial` | **Une seule** par chasseur : index unique partiel | base |
+| P36 | Plusieurs notes `initial` | **Une seule** par chasseur : index unique partiel. ✅ Codé le 12/10 (migration 36) | base |
 
 **La règle des visites (P23)**
 
@@ -58,11 +58,14 @@ Le sens des deux valeurs est écrit en base : `COMMENT ON COLUMN visit.visitor_t
 
 **Conséquences**
 
-* **Codé** : le commentaire de `visit.visitor_type` (migration 22) et P3 (migration 23). Les autres choix « base » et « API » deviennent des tâches.
+* **Codé le 12/10/2026** (« go » de Sébastien) : le commentaire de `visit.visitor_type` (migration 22) et tous les choix « base » : P3 (23), P2 (24), P12 (28), P13 (29), P24 (33), P36 (36). Chaque migration est jouée sur `fil_rouge_immobilier` ; tests dans `API/tests/integration/test_trous_audit_db.py`.
+* **Avec eux, les réparations prêtes de l'audit qui se font en base** : P6 (25), P8 (26), P9 (27), P15 (30), P17 (31, coordonnées seulement), P22 (32), P34 (34), P35 (35).
+* **Reste pour le chantier API** : les choix « API » (P16, P23, P25, P28, P29, et `EmailStr` de P2) et les réparations prêtes qui se font dans l'API (P5, P19, P20, P27, P32, P33). Leur solution est décrite dans l'audit, pas écrite.
+* **Laissé de côté** : P10, aucune source ne lie type de bien et typologie.
 * **P3, fait le 12/10/2026 :** `NOT NULL` dans `01` et la migration 23, jouées sur `fil_rouge_immobilier` ; le tout-ou-rien et `ck_client_postal_code_needs_country` retirés ; le modèle `Client` de l'API rend les quatre champs obligatoires (422 s'il en manque un) ; tests : champ manquant, `NOT NULL` en SQL, adresse neutre acceptée. Rien d'autre à faire : le front est hors du périmètre (Sébastien, Discord, 12/10/2026), et l'API refuse déjà un client sans adresse.
-* **P13 :** la version testée de la condition est dans le rapport de vérification (§ 2, P13), avec `COALESCE` et dans les deux sens. Un renouvellement signé **avant** l'échéance sera refusé, conforme à `00_…feature:40`.
-* **P12 et P13 :** chacun demande d'abord une contrainte `UNIQUE` sur la table visée.
-* **P24 :** comparer à `clock_timestamp()` ou dans l'API, pas à `now()` (même piège que P34).
+* **P13 :** la condition est celle du rapport de vérification (§ 2, P13), avec `COALESCE` et dans les deux sens. Un renouvellement signé **avant** l'échéance est refusé, conforme à `00_…feature:40`.
+* **P24 et P34 :** comparés à `clock_timestamp()`, pas à `now()` ; un jour de marge pour la date d'une visite (fuseaux en avance sur UTC), 5 minutes pour l'heure d'un paiement ou d'une note (horloge de l'API).
+* **Tests ajustés :** deux tests créaient une seconde version de départ des critères (interdit par P8) ; les paiements et notes de test étaient datés de 2030 (interdit par P34), ils passent en 2026.
 
 **Questions ouvertes** 🟡
 
