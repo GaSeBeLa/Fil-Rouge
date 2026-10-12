@@ -69,7 +69,7 @@ Le sens des deux valeurs est écrit en base : `COMMENT ON COLUMN visit.visitor_t
 
 **Questions ouvertes** 🟡
 
-1. **P18, le nombre d'étages d'une maison.** Les 2 556 biens à importer sont **tous** des maisons, chalets ou châteaux : aucun appartement (`normalised/annonces/annonces.csv`, colonne `type_bien`). La source n'a **aucune colonne** de nombre d'étages, et aucun titre ni description ne le dit (recherche de « plain-pied », « R+1 », « étages », « niveaux » : 0). Ajouter `nb_floors` ferait une colonne **vide partout**, qu'aucune source ne demande. 💡 Proposé : ne pas l'ajouter.
+1. ~~**P18, le nombre d'étages d'une maison.**~~ ✅ Tranchée le 12/10/2026 : **pas de `nb_floors`** (Laurence, Discord). La colonne resterait vide : les 2 556 biens à importer sont **tous** des maisons, chalets ou châteaux, et la source n'a aucune colonne de nombre d'étages (`normalised/annonces/annonces.csv`, colonnes `type_bien` et `etage`). Le chasseur peut l'écrire dans sa note de visite (« RDC », « R+1 »…).
 2. ~~**P3 :** l'adresse neutre de l'anonymisation.~~ ✅ Tranchée le 12/10/2026 : `'anonyme'`, `'00000'`, `'anonyme'`, `'FR'` (Sébastien, Discord).
 
 **Sources**
@@ -78,6 +78,7 @@ Le sens des deux valeurs est écrit en base : `COMMENT ON COLUMN visit.visitor_t
 |---|---|
 | Les 13 choix | Sébastien, réponses à la page à cartes, Discord, 12/10/2026 |
 | L'adresse neutre de l'anonymisation | Sébastien, Discord, 12/10/2026 (« j'accepte ta proposition ») |
+| Pas de `nb_floors` ; le nombre d'étages va dans la note de visite | Laurence, Discord, 12/10/2026 |
 | Les 18 clients ont adresse, code postal, ville et pays ; tous en France | `fil_rouge_immobilier`, compté le 12/10/2026 : `18\|18\|18\|18\|18`, 0 hors `FR` |
 | Le flux des sources est retenu ; la visite du chasseur avant la proposition est écartée | Gabriel, Discord, 12/10/2026 |
 | La visite 2 se fait avec le chasseur, et c'est elle qui compte pour la rémunération | Gabriel, Discord, 12/10/2026 |
