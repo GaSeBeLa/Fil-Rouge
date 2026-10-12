@@ -10,11 +10,12 @@ Les règles des ADR acceptés le 12/10 sont codées et testées : connexion par 
 - API6 : test_auteurs : 11 tests (Hunter et Manager créent, id_author = leur id, valeur envoyée ignorée ; Client, Admin, Reader 403 ; PUT garde l'auteur ; chasseur de la note 201, autre chasseur 403) ; mutants : id_author reçu → 3 failed, PUT sans garde → 1 failed, sans contrôle d'auteur du média → 1 failed ; suite 341 passed, 7 skipped (avant 332)
 - API7 : test_propositions_visites : 17 tests (P19, P20, P23, P25, ADR-044 : un refus et un accepté chacun) ; mutants : sans P23 → 1 failed (visite client sur un bien non proposé), sans P20 → 2, sans P19 → 2, sans P25 → 2, sans ADR-044 → 2 ; suite 358 passed, 7 skipped (avant 341)
 - API8 : test_signature_vente : 12 tests (signature → demande 'launched' ; vente sur mandat non signé 409 ; vente 'hunter' sans offre 409 ; vente → mandat 'completed' ; mauvaise grille 409) ; mutants : sans passage à 'completed' → 1 failed, sans Q-MAN-06 → 1, sans P27 → 2, sans ADR-030 → 2, sans ADR-044 → 2 ; suite 370 passed, 7 skipped (avant 358)
-- API9 : Demande enregistrée avant le compte (P5) ; dépend d'API1
+- API9 : test_demande_avant_compte : 9 tests (formulaire neuf → user inactif + client + demande, connexion 401 ; majuscules → même compte ; client connu → fiche non réécrite ; email de chasseur 409 ; adresse manquante 422 et 0 ligne ; refus au milieu 409 et 0 ligne ; PUT /users active) ; mutants : user hors transaction → 1 failed (refus au milieu, pas le 422), casse → 2, sans contrôle du rôle → 1, fiche réécrite → 2 ; suite 379 passed, 7 skipped (avant 370)
 - API10 : Anonymisation, 10 ans, plus de DELETE ; dépend d'API2
 - API11 : Taux de réussite des mandats pour la note max (mandate_success_rate_for_max_score) = 100 % ; migration 39
 - API12 : Paiement calculé depuis la base ; dépend d'API5, API8, API11
 ## Journal
 - 2026-10-12 : API6 : l'auteur de la note (ADR-051) est estate_searchrequest.id_hunter, pas search_request.id_hunter ; seul le POST est restreint, les PUT restent aux rôles qui écrivent
 - 2026-10-12 : API7 : un PUT de proposition ne repasse P19 et P20 que s'il change de bien ou de mandat ; les visites repassent leurs règles à chaque PUT
+- 2026-10-12 : API9 : un email connu garde sa fiche client (formulaire sans connexion) ; email d'un non-client → 409 ; le test qui tombe sans transaction est le refus au milieu, le 422 part avant toute écriture
 ## Bilan

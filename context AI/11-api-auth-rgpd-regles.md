@@ -294,8 +294,9 @@ mandat non signé → 409 ; vente `'hunter'` sans offre → 409 ; vente → mand
 ---
 
 <!-- FICHE:API9 -->
-## API9 [ ] — Enregistrer une demande avant le compte
+## API9 [x] — Enregistrer une demande avant le compte
 
+**Session** : bad3e8d0-ea0b-437e-b299-3505f03fa77c
 **Dépend de** : `API1`.
 **Fichiers** : un nouveau `API/src/app/routes/signup_router.py`, un nouveau `API/src/app/services/signup_service.py`, `API/src/app/main.py`, `API/src/app/utils/security.py`, `md/journal/problemes-a-regler.md` (§ P5), un nouveau `API/tests/integration/test_demande_avant_compte.py`.
 

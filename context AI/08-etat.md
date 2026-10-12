@@ -307,3 +307,9 @@ de ce que le code dit déjà.
   proposition) ; changer le statut, le montant ou un commentaire d'une
   proposition sur un mandat devenu `completed` reste permis. Les visites,
   elles, repassent P23, P25 et ADR-044 à chaque `PUT`.
+- **2026-10-12** — **API9** : un email déjà connu au formulaire de demande
+  (P5) garde sa fiche client telle quelle — un formulaire envoyé sans
+  connexion ne réécrit pas l'adresse d'un autre ; un compte `Client` sans
+  fiche en reçoit une ; un email de chasseur, manager ou admin → `409` (P1).
+  Le test qui tombe sans transaction est le refus de la base au milieu
+  (code postal), pas l'adresse manquante : le `422` part avant toute écriture.
