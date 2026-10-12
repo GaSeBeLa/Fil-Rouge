@@ -73,8 +73,9 @@ et `API11` ne dépendent de rien : leur ordre peut changer.
 ---
 
 <!-- FICHE:API1 -->
-## API1 [ ] — Se connecter et recevoir un jeton JWT
+## API1 [x] — Se connecter et recevoir un jeton JWT
 
+**Session** : bad3e8d0-ea0b-437e-b299-3505f03fa77c
 **Dépend de** : rien.
 **Fichiers** : `API/requirements.txt`, `API/src/app/utils/security.py`, un nouveau `API/src/app/routes/auth_router.py`, `API/src/app/main.py`, `API/src/app/services/user_service.py`, `md/adr/adr-052-jeton-jwt-60-minutes.md`, `docker/.env.exemple`, un nouveau `API/tests/test_auth.py`.
 

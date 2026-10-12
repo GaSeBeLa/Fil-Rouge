@@ -26,13 +26,13 @@
 1. ✅ Un **JWT** signé, que le client présente à chaque appel.
 2. ✅ Durée de vie : **60 minutes**, sans jeton de rafraîchissement.
 3. ✅ À chaque appel, l'utilisateur est **relu en base** : son rôle et son activation du moment font foi, pas ceux écrits dans le jeton.
-4. 💡 Signature `HS256` avec `pyjwt`, la bibliothèque de la doc FastAPI (proposition d'ADR-028, à confirmer au codage).
-5. 💡 Le secret se génère avec `openssl rand -hex 32` et ne s'écrit jamais dans le dépôt.
+4. ✅ Signature `HS256` avec `pyjwt` (confirmé au codage, fiche API1, 12/10/2026 : `pyjwt` 2.15.1 dans l'image).
+5. ✅ Le secret se génère avec `openssl rand -hex 32` et ne s'écrit jamais dans le dépôt : variable `JWT_SECRET`, valeur dans `docker/.env`, 32 caractères au moins, sinon l'API refuse de démarrer (fiche API1).
 6. La « session » du client est donc la durée de vie du jeton.
 
 **Conséquences**
 
-* **Code :** à écrire. `API/requirements.txt` n'a aucune bibliothèque de jeton : il faut ajouter `pyjwt`. Rien n'est codé.
+* **Code :** fait le 12/10/2026 (fiche API1) : `POST /auth/login`, `GET /auth/me` et la dépendance `get_current_user` (`API/src/app/routes/auth_router.py`), jeton dans `API/src/app/utils/security.py`, `pyjwt` dans `API/requirements.txt`. Les routes CRUD ne l'exigent pas encore : fiche API2.
 * **Où brancher :** une dépendance posée sur `build_crud_router` vaut pour toutes les routes CRUD (ADR-028).
 * **Compte désactivé :** il perd ses droits au prochain appel (ADR-049).
 * **Prix :** une lecture en base de plus à chaque appel.
@@ -40,7 +40,7 @@
 
 **Questions ouvertes** 🟡
 
-Aucune sur le choix. À décider au codage : la durée exacte si 60 minutes gêne, et où ranger le secret.
+Aucune sur le choix. Le secret est rangé dans `docker/.env` (fiche API1). Reste ouvert : la durée exacte, si 60 minutes gêne.
 
 **Sources**
 
