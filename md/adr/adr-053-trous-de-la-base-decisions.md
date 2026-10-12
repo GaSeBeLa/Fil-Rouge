@@ -4,7 +4,7 @@
 
 * **Date :** 12/10/2026
 * **Statut :** proposé
-* **Décideurs :** Sébastien a coché les 13 cartes le 12/10/2026 (page à cartes « Les trous de la base à trancher », réponses collées sur Discord). La règle des visites vient d'une précision du groupe, sur Discord, le même jour.
+* **Décideurs :** Sébastien a coché les 13 cartes le 12/10/2026 (page à cartes « Les trous de la base à trancher », réponses collées sur Discord). La règle des visites suit le flux des sources, vérifié et retenu par le groupe le même jour (Gabriel, Discord).
 * **Complète :** ADR-022 et ADR-043 (adresse du client) ; ADR-039, Décision 2 (exclusivité) ; ADR-048 (critère des visites)
 * **Voir aussi :** ADR-034 (réglages du taux) ; ADR-040 (où vit une règle) ; ADR-045 (limites du MVP) ; ADR-049 (anonymisation) ; ADR-050 (renouvellement)
 
@@ -34,24 +34,27 @@
 
 **La règle des visites (P23)**
 
-1. Le chasseur visite d'abord **seul**, pour se renseigner sur le bien (exposition, travaux…). Ces visites ont lieu **avant** la proposition : `visitor_type = 'hunter'`, aucun contrôle.
-2. Il propose ensuite les biens adaptés ; le client choisit ceux à visiter.
-3. Client et chasseur visitent **ensemble** : `visitor_type = 'client'`. Le bien doit avoir été proposé sur ce mandat. La règle croise deux tables : elle va dans l'API (ADR-040).
-4. Seules les visites `'client'` comptent pour la performance du chasseur (ADR-048 l. 94).
+Le flux suit les sources, étape par étape (retenu par le groupe le 12/10/2026).
+
+1. Le système envoie au chasseur une sélection de biens ; il en fait sa propre sélection et la **propose** au client (`Readme.md:127` ; `05_…feature:14-23`).
+2. Le client choisit les biens **à faire visiter par son chasseur**, les commente et les priorise ; le chasseur reçoit une alerte (`Readme.md:99`, `:128` ; `02_…feature:14-17` ; `05_…feature:26-29`).
+3. **Visite 1** : le chasseur visite les **biens choisis**, `visitor_type = 'hunter'`. Il rédige ensuite sa note d'avis (`Readme.md:100`, `:129` ; `02_…feature:20-23` ; `06_…feature:10-15`).
+4. **Visite 2** : si un bien convient, le client est invité à le visiter, ou fait directement une offre ; `visitor_type = 'client'` (`Readme.md:101` ; `02_…feature:32-35`). La source ne dit pas si le chasseur l'accompagne.
+5. Les visites `'client'` portent sur un bien proposé sur ce mandat. L'API le vérifie ; la règle croise deux tables (ADR-040).
+6. Seules les visites `'client'` comptent pour la performance du chasseur (ADR-048 l. 94).
 
 Le sens des deux valeurs est écrit en base : `COMMENT ON COLUMN visit.visitor_type` (`01`, bloc des métadonnées ; migration 22).
 
-**Écart avec le sujet** ⚠️
+**Lecture écartée**
 
-* Le Readme place la visite du chasseur **après** le retour du client (parcours du chasseur, points 6 et 7, `Readme.md:128-129` ; aussi `05_…feature:32-35`).
-* La règle ci-dessus ajoute une visite de renseignement **avant** la proposition. C'est une précision du groupe, pas une phrase du sujet. À dire à l'oral.
+* Une précision donnée sur Discord le même jour plaçait la visite du chasseur **avant** la proposition, pour se renseigner, et faisait visiter client et chasseur **ensemble**. Aucune source ne le dit : le groupe a retenu le flux des sources (Gabriel, Discord, 12/10/2026).
 
 **Ce que ces choix changent dans les ADR déjà écrits**
 
 * **ADR-022 et ADR-043 (P3).** L'adresse passe de « tout ou rien » à **obligatoire**. ADR-043 Décision 4 (« ses trois champs, ou aucun ») tombe. Les 18 clients repris gardent leurs valeurs factices (ADR-043 Décisions 2 et 3).
 * **ADR-049 (P3).** L'anonymisation ne peut plus **vider** l'adresse (`adr-049:114`) : elle met une adresse neutre, comme pour le téléphone. 🟡 La valeur reste à fixer ; `'non renseigné'` et `00000` sont déjà admis pour les clients repris.
 * **ADR-039, Décision 2 (P13).** Le trigger n'exempte plus le parent et l'enfant sans condition : seulement quand l'enfant est signé à l'échéance du parent. Cela met dans la base la règle « à l'échéance » d'ADR-050 Décision 4.
-* **ADR-048 (P23).** Le critère des visites compte les visites `'client'` : la règle ci-dessus le précise.
+* **ADR-048 (P23).** Le critère compte les visites `'client'` ; la « visite de repérage » du chasseur (l. 94) est la visite 1 de la règle ci-dessus, sur un bien déjà choisi par le client.
 
 **Conséquences**
 
@@ -71,7 +74,9 @@ Le sens des deux valeurs est écrit en base : `COMMENT ON COLUMN visit.visitor_t
 | Affirmation | Source |
 |---|---|
 | Les 13 choix | Sébastien, réponses à la page à cartes, Discord, 12/10/2026 |
-| Les visites de renseignement, puis les visites communes ; seules celles-ci comptent | Précision du groupe, Discord, 12/10/2026 |
+| Le flux des sources est retenu ; la lecture « avant la proposition, ensemble » est écartée | Gabriel, Discord, 12/10/2026 |
+| Le client choisit les biens à faire visiter par son chasseur ; le chasseur visite les biens choisis | `02_particulier_recherche_et_visites.feature:14-23` ; `Readme.md:99-100` |
+| Un bien convient : le client est invité à le visiter | `02_particulier_recherche_et_visites.feature:32-35` ; `Readme.md:101` |
 | Seules les visites client jusqu'à l'acte comptent | ADR-048 l. 94 |
 | Le chasseur visite après le retour du client | `Readme.md:128-129` ; `05_chasseur_selection_quotidienne_biens.feature:32-35` |
 | L'anonymisation vide l'adresse | `md/adr/adr-049-effacement-compte-desactiver-anonymiser.md:114` |
