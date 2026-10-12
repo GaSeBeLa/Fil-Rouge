@@ -39,15 +39,15 @@ Le flux suit les sources, étape par étape (retenu par le groupe le 12/10/2026)
 1. Le système envoie au chasseur une sélection de biens ; il en fait sa propre sélection et la **propose** au client (`Readme.md:127` ; `05_…feature:14-23`).
 2. Le client choisit les biens **à faire visiter par son chasseur**, les commente et les priorise ; le chasseur reçoit une alerte (`Readme.md:99`, `:128` ; `02_…feature:14-17` ; `05_…feature:26-29`).
 3. **Visite 1** : le chasseur visite les **biens choisis**, `visitor_type = 'hunter'`. Il rédige ensuite sa note d'avis (`Readme.md:100`, `:129` ; `02_…feature:20-23` ; `06_…feature:10-15`).
-4. **Visite 2** : si un bien convient, le client est invité à le visiter, ou fait directement une offre ; `visitor_type = 'client'` (`Readme.md:101` ; `02_…feature:32-35`). La source ne dit pas si le chasseur l'accompagne.
+4. **Visite 2** : si un bien convient, le client est invité à le visiter, ou fait directement une offre ; `visitor_type = 'client'` (`Readme.md:101` ; `02_…feature:32-35`). Le client la fait **avec son chasseur** : précision du groupe (Gabriel, Discord, 12/10/2026), la source ne le dit pas.
 5. Les visites `'client'` portent sur un bien proposé sur ce mandat. L'API le vérifie ; la règle croise deux tables (ADR-040).
-6. Seules les visites `'client'` comptent pour la performance du chasseur (ADR-048 l. 94).
+6. Seules les visites `'client'`, faites ensemble, comptent pour la rémunération du chasseur (ADR-048 l. 94 ; Gabriel, 12/10/2026).
 
 Le sens des deux valeurs est écrit en base : `COMMENT ON COLUMN visit.visitor_type` (`01`, bloc des métadonnées ; migration 22).
 
 **Lecture écartée**
 
-* Une précision donnée sur Discord le même jour plaçait la visite du chasseur **avant** la proposition, pour se renseigner, et faisait visiter client et chasseur **ensemble**. Aucune source ne le dit : le groupe a retenu le flux des sources (Gabriel, Discord, 12/10/2026).
+* Une précision donnée sur Discord le même jour plaçait la visite du chasseur **avant** la proposition, pour se renseigner. Aucune source ne le dit : le groupe a retenu le flux des sources (Gabriel, Discord, 12/10/2026). La visite commune, elle, est gardée pour la visite 2 (point 4).
 
 **Ce que ces choix changent dans les ADR déjà écrits**
 
@@ -74,7 +74,8 @@ Le sens des deux valeurs est écrit en base : `COMMENT ON COLUMN visit.visitor_t
 | Affirmation | Source |
 |---|---|
 | Les 13 choix | Sébastien, réponses à la page à cartes, Discord, 12/10/2026 |
-| Le flux des sources est retenu ; la lecture « avant la proposition, ensemble » est écartée | Gabriel, Discord, 12/10/2026 |
+| Le flux des sources est retenu ; la visite du chasseur avant la proposition est écartée | Gabriel, Discord, 12/10/2026 |
+| La visite 2 se fait avec le chasseur, et c'est elle qui compte pour la rémunération | Gabriel, Discord, 12/10/2026 |
 | Le client choisit les biens à faire visiter par son chasseur ; le chasseur visite les biens choisis | `02_particulier_recherche_et_visites.feature:14-23` ; `Readme.md:99-100` |
 | Un bien convient : le client est invité à le visiter | `02_particulier_recherche_et_visites.feature:32-35` ; `Readme.md:101` |
 | Seules les visites client jusqu'à l'acte comptent | ADR-048 l. 94 |
