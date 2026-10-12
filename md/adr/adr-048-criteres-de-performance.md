@@ -137,7 +137,7 @@ Sur le dénominateur du taux (sous-choix de l'option 3) :
 |---|---|---|
 | Le critère « visites » : moins, c'est mieux ? | Oui. Le sujet le dit quatre fois, et son code aussi : paliers « ordonnés du meilleur au moins bon », 3 visites → 100, plus de 15 → 0 | `Readme.md:88` (« au moins il y en a, au plus la rémunération monte ») ; RCR:55, `:153` ; F10:116 ; RCR:147 ; RCR:668-670, recopié dans `rem.py:191-196`, `:320-322` |
 | Combien de critères portent sur la vente ? | Trois : délai, exclusivité, visites. Deux sur l'activité : ventes, mandats. RCR:139 dit l'inverse ; le tableau, le code et F10 tranchent. Tranchée par déduction : coquille du sujet | RCR:141-147 (colonne « Portée ») ; `rem.py:129-140` ; F10:141, `:259` ; RCR:139 |
-| Quelles visites ? | Celles du client, sur tous les biens du mandat, jusqu'au jour de l'acte. `'hunter'` = visite de repérage | Q-REM-07 (`reg:619`) ; Q-JEF-08 (`jeff.html:1046`) ; F10:259 ; `01:716-719` ; `API/src/app/models/visit_model.py:4` |
+| Quelles visites ? | Celles du client, sur tous les biens du mandat, jusqu'au jour de l'acte. `'hunter'` = visite de repérage | Q-REM-07 (`reg:619`) ; Q-JEF-08 (`jeff.html:1046`) ; F10:259 ; `01:802` ; ADR-053 (« La règle des visites ») ; `API/src/app/models/visit_model.py:4` |
 | Quelles ventes ? | Celles des mandats du chasseur, paiement non refusé, 12 mois avant l'acte, vente en cours exclue | Q-REM-08 (`reg:631`) ; Q-JEF-09 (`jeff.html:1096`) ; RCR:470 ; `rem.py:139` |
 | Quels mandats ? | Signés (`signature_date` non vide), sans les renouvellements (`id_mandate_parent` vide) | Q-REM-09 (`reg:640-646`) ; Q-JEF-09 ; `01:452`, `:470` |
 | Le taux remplace-t-il un critère ? | Non : il note le critère « mandats signés » ; les cinq poids restent | RCR:137, `:160` ; `reg:145` |
@@ -182,6 +182,7 @@ Où l'on a cherché la grille et la note hors vente : le StarterPack (« transfo
 | Le code du sujet : `Vente`, `noter_criteres` | `API/src/app/services/remuneration.py:129-140`, `:191-196`, `:204-216` |
 | Réglages en base, sans grille du taux | `docker/init-v3/01_create_fil_rouge_immobilier.sql:837-871` ; `API/src/app/models/hunter_rate_parameters_model.py:22-23` |
 | Visites : type, date, mandat ; visite avant signature | `01:713-726` ; `API/src/app/models/visit_model.py:4` |
+| Sens de `visitor_type` et ordre des visites | ADR-053, « La règle des visites » (accepté le 12/10/2026) ; `01:802` |
 | Renouvellement : le nouveau mandat pointe l'ancien | `01:465-470` |
 | Un mandat, au plus une vente | `01:763` |
 | Journal des notes, déclencheurs | `01:1002-1021` |
