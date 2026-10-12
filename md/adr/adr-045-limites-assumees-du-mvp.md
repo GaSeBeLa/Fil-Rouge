@@ -60,7 +60,7 @@
   * l'équipe projet, réponses du groupe : Q-SCH-07 « Ne pas créer, hors MVP », Q-SCH-14 « Accepter comme limite », Q-MAN-08 « Reporter » ;
   * cartes du PO, réponse du groupe « Reporter au parcours IA » : Q-SCH-08, Q-ACC-14. Le PO, c'est Jeff (Q-PRO-01) : il les confirme à la séance de validation des ADR (Q-JEF-25) ;
   * acte notarié : annoncé par Sébastien le 02/10/2026. Décidé par Jeff, précisé par Sébastien le 2026-10-09 (Discord) ; le registre ne le note pas encore (`:62`) ;
-  * limite 7 : 💡 proposée par cet ADR, le 08/10/2026, puis réécrite le 2026-10-09 : Sébastien dit que le groupe compte importer les annonces par un flux Airflow. Acceptée par le groupe le 2026-10-09 (Sébastien, Discord) ; l'ADR-045 dans son ensemble reste « proposé ».
+  * limite 7 : 💡 proposée par cet ADR, le 08/10/2026, puis réécrite le 2026-10-09 : Sébastien dit que le groupe compte importer les annonces par un flux Airflow. Acceptée par le groupe le 2026-10-09 (Sébastien, Discord) ; l'ADR-045 dans son ensemble est accepté par le groupe le 12/10/2026.
 * **Remplace :** aucun ADR.
 * **Complète :** ADR-029, Décision 5 (pas d'historique des managers) : la limite est décidée là-bas ; ici, on dit ce qu'on en dit au jury.
 * **Voir aussi :** ADR-044 (seul le client signe le mandat : limite dite là-bas) ; ADR-038 (pas de facture : écart au sujet) ; ADR-047 (biens saisis à la main).
@@ -228,7 +228,7 @@ Aucune.
 | D10, D11, D12 ; « Pas urgent » | `livrables/2-modelisation/09-decisions-a-prendre.md:72-74`, `:439-468` |
 | Q-SCH-08 « Reporter au parcours IA » | `questions-a-trancher.md:163`, `:925` |
 | Sélection, priorité du client, montant de l'offre | `01_create_fil_rouge_immobilier.sql:659-668`, `:684-710` |
-| Nouvelle offre après un refus : une nouvelle ligne (déduit) | ADR-041 (proposé), Questions tranchées |
+| Nouvelle offre après un refus : une nouvelle ligne (déduit) | ADR-041 (accepté), Questions tranchées |
 | Q-SCH-14 « Accepter comme limite » | `questions-a-trancher.md:169`, `:931`, `:966` |
 | Pas d'historique ; « Suffisant pour les droits d'accès » | `docker/init-v3/README.md:625-627` ; ADR-029, Décision 5 et Conséquences |
 | `hunter.id_realestatemanager NOT NULL` ; `is_hunter_ai` | `01_create_fil_rouge_immobilier.sql:293-297` |

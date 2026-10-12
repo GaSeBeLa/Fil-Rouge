@@ -140,7 +140,7 @@ id_author            INTEGER
    Non, déduit : l'import est un script SQL joué sous `POSTGRES_USER` (`docker/docker-compose.yml:8`, `:17`), pas un appel à l'API.
 
 5. **Un import régulier des nouvelles annonces entre-t-il dans le projet (Airflow) ?**
-   Oui, accepté par le groupe le 2026-10-09 (proposé par Sébastien, Discord) : un flux Airflow, avec tri, mise en forme et dédoublonnage en map/reduce. C'est la limite 7 d'ADR-045, acceptée par le groupe le 2026-10-09 ; l'ADR-045 dans son ensemble reste « proposé ». La version du 08/10 disait non, en lisant la note du groupe comme conditionnelle : « si non les biens vont être importer via un script dans Airflow » (Q-ACC-09) ; Jeff avait dit oui à la saisie à la main. Le sujet n'impose aucun outil : « Airflow » n'y apparaît pas, c'est un choix du groupe.
+   Oui, accepté par le groupe le 2026-10-09 (proposé par Sébastien, Discord) : un flux Airflow, avec tri, mise en forme et dédoublonnage en map/reduce. C'est la limite 7 d'ADR-045, acceptée par le groupe le 2026-10-09 ; l'ADR-045 dans son ensemble est accepté par le groupe le 12/10/2026. La version du 08/10 disait non, en lisant la note du groupe comme conditionnelle : « si non les biens vont être importer via un script dans Airflow » (Q-ACC-09) ; Jeff avait dit oui à la saisie à la main. Le sujet n'impose aucun outil : « Airflow » n'y apparaît pas, c'est un choix du groupe.
 
 **Questions ouvertes** 🟡
 

@@ -56,7 +56,7 @@
 * **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
 * **Décideurs :** le groupe (carte Q-INF-06, réponse « Valider dans le routeur commun », 05/10/2026) ; le code est du même jour (commit `fea3c9f`, Sébastien)
 * **Complète :** ADR-032 (un prix à virgule est refusé en 422)
-* **Voir aussi :** ADR-040 (règles qui croisent plusieurs tables, proposé) ; ADR-016 (mot de passe : les modèles propres à `/users`) ; ADR-021, ADR-022, ADR-031 (normaliser un code postal avant d'écrire)
+* **Voir aussi :** ADR-040 (règles qui croisent plusieurs tables, accepté) ; ADR-016 (mot de passe : les modèles propres à `/users`) ; ADR-021, ADR-022, ADR-031 (normaliser un code postal avant d'écrire)
 
 **Contexte**
 
@@ -84,7 +84,7 @@ Le sujet ne tranche pas entre 409 et 422. Il demande de tester « les cas d'erre
 2. Une entrée invalide rend **422**, au format de FastAPI, `loc` préfixé par `"body"` (l. 55-59). Le service n'est pas appelé, la base n'est pas touchée. Cas : type faux, champ obligatoire vide (`null`) ou absent, prix à virgule, texte plus long que sa limite.
 3. Ce que seul PostgreSQL connaît rend **409** : `CHECK`, `UNIQUE`, clé étrangère, trigger. Les `CHECK` ne sont pas recopiés en Python : le script SQL reste la seule source.
 4. Pas de modèle d'entrée par table. Seule exception, `/users`, pour le mot de passe (ADR-016).
-5. Une règle qui croise plusieurs tables n'est pas l'affaire du routeur. Elle va dans le service (ADR-040, proposé).
+5. Une règle qui croise plusieurs tables n'est pas l'affaire du routeur. Elle va dans le service (ADR-040, accepté).
 
 **Justification**
 

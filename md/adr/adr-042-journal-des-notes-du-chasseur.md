@@ -50,7 +50,7 @@
 * **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
 * **Décideurs :** le groupe — réponse du 05/10/2026 à la carte Q-SCH-06. La case cochée était « tsrange » ; le commentaire dit « ni « garder », ni tsrange ». Le registre retient le commentaire : « le commentaire fait foi » (`md/questions/questions-a-trancher.md:102`, `:161`, `:438`).
 * **Remplace :** aucun ADR. Ferme la décision D9 de `livrables/2-modelisation/09-decisions-a-prendre.md`.
-* **Lien :** suit ADR-035 (lettre E, proposé) : la note est recalculée à chaque vente (Q-REM-06).
+* **Lien :** suit ADR-035 (lettre E, accepté) : la note est recalculée à chaque vente (Q-REM-06).
 
 **Contexte**
 
@@ -96,7 +96,7 @@ Le commentaire du groupe, recopié : « Chaque note = une ligne datée à la sec
 * Deux notes le même jour passent : c'est ce que Q-REM-06 exige. Testé : une note à 9 h et une à 17 h le même jour, 201 (`API/tests/integration/test_constraints_db.py:728-736`).
 * Plus simple que `tsrange` : pas de période à fermer, donc pas de mise à jour de la note précédente.
 * Une note vaut jusqu'à la suivante. Même idée que les grilles d'honoraires « à partir du » (ADR-030).
-* L'argument de l'`EXCLUDE` ne tient plus. Le paiement n'a plus à retrouver son score par date : il le fige lui-même, dans `payment.performance_score` (`01:923-927`, Q-REM-03 ; ADR-033, proposé).
+* L'argument de l'`EXCLUDE` ne tient plus. Le paiement n'a plus à retrouver son score par date : il le fige lui-même, dans `payment.performance_score` (`01:923-927`, Q-REM-03 ; ADR-033, accepté).
 * L'historique est gardé. Q-REM-06 l'avait annoncé : « `hunter_performance` = **historique** » (`questions-a-trancher.md:608`).
 
 **Conséquences**

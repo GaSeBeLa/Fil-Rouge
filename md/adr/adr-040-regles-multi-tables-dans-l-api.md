@@ -53,7 +53,7 @@
   * le groupe (carte Q-MAN-06, réponse « Toutes dans l'API, chacune testée », 05/10/2026) ;
   * pour l'exception du trigger : le groupe (Q-MAN-02, ADR-039).
 * **Complète :** ADR-005. Il laissait le contrôle « un compte, un seul profil » « par trigger, ou … contrôle applicatif ». Cet ADR le range dans l'API (déduit, voir Questions tranchées).
-* **Voir aussi :** ADR-039 (l'exclusivité, seule exception) ; ADR-024, ADR-030, ADR-031, ADR-050, puis ADR-033, ADR-034, ADR-035, ADR-038, ADR-041, ADR-042 (règles qu'ils renvoient à l'API) ; ADR-036 (validation de l'entrée, proposé) ; ADR-047 (biens saisis à la main, proposé)
+* **Voir aussi :** ADR-039 (l'exclusivité, seule exception) ; ADR-024, ADR-030, ADR-031, ADR-050, puis ADR-033, ADR-034, ADR-035, ADR-038, ADR-041, ADR-042 (règles qu'ils renvoient à l'API) ; ADR-036 (validation de l'entrée, accepté) ; ADR-047 (biens saisis à la main, accepté)
 
 **Contexte**
 
