@@ -186,8 +186,9 @@ poids ≠ 1 » tombe. Suite complète verte, compte brut.
 ---
 
 <!-- FICHE:API5 -->
-## API5 [ ] — Figer les versions et l'ordre du paiement
+## API5 [x] — Figer les versions et l'ordre du paiement
 
+**Session** : bad3e8d0-ea0b-437e-b299-3505f03fa77c
 **Dépend de** : rien.
 **Fichiers** : `API/src/app/services/parameters_fees_service.py`, `API/src/app/services/commission_scale_service.py`, `API/src/app/services/hunter_rate_parameters_service.py`, `API/src/app/services/payment_service.py`, `API/src/app/services/remuneration.py`, un nouveau `API/tests/integration/test_versions_paiement.py`.
 
