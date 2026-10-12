@@ -609,3 +609,43 @@
 **Solution (SQL)** : `CONSTRAINT uq_sale_estate UNIQUE (id_estate)` dans `01` et la migration 38. 0 vente en base au 12/10/2026 : rien à reprendre. Test : `test_sale_second_sale_of_same_estate_returns_409`.
 
 **Statut** : réglé le 12/10/2026 (ADR-053)
+
+---
+
+## P38. Une vente passe sur un mandat annulé ou perdu, qui devient « terminé »
+
+**Problème** : `POST /sales` ne regarde que la signature du mandat (`API/src/app/services/sale_service.py:60`), pas son statut. Une vente sur un mandat `'canceled'` ou `'lost'`, mais signé, est acceptée, et le mandat passe à `'completed'` (`sale_service.py:76`). Le statut d'avant est perdu.
+
+**Preuve** : relecture de la série API6 → API10, le 12/10/2026. Mesuré le même jour sur la base de test : mandat signé, offre acceptée, statut mis à `'canceled'` puis à `'lost'` par `PUT /mandates/{id}` → `POST /sales` répond `201` dans les deux cas, et le mandat se relit `'completed'`.
+
+**Règle visée** :
+- `'lost'` : « Quand la vente est perdue, il n'y a ni vente ni paiement » (ADR-024, point 3).
+- `'canceled'` : aucune source ne le dit (hypothèse) ; un mandat annulé n'a plus de vente à porter.
+
+**Solution recommandée (API)** : dans `_check_sale`, refuser une vente sur un mandat `'canceled'` ou `'lost'` → `409`, avec un test par statut. Même contrôle au `PUT /sales`.
+
+**Alternative** : accepter la vente, mais sans changer le statut du mandat.
+
+**Statut** : ouvert — à trancher par le groupe (le cas `'canceled'`)
+
+---
+
+## P39. Un chasseur ou un manager anonymisé garde son genre, son pays et sa société
+
+**Problème** : `POST /users/{id}/anonymize` vide le téléphone, puis le nom à la fin du délai, sur les trois profils (`API/src/app/services/anonymization_service.py:120`). Le reste n'est vidé que chez un client. Chez un chasseur ou un manager, ces colonnes restent :
+- `gender`, `country_iso`, `company_name` (`hunter`, `real_estate_manager`) ;
+- `education_level` (`hunter`).
+
+Une société de chasseur indépendant porte souvent son nom.
+
+**Preuve** : relecture de la série API6 → API10, le 12/10/2026. Colonnes : `docker/init-v3/01_create_fil_rouge_immobilier.sql`, lignes 262 à 266 (`real_estate_manager`) et 284 à 291 (`hunter`), toutes facultatives.
+
+**Règle visée** : deux points d'ADR-049 tirent dans deux sens.
+- Le code suit le tableau du point 7 : genre et pays n'y figurent que pour `client`.
+- Le point 4 dit : « Ce que rien n'oblige à garder est rendu anonyme tout de suite ».
+
+**Solution recommandée (API)** : vider tout de suite ces quatre colonnes chez un chasseur et un manager (elles acceptent `NULL`), avec un test ; ajouter la ligne au tableau du point 7 d'ADR-049. À regarder avec : `is_carte_t`, `certification_date`, `is_hunter_ai` (lignes 296 à 299), données de métier qui servent peut-être au calcul de la rémunération.
+
+**Alternative** : garder ces colonnes, et écrire pourquoi dans ADR-049.
+
+**Statut** : ouvert — à trancher par le groupe
