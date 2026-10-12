@@ -212,8 +212,9 @@ contrôle « déjà citée » → son test tombe. Suite complète verte, compte 
 ---
 
 <!-- FICHE:API6 -->
-## API6 [ ] — Noter l'auteur d'un bien et d'un média
+## API6 [x] — Noter l'auteur d'un bien et d'un média
 
+**Session** : bad3e8d0-ea0b-437e-b299-3505f03fa77c
 **Dépend de** : `API2`.
 **Fichiers** : `API/src/app/routes/estate_router.py`, `API/src/app/services/estate_service.py`, `API/src/app/routes/review_media_router.py`, `API/src/app/services/review_media_service.py`, `docker/init-v3/01_create_fil_rouge_immobilier.sql` (lecture), un nouveau `API/tests/integration/test_auteurs.py`.
 

@@ -296,3 +296,9 @@ de ce que le code dit déjà.
   au calcul ; NULL sur un refus, exigée sinon (`chk_refused`). Base de dev :
   0 paiement, 0 version. Banc IDENTIQUES — 564 faits, **193 tests** (3 tests
   G1, vérifiés en mutant : 3 échecs sans la règle).
+- **2026-10-12** — **API6** : « l'auteur de la note » (ADR-051) se lit dans
+  `estate_searchrequest.id_hunter`, le chasseur qui a écrit la note, et non
+  dans `search_request.id_hunter` (le chasseur de la demande) : aucune
+  contrainte ne lie les deux en base. `PUT /estates` et `PUT /review-media`
+  restent ouverts aux rôles qui écrivent ; seul le `POST` est restreint
+  (périmètre de la fiche).
