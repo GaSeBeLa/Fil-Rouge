@@ -9,7 +9,7 @@ Les règles des ADR acceptés le 12/10 sont codées et testées : connexion par 
 - API5 : test_versions_paiement : 16 tests (citée 409, non citée 200 ; paid → announced 409 ; taux final faux 409) ; mutants : sans contrôle « déjà citée » → 3 failed, sans ordre du statut → 4 failed, sans P33 → 2 failed ; suite 308 passed, 7 skipped (avant 292)
 - API6 : test_auteurs : 11 tests (Hunter et Manager créent, id_author = leur id, valeur envoyée ignorée ; Client, Admin, Reader 403 ; PUT garde l'auteur ; chasseur de la note 201, autre chasseur 403) ; mutants : id_author reçu → 3 failed, PUT sans garde → 1 failed, sans contrôle d'auteur du média → 1 failed ; suite 341 passed, 7 skipped (avant 332)
 - API7 : test_propositions_visites : 17 tests (P19, P20, P23, P25, ADR-044 : un refus et un accepté chacun) ; mutants : sans P23 → 1 failed (visite client sur un bien non proposé), sans P20 → 2, sans P19 → 2, sans P25 → 2, sans ADR-044 → 2 ; suite 358 passed, 7 skipped (avant 341)
-- API8 : Signature → 'launched' ; vente : P27, P28, grille en vigueur
+- API8 : test_signature_vente : 12 tests (signature → demande 'launched' ; vente sur mandat non signé 409 ; vente 'hunter' sans offre 409 ; vente → mandat 'completed' ; mauvaise grille 409) ; mutants : sans passage à 'completed' → 1 failed, sans Q-MAN-06 → 1, sans P27 → 2, sans ADR-030 → 2, sans ADR-044 → 2 ; suite 370 passed, 7 skipped (avant 358)
 - API9 : Demande enregistrée avant le compte (P5) ; dépend d'API1
 - API10 : Anonymisation, 10 ans, plus de DELETE ; dépend d'API2
 - API11 : Taux de réussite des mandats pour la note max (mandate_success_rate_for_max_score) = 100 % ; migration 39

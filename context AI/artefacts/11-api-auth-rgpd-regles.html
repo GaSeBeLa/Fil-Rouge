@@ -21,9 +21,9 @@
     <p>Les règles des ADR acceptés le 12/10 sont codées et testées : connexion par jeton, rôles, clé d'API, contrôles entre tables, anonymisation sans DELETE, et un paiement calculé depuis la base.</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">12 fiches · 7 faites · en cours : API8</p>
+    <p class="mono" style="margin-top:.5rem">12 fiches · 8 faites · en cours : API9</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -65,25 +65,26 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">API7</span></span>
         <details><summary><span class="titre">Contrôler propositions et visites</span><span class="etat">Faite</span></summary>
         <span class="note">test_propositions_visites : 17 tests (P19, P20, P23, P25, ADR-044 : un refus et un accepté chacun) ; mutants : sans P23 → 1 failed (visite client sur un bien non proposé), sans P20 → 2, sans P19 → 2, sans P25 → 2, sans ADR-044 → 2 ; suite 358 passed, 7 skipped (avant 341)</span></details>
-        <span class="cout mono">≈4,3M (4 304 292) · 20 tours · 1,81 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">API8</span></span>
-        <details open><summary><span class="titre">Contrôler signature et vente</span><span class="etat">En cours · API9, API10 peuvent partir en même temps</span></summary>
-        <span class="note">Signature → 'launched' ; vente : P27, P28, grille en vigueur</span></details></li>
-      <li class="fiche"><span class="gauche"><span class="id">API9</span></span>
-        <details><summary><span class="titre">Enregistrer une demande avant le compte</span><span class="etat">À lancer · en même temps que API8, API10</span></summary>
+        <span class="cout mono">≈4,8M (4 785 610) · 22 tours · 1,94 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">API8</span></span>
+        <details><summary><span class="titre">Contrôler signature et vente</span><span class="etat">Faite</span></summary>
+        <span class="note">test_signature_vente : 12 tests (signature → demande 'launched' ; vente sur mandat non signé 409 ; vente 'hunter' sans offre 409 ; vente → mandat 'completed' ; mauvaise grille 409) ; mutants : sans passage à 'completed' → 1 failed, sans Q-MAN-06 → 1, sans P27 → 2, sans ADR-030 → 2, sans ADR-044 → 2 ; suite 370 passed, 7 skipped (avant 358)</span></details>
+        <span class="cout mono">≈4,6M (4 620 075) · 17 tours · 1,93 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">API9</span></span>
+        <details open><summary><span class="titre">Enregistrer une demande avant le compte</span><span class="etat">En cours · API10, API11 peuvent partir en même temps</span></summary>
         <span class="note">Demande enregistrée avant le compte (P5) ; dépend d'API1</span></details></li>
       <li class="fiche"><span class="gauche"><span class="id">API10</span></span>
-        <details><summary><span class="titre">Anonymiser un compte et fermer DELETE</span><span class="etat">À lancer · en même temps que API8, API9</span></summary>
+        <details><summary><span class="titre">Anonymiser un compte et fermer DELETE</span><span class="etat">À lancer · en même temps que API9, API11</span></summary>
         <span class="note">Anonymisation, 10 ans, plus de DELETE ; dépend d'API2</span></details></li>
       <li class="fiche"><span class="gauche"><span class="id">API11</span></span>
-        <details><summary><span class="titre">Noter les mandats par le taux de transformation</span><span class="etat">À lancer</span></summary>
+        <details><summary><span class="titre">Noter les mandats par le taux de transformation</span><span class="etat">À lancer · en même temps que API9, API10</span></summary>
         <span class="note">Taux de réussite des mandats pour la note max (mandate_success_rate_for_max_score) = 100 % ; migration 39</span></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">API12</span></span>
-        <details><summary><span class="titre">Brancher la rémunération sur la base</span><span class="etat">Après API8, API11</span></summary>
+        <details><summary><span class="titre">Brancher la rémunération sur la base</span><span class="etat">Après API11</span></summary>
         <span class="note">Paiement calculé depuis la base ; dépend d'API5, API8, API11</span></details></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈6,7M (6 672 728) · 42 tours · 3,41 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈72,6M (72 616 723) · 381 tours · 29,96 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈77,7M (77 718 116) · 400 tours · 32,02 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 

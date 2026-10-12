@@ -266,8 +266,9 @@ non proposé » tombe. Suite complète verte, compte brut.
 ---
 
 <!-- FICHE:API8 -->
-## API8 [ ] — Contrôler signature et vente
+## API8 [x] — Contrôler signature et vente
 
+**Session** : bad3e8d0-ea0b-437e-b299-3505f03fa77c
 **Dépend de** : rien.
 **Fichiers** : `API/src/app/services/mandate_service.py`, `API/src/app/services/sale_service.py`, `docker/init-v3/01_create_fil_rouge_immobilier.sql` (lecture des TODO du bloc `sale`), un nouveau `API/tests/integration/test_signature_vente.py`.
 
