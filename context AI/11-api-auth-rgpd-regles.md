@@ -103,8 +103,9 @@ désactivé après l'émission » tombe. Suite complète verte, compte brut.
 ---
 
 <!-- FICHE:API2 -->
-## API2 [ ] — Brancher les rôles sur toutes les routes
+## API2 [x] — Brancher les rôles sur toutes les routes
 
+**Session** : bad3e8d0-ea0b-437e-b299-3505f03fa77c
 **Dépend de** : `API1`.
 **Fichiers** : `API/src/app/routes/crud_router.py`, un nouveau `API/src/app/utils/roles.py`, `API/src/app/routes/hunter_performance_router.py`, `API/tests/conftest.py`, `API/tests/integration/conftest.py`, un nouveau `API/tests/test_roles.py`.
 

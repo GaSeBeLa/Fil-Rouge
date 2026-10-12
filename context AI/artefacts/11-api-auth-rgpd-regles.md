@@ -3,7 +3,7 @@
 Les règles des ADR acceptés le 12/10 sont codées et testées : connexion par jeton, rôles, clé d'API, contrôles entre tables, anonymisation sans DELETE, et un paiement calculé depuis la base.
 ## Notes
 - API1 : test_auth : 7 tests verts (200 + jeton ; 401 mauvais mot de passe, inactif, expiré, forgé, désactivé après émission) ; mutant sans contrôle de relecture → 1 failed ; suite 258 passed, 7 skipped (avant 251)
-- API2 : Rôles sur toutes les routes, Reader en lecture seule ; dépend d'API1
+- API2 : test_roles : sans jeton 401, Reader POST 403 / GET 200, POST /hunter-performances 403, Admin POST 201 ; mutant sans contrôle du rôle → 2 failed ; suite 265 passed, 7 skipped (avant 258)
 - API3 : Une clé d'API par programme ; arrêt pour docker-compose ; dépend d'API1
 - API4 : EmailStr, chambres ≤ pièces, réglages cohérents, trace du calcul typée
 - API5 : Barème et grilles figés une fois cités ; ordre du paiement ; taux recalculé
