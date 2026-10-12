@@ -90,7 +90,7 @@
 
 **Alternative (SQL)** : `password` facultatif avec `CHECK (is_activated = FALSE OR password IS NOT NULL)`. En second : change le schéma alors que la migration utilise déjà la valeur factice. Écartées : demande gardée dans la base du site (contredit EF-11), `id_client` facultatif.
 
-**Statut** : codé côté API le 12/10/2026 (fiche API9), sans changer le schéma : `POST /search-requests/submit` (clé d'API, pas de jeton), mot de passe factice `PENDING_SIGNUP_PASSWORD` (`security.py`), activation par `PUT /users/{id}`. Un email connu garde sa fiche client telle quelle ; un email de chasseur ou de manager → `409`. Tests : `API/tests/integration/test_demande_avant_compte.py`.
+**Statut** : codé côté API le 12/10/2026 (fiche API9), sans changer le schéma : `POST /search-requests/submit` (clé d'API, pas de jeton), mot de passe factice `PENDING_SIGNUP_PASSWORD` (`security.py`), activation par `PUT /users/{id}`. Un email connu garde sa fiche client telle quelle ; un email de chasseur ou de manager est ignoré et logué. Même réponse pour tous (`202`, sans id), pour ne pas dire si l'email existe (relecture du 12/10/2026) ; seul un formulaire mal formé, refusé par la base, le dit encore (`409` si l'email est neuf). Tests : `API/tests/integration/test_demande_avant_compte.py`.
 
 ---
 
