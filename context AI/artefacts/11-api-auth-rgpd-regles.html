@@ -21,9 +21,9 @@
     <p>Les règles des ADR acceptés le 12/10 sont codées et testées : connexion par jeton, rôles, clé d'API, contrôles entre tables, anonymisation sans DELETE, et un paiement calculé depuis la base.</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">12 fiches · 6 faites · en cours : API7</p>
+    <p class="mono" style="margin-top:.5rem">12 fiches · 7 faites · en cours : API8</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -61,18 +61,19 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">API6</span></span>
         <details><summary><span class="titre">Noter l'auteur d'un bien et d'un média</span><span class="etat">Faite</span></summary>
         <span class="note">test_auteurs : 11 tests (Hunter et Manager créent, id_author = leur id, valeur envoyée ignorée ; Client, Admin, Reader 403 ; PUT garde l'auteur ; chasseur de la note 201, autre chasseur 403) ; mutants : id_author reçu → 3 failed, PUT sans garde → 1 failed, sans contrôle d'auteur du média → 1 failed ; suite 341 passed, 7 skipped (avant 332)</span></details>
-        <span class="cout mono">≈35,1M (35 142 492) · 178 tours · 13,91 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">API7</span></span>
-        <details open><summary><span class="titre">Contrôler propositions et visites</span><span class="etat">En cours · API8, API9, API10 peuvent partir en même temps</span></summary>
-        <span class="note">Propositions et visites : P19, P20, P23, P25, visite avant signature</span></details></li>
-      <li class="fiche"><span class="gauche"><span class="id">API8</span></span>
-        <details><summary><span class="titre">Contrôler signature et vente</span><span class="etat">À lancer · en même temps que API7, API9, API10</span></summary>
+        <span class="cout mono">≈35,5M (35 504 160) · 180 tours · 14,03 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">API7</span></span>
+        <details><summary><span class="titre">Contrôler propositions et visites</span><span class="etat">Faite</span></summary>
+        <span class="note">test_propositions_visites : 17 tests (P19, P20, P23, P25, ADR-044 : un refus et un accepté chacun) ; mutants : sans P23 → 1 failed (visite client sur un bien non proposé), sans P20 → 2, sans P19 → 2, sans P25 → 2, sans ADR-044 → 2 ; suite 358 passed, 7 skipped (avant 341)</span></details>
+        <span class="cout mono">≈4,3M (4 304 292) · 20 tours · 1,81 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">API8</span></span>
+        <details open><summary><span class="titre">Contrôler signature et vente</span><span class="etat">En cours · API9, API10 peuvent partir en même temps</span></summary>
         <span class="note">Signature → 'launched' ; vente : P27, P28, grille en vigueur</span></details></li>
       <li class="fiche"><span class="gauche"><span class="id">API9</span></span>
-        <details><summary><span class="titre">Enregistrer une demande avant le compte</span><span class="etat">À lancer · en même temps que API7, API8, API10</span></summary>
+        <details><summary><span class="titre">Enregistrer une demande avant le compte</span><span class="etat">À lancer · en même temps que API8, API10</span></summary>
         <span class="note">Demande enregistrée avant le compte (P5) ; dépend d'API1</span></details></li>
       <li class="fiche"><span class="gauche"><span class="id">API10</span></span>
-        <details><summary><span class="titre">Anonymiser un compte et fermer DELETE</span><span class="etat">À lancer · en même temps que API7, API8, API9</span></summary>
+        <details><summary><span class="titre">Anonymiser un compte et fermer DELETE</span><span class="etat">À lancer · en même temps que API8, API9</span></summary>
         <span class="note">Anonymisation, 10 ans, plus de DELETE ; dépend d'API2</span></details></li>
       <li class="fiche"><span class="gauche"><span class="id">API11</span></span>
         <details><summary><span class="titre">Noter les mandats par le taux de transformation</span><span class="etat">À lancer</span></summary>
@@ -82,7 +83,7 @@
         <span class="note">Paiement calculé depuis la base ; dépend d'API5, API8, API11</span></details></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈6,7M (6 672 728) · 42 tours · 3,41 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈68,0M (67 950 763) · 359 tours · 28,03 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈72,6M (72 616 723) · 381 tours · 29,96 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 
@@ -100,6 +101,7 @@
     <!-- ZONE:journal — une ligne par décision imprévue tranchée en cours de fiche -->
     <ul class="journal">
       <li><time datetime="2026-10-12">2026-10-12</time><span>API6 : l'auteur de la note (ADR-051) est estate_searchrequest.id_hunter, pas search_request.id_hunter ; seul le POST est restreint, les PUT restent aux rôles qui écrivent</span></li>
+      <li><time datetime="2026-10-12">2026-10-12</time><span>API7 : un PUT de proposition ne repasse P19 et P20 que s'il change de bien ou de mandat ; les visites repassent leurs règles à chaque PUT</span></li>
     </ul>
   </section>
 

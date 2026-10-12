@@ -302,3 +302,8 @@ de ce que le code dit déjà.
   contrainte ne lie les deux en base. `PUT /estates` et `PUT /review-media`
   restent ouverts aux rôles qui écrivent ; seul le `POST` est restreint
   (périmètre de la fiche).
+- **2026-10-12** — **API7** : un `PUT /estate-proposed` ne repasse P19 et P20
+  que s'il change de bien ou de mandat (c'est alors une nouvelle
+  proposition) ; changer le statut, le montant ou un commentaire d'une
+  proposition sur un mandat devenu `completed` reste permis. Les visites,
+  elles, repassent P23, P25 et ADR-044 à chaque `PUT`.

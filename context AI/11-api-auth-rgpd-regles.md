@@ -239,8 +239,9 @@ complète verte, compte brut.
 ---
 
 <!-- FICHE:API7 -->
-## API7 [ ] — Contrôler propositions et visites
+## API7 [x] — Contrôler propositions et visites
 
+**Session** : bad3e8d0-ea0b-437e-b299-3505f03fa77c
 **Dépend de** : rien.
 **Fichiers** : `API/src/app/services/estate_proposed_service.py`, `API/src/app/services/visit_service.py`, `md/adr/adr-053-trous-de-la-base-decisions.md` (règle des visites), un nouveau `API/tests/integration/test_propositions_visites.py`.
 
