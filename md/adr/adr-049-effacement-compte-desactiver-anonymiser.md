@@ -90,7 +90,7 @@ Sous-choix sur la route, laissé par le client (Q-JEF-15) :
 
 1. ✅ **Sur une demande d'effacement, l'admin désactive le compte** : `is_activated = FALSE` (`01:173`). Le compte ne peut plus se connecter (ADR-028).
 2. ✅ **Aucune personne ne se supprime.** L'effacement passe par l'anonymisation (Q-ACC-08). La CNIL l'admet : « en lieu et place de mesures d'effacement, les données peuvent faire l'objet d'un processus d'anonymisation afin de rendre impossible pour quiconque la « ré-identification » des personnes concernées » (guide CNIL). Limite : voir Conséquences.
-3. ✅ **Une route à part rend anonyme** les données personnelles d'une personne (Q-JEF-15) : `POST /users/{id}/anonymize`, réservée à l'`Admin` (ADR-027). Elle désactive, et rend anonyme ce qui peut l'être. La forme est tranchée par déduction (Options). Demande du code, non fait.
+3. ✅ **Une route à part rend anonyme** les données personnelles d'une personne (Q-JEF-15) : `POST /users/{id}/anonymize`, réservée à l'`Admin` (ADR-027). Elle désactive, et rend anonyme ce qui peut l'être. La forme est tranchée par déduction (Options). Codé le 12/10/2026 (fiche API10, `API/src/app/services/anonymization_service.py`).
 4. ✅ **Ce que rien n'oblige à garder est rendu anonyme tout de suite** (déduit de Q-ACC-08 et de la minimisation, `REGISTRE-RGPD.md:9`). Garder « au cas où » n'est pas permis : « Il n'est pas possible d'archiver des données « au cas où… » » (guide CNIL).
 5. **Les durées, rangées par traitement** (`REGISTRE-RGPD.md:27-29`) :
 
@@ -118,7 +118,7 @@ Sous-choix sur la route, laissé par le client (Q-JEF-15) :
 
 8. ✅ **Même règle pour un chasseur ou un manager** (déduit de Q-ACC-08, qui ne distingue pas les rôles, `reg:183` ; et de `REGISTRE-RGPD.md:29`). Un chasseur a des paiements : son nom reste 10 ans (point 5). Sa date d'embauche, `NOT NULL`, sert au calcul de l'ancienneté (`01:284`) : elle suit le paiement.
 9. 💡 **La seconde étape, à la fin d'un délai :** la même route, rappelée par l'`Admin`, à la demande. Plus tard, un traitement planifié. Proposition de l'équipe, adoptée avec la fiche. ✅ Le traitement planifié est **reporté à une éventuelle V2** (Sébastien, Discord, 09/10/2026) : dans le MVP, l'`Admin` relance la route à la main.
-10. ✅ **Fermer DELETE sur toutes les ressources**, proposition de l'équipe, adoptée avec la fiche (ADR-027, point 4). ✅ Confirmé par le groupe le 09/10/2026 (S2) : plus aucune route DELETE ; l'effacement passe seulement par la route d'anonymisation (S3). Le registre ne le demandait que pour les comptes, « ou à justifier » (`reg:303`). Demande du code, non fait.
+10. ✅ **Fermer DELETE sur toutes les ressources**, proposition de l'équipe, adoptée avec la fiche (ADR-027, point 4). ✅ Confirmé par le groupe le 09/10/2026 (S2) : plus aucune route DELETE ; l'effacement passe seulement par la route d'anonymisation (S3). Le registre ne le demandait que pour les comptes, « ou à justifier » (`reg:303`). Codé le 12/10/2026 (fiche API10) : un `DELETE` rend `405`.
 
 **Justification**
 
@@ -131,7 +131,7 @@ Sous-choix sur la route, laissé par le client (Q-JEF-15) :
 
 **Conséquences**
 
-* **Code, à écrire :** la route d'anonymisation, réservée à l'`Admin` (ADR-027, ADR-028), et ses tests d'intégration. Un client rendu anonyme doit passer tous les `CHECK` de la base. Demande du code, non fait.
+* **Code, à écrire :** la route d'anonymisation, réservée à l'`Admin` (ADR-027, ADR-028), et ses tests d'intégration. Un client rendu anonyme doit passer tous les `CHECK` de la base. Fait le 12/10/2026 (fiche API10) : `API/tests/integration/test_anonymisation.py`, 15 tests.
 * **Routes DELETE :** la fabrique commune les donne à toutes les ressources (`crud_router.py:104-110`). Elles contredisent cette fiche et ADR-027. Les tests `test_users_db.py:89-104` décrivent une vraie suppression : à réécrire si DELETE se ferme (point 10).
 * ⚠️ **Limite : plus proche d'une pseudonymisation que d'une anonymisation.** Le sujet dit l'anonymisation « irréversible » : « on supprime tout moyen de ré-identifier la personne » (`SOUVERAINETE-SECURITE-IA.md:19`). Or la vente garde l'adresse du bien, la date et le prix ; les critères gardent la ville et le quartier. En les croisant, on peut encore retrouver la personne. La pseudonymisation remplace les identifiants par des codes (`SOUVERAINETE-SECURITE-IA.md:20`) ; ici, aucune clé n'est gardée, mais le risque de ré-identification reste. À dire à l'oral, et dans le registre.
 * **Données en attente :** pour la CNIL, elles « ne doivent plus être consultables par tous les opérationnels initialement prévus, mais seulement par des personnes spécialement habilitées » (guide CNIL). Le référentiel parle d'une « séparation logique dans la base de données active ». 💡 Ici : le compte désactivé, et ses données lisibles par l'`Admin` seul (ADR-027, point 7). Pas de base d'archive à part : le projet n'est pas déployé.

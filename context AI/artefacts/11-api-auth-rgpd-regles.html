@@ -21,9 +21,9 @@
     <p>Les règles des ADR acceptés le 12/10 sont codées et testées : connexion par jeton, rôles, clé d'API, contrôles entre tables, anonymisation sans DELETE, et un paiement calculé depuis la base.</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">12 fiches · 9 faites · en cours : API10</p>
+    <p class="mono" style="margin-top:.5rem">12 fiches · 10 faites · en cours : API11</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -73,19 +73,20 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">API9</span></span>
         <details><summary><span class="titre">Enregistrer une demande avant le compte</span><span class="etat">Faite</span></summary>
         <span class="note">test_demande_avant_compte : 9 tests (formulaire neuf → user inactif + client + demande, connexion 401 ; majuscules → même compte ; client connu → fiche non réécrite ; email de chasseur 409 ; adresse manquante 422 et 0 ligne ; refus au milieu 409 et 0 ligne ; PUT /users active) ; mutants : user hors transaction → 1 failed (refus au milieu, pas le 422), casse → 2, sans contrôle du rôle → 1, fiche réécrite → 2 ; suite 379 passed, 7 skipped (avant 370)</span></details>
-        <span class="cout mono">≈5,5M (5 519 154) · 32 tours · 2,92 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">API10</span></span>
-        <details open><summary><span class="titre">Anonymiser un compte et fermer DELETE</span><span class="etat">En cours · API11 peut partir en même temps</span></summary>
-        <span class="note">Anonymisation, 10 ans, plus de DELETE ; dépend d'API2</span></details></li>
-      <li class="fiche"><span class="gauche"><span class="id">API11</span></span>
-        <details><summary><span class="titre">Noter les mandats par le taux de transformation</span><span class="etat">À lancer · en même temps que API10</span></summary>
+        <span class="cout mono">≈5,7M (5 680 194) · 33 tours · 2,99 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">API10</span></span>
+        <details><summary><span class="titre">Anonymiser un compte et fermer DELETE</span><span class="etat">Faite</span></summary>
+        <span class="note">test_anonymisation : 15 tests (client sans mandat → tout anonyme, compte désactivé, connexion 401 ; chasseur payé il y a 2 ans → nom gardé, reste anonyme ; paiement du jour, paiement non versé, renouvellement → date du délai exacte ; rappel après le délai → « Anonyme » ; DELETE /clients/1 → 405 ; non-Admin → 403) ; mutants : nom sans délai → 5 failed, paiements ignorés → 2, non versé ignoré → 1, commentaire gardé → 1, motif gardé → 1, adresse gardée → 2, compte actif → 1, chaîne non suivie → 1 ; suite 391 passed, 7 skipped (avant 379)</span></details>
+        <span class="cout mono">≈9,6M (9 558 767) · 43 tours · 3,82 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">API11</span></span>
+        <details open><summary><span class="titre">Noter les mandats par le taux de transformation</span><span class="etat">En cours</span></summary>
         <span class="note">Taux de réussite des mandats pour la note max (mandate_success_rate_for_max_score) = 100 % ; migration 39</span></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">API12</span></span>
         <details><summary><span class="titre">Brancher la rémunération sur la base</span><span class="etat">Après API11</span></summary>
         <span class="note">Paiement calculé depuis la base ; dépend d'API5, API8, API11</span></details></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈6,7M (6 672 728) · 42 tours · 3,41 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈83,8M (83 822 100) · 434 tours · 35,09 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈93,5M (93 541 907) · 478 tours · 38,98 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 
@@ -102,10 +103,15 @@
     <h2>Journal des décisions</h2>
     <!-- ZONE:journal — une ligne par décision imprévue tranchée en cours de fiche -->
     <ul class="journal">
-      <li><time datetime="2026-10-12">2026-10-12</time><span>API6 : l'auteur de la note (ADR-051) est estate_searchrequest.id_hunter, pas search_request.id_hunter ; seul le POST est restreint, les PUT restent aux rôles qui écrivent</span></li>
       <li><time datetime="2026-10-12">2026-10-12</time><span>API7 : un PUT de proposition ne repasse P19 et P20 que s'il change de bien ou de mandat ; les visites repassent leurs règles à chaque PUT</span></li>
       <li><time datetime="2026-10-12">2026-10-12</time><span>API9 : un email connu garde sa fiche client (formulaire sans connexion) ; email d'un non-client → 409 ; le test qui tombe sans transaction est le refus au milieu, le 422 part avant toute écriture</span></li>
+      <li><time datetime="2026-10-12">2026-10-12</time><span>API10 : délai du nom — paiement non versé compté à partir d'aujourd'hui, refusé ignoré, mandat jamais signé ignoré ; la chaîne suit id_mandate_parent même si le chasseur change ; tableau de la Décision 7 suivi tel quel (chasseur et manager : téléphone et nom seulement)</span></li>
     </ul>
+    <details class="journal-ancien"><summary>1 entrée plus ancienne</summary>
+    <ul class="journal">
+      <li><time datetime="2026-10-12">2026-10-12</time><span>API6 : l'auteur de la note (ADR-051) est estate_searchrequest.id_hunter, pas search_request.id_hunter ; seul le POST est restreint, les PUT restent aux rôles qui écrivent</span></li>
+    </ul>
+    </details>
   </section>
 
   <footer>

@@ -313,3 +313,11 @@ de ce que le code dit déjà.
   fiche en reçoit une ; un email de chasseur, manager ou admin → `409` (P1).
   Le test qui tombe sans transaction est le refus de la base au milieu
   (code postal), pas l'adresse manquante : le `422` part avant toute écriture.
+- **2026-10-12** — **API10** : pour le délai du nom (ADR-049, Décision 5), un
+  paiement annoncé ou programmé, pas encore versé, compte à partir
+  d'aujourd'hui ; un paiement refusé ne compte pas (aucun versement) ; un
+  mandat jamais signé non plus (pas de fin). La chaîne suit
+  `id_mandate_parent` même quand le renouvellement change de chasseur
+  (Q-MAN-08). Le tableau de la Décision 7 est suivi tel quel : pour un
+  chasseur ou un manager, seuls téléphone et nom changent ; une révision de
+  critères garde un motif neutre `'anonyme'` (`chk_criteria_change_reason`).

@@ -323,8 +323,9 @@ transaction → le test « 0 ligne écrite » tombe. Suite complète verte.
 ---
 
 <!-- FICHE:API10 -->
-## API10 [ ] — Anonymiser un compte et fermer DELETE
+## API10 [x] — Anonymiser un compte et fermer DELETE
 
+**Session** : bad3e8d0-ea0b-437e-b299-3505f03fa77c
 **Dépend de** : `API2`.
 **Fichiers** : `API/src/app/routes/crud_router.py`, `API/src/app/routes/user_router.py`, un nouveau `API/src/app/services/anonymization_service.py`, `md/adr/adr-049-effacement-compte-desactiver-anonymiser.md` (Décisions 5 à 10), `API/tests/test_crud_router.py`, un nouveau `API/tests/integration/test_anonymisation.py`.
 
