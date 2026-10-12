@@ -82,7 +82,7 @@ Le sens des deux valeurs est écrit en base : `COMMENT ON COLUMN visit.visitor_t
 | Un bien convient : le client est invité à le visiter | `02_particulier_recherche_et_visites.feature:32-35` ; `Readme.md:101` |
 | Seules les visites client jusqu'à l'acte comptent | ADR-048 l. 94 |
 | Le chasseur visite après le retour du client | `Readme.md:128-129` ; `05_chasseur_selection_quotidienne_biens.feature:32-35` |
-| L'anonymisation vide l'adresse | `md/adr/adr-049-effacement-compte-desactiver-anonymiser.md:114` |
+| L'anonymisation vidait l'adresse, avant P3 | `md/adr/adr-049-effacement-compte-desactiver-anonymiser.md:114`, version du commit `a921b4e` |
 | Tout ou rien ; trois champs, ou aucun | ADR-043, Décisions 1 et 4 |
 | Renouvellement à l'échéance | `00_regles_metier_mandat_remuneration.feature:40` ; ADR-050, Décision 4 |
 | Le trigger exempte parent et enfant | ADR-039, Décision 2 ; ADR-050 l. 114 |
