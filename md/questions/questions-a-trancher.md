@@ -173,7 +173,7 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 | Q-ACC-11 | ✏️ **Changée le 2026-10-06**, voir plus bas. Avant : « invoice_reference sur payment » (2026-10-05) | Même lot que Q-REM-17 ; plus un doublon. |
 | Q-MAN-08 | ✏️ cochée « Reporter », commentaire « revoir, pas répondu » (2026-10-05) ; ✅ **répondue le 2026-10-06**, voir plus bas | Carte réécrite (thème C). |
 | Q-MAN-05 | ✅ **Supprimer la colonne** (2026-10-06, pas l'option recommandée) — « le mandat doit être signé par les deux partie, donc il faudrait rajouter  is_hunter_signed et date signature reflèterais la signature des deux ? qu'en pense tu ? a modifié les schemas et bdd » | ✏️ **Change la réponse du 2026-10-05** (« Poser un CHECK d'égalité »), à la suite de Q-MAN-09. `is_client_signed` est retiré (`01:415`) : modèle, API et `02` touchés. Plus de case, plus de contradiction : `MAND-0008` et `MAND-0016` (`02:218`, `02:225`) gardent leur date, reprise de la source (`date_debut`, `PgSQL.sql:130`). ADR S. |
-| Q-MAN-08 | ✅ **Reporter** (2026-10-06) | Rien maintenant : la réaffectation attend que l'**affectation** soit décidée, avec Jeff (Q-JEF-14). 💡 Une ligne dans l'ADR T (limites assumées) : une demande réaffectée peut revenir au chasseur qui l'a refusée. |
+| Q-MAN-08 | ✅ **Reporter** (2026-10-06) | Rien maintenant : la réaffectation attend que l'**affectation** soit décidée, avec Jeff (Q-JEF-14). 💡 Une ligne dans l'ADR T (limites assumées) : une demande réaffectée peut revenir au chasseur qui l'a refusée. 🆕 2026-10-12 : la réaffectation d'un **mandat** en cours part à Jeff, Q-JEF-30 (partie 2). |
 | Q-MAN-09 | ✅ **Le client seul, comme le sujet** (2026-10-06, pas l'option recommandée) — « retirer is_client_signed, par juste la date de signature, on passe par le status pending signature » | Comme le sujet : seule la signature du **client** compte (`Readme.md:98`). **Le commentaire fait foi** : pas de CHECK d'égalité (l'effet écrit sous l'option) ; la case disparaît (Q-MAN-05). Restent la date `signature_date` (`01:408`) et le statut. `pending_signature` existe déjà (`01:405-407`) ; `chk_status_signature` le relie à la date : « en attente » si et seulement si pas de date (`01:430-432`). ADR S : décidé. |
 | Q-SCH-18 | ✅ **Un code factice 00000, documenté** (2026-10-06) | `02` écrit `00000` pour les 18 clients repris (`02:148-165`) ; le format français l'accepte : 5 chiffres (`01:210`). Une ligne dans le README du schéma, et dans l'audit. ADR R : décidé. Jeff peut fournir les vrais codes (Q-JEF-26). |
 | Q-MIG-04 | ✅ **Remplacer dans le seed, puis supprimer** (2026-10-06) | Le seed crée 2 managers (Q-ACC-16), y rattache les 6 chasseurs, puis efface le user 25 (`02:122-128`). Dans cet ordre : les clés sont en `ON DELETE RESTRICT` (`01:222-223`, `01:266-267`). 💡 Effacer, et non désactiver (Q-ACC-08) : ce compte n'a jamais servi. À dire. ⚠️ Suppose le lien chasseur → manager : ADR-025 serait « Annulé » sur Confluence (voir Q-ACC-20). |
@@ -1126,6 +1126,22 @@ Sources :
 (daté le 2026-10-08 : c'est la photo de l'entretien du 2026-10-07).
 🆕 **2026-10-08** : les questions sur les **notifications** (Q-JEF-27 à 29) ont leur
 page, `md/questions/questions-pour-jeff-notifications.html`.
+🆕 **2026-10-12** : **Q-JEF-30, réaffecter un mandat en cours** (suite de Q-MAN-08,
+mise en suspens par Sébastien, Discord, 2026-10-12 : cas non bloquant). À poser à Jeff :
+
+> Un chasseur ne peut plus suivre un mandat en cours (maladie ou autre). Le manager
+> le confie à un autre chasseur.
+> 1. Est-ce dans le MVP, ou pour une V2 ?
+> 2. Les biens déjà proposés au client restent-ils au nom de l'ancien chasseur, ou
+>    passent-ils au nouveau ?
+> 3. Si la vente se fait ensuite, qui est payé : l'ancien, le nouveau, ou les deux
+>    (et alors, comment on partage) ?
+
+Pourquoi : depuis P22 (ADR-053, migration 32), une offre porte le chasseur de son
+mandat ; dès qu'un mandat a une offre, son chasseur ne peut plus changer (testé le
+2026-10-12 : refus `fk_proposed_hunter_of_mandate`). La réponse 2 choisit entre « les
+offres suivent le nouveau chasseur » (`ON UPDATE CASCADE`, une ligne) et « elles
+gardent leur auteur » (historique des chasseurs du mandat) ; la 3 tranche entre les deux.
 (artifact « Fil Rouge — Questions pour Jeff »). Chaque question y porte **notre position**,
 tirée des réponses, et ce que sa réponse change. Elles se cochent **là-bas
 seulement** : la page principale n'a plus que le lien.
