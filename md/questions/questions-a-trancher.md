@@ -1127,7 +1127,8 @@ Sources :
 🆕 **2026-10-08** : les questions sur les **notifications** (Q-JEF-27 à 29) ont leur
 page, `md/questions/questions-pour-jeff-notifications.html`.
 🆕 **2026-10-12** : **Q-JEF-30, réaffecter un mandat en cours** (suite de Q-MAN-08,
-mise en suspens par Sébastien, Discord, 2026-10-12 : cas non bloquant). À poser à Jeff :
+mise en suspens par Sébastien, Discord, 2026-10-12 : cas non bloquant ; il penche
+pour **hors MVP**, mais pensé). Sébastien la pose plus tard. À poser à Jeff :
 
 > Un chasseur ne peut plus suivre un mandat en cours (maladie ou autre). Le manager
 > le confie à un autre chasseur.
