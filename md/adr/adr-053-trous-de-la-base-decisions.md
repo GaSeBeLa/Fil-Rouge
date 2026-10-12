@@ -31,6 +31,7 @@
 | P28 | Le mandat reste `active` après la vente | L'API le passe à `completed` dans la transaction de la vente | API |
 | P29 | Réglages du taux absurdes | Validation Pydantic à la création d'une version ; ADR-034 Décision 3 reste | API |
 | P36 | Plusieurs notes `initial` | **Une seule** par chasseur : index unique partiel. ✅ Codé le 12/10 (migration 36) | base |
+| P37 | Un bien vendu deux fois, sur deux mandats | **Une seule** vente par bien : `UNIQUE (id_estate)` sur `sale`. ✅ Codé le 12/10 (migration 38) | base |
 
 **La règle des visites (P23)**
 
@@ -58,7 +59,7 @@ Le sens des deux valeurs est écrit en base : `COMMENT ON COLUMN visit.visitor_t
 
 **Conséquences**
 
-* **Codé le 12/10/2026** (« go » de Sébastien) : le commentaire de `visit.visitor_type` (migration 22) et tous les choix « base » : P3 (23), P2 (24), P12 (28), P13 (29), P24 (33), P36 (36), et le sens de `floor` (P18, 37). Chaque migration est jouée sur `fil_rouge_immobilier` ; tests dans `API/tests/integration/test_trous_audit_db.py`.
+* **Codé le 12/10/2026** (« go » de Sébastien) : le commentaire de `visit.visitor_type` (migration 22) et tous les choix « base » : P3 (23), P2 (24), P12 (28), P13 (29), P24 (33), P36 (36), et le sens de `floor` (P18, 37) ; P37, trou signalé par Gabriel le même jour (38). Chaque migration est jouée sur `fil_rouge_immobilier` ; tests dans `API/tests/integration/test_trous_audit_db.py`.
 * **Avec eux, les réparations prêtes de l'audit qui se font en base** : P6 (25), P8 (26), P9 (27), P15 (30), P17 (31, coordonnées seulement), P22 (32), P34 (34), P35 (35).
 * **Reste pour le chantier API** : les choix « API » (P16, P23, P25, P28, P29, et `EmailStr` de P2) et les réparations prêtes qui se font dans l'API (P5, P19, P20, P27, P32, P33). Leur solution est décrite dans l'audit, pas écrite.
 * **Laissé de côté** : P10, aucune source ne lie type de bien et typologie.
@@ -79,6 +80,7 @@ Le sens des deux valeurs est écrit en base : `COMMENT ON COLUMN visit.visitor_t
 | Les 13 choix | Sébastien, réponses à la page à cartes, Discord, 12/10/2026 |
 | L'adresse neutre de l'anonymisation | Sébastien, Discord, 12/10/2026 (« j'accepte ta proposition ») |
 | Pas de `nb_floors` ; le nombre d'étages va dans la note de visite | Laurence, Discord, 12/10/2026 |
+| Un bien n'est vendu qu'une fois (P37) | Gabriel, Discord, 12/10/2026 |
 | Les 18 clients ont adresse, code postal, ville et pays ; tous en France | `fil_rouge_immobilier`, compté le 12/10/2026 : `18\|18\|18\|18\|18`, 0 hors `FR` |
 | Le flux des sources est retenu ; la visite du chasseur avant la proposition est écartée | Gabriel, Discord, 12/10/2026 |
 | La visite 2 se fait avec le chasseur, et c'est elle qui compte pour la rémunération | Gabriel, Discord, 12/10/2026 |

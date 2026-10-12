@@ -595,3 +595,17 @@
 **Alternative (API)** : contrôle à l'écriture.
 
 **Statut** : ouvert
+
+---
+
+## P37. Un bien peut être vendu deux fois
+
+**Problème** : `sale.id_mandate` est `UNIQUE` (une vente par mandat), mais `sale.id_estate` n'a ni `UNIQUE` ni trigger. Le même bien peut donc être vendu deux fois, sur deux mandats différents.
+
+**Preuve** : `docker/init-v3/01_create_fil_rouge_immobilier.sql`, table `sale` ; signalé par Gabriel le 12/10/2026. Testé : deux ventes du même bien sur les mandats 1 et 2, acceptées sans la contrainte.
+
+**Règle visée** : un bien n'est vendu qu'une fois *(décision du groupe, Gabriel, Discord, 12/10/2026)*. Une revente plus tard serait une nouvelle annonce, donc un autre `estate`.
+
+**Solution (SQL)** : `CONSTRAINT uq_sale_estate UNIQUE (id_estate)` dans `01` et la migration 38. 0 vente en base au 12/10/2026 : rien à reprendre. Test : `test_sale_second_sale_of_same_estate_returns_409`.
+
+**Statut** : réglé le 12/10/2026 (ADR-053)
