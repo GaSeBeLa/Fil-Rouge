@@ -318,6 +318,7 @@ de ce que le code dit déjà.
   d'aujourd'hui ; un paiement refusé ne compte pas (aucun versement) ; un
   mandat jamais signé non plus (pas de fin). La chaîne suit
   `id_mandate_parent` même quand le renouvellement change de chasseur
-  (Q-MAN-08). Le tableau de la Décision 7 est suivi tel quel : pour un
+  (Q-MAN-08) ; chaque maillon signé compte, un maillon jamais signé
+  n'efface pas la fin du maillon d'avant (corrigé après la relecture). Le tableau de la Décision 7 est suivi tel quel : pour un
   chasseur ou un manager, seuls téléphone et nom changent ; une révision de
   critères garde un motif neutre `'anonyme'` (`chk_criteria_change_reason`).
