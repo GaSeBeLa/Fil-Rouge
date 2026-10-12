@@ -132,8 +132,9 @@ Suite complète verte, même compte qu'avant plus les nouveaux.
 ---
 
 <!-- FICHE:API3 -->
-## API3 [ ] — Exiger une clé d'API par programme
+## API3 [x] — Exiger une clé d'API par programme
 
+**Session** : bad3e8d0-ea0b-437e-b299-3505f03fa77c
 **Dépend de** : `API1`.
 **Fichiers** : un nouveau `API/src/app/utils/api_keys.py`, `API/src/app/routes/crud_router.py`, `API/src/app/routes/auth_router.py`, `docker/.env.exemple`, `API/tests/conftest.py`, un nouveau `API/tests/test_api_keys.py`.
 

@@ -4,7 +4,7 @@ Les règles des ADR acceptés le 12/10 sont codées et testées : connexion par 
 ## Notes
 - API1 : test_auth : 7 tests verts (200 + jeton ; 401 mauvais mot de passe, inactif, expiré, forgé, désactivé après émission) ; mutant sans contrôle de relecture → 1 failed ; suite 258 passed, 7 skipped (avant 251)
 - API2 : test_roles : sans jeton 401, Reader POST 403 / GET 200, POST /hunter-performances 403, Admin POST 201 ; mutant sans contrôle du rôle → 2 failed ; suite 265 passed, 7 skipped (avant 258)
-- API3 : Une clé d'API par programme ; arrêt pour docker-compose ; dépend d'API1
+- API3 : test_api_keys : sans clé 401, clé inconnue 401, bonne clé + jeton 200, bonne clé sans jeton 401 ; mutant toute clé acceptée → 2 failed ; suite 274 passed, 7 skipped (avant 265)
 - API4 : EmailStr, chambres ≤ pièces, réglages cohérents, trace du calcul typée
 - API5 : Barème et grilles figés une fois cités ; ordre du paiement ; taux recalculé
 - API6 : Auteur d'un bien et d'un média ; dépend d'API2
