@@ -12,7 +12,7 @@ Les règles des ADR acceptés le 12/10 sont codées et testées : connexion par 
 - API8 : Signature → 'launched' ; vente : P27, P28, grille en vigueur
 - API9 : Demande enregistrée avant le compte (P5) ; dépend d'API1
 - API10 : Anonymisation, 10 ans, plus de DELETE ; dépend d'API2
-- API11 : Taux cible target_conversion_rate = 100 % ; migration 39
+- API11 : Taux de réussite des mandats pour la note max (mandate_success_rate_for_max_score) = 100 % ; migration 39
 - API12 : Paiement calculé depuis la base ; dépend d'API5, API8, API11
 ## Journal
 ## Bilan

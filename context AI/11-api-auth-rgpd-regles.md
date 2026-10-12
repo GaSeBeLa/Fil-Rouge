@@ -346,23 +346,25 @@ tombe. Suite complète verte, compte brut.
 ## API11 [ ] — Noter les mandats par le taux de transformation
 
 **Dépend de** : rien.
-**Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql`, `docker/init-v3/05_parametres.sql`, une nouvelle migration `docker/migrations/v2-vers-v3/39_taux-cible.sql`, `API/src/app/models/hunter_rate_parameters_model.py`, `API/src/app/services/parametrage_service.py`, `API/src/app/services/remuneration.py`, `API/tests/test_remuneration.py`, `md/adr/adr-048-criteres-de-performance.md`.
+**Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql`, `docker/init-v3/05_parametres.sql`, une nouvelle migration `docker/migrations/v2-vers-v3/39_taux-reussite-mandats.sql`, `API/src/app/models/hunter_rate_parameters_model.py`, `API/src/app/services/parametrage_service.py`, `API/src/app/services/remuneration.py`, `API/tests/test_remuneration.py`, `md/adr/adr-048-criteres-de-performance.md`.
 
 **Prompt**
 Code ADR-048, Décision 5 (choisi le 12/10/2026 : nom et valeur).
-- Ajoute à `hunter_rate_parameters` la colonne `target_conversion_rate`
-  (« taux cible ») : le taux de transformation qui vaut **100 points**. Valeur
-  de départ : **1.0000** (100 %). Dans `01`, `05` et la migration 39 ; joue la
-  migration sur `fil_rouge_immobilier` et recrée `fil_rouge_test`.
-- Le critère « mandats signés » devient `min(100 ; 100 × T ÷ target)`, avec
+- Ajoute à `hunter_rate_parameters` la colonne
+  `mandate_success_rate_for_max_score` : le taux de réussite des mandats
+  (ventes ÷ mandats) qui donne la **note max**. Nom choisi le 12/10/2026 pour
+  être compris sans l'ADR ; un `COMMENT ON COLUMN` le dit en une phrase.
+  Valeur de départ : **1.0000** (100 %). Dans `01`, `05` et la migration 39 ;
+  joue la migration sur `fil_rouge_immobilier` et recrée `fil_rouge_test`.
+- Le critère « mandats signés » devient `min(100 ; 100 × T ÷ réglage)`, avec
   `T = ventes ÷ mandats`. Zéro mandat : demande-le avant de choisir.
 - `points_per_mandate` reste en base, n'est plus lu ; ne le retire pas.
 - Les cas qui utilisaient `mandats × 10` sont refaits, ou gardés et nommés
   « cas du sujet » (ADR-048, Conséquences).
 
 **Critère de fin**
-`test_remuneration.py` : 4 ventes pour 5 mandats, cible 100 % → 80 points ;
-cible 50 % → 100 points. Mutant : remettre `mandats × points_per_mandate` → le
+`test_remuneration.py` : 4 ventes pour 5 mandats, réglage à 100 % → 80
+points ; réglage à 50 % → 100 points. Mutant : remettre `mandats × points_per_mandate` → le
 test « 80 points » tombe. `\d hunter_rate_parameters` montre la colonne. Suite
 complète verte, compte brut.
 <!-- /FICHE -->
