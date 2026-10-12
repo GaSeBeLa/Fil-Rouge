@@ -14,7 +14,7 @@
 - **fichier d'état** : context AI/08-etat.md
 - **index** : context AI/00-INDEX.md
 - **artefact feuille de route** : https://claude.ai/artifact/Wu5xkSJUtfbjuhFdbvUq3C
-- **artefact du chantier** : aucun
+- **artefact du chantier** : https://claude.ai/artifact/CTd6grJoE1eoLnAsQU6uda
 - **livraison** : aucune — le code tourne en local (`docker compose up -d`
   depuis `docker/`)
 - **vérification** : depuis `docker/`, `docker compose exec -T api python -m pytest -q`

@@ -76,6 +76,7 @@ et seulement dans ce cas, ouvrir l'index.
 | ouvrir un chantier, ou le découper en fiches | **lancer `/vlp:chantier`** — la méthode vit dans le kit, pas ici |
 | relire une fiche `C1` à `C5` | `context AI/09-contraintes-mpd.md` — chantier **clos** le 2026-09-11, ne se rejoue pas |
 | relire une fiche `LOT1` à `LOT12` | `context AI/10-lot-migration.md` — chantier « Lot de migration (schéma v3) » **clos** le 2026-10-07, ne se rejoue pas |
+| relire le chantier, ou jouer une fiche `API1` à `API12` | `context AI/11-api-auth-rgpd-regles.md` — chantier « API : auth, RGPD et règles métier », **ouvert** le 2026-10-12 ; `/vlp:tache API<n>` |
 | reprendre après une longue interruption | `context AI/08-etat.md` |
 
 ## Économie de contexte
