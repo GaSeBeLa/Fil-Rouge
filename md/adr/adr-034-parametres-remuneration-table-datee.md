@@ -122,7 +122,7 @@ D. Qui transforme les tables en `Parametrage` ?
    * `commission_scale` : le barème, par tranche, par défaut ou propre à un chasseur (`id_hunter`) ;
    * `hunter_rate_parameters` : les réglages du taux du chasseur (poids, paliers, notes, points, fenêtre, ancienneté, modulation, bornes). Nom choisi par le groupe le 08/10/2026 (G2).
 2. `parameters_fees` et `hunter_rate_parameters` sont datées « à partir du » : `effective_from DATE NOT NULL` et `UNIQUE (effective_from)`. Une version vaut jusqu'à la veille de la suivante. `commission_scale` garde ses périodes et ses `EXCLUDE` : cinq tranches y démarrent le même jour, et une tranche peut être propre à un chasseur (ADR-030).
-3. Aucun `CHECK` sur les valeurs de `hunter_rate_parameters` : ce sont des paramètres.
+3. Aucun `CHECK` sur les valeurs de `hunter_rate_parameters` : ce sont des paramètres. La **cohérence** d'une version, elle, est contrôlée par l'API à la saisie, sans figer de valeur (P29, ADR-053 ; fiche API4, 12/10/2026) : somme des 5 poids = 1, `rate_floor` ≤ `rate_ceiling`, paliers `{"maximum", "note"}` à bornes croissantes, le dernier ouvert. Refus : 422.
 4. Sur `payment`, `seniority_rate` et `performance_rate` n'ont plus que les bornes du domaine : `BETWEEN 0 AND 1` et `BETWEEN -1 AND 1`.
 5. Une exception, voulue : `final_rate BETWEEN 0.20 AND 0.60`. Jeff a validé ces deux bornes (Q-JEF-01).
 6. Changer une valeur, c'est insérer une nouvelle version datée. Une version déjà utilisée ne devra plus se modifier : pas encore codé (Conséquences).

@@ -159,8 +159,9 @@ jeton → 200 ; bonne clé sans jeton → 401. Mutant : accepter toute clé non 
 ---
 
 <!-- FICHE:API4 -->
-## API4 [ ] — Contrôler les entrées sur une seule ligne
+## API4 [x] — Contrôler les entrées sur une seule ligne
 
+**Session** : bad3e8d0-ea0b-437e-b299-3505f03fa77c
 **Dépend de** : rien.
 **Fichiers** : `API/requirements.txt`, `API/src/app/models/user_model.py`, `API/src/app/models/estate_model.py`, `API/src/app/models/hunter_rate_parameters_model.py`, `API/src/app/models/payment_model.py`, `md/adr/adr-033-tracabilite-du-calcul.md`, `md/adr/adr-034-parametres-remuneration-table-datee.md`, un nouveau `API/tests/test_entrees.py`.
 

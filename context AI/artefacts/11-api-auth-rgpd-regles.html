@@ -21,9 +21,9 @@
     <p>Les règles des ADR acceptés le 12/10 sont codées et testées : connexion par jeton, rôles, clé d'API, contrôles entre tables, anonymisation sans DELETE, et un paiement calculé depuis la base.</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">12 fiches · 3 faites · en cours : API4</p>
+    <p class="mono" style="margin-top:.5rem">12 fiches · 4 faites · en cours : API5</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -49,27 +49,28 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">API3</span></span>
         <details><summary><span class="titre">Exiger une clé d'API par programme</span><span class="etat">Faite</span></summary>
         <span class="note">test_api_keys : sans clé 401, clé inconnue 401, bonne clé + jeton 200, bonne clé sans jeton 401 ; mutant toute clé acceptée → 2 failed ; suite 274 passed, 7 skipped (avant 265)</span></details>
-        <span class="cout mono">≈2,7M (2 667 974) · 12 tours · 1,06 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">API4</span></span>
-        <details open><summary><span class="titre">Contrôler les entrées sur une seule ligne</span><span class="etat">En cours · API5, API6, API7, API9, API10 peuvent partir en même temps</span></summary>
-        <span class="note">EmailStr, chambres ≤ pièces, réglages cohérents, trace du calcul typée</span></details></li>
-      <li class="fiche"><span class="gauche"><span class="id">API5</span></span>
-        <details><summary><span class="titre">Figer les versions et l'ordre du paiement</span><span class="etat">À lancer · en même temps que API4, API6, API7, API9, API10</span></summary>
+        <span class="cout mono">≈2,9M (2 902 490) · 13 tours · 1,12 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">API4</span></span>
+        <details><summary><span class="titre">Contrôler les entrées sur une seule ligne</span><span class="etat">Faite</span></summary>
+        <span class="note">test_entrees : 18 tests, 422 par règle (P2, P16, P29, P32) et un cas accepté chacune ; mutant sans contrôle des poids → 1 failed ; suite 292 passed, 7 skipped (avant 274)</span></details>
+        <span class="cout mono">≈7,3M (7 341 631) · 27 tours · 2,49 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">API5</span></span>
+        <details open><summary><span class="titre">Figer les versions et l'ordre du paiement</span><span class="etat">En cours · API6, API7, API9, API10 peuvent partir en même temps</span></summary>
         <span class="note">Barème et grilles figés une fois cités ; ordre du paiement ; taux recalculé</span></details></li>
       <li class="fiche"><span class="gauche"><span class="id">API6</span></span>
-        <details><summary><span class="titre">Noter l'auteur d'un bien et d'un média</span><span class="etat">À lancer · en même temps que API4, API5, API7, API9, API10</span></summary>
+        <details><summary><span class="titre">Noter l'auteur d'un bien et d'un média</span><span class="etat">À lancer · en même temps que API5, API7, API9, API10</span></summary>
         <span class="note">Auteur d'un bien et d'un média ; dépend d'API2</span></details></li>
       <li class="fiche"><span class="gauche"><span class="id">API7</span></span>
-        <details><summary><span class="titre">Contrôler propositions et visites</span><span class="etat">À lancer · en même temps que API4, API5, API6, API9, API10</span></summary>
+        <details><summary><span class="titre">Contrôler propositions et visites</span><span class="etat">À lancer · en même temps que API5, API6, API9, API10</span></summary>
         <span class="note">Propositions et visites : P19, P20, P23, P25, visite avant signature</span></details></li>
       <li class="fiche"><span class="gauche"><span class="id">API8</span></span>
         <details><summary><span class="titre">Contrôler signature et vente</span><span class="etat">À lancer</span></summary>
         <span class="note">Signature → 'launched' ; vente : P27, P28, grille en vigueur</span></details></li>
       <li class="fiche"><span class="gauche"><span class="id">API9</span></span>
-        <details><summary><span class="titre">Enregistrer une demande avant le compte</span><span class="etat">À lancer · en même temps que API4, API5, API6, API7, API10</span></summary>
+        <details><summary><span class="titre">Enregistrer une demande avant le compte</span><span class="etat">À lancer · en même temps que API5, API6, API7, API10</span></summary>
         <span class="note">Demande enregistrée avant le compte (P5) ; dépend d'API1</span></details></li>
       <li class="fiche"><span class="gauche"><span class="id">API10</span></span>
-        <details><summary><span class="titre">Anonymiser un compte et fermer DELETE</span><span class="etat">À lancer · en même temps que API4, API5, API6, API7, API9</span></summary>
+        <details><summary><span class="titre">Anonymiser un compte et fermer DELETE</span><span class="etat">À lancer · en même temps que API5, API6, API7, API9</span></summary>
         <span class="note">Anonymisation, 10 ans, plus de DELETE ; dépend d'API2</span></details></li>
       <li class="fiche"><span class="gauche"><span class="id">API11</span></span>
         <details><summary><span class="titre">Noter les mandats par le taux de transformation</span><span class="etat">À lancer</span></summary>
@@ -79,7 +80,7 @@
         <span class="note">Paiement calculé depuis la base ; dépend d'API5, API8, API11</span></details></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈6,7M (6 672 728) · 42 tours · 3,41 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈19,2M (19 227 115) · 118 tours · 8,81 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈26,8M (26 803 262) · 146 tours · 11,36 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 
