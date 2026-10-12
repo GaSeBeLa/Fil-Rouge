@@ -35,7 +35,7 @@
 
 ---
 
-### ADR-043 : Adresse client — tout ou rien, et « non renseigné » / `00000` pour les 18 clients repris
+### ADR-043 : Adresse des clients repris — « non renseigné » et `00000` pour les 18 clients sans adresse
 
 ✅ établi · 🟡 à décider · 💡 proposé
 
@@ -45,6 +45,9 @@
   * le groupe : Q-SCH-01 le 05/10/2026, Q-SCH-18 le 06/10/2026 ;
   * Jeff, client, entretien du 07/10/2026 : les manques des anciennes données sont voulus (Q-JEF-26).
 * **Complète :** ADR-022 (qui reste « accepté ») : sa règle tient, cette fiche dit comment la reprise des anciennes données la respecte.
+* **Modifié par :** ADR-053 (P3, 12/10/2026) : l'adresse du client devient **obligatoire**. Le tout-ou-rien et la Décision 4 tombent ; les valeurs des 18 clients repris (Décisions 2 et 3) restent.
+
+> ⚠️ **Retouche du 12/10/2026.** Le titre disait « tout ou rien » ; depuis ADR-053, l'adresse est obligatoire. Les passages périmés sont barrés, pas effacés, pour garder la trace.
 
 **Contexte**
 
@@ -68,12 +71,12 @@ La règle d'ADR-022 les refusait. Le schéma v2 l'avait donc assouplie, par un `
 
 **Décision**
 
-1. La règle d'ADR-022 reste entière. `ck_client_address_all_or_nothing` : les trois colonnes vides ensemble, ou remplies ensemble.
+1. ~~La règle d'ADR-022 reste entière. `ck_client_address_all_or_nothing` : les trois colonnes vides ensemble, ou remplies ensemble.~~ Remplacée le 12/10/2026 par ADR-053 (P3) : adresse, code postal, ville et pays sont `NOT NULL` ; le `CHECK` du tout-ou-rien est retiré (migration 23).
 2. Les **18 clients repris** reçoivent `address = 'non renseigné'` et `postal_code = '00000'`. Leur ville et leur pays `'FR'` viennent de la source et sont gardés.
 3. Ces deux valeurs sont **factices** et documentées. Elles ne servent qu'aux données reprises.
-4. Un nouveau client donne ses trois champs d'adresse, ou aucun (ADR-022).
+4. ~~Un nouveau client donne ses trois champs d'adresse, ou aucun (ADR-022).~~ Depuis ADR-053 (P3) : un nouveau client **donne son adresse**, sinon il est refusé (`422` dans l'API, `NOT NULL` en base).
 
-Le code, tel qu'il est aujourd'hui (`docker/init-v3/01_create_fil_rouge_immobilier.sql:225-229`) :
+Le code, tel qu'il était le 08/10/2026 (retiré le 12/10/2026 ; le code actuel : `docker/init-v3/01_create_fil_rouge_immobilier.sql:209-237`, migration `23_client-adresse-obligatoire.sql`) :
 
 ```sql
 -- Tout-ou-rien gardé (Q-SCH-01) : les 18 clients repris sans adresse
@@ -113,7 +116,7 @@ CONSTRAINT ck_client_address_all_or_nothing
    * ADR-022 : un client « peut toujours n'avoir renseigné aucune adresse » (ADR-022, Justification), et le formulaire soumet les trois champs « ensemble ou aucun des trois » (ADR-022, Conséquences) ;
    * le titre de la lettre R : « « non renseigné » pour les données reprises » (`questions-a-trancher.md:413`) ;
    * le commentaire du groupe vise « l'import des ancienne données » (Q-SCH-01).
-   Un nouveau client sans adresse a donc les trois colonnes vides.
+   ~~Un nouveau client sans adresse a donc les trois colonnes vides.~~ Depuis ADR-053 (P3), un nouveau client sans adresse est refusé. La réponse reste « non » : `'non renseigné'` est réservé aux données reprises.
 3. **Le format irlandais (Eircode) de `client` change-t-il ici ?**
    Non : ADR-031 l'a déjà amendé.
 
@@ -145,4 +148,5 @@ Aucune. Les deux réponses du groupe et celle de Jeff suffisent ; le code est fa
 | Migration v2 vers v3 : garde et mise à jour (tout client avec une ville sans adresse) | `docker/migrations/v2-vers-v3/07_personnes.sql:62-65`, `:112-117` |
 | Tests de la règle | `API/tests/integration/test_constraints_db.py:132-143` |
 | Code fait à LOT7 | commit `0e7134d` |
+| Adresse obligatoire ; tout-ou-rien retiré | ADR-053 (P3), accepté le 12/10/2026 ; `docker/init-v3/01_create_fil_rouge_immobilier.sql:209-237` ; `docker/migrations/v2-vers-v3/23_client-adresse-obligatoire.sql` |
 | Modèle d'ADR | `documents utiles/JOURNAL-DE-DECISIONS.md:19-40` (StarterPack) |

@@ -9,8 +9,9 @@
 >
 > 💡 **Rédigé le 2026-10-08 par Claude, d'après les fichiers du dépôt ; fini le
 > même jour.** Le premier jet avait 6 questions ouvertes. Relu le 08/10/2026 par
-> deux relecteurs (sources ; oral et jury) et un arbitre. Il en reste **une**,
-> marquée 🟡 : le type de token. C'est une question, pas une décision.
+> deux relecteurs (sources ; oral et jury) et un arbitre. Il en restait **une**,
+> le type de token : tranchée par ADR-052, accepté le 12/10/2026 (retouche du
+> 12/10/2026).
 >
 > 🗂️ **Trois points réglés hors de la fiche** (ils parlent des sources ou des
 > pages Confluence, pas de la décision) :
@@ -106,7 +107,7 @@ Sous-choix déjà tranchés par le client :
 6. ✅ Déduit des points 1 et 4 : **deux contrôles**, qui ne se remplacent pas. La clé dit quel programme appelle. Le token dit quelle personne agit.
 7. ✅ Les rôles sont les **5 valeurs** de la table `role` : `Admin`, `Client`, `Hunter`, `Manager`, `Reader`. `Reader` consulte sans modifier.
 8. ✅ Le « qui a le droit de faire quoi » est la matrice d'ADR-027, à réécrire. Cet ADR fournit l'outil ; ADR-027 en fixe le contenu.
-9. 🟡 Le type de token et de session : Sébastien a retenu un JWT de 60 minutes le 2026-10-09 (question ouverte 1), à écrire dans son propre ADR. 💡 Ce choix mérite son propre ADR, avec sa durée d'expiration (le tuto 2 le disait déjà, `tuto-2-authentification-jwt.md:105-106`).
+9. ✅ Le type de token et de session : un **JWT de 60 minutes**, l'utilisateur relu en base à chaque appel. Choisi par Sébastien le 2026-10-09, fixé dans son propre ADR : **ADR-052**, accepté le 12/10/2026. Cet ADR garde le périmètre ; ADR-052 fixe le mécanisme.
 
 **Justification**
 
@@ -119,7 +120,7 @@ Sous-choix déjà tranchés par le client :
 
 * **Code :** il n'y a aujourd'hui, dans `API/`, aucune route de connexion, aucun token, aucune clé d'API. Recherche refaite le 08/10/2026 sur `APIKeyHeader`, `api_key`, `auth/login`, `create_access_token`, `get_current_user`, `require_role`, `OAuth2PasswordBearer`, `jwt`, `token`, `Bearer` : 0 occurrence. Ce qui existe : le hachage Argon2 (`API/src/app/utils/security.py:20-32`), sa vérification à temps constant (`:35-49`), `needs_rehash` (`:52-60`), et le minimum de 12 caractères (`API/src/app/models/user_model.py:63`, testé dans `API/tests/test_user_models.py`).
 * **Où brancher les contrôles :** les routes CRUD sortent d'une seule fabrique, `build_crud_router`. Une dépendance posée sur elle vaut pour toutes ses routes (`md/securite/tuto-2-authentification-jwt.md:387-409`).
-* **Dépendance :** `API/requirements.txt` n'a aucune bibliothèque de token. Si le groupe retient JWT, il faut ajouter `pyjwt` (tuto 2, §2.1).
+* **Dépendance :** `API/requirements.txt` n'a aucune bibliothèque de token. JWT est retenu (ADR-052) : il faut ajouter `pyjwt` (tuto 2, §2.1).
 * **Les clés, comme les autres secrets du dépôt** (déduit de la pratique) : la valeur dans `docker/.env`, le nom seul dans `docker/.env.exemple`, comme `POSTGRES_PASSWORD` et `POSTGRES_READER_PASSWORD` (`docker/.env.exemple:14`, `:20`).
 * **Générer la clé et la remettre au programme :** une micro-décision (« Pas pour les micro-décisions », `JOURNAL-DE-DECISIONS.md:13`), à écrire dans le README quand on codera. 💡 `openssl rand -hex 32`, comme pour le secret du JWT (tuto 2, `:139`) ; la valeur remise au responsable du programme, hors dépôt.
 * **`docker/docker-compose.yml` :** le service `api` liste ses variables une à une (`docker-compose.yml:32-40`). Les clés et le secret du token y demandent donc une ligne chacun.
@@ -145,14 +146,16 @@ Sous-choix déjà tranchés par le client :
 
 **Questions ouvertes** 🟡
 
-1. **Quel token, quelle session ?** Un JWT signé, sans état côté serveur ; ou une session rangée en base ; et pour combien de temps ?
+Aucune depuis le 12/10/2026. La seule question est tranchée ci-dessous ; on la garde pour la trace.
+
+1. ~~**Quel token, quelle session ?**~~ ✅ Tranchée : **ADR-052** (JWT, 60 minutes), accepté le 12/10/2026. Un JWT signé, sans état côté serveur ; ou une session rangée en base ; et pour combien de temps ?
    * Où on a cherché (rédacteur, puis arbitre le 08/10/2026) :
      * le StarterPack : `jwt`, `token`, `oauth`, `bearer`, `session`, `authentif`, `login`, `connexion`, `jeton`, `expir`, `cookie`. Rien sur le sujet (deux mots « session » et « authentifie », hors sujet : `fixtures/Readme.md:56`, `GLOSSAIRE-METIER.md:10`) ;
      * le dépôt (`md/`, `livrables/`, `context AI/`, `API/README.md`, registre) : aucune décision du groupe. Le tuto 2 laisse le choix ouvert : « Ce tuto **propose** JWT ; il ne tranche pas » (`tuto-2-authentification-jwt.md:10-12`, `:91-107`, `:657`). Le plan du 22/09 partait sur JWT (`securite-mots-de-passe-et-droits.md:241-260`, étape 4 `:390` ; brouillon local d'ADR-026, `:29`), mais c'est une note « rédigée avec l'IA », qui « ne fait pas foi » (`securite-mots-de-passe-et-droits.md:7`) ; la même note propose 1 h sans le décider (`:370-371`) ; `context AI/08-etat.md:53` dit « token » sans choisir ;
      * le client dit « token, session » sans choisir.
    * Pourquoi ça ne suffit pas : aucune décision du groupe n'est écrite. Discord n'a pas été relu au-delà des notes du jour.
    * 💡 Proposition : un **JWT** signé en `HS256` avec `pyjwt`, la bibliothèque de la doc FastAPI (tuto 2, §2, source consultée le 22/09/2026) ; durée **60 minutes**, sans jeton de rafraîchissement (`securite-mots-de-passe-et-droits.md:370-371`) ; l'utilisateur **relu en base à chaque appel** (tuto 2, §5, `:370-383`). Ce dernier point corrige le défaut du JWT : un compte désactivé ou rétrogradé perd ses droits tout de suite, sans attendre l'expiration. La « session » de Jeff serait alors la durée de vie du token.
-   * ✅ Choisi par Sébastien le 2026-10-09 (Discord, « option 1 ») : JWT, 60 minutes, utilisateur relu en base à chaque appel. Reste à écrire : le futur ADR (ADR-052) qui fixe le mécanisme, et l'accord du groupe.
+   * ✅ Choisi par Sébastien le 2026-10-09 (Discord, « option 1 ») : JWT, 60 minutes, utilisateur relu en base à chaque appel. Écrit dans ADR-052, accepté par le groupe le 12/10/2026.
    * 💡 Ce choix mérite **son propre ADR** (tuto 2, `:105-106` : « ce choix mérite un ADR, avec sa durée d'expiration »). ADR-028 garde le périmètre ; le futur ADR fixera le mécanisme.
 
 **Sources**
@@ -179,4 +182,5 @@ Sous-choix déjà tranchés par le client :
 | Variables du service `api` listées une à une | `docker/docker-compose.yml:32-40` |
 | « mot de passe (haché) » dans le registre RGPD du sujet | `documents utiles/REGISTRE-RGPD.md:28`, `:37` (StarterPack) |
 | Le sujet ne parle ni de JWT, ni de token, ni de session | grep du StarterPack, 08/10/2026 (rédacteur, puis arbitre) : 0 occurrence utile |
+| JWT de 60 minutes, ADR-052 accepté | `md/adr/adr-052-jeton-jwt-60-minutes.md`, Statut (groupe, 12/10/2026) |
 | Modèle d'ADR, micro-décisions | `documents utiles/JOURNAL-DE-DECISIONS.md:13`, `:19-40` (StarterPack) |

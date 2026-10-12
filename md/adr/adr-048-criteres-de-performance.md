@@ -23,13 +23,16 @@
 >
 > 🧹 **À faire ailleurs** (des tâches, pas la décision) :
 >
-> * `questions-a-trancher.md:228` : « 🟡 Sens du critère à vérifier dans le
->   code du sujet avant l'ADR F ». Vérifié, à clore.
-> * La carte Q-REM-07 cite `01:635` pour `visitor_type` : c'était la ligne de
->   v2. En v3, c'est `01:717`.
-> * ADR-035 dit « Le critère « mandats » remplacé par le taux de
->   transformation » (`adr-035-…md:126`). Cette fiche dit : le critère reste,
->   sa notation change. À aligner.
+> * ✅ `questions-a-trancher.md:228` : « 🟡 Sens du critère à vérifier dans le
+>   code du sujet avant l'ADR F ». Vérifié, clos le 12/10/2026.
+> * ✅ La carte Q-REM-07 citait `01:635` pour `visitor_type` (ligne de v2).
+>   Corrigée le 12/10/2026 : `01:802` (le schéma v3 a grandi depuis le 08/10).
+> * ✅ ADR-035 disait « Le critère « mandats » remplacé par le taux de
+>   transformation ». Déjà aligné à son acceptation : il dit « sa notation
+>   change, pas le critère » (vérifié le 12/10/2026).
+> * ⚠️ Les autres renvois `01:NNN` de cette fiche datent du 08/10/2026. Les
+>   migrations 22 à 38 (12/10/2026) ont allongé le schéma : ils peuvent être
+>   décalés. Le nom de la colonne ou de la table, cité à côté, fait foi.
 >
 > ✂️ **Ne pas copier ce bandeau.** Le texte à coller commence sous le trait.
 
@@ -91,7 +94,7 @@ Sur le dénominateur du taux (sous-choix de l'option 3) :
 1. ✅ **Cinq critères, poids du sujet** : délai 25 %, exclusivité 10 %, ventes 25 %, mandats 15 %, visites 25 % (RCR:143-147 ; Q-PAR-06 ; Q-JEF-01). Fenêtre : douze mois glissants avant l'acte (RCR:139 ; Q-PAR-04). Les valeurs vivent dans `hunter_rate_parameters`, jamais en dur (RCR:47 ; `01:839-871`). Trois critères portent sur la vente (délai, exclusivité, visites) ; deux sur l'activité (ventes, mandats) (Questions tranchées).
 2. ✅ **Délai (S₁) et exclusivité (S₂)** : grilles du sujet (RCR:143-144 ; Q-PAR-13 ; Q-JEF-01). Le délai part de la première signature d'une chaîne de renouvellements (ADR-050).
 3. ✅ **Ventes (S₃)** : `min(100 ; ventes × 20)` (RCR:145). Comptées : les ventes des mandats du chasseur, sauf celles dont le paiement est refusé, dans les 12 mois avant l'acte, vente en cours exclue (Q-REM-08 ; Q-JEF-09 ; RCR:470).
-4. ✅ **Visites (S₅) : moins il y en a, meilleure est la note.** Grille du sujet : 3 ou moins → 100, plus de 15 → 0 (RCR:147). Comptées : les visites du client (`visitor_type = 'client'`, `01:717`), sur tous les biens du mandat, jusqu'au jour de l'acte (Q-REM-07 ; Q-JEF-08). Les visites de repérage du chasseur (`'hunter'`) ne comptent pas.
+4. ✅ **Visites (S₅) : moins il y en a, meilleure est la note.** Grille du sujet : 3 ou moins → 100, plus de 15 → 0 (RCR:147). Comptées : les visites du client (`visitor_type = 'client'`, `01:802`), sur tous les biens du mandat, jusqu'au jour de l'acte (Q-REM-07 ; Q-JEF-08). Les visites de repérage du chasseur (`'hunter'`) ne comptent pas. Le sens des deux valeurs et l'ordre des visites sont fixés par **ADR-053** (« La règle des visites », 12/10/2026) : la visite `'client'` se fait avec le chasseur, et c'est elle qui compte.
    * 💡 Mandat renouvelé : compter les visites de toute la chaîne, comme le délai (point 2). Sinon, renouveler remettrait le compteur à zéro.
 5. ✅ **« Mandats signés » (S₄) est noté par le taux de transformation** (Q-PAR-05 ; RCR:160). Les cinq poids restent : le critère pèse 15 % (`reg:145`).
 6. ✅ **Mandats comptés : signés, sans les renouvellements.** Une chaîne compte une fois (Q-REM-09 ; Q-JEF-09 ; `01:470`).

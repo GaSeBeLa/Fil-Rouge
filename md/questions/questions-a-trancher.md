@@ -225,7 +225,7 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 | Q-PAR-02, Q-REM-02 | 👥 **rien** — 🧑‍💼 « **rien pour personne** » (Q-JEF-03) | Vente par le client ou une autre agence : ni le chasseur ni l'entreprise ne touchent rien. Le statut de fin du mandat (Q-REM-02, Q-REM-14) se garde. |
 | Q-JEF-04 | 🧑‍💼 honoraires **HT** validés | Rien. |
 | Q-PAR-05 | 👥 **transfo** — 🧑‍💼 pas de grille : **le groupe propose la sienne** (Q-JEF-05) | ➡️ Grille de notes à écrire, marquée « proposition du groupe ». 📝 Ta note : « demandé a jeff comment le score baisse, le calcule ? » — à expliquer dans l'ADR F. |
-| Q-REM-07 | 👥 **client-tous** — 🧑‍💼 validé (Q-JEF-08) | 📝 Ta note : « moins il visite, meilleure est la note ». 🟡 Sens du critère à vérifier dans le code du sujet avant l'ADR F. |
+| Q-REM-07 | 👥 **client-tous** — 🧑‍💼 validé (Q-JEF-08) | 📝 Ta note : « moins il visite, meilleure est la note ». ✅ Sens vérifié dans le code du sujet ; écrit dans ADR-048, point 4 (clos le 12/10/2026). |
 | Q-REM-08, Q-REM-09 | 👥 non refusées ; signés sans renouvellement — 🧑‍💼 validés (Q-JEF-09) | Rien. |
 | Q-REM-06 | 🧑‍💼 recalculer à chaque vente : validé (Q-JEF-17) | Écart à `F10:293` assumé : ADR E. |
 | Q-REM-16, Q-MIG-02 | 👥 hypothèse gardée — 🧑‍💼 validé (Q-JEF-10) | À dire en soutenance. |
@@ -618,7 +618,7 @@ Voici ce qui ne colle pas avec la base.
 
 - ✅ **Répondue le 2026-10-02 : « Visites du client, tous les biens du mandat, jusqu'au jour de l'acte »** · 🧑‍💼 **Jeff** (Q-JEF-08), le groupe écrit la requête
 - **Constat** :
-  - `visit.visitor_type IN ('hunter', 'client')` (`01:635`) ;
+  - `visit.visitor_type IN ('hunter', 'client')` (`01:802` en v3 ; `01:635` en v2) ;
   - `F10:259` : « le client a effectué 5 visites » ;
   - le sujet cite les deux sortes de visites (`Readme.md:100-101`).
 - **Questions** : quel type ? tous les biens du mandat, ou seulement le bien vendu ? avant l'acte seulement ?
