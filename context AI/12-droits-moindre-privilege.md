@@ -76,7 +76,7 @@ d'équipe »).
 | `DRO7` | Limiter le Manager à son équipe | `DRO4`, `DRO6` |
 | `DRO8` | Réserver les comptes désactivés à l'Admin | `DRO4` |
 | `DRO9` | Fermer `fil_rouge_reader` sur paiements et comptes désactivés | rien |
-| `DRO10` | Refaire le relevé et mettre la doc à jour | toutes |
+| `DRO10` | Refaire le relevé et mettre la doc à jour | `DRO1` à `DRO9` |
 
 `DRO9` ne dépend de rien et peut se jouer à tout moment. `DRO2` et `DRO3`
 sont parallèles ; `DRO5`, `DRO6`, `DRO8` aussi, après `DRO4`.
@@ -317,7 +317,7 @@ test tombe.
 <!-- FICHE:DRO10 -->
 ## DRO10 [ ] — Refaire le relevé et mettre la doc à jour
 
-**Dépend de** : toutes.
+**Dépend de** : `DRO1`, `DRO2`, `DRO3`, `DRO4`, `DRO5`, `DRO6`, `DRO7`, `DRO8`, `DRO9`.
 **Fichiers** : `docker/tools/print_rights_matrix.py`, `md/securite/matrice-droits-crud-par-role.md`, `md/adr/adr-027-matrice-acces-par-role.md`, `API/README.md`, `CLAUDE.md` (Fil-Rouge, « Où on en est »).
 
 **Prompt**
