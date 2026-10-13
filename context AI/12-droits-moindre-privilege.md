@@ -144,8 +144,9 @@ lecteurs de `payment` → le test `GET /payments` en `Client` tombe.
 ---
 
 <!-- FICHE:DRO3 -->
-## DRO3 [ ] — Revoir les routes à part
+## DRO3 [x] — Revoir les routes à part
 
+**Session** : 15e33082-f94c-4e7f-82b3-169a3c651e22
 **Dépend de** : `DRO1`.
 **Fichiers** : `API/src/app/routes/auth_router.py`, `API/src/app/routes/signup_router.py`, `API/src/app/routes/user_router.py`, `API/src/app/routes/estate_contact_router.py`, `API/src/app/main.py` (route `/`), `API/tests/integration/test_droits_par_role.py`.
 

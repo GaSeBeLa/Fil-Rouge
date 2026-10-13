@@ -21,9 +21,9 @@
     <p>Tout fermé par défaut ; chaque rôle ne lit et n'écrit que ce que la cible d'ADR-027 lui donne, et seulement ses lignes (404 sur la ligne d'un autre).</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">10 fiches · 2 faites · en cours : DRO3</p>
+    <p class="mono" style="margin-top:.5rem">10 fiches · 3 faites · en cours : DRO4</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -45,11 +45,13 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">DRO2</span></span>
         <details><summary><span class="titre">Réserver l'argent à qui la cible le donne</span><span class="etat">Faite</span></summary>
         <span class="note">test_droits_par_role.py 321 passed, dont Client 403 sur POST /commission-scales, GET /payments, POST /sales/{id}/payment et Hunter 403 sur POST /sales ; suite 770 passed, 8 skipped, 6 xfailed (avant 690) ; mutant Client lecteur de payment : 1 failed (/payments-lire-Client) ; pyright 0 errors</span></details>
-        <span class="cout mono">≈7,3M (7 315 049) · 29 tours · 2,60 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">DRO3</span></span>
-        <details open><summary><span class="titre">Revoir les routes à part</span><span class="etat">En cours · DRO4, DRO9 peuvent partir en même temps</span></summary></details></li>
-      <li class="fiche"><span class="gauche"><span class="id">DRO4</span></span>
-        <details><summary><span class="titre">Poser le mécanisme « le sien »</span><span class="etat">À lancer · en même temps que DRO3, DRO9</span></summary></details></li>
+        <span class="cout mono">≈8,2M (8 226 494) · 32 tours · 2,86 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">DRO3</span></span>
+        <details><summary><span class="titre">Revoir les routes à part</span><span class="etat">Faite</span></summary>
+        <span class="note">test_droits_par_role.py : 7 routes à part nommées avec leur test, /auth/me rend le seul compte du jeton sans password ; suite 774 passed, 8 skipped, 7 xfailed (avant 770 ; +1 xfail strict : fuite du formulaire) ; mutant /auth/me lit l'id de l'URL : 1 failed ; pyright 0 errors</span></details>
+        <span class="cout mono">≈7,1M (7 060 603) · 41 tours · 3,21 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">DRO4</span></span>
+        <details open><summary><span class="titre">Poser le mécanisme « le sien »</span><span class="etat">En cours · DRO9 peut partir en même temps</span></summary></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">DRO5</span></span>
         <details><summary><span class="titre">Limiter le Client à ses lignes</span><span class="etat">Après DRO4</span></summary></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">DRO6</span></span>
@@ -59,12 +61,12 @@
       <li class="fiche" data-attend><span class="gauche"><span class="id">DRO8</span></span>
         <details><summary><span class="titre">Réserver les comptes désactivés à l'Admin</span><span class="etat">Après DRO4</span></summary></details></li>
       <li class="fiche"><span class="gauche"><span class="id">DRO9</span></span>
-        <details><summary><span class="titre">Fermer fil_rouge_reader sur paiements et comptes désactivés</span><span class="etat">À lancer · en même temps que DRO3, DRO4</span></summary></details></li>
+        <details><summary><span class="titre">Fermer fil_rouge_reader sur paiements et comptes désactivés</span><span class="etat">À lancer · en même temps que DRO4</span></summary></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">DRO10</span></span>
-        <details><summary><span class="titre">Refaire le relevé et mettre la doc à jour</span><span class="etat">Après DRO3, DRO4, DRO5, DRO6, DRO7, DRO8, DRO9</span></summary></details></li>
+        <details><summary><span class="titre">Refaire le relevé et mettre la doc à jour</span><span class="etat">Après DRO4, DRO5, DRO6, DRO7, DRO8, DRO9</span></summary></details></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈14,5M (14 540 259) · 74 tours · 6,52 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈28,8M (28 843 030) · 137 tours · 11,76 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈36,8M (36 815 078) · 181 tours · 15,23 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 
@@ -83,6 +85,7 @@
     <ul class="journal">
       <li><time datetime="2026-10-13">2026-10-13</time><span>DRO1 : POST /users reste à Admin seul (le client crée son compte par /search-requests/submit, Q-ACC-12) ; ouvert au Client, il lui laisserait choisir id_role.</span></li>
       <li><time datetime="2026-10-13">2026-10-13</time><span>DRO2 : POST /payments fermé à tous ; les tests écrivent les paiements par le service (write_payment), un refus y est un ConflictError.</span></li>
+      <li><time datetime="2026-10-13">2026-10-13</time><span>DRO3 : la fuite du formulaire (409 pour un email neuf, 202 pour un connu, si un format est refusé) reste, gardée en xfail strict : la corriger demanderait de recopier en Python les CHECK de la base. À trancher.</span></li>
     </ul>
   </section>
 

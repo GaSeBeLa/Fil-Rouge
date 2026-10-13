@@ -350,3 +350,8 @@ de ce que le code dit déjà.
   point 10) ; les tests qui créaient un paiement à la main l'écrivent par le
   service (`write_payment`, `test_constraints_db.py`), un refus y est un
   `ConflictError`. Même voie pour toute table qu'aucun rôle ne crée.
+- **2026-10-13** — **DRO3** : la fuite du formulaire (`409` pour un email
+  neuf, `202` pour un connu, si un format est refusé) n'est pas corrigée :
+  il faudrait recopier en Python les `CHECK` de la base. Gardée en `xfail`
+  strict (`test_droits_par_role.py`), à trancher. La fiche citait ADR-039,
+  qui traite du mandat : le code cite Q-ACC-12 et P5.
