@@ -22,12 +22,6 @@ la ligne à autre chose qu'elle-même :
 Un refus ne porte aucun taux (chk_refused) : rien à recalculer. Un terme
 manquant, ou une version des réglages inconnue, est laissé à la base
 (chk_refused, clé étrangère), qui répond déjà 409.
-
-ADR-035 — la note du journal. Quand un PUT fait passer le paiement à
-'paid', la note 'payment' du chasseur s'écrit avec lui, dans la même
-transaction (`PaymentCalculationService.journal_note`, fiche API12) : un
-refus de la base annule les deux. Jamais avant : un paiement annoncé ou
-planifié n'a pas de note.
 ============================================================================
 """
 
@@ -36,13 +30,11 @@ from typing import Optional
 from sqlmodel import Session
 
 from ..models import Payment, User
-from ..repositories.hunter_performance_repository import HunterPerformanceRepository
 from ..repositories.hunter_rate_parameters_repository import HunterRateParametersRepository
 from ..repositories.payment_repository import PaymentRepository
 from ..utils.exceptions import ConflictError
 from .base_service import BaseService
 from .parametrage_service import modulation
-from .payment_calculation_service import PaymentCalculationService
 from .remuneration import taux_final
 
 REFUSED = "refused"
@@ -60,18 +52,9 @@ NEXT_STATUSES: dict[str, frozenset[str]] = {
 
 
 class PaymentService(BaseService[Payment]):
-    def __init__(
-        self,
-        repository: PaymentRepository,
-        rate_parameters: HunterRateParametersRepository,
-        journal: Optional[PaymentCalculationService] = None,
-        performances: Optional[HunterPerformanceRepository] = None,
-    ):
+    def __init__(self, repository: PaymentRepository, rate_parameters: HunterRateParametersRepository):
         super().__init__(repository, not_found_detail="Versement introuvable")
         self.rate_parameters = rate_parameters
-        # ADR-035 : sans eux, le passage à 'paid' n'écrit pas de note (tests unitaires).
-        self.journal = journal
-        self.performances = performances
 
     def create(self, session: Session, item: Payment, actor: Optional[User] = None) -> Payment:
         if item.status not in CREATE_STATUSES:
@@ -91,8 +74,6 @@ class PaymentService(BaseService[Payment]):
                 "payé, il ne se modifie plus (ADR-038)."
             )
         self._check_final_rate(session, data)
-        if data.status == PAID and existing.status != PAID:
-            self._stage_journal_note(session, item_id, data)
         return self.repository.replace(session, existing, data)
 
     def delete(self, session: Session, item_id: int) -> Payment:
@@ -100,13 +81,6 @@ class PaymentService(BaseService[Payment]):
         if existing.status == PAID:
             raise ConflictError("Un paiement payé ne s'efface pas : c'est la trace d'un versement (ADR-038).")
         return self.repository.delete(session, existing)
-
-    def _stage_journal_note(self, session: Session, item_id: int, data: Payment) -> None:
-        """ADR-035 : la note 'payment', préparée pour le commit du paiement."""
-        if self.journal is None or self.performances is None or data.paid_at is None:
-            return  # paid_at absent : chk_paid refuse déjà la ligne (409)
-        data.id = item_id
-        self.performances.stage(session, self.journal.journal_note(session, data, data.paid_at))
 
     def _check_final_rate(self, session: Session, payment: Payment) -> None:
         """P33 : le taux final stocké doit être celui que les taux stockés donnent."""

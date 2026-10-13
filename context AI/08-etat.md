@@ -328,9 +328,3 @@ de ce que le code dit déjà.
   sur `mandats × 10` restent, « cas du sujet » en `xfail(strict=True)`, à côté
   des cas du taux (Bruno refait : 66,7 points, 6 084,45 €). La note des
   mandats n'est pas arrondie : seul le score l'est (§9).
-- **2026-10-13** — **API12** : deux choix du groupe (dans la séance) — le taux
-  des mandats suit ADR-048 point 7 à la lettre : `Vente` gagne
-  `mandats_vendus_12_mois` (un champ de plus au code du sujet), et le détail
-  du paiement garde `sold_mandates_12_months` ; la note `'payment'` du journal
-  s'écrit au passage à `'paid'`, dans la même transaction que le paiement.
-  Reste : la note de l'échéance (`'mandate_expired'`, ADR-048 point 8).

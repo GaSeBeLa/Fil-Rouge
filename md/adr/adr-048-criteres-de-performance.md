@@ -39,16 +39,6 @@
 >   du code du sujet qui changent (Conséquences), mais trois endroits et une
 >   fonction ajoutée : voir la docstring de `rem.py`. Les comptages (ADR-035)
 >   restent à coder.
-> * ✅ Comptages codés le 13/10/2026 (fiche API12) :
->   `API/src/app/services/payment_calculation_service.py`, derrière
->   `POST /sales/{id}/payment`. Points 3, 4 et 7 comptés en base ; le taux
->   suit le point 7 à la lettre (choix du groupe, 13/10/2026) : `Vente`
->   gagne `mandats_vendus_12_mois`, le numérateur, et le détail du paiement
->   garde les deux termes (`sold_mandates_12_months`, Traçabilité). Point 8 :
->   seule la note du passage à 'paid' est codée ; celle de l'échéance
->   (`'mandate_expired'`) reste à faire. Les phrases « non fait » et
->   « Aucun des comptages n'est codé » du texte sous le trait sont donc
->   périmées pour les points 3, 4 et 7 : à reporter sur Confluence.
 > * ⚠️ Les autres renvois `01:NNN` de cette fiche datent du 08/10/2026. Les
 >   migrations 22 à 38 (12/10/2026) ont allongé le schéma : ils peuvent être
 >   décalés. Le nom de la colonne ou de la table, cité à côté, fait foi.

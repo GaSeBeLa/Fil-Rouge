@@ -383,9 +383,8 @@ complète verte, compte brut.
 ---
 
 <!-- FICHE:API12 -->
-## API12 [x] — Brancher la rémunération sur la base
+## API12 [ ] — Brancher la rémunération sur la base
 
-**Session** : 5f96deba-d497-4409-80b3-b6b6e591a21c
 **Dépend de** : `API5`, `API8`, `API11`.
 **Fichiers** : un nouveau `API/src/app/services/payment_calculation_service.py`, `API/src/app/routes/sale_router.py`, `API/src/app/services/parametrage_service.py`, `API/src/app/services/remuneration.py` (lecture), `md/adr/adr-035-note-recalculee-a-chaque-vente.md`, `md/adr/adr-048-criteres-de-performance.md`, un nouveau `API/tests/integration/test_calcul_paiement.py`.
 

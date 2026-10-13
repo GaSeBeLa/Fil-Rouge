@@ -27,12 +27,6 @@
 > * `md/journal/2026-09-21-point-etape.md:106-113` : la position de Sébastien
 >   (« Le score de cette vente ») y est « à valider par le groupe ». Elle l'est
 >   depuis le 02/10/2026.
-> * ✅ Codé le 13/10/2026 (fiche API12) : le paiement d'une vente fige son
->   score (`payment.performance_score`, point 4) ; la note `'payment'` du
->   journal s'écrit quand le paiement passe à `'paid'`, dans la même
->   transaction (`PaymentService.replace`), jamais avant (choix du groupe,
->   13/10/2026). Les « pas encore codé » du texte sous le trait (point 4,
->   Questions tranchées) sont périmés : à reporter sur Confluence.
 >
 > ✂️ **Ne pas copier ce bandeau.** Le texte à coller commence sous le trait.
 
