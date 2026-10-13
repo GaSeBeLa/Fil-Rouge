@@ -353,9 +353,8 @@ tombe. Suite complète verte, compte brut.
 ---
 
 <!-- FICHE:API11 -->
-## API11 [x] — Noter les mandats par le taux de transformation
+## API11 [ ] — Noter les mandats par le taux de transformation
 
-**Session** : 5f96deba-d497-4409-80b3-b6b6e591a21c
 **Dépend de** : rien.
 **Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql`, `docker/init-v3/05_parametres.sql`, une nouvelle migration `docker/migrations/v2-vers-v3/39_taux-reussite-mandats.sql`, `API/src/app/models/hunter_rate_parameters_model.py`, `API/src/app/services/parametrage_service.py`, `API/src/app/services/remuneration.py`, `API/tests/test_remuneration.py`, `md/adr/adr-048-criteres-de-performance.md`.
 
