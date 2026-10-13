@@ -48,6 +48,8 @@ Ces points n'ont pas été tranchés par le groupe. Le code prend le choix qui n
 
 **Questions ouvertes** 🟡
 
+Expliquées, avec leurs options, sur la page à cartes `md/journal/2026-10-13-questions-contact-vendeur.html`.
+
 1. Les **166** « particulier + agence » : croire l'agence, croire « particulier », ou laisser vide (choix provisoire) ?
 2. Corriger `normalised.py` pour garder « inconnu » au lieu de `False` ?
 3. Une table `agency` à part, ou le nom en texte (choix provisoire) ?
