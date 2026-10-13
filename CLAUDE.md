@@ -10,6 +10,11 @@ modifiés**.
 
 ## Où on en est — en cinq lignes
 
+- ⚠️ **Depuis le 2026-10-13, le code de l'API et `docker/` évoluent dans le
+  dépôt [Fil-Rouge-API](https://github.com/GaSeBeLa/Fil-Rouge-API)**, cloné à
+  côté : `../Fil-Rouge-API/`. Ici, `API/` et `docker/` sont restés à leur état
+  d'avant la fiche API11 (`3492423`) : ne pas s'y fier pour le code. Les lignes
+  qui suivent décrivent l'API telle qu'elle est dans Fil-Rouge-API.
 - Le schéma PostgreSQL **v3** (**20 tables** depuis le 2026-10-08, `review_media` ; montants en **euros**) est posé
   dans `docker/init-v3/` et monté par `docker compose` : chantier LOT, LOT1 à
   LOT12 faits le 2026-10-07 (LOT12 : rôle en lecture seule `fil_rouge_reader`).
@@ -29,11 +34,13 @@ modifiés**.
   `fil_rouge_test` (`docker/create_test_db.sh`) — voir `API/README.md` § Tests.
 - Les user stories Gherkin (`user-stories/`) couvrent le parcours actuel et le
   futur parcours IA. Seul le **calcul de rémunération** est implémenté
-  (`services/remuneration.py`, code du sujet, non branché sur la base).
+  (`services/remuneration.py`, code du sujet), branché sur la base par
+  `POST /sales/{id}/payment` (fiche API12).
 - `normalised/` porte la normalisation des annonces et son rapport d'anomalies.
 - `livrables/2-modelisation/` porte trois rapports du chantier `C` ; les trois
   autres livrables sont vides. Détail daté dans `context AI/08-etat.md`.
 - Clos le 2026-10-07 : schéma v3 (19 tables, euros) posé dans docker/init-v3/, migrations v2→v3 et banc ; rôle en lecture seule fil_rouge_reader (chantier LOT).
+- Clos le 2026-10-13 : auth, rôles, contrôles, RGPD et paiement calculé depuis la base (chantier API).
 
 ## Cinq règles non négociables
 
@@ -66,7 +73,7 @@ et seulement dans ce cas, ouvrir l'index.
 
 | La tâche | Ouvrir |
 |---|---|
-| écrire ou modifier du code de l'API | `API/README.md`, puis le fichier visé |
+| écrire ou modifier du code de l'API | **dans `../Fil-Rouge-API/`** : `API/README.md`, puis le fichier visé |
 | lancer l'API et son Swagger | `docker compose up -d api` depuis `docker/`, puis http://localhost:8000/docs |
 | créer un module, chercher où va un bout de code | `API/src/app/main.py` — son en-tête décrit les trois couches |
 | vérifier une règle métier | `user-stories/<NN>_*.feature` |
@@ -76,7 +83,7 @@ et seulement dans ce cas, ouvrir l'index.
 | ouvrir un chantier, ou le découper en fiches | **lancer `/vlp:chantier`** — la méthode vit dans le kit, pas ici |
 | relire une fiche `C1` à `C5` | `context AI/09-contraintes-mpd.md` — chantier **clos** le 2026-09-11, ne se rejoue pas |
 | relire une fiche `LOT1` à `LOT12` | `context AI/10-lot-migration.md` — chantier « Lot de migration (schéma v3) » **clos** le 2026-10-07, ne se rejoue pas |
-| relire le chantier, ou jouer une fiche `API1` à `API12` | `context AI/11-api-auth-rgpd-regles.md` — chantier « API : auth, RGPD et règles métier », **ouvert** le 2026-10-12 ; `/vlp:tache API<n>` |
+| relire une fiche `API1` à `API12` | `context AI/11-api-auth-rgpd-regles.md` — chantier « API : auth, RGPD et règles métier » **clos** le 2026-10-13, ne se rejoue pas |
 | reprendre après une longue interruption | `context AI/08-etat.md` |
 
 ## Économie de contexte

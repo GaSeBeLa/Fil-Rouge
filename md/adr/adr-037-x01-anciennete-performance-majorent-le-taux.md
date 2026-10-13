@@ -18,6 +18,9 @@
 >
 > 🧹 **À faire ailleurs** (des tâches, pas la décision) :
 >
+> * ✅ Conséquences mises à jour sous le trait le 13/10/2026 (dette du
+>   chantier API) : seed en échec attendu, branchement et ancienneté codés.
+>   À reporter sur Confluence.
 > * Quatre fichiers disent encore X01 ouvert, ou bloquant : `context AI/08-etat.md`
 >   (l. 84-88, l. 104, l. 199-200) ; `API/README.md:154-155` ;
 >   `livrables/4-application/rapport-tests.md:250` ;
@@ -82,7 +85,7 @@ Ces notes « ne font pas foi : on remonte toujours à la source officielle du st
    * `p = (S − pivot) / demi-amplitude × amplitude` ;
    * `r = borne(r₀ × (1 + a + p) ; plancher ; plafond)`.
 3. `a` et `p` s'additionnent avant d'être appliqués. `r` est arrondi à 4 décimales, au demi supérieur (`RCR:228` ; `rem.py:40`, `:264`).
-4. `a`, `p` et `r` devront être figés sur le paiement : `seniority_rate`, `performance_rate`, `final_rate` (ADR-033). Les colonnes existent ; leur écriture viendra avec le branchement du calcul, pas encore codé.
+4. `a`, `p` et `r` devront être figés sur le paiement : `seniority_rate`, `performance_rate`, `final_rate` (ADR-033). Les colonnes existent ; elles s'écrivent depuis le 13/10/2026 (fiche API12, `POST /sales/{id}/payment`).
 5. Les réglages de cette formule sont des paramètres, dans `hunter_rate_parameters` (`01:859-867`). Valeurs du seed : 0,02 par an, plafond 0,10 ; pivot 50, demi-amplitude 50, amplitude 0,20 ; plancher 0,20, plafond 0,60 (`docker/init-v3/05_parametres.sql:76-78`). Leur gestion relève d'ADR-034.
 
 **Justification**
@@ -96,9 +99,9 @@ Ces notes « ne font pas foi : on remonte toujours à la source officielle du st
 **Conséquences**
 
 * **Schéma et code :** rien à changer. `payment.seniority_rate` et `payment.performance_rate` existent (`01:912-922`) ; le barème n'a pas de niveau (`01:789-821`).
-* **Tests :** les 13 cas de modulation et le cas de bout en bout (Bruno, 46,16 %, 6 231,60 €) passent (`API/tests/test_remuneration.py:215-258`). Le même calcul, avec les réglages lus en base, rend 6 231,60 € (`API/tests/integration/test_seed_parametres.py:97-116`).
-* **Branchement du calcul :** X01 ne le bloque plus. Il reste à coder pour d'autres raisons (ADR-033, ADR-035).
-* **À coder :** compter les années révolues à la date de l'acte, depuis `hunter.hire_date` (`01:284`). Rien ne le fait encore : le calcul reçoit un nombre déjà compté (`RCR:762`).
+* **Tests :** les 13 cas de modulation et le cas de bout en bout (Bruno, 46,16 %, 6 231,60 €) passent (`API/tests/test_remuneration.py:215-258`). Le même calcul, avec les réglages lus en base, rendait 6 231,60 € (`API/tests/integration/test_seed_parametres.py`). Depuis ADR-048 (critère « mandats » noté par le taux, codé le 13/10/2026), ces deux cas du sujet sont gardés en échec attendu ; Bruno refait avec le taux rend 6 084,45 €.
+* **Branchement du calcul :** fait le 13/10/2026 (fiche API12), `POST /sales/{id}/payment`.
+* **Codé le 13/10/2026 (fiche API12) :** les années révolues à la date de l'acte, comptées depuis `hunter.hire_date` (`full_years`, `API/src/app/services/payment_calculation_service.py`). Le calcul reçoit ce nombre déjà compté (`RCR:762`).
 * **Bornes des colonnes :** `seniority_rate` de 0 à 1, `performance_rate` de −1 à 1 : le domaine d'un taux, pas les chiffres du sujet (`01:914-922`, Q-REM-05). Le `CHECK` 20 %-60 % de `final_rate` (`01:905-911`) relève d'ADR-034.
 
 **Questions tranchées par les sources**

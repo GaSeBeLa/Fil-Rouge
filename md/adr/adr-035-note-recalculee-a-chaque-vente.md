@@ -27,6 +27,13 @@
 > * `md/journal/2026-09-21-point-etape.md:106-113` : la position de Sébastien
 >   (« Le score de cette vente ») y est « à valider par le groupe ». Elle l'est
 >   depuis le 02/10/2026.
+> * ✅ Codé le 13/10/2026 (fiche API12) : le paiement d'une vente fige son
+>   score (`payment.performance_score`, point 4) ; la note `'payment'` du
+>   journal s'écrit quand le paiement passe à `'paid'`, dans la même
+>   transaction (`PaymentService.replace`), jamais avant (choix du groupe,
+>   13/10/2026). Les « pas encore codé » du texte sous le trait (point 4,
+>   Questions tranchées) sont corrigés (dette du chantier API) : à reporter
+>   sur Confluence.
 >
 > ✂️ **Ne pas copier ce bandeau.** Le texte à coller commence sous le trait.
 
@@ -83,7 +90,7 @@ Le registre range cette contradiction parmi les défauts du sujet (`md/questions
 1. Le score d'un paiement se calcule au moment du calcul : les 5 notes, puis leur somme pondérée (`RCR:618-619` ; `rem.py:275-276`).
 2. Ses entrées : la vente elle-même (délai, exclusivité, visites), et l'activité du chasseur sur les 12 mois avant l'acte, vente en cours exclue (`rem.py:139`, « hors vente en cours » ; `RCR:139`).
 3. Le calcul ne lit jamais `hunter_performance`.
-4. Le score calculé devra être figé sur `payment.performance_score` (ADR-033). La colonne existe ; son écriture viendra avec le branchement du calcul, pas encore codé.
+4. Le score calculé devra être figé sur `payment.performance_score` (ADR-033). La colonne existe ; elle s'écrit depuis le 13/10/2026 (fiche API12, `POST /sales/{id}/payment`).
 5. `hunter_performance` est le journal des notes affichées au chasseur (`Readme.md:134-135`). Ses règles relèvent d'ADR-042 ; le calcul de sa note, d'ADR-048.
 6. L'écart à `F10:293` est assumé, et dit en soutenance.
 
@@ -107,7 +114,7 @@ Le registre range cette contradiction parmi les défauts du sujet (`md/questions
 
 | Question | Réponse | Source |
 |---|---|---|
-| Quand s'écrit la note `'payment'` du journal ? | Quand le paiement passe à `'paid'`. Contrôle dans l'API, pas encore codé. | déduit de `Readme.md:134` (« une fois le paiement effectué ») et `F10:290` (« une rémunération marquée comme payée ») |
+| Quand s'écrit la note `'payment'` du journal ? | Quand le paiement passe à `'paid'`. Contrôle dans l'API, codé le 13/10/2026 (fiche API12). | déduit de `Readme.md:134` (« une fois le paiement effectué ») et `F10:290` (« une rémunération marquée comme payée ») |
 | Un refus donne-t-il une note `'payment'` ? | Non : un refus n'est jamais payé. Un mandat échu a son propre déclencheur, `'mandate_expired'`, hors de cet ADR. | déduit de `01:944-946`, `:965-975` ; `01:1008` |
 | Deux ventes le même jour ? | Deux calculs, deux notes au journal, à la seconde près. | Q-SCH-06, `questions-a-trancher.md:161` ; `01:996-1001` ; `test_constraints_db.py:728-736` |
 | La note du journal est-elle celle du paiement ? | Non. Le journal est recalculé après le paiement, compteurs mis à jour ; le paiement garde la note du calcul. | `F10:289-292` ; `01:923-925` |

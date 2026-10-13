@@ -12,8 +12,9 @@ le calcul de rémunération branché sur la base.
 
 **Estimé.** 14 fiches · ≈56 $ — ≈4,00 $/fiche sur 2 clos (le 2026-10-12).
 
-**Fait.** Rien. Cadré en 12 fiches, `API1` à jouer. Base prête : schéma v3,
-20 tables, 258 tests verts au 12/10.
+**CLOS** le 2026-10-13. Ne se rejoue pas — ne sert plus qu'à relire son socle.
+
+**Fait.** API1..API12 (2026-10-13) : Connexion par jeton, rôles, clé d'API, contrôles d'entrée et entre tables, anonymisation sans DELETE, rémunération calculée depuis la base (POST /sales/{id}/payment) — estimé 14 fiches ≈56 $ · cadré 12 · joué 12 fiches 61,74 $.
 
 **Session** : aded003c-7d9f-4c76-83df-6971407e7c1a
 
@@ -353,8 +354,9 @@ tombe. Suite complète verte, compte brut.
 ---
 
 <!-- FICHE:API11 -->
-## API11 [ ] — Noter les mandats par le taux de transformation
+## API11 [x] — Noter les mandats par le taux de transformation
 
+**Session** : 5f96deba-d497-4409-80b3-b6b6e591a21c
 **Dépend de** : rien.
 **Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql`, `docker/init-v3/05_parametres.sql`, une nouvelle migration `docker/migrations/v2-vers-v3/39_taux-reussite-mandats.sql`, `API/src/app/models/hunter_rate_parameters_model.py`, `API/src/app/services/parametrage_service.py`, `API/src/app/services/remuneration.py`, `API/tests/test_remuneration.py`, `md/adr/adr-048-criteres-de-performance.md`.
 
@@ -382,8 +384,9 @@ complète verte, compte brut.
 ---
 
 <!-- FICHE:API12 -->
-## API12 [ ] — Brancher la rémunération sur la base
+## API12 [x] — Brancher la rémunération sur la base
 
+**Session** : 5f96deba-d497-4409-80b3-b6b6e591a21c
 **Dépend de** : `API5`, `API8`, `API11`.
 **Fichiers** : un nouveau `API/src/app/services/payment_calculation_service.py`, `API/src/app/routes/sale_router.py`, `API/src/app/services/parametrage_service.py`, `API/src/app/services/remuneration.py` (lecture), `md/adr/adr-035-note-recalculee-a-chaque-vente.md`, `md/adr/adr-048-criteres-de-performance.md`, un nouveau `API/tests/integration/test_calcul_paiement.py`.
 
