@@ -21,9 +21,9 @@
     <p>Tout fermé par défaut ; chaque rôle ne lit et n'écrit que ce que la cible d'ADR-027 lui donne, et seulement ses lignes (404 sur la ligne d'un autre).</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">11 fiches · 9 faites · en cours : DRO11</p>
+    <p class="mono" style="margin-top:.5rem">11 fiches · 10 faites · en cours : DRO10</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -73,14 +73,16 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">DRO9</span></span>
         <details><summary><span class="titre">Fermer fil_rouge_reader sur paiements et comptes désactivés</span><span class="etat">Faite</span></summary>
         <span class="note">fil_rouge_reader : SELECT payment → permission denied ; compte désactivé absent des 4 tables de profil ; API (postgres) lit tout : 910 passed, 8 skipped, 7 xfailed ; mutant REVOKE retiré → 1 failed ; relecture ACCEPTÉE</span></details>
-        <span class="cout mono">≈7,7M (7 693 735) · 78 tours · 3,68 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">DRO11</span></span>
-        <details open><summary><span class="titre">Fermer la fuite du formulaire</span><span class="etat">En cours</span></summary></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">DRO10</span></span>
-        <details><summary><span class="titre">Refaire le relevé et mettre la doc à jour</span><span class="etat">Après DRO11</span></summary></details></li>
+        <span class="cout mono">≈8,0M (8 027 208) · 80 tours · 3,79 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">DRO11</span></span>
+        <details><summary><span class="titre">Fermer la fuite du formulaire</span><span class="etat">Faite</span></summary>
+        <span class="note">formulaire mal formé → 409 quel que soit l'email (neuf, client, chasseur), xfail retiré ; bien formé connu → 202 sans ligne de plus ; 911 passed, 8 skipped, 6 xfailed ; mutant sonde retirée → 1 failed ; relecture ACCEPTÉE</span></details>
+        <span class="cout mono">≈5,7M (5 688 178) · 45 tours · 2,24 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">DRO10</span></span>
+        <details open><summary><span class="titre">Refaire le relevé et mettre la doc à jour</span><span class="etat">En cours</span></summary></details></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈17,8M (17 810 935) · 85 tours · 7,46 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈158,7M (158 718 506) · 848 tours · 61,07 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈164,7M (164 740 157) · 895 tours · 63,42 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 

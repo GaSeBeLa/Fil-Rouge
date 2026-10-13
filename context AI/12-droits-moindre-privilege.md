@@ -326,8 +326,9 @@ test tombe.
 ---
 
 <!-- FICHE:DRO11 -->
-## DRO11 [ ] — Fermer la fuite du formulaire
+## DRO11 [x] — Fermer la fuite du formulaire
 
+**Session** : 4e508779-8618-401d-b40e-17c615120929
 **Dépend de** : `DRO3`.
 **Fichiers** : `API/src/app/services/signup_service.py`, `API/src/app/routes/signup_router.py`, `API/tests/integration/test_droits_par_role.py` (`test_malformed_form_gets_the_same_answer_whoever_the_email`), `API/README.md` (Limites connues).
 

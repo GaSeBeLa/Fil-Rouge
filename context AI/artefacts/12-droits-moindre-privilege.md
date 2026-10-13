@@ -11,6 +11,7 @@ Tout fermé par défaut ; chaque rôle ne lit et n'écrit que ce que la cible d'
 - DRO7 : 897 passed, 8 skipped, 7 xfailed (876 avant) ; 2 managers (1 au seed, 1 créé) : chacun son équipe sur 8 tables + paiements, 404 sur l'autre ; mutant payment → 1 failed ; pyright 4 → 4
 - DRO8 : 905 passed, 8 skipped, 7 xfailed (897 avant) ; compte désactivé : Reader, Hunter, Manager reçoivent 404 sur son profil (4 tables, 7 cas), Admin le lit ; mutant is_activated retiré → 7 failed ; pyright 2 → 2
 - DRO9 : fil_rouge_reader : SELECT payment → permission denied ; compte désactivé absent des 4 tables de profil ; API (postgres) lit tout : 910 passed, 8 skipped, 7 xfailed ; mutant REVOKE retiré → 1 failed ; relecture ACCEPTÉE
+- DRO11 : formulaire mal formé → 409 quel que soit l'email (neuf, client, chasseur), xfail retiré ; bien formé connu → 202 sans ligne de plus ; 911 passed, 8 skipped, 6 xfailed ; mutant sonde retirée → 1 failed ; relecture ACCEPTÉE
 ## Journal
 - 2026-10-13 : DRO1 : POST /users reste à Admin seul (le client crée son compte par /search-requests/submit, Q-ACC-12) ; ouvert au Client, il lui laisserait choisir id_role.
 - 2026-10-13 : DRO2 : POST /payments fermé à tous ; les tests écrivent les paiements par le service (write_payment), un refus y est un ConflictError.
