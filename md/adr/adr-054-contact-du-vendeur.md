@@ -40,7 +40,7 @@ Le premier code avait pris un choix prudent provisoire (une colonne `seller_type
 | 1. Les **166** « particulier + agence » | **On garde les deux** : `is_private` vrai **et** le nom de l'agence | Aucune perte d'information ; on ne devine pas lequel est faux |
 | 2. « particulier » vide dans le CSV | **Vrai ou faux, jamais vide**, en base aussi : `is_private BOOLEAN NOT NULL` | `seller_type` est retirée ; `normalised.py` sort déjà vrai ou faux, il ne change pas |
 | 3. Une table `agency` (6 agences) | **Non** : le nom de l'agence en texte | Rien à changer |
-| 4. Durée de conservation | **3 ans** après la fin du suivi du bien | Écrit, **pas encore codé** |
+| 4. Durée de conservation | **3 ans** après la **dernière activité** du bien, puis **anonymisé** | `POST /estate-contacts/anonymize-expired`, Admin |
 | 5. `fil_rouge_reader` | **Retiré** : le compte d'analyse ne lit plus la table | `REVOKE` dans `04`, migration 41 |
 
 **Ce qui est fait (13/10/2026, dépôt Fil-Rouge-API)**
@@ -49,7 +49,8 @@ Le premier code avait pris un choix prudent provisoire (une colonne `seller_type
 * Données : `docker/tools/generate_estate_contact.py` lit le CSV et écrit `docker/init-v3/06_populate_estate_contact.sql` : **2 469** contacts (`is_private` : **392** vrais, **2 077** faux) ; 87 annonces sans ligne.
 * Migrations pour une base existante : 40 (la table), 41 (lecteur fermé), 42 (`seller_type` → `is_private`, puis rejouer 06).
 * API : `/estate-contacts`, 4 routes ; `routes/crud_router.py` reçoit `read_roles` pour fermer la lecture.
-* Tests : `API/tests/integration/test_contact_vendeur.py`, 16 tests ; suite entière **435 passed**, 8 skipped, 6 xfailed.
+* Effacement (question 4) : `POST /estate-contacts/anonymize-expired`, Admin seul, lancée à la main ; `services/estate_contact_service.py`.
+* Tests : `API/tests/integration/test_contact_vendeur.py`, 24 tests ; suite entière **443 passed**, 8 skipped, 6 xfailed.
 
 **Questions** ✅ toutes tranchées
 
@@ -58,7 +59,10 @@ Expliquées, avec leurs options, sur la page à cartes `md/journal/2026-10-13-qu
 1. ~~Les **166** « particulier + agence » : croire l'agence, croire « particulier », ou laisser vide ?~~ ✅ Tranchée le 13/10/2026 : **on garde les deux** (Sébastien, Discord).
 2. ~~Corriger `normalised.py` pour garder « inconnu » au lieu de `False` ?~~ ✅ Tranchée le 13/10/2026 : **vrai ou faux, jamais vide**, même en base (Sébastien, Discord). `normalised.py` le fait déjà.
 3. ~~Une table `agency` à part, ou le nom en texte ?~~ ✅ Tranchée le 13/10/2026 : **le nom en texte** (Sébastien, Discord). Rien à changer.
-4. ~~Combien de mois garder le contact après la fin du suivi du bien ?~~ ✅ Tranchée le 13/10/2026 : **3 ans** après la fin du suivi du bien (Sébastien, Discord). Repère : la CNIL conseille 3 ans pour un prospect ([référentiel « gestion des activités commerciales »](https://www.cnil.fr/sites/cnil/files/atoms/files/referentiel_traitements-donnees-caractere-personnel_gestion-activites-commerciales.pdf), lu le 13/10/2026) ; le vendeur n'est pas un prospect, c'est un rapprochement. **Écrit, pas encore codé** : l'effacement suivra le geste d'ADR-049 (champs vidés, ligne gardée).
+4. ~~Combien de mois garder le contact après la fin du suivi du bien ?~~ ✅ Tranchée le 13/10/2026 : **3 ans** après la fin du suivi du bien (Sébastien, Discord). Repère : la CNIL conseille 3 ans pour un prospect ([référentiel « gestion des activités commerciales »](https://www.cnil.fr/sites/cnil/files/atoms/files/referentiel_traitements-donnees-caractere-personnel_gestion-activites-commerciales.pdf), lu le 13/10/2026) ; le vendeur n'est pas un prospect, c'est un rapprochement.
+   * **Point de départ** : la dernière activité du bien, la plus récente de ces dates : création du bien ou du contact, sélection, proposition, fin de mandat, visite, vente (Sébastien, Discord, 13/10/2026 ; contre « la vente » et « la saisie du contact »).
+   * **Le geste** : **anonymiser**, comme ADR-049 (Sébastien, Discord, 13/10/2026 ; contre « supprimer la ligne ») : le nom devient « Anonyme », agence, téléphone et email sont vidés ; la ligne, `is_private` et l'auteur restent. Un nom neutre, pas un nom vide : `ck_estate_contact_not_empty` exige un renseignement.
+   * **Qui, quand** : `POST /estate-contacts/anonymize-expired`, **Admin** seul, lancée à la main ; pas de tâche planifiée (V2), comme ADR-049.
 5. ~~Le compte PostgreSQL en lecture seule `fil_rouge_reader` lit aussi `estate_contact`. Faut-il le lui retirer ?~~ ✅ Tranchée le 13/10/2026 : **retiré** (Sébastien, Discord). `REVOKE` dans `docker/init-v3/04_role-lecture-seule.sql`, migration `41_contact-ferme-au-lecteur.sql` pour une base existante.
 
 ⚠️ Les contacts du CSV sont faux (emails en `example.com`, une centaine de noms qui reviennent) : bons pour les tests. La règle de droits et de conservation vaut pour les vrais.
@@ -70,7 +74,7 @@ Décision prise par le groupe sans lui, à lui présenter (demandé par Sébasti
 * le contact du vendeur est gardé, dans une table à part, `estate_contact` ;
 * seuls Admin, Hunter et Manager le voient ; ni le client, ni le rôle Reader, ni le compte d'analyse `fil_rouge_reader` ;
 * « particulier » est vrai ou faux, gardé avec le nom de l'agence ;
-* durée de conservation : 3 ans après la fin du suivi du bien, pas encore codée.
+* durée de conservation : 3 ans après la dernière activité du bien, puis le contact est rendu anonyme (route Admin, lancée à la main).
 
 **Sources**
 
@@ -78,6 +82,7 @@ Décision prise par le groupe sans lui, à lui présenter (demandé par Sébasti
 |---|---|
 | La table est validée | Sébastien, Discord, 13/10/2026 |
 | Les 5 réponses | Sébastien, page à cartes `md/journal/2026-10-13-questions-contact-vendeur.html` et Discord, 13/10/2026 |
+| Départ et geste de l'effacement | Sébastien, boutons Discord, 13/10/2026 |
 | 3 ans pour un prospect | CNIL, référentiel « gestion des activités commerciales », lu le 13/10/2026 |
 | Le manque à l'import | Gabriel, Discord, 13/10/2026 ; `normalised/normalised.py:428-434` |
 | Les comptes du CSV | `normalised/annonces_normalised.csv`, compté le 13/10/2026 |
