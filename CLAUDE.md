@@ -66,6 +66,23 @@ Prose et commentaires de code en français ; noms de code en anglais.
 Le contexte IA (`CLAUDE.md`, `context AI/`) est **versionné** : le projet se
 travaille à plusieurs. Les notes métier libres vivent dans `md/`.
 
+## Ramasser sa poubelle
+
+Une modification n'est finie que quand ce qu'elle a rendu faux a disparu
+(proposé par Gabriel le 2026-10-12, adopté par Sébastien le 2026-10-13).
+
+1. Même commit : commentaires, en-têtes, docstrings et doc du code touché mis
+   à jour (compte, nom, unité, renvoi `fichier:ligne`).
+2. Le code mort laissé est supprimé, pas commenté.
+3. Avant le commit : grep de l'ancienne valeur dans tout le dépôt (et dans
+   `../Fil-Rouge-API/`) ; chaque reste vivant est corrigé ou signalé.
+4. Un chiffre en commentaire se recompte ; s'il n'apporte rien, il ne s'écrit pas.
+5. Exception : l'historique daté (journal, rapport, ADR, fiche close) ne se
+   réécrit pas.
+6. ADR : un ADR accepté ne se réécrit pas. Créer ou modifier un ADR → les ADR
+   qu'il contredit passent à « remplacé par ADR-0XX », renvois mis à jour des
+   deux côtés (`md/adr/`, et Confluence avec l'accord du groupe).
+
 ## Routage — ouvrir ceci, et rien d'autre
 
 Cette table remplace la lecture de `00-INDEX.md`. Si la tâche n'y figure pas,
