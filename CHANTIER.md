@@ -15,11 +15,12 @@
 - **index** : context AI/00-INDEX.md
 - **artefact feuille de route** : https://claude.ai/artifact/Wu5xkSJUtfbjuhFdbvUq3C
 - **artefact du chantier** : aucun
-- **livraison** : aucune — le code tourne en local (`docker compose up -d`
-  depuis `docker/`)
-- **vérification** : depuis `docker/`, `docker compose exec -T api python -m pytest -q`
+- **livraison** : aucune — le code vit dans `../Fil-Rouge-API/` depuis le
+  2026-10-13, et tourne en local (`docker compose up -d` depuis
+  `../Fil-Rouge-API/docker/`)
+- **vérification** : depuis `../Fil-Rouge-API/docker/`, `docker compose exec -T api python -m pytest -q`
   — la session la lance et lit son verdict ; base de test `fil_rouge_test` recréée
-  par `bash docker/create_test_db.sh` (`API/README.md` § Tests)
+  par `bash docker/create_test_db.sh` depuis `../Fil-Rouge-API/` (`API/README.md` § Tests)
 
 ## Contraintes d'écriture
 
@@ -27,9 +28,10 @@ Les règles que toute fiche respecte, quel que soit son sujet. Trois ou quatre,
 pas quinze — celles qu'on regrette de ne pas avoir écrites.
 
 - **Les deux dossiers `../Fil-Rouge-EISI-Data-IA-26-D04-StarterPack*/` ne se
-  modifient jamais**, ni **`docker/docker-compose.yml`** sans le oui de
-  l'utilisateur.
-- Le schéma de référence est `docker/init-v3/01_create_fil_rouge_immobilier.sql` :
+  modifient jamais**, ni **`docker/docker-compose.yml`** (dans
+  `../Fil-Rouge-API/`) sans le oui de l'utilisateur.
+- Le schéma de référence est `docker/init-v3/01_create_fil_rouge_immobilier.sql`,
+  dans `../Fil-Rouge-API/` :
   tout modèle SQLModel s'y confronte par grep. **Tout montant est en euros**
   (`CLAUDE.md`, règle 4).
 - Prose et commentaires de code en français ; noms de code en anglais. Le code

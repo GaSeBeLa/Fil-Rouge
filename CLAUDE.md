@@ -10,11 +10,11 @@ modifiés**.
 
 ## Où on en est — en cinq lignes
 
-- ⚠️ **Depuis le 2026-10-13, le code de l'API et `docker/` évoluent dans le
+- ⚠️ **Depuis le 2026-10-13, le code de l'API et `docker/` vivent dans le
   dépôt [Fil-Rouge-API](https://github.com/GaSeBeLa/Fil-Rouge-API)**, cloné à
-  côté : `../Fil-Rouge-API/`. Ici, `API/` et `docker/` sont restés à leur état
-  d'avant la fiche API11 (`3492423`) : ne pas s'y fier pour le code. Les lignes
-  qui suivent décrivent l'API telle qu'elle est dans Fil-Rouge-API.
+  côté : `../Fil-Rouge-API/`. Ce dépôt-ci garde les docs, les ADR, les
+  livrables et le suivi des chantiers. **Tout chemin `API/…` ou `docker/…`
+  cité ici, dans `context AI/` ou dans `md/` se lit dans `../Fil-Rouge-API/`.**
 - Le schéma PostgreSQL **v3** (**20 tables** depuis le 2026-10-08, `review_media` ; montants en **euros**) est posé
   dans `docker/init-v3/` et monté par `docker compose` : chantier LOT, LOT1 à
   LOT12 faits le 2026-10-07 (LOT12 : rôle en lecture seule `fil_rouge_reader`).
@@ -50,7 +50,7 @@ modifiés**.
    verdict — un instrument muet rend son propre échec indiagnosticable.
 3. **Les deux dossiers `../Fil-Rouge-EISI-Data-IA-26-D04-StarterPack*/` ne se
    modifient jamais**, et `docker/init-v3/01_create_fil_rouge_immobilier.sql`
-   est le schéma de référence : tout modèle SQLModel s'y confronte par grep.
+   (dans `../Fil-Rouge-API/`) est le schéma de référence : tout modèle SQLModel s'y confronte par grep.
    `docker/init-v2/` est figé : il ne se modifie plus.
 4. **Tout montant est en euros** — jamais en K€ (`docker/init-v3/README.md`
    §1). Deux types depuis le 2026-10-05 (Q-REM-01) : prix, budgets, bornes du
@@ -74,11 +74,11 @@ et seulement dans ce cas, ouvrir l'index.
 | La tâche | Ouvrir |
 |---|---|
 | écrire ou modifier du code de l'API | **dans `../Fil-Rouge-API/`** : `API/README.md`, puis le fichier visé |
-| lancer l'API et son Swagger | `docker compose up -d api` depuis `docker/`, puis http://localhost:8000/docs |
-| créer un module, chercher où va un bout de code | `API/src/app/main.py` — son en-tête décrit les trois couches |
+| lancer l'API et son Swagger | `docker compose up -d api` depuis `../Fil-Rouge-API/docker/`, puis http://localhost:8000/docs |
+| créer un module, chercher où va un bout de code | `../Fil-Rouge-API/API/src/app/main.py` — son en-tête décrit les trois couches |
 | vérifier une règle métier | `user-stories/<NN>_*.feature` |
-| vérifier une table, une colonne, une contrainte | `docker/init-v3/01_create_fil_rouge_immobilier.sql` |
-| comprendre un choix du schéma (euros, migration, hypothèses, changements v3) | `docker/init-v3/README.md` |
+| vérifier une table, une colonne, une contrainte | `../Fil-Rouge-API/docker/init-v3/01_create_fil_rouge_immobilier.sql` |
+| comprendre un choix du schéma (euros, migration, hypothèses, changements v3) | `../Fil-Rouge-API/docker/init-v3/README.md` |
 | relire une décision d'architecture (ADR) | **Confluence**, espace `GaSeBeLa1` — [wiki du projet](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/overview?homepageId=15008134). Le dossier `decisions/` du dépôt est **vide**, rien n'y est écrit |
 | ouvrir un chantier, ou le découper en fiches | **lancer `/vlp:chantier`** — la méthode vit dans le kit, pas ici |
 | relire une fiche `C1` à `C5` | `context AI/09-contraintes-mpd.md` — chantier **clos** le 2026-09-11, ne se rejoue pas |
