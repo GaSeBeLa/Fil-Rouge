@@ -322,3 +322,9 @@ de ce que le code dit déjà.
   n'efface pas la fin du maillon d'avant (corrigé après la relecture). Le tableau de la Décision 7 est suivi tel quel : pour un
   chasseur ou un manager, seuls téléphone et nom changent ; une révision de
   critères garde un motif neutre `'anonyme'` (`chk_criteria_change_reason`).
+- **2026-10-13** — **API11** : trois choix du groupe (Discord, boutons) — zéro
+  mandat → note 0 (ADR-048, point 7) ; un réglage
+  `mandate_success_rate_for_max_score` ≤ 0 → `422` (P29) ; les cas du sujet
+  sur `mandats × 10` restent, « cas du sujet » en `xfail(strict=True)`, à côté
+  des cas du taux (Bruno refait : 66,7 points, 6 084,45 €). La note des
+  mandats n'est pas arrondie : seul le score l'est (§9).

@@ -30,6 +30,15 @@
 > * ✅ ADR-035 disait « Le critère « mandats » remplacé par le taux de
 >   transformation ». Déjà aligné à son acceptation : il dit « sa notation
 >   change, pas le critère » (vérifié le 12/10/2026).
+> * ✅ Décision 5 et point 7 codés le 13/10/2026 (fiche API11) : le réglage
+>   `T_plein` est la colonne `hunter_rate_parameters.mandate_success_rate_for_max_score`
+>   (1.0000, migration 39) ; la note vient de `note_mandats` (`rem.py`).
+>   Choisis par le groupe le 13/10/2026 (Discord) : zéro mandat → 0 ; un
+>   réglage ≤ 0 est refusé (422, P29) ; les cas du sujet sur S₄ sont gardés,
+>   en échec attendu, à côté des cas du taux. Ce ne sont pas « une ligne »
+>   du code du sujet qui changent (Conséquences), mais trois endroits et une
+>   fonction ajoutée : voir la docstring de `rem.py`. Les comptages (ADR-035)
+>   restent à coder.
 > * ⚠️ Les autres renvois `01:NNN` de cette fiche datent du 08/10/2026. Les
 >   migrations 22 à 38 (12/10/2026) ont allongé le schéma : ils peuvent être
 >   décalés. Le nom de la colonne ou de la table, cité à côté, fait foi.
