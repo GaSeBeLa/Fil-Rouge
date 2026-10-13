@@ -16,4 +16,5 @@ Tout fermé par défaut ; chaque rôle ne lit et n'écrit que ce que la cible d'
 - 2026-10-13 : Relecture de DRO1 à DRO3 : DRO1 et DRO2 acceptées ; DRO3 refusée pour la fuite du formulaire, question posée à Seb (accepter, resserrer en DRO11, ou reporter).
 - 2026-10-13 : DRO5 : hunter filtré aussi (« son chasseur », colonne Client) ; écrire une ligne qui ne serait pas à soi rend 409 (crochet owns) ; rôle et activation : seul un vrai changement rend 403.
 - 2026-10-13 : DRO6 : user ouvert au Hunter (son compte) ; mandat gardé à son nom et sur ses demandes (relecteur : sinon il s'ouvrait le client d'un autre ; Q-JEF-30) ; garde des coordonnées sur tout le modèle (un champ omis l'effaçait) ; POST /hunters refermé (create_roles suivait write_roles) ; PUT d'un média : ADR-051 (403) après le 404.
+- 2026-10-13 : DRO3 : fuite du formulaire, Seb choisit B ; fiche DRO11 ajoutée avant DRO10 (la base juge les formats dans un SAVEPOINT annulé, même réponse pour tous).
 ## Bilan

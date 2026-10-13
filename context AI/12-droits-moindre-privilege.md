@@ -10,7 +10,8 @@
 défaut presque tout à tout compte connecté. Ce chantier ferme tout par défaut,
 puis rouvre ce que la cible d'ADR-027 donne, rôle par rôle et ligne par ligne.
 
-**Fait.** Rien. Cadré le 2026-10-13 en 10 fiches, `DRO1` à jouer.
+**Fait.** Cadré le 2026-10-13 en 10 fiches ; `DRO11` ajoutée le même jour (fuite du
+formulaire, choix B de Seb), jouée avant `DRO10`.
 
 **Session** : 5f96deba-d497-4409-80b3-b6b6e591a21c
 
@@ -76,7 +77,8 @@ d'équipe »).
 | `DRO7` | Limiter le Manager à son équipe | `DRO4`, `DRO6` |
 | `DRO8` | Réserver les comptes désactivés à l'Admin | `DRO4` |
 | `DRO9` | Fermer `fil_rouge_reader` sur paiements et comptes désactivés | rien |
-| `DRO10` | Refaire le relevé et mettre la doc à jour | `DRO1` à `DRO9` |
+| `DRO11` | Fermer la fuite du formulaire | `DRO3` |
+| `DRO10` | Refaire le relevé et mettre la doc à jour | `DRO1` à `DRO9`, `DRO11` |
 
 `DRO9` ne dépend de rien et peut se jouer à tout moment. `DRO2` et `DRO3`
 sont parallèles ; `DRO5`, `DRO6`, `DRO8` aussi, après `DRO4`.
@@ -320,10 +322,38 @@ test tombe.
 
 ---
 
+<!-- FICHE:DRO11 -->
+## DRO11 [ ] — Fermer la fuite du formulaire
+
+**Dépend de** : `DRO3`.
+**Fichiers** : `API/src/app/services/signup_service.py`, `API/src/app/routes/signup_router.py`, `API/tests/integration/test_droits_par_role.py` (`test_malformed_form_gets_the_same_answer_whoever_the_email`), `API/README.md` (Limites connues).
+
+**Prompt**
+Choix B de Seb (2026-10-13), après le refus de `DRO3` par le relecteur.
+`POST /search-requests/submit` juge les formats (téléphone, code postal) par
+les CHECK de la base, et seulement quand une fiche s'écrit : un formulaire
+mal formé rend `409` pour un email neuf, `202` pour un email connu (client,
+chasseur, manager, admin). L'email se devine.
+Pour un email connu, rejoue le chemin d'un email neuf dans un SAVEPOINT
+(`session.begin_nested()`) : un compte jetable, puis sa fiche client avec les
+champs du formulaire, `flush` pour que la base juge, puis annule le
+SAVEPOINT. Un refus de la base → la même erreur que pour un email neuf ; sinon
+le chemin connu continue, sans rien réécrire. Les CHECK ne se recopient pas
+en Python : la base reste seul juge. Mets à jour l'en-tête du service (la
+« Limite connue » disparaît) et `API/README.md`.
+
+**Critère de fin**
+`test_malformed_form_gets_the_same_answer_whoever_the_email` passe sans
+`xfail`, et vérifie aussi un email de chasseur ; un formulaire bien formé
+d'un email connu rend toujours `202` et ne laisse ni compte ni fiche de
+plus. Suite verte, compte brut. Mutant : retirer la sonde du SAVEPOINT → le
+test retombe.
+<!-- /FICHE -->
+
 <!-- FICHE:DRO10 -->
 ## DRO10 [ ] — Refaire le relevé et mettre la doc à jour
 
-**Dépend de** : `DRO1`, `DRO2`, `DRO3`, `DRO4`, `DRO5`, `DRO6`, `DRO7`, `DRO8`, `DRO9`.
+**Dépend de** : `DRO1`, `DRO2`, `DRO3`, `DRO4`, `DRO5`, `DRO6`, `DRO7`, `DRO8`, `DRO9`, `DRO11`.
 **Fichiers** : `docker/tools/print_rights_matrix.py`, `md/securite/matrice-droits-crud-par-role.md`, `md/adr/adr-027-matrice-acces-par-role.md`, `API/README.md`, `CLAUDE.md` (Fil-Rouge, « Où on en est »).
 
 **Prompt**

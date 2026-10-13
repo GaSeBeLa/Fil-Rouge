@@ -383,3 +383,7 @@ de ce que le code dit déjà.
   défaut : ouvrir le PUT de `/hunters` ouvrait aussi le POST, refermé
   (`create_roles=(ADMIN,)`). Le PUT d'un média d'avis suit ADR-051 comme le
   POST (403), après le 404 de « le sien ».
+- **2026-10-13** — **DRO3, fuite du formulaire** : Seb choisit **B** (dans la
+  séance, après la série DRO2 → DRO6). Fiche **DRO11** ajoutée avant DRO10 :
+  pour un email connu, la base juge les formats dans un SAVEPOINT annulé ;
+  même réponse pour tous. DRO3 reste cochée.
