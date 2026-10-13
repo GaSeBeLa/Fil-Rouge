@@ -387,3 +387,16 @@ de ce que le code dit déjà.
   séance, après la série DRO2 → DRO6). Fiche **DRO11** ajoutée avant DRO10 :
   pour un email connu, la base juge les formats dans un SAVEPOINT annulé ;
   même réponse pour tous. DRO3 reste cochée.
+- **2026-10-13** — **DRO7** : le Manager lit aussi le barème **par défaut**
+  (« ceux de ses chasseurs » : celui qui vaut pour ses chasseurs sans barème
+  à eux), lecture de l'annexe à confirmer. `/users` et `/real-estate-managers`
+  ouverts au Manager en modification (son compte, ses coordonnées), comme le
+  code l'annonçait.
+- **2026-10-13** — **DRO8, à mettre au rapport du 14/10 au matin** (demandé par
+  Seb) : les **25 comptes du seed sont désactivés** (migrés sans mot de passe,
+  `is_activated` à son défaut FALSE). Seb choisit **A** (dans la séance) : la
+  règle s'applique telle quelle, le seed ne bouge pas ; en dev, ces 25 profils
+  sont cachés aux non-Admin jusqu'à leur activation. Les tests activent les
+  comptes du seed dans leur transaction (`db_client`). Reste ouvert :
+  « désactivé » ne distingue pas un compte effacé (ADR-049) d'un compte jamais
+  activé.

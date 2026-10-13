@@ -276,8 +276,9 @@ l'autre. Suite verte, compte brut. Mutant : retirer le filtre d'équipe de
 ---
 
 <!-- FICHE:DRO8 -->
-## DRO8 [ ] — Réserver les comptes désactivés à l'Admin
+## DRO8 [x] — Réserver les comptes désactivés à l'Admin
 
+**Session** : 4e508779-8618-401d-b40e-17c615120929
 **Dépend de** : `DRO4`.
 **Fichiers** : les services de `user`, `client`, `hunter`, `real_estate_manager` dans `API/src/app/services/`, `md/adr/adr-049-effacement-compte-desactiver-anonymiser.md` (lecture), `API/tests/integration/test_le_sien.py`.
 
