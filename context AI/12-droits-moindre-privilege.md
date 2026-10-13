@@ -10,8 +10,9 @@
 défaut presque tout à tout compte connecté. Ce chantier ferme tout par défaut,
 puis rouvre ce que la cible d'ADR-027 donne, rôle par rôle et ligne par ligne.
 
-**Fait.** Cadré le 2026-10-13 en 10 fiches ; `DRO11` ajoutée le même jour (fuite du
-formulaire, choix B de Seb), jouée avant `DRO10`.
+**CLOS** le 2026-10-13. Ne se rejoue pas — ne sert plus qu'à relire son socle.
+
+**Fait.** DRO1..DRO11 (2026-10-13) : droits codés au moindre privilège : rôle par table (fermé par défaut), « le sien » pour Client, Hunter et Manager, argent et comptes désactivés réservés, fil_rouge_reader fermé pareil, fuite du formulaire fermée, doc et relevé refaits (911 passed) — estimé non noté · cadré 11 · joué 11 fiches 67,07 $.
 
 **Session** : 5f96deba-d497-4409-80b3-b6b6e591a21c
 

@@ -400,3 +400,13 @@ de ce que le code dit déjà.
   comptes du seed dans leur transaction (`db_client`). Reste ouvert :
   « désactivé » ne distingue pas un compte effacé (ADR-049) d'un compte jamais
   activé.
+- **2026-10-13** — **Chantier DRO clos** (DRO1 à DRO11, 11 fiches sur 11) :
+  droits codés au moindre privilège — le rôle, table par table (fermé par
+  défaut), puis « le sien » pour le Client, le Hunter et le Manager ; argent
+  et comptes désactivés réservés ; `fil_rouge_reader` fermé pareil ; fuite du
+  formulaire fermée ; relevé et doc refaits. **911 passed, 8 skipped,
+  6 xfailed**. Coût du chantier : 174 326 604. Laissé ouvert : trois cases
+  pour Jeff (Q-ACC-06, 12, 13), Q-JEF-30, la demande partagée entre deux
+  équipes, « désactivé » contre « effacé » ; le banc `compare_v2_v3.sh` rend
+  DIFFÉRENTES (comptes de lignes du seed, préexistant) ; `rapport-tests.md`
+  périmé (258 tests). Relevé et écarts : `md/securite/matrice-droits-crud-par-role.md`.

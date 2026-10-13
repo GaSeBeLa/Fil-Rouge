@@ -19,15 +19,14 @@
   </header>
 
   <nav class="sommaire" aria-label="Sommaire"><a href="#encours">Chantier en cours</a><a href="#todo">Chantiers possibles</a><a href="#clos">Chantiers clos</a></nav>
-  <nav class="pages" aria-label="Les autres pages">Les autres pages : <a href="https://claude.ai/artifact/FkXyroNszih7Axae8SU5Th">la page du chantier</a></nav>
 
   <section id="encours">
     <h2>Chantier en cours</h2>
     <!-- ZONE:encours — remplacé à chaque ouverture, remis à « aucun » à chaque clôture.
          /tache n'y touche pas : l'avancement fiche par fiche est sur la page du chantier. -->
     <div class="encours">
-      <div class="titre">Droits : moindre privilège <span class="badge" data-etat="cours">en cours</span></div>
-      <div>Fiches <span class="mono">DRO1–DRO10</span> — <a href="https://claude.ai/artifact/FkXyroNszih7Axae8SU5Th">la page du chantier</a></div>
+      <div class="titre">Aucun chantier ouvert</div>
+      <div>Lancer <span class="mono">/vlp:chantier</span> pour en ouvrir un.</div>
     </div>
   </section>
 
@@ -50,15 +49,21 @@
   <section id="clos">
     <h2>Chantiers clos — ils ne se rejouent pas</h2>
     <!-- ZONE:clos — une ligne ajoutée à chaque clôture, la plus récente en haut -->
-    <img src="couts.svg" alt="Coût des chantiers clos en tokens : 3 barres, du plus ancien au plus récent ; le plus cher : API : auth, RGPD et règles métier" data-couts="{&quot;couleur&quot;: &quot;#8f5a0f&quot;, &quot;barres&quot;: [[&quot;Contraintes manquantes du MPD&quot;, 31326311, &quot;≈31,3M (31 326 311)&quot;], [&quot;Lot de migration (schéma v3)&quot;, 116219396, &quot;≈116,2M (116 219 396)&quot;], [&quot;API : auth, RGPD et règles métier&quot;, 140122204, &quot;≈140,1M (140 122 204)&quot;]]}">
+    <img src="couts.svg" alt="Coût des chantiers clos en tokens : 4 barres, du plus ancien au plus récent ; le plus cher : Droits : moindre privilège" data-couts="{&quot;couleur&quot;: &quot;#8f5a0f&quot;, &quot;barres&quot;: [[&quot;Contraintes manquantes du MPD&quot;, 31326311, &quot;≈31,3M (31 326 311)&quot;], [&quot;Lot de migration (schéma v3)&quot;, 116219396, &quot;≈116,2M (116 219 396)&quot;], [&quot;API : auth, RGPD et règles métier&quot;, 140122204, &quot;≈140,1M (140 122 204)&quot;], [&quot;Droits : moindre privilège&quot;, 174326604, &quot;≈174,3M (174 326 604)&quot;]]}">
     <details class="clos">
-      <summary><span class="resume-clos">3 chantiers clos · ≈287,7M (287 667 911) tokens · 109,78 $ sur 2 clos mesurés</span></summary>
+      <summary><span class="resume-clos">4 chantiers clos · ≈462,0M (461 994 515) tokens · 176,85 $ sur 3 clos mesurés</span></summary>
     <div class="tableau">
       <table>
         <thead>
           <tr><th>Chantier</th><th>Fiches</th><th>Clos le</th><th>Tokens</th><th>Ce qu'il a livré</th></tr>
         </thead>
         <tbody>
+          <tr>
+            <td><a href="https://claude.ai/artifact/FkXyroNszih7Axae8SU5Th">Droits : moindre privilège</a> <span class="badge" data-etat="clos">clos</span></td>
+            <td class="mono">DRO1–DRO11</td><td class="mono">2026-10-13</td>
+            <td class="mono">67,07 $ · ≈174,3M (174 326 604)</td>
+            <td>droits codés au moindre privilège : rôle par table (fermé par défaut), « le sien » pour Client, Hunter et Manager, argent et comptes désactivés réservés, fil_rouge_reader fermé pareil, fuite du formulaire fermée, doc et relevé refaits (911 passed)</td>
+          </tr>
           <tr>
             <td><a href="https://claude.ai/artifact/CTd6grJoE1eoLnAsQU6uda">API : auth, RGPD et règles métier</a> <span class="badge" data-etat="clos">clos</span></td>
             <td class="mono">API1–API12</td><td class="mono">2026-10-13</td>
@@ -80,7 +85,7 @@
           </tr>
         </tbody>
         <tfoot>
-          <tr><td colspan="3">Total cumulé</td><td class="mono"><strong>≈287,7M (287 667 911)</strong></td><td class="mono">109,78 $ sur 2 clos mesurés</td></tr>
+          <tr><td colspan="3">Total cumulé</td><td class="mono"><strong>≈462,0M (461 994 515)</strong></td><td class="mono">176,85 $ sur 3 clos mesurés</td></tr>
         </tfoot>
       </table>
     </div>

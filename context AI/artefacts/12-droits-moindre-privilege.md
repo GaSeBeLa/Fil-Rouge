@@ -24,3 +24,6 @@ Tout fermé par défaut ; chaque rôle ne lit et n'écrit que ce que la cible d'
 - 2026-10-13 : DRO3 : fuite du formulaire, Seb choisit B ; fiche DRO11 ajoutée avant DRO10 (la base juge les formats dans un SAVEPOINT annulé, même réponse pour tous).
 - 2026-10-13 : DRO8 : les 25 comptes du seed sont désactivés (migrés sans mot de passe) ; Seb choisit A : règle telle quelle, seed inchangé, les tests activent ces comptes dans leur transaction. À mettre au rapport du 14/10.
 ## Bilan
+- Livré : droits codés au moindre privilège : rôle par table (fermé par défaut), « le sien » pour Client, Hunter et Manager, argent et comptes désactivés réservés, fil_rouge_reader fermé pareil, fuite du formulaire fermée, doc et relevé refaits (911 passed)
+- Surpris : les 25 comptes du seed sont désactivés : fermer les comptes désactivés (DRO8) a cassé 49 tests, réglé en les activant dans la fixture (choix A de Sébastien)
+- Estimé : estimé non noté · cadré 11 · joué 11 fiches 67,07 $
