@@ -362,3 +362,15 @@ de ce que le code dit déjà.
   seul (DRO2), le 404 en modification s'y prouve au service : DRO5 à DRO8
   choisissent une table où le rôle filtré a le U, pour un vrai `PUT` en 404.
   Relecteur indépendant (agent `vlp:relecture`) : ACCEPTÉE.
+- **2026-10-13** — **Relecture de DRO1 à DRO3** (agent `vlp:relecture`,
+  après coup) : DRO1 et DRO2 acceptées ; deux restes du README corrigés
+  (`7918b6b`). DRO3 refusée pour la seule fuite du formulaire : question
+  posée à Seb sur Discord (A accepter, B resserrer par une fiche DRO11, C
+  reporter). DRO3 reste cochée en attendant.
+- **2026-10-13** — **DRO5** : la table `hunter` est filtrée (« son
+  chasseur », P2) bien que la liste de la fiche ne la nomme pas : la règle
+  est « chaque table de la colonne Client ». Écrire une ligne qui ne serait
+  pas à soi rend `409`, comme une référence inexistante (crochet `owns`,
+  `create_as` pour le POST). Changer son rôle ou son activation ne refuse
+  qu'un vrai changement : renvoyer sa propre valeur passe. Le client 7 du
+  seed est désactivé.

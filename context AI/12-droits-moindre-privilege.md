@@ -200,8 +200,9 @@ Mutant : neutraliser le filtre de `payment` → le test du `404` tombe.
 ---
 
 <!-- FICHE:DRO5 -->
-## DRO5 [ ] — Limiter le Client à ses lignes
+## DRO5 [x] — Limiter le Client à ses lignes
 
+**Session** : 15e33082-f94c-4e7f-82b3-169a3c651e22
 **Dépend de** : `DRO4`.
 **Fichiers** : les services de `user`, `client`, `search_request`, `criteria`, `mandate`, `estate`, `picture`, `estate_proposed`, `estate_searchrequest`, `review_media`, `visit`, `sale` dans `API/src/app/services/`, `API/src/app/routes/user_router.py`, `md/adr/adr-027-annexe-matrice-detaillee.md` § 1 à 4 (colonne Client), `API/tests/integration/test_le_sien.py`.
 
