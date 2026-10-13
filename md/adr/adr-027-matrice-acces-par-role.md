@@ -21,7 +21,8 @@
 > `md/adr/adr-027-annexe-matrice-detaillee.md` (état au 08/10/2026). La fiche
 > garde les principes et un tableau de cinq lignes. ➡️ **Sa place finale** est
 > `md/securite/matrice-droits-crud-par-role.md`, à remplacer par l'annexe : une
-> tâche pour l'équipe.
+> tâche pour l'équipe. ✅ Fait autrement le 13/10/2026 (fiche DRO10) : la matrice
+> renvoie à l'annexe pour la cible et garde le relevé du code.
 >
 > 🗂️ **Points réglés hors de la fiche** (ils parlent de la page Confluence ou
 > des sources, pas de la décision) :
@@ -45,7 +46,7 @@
 >   ne sera donc **pas codée** » (l. 9) ; « 18 tables » (l. 129) et 4 rôles
 >   (l. 17, l. 66) ; états de facture `invoice_submitted`, `verified`
 >   (l. 209-213) ; « Aucun rôle humain ne crée un bien » (l. 237). À remplacer
->   par l'annexe de cette fiche.
+>   par l'annexe de cette fiche. ✅ Réécrite le 13/10/2026 (fiche DRO10).
 > * `docker/init-v3/04_role-lecture-seule.sql:51` donnait à `fil_rouge_reader`
 >   `SELECT` sur toutes les tables, mot de passe compris. Corrigé le 2026-10-09
 >   (rapport « Rôle lecteur et mots de passe », L1 A, L2 A, L3 A) : le mot de
@@ -112,7 +113,7 @@ Sous-choix déjà tranché, le rôle en lecture seule (Q14) :
 
 **Décision**
 
-✅ veut dire « établi par une source », pas « codé ». Aucun contrôle de droit n'est codé aujourd'hui (voir Conséquences).
+✅ veut dire « établi par une source », pas « codé ». Ce qui est codé, et depuis quand : voir Conséquences.
 
 1. ✅ **Cinq rôles**, ceux de la table `role` : `Admin`, `Client`, `Hunter`, `Manager`, `Reader` (`01:164`).
 2. ✅ **Deux contrôles**, dans cet ordre. Le rôle : ce type d'utilisateur a-t-il droit à ce type de donnée ? Puis l'appartenance : cette ligne est-elle la sienne ? Ils viennent après la clé d'API du programme appelant (ADR-028).
@@ -120,13 +121,13 @@ Sous-choix déjà tranché, le rôle en lecture seule (Q14) :
 4. **Supprimer : trois cas.**
    * ✅ **Un compte ne se supprime pas.** L'`Admin` le désactive et le rend anonyme (Q-ACC-08, `reg:183`). Le détail est dans ADR-049.
    * ✅ **Une ligne citée par une autre ne se supprime pas.** La base la refuse : 38 clés en `ON DELETE RESTRICT` sur 38 (`01`, recompté le 08/10/2026).
-   * ⚠️ **Une ligne que rien ne cite se supprime encore.** Un compte libre se supprime : réponse 200 (`API/tests/integration/test_users_db.py:89-92`). Cinq tables ne sont citées par aucune clé : `picture`, `review_media`, `estate_proposed`, `visit`, `hunter_performance`.
-   * 💡 **Proposition de l'équipe, adoptée avec la fiche : plus aucune route DELETE**, sur les 20 ressources. ✅ Confirmé par le groupe le 09/10/2026 (S2) : plus aucune route DELETE ; l'effacement passe seulement par la route d'anonymisation (S3). Le registre ne le demandait que pour les comptes, « ou à justifier » (`reg:303`). Lié à ADR-049. Déduit — demande du code, non fait.
+   * ✅ **Une ligne que rien ne cite ne se supprime plus non plus.** Cinq tables ne sont citées par aucune clé : `picture`, `review_media`, `estate_proposed`, `visit`, `hunter_performance`. Depuis la fiche API10, aucune route ne supprime : un `DELETE` rend `405` (`API/src/app/routes/crud_router.py`, en-tête).
+   * 💡 **Proposition de l'équipe, adoptée avec la fiche : plus aucune route DELETE**, sur les 20 ressources. ✅ Confirmé par le groupe le 09/10/2026 (S2) : plus aucune route DELETE ; l'effacement passe seulement par la route d'anonymisation (S3). Le registre ne le demandait que pour les comptes, « ou à justifier » (`reg:303`). Lié à ADR-049. Codé depuis la fiche API10 : `DELETE` → `405`.
 5. ✅ **Trois écritures fermées à tous**, l'`Admin` compris, reprises du texte du 22/09 (ADR-027 du 22/09/2026, Décision, point 6) :
    * `criteria` ne se modifie pas : chaque changement crée une nouvelle version (`01:323-324`) ;
    * `hunter_performance` n'est jamais saisi à la main : le système l'écrit, sur trois déclencheurs (`01:1007-1008`) ;
    * `mandate`, `sale` et `payment` ne s'effacent pas : « documents légaux et traces comptables » (ADR-027 du 22/09/2026, Décision, point 6).
-6. ✅ **`Reader` lit, et ne modifie rien.** Dans l'API : « consulter dans l'API sans modifier » (`docker/init-v3/README.md:134`). En base : `fil_rouge_reader`, `SELECT` seul, sur toutes les tables, présentes et futures (`docker/init-v3/04_role-lecture-seule.sql:49-52`).
+6. ✅ **`Reader` lit, et ne modifie rien.** Dans l'API : « consulter dans l'API sans modifier » (`docker/init-v3/README.md:134`). En base : `fil_rouge_reader`, `SELECT` seul, sur les tables présentes et futures, sauf le mot de passe, `estate_contact`, `payment` et les comptes désactivés (`docker/init-v3/04_role-lecture-seule.sql` ; Conséquences).
 7. 💡 **Un compte désactivé : ses données personnelles ne sont plus lues que par l'`Admin`.** La CNIL veut des données en attente lisibles par des personnes « spécialement habilitées » seulement (guide CNIL, cité et daté dans ADR-049). Le choix de l'`Admin` est la proposition d'ADR-049.
 8. **Le montant de la rémunération** : deux exemples du sujet divergent (✅ sources ci-dessous). ENF-03 : « le montant et l'IBAN ne sont lisibles que par le chasseur concerné et son manager » (RCR:763 ; aussi RCR:296). Le modèle de registre donne les paiements à « comptabilité, direction » (`REGISTRE-RGPD.md:29`). On suit les deux : **le chasseur, son manager, et la direction (`Admin`), qui paie.** Personne d'autre, `Reader` compris. Tranchée par déduction (aucun des deux exemples ne nomme un auditeur). Confirmée par Sébastien le 2026-10-09 (Discord) ; un autre membre du groupe, Gabriel, avait proposé le contraire (Reader voit les paiements) avant ce choix.
 9. **Qui lit et qui écrit quoi.** Chaque case, avec sa source et son statut, est dans l'annexe : `md/adr/adr-027-annexe-matrice-detaillee.md` (état au 08/10/2026). En bref :
@@ -156,11 +157,11 @@ Sous-choix déjà tranché, le rôle en lecture seule (Q14) :
 
 **Conséquences**
 
-* **Code :** aucun contrôle de droit dans `API/` aujourd'hui. Recherche du 08/10/2026 sur `require_role`, `get_current_user`, `APIKeyHeader`, `anonym` dans `API/src` : 0 occurrence. Les contrôles se branchent sur la fabrique commune `build_crud_router` (`md/securite/tuto-2-authentification-jwt.md:387-409`). À coder.
-* **Routes DELETE :** les 20 routeurs ont une route DELETE (`API/src/app/routes/crud_router.py:104-110`). Elles contredisent le point 4 pour les comptes. Les fermer est proposé (point 4) ; leurs tests (`test_users_db.py:89-104`) seront alors à réécrire (ADR-049). Demande du code, non fait.
-* **`POST /hunter-performances` est ouvert** : il contredit le point 5 (ADR-035, Conséquences).
+* **Code :** les deux contrôles sont codés, au 13/10/2026 (chantier « Droits : moindre privilège », fiches DRO1 à DRO11, dépôt Fil-Rouge-API). Le rôle : fermé par défaut, chaque table déclare ses rôles dans `build_crud_router` (`API/src/app/routes/crud_router.py`), selon l'annexe ; `API/tests/integration/test_droits_par_role.py` rejoue la grille. « Le sien » : le crochet `visible_rows` de chaque service filtre dans la requête SQL, la ligne d'un autre rend `404` ; le crochet `owns` refuse en écriture (`409`). Les comptes désactivés : `Admin` seul. Le relevé, route par route, et les écarts qui restent : `md/securite/matrice-droits-crud-par-role.md`.
+* **Routes DELETE :** retirées des 21 routeurs (fiche API10, ADR-049) : un `DELETE` rend `405`.
+* **`POST /hunter-performances` est fermé** à tous, `Admin` compris, comme le veut le point 5 (fiche DRO1 ; ADR-035).
 * **Conflit d'intérêts sur les visites :** le chasseur enregistre la visite (Q-ACC-13), et moins de visites donne une meilleure note (ADR-048). La carte le disait : « Il a intérêt à ne pas tout déclarer » (`jeff.html:1649`). 💡 Contre-pouvoir : le client lit ses visites, le manager celles de son équipe.
-* **Limite du rôle PostgreSQL :** `fil_rouge_reader` lit toutes les tables (`04_role-lecture-seule.sql:51`). Depuis le 2026-10-09, il ne lit plus `"user".password` : la table est rouverte colonne par colonne, sans le mot de passe (`04_role-lecture-seule.sql`, fin du fichier ; migration `18_role-lecture-seule-sans-mot-de-passe.sql` pour une base déjà créée). Il lit encore les paiements et les comptes désactivés : plus que `Reader` dans l'API (points 8 et 10) ; question à part, non tranchée. `SELECT *` sur `"user"` lui est refusé. Correctif écrit mais pas encore exécuté (Docker arrêté le 2026-10-09).
+* **Le rôle PostgreSQL suit `Reader` :** `fil_rouge_reader` ne lit ni `"user".password` (depuis le 2026-10-09 : la table est rouverte colonne par colonne, et `SELECT *` sur `"user"` lui est refusé), ni `estate_contact` (ADR-054), ni `payment` (point 8), ni les comptes désactivés (point 7 : politique par ligne sur `"user"`, `client`, `hunter`, `real_estate_manager`). Les deux derniers depuis le 2026-10-13 (fiche DRO9 ; `04_role-lecture-seule.sql`, et la migration `43_lecteur-sans-paiement-ni-compte-desactive.sql` pour une base déjà créée). L'API, connectée en `postgres`, n'est pas filtrée.
 * 💡 **Pour une IA ou une analyse :** lire une copie anonymisée (OLAP), pas la base de production, comme le dit le sujet (`documents utiles/SOUVERAINETE-SECURITE-IA.md:16`, StarterPack). Non décidé ici.
 * **Comptes désactivés en attente d'anonymisation :** traités dans ADR-049.
 * **Barème propre à un chasseur** (Q-PAR-09, décision D9 du sujet) : il va dans la RACI, pas ici (`reg:427` ; RCR:329).
@@ -191,7 +192,7 @@ Sous-choix déjà tranché, le rôle en lecture seule (Q14) :
 
 **Questions ouvertes** 🟡
 
-Aucune. Ce qui reste est du code à écrire (Conséquences) et la confirmation de Q-ACC-06, 12 et 13 par Jeff à la validation (Décideurs).
+Aucune sur la décision. Reste la confirmation de Q-ACC-06, 12 et 13 par Jeff à la validation (Décideurs), et deux cas que l'annexe ne règle pas : le renouvellement du mandat d'un autre chasseur (Q-JEF-30) ; une demande confiée à un manager et suivie par un chasseur d'un autre (`md/securite/matrice-droits-crud-par-role.md`, § 3).
 
 Où l'on a cherché, pour les cases du point 10 : les parcours (`Readme.md:94-135`) ; les acteurs du glossaire (ni direction ni manager) ; `RACI.md` (un modèle de cours, sans ces rôles) ; `REGISTRE-RGPD.md:27-29` ; le registre (`reg:241-264`, `:1028-1065`) ; la carte Q-JEF-14 (`jeff.html:1440-1470`) ; la matrice du 02/10 (§ 6) ; ADR-038, qui renvoie ici « qui crée le paiement et le fait avancer » (`md/adr/adr-038-etapes-du-paiement-sans-facture.md:17-19`). Le sujet ne décrit ni le travail du manager ni celui de la direction.
 
@@ -214,8 +215,8 @@ Où l'on a cherché, pour les cases du point 10 : les parcours (`Readme.md:94-13
 | Jeff valide les ADR en une séance | `questions-a-trancher.md:263` |
 | 5 rôles | `docker/init-v3/01_create_fil_rouge_immobilier.sql:164` |
 | 20 tables, 38 clés `RESTRICT`, 0 `CASCADE` ; 5 tables citées par aucune clé | même fichier, compté le 08/10/2026 |
-| Un compte libre se supprime (200) ; un compte cité, 409 | `API/tests/integration/test_users_db.py:89-92`, `:95-104` |
-| `fil_rouge_reader` : `SELECT` sur toutes les tables | `docker/init-v3/04_role-lecture-seule.sql:49-52` ; `"user"` sans `password` (fin du fichier) |
+| Aucune route ne supprime : `DELETE` → `405` | `API/src/app/routes/crud_router.py`, en-tête (fiche API10) |
+| `fil_rouge_reader` : `SELECT`, sauf le mot de passe, `estate_contact`, `payment` et les comptes désactivés | `docker/init-v3/04_role-lecture-seule.sql` ; `API/tests/integration/test_lecteur_sql.py` |
 | L'API ne renvoie jamais le mot de passe | `API/src/app/models/user_model.py:35-46` |
 | Comptes repris : mot de passe factice | `API/src/app/utils/security.py:41-43` ; `docker/init-v3/README.md:322-328` |
 | Critères versionnés | `01:323-324` ; `GLOSSAIRE-METIER.md`, « Version de demande » (StarterPack) |
@@ -234,9 +235,7 @@ Où l'on a cherché, pour les cases du point 10 : les parcours (`Readme.md:94-13
 | Le client finalise son compte | `user-stories/01_particulier_demande_et_compte.feature:25-28` (StarterPack) |
 | L'IA lit un OLAP anonymisé | `documents utiles/SOUVERAINETE-SECURITE-IA.md:16` (StarterPack) |
 | Conflit d'intérêts sur les visites | `jeff.html:1649` |
-| Aucun contrôle de droit codé | recherche du 08/10/2026 dans `API/src` : 0 occurrence |
-| Routes DELETE sur 20 routeurs | `API/src/app/routes/crud_router.py:104-110` ; 20 fichiers de `API/src/app/routes/` |
-| Où brancher les contrôles | `md/securite/tuto-2-authentification-jwt.md:387-409` |
+| Les deux contrôles codés (13/10/2026) | `API/src/app/routes/crud_router.py` ; `API/src/app/services/base_service.py` ; `md/securite/matrice-droits-crud-par-role.md` |
 | Paiement : renvoyé à ADR-027 | `md/adr/adr-038-etapes-du-paiement-sans-facture.md:17-19` |
 | Réglages du taux : analogie, 💡 | `md/adr/adr-034-parametres-remuneration-table-datee.md:33-37` |
 | Barème nominatif : RACI | `questions-a-trancher.md:427` ; RCR:329 (StarterPack) |

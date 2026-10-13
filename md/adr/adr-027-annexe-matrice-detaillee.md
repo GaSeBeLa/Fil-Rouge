@@ -24,7 +24,7 @@
 * ✅ = une réponse du groupe, une étape du sujet, ou une déduction dite « déduit ».
 * 💡 = proposition de l'équipe, adoptée avec la fiche (ADR-027, point 10).
 * « — » = aucun droit.
-* ✅ veut dire « établi », pas « codé » : aucun contrôle de droit n'est codé (ADR-027, Conséquences).
+* ✅ veut dire « établi », pas « codé ». Le code suit cette grille depuis le 13/10/2026 (ADR-027, Conséquences) ; ses écarts : `md/securite/matrice-droits-crud-par-role.md`, § 3.
 
 Abréviations : `01` = `docker/init-v3/01_create_fil_rouge_immobilier.sql` ; `reg` = `md/questions/questions-a-trancher.md` ; P1 à P9 et H1 à H13 = les étapes des parcours du particulier et du chasseur (`Readme.md:96-104`, `:123-135`, StarterPack) ; F01, F10 = `user-stories/01_…`, `10_….feature` (StarterPack).
 

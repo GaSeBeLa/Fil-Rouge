@@ -21,9 +21,9 @@
     <p>Tout fermé par défaut ; chaque rôle ne lit et n'écrit que ce que la cible d'ADR-027 lui donne, et seulement ses lignes (404 sur la ligne d'un autre).</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">11 fiches · 10 faites · en cours : DRO10</p>
+    <p class="mono" style="margin-top:.5rem">11 fiches · 11 faites</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -77,12 +77,14 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">DRO11</span></span>
         <details><summary><span class="titre">Fermer la fuite du formulaire</span><span class="etat">Faite</span></summary>
         <span class="note">formulaire mal formé → 409 quel que soit l'email (neuf, client, chasseur), xfail retiré ; bien formé connu → 202 sans ligne de plus ; 911 passed, 8 skipped, 6 xfailed ; mutant sonde retirée → 1 failed ; relecture ACCEPTÉE</span></details>
-        <span class="cout mono">≈5,7M (5 688 178) · 45 tours · 2,24 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">DRO10</span></span>
-        <details open><summary><span class="titre">Refaire le relevé et mettre la doc à jour</span><span class="etat">En cours</span></summary></details></li>
+        <span class="cout mono">≈5,9M (5 902 772) · 46 tours · 2,31 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">DRO10</span></span>
+        <details><summary><span class="titre">Refaire le relevé et mettre la doc à jour</span><span class="etat">Faite</span></summary>
+        <span class="note">§ 2 de la matrice = sortie brute de print_rights_matrix.py (91 opérations) ; grep des 3 anciennes phrases : 16 fichiers avant, ne reste que de l'historique daté ou un autre sens ; 911 passed, 8 skipped, 6 xfailed ; relecture ACCEPTÉE</span></details>
+        <span class="cout mono">≈8,5M (8 496 600) · 47 tours · 3,32 $</span></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈17,8M (17 810 935) · 85 tours · 7,46 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈164,7M (164 740 157) · 895 tours · 63,42 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈173,5M (173 451 351) · 943 tours · 66,81 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 

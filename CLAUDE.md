@@ -29,9 +29,13 @@ modifiés**.
 - L'API expose un CRUD complet en trois couches (routes / services /
   repositories) sur les **21 tables** ; le routeur commun revalide l'entrée
   (`422` avant la base). 91 opérations vérifiées en `200` contre la base
-  (mesuré avant LOT6). **193 tests** (au 2026-10-08) : 99 unitaires sans base
-  (dont les 55 cas de rémunération), 94 d'intégration sur la base de test isolée
+  (mesuré avant LOT6). **911 passed, 8 skipped, 6 xfailed** (au 2026-10-13,
+  fiche DRO11), unitaires sans base et intégration sur la base de test isolée
   `fil_rouge_test` (`docker/create_test_db.sh`) — voir `API/README.md` § Tests.
+- **Les droits sont codés** (chantier DRO, 2026-10-13) : le rôle, table par
+  table, puis « le sien » (la ligne d'un autre rend `404`) ; les comptes
+  désactivés réservés à l'`Admin` ; `fil_rouge_reader` fermé pareil. Relevé et
+  écarts : `md/securite/matrice-droits-crud-par-role.md`.
 - Les user stories Gherkin (`user-stories/`) couvrent le parcours actuel et le
   futur parcours IA. Seul le **calcul de rémunération** est implémenté
   (`services/remuneration.py`, code du sujet), branché sur la base par

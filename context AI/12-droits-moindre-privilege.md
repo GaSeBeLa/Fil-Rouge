@@ -355,8 +355,9 @@ test retombe.
 <!-- /FICHE -->
 
 <!-- FICHE:DRO10 -->
-## DRO10 [ ] — Refaire le relevé et mettre la doc à jour
+## DRO10 [x] — Refaire le relevé et mettre la doc à jour
 
+**Session** : 4e508779-8618-401d-b40e-17c615120929
 **Dépend de** : `DRO1`, `DRO2`, `DRO3`, `DRO4`, `DRO5`, `DRO6`, `DRO7`, `DRO8`, `DRO9`, `DRO11`.
 **Fichiers** : `docker/tools/print_rights_matrix.py`, `md/securite/matrice-droits-crud-par-role.md`, `md/adr/adr-027-matrice-acces-par-role.md`, `API/README.md`, `CLAUDE.md` (Fil-Rouge, « Où on en est »).
 
