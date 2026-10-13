@@ -57,6 +57,7 @@ ordonné par ce qui débloque le reste.
 | 7 | Livrable 1 — audit des données | rapport de normalisation à partir de `normalised/rapport_anomalies.txt` | 3–4 fiches | rien |
 | 8 | Livrable 3 — architecture | documente les trois couches et les choix (pas de PATCH, bases génériques, auth côté back) | 2–3 fiches | 2 |
 | 9 | Déploiement sur le VPS | mettre l'API et la base réparée sur le VPS de l'utilisateur ; hôte, accès et méthode **à demander avant d'agir**, aucun secret dans le dépôt | 🟡 à cadrer | 1..8 |
+| 10 | Finitions de l'API : erreurs et Swagger | **à faire juste après le chantier DRO** (Seb, Discord, 13/10) : le `409` nomme la contrainte cassée (aujourd'hui « valeur en double ou référence inexistante », sans dire laquelle) ; un gestionnaire `500` qui écrit l'erreur imprévue dans les logs ; sous `id_client`, `id_hunter`, `id_realestatemanager`, la phrase « numéro du compte (`user.id`) » dans le Swagger (questions de Gabriel et Laurence) | 💡 1-2 fiches | DRO |
 
 ## Journal des décisions
 
