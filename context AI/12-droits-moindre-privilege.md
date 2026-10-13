@@ -115,8 +115,9 @@ suite complète verte, compte brut avant et après. Mutant : remettre
 ---
 
 <!-- FICHE:DRO2 -->
-## DRO2 [ ] — Réserver l'argent à qui la cible le donne
+## DRO2 [x] — Réserver l'argent à qui la cible le donne
 
+**Session** : 15e33082-f94c-4e7f-82b3-169a3c651e22
 **Dépend de** : `DRO1`.
 **Fichiers** : `API/src/app/routes/{parameters_fees,commission_scale,hunter_rate_parameters,payment,sale}_router.py`, `API/src/app/routes/sale_router.py` (route `/payment`), `md/adr/adr-027-annexe-matrice-detaillee.md` § 4 (lecture), `API/tests/integration/test_droits_par_role.py`, les tests de paiement qui cassent.
 

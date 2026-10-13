@@ -346,3 +346,7 @@ de ce que le code dit déjà.
   compte par `POST /search-requests/submit`, sans jeton (Q-ACC-12) ; ouvert
   au rôle Client, `POST /users` lui laisserait choisir `id_role`, donc se
   créer un Admin. À redire si l'annexe est relue.
+- **2026-10-13** — **DRO2** : `POST /payments` fermé à tous (ADR-027,
+  point 10) ; les tests qui créaient un paiement à la main l'écrivent par le
+  service (`write_payment`, `test_constraints_db.py`), un refus y est un
+  `ConflictError`. Même voie pour toute table qu'aucun rôle ne crée.
