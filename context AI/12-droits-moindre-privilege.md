@@ -172,8 +172,9 @@ compte brut. Mutant : rendre l'id de l'URL dans `/auth/me` au lieu du jeton
 ---
 
 <!-- FICHE:DRO4 -->
-## DRO4 [ ] — Poser le mécanisme « le sien »
+## DRO4 [x] — Poser le mécanisme « le sien »
 
+**Session** : 15e33082-f94c-4e7f-82b3-169a3c651e22
 **Dépend de** : `DRO1`.
 **Fichiers** : `API/src/app/routes/crud_router.py`, `API/src/app/services/base_service.py`, `API/src/app/services/payment_service.py` (table pilote), un nouveau `API/tests/integration/test_le_sien.py`.
 

@@ -355,3 +355,9 @@ de ce que le code dit déjà.
   il faudrait recopier en Python les `CHECK` de la base. Gardée en `xfail`
   strict (`test_droits_par_role.py`), à trancher. La fiche citait ADR-039,
   qui traite du mandat : le code cite Q-ACC-12 et P5.
+- **2026-10-13** — **DRO4** : le PUT de l'API passe par
+  `BaseService.replace_visible` (contrôle « visible », puis `replace()`), sans
+  toucher les `replace()` surchargés. Le PUT de `/payments` étant à l'Admin
+  seul (DRO2), le 404 en modification s'y prouve au service : DRO5 à DRO8
+  choisissent une table où le rôle filtré a le U, pour un vrai `PUT` en 404.
+  Relecteur indépendant (agent `vlp:relecture`) : ACCEPTÉE.

@@ -21,9 +21,9 @@
     <p>Tout fermé par défaut ; chaque rôle ne lit et n'écrit que ce que la cible d'ADR-027 lui donne, et seulement ses lignes (404 sur la ligne d'un autre).</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">10 fiches · 3 faites · en cours : DRO4</p>
+    <p class="mono" style="margin-top:.5rem">10 fiches · 4 faites · en cours : DRO5</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -49,24 +49,26 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">DRO3</span></span>
         <details><summary><span class="titre">Revoir les routes à part</span><span class="etat">Faite</span></summary>
         <span class="note">test_droits_par_role.py : 7 routes à part nommées avec leur test, /auth/me rend le seul compte du jeton sans password ; suite 774 passed, 8 skipped, 7 xfailed (avant 770 ; +1 xfail strict : fuite du formulaire) ; mutant /auth/me lit l'id de l'URL : 1 failed ; pyright 0 errors</span></details>
-        <span class="cout mono">≈7,1M (7 060 603) · 41 tours · 3,21 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">DRO4</span></span>
-        <details open><summary><span class="titre">Poser le mécanisme « le sien »</span><span class="etat">En cours · DRO9 peut partir en même temps</span></summary></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">DRO5</span></span>
-        <details><summary><span class="titre">Limiter le Client à ses lignes</span><span class="etat">Après DRO4</span></summary></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">DRO6</span></span>
-        <details><summary><span class="titre">Limiter le Hunter à ses lignes</span><span class="etat">Après DRO4</span></summary></details></li>
+        <span class="cout mono">≈7,7M (7 741 751) · 45 tours · 3,44 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">DRO4</span></span>
+        <details><summary><span class="titre">Poser le mécanisme « le sien »</span><span class="etat">Faite</span></summary>
+        <span class="note">test_le_sien.py 6 passed : le chasseur 1 liste ses paiements seulement, 404 sur celui du chasseur 2 en lecture, refus au service en modification (le PUT HTTP est à l'Admin, DRO2) ; suite 784 passed, 8 skipped, 7 xfailed (avant 774) ; mutant filtre de payment neutralisé : 3 failed ; pyright 2 errors anciennes ; relecteur indépendant : ACCEPTÉE</span></details>
+        <span class="cout mono">≈24,4M (24 395 573) · 128 tours · 8,86 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">DRO5</span></span>
+        <details open><summary><span class="titre">Limiter le Client à ses lignes</span><span class="etat">En cours · DRO9 peut partir en même temps</span></summary></details></li>
+      <li class="fiche"><span class="gauche"><span class="id">DRO6</span></span>
+        <details><summary><span class="titre">Limiter le Hunter à ses lignes</span><span class="etat">À lancer</span></summary></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">DRO7</span></span>
-        <details><summary><span class="titre">Limiter le Manager à son équipe</span><span class="etat">Après DRO4, DRO6</span></summary></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">DRO8</span></span>
-        <details><summary><span class="titre">Réserver les comptes désactivés à l'Admin</span><span class="etat">Après DRO4</span></summary></details></li>
+        <details><summary><span class="titre">Limiter le Manager à son équipe</span><span class="etat">Après DRO6</span></summary></details></li>
+      <li class="fiche"><span class="gauche"><span class="id">DRO8</span></span>
+        <details><summary><span class="titre">Réserver les comptes désactivés à l'Admin</span><span class="etat">À lancer</span></summary></details></li>
       <li class="fiche"><span class="gauche"><span class="id">DRO9</span></span>
-        <details><summary><span class="titre">Fermer fil_rouge_reader sur paiements et comptes désactivés</span><span class="etat">À lancer · en même temps que DRO4</span></summary></details></li>
+        <details><summary><span class="titre">Fermer fil_rouge_reader sur paiements et comptes désactivés</span><span class="etat">À lancer · en même temps que DRO5</span></summary></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">DRO10</span></span>
-        <details><summary><span class="titre">Refaire le relevé et mettre la doc à jour</span><span class="etat">Après DRO4, DRO5, DRO6, DRO7, DRO8, DRO9</span></summary></details></li>
+        <details><summary><span class="titre">Refaire le relevé et mettre la doc à jour</span><span class="etat">Après DRO5, DRO6, DRO7, DRO8, DRO9</span></summary></details></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈14,5M (14 540 259) · 74 tours · 6,52 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈36,8M (36 815 078) · 181 tours · 15,23 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈61,9M (61 891 799) · 313 tours · 24,32 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 
@@ -83,10 +85,15 @@
     <h2>Journal des décisions</h2>
     <!-- ZONE:journal — une ligne par décision imprévue tranchée en cours de fiche -->
     <ul class="journal">
-      <li><time datetime="2026-10-13">2026-10-13</time><span>DRO1 : POST /users reste à Admin seul (le client crée son compte par /search-requests/submit, Q-ACC-12) ; ouvert au Client, il lui laisserait choisir id_role.</span></li>
       <li><time datetime="2026-10-13">2026-10-13</time><span>DRO2 : POST /payments fermé à tous ; les tests écrivent les paiements par le service (write_payment), un refus y est un ConflictError.</span></li>
       <li><time datetime="2026-10-13">2026-10-13</time><span>DRO3 : la fuite du formulaire (409 pour un email neuf, 202 pour un connu, si un format est refusé) reste, gardée en xfail strict : la corriger demanderait de recopier en Python les CHECK de la base. À trancher.</span></li>
+      <li><time datetime="2026-10-13">2026-10-13</time><span>DRO4 : le PUT passe par replace_visible (contrôle « visible », puis replace()). Le PUT de /payments étant à l'Admin (DRO2), son 404 se prouve au service. Relecteur indépendant : ACCEPTÉE.</span></li>
     </ul>
+    <details class="journal-ancien"><summary>1 entrée plus ancienne</summary>
+    <ul class="journal">
+      <li><time datetime="2026-10-13">2026-10-13</time><span>DRO1 : POST /users reste à Admin seul (le client crée son compte par /search-requests/submit, Q-ACC-12) ; ouvert au Client, il lui laisserait choisir id_role.</span></li>
+    </ul>
+    </details>
   </section>
 
   <footer>
