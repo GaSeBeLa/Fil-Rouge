@@ -26,7 +26,10 @@
    * un nom ou une agence vide ou entouré d'espaces ;
    * une ligne **sans aucun renseignement** (`ck_estate_contact_not_empty`) : pas de contact connu, pas de ligne.
 4. **Qui voit et écrit** : **Admin**, **Hunter** et **Manager** seulement, en lecture comme en écriture. **Client** : non, l'offre passe au vendeur « par l'intermédiaire de mon chasseur » (`user-stories/03_particulier_offre_et_signature.feature:16`). **Reader** : non plus, par minimisation.
+   * Les trois rôles **créent** un contact, pas le seul Hunter : plus souple, retenu par Sébastien (Discord, 13/10/2026), contre « Hunter seul » et « Hunter et Manager, comme un bien ».
 5. **L'auteur** : comme ADR-047, `id_author` est le compte du jeton, la valeur envoyée est ignorée, un `PUT` ne la change pas ; vide = contact importé.
+   * Pourquoi pas déduit de `estate.id_author` (question de Gabriel, 13/10/2026) : les deux auteurs diffèrent. Les 2 556 biens importés n'ont pas d'auteur ; un contact trouvé plus tard par un chasseur doit dire lequel. Un même bien peut aussi être proposé sur plusieurs mandats, par des chasseurs différents.
+   * Le vendeur n'est **pas** un `user` : ses coordonnées sont du texte dans la table. `id_author` désigne le membre de l'agence qui a noté le contact.
 
 **Les choix prudents provisoires** 🟡
 
