@@ -21,9 +21,9 @@
     <p>Tout fermé par défaut ; chaque rôle ne lit et n'écrit que ce que la cible d'ADR-027 lui donne, et seulement ses lignes (404 sur la ligne d'un autre).</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">10 fiches · 5 faites · en cours : DRO6</p>
+    <p class="mono" style="margin-top:.5rem">10 fiches · 6 faites · en cours : DRO7</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -57,20 +57,22 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">DRO5</span></span>
         <details><summary><span class="titre">Limiter le Client à ses lignes</span><span class="etat">Faite</span></summary>
         <span class="note">test_le_sien.py 41 passed (35 du Client, 13 tables, deux clients) ; suite 826 passed, 8 skipped, 7 xfailed (avant 784) ; mutants : filtre de mandate retiré 3 failed, _check_owner neutralisé 4 failed, owns de search_request, criteria, estate_proposed 1 failed chacun ; pyright 4 errors avant et après (anciennes) ; relecteur indépendant : ACCEPTÉE</span></details>
-        <span class="cout mono">≈37,8M (37 774 791) · 187 tours · 13,85 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">DRO6</span></span>
-        <details open><summary><span class="titre">Limiter le Hunter à ses lignes</span><span class="etat">En cours · DRO9 peut partir en même temps</span></summary></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">DRO7</span></span>
-        <details><summary><span class="titre">Limiter le Manager à son équipe</span><span class="etat">Après DRO6</span></summary></details></li>
+        <span class="cout mono">≈38,2M (38 231 174) · 191 tours · 14,01 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">DRO6</span></span>
+        <details><summary><span class="titre">Limiter le Hunter à ses lignes</span><span class="etat">Faite</span></summary>
+        <span class="note">test_le_sien.py 92 passed (51 du Hunter : chasseurs 1 et 2, 13 tables, 404 sur l'autre ; barème d'un autre 404, barème par défaut visible ; son seul manager) ; suite 876 passed, 8 skipped, 7 xfailed (avant 826) ; mutant filtre de client retiré : test /clients tombe ; 22 mutants + 2 des correctifs attrapés ; pyright 2 errors avant et après (anciennes) ; relecteur : REFUSÉE (champ omis effacé, mandat sur la demande d'un autre), corrigé, puis ACCEPTÉE</span></details>
+        <span class="cout mono">≈20,3M (20 324 131) · 119 tours · 8,24 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">DRO7</span></span>
+        <details open><summary><span class="titre">Limiter le Manager à son équipe</span><span class="etat">En cours · DRO9 peut partir en même temps</span></summary></details></li>
       <li class="fiche"><span class="gauche"><span class="id">DRO8</span></span>
         <details><summary><span class="titre">Réserver les comptes désactivés à l'Admin</span><span class="etat">À lancer</span></summary></details></li>
       <li class="fiche"><span class="gauche"><span class="id">DRO9</span></span>
-        <details><summary><span class="titre">Fermer fil_rouge_reader sur paiements et comptes désactivés</span><span class="etat">À lancer · en même temps que DRO6</span></summary></details></li>
+        <details><summary><span class="titre">Fermer fil_rouge_reader sur paiements et comptes désactivés</span><span class="etat">À lancer · en même temps que DRO7</span></summary></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">DRO10</span></span>
-        <details><summary><span class="titre">Refaire le relevé et mettre la doc à jour</span><span class="etat">Après DRO6, DRO7, DRO8, DRO9</span></summary></details></li>
+        <details><summary><span class="titre">Refaire le relevé et mettre la doc à jour</span><span class="etat">Après DRO7, DRO8, DRO9</span></summary></details></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈14,5M (14 540 259) · 74 tours · 6,52 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈101,7M (101 698 444) · 509 tours · 38,76 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈122,5M (122 478 958) · 632 tours · 47,16 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 
@@ -87,15 +89,16 @@
     <h2>Journal des décisions</h2>
     <!-- ZONE:journal — une ligne par décision imprévue tranchée en cours de fiche -->
     <ul class="journal">
-      <li><time datetime="2026-10-13">2026-10-13</time><span>DRO4 : le PUT passe par replace_visible (contrôle « visible », puis replace()). Le PUT de /payments étant à l'Admin (DRO2), son 404 se prouve au service. Relecteur indépendant : ACCEPTÉE.</span></li>
       <li><time datetime="2026-10-13">2026-10-13</time><span>Relecture de DRO1 à DRO3 : DRO1 et DRO2 acceptées ; DRO3 refusée pour la fuite du formulaire, question posée à Seb (accepter, resserrer en DRO11, ou reporter).</span></li>
       <li><time datetime="2026-10-13">2026-10-13</time><span>DRO5 : hunter filtré aussi (« son chasseur », colonne Client) ; écrire une ligne qui ne serait pas à soi rend 409 (crochet owns) ; rôle et activation : seul un vrai changement rend 403.</span></li>
+      <li><time datetime="2026-10-13">2026-10-13</time><span>DRO6 : user ouvert au Hunter (son compte) ; mandat gardé à son nom et sur ses demandes (relecteur : sinon il s'ouvrait le client d'un autre ; Q-JEF-30) ; garde des coordonnées sur tout le modèle (un champ omis l'effaçait) ; POST /hunters refermé (create_roles suivait write_roles) ; PUT d'un média : ADR-051 (403) après le 404.</span></li>
     </ul>
-    <details class="journal-ancien"><summary>3 entrées plus anciennes</summary>
+    <details class="journal-ancien"><summary>4 entrées plus anciennes</summary>
     <ul class="journal">
       <li><time datetime="2026-10-13">2026-10-13</time><span>DRO1 : POST /users reste à Admin seul (le client crée son compte par /search-requests/submit, Q-ACC-12) ; ouvert au Client, il lui laisserait choisir id_role.</span></li>
       <li><time datetime="2026-10-13">2026-10-13</time><span>DRO2 : POST /payments fermé à tous ; les tests écrivent les paiements par le service (write_payment), un refus y est un ConflictError.</span></li>
       <li><time datetime="2026-10-13">2026-10-13</time><span>DRO3 : la fuite du formulaire (409 pour un email neuf, 202 pour un connu, si un format est refusé) reste, gardée en xfail strict : la corriger demanderait de recopier en Python les CHECK de la base. À trancher.</span></li>
+      <li><time datetime="2026-10-13">2026-10-13</time><span>DRO4 : le PUT passe par replace_visible (contrôle « visible », puis replace()). Le PUT de /payments étant à l'Admin (DRO2), son 404 se prouve au service. Relecteur indépendant : ACCEPTÉE.</span></li>
     </ul>
     </details>
   </section>

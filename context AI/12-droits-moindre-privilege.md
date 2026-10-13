@@ -226,8 +226,9 @@ test « mandat d'un autre client » tombe.
 ---
 
 <!-- FICHE:DRO6 -->
-## DRO6 [ ] — Limiter le Hunter à ses lignes
+## DRO6 [x] — Limiter le Hunter à ses lignes
 
+**Session** : 15e33082-f94c-4e7f-82b3-169a3c651e22
 **Dépend de** : `DRO4`.
 **Fichiers** : les services de `client`, `hunter`, `search_request`, `criteria`, `mandate`, `estate_proposed`, `estate_searchrequest`, `review_media`, `visit`, `sale`, `commission_scale`, `hunter_performance`, `real_estate_manager` dans `API/src/app/services/`, `md/adr/adr-027-annexe-matrice-detaillee.md` (colonne Hunter), `API/tests/integration/test_le_sien.py`.
 

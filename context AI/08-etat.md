@@ -374,3 +374,12 @@ de ce que le code dit déjà.
   `create_as` pour le POST). Changer son rôle ou son activation ne refuse
   qu'un vrai changement : renvoyer sa propre valeur passe. Le client 7 du
   seed est désactivé.
+- **2026-10-13** — **DRO6** : `user` ouvert au Hunter en modification (son
+  compte), bien que la fiche ne le nomme pas : même règle que DRO5. Le mandat
+  d'un Hunter est gardé à son nom et sur une de ses demandes : sinon il
+  s'ouvrait le client d'un autre (relecteur ; renouveler le mandat d'un autre
+  attend Q-JEF-30). Le garde des coordonnées compare tout le modèle : le PUT
+  remplace la ligne, un champ omis l'effaçait (relecteur). `create_roles` suit `write_roles` par
+  défaut : ouvrir le PUT de `/hunters` ouvrait aussi le POST, refermé
+  (`create_roles=(ADMIN,)`). Le PUT d'un média d'avis suit ADR-051 comme le
+  POST (403), après le 404 de « le sien ».
