@@ -39,6 +39,9 @@
 >   du code du sujet qui changent (Conséquences), mais trois endroits et une
 >   fonction ajoutée : voir la docstring de `rem.py`. Les comptages (ADR-035)
 >   restent à coder.
+> * ✅ Texte sous le trait mis à jour le 13/10/2026 (dette du chantier API) :
+>   « non fait » et « Aucun des comptages n'est codé » corrigés. À reporter
+>   sur Confluence.
 > * ✅ Comptages codés le 13/10/2026 (fiche API12) :
 >   `API/src/app/services/payment_calculation_service.py`, derrière
 >   `POST /sales/{id}/payment`. Points 3, 4 et 7 comptés en base ; le taux
@@ -46,9 +49,7 @@
 >   gagne `mandats_vendus_12_mois`, le numérateur, et le détail du paiement
 >   garde les deux termes (`sold_mandates_12_months`, Traçabilité). Point 8 :
 >   seule la note du passage à 'paid' est codée ; celle de l'échéance
->   (`'mandate_expired'`) reste à faire. Les phrases « non fait » et
->   « Aucun des comptages n'est codé » du texte sous le trait sont donc
->   périmées pour les points 3, 4 et 7 : à reporter sur Confluence.
+>   (`'mandate_expired'`) reste à faire.
 > * ⚠️ Les autres renvois `01:NNN` de cette fiche datent du 08/10/2026. Les
 >   migrations 22 à 38 (12/10/2026) ont allongé le schéma : ils peuvent être
 >   décalés. Le nom de la colonne ou de la table, cité à côté, fait foi.
@@ -108,7 +109,7 @@ Sur le dénominateur du taux (sous-choix de l'option 3) :
 
 **Décision**
 
-✅ veut dire « établi par une source », pas « codé ». Aucun des comptages n'est codé (voir Conséquences).
+✅ veut dire « établi par une source », pas « codé ». Les points 3 à 7 sont codés depuis le 13/10/2026 (fiches API11 et API12, voir Conséquences) ; le point 8 en partie.
 
 1. ✅ **Cinq critères, poids du sujet** : délai 25 %, exclusivité 10 %, ventes 25 %, mandats 15 %, visites 25 % (RCR:143-147 ; Q-PAR-06 ; Q-JEF-01). Fenêtre : douze mois glissants avant l'acte (RCR:139 ; Q-PAR-04). Les valeurs vivent dans `hunter_rate_parameters`, jamais en dur (RCR:47 ; `01:839-871`). Trois critères portent sur la vente (délai, exclusivité, visites) ; deux sur l'activité (ventes, mandats) (Questions tranchées).
 2. ✅ **Délai (S₁) et exclusivité (S₂)** : grilles du sujet (RCR:143-144 ; Q-PAR-13 ; Q-JEF-01). Le délai part de la première signature d'une chaîne de renouvellements (ADR-050).
@@ -123,7 +124,7 @@ Sur le dénominateur du taux (sous-choix de l'option 3) :
    * **Le numérateur :** parmi ces chaînes, celles qui finissent par une vente dont le paiement n'est pas refusé (Q-REM-08). Le taux reste entre 0 et 1.
    * **Aucune chaîne au dénominateur :** note 0. Un critère d'activité sans activité vaut 0, comme S₃ et S₄ du sujet (`0 × 20`, `0 × 10`, RCR:145-146).
    * **Mandat annulé après signature :** il compte ; un mandat jamais signé, non. Tranchée par déduction ; confirmée par Sébastien le 2026-10-09 (Discord).
-8. **La note du journal hors d'une vente** (mandat échu, note de départ). Tranchée par déduction ; confirmée par Sébastien le 2026-10-09 (Discord). Demande du code, non fait.
+8. **La note du journal hors d'une vente** (mandat échu, note de départ). Tranchée par déduction ; confirmée par Sébastien le 2026-10-09 (Discord). Codé pour la note écrite au paiement (fiche API12) ; la note de l'échéance (`'mandate_expired'`) reste à coder.
    * **Note de départ (`'initial'`) : 50**, le pivot. « Le pivot à 50 est le point d'équilibre » (RCR:213). Elle ne sert qu'à l'affichage (ADR-035, `md/adr/adr-035-note-recalculee-a-chaque-vente.md:114`).
    * **À l'échéance :** reprendre les cinq notes du dernier paiement payé, gardées dans `payment.calculation_details` (`01:928-931`). Recompter les deux critères d'activité (ventes, taux) à la date de l'échéance. Garder les trois notes de vente.
    * **Échéance avant toute vente payée :** les trois notes de vente valent 50 ; les deux critères d'activité sont recomptés.
@@ -141,10 +142,10 @@ Sur le dénominateur du taux (sous-choix de l'option 3) :
 
 **Conséquences**
 
-* **Code de calcul :** une ligne du code du sujet change, la note « mandats » (`rem.py:214`). C'est un écart au code de référence, à dire en soutenance. Le reste de `noter_criteres` ne bouge pas (`rem.py:204-216`). Demande du code, non fait.
+* **Code de calcul :** la note « mandats » du code du sujet change (`note_mandats`, `rem.py`). C'est un écart au code de référence, à dire en soutenance. Codé le 13/10/2026 : quatre endroits changent, listés dans la docstring de `rem.py` (fiches API11 et API12).
 * **Comptages, à coder :** aujourd'hui, `rem.py` reçoit des nombres déjà comptés (`rem.py:137-140`). Aucun code ne compte les visites, ventes ou mandats dans la base. Recherche du 08/10/2026 : dans `API/src`, `nb_visites` n'apparaît que dans `rem.py` (et dans trois fichiers de tests). Le branchement est décrit par ADR-035.
 * **Tests :** deux cas utilisent S₄ = `mandats × 10`. Ils sont à refaire, ou à garder comme « cas du sujet » : les critères de volume (`API/tests/test_remuneration.py:174-179`, scénario F10:140-152) et le calcul de bout en bout de Bruno, 73,5 (RCR:248 ; `test_remuneration.py:255`). Le score global de `:184` reçoit ses notes toutes faites : il ne dépend pas de la formule. La carte Q-JEF-05 le disait : « les cas de test qui l'utilisent sont à refaire » (`jeff.html:992`).
-* **Schéma :** `hunter_rate_parameters` a `points_per_mandate`, pas de réglage `T_plein`. La base le dit : « La grille de notes du taux de transformation (Q-JEF-05) n'est pas ici : chantier API » (`01:837-838` ; même constat dans `API/src/app/models/hunter_rate_parameters_model.py:22-23`). Un réglage est à ajouter : demande du code, non fait.
+* **Schéma :** `hunter_rate_parameters` a `points_per_mandate`, pas de réglage `T_plein`. La base le dit : « La grille de notes du taux de transformation (Q-JEF-05) n'est pas ici : chantier API » (`01:837-838` ; même constat dans `API/src/app/models/hunter_rate_parameters_model.py:22-23`). Ajouté le 13/10/2026 (fiche API11) : `mandate_success_rate_for_max_score`, migration 39.
 * **Traçabilité :** `payment.calculation_details` garde « les 5 notes et les entrées » (`01:928-931`). Il doit garder aussi les deux termes du taux.
 * **Conflit d'intérêts :** le chasseur enregistre les visites (Q-ACC-13), et moins de visites donne une meilleure note. Le contre-pouvoir proposé est dans ADR-027 : le client lit ses visites, le manager celles de son équipe.
 * **Visite avant la signature :** la base l'accepte encore ; l'API devra la refuser (`01:721-725`). Sinon, une visite mal datée fausse le compte.

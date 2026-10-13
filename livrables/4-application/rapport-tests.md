@@ -181,11 +181,11 @@ Valent pour les **20 ressources** de l'API, qui partagent le même router (`API/
 ### 5.2 💶 Unitaires — rémunération (55 tests)
 
 - **Code testé** : `API/src/app/services/remuneration.py`.
-  - C'est le **code de référence du sujet**, extrait tel quel de `REGLES-CALCUL-REMUNERATION.md` §14.2-14.3.
+  - C'est le **code de référence du sujet**, extrait de `REGLES-CALCUL-REMUNERATION.md` §14.2-14.3, à **un écart** près : le critère « mandats » (ADR-048, ci-dessous).
   - Le groupe ne l'a **pas écrit** : il l'a repris pour ne pas s'écarter de la référence.
 - **Cas testés** : les tableaux du fichier `user-stories/10_calcul_remuneration_chasseur.feature`, **recopiés tels quels**.
 - ⚠️ Les chiffres (fixe 3 000 €, 2,5 %, tranches, poids, bornes) sont des **paramètres proposés** par le sujet, pas des règles métier. S'ils changent, ce sont les résultats attendus qui bougent, pas les règles.
-- ⚠️ ADR-048 (accepté le 2026-10-12) note le critère « mandats signés » par le **taux de transformation**. Ce n'est pas encore codé : les cas R07 et R15 testent encore la formule du sujet (`mandats × 10`).
+- ⚠️ ADR-048 (accepté le 2026-10-12) note le critère « mandats signés » par le **taux de transformation**, codé le 2026-10-13 (fiches API11 et API12). Les cas du sujet sur `mandats × 10` restent, nommés « cas du sujet » et marqués **en échec attendu** (`xfail(strict=True)`) : 5 lignes de R07 et R15. À côté, les cas du taux : 4 ventes pour 5 mandats → **80 points** ; Bruno refait → **6 084,45 €**.
 
 | ID | Règle du `.feature` | Ce qu'on teste | Ligne | Cas | Statut |
 | --- | --- | --- | ---: | ---: | --- |
@@ -195,7 +195,7 @@ Valent pour les **20 ressources** de l'API, qui partagent le même router (`API/
 | R04 | `@performance` | délai mandat → acte, arrondi à la semaine inférieure | 100 | 6 | ✅ |
 | R05 | `@performance` | moins de visites, meilleure note | 116 | 6 | ✅ |
 | R06 | `@performance` | note d'exclusivité forfaitaire | 130 | 2 | ✅ |
-| R07 | `@performance` | ventes et mandats sur 12 mois glissants | 140 | 5 | ✅ |
+| R07 | `@performance` | ventes et mandats sur 12 mois glissants | 140 | 5 | ✅ ventes · ⚠️ mandats en échec attendu (ADR-048) |
 | R08 | `@performance` | score global = 73,5 / 100 | 154 | 1 | ✅ |
 | R09 | `@bareme` | un prix → une seule tranche, un seul taux | 168 | 6 | ✅ |
 | R10 | `@bareme` | barème en vigueur à la date de l'acte (38 %) | 188 | 1 | ✅ |
@@ -203,7 +203,7 @@ Valent pour les **20 ressources** de l'API, qui partagent le même router (`API/
 | R12 | `@modulation` | ancienneté : +2 % par an, plafonné à 10 % | 203 | 5 | ✅ |
 | R13 | `@modulation` | performance : ±20 % autour d'un score pivot de 50 | 216 | 5 | ✅ |
 | R14 | `@modulation` | taux final : 46,16 % · plafond 60 % · plancher 20 % | 229, 236, 244 | 3 | ✅ |
-| R15 | `@montant` | bout en bout : 13 500 € → **6 231,60 €** pour Bruno, marge 7 268,40 € | 255 | 1 | ✅ |
+| R15 | `@montant` | bout en bout : 13 500 € → **6 231,60 €** pour Bruno, marge 7 268,40 € | 255 | 1 | ⚠️ échec attendu (ADR-048) ; avec le taux : 6 084,45 € |
 | R16 | `@montant` | arrondi au centime, au demi supérieur : 3 606,575 → 3 606,58 € | 267 | 1 | ✅ |
 | R17 | `@assiette` | le taux s'applique aux honoraires, jamais au prix | 81 | 1 | ✅ |
 | | | | **Total** | **55** | |
