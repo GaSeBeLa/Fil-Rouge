@@ -12,9 +12,8 @@ le calcul de rémunération branché sur la base.
 
 **Estimé.** 14 fiches · ≈56 $ — ≈4,00 $/fiche sur 2 clos (le 2026-10-12).
 
-**CLOS** le 2026-10-13. Ne se rejoue pas — ne sert plus qu'à relire son socle.
-
-**Fait.** API1..API12 (2026-10-13) : Connexion par jeton, rôles, clé d'API, contrôles d'entrée et entre tables, anonymisation sans DELETE, rémunération calculée depuis la base (POST /sales/{id}/payment) — estimé 14 fiches ≈56 $ · cadré 12 · joué 12 fiches 61,74 $.
+**Fait.** Rien. Cadré en 12 fiches, `API1` à jouer. Base prête : schéma v3,
+20 tables, 258 tests verts au 12/10.
 
 **Session** : aded003c-7d9f-4c76-83df-6971407e7c1a
 
