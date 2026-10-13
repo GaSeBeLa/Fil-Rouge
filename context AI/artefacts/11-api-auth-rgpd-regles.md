@@ -21,3 +21,6 @@ Les règles des ADR acceptés le 12/10 sont codées et testées : connexion par 
 - 2026-10-12 : API10 : délai du nom — paiement non versé compté à partir d'aujourd'hui, refusé ignoré, mandat jamais signé ignoré ; la chaîne suit id_mandate_parent même si le chasseur change ; tableau de la Décision 7 suivi tel quel (chasseur et manager : téléphone et nom seulement)
 - 2026-10-13 : API11 : zéro mandat → 0 ; réglage ≤ 0 → 422 (P29) ; cas du sujet sur mandats × 10 gardés en xfail strict, Bruno refait 66,7 points, 6 084,45 € (choix du groupe, 13/10)
 ## Bilan
+- Livré : Connexion par jeton, rôles, clé d'API, contrôles d'entrée et entre tables, anonymisation sans DELETE, rémunération calculée depuis la base (POST /sales/{id}/payment)
+- Surpris : Deux fiches (API6, API11) ont coûté plus que les dix autres réunies : chacune attendait un choix du groupe en cours de route
+- Estimé : estimé 14 fiches ≈56 $ · cadré 12 · joué 12 fiches 61,74 $

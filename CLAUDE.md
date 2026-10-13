@@ -35,6 +35,7 @@ modifiés**.
 - `livrables/2-modelisation/` porte trois rapports du chantier `C` ; les trois
   autres livrables sont vides. Détail daté dans `context AI/08-etat.md`.
 - Clos le 2026-10-07 : schéma v3 (19 tables, euros) posé dans docker/init-v3/, migrations v2→v3 et banc ; rôle en lecture seule fil_rouge_reader (chantier LOT).
+- Clos le 2026-10-13 : auth, rôles, contrôles, RGPD et paiement calculé depuis la base (chantier API).
 
 ## Cinq règles non négociables
 
@@ -77,7 +78,7 @@ et seulement dans ce cas, ouvrir l'index.
 | ouvrir un chantier, ou le découper en fiches | **lancer `/vlp:chantier`** — la méthode vit dans le kit, pas ici |
 | relire une fiche `C1` à `C5` | `context AI/09-contraintes-mpd.md` — chantier **clos** le 2026-09-11, ne se rejoue pas |
 | relire une fiche `LOT1` à `LOT12` | `context AI/10-lot-migration.md` — chantier « Lot de migration (schéma v3) » **clos** le 2026-10-07, ne se rejoue pas |
-| relire le chantier, ou jouer une fiche `API1` à `API12` | `context AI/11-api-auth-rgpd-regles.md` — chantier « API : auth, RGPD et règles métier », **ouvert** le 2026-10-12 ; `/vlp:tache API<n>` |
+| relire une fiche `API1` à `API12` | `context AI/11-api-auth-rgpd-regles.md` — chantier « API : auth, RGPD et règles métier » **clos** le 2026-10-13, ne se rejoue pas |
 | reprendre après une longue interruption | `context AI/08-etat.md` |
 
 ## Économie de contexte

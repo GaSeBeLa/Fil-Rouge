@@ -50,7 +50,6 @@ ordonné par ce qui débloque le reste.
 
 | # | Chantier | Ce qu'il apporte | Coût estimé | Dépend de |
 |---|---|---|---|---|
-| 2 | API : auth, RGPD et règles métier | les **outils d'auth** côté back (connexion, token, rôles, droits, Argon2), l'**anonymisation** d'un compte, une **clé d'API par programme**, les règles « contrôlées par l'API », et le calcul de rémunération branché sur la base (55 cas déjà verts) ; la **grille de notes** (Q-JEF-05) et la **durée X** (Q-ACC-21), à proposer par le groupe (sortis du lot le 2026-10-07). Décidé par les ADR du 2026-10-09, **à coder** : JWT 60 min (ADR-052) ; plus de route `DELETE`, une route d'anonymisation (ADR-049) ; renouvellement (ADR-050) ; `'launched'` à la signature (ADR-044) ; versions de barème non modifiables (ADR-030, 034) ; ordre des dates du paiement (ADR-038) ; auteur sur `POST /estates` (ADR-047) ; droits sur les médias (ADR-051). Déjà codé : `needs_renovation` à deux états, budgets travaux retirés (ADR-032, migration 21) | 💡 ~5 à 7 fiches | 1 |
 | 3 | Seed de démo | des données de démo générées (faker), cohérentes avec le nouveau schéma ; le décor, pas la preuve : les tests restent la preuve | 💡 2-3 fiches | 1 |
 | 4 | Les ADR | **une fiche par ADR**, chacune relue (Q15) ; chaque ADR cite ses cartes et ses sources, puis se copie sur Confluence. ✅ **Fait le 2026-10-09** : **27 ADR** (024, 027 à 052) + **2 annexes**, réponses du groupe intégrées (S1 à S12, M), publiés sur Confluence, dossier « Proposé » ; bandeau « remplacé par » sur ADR-012, ADR-019 et l'ancien ADR-027. Reste : validation de Jeff ; S4 (acte après la fin) et D1b avec lui ; S10 après les cours d'IA ; D8 après les cours ML/data | 🟢 rédigés, à valider | 1..3 |
 | 5 | Doc d'équipe | matrice des droits, RACI, registre RGPD, rapport de tests | 💡 3-4 fiches | 1..2 |
@@ -334,3 +333,11 @@ de ce que le code dit déjà.
   du paiement garde `sold_mandates_12_months` ; la note `'payment'` du journal
   s'écrit au passage à `'paid'`, dans la même transaction que le paiement.
   Reste : la note de l'échéance (`'mandate_expired'`, ADR-048 point 8).
+- **2026-10-13** — **Chantier API clos** (API1 à API12, 12 fiches sur 12) :
+  connexion par jeton, rôles, clé d'API, contrôles d'entrée et entre tables,
+  anonymisation sans DELETE, paiement calculé depuis la base. Suite :
+  419 passed, 8 skipped, 6 xfailed. Laissé ouvert : la note de l'échéance
+  (`'mandate_expired'`, ADR-048 point 8) ; trois mentions périmées hors
+  fiche (`livrables/4-application/rapport-tests.md:206`,
+  `md/adr/adr-037-…:99`, `md/adr/adr-048-…:137`) ; les statuts des ADR à
+  reporter sur Confluence. Coût : chantier 140 122 204.
