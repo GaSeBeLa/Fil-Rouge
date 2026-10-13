@@ -29,7 +29,8 @@ modifiés**.
   `fil_rouge_test` (`docker/create_test_db.sh`) — voir `API/README.md` § Tests.
 - Les user stories Gherkin (`user-stories/`) couvrent le parcours actuel et le
   futur parcours IA. Seul le **calcul de rémunération** est implémenté
-  (`services/remuneration.py`, code du sujet, non branché sur la base).
+  (`services/remuneration.py`, code du sujet), branché sur la base par
+  `POST /sales/{id}/payment` (fiche API12).
 - `normalised/` porte la normalisation des annonces et son rapport d'anomalies.
 - `livrables/2-modelisation/` porte trois rapports du chantier `C` ; les trois
   autres livrables sont vides. Détail daté dans `context AI/08-etat.md`.

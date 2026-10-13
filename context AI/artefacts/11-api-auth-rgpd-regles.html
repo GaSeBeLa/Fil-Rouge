@@ -21,9 +21,9 @@
     <p>Les règles des ADR acceptés le 12/10 sont codées et testées : connexion par jeton, rôles, clé d'API, contrôles entre tables, anonymisation sans DELETE, et un paiement calculé depuis la base.</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">12 fiches · 11 faites · en cours : API12</p>
+    <p class="mono" style="margin-top:.5rem">12 fiches · 12 faites</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -81,13 +81,14 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">API11</span></span>
         <details><summary><span class="titre">Noter les mandats par le taux de transformation</span><span class="etat">Faite</span></summary>
         <span class="note">test_remuneration.py : 4 ventes / 5 mandats à 100 % → 80 points, à 50 % → 100 ; mutant mandats × 10 → le test 80 points tombe (10 failed) ; \d hunter_rate_parameters montre la colonne ; suite 405 passed, 8 skipped, 6 xfailed (avant 399 passed, 7 skipped)</span></details>
-        <span class="cout mono">≈31,3M (31 316 821) · 165 tours · 16,39 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">API12</span></span>
-        <details open><summary><span class="titre">Brancher la rémunération sur la base</span><span class="etat">En cours</span></summary>
-        <span class="note">Paiement calculé depuis la base ; dépend d'API5, API8, API11</span></details></li>
+        <span class="cout mono">≈32,5M (32 522 204) · 170 tours · 16,75 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">API12</span></span>
+        <details><summary><span class="titre">Brancher la rémunération sur la base</span><span class="etat">Faite</span></summary>
+        <span class="note">POST /sales/{id}/payment : montant = calculer_remuneration sur les mêmes nombres ; 2e appel 409 ; note 'payment' absente avant 'paid', écrite au passage ; mutant visites 'hunter' → 2 tests tombent ; 419 passed, 8 skipped, 6 xfailed (avant 405) ; pyright 1 → 1</span></details>
+        <span class="cout mono">≈12,8M (12 806 211) · 60 tours · 5,60 $</span></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈6,7M (6 672 728) · 42 tours · 3,41 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈125,1M (125 125 039) · 644 tours · 55,45 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈139,1M (139 136 633) · 709 tours · 61,41 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 
