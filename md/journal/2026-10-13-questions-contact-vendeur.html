@@ -221,6 +221,23 @@ body.vlp-lit { padding-bottom:9rem; }
   </section>
 
   <section>
+    <h2>Les décisions prises seul — à valider</h2>
+    <p class="sous">Tranché sur Discord le 13/10/2026, après les questions de Gabriel et de Laurence. Rien à cocher : la carte dit ce qui est décidé, tu peux le garder ou le revoir. Coche ce que tu gardes, ajoute un commentaire si besoin ; en bas, un bouton copie tes réponses.</p>
+
+    <div class="decision">
+      <div class="tete"><h3>D1 · Qui crée un contact, et pourquoi on note son auteur</h3><span class="puce faible"><span class="mono">estate_contact</span> : droits du <span class="mono">POST</span>, colonne <span class="mono">id_author</span></span></div>
+      <dl class="grille">
+        <dt>Le problème</dt><dd>Gabriel : <span class="mono">id_author</span> semble en trop, puisqu'on a <span class="mono">id_estate</span>. Seb : ce sont peut-être les chasseurs seuls qui créent un contact. Laurence : pourquoi relier le vendeur aux comptes <span class="mono">user</span> de l'agence ?</dd>
+        <dt>Mon choix</dt><dd><strong>C</strong> (Seb) : <strong>Admin, Hunter et Manager</strong> créent un contact, plus souple. <span class="mono">id_author</span> est gardé : il dit <strong>quel membre de l'agence</strong> a noté le contact. Le vendeur, lui, n'est <strong>pas</strong> un <span class="mono">user</span> : ses coordonnées sont du texte dans la table.</dd>
+        <dt>Écarté</dt><dd><strong>A</strong> : Hunter seul crée. <strong>B</strong> : Hunter et Manager, comme pour un bien (ADR-047). Déduire l'auteur de <span class="mono">estate.id_author</span> : impossible, les 2 556 biens importés n'en ont pas, et un même bien peut être suivi par plusieurs chasseurs.</dd>
+        <dt>Le prix</dt><dd>Rien : le code faisait déjà C. Seul l'ADR-054 est complété.</dd>
+        <dt>Défaire</dt><dd>Restreindre plus tard : une ligne <span class="mono">create_roles</span> dans <span class="mono">routes/estate_contact_router.py</span>, et ses tests.</dd>
+      </dl>
+      <div class="choix"><label><input type="radio" name="D1" value="garder">Je garde</label><label><input type="radio" name="D1" value="revoir">À revoir</label></div>
+    </div>
+  </section>
+
+  <section>
     <h2>Les choix à trancher</h2>
     <p class="sous">Une carte par question. Chaque option dit ce qu'elle change.</p>
 
