@@ -341,3 +341,8 @@ de ce que le code dit déjà.
   fiche (`livrables/4-application/rapport-tests.md:206`,
   `md/adr/adr-037-…:99`, `md/adr/adr-048-…:137`) ; les statuts des ADR à
   reporter sur Confluence. Coût : chantier 140 122 204.
+- **2026-10-13** — **DRO1** : `POST /users` reste à `Admin` seul, écart à
+  l'annexe d'ADR-027 (« C son compte » au Client) : le client crée son
+  compte par `POST /search-requests/submit`, sans jeton (Q-ACC-12) ; ouvert
+  au rôle Client, `POST /users` lui laisserait choisir `id_role`, donc se
+  créer un Admin. À redire si l'annexe est relue.

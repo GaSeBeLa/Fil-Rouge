@@ -84,8 +84,9 @@ sont parallèles ; `DRO5`, `DRO6`, `DRO8` aussi, après `DRO4`.
 ---
 
 <!-- FICHE:DRO1 -->
-## DRO1 [ ] — Fermer par défaut et déclarer les rôles de chaque table
+## DRO1 [x] — Fermer par défaut et déclarer les rôles de chaque table
 
+**Session** : 15e33082-f94c-4e7f-82b3-169a3c651e22
 **Dépend de** : rien.
 **Fichiers** : `API/src/app/routes/crud_router.py`, les 21 `API/src/app/routes/*_router.py` qui l'appellent, `md/adr/adr-027-annexe-matrice-detaillee.md` (lecture), les tests d'intégration qui cassent, un nouveau `API/tests/integration/test_droits_par_role.py`.
 

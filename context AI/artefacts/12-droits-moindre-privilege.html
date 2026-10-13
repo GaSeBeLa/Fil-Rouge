@@ -21,9 +21,9 @@
     <p>Tout fermé par défaut ; chaque rôle ne lit et n'écrit que ce que la cible d'ADR-027 lui donne, et seulement ses lignes (404 sur la ligne d'un autre).</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">10 fiches · 0 faite · en cours : DRO1</p>
+    <p class="mono" style="margin-top:.5rem">10 fiches · 1 faite · en cours : DRO2</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -38,14 +38,16 @@
     <h2>Les fiches, dans l'ordre des dépendances</h2>
     <!-- ZONE:fiches — data-etat vaut faite | encours | bloquee ; absent = à faire -->
     <ul class="fiches">
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">DRO1</span></span>
-        <details open><summary><span class="titre">Fermer par défaut et déclarer les rôles de chaque table</span><span class="etat">En cours · DRO9 peut partir en même temps</span></summary></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">DRO2</span></span>
-        <details><summary><span class="titre">Réserver l'argent à qui la cible le donne</span><span class="etat">Après DRO1</span></summary></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">DRO3</span></span>
-        <details><summary><span class="titre">Revoir les routes à part</span><span class="etat">Après DRO1</span></summary></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">DRO4</span></span>
-        <details><summary><span class="titre">Poser le mécanisme « le sien »</span><span class="etat">Après DRO1</span></summary></details></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">DRO1</span></span>
+        <details><summary><span class="titre">Fermer par défaut et déclarer les rôles de chaque table</span><span class="etat">Faite</span></summary>
+        <span class="note">test_droits_par_role.py 241 passed ; suite 690 passed, 8 skipped, 6 xfailed (avant 443 passed) ; mutant WRITER_ROLES en défaut : 4 failed ; mutant Manager lit /clients : 1 failed ; pyright 2 errors avant et après (crud_router.py, anciennes)</span></details>
+        <span class="cout mono">≈5,9M (5 928 106) · 29 tours · 2,31 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">DRO2</span></span>
+        <details open><summary><span class="titre">Réserver l'argent à qui la cible le donne</span><span class="etat">En cours · DRO4, DRO9 peuvent partir en même temps</span></summary></details></li>
+      <li class="fiche"><span class="gauche"><span class="id">DRO3</span></span>
+        <details><summary><span class="titre">Revoir les routes à part</span><span class="etat">À lancer</span></summary></details></li>
+      <li class="fiche"><span class="gauche"><span class="id">DRO4</span></span>
+        <details><summary><span class="titre">Poser le mécanisme « le sien »</span><span class="etat">À lancer · en même temps que DRO2, DRO9</span></summary></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">DRO5</span></span>
         <details><summary><span class="titre">Limiter le Client à ses lignes</span><span class="etat">Après DRO4</span></summary></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">DRO6</span></span>
@@ -55,10 +57,12 @@
       <li class="fiche" data-attend><span class="gauche"><span class="id">DRO8</span></span>
         <details><summary><span class="titre">Réserver les comptes désactivés à l'Admin</span><span class="etat">Après DRO4</span></summary></details></li>
       <li class="fiche"><span class="gauche"><span class="id">DRO9</span></span>
-        <details><summary><span class="titre">Fermer fil_rouge_reader sur paiements et comptes désactivés</span><span class="etat">À lancer · en même temps que DRO1</span></summary></details></li>
+        <details><summary><span class="titre">Fermer fil_rouge_reader sur paiements et comptes désactivés</span><span class="etat">À lancer · en même temps que DRO2, DRO4</span></summary></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">DRO10</span></span>
-        <details><summary><span class="titre">Refaire le relevé et mettre la doc à jour</span><span class="etat">Après DRO1, DRO2, DRO3, DRO4, DRO5, DRO6, DRO7, DRO8, DRO9</span></summary></details></li>
+        <details><summary><span class="titre">Refaire le relevé et mettre la doc à jour</span><span class="etat">Après DRO2, DRO3, DRO4, DRO5, DRO6, DRO7, DRO8, DRO9</span></summary></details></li>
     </ul>
+    <p class="mono cout-hors">Hors fiches : ≈14,5M (14 540 259) · 74 tours · 6,52 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈20,5M (20 468 365) · 103 tours · 8,83 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 
@@ -75,6 +79,7 @@
     <h2>Journal des décisions</h2>
     <!-- ZONE:journal — une ligne par décision imprévue tranchée en cours de fiche -->
     <ul class="journal">
+      <li><time datetime="2026-10-13">2026-10-13</time><span>DRO1 : POST /users reste à Admin seul (le client crée son compte par /search-requests/submit, Q-ACC-12) ; ouvert au Client, il lui laisserait choisir id_role.</span></li>
     </ul>
   </section>
 
