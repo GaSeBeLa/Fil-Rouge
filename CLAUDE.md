@@ -15,7 +15,7 @@ modifiés**.
   côté : `../Fil-Rouge-API/`. Ce dépôt-ci garde les docs, les ADR, les
   livrables et le suivi des chantiers. **Tout chemin `API/…` ou `docker/…`
   cité ici, dans `context AI/` ou dans `md/` se lit dans `../Fil-Rouge-API/`.**
-- Le schéma PostgreSQL **v3** (**20 tables** depuis le 2026-10-08, `review_media` ; montants en **euros**) est posé
+- Le schéma PostgreSQL **v3** (**21 tables** depuis le 2026-10-13, `estate_contact`, ADR-054 ; montants en **euros**) est posé
   dans `docker/init-v3/` et monté par `docker compose` : chantier LOT, LOT1 à
   LOT12 faits le 2026-10-07 (LOT12 : rôle en lecture seule `fil_rouge_reader`).
   Changements par thème : `docker/init-v3/README.md` §0. `docker/init-v2/` est
@@ -27,7 +27,7 @@ modifiés**.
   `docker compose down -v && docker compose up -d` (⚠️ efface la base de dev
   locale), puis `bash docker/create_test_db.sh`.
 - L'API expose un CRUD complet en trois couches (routes / services /
-  repositories) sur les **20 tables** ; le routeur commun revalide l'entrée
+  repositories) sur les **21 tables** ; le routeur commun revalide l'entrée
   (`422` avant la base). 91 opérations vérifiées en `200` contre la base
   (mesuré avant LOT6). **193 tests** (au 2026-10-08) : 99 unitaires sans base
   (dont les 55 cas de rémunération), 94 d'intégration sur la base de test isolée
