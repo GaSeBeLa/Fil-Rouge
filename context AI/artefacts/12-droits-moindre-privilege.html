@@ -21,9 +21,9 @@
     <p>Tout fermé par défaut ; chaque rôle ne lit et n'écrit que ce que la cible d'ADR-027 lui donne, et seulement ses lignes (404 sur la ligne d'un autre).</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">11 fiches · 8 faites · en cours : DRO9</p>
+    <p class="mono" style="margin-top:.5rem">11 fiches · 9 faites · en cours : DRO11</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -69,16 +69,18 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">DRO8</span></span>
         <details><summary><span class="titre">Réserver les comptes désactivés à l'Admin</span><span class="etat">Faite</span></summary>
         <span class="note">905 passed, 8 skipped, 7 xfailed (897 avant) ; compte désactivé : Reader, Hunter, Manager reçoivent 404 sur son profil (4 tables, 7 cas), Admin le lit ; mutant is_activated retiré → 7 failed ; pyright 2 → 2</span></details>
-        <span class="cout mono">≈9,7M (9 678 002) · 34 tours · 2,88 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">DRO9</span></span>
-        <details open><summary><span class="titre">Fermer fil_rouge_reader sur paiements et comptes désactivés</span><span class="etat">En cours · DRO11 peut partir en même temps</span></summary></details></li>
-      <li class="fiche"><span class="gauche"><span class="id">DRO11</span></span>
-        <details><summary><span class="titre">Fermer la fuite du formulaire</span><span class="etat">À lancer · en même temps que DRO9</span></summary></details></li>
+        <span class="cout mono">≈11,9M (11 918 171) · 57 tours · 3,78 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">DRO9</span></span>
+        <details><summary><span class="titre">Fermer fil_rouge_reader sur paiements et comptes désactivés</span><span class="etat">Faite</span></summary>
+        <span class="note">fil_rouge_reader : SELECT payment → permission denied ; compte désactivé absent des 4 tables de profil ; API (postgres) lit tout : 910 passed, 8 skipped, 7 xfailed ; mutant REVOKE retiré → 1 failed ; relecture ACCEPTÉE</span></details>
+        <span class="cout mono">≈7,7M (7 693 735) · 78 tours · 3,68 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">DRO11</span></span>
+        <details open><summary><span class="titre">Fermer la fuite du formulaire</span><span class="etat">En cours</span></summary></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">DRO10</span></span>
-        <details><summary><span class="titre">Refaire le relevé et mettre la doc à jour</span><span class="etat">Après DRO9, DRO11</span></summary></details></li>
+        <details><summary><span class="titre">Refaire le relevé et mettre la doc à jour</span><span class="etat">Après DRO11</span></summary></details></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈17,8M (17 810 935) · 85 tours · 7,46 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈148,8M (148 784 602) · 747 tours · 56,49 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈158,7M (158 718 506) · 848 tours · 61,07 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 

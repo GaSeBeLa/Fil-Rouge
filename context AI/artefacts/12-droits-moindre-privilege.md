@@ -10,6 +10,7 @@ Tout fermé par défaut ; chaque rôle ne lit et n'écrit que ce que la cible d'
 - DRO6 : test_le_sien.py 92 passed (51 du Hunter : chasseurs 1 et 2, 13 tables, 404 sur l'autre ; barème d'un autre 404, barème par défaut visible ; son seul manager) ; suite 876 passed, 8 skipped, 7 xfailed (avant 826) ; mutant filtre de client retiré : test /clients tombe ; 22 mutants + 2 des correctifs attrapés ; pyright 2 errors avant et après (anciennes) ; relecteur : REFUSÉE (champ omis effacé, mandat sur la demande d'un autre), corrigé, puis ACCEPTÉE
 - DRO7 : 897 passed, 8 skipped, 7 xfailed (876 avant) ; 2 managers (1 au seed, 1 créé) : chacun son équipe sur 8 tables + paiements, 404 sur l'autre ; mutant payment → 1 failed ; pyright 4 → 4
 - DRO8 : 905 passed, 8 skipped, 7 xfailed (897 avant) ; compte désactivé : Reader, Hunter, Manager reçoivent 404 sur son profil (4 tables, 7 cas), Admin le lit ; mutant is_activated retiré → 7 failed ; pyright 2 → 2
+- DRO9 : fil_rouge_reader : SELECT payment → permission denied ; compte désactivé absent des 4 tables de profil ; API (postgres) lit tout : 910 passed, 8 skipped, 7 xfailed ; mutant REVOKE retiré → 1 failed ; relecture ACCEPTÉE
 ## Journal
 - 2026-10-13 : DRO1 : POST /users reste à Admin seul (le client crée son compte par /search-requests/submit, Q-ACC-12) ; ouvert au Client, il lui laisserait choisir id_role.
 - 2026-10-13 : DRO2 : POST /payments fermé à tous ; les tests écrivent les paiements par le service (write_payment), un refus y est un ConflictError.

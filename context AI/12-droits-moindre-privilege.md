@@ -299,8 +299,9 @@ condition `is_activated` → le test en `Reader` tombe.
 ---
 
 <!-- FICHE:DRO9 -->
-## DRO9 [ ] — Fermer `fil_rouge_reader` sur paiements et comptes désactivés
+## DRO9 [x] — Fermer `fil_rouge_reader` sur paiements et comptes désactivés
 
+**Session** : 4e508779-8618-401d-b40e-17c615120929
 **Dépend de** : rien.
 **Fichiers** : `docker/init-v3/04_role-lecture-seule.sql`, une nouvelle migration `docker/migrations/v2-vers-v3/43_<nom>.sql`, `API/tests/integration/test_contact_vendeur.py` (modèle : `test_reader_role_cannot_read_contacts`), un nouveau test dans `API/tests/integration/`.
 
