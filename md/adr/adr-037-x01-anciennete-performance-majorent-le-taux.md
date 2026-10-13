@@ -85,7 +85,7 @@ Ces notes « ne font pas foi : on remonte toujours à la source officielle du st
    * `p = (S − pivot) / demi-amplitude × amplitude` ;
    * `r = borne(r₀ × (1 + a + p) ; plancher ; plafond)`.
 3. `a` et `p` s'additionnent avant d'être appliqués. `r` est arrondi à 4 décimales, au demi supérieur (`RCR:228` ; `rem.py:40`, `:264`).
-4. `a`, `p` et `r` devront être figés sur le paiement : `seniority_rate`, `performance_rate`, `final_rate` (ADR-033). Les colonnes existent ; leur écriture viendra avec le branchement du calcul, pas encore codé.
+4. `a`, `p` et `r` devront être figés sur le paiement : `seniority_rate`, `performance_rate`, `final_rate` (ADR-033). Les colonnes existent ; elles s'écrivent depuis le 13/10/2026 (fiche API12, `POST /sales/{id}/payment`).
 5. Les réglages de cette formule sont des paramètres, dans `hunter_rate_parameters` (`01:859-867`). Valeurs du seed : 0,02 par an, plafond 0,10 ; pivot 50, demi-amplitude 50, amplitude 0,20 ; plancher 0,20, plafond 0,60 (`docker/init-v3/05_parametres.sql:76-78`). Leur gestion relève d'ADR-034.
 
 **Justification**

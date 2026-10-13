@@ -271,15 +271,15 @@ Un test par règle ajoutée à la base par ADR-053 (migrations 22 à 38). Le n°
 
 | Manque | Pourquoi | Statut |
 | --- | --- | --- |
-| **Tests fonctionnels** (un parcours métier complet, de bout en bout) | les règles métier ne sont pas encore branchées sur l'API : il n'y a pas encore de parcours à dérouler | ⬜ |
-| **Authentification** : connexion, JWT, rôles, droits | rentrée dans le périmètre (ADR-028), mécanisme fixé (ADR-052) ; pas encore codée | ⬜ |
-| Trous de l'audit **côté API** (ADR-053 : P2 `EmailStr`, P5, P16, P19…) | pas encore codés | ⬜ |
-| Calcul de rémunération **branché sur la base** (lire le barème, écrire le paiement) | pas encore codé | ⬜ |
-| Critère « mandats signés » noté par le taux de transformation (ADR-048) | pas encore codé ; R07 et R15 testent encore la formule du sujet | ⬜ |
+| **Tests fonctionnels** (un parcours métier complet, de bout en bout) | les règles sont branchées sur l'API depuis le 2026-10-13 (chantier API) ; aucun parcours de bout en bout n'est encore écrit | ⬜ |
+| **Authentification** : connexion, JWT, rôles, droits | codée et testée le 2026-10-12 (fiches API1 à API3 : `test_auth.py`, `test_roles.py`, `test_api_keys.py`) ; la matrice complète des droits (ADR-027) n'est pas codée | ✅ |
+| Trous de l'audit **côté API** (ADR-053 : P2 `EmailStr`, P5, P16, P19…) | codés et testés le 2026-10-12 (fiches API4, API7 à API9 : `test_entrees.py`, `test_propositions_visites.py`, `test_signature_vente.py`, `test_demande_avant_compte.py`) | ✅ |
+| Calcul de rémunération **branché sur la base** (lire le barème, écrire le paiement) | codé et testé le 2026-10-13 (fiche API12 : `test_calcul_paiement.py`) | ✅ |
+| Critère « mandats signés » noté par le taux de transformation (ADR-048) | codé le 2026-10-13 (fiche API11) ; les cas du sujet R07 et R15 restent, en échec attendu | ✅ |
 | « Un seul chasseur est rémunéré pour une vente » (`.feature` l. 52) | demande plusieurs mandats en base, pas une fonction pure | ⬜ |
 | Règle `@tracabilite` (`.feature` l. 275-300) : montant figé, notifications | relève de la persistance | ⬜ |
-| ENF-01 : rémunération calculée en moins de 2 s pour 500 mandats (test de charge) | le calcul n'est pas encore branché sur la base : rien à charger | ⬜ |
-| ENF-03 : accès croisé aux données de rémunération | dépend des droits d'accès, donc de l'authentification | ⬜ |
+| ENF-01 : rémunération calculée en moins de 2 s pour 500 mandats (test de charge) | le calcul est branché (fiche API12) ; le test de charge n'est pas écrit | ⬜ |
+| ENF-03 : accès croisé aux données de rémunération | les rôles sont codés (fiche API2), pas la matrice des droits (ADR-027) | ⬜ |
 | Les 7 tests du seed **dans le conteneur** | le conteneur `api` ne voit pas `docker/` ; ils passent quand le fichier est présent (§ 1) | ⬜ |
 
 ⚠️ Le sujet demande des tests **unitaires et fonctionnels** (`Readme.md:256`). Les **fonctionnels** restent à écrire.
