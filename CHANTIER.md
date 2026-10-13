@@ -44,6 +44,6 @@ pas quinze — celles qu'on regrette de ne pas avoir écrites.
 
 Chacun a sa ligne dans l'**index** ; sa page reste sur la feuille de route.
 
-Lettres de fiche déjà prises : C, LOT, API (API : auth, RGPD et règles métier). Un nouveau chantier en choisit un autre —
+Lettres de fiche déjà prises : C, LOT, API (API : auth, RGPD et règles métier), DRO (droits : moindre privilège). Un nouveau chantier en choisit un autre —
 trois majuscules, jamais réemployées, même après clôture. `/vlp:chantier` le
 propose, l'utilisateur tranche ; c'est cette ligne qui rend le refus possible.
