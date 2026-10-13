@@ -251,8 +251,9 @@ visible. Suite verte, compte brut. Mutant : retirer le filtre de `client`
 ---
 
 <!-- FICHE:DRO7 -->
-## DRO7 [ ] — Limiter le Manager à son équipe
+## DRO7 [x] — Limiter le Manager à son équipe
 
+**Session** : 4e508779-8618-401d-b40e-17c615120929
 **Dépend de** : `DRO4`, `DRO6`.
 **Fichiers** : les services de `hunter`, `search_request`, `criteria`, `mandate`, `visit`, `sale`, `payment`, `hunter_performance`, `commission_scale`, `real_estate_manager` dans `API/src/app/services/`, `md/adr/adr-027-annexe-matrice-detaillee.md` (colonne Manager, « L'équipe d'un manager »), `API/tests/integration/test_le_sien.py`.
 
