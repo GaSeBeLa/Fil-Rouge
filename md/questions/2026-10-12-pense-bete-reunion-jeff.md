@@ -38,6 +38,7 @@ Préparé le 12/10/2026. Le numéro entre parenthèses renvoie à l'ADR, pour qu
 - Le chasseur visite d'abord les biens choisis par le client ; puis le client visite avec lui le bien qui lui plaît. Seule cette visite du client compte pour la rémunération. (053)
 - On n'enregistre que les visites faites, pas les visites prévues. (053)
 - La note d'avis du chasseur peut porter plusieurs médias : audio, vidéo. (051)
+- Le contact du vendeur (nom, téléphone, email, agence) est gardé, à part du bien. Seuls l'admin, le chasseur et le manager le voient ; on le garde 3 ans après la fin du suivi. Décidé le 13/10, à vous présenter. (054)
 
 ### Les comptes et la sécurité
 
