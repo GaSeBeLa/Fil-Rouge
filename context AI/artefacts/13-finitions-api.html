@@ -21,9 +21,9 @@
     <p>Un 409 qui nomme la règle refusée sans recopier la valeur, un 500 neutre avec un numéro retrouvable dans les logs, et la phrase « numéro du compte (user.id) » sous les id du Swagger</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="encours"></span><span></span>
+      <span data-etat="faite"></span><span data-etat="encours"></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">2 fiches · 0 faite · en cours : FIN1</p>
+    <p class="mono" style="margin-top:.5rem">2 fiches · 1 faite · en cours : FIN2</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -38,13 +38,16 @@
     <h2>Les fiches, dans l'ordre des dépendances</h2>
     <!-- ZONE:fiches — data-etat vaut faite | encours | bloquee ; absent = à faire -->
     <ul class="fiches">
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">FIN1</span></span>
-        <details open><summary><span class="titre">Nommer la règle dans le 409 et tracer les 500</span><span class="etat">En cours · FIN2 peut partir en même temps</span></summary>
-        <span class="note">le 409 nomme la contrainte, le 500 a un numéro écrit dans les logs ; ne dépend de rien</span></details></li>
-      <li class="fiche"><span class="gauche"><span class="id">FIN2</span></span>
-        <details><summary><span class="titre">Dire « numéro du compte » dans le Swagger</span><span class="etat">À lancer · en même temps que FIN1</span></summary>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">FIN1</span></span>
+        <details><summary><span class="titre">Nommer la règle dans le 409 et tracer les 500</span><span class="etat">Faite</span></summary>
+        <span class="note">test_erreurs_api.py 3 passed ; suite 924 passed, 8 skipped, 6 xfailed (avant 911) ; pyright 2 errors avant = 2 après (crud_router, anciennes) ; 2 mutants tombent ; API b4ab3ce</span></details>
+        <span class="cout mono">≈8,4M (8 418 565) · 53 tours · 3,62 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">FIN2</span></span>
+        <details open><summary><span class="titre">Dire « numéro du compte » dans le Swagger</span><span class="etat">En cours</span></summary>
         <span class="note">la phrase « numéro du compte (user.id) » sous id_client, id_hunter, id_realestatemanager, id_author, et le commentaire de status corrigé ; ne dépend de rien</span></details></li>
     </ul>
+    <p class="mono cout-hors">Hors fiches : ≈6,9M (6 880 534) · 56 tours · 3,08 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈15,3M (15 299 099) · 109 tours · 6,70 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 

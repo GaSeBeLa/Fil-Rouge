@@ -65,8 +65,9 @@ Les deux fiches sont indépendantes et peuvent se jouer dans n'importe quel ordr
 ---
 
 <!-- FICHE:FIN1 -->
-## FIN1 [ ] — Nommer la règle dans le `409` et tracer les `500`
+## FIN1 [x] — Nommer la règle dans le `409` et tracer les `500`
 
+**Session** : d91d2486-ccc7-4872-9632-f6e1b9331d93
 **Dépend de** : rien.
 **Fichiers** : `API/src/app/repositories/base_repository.py`, un nouveau `API/src/app/utils/constraint_messages.py`, `API/src/app/main.py`, `API/tests/test_base_repository.py`, `API/tests/test_crud_router.py`, `API/tests/integration/test_users_db.py`, un nouveau `API/tests/integration/test_erreurs_api.py`.
 
