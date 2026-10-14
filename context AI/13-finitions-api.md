@@ -101,8 +101,9 @@ le gestionnaire `Exception` → le test du `500` tombe.
 ---
 
 <!-- FICHE:FIN2 -->
-## FIN2 [ ] — Dire « numéro du compte » dans le Swagger
+## FIN2 [x] — Dire « numéro du compte » dans le Swagger
 
+**Session** : d91d2486-ccc7-4872-9632-f6e1b9331d93
 **Dépend de** : rien.
 **Fichiers** : les modèles de `API/src/app/models/` qui portent `id_client`, `id_hunter`, `id_realestatemanager` ou `id_author` (8 au 2026-10-14 : à recompter par grep), `API/src/app/models/search_request_model.py`, un nouveau test `API/tests/test_openapi_ids.py`.
 
