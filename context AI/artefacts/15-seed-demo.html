@@ -21,9 +21,9 @@
     <p>Une commande remplit la base de dev avec un parcours complet (demande, mandat, biens proposés, visites, vente, paiement, note, avis) et 4 comptes de démo activés, un par rôle : le Swagger et la soutenance ont de quoi montrer.</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="encours"></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="encours"></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">3 fiches · 0 faite · en cours : DEM1</p>
+    <p class="mono" style="margin-top:.5rem">3 fiches · 1 faite · en cours : DEM2</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -38,16 +38,19 @@
     <h2>Les fiches, dans l'ordre des dépendances</h2>
     <!-- ZONE:fiches — data-etat vaut faite | encours | bloquee ; absent = à faire -->
     <ul class="fiches">
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">DEM1</span></span>
-        <details open><summary><span class="titre">Poser le script et les comptes de démo</span><span class="etat">En cours</span></summary>
-        <span class="note">Le script seed_demo.py, faker, DEMO_PASSWORD, et les 4 comptes de démo ; ne dépend de rien</span></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">DEM2</span></span>
-        <details><summary><span class="titre">Jouer le parcours jusqu'à la visite</span><span class="etat">Après DEM1</span></summary>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">DEM1</span></span>
+        <details><summary><span class="titre">Poser le script et les comptes de démo</span><span class="etat">Faite</span></summary>
+        <span class="note">test_seed_demo.py : 6 passed ; suite 933 passed, 8 skipped, 6 xfailed ; pyright 0 error ; mutant sans contrôle « déjà semé » : 1 failed (test_second_seed_writes_nothing)</span></details>
+        <span class="cout mono">≈4,5M (4 450 824) · 34 tours · 2,17 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">DEM2</span></span>
+        <details open><summary><span class="titre">Jouer le parcours jusqu'à la visite</span><span class="etat">En cours</span></summary>
         <span class="note">Demande, mandat signé, biens proposés et visites ; dépend de DEM1</span></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">DEM3</span></span>
         <details><summary><span class="titre">Finir le parcours : vente, paiement, note, avis</span><span class="etat">Après DEM2</span></summary>
         <span class="note">Vente, paiement calculé, note du chasseur, avis, README et petit ADR ; dépend de DEM2</span></details></li>
     </ul>
+    <p class="mono cout-hors">Hors fiches : ≈8,5M (8 472 613) · 41 tours · 4,00 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈12,9M (12 923 437) · 75 tours · 6,17 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 
@@ -64,6 +67,7 @@
     <h2>Journal des décisions</h2>
     <!-- ZONE:journal — une ligne par décision imprévue tranchée en cours de fiche -->
     <ul class="journal">
+      <li><time datetime="2026-10-14">2026-10-14</time><span>DEM1 : les comptes de démo sont en @example.com (RFC 2606), pas en .invalid comme le disait la fiche : UserCreate (email-validator) refuse les noms à usage spécial (.invalid, .test, .local) ; DEM2 et DEM3 gardent example.com.</span></li>
     </ul>
   </section>
 

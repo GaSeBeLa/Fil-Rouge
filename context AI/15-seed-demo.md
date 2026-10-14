@@ -79,8 +79,9 @@ Les trois fiches se suivent : chacune part des lignes écrites par la précéden
 ---
 
 <!-- FICHE:DEM1 -->
-## DEM1 [ ] — Poser le script et les comptes de démo
+## DEM1 [x] — Poser le script et les comptes de démo
 
+**Session** : 4b603c61-6273-4519-a6c1-80c6873b02e1
 **Dépend de** : rien.
 **Fichiers** : nouveau `API/src/app/scripts/seed_demo.py`, `API/src/app/scripts/create_admin.py` (lecture, modèle), `API/requirements.txt`, `docker/docker-compose.yml` (une ligne, voir le socle), `docker/.env.exemple`, nouveau `API/tests/integration/test_seed_demo.py`.
 
