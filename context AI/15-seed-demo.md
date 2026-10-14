@@ -12,7 +12,9 @@ parcours n'a jamais eu lieu : 7 tables vides et 0 compte actif sur 25 (compté l
 
 **Estimé.** 6 fiches · ≈29 $ — ≈4,82 $/fiche sur 6 clos (le 2026-10-14).
 
-**Fait.** Rien. Cadré le 2026-10-14 (Seb, Discord), en 3 fiches, `DEM1` à jouer.
+**CLOS** le 2026-10-14. Ne se rejoue pas — ne sert plus qu'à relire son socle.
+
+**Fait.** DEM1..DEM3 (2026-10-14) : Seed de démo : seed_demo.py remplit la base de dev par les services (4 comptes, demande, mandat, propositions, visites, vente, paiement payé, note, avis), testé sur fil_rouge_test — estimé 6 fiches ≈29 $ · cadré 3 · joué 3 fiches 13,66 $.
 
 **Session** : da42f1a3-d291-47c1-a710-979822a907ab
 

@@ -19,25 +19,23 @@
   </header>
 
   <nav class="sommaire" aria-label="Sommaire"><a href="#encours">Chantier en cours</a><a href="#todo">Chantiers possibles</a><a href="#clos">Chantiers clos</a></nav>
-  <nav class="pages" aria-label="Les autres pages">Les autres pages : <a href="https://claude.ai/artifact/K1Uj64nuaYSmLWdHGWLtnD">la page du chantier</a></nav>
 
   <section id="encours">
     <h2>Chantier en cours</h2>
     <!-- ZONE:encours — remplacé à chaque ouverture, remis à « aucun » à chaque clôture.
          /tache n'y touche pas : l'avancement fiche par fiche est sur la page du chantier. -->
     <div class="encours">
-      <div class="titre">Seed de démo <span class="badge" data-etat="cours">en cours</span></div>
-      <div>Fiches <span class="mono">DEM1–DEM3</span> — <a href="https://claude.ai/artifact/K1Uj64nuaYSmLWdHGWLtnD">la page du chantier</a></div>
+      <div class="titre">Aucun chantier ouvert</div>
+      <div>Lancer <span class="mono">/vlp:chantier</span> pour en ouvrir un.</div>
     </div>
   </section>
 
   <section id="todo">
     <h2>Les chantiers possibles, dans l'ordre</h2>
-    <p class="resume-todo"><strong>7 chantiers possibles</strong> · 5 moyens, 2 pas estimés · 2 bloqués · ≈18 fiches estimées</p>
+    <p class="resume-todo"><strong>6 chantiers possibles</strong> · 4 moyens, 2 pas estimés · 1 bloqué · ≈15 fiches estimées</p>
     <!-- ZONE:todo — miroir de la TODO ordonnée du fichier d'état ; le fichier reste la vérité -->
     <ol class="todo">
-          <li class="carte-todo" data-taille="moyen" data-pret="oui"><span class="gauche"><span class="rang mono">3</span> <span class="badge" data-etat="cours">en cours</span><span class="dep mono">← 1</span></span><details><summary><span class="titre">Seed de démo</span></summary><div class="detail">des données de démo générées (faker), cohérentes avec le nouveau schéma ; le décor, pas la preuve : les tests restent la preuve</div></details><span class="meta"><span class="seg">💡 2-3 fiches</span></span></li>
-          <li class="carte-todo" data-taille="pas-estime" data-pret="non"><span class="gauche"><span class="rang mono">4</span><span class="dep mono">← 1..3</span></span><details><summary><span class="titre">Les ADR</span></summary><div class="detail"><strong>une fiche par ADR</strong>, chacune relue (Q15) ; chaque ADR cite ses cartes et ses sources, puis se copie sur Confluence. ✅ <strong>Fait le 2026-10-09</strong> : <strong>27 ADR</strong> (024, 027 à 052) + <strong>2 annexes</strong>, réponses du groupe intégrées (S1 à S12, M), publiés sur Confluence, dossier « Proposé » ; bandeau « remplacé par » sur ADR-012, ADR-019 et l'ancien ADR-027. Reste : validation de Jeff ; S4 (acte après la fin) et D1b avec lui ; S10 après les cours d'IA ; D8 après les cours ML/data</div></details><span class="meta"><span class="seg">🟢 rédigés, à valider</span></span></li>
+          <li class="carte-todo" data-taille="pas-estime" data-pret="oui"><span class="gauche"><span class="rang mono">4</span><span class="dep mono">← 1..3</span></span><details><summary><span class="titre">Les ADR</span></summary><div class="detail"><strong>une fiche par ADR</strong>, chacune relue (Q15) ; chaque ADR cite ses cartes et ses sources, puis se copie sur Confluence. ✅ <strong>Fait le 2026-10-09</strong> : <strong>27 ADR</strong> (024, 027 à 052) + <strong>2 annexes</strong>, réponses du groupe intégrées (S1 à S12, M), publiés sur Confluence, dossier « Proposé » ; bandeau « remplacé par » sur ADR-012, ADR-019 et l'ancien ADR-027. Reste : validation de Jeff ; S4 (acte après la fin) et D1b avec lui ; S10 après les cours d'IA ; D8 après les cours ML/data</div></details><span class="meta"><span class="seg">🟢 rédigés, à valider</span></span></li>
           <li class="carte-todo" data-taille="moyen" data-pret="oui"><span class="gauche"><span class="rang mono">5</span><span class="dep mono">← 1..2</span></span><details><summary><span class="titre">Doc d'équipe</span></summary><div class="detail">matrice des droits, RACI, registre RGPD, rapport de tests</div></details><span class="meta"><span class="seg">💡 3-4 fiches</span></span></li>
           <li class="carte-todo" data-taille="moyen" data-pret="oui"><span class="gauche"><span class="rang mono">6</span><span class="dep mono">← 1</span></span><details><summary><span class="titre">Livrable 2 — modélisation (MCD/MLD)</span></summary><div class="detail">reconstruit le modèle depuis le schéma réparé, pour <span class="mono">livrables/2-modelisation/</span></div></details><span class="meta"><span class="seg">3–4 fiches</span></span></li>
           <li class="carte-todo" data-taille="moyen" data-pret="oui"><span class="gauche"><span class="rang mono">7</span></span><details><summary><span class="titre">Livrable 1 — audit des données</span></summary><div class="detail">rapport de normalisation à partir de <span class="mono">normalised/rapport_anomalies.txt</span></div></details><span class="meta"><span class="seg">3–4 fiches</span></span></li>
@@ -49,15 +47,21 @@
   <section id="clos">
     <h2>Chantiers clos — ils ne se rejouent pas</h2>
     <!-- ZONE:clos — une ligne ajoutée à chaque clôture, la plus récente en haut -->
-    <img src="couts.svg" alt="Coût des chantiers clos en tokens : 6 barres, du plus ancien au plus récent ; le plus cher : Droits : moindre privilège" data-couts="{&quot;couleur&quot;: &quot;#8f5a0f&quot;, &quot;barres&quot;: [[&quot;Contraintes manquantes du MPD&quot;, 31326311, &quot;≈31,3M (31 326 311)&quot;], [&quot;Lot de migration (schéma v3)&quot;, 116219396, &quot;≈116,2M (116 219 396)&quot;], [&quot;API : auth, RGPD et règles métier&quot;, 140122204, &quot;≈140,1M (140 122 204)&quot;], [&quot;Droits : moindre privilège&quot;, 174326604, &quot;≈174,3M (174 326 604)&quot;], [&quot;Finitions de l'API : erreurs et Swagger&quot;, 19491473, &quot;≈19,5M (19 491 473)&quot;], [&quot;Réparer le banc v2/v3&quot;, 17998587, &quot;≈18,0M (17 998 587)&quot;]]}">
+    <img src="couts.svg" alt="Coût des chantiers clos en tokens : 7 barres, du plus ancien au plus récent ; le plus cher : Droits : moindre privilège" data-couts="{&quot;couleur&quot;: &quot;#8f5a0f&quot;, &quot;barres&quot;: [[&quot;Contraintes manquantes du MPD&quot;, 31326311, &quot;≈31,3M (31 326 311)&quot;], [&quot;Lot de migration (schéma v3)&quot;, 116219396, &quot;≈116,2M (116 219 396)&quot;], [&quot;API : auth, RGPD et règles métier&quot;, 140122204, &quot;≈140,1M (140 122 204)&quot;], [&quot;Droits : moindre privilège&quot;, 174326604, &quot;≈174,3M (174 326 604)&quot;], [&quot;Finitions de l'API : erreurs et Swagger&quot;, 19491473, &quot;≈19,5M (19 491 473)&quot;], [&quot;Réparer le banc v2/v3&quot;, 17998587, &quot;≈18,0M (17 998 587)&quot;], [&quot;Seed de démo&quot;, 33892230, &quot;≈33,9M (33 892 230)&quot;]]}">
     <details class="clos">
-      <summary><span class="resume-clos">6 chantiers clos · ≈499,5M (499 484 575) tokens · 192,98 $ sur 5 clos mesurés</span></summary>
+      <summary><span class="resume-clos">7 chantiers clos · ≈533,4M (533 376 805) tokens · 206,64 $ sur 6 clos mesurés</span></summary>
     <div class="tableau">
       <table>
         <thead>
           <tr><th>Chantier</th><th>Fiches</th><th>Clos le</th><th>Tokens</th><th>Ce qu'il a livré</th></tr>
         </thead>
         <tbody>
+          <tr>
+            <td><a href="https://claude.ai/artifact/K1Uj64nuaYSmLWdHGWLtnD">Seed de démo</a> <span class="badge" data-etat="clos">clos</span></td>
+            <td class="mono">DEM1–DEM3</td><td class="mono">2026-10-14</td>
+            <td class="mono">13,66 $ · ≈33,9M (33 892 230)</td>
+            <td>Seed de démo : seed_demo.py remplit la base de dev par les services (4 comptes, demande, mandat, propositions, visites, vente, paiement payé, note, avis), testé sur fil_rouge_test</td>
+          </tr>
           <tr>
             <td><a href="https://claude.ai/artifact/E559RFAsCtKiS5jiwUcCSF">Réparer le banc v2/v3</a> <span class="badge" data-etat="clos">clos</span></td>
             <td class="mono">BAN1–BAN3</td><td class="mono">2026-10-14</td>
@@ -97,7 +101,7 @@
           </tr>
         </tbody>
         <tfoot>
-          <tr><td colspan="3">Total cumulé</td><td class="mono"><strong>≈499,5M (499 484 575)</strong></td><td class="mono">192,98 $ sur 5 clos mesurés</td></tr>
+          <tr><td colspan="3">Total cumulé</td><td class="mono"><strong>≈533,4M (533 376 805)</strong></td><td class="mono">206,64 $ sur 6 clos mesurés</td></tr>
         </tfoot>
       </table>
     </div>

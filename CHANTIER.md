@@ -14,7 +14,7 @@
 - **fichier d'état** : context AI/08-etat.md
 - **index** : context AI/00-INDEX.md
 - **artefact feuille de route** : https://claude.ai/artifact/Wu5xkSJUtfbjuhFdbvUq3C
-- **artefact du chantier** : https://claude.ai/artifact/K1Uj64nuaYSmLWdHGWLtnD
+- **artefact du chantier** : aucun
 - **livraison** : aucune — le code vit dans `../Fil-Rouge-API/` depuis le
   2026-10-13, et tourne en local (`docker compose up -d` depuis
   `../Fil-Rouge-API/docker/`)
@@ -44,6 +44,6 @@ pas quinze — celles qu'on regrette de ne pas avoir écrites.
 
 Chacun a sa ligne dans l'**index** ; sa page reste sur la feuille de route.
 
-Lettres de fiche déjà prises : C, LOT, API (API : auth, RGPD et règles métier), DRO (droits : moindre privilège), FIN (Finitions de l'API : erreurs et Swagger), BAN (Réparer le banc v2/v3). Un nouveau chantier en choisit un autre —
+Lettres de fiche déjà prises : C, LOT, API (API : auth, RGPD et règles métier), DRO (droits : moindre privilège), FIN (Finitions de l'API : erreurs et Swagger), BAN (Réparer le banc v2/v3), DEM (Seed de démo). Un nouveau chantier en choisit un autre —
 trois majuscules, jamais réemployées, même après clôture. `/vlp:chantier` le
 propose, l'utilisateur tranche ; c'est cette ligne qui rend le refus possible.
