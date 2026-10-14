@@ -4,6 +4,7 @@ Le banc base neuve = base migrée rend IDENTIQUES, et il tourne à chaque pytest
 ## Notes
 - BAN1 : compare_v2_v3.sh : IDENTIQUES, exit 0, 617 faits. Mutant sans 44 : DIFFÉRENTES, exit 1, nomme commission_scale 0/5. Mutant sans liste de démo : exit 1, nomme estate_contact 0/2469. pytest 926 passed, 8 skipped, 6 xfailed
 - BAN2 : psql 17.11 ; /api/sql/v2-vers-v3 : 41 .sql dans le conteneur, 41 sur l'hôte (40 avant BAN1) ; 0 .env sous /api/sql ; image 227 MB -> 286 MB ; pytest 926 passed, 8 skipped, 6 xfailed
-- BAN3 : Le banc devient un test pytest, le script se réduit à le lancer. Attend BAN1 et BAN2.
+- BAN3 : test_banc_v2_v3.py : 1 passed en 9,15 s ; mutant (6e ligne de barème dans une copie de init-v3) : 1 failed, diff commission_scale 5/6 ; suite 926 -> 927 passed, 8 skipped, 6 xfailed, 62 s -> 72 s ; fil_rouge_reader noté puis remis (choix A)
 ## Journal
+- 2026-10-14 : BAN3 : le test note l'état de fil_rouge_reader (login, empreinte du mot de passe) et le remet à la fin : init-v3/04 et migrations/12 le passent en NOLOGIN sans POSTGRES_READER_PASSWORD, absent du conteneur api (choix A de Sébastien, 14/10)
 ## Bilan

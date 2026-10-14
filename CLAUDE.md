@@ -19,7 +19,8 @@ modifiés**.
   dans `docker/init-v3/` et monté par `docker compose` : chantier LOT, LOT1 à
   LOT12 faits le 2026-10-07 (LOT12 : rôle en lecture seule `fil_rouge_reader`).
   Changements par thème : `docker/init-v3/README.md` §0. `docker/init-v2/` est
-  **figé**, gardé pour le banc `docker/compare_v2_v3.sh` ;
+  **figé**, gardé pour le banc v2/v3 (`API/tests/integration/test_banc_v2_v3.py`,
+  lancé à chaque pytest, ou par `docker/compare_v2_v3.sh`) ;
   `docker/migrations/v2-vers-v3/` mène une base v2 existante au même schéma ;
   `docker/init/` (12 tables, K€) est l'ancien schéma, plus monté.
 - **Pour l'équipe, après un pull** : ajouter `POSTGRES_READER_PASSWORD=` à

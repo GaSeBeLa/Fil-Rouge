@@ -130,8 +130,9 @@ La suite pytest rend toujours 926 passed.
 ---
 
 <!-- FICHE:BAN3 -->
-## BAN3 [ ] — Faire du banc un test pytest
+## BAN3 [x] — Faire du banc un test pytest
 
+**Session** : 990a5a18-5517-41c2-b408-e47667014e06
 **Dépend de** : `BAN1`, `BAN2`.
 **Fichiers** : `../Fil-Rouge-API/API/tests/integration/test_banc_v2_v3.py` (nouveau),
 `../Fil-Rouge-API/docker/compare_v2_v3.sh`.

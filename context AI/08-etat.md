@@ -419,3 +419,4 @@ de ce que le code dit déjà.
   19 491 473. Laissé ouvert : deux erreurs pyright anciennes dans
   `crud_router.py` (`reportInvalidTypeForm`) ; `__tablename__` sans
   justification dans les modèles que FIN2 n'a pas touchés.
+- **2026-10-14** — BAN3 : le test note l'état de fil_rouge_reader (login, empreinte du mot de passe) et le remet à la fin : init-v3/04 et migrations/12 le passent en NOLOGIN sans POSTGRES_READER_PASSWORD, absent du conteneur api (choix A de Sébastien, 14/10).
