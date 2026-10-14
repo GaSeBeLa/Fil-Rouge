@@ -57,7 +57,6 @@ ordonné par ce qui débloque le reste.
 | 7 | Livrable 1 — audit des données | rapport de normalisation à partir de `normalised/rapport_anomalies.txt` | 3–4 fiches | rien |
 | 8 | Livrable 3 — architecture | documente les trois couches et les choix (pas de PATCH, bases génériques, auth côté back) | 2–3 fiches | 2 |
 | 9 | Déploiement sur le VPS | mettre l'API et la base réparée sur le VPS de l'utilisateur ; hôte, accès et méthode **à demander avant d'agir**, aucun secret dans le dépôt | 🟡 à cadrer | 1..8 |
-| 11 | Réparer le banc v2/v3 | `docker/compare_v2_v3.sh` (Fil-Rouge-API) rendait **IDENTIQUES** à la fin du chantier LOT ; il rend **DIFFÉRENTES** au 13/10 (relecture DRO9) : le nombre de lignes diffère dans `commission_scale`, `estate_contact`, `hunter_rate_parameters`, `parameters_fees`. Trouver lequel des deux chemins a tort (`init-v3/` ou `migrations/v2-vers-v3/`), le corriger, et finir sur un banc IDENTIQUES | 💡 1 fiche | rien |
 
 ## Journal des décisions
 
@@ -420,3 +419,4 @@ de ce que le code dit déjà.
   `crud_router.py` (`reportInvalidTypeForm`) ; `__tablename__` sans
   justification dans les modèles que FIN2 n'a pas touchés.
 - **2026-10-14** — BAN3 : le test note l'état de fil_rouge_reader (login, empreinte du mot de passe) et le remet à la fin : init-v3/04 et migrations/12 le passent en NOLOGIN sans POSTGRES_READER_PASSWORD, absent du conteneur api (choix A de Sébastien, 14/10).
+- **2026-10-14** — Chantier BAN clos : banc v2/v3 IDENTIQUES (migration 44 des paramètres ; estate_contact, données de démo, non compté), devenu le test pytest API/tests/integration/test_banc_v2_v3.py lancé à chaque suite (927 passed) ; compare_v2_v3.sh le lance. Coût du chantier : 17 998 587. Laissé ouvert : requirements.txt sans versions fixées (la reconstruction de BAN2 a tout réinstallé en dernière version) ; la remise du mot de passe de fil_rouge_reader n'est vérifiée que pour un rôle NOLOGIN sans mot de passe.

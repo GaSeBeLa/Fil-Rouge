@@ -19,21 +19,20 @@
   </header>
 
   <nav class="sommaire" aria-label="Sommaire"><a href="#encours">Chantier en cours</a><a href="#todo">Chantiers possibles</a><a href="#clos">Chantiers clos</a></nav>
-  <nav class="pages" aria-label="Les autres pages">Les autres pages : <a href="https://claude.ai/artifact/E559RFAsCtKiS5jiwUcCSF">la page du chantier</a></nav>
 
   <section id="encours">
     <h2>Chantier en cours</h2>
     <!-- ZONE:encours — remplacé à chaque ouverture, remis à « aucun » à chaque clôture.
          /tache n'y touche pas : l'avancement fiche par fiche est sur la page du chantier. -->
     <div class="encours">
-      <div class="titre">Réparer le banc v2/v3 <span class="badge" data-etat="cours">en cours</span></div>
-      <div>Fiches <span class="mono">BAN1–BAN3</span> — <a href="https://claude.ai/artifact/E559RFAsCtKiS5jiwUcCSF">la page du chantier</a></div>
+      <div class="titre">Aucun chantier ouvert</div>
+      <div>Lancer <span class="mono">/vlp:chantier</span> pour en ouvrir un.</div>
     </div>
   </section>
 
   <section id="todo">
     <h2>Les chantiers possibles, dans l'ordre</h2>
-    <p class="resume-todo"><strong>8 chantiers possibles</strong> · 1 petit, 5 moyens, 2 pas estimés · 2 bloqués · ≈19 fiches estimées</p>
+    <p class="resume-todo"><strong>7 chantiers possibles</strong> · 5 moyens, 2 pas estimés · 2 bloqués · ≈18 fiches estimées</p>
     <!-- ZONE:todo — miroir de la TODO ordonnée du fichier d'état ; le fichier reste la vérité -->
     <ol class="todo">
           <li class="carte-todo" data-taille="moyen" data-pret="oui"><span class="gauche"><span class="rang mono">3</span><span class="dep mono">← 1</span></span><details><summary><span class="titre">Seed de démo</span></summary><div class="detail">des données de démo générées (faker), cohérentes avec le nouveau schéma ; le décor, pas la preuve : les tests restent la preuve</div></details><span class="meta"><span class="seg">💡 2-3 fiches</span></span></li>
@@ -43,22 +42,27 @@
           <li class="carte-todo" data-taille="moyen" data-pret="oui"><span class="gauche"><span class="rang mono">7</span></span><details><summary><span class="titre">Livrable 1 — audit des données</span></summary><div class="detail">rapport de normalisation à partir de <span class="mono">normalised/rapport_anomalies.txt</span></div></details><span class="meta"><span class="seg">3–4 fiches</span></span></li>
           <li class="carte-todo" data-taille="moyen" data-pret="oui"><span class="gauche"><span class="rang mono">8</span><span class="dep mono">← 2</span></span><details><summary><span class="titre">Livrable 3 — architecture</span></summary><div class="detail">documente les trois couches et les choix (pas de PATCH, bases génériques, auth côté back)</div></details><span class="meta"><span class="seg">2–3 fiches</span></span></li>
           <li class="carte-todo" data-taille="pas-estime" data-pret="non"><span class="gauche"><span class="rang mono">9</span><span class="dep mono">← 1..8</span></span><details><summary><span class="titre">Déploiement sur le VPS</span></summary><div class="detail">mettre l'API et la base réparée sur le VPS de l'utilisateur ; hôte, accès et méthode <strong>à demander avant d'agir</strong>, aucun secret dans le dépôt</div></details><span class="meta"><span class="seg">🟡 à cadrer</span></span></li>
-          <li class="carte-todo" data-taille="petit" data-pret="oui"><span class="gauche"><span class="rang mono">11</span> <span class="badge" data-etat="cours">en cours</span></span><details><summary><span class="titre">Réparer le banc v2/v3</span></summary><div class="detail"><span class="mono">docker/compare_v2_v3.sh</span> (Fil-Rouge-API) rendait <strong>IDENTIQUES</strong> à la fin du chantier LOT ; il rend <strong>DIFFÉRENTES</strong> au 13/10 (relecture DRO9) : le nombre de lignes diffère dans <span class="mono">commission_scale</span>, <span class="mono">estate_contact</span>, <span class="mono">hunter_rate_parameters</span>, <span class="mono">parameters_fees</span>. Trouver lequel des deux chemins a tort (<span class="mono">init-v3/</span> ou <span class="mono">migrations/v2-vers-v3/</span>), le corriger, et finir sur un banc IDENTIQUES</div></details><span class="meta"><span class="seg">💡 1 fiche</span></span></li>
         </ol>
   </section>
 
   <section id="clos">
     <h2>Chantiers clos — ils ne se rejouent pas</h2>
     <!-- ZONE:clos — une ligne ajoutée à chaque clôture, la plus récente en haut -->
-    <img src="couts.svg" alt="Coût des chantiers clos en tokens : 5 barres, du plus ancien au plus récent ; le plus cher : Droits : moindre privilège" data-couts="{&quot;couleur&quot;: &quot;#8f5a0f&quot;, &quot;barres&quot;: [[&quot;Contraintes manquantes du MPD&quot;, 31326311, &quot;≈31,3M (31 326 311)&quot;], [&quot;Lot de migration (schéma v3)&quot;, 116219396, &quot;≈116,2M (116 219 396)&quot;], [&quot;API : auth, RGPD et règles métier&quot;, 140122204, &quot;≈140,1M (140 122 204)&quot;], [&quot;Droits : moindre privilège&quot;, 174326604, &quot;≈174,3M (174 326 604)&quot;], [&quot;Finitions de l'API : erreurs et Swagger&quot;, 19491473, &quot;≈19,5M (19 491 473)&quot;]]}">
+    <img src="couts.svg" alt="Coût des chantiers clos en tokens : 6 barres, du plus ancien au plus récent ; le plus cher : Droits : moindre privilège" data-couts="{&quot;couleur&quot;: &quot;#8f5a0f&quot;, &quot;barres&quot;: [[&quot;Contraintes manquantes du MPD&quot;, 31326311, &quot;≈31,3M (31 326 311)&quot;], [&quot;Lot de migration (schéma v3)&quot;, 116219396, &quot;≈116,2M (116 219 396)&quot;], [&quot;API : auth, RGPD et règles métier&quot;, 140122204, &quot;≈140,1M (140 122 204)&quot;], [&quot;Droits : moindre privilège&quot;, 174326604, &quot;≈174,3M (174 326 604)&quot;], [&quot;Finitions de l'API : erreurs et Swagger&quot;, 19491473, &quot;≈19,5M (19 491 473)&quot;], [&quot;Réparer le banc v2/v3&quot;, 17998587, &quot;≈18,0M (17 998 587)&quot;]]}">
     <details class="clos">
-      <summary><span class="resume-clos">5 chantiers clos · ≈481,5M (481 485 988) tokens · 184,95 $ sur 4 clos mesurés</span></summary>
+      <summary><span class="resume-clos">6 chantiers clos · ≈499,5M (499 484 575) tokens · 192,98 $ sur 5 clos mesurés</span></summary>
     <div class="tableau">
       <table>
         <thead>
           <tr><th>Chantier</th><th>Fiches</th><th>Clos le</th><th>Tokens</th><th>Ce qu'il a livré</th></tr>
         </thead>
         <tbody>
+          <tr>
+            <td><a href="https://claude.ai/artifact/E559RFAsCtKiS5jiwUcCSF">Réparer le banc v2/v3</a> <span class="badge" data-etat="clos">clos</span></td>
+            <td class="mono">BAN1–BAN3</td><td class="mono">2026-10-14</td>
+            <td class="mono">8,03 $ · ≈18,0M (17 998 587)</td>
+            <td>banc v2/v3 IDENTIQUES (migration 44 des paramètres, contacts de démo non comptés) et devenu un test pytest lancé à chaque suite (psql et fichiers SQL dans le conteneur api)</td>
+          </tr>
           <tr>
             <td><a href="https://claude.ai/artifact/UrrtuNAL1GK6W6f8dLm7Vr">Finitions de l'API : erreurs et Swagger</a> <span class="badge" data-etat="clos">clos</span></td>
             <td class="mono">FIN1–FIN2</td><td class="mono">2026-10-14</td>
@@ -92,7 +96,7 @@
           </tr>
         </tbody>
         <tfoot>
-          <tr><td colspan="3">Total cumulé</td><td class="mono"><strong>≈481,5M (481 485 988)</strong></td><td class="mono">184,95 $ sur 4 clos mesurés</td></tr>
+          <tr><td colspan="3">Total cumulé</td><td class="mono"><strong>≈499,5M (499 484 575)</strong></td><td class="mono">192,98 $ sur 5 clos mesurés</td></tr>
         </tfoot>
       </table>
     </div>

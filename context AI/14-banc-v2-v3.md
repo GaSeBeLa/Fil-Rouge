@@ -9,7 +9,9 @@
 
 **Ouvert.** le 2026-10-14.
 
-**Fait.** Rien : diagnostic fait au cadrage (voir le socle), `BAN1` à jouer — estimé 2 fiches · cadré 3.
+**CLOS** le 2026-10-14. Ne se rejoue pas — ne sert plus qu'à relire son socle.
+
+**Fait.** BAN1..BAN3 (2026-10-14) : banc v2/v3 IDENTIQUES (migration 44 des paramètres, contacts de démo non comptés) et devenu un test pytest lancé à chaque suite (psql et fichiers SQL dans le conteneur api) — estimé non noté · cadré 3 · joué 3 fiches 8,03 $.
 
 **Session** : 937d71c9-531a-49f9-9349-193dc854db9d
 

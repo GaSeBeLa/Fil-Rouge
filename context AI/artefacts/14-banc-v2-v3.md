@@ -8,3 +8,6 @@ Le banc base neuve = base migrée rend IDENTIQUES, et il tourne à chaque pytest
 ## Journal
 - 2026-10-14 : BAN3 : le test note l'état de fil_rouge_reader (login, empreinte du mot de passe) et le remet à la fin : init-v3/04 et migrations/12 le passent en NOLOGIN sans POSTGRES_READER_PASSWORD, absent du conteneur api (choix A de Sébastien, 14/10)
 ## Bilan
+- Livré : banc v2/v3 IDENTIQUES (migration 44 des paramètres, contacts de démo non comptés) et devenu un test pytest lancé à chaque suite (psql et fichiers SQL dans le conteneur api)
+- Surpris : le compte fil_rouge_reader est commun au serveur : rejouer init-v3/04 depuis api le passait en NOLOGIN ; le test note et remet son état
+- Estimé : estimé non noté · cadré 3 · joué 3 fiches 8,03 $
