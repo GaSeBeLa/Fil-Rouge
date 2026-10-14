@@ -107,6 +107,7 @@ et seulement dans ce cas, ouvrir l'index.
 | relire une fiche `LOT1` à `LOT12` | `context AI/10-lot-migration.md` — chantier « Lot de migration (schéma v3) » **clos** le 2026-10-07, ne se rejoue pas |
 | relire une fiche `API1` à `API12` | `context AI/11-api-auth-rgpd-regles.md` — chantier « API : auth, RGPD et règles métier » **clos** le 2026-10-13, ne se rejoue pas |
 | relire une fiche `DRO1` à `DRO11` | `context AI/12-droits-moindre-privilege.md` — chantier « Droits : moindre privilège » **clos** le 2026-10-13, ne se rejoue pas |
+| jouer ou relire une fiche `FIN1` à `FIN2` | `context AI/13-finitions-api.md` — chantier « Finitions de l'API : erreurs et Swagger », **ouvert** le 2026-10-14 ; `/vlp:tache FIN<n>` n'en lit que le socle et la fiche |
 | reprendre après une longue interruption | `context AI/08-etat.md` |
 
 ## Économie de contexte
