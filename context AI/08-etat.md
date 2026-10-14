@@ -56,6 +56,7 @@ ordonné par ce qui débloque le reste.
 | 7 | Livrable 1 — audit des données | rapport de normalisation à partir de `normalised/rapport_anomalies.txt` | 3–4 fiches | rien |
 | 8 | Livrable 3 — architecture | documente les trois couches et les choix (pas de PATCH, bases génériques, auth côté back) | 2–3 fiches | 2 |
 | 9 | Déploiement sur le VPS | mettre l'API et la base réparée sur le VPS de l'utilisateur ; hôte, accès et méthode **à demander avant d'agir**, aucun secret dans le dépôt | 🟡 à cadrer | 1..8 |
+| 10 | Refacto des profils (découpage du prof Robin) | ⏬ **dépriorisé** par Robin le 2026-10-14, à garder comme refacto à venir (ADR-056) : les 11 FK `id_client` / `id_hunter` / `id_realestatemanager` visent la PK du profil (`client.id`, `hunter.id`, `real_estate_manager.id`), plus `id_user`, le `sub` du JWT, qui ne doit pas se propager ; `AbstractClient`, classe de base sans table pour les champs communs ; rôle par défaut posé par le constructeur de chaque profil ; base de test aux `id ≠ id_user` | 💡 4-5 fiches | rien |
 
 ## Journal des décisions
 
