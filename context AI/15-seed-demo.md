@@ -110,8 +110,9 @@ le test du 2e appel tombe.
 ---
 
 <!-- FICHE:DEM2 -->
-## DEM2 [ ] — Jouer le parcours jusqu'à la visite
+## DEM2 [x] — Jouer le parcours jusqu'à la visite
 
+**Session** : 4b603c61-6273-4519-a6c1-80c6873b02e1
 **Dépend de** : `DEM1`.
 **Fichiers** : `API/src/app/scripts/seed_demo.py`, `API/tests/integration/test_seed_demo.py`, `tests/integration/test_propositions_visites.py` (lecture, modèle).
 
