@@ -8,3 +8,4 @@ QUAND LIRE : on relit un chantier clos ; l'index n'en garde qu'une ligne qui ren
 | `10-lot-migration.md` | on relit le socle du chantier LOT — **clos** « Lot de migration (schéma v3) », `LOT1..LOT12` |
 | `11-api-auth-rgpd-regles.md` | on relit le socle du chantier API — **clos** « API : auth, RGPD et règles métier », `API1..API12` |
 | `12-droits-moindre-privilege.md` | on relit le socle du chantier DRO — **clos** « Droits : moindre privilège », `DRO1..DRO11` |
+| `13-finitions-api.md` | on relit le socle du chantier FIN — **clos** « Finitions de l'API : erreurs et Swagger », `FIN1..FIN2` |

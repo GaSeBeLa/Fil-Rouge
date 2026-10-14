@@ -57,7 +57,6 @@ ordonné par ce qui débloque le reste.
 | 7 | Livrable 1 — audit des données | rapport de normalisation à partir de `normalised/rapport_anomalies.txt` | 3–4 fiches | rien |
 | 8 | Livrable 3 — architecture | documente les trois couches et les choix (pas de PATCH, bases génériques, auth côté back) | 2–3 fiches | 2 |
 | 9 | Déploiement sur le VPS | mettre l'API et la base réparée sur le VPS de l'utilisateur ; hôte, accès et méthode **à demander avant d'agir**, aucun secret dans le dépôt | 🟡 à cadrer | 1..8 |
-| 10 | Finitions de l'API : erreurs et Swagger | **à faire juste après le chantier DRO** (Seb, Discord, 13/10) : le `409` nomme la contrainte cassée (aujourd'hui « valeur en double ou référence inexistante », sans dire laquelle) ; un gestionnaire `500` qui écrit l'erreur imprévue dans les logs ; sous `id_client`, `id_hunter`, `id_realestatemanager`, la phrase « numéro du compte (`user.id`) » dans le Swagger (questions de Gabriel et Laurence) | 💡 1-2 fiches | DRO |
 | 11 | Réparer le banc v2/v3 | `docker/compare_v2_v3.sh` (Fil-Rouge-API) rendait **IDENTIQUES** à la fin du chantier LOT ; il rend **DIFFÉRENTES** au 13/10 (relecture DRO9) : le nombre de lignes diffère dans `commission_scale`, `estate_contact`, `hunter_rate_parameters`, `parameters_fees`. Trouver lequel des deux chemins a tort (`init-v3/` ou `migrations/v2-vers-v3/`), le corriger, et finir sur un banc IDENTIQUES | 💡 1 fiche | rien |
 
 ## Journal des décisions
@@ -411,3 +410,12 @@ de ce que le code dit déjà.
   équipes, « désactivé » contre « effacé » ; le banc `compare_v2_v3.sh` rend
   DIFFÉRENTES (comptes de lignes du seed, préexistant) ; `rapport-tests.md`
   périmé (258 tests). Relevé et écarts : `md/securite/matrice-droits-crud-par-role.md`.
+- **2026-10-14** — **Chantier FIN clos** (FIN1 à FIN2, 2 fiches sur 2) : le
+  `409` d'un refus de la base dit sa sorte et nomme la contrainte, jamais la
+  valeur refusée (`utils/constraint_messages.py`) ; le `500` rend un message
+  neutre et un numéro, le même dans le log avec la pile ; sous les 20 id de
+  compte du Swagger, « numéro du compte (`user.id`) ». **925 passed,
+  8 skipped, 6 xfailed** (Fil-Rouge-API `a5ed572`). Coût du chantier :
+  19 491 473. Laissé ouvert : deux erreurs pyright anciennes dans
+  `crud_router.py` (`reportInvalidTypeForm`) ; `__tablename__` sans
+  justification dans les modèles que FIN2 n'a pas touchés.

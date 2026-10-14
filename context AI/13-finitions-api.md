@@ -12,7 +12,9 @@ lisible, et le Swagger ne dit pas quel numéro mettre dans `id_client` (TODO 10)
 
 **Estimé.** 4 fiches · ≈20 $ — ≈5,05 $/fiche sur 4 clos (le 2026-10-14).
 
-**Fait.** Rien. Ouvert le 2026-10-14, cadré en 2 fiches, `FIN1` à jouer.
+**CLOS** le 2026-10-14. Ne se rejoue pas — ne sert plus qu'à relire son socle.
+
+**Fait.** FIN1..FIN2 (2026-10-14) : 409 qui nomme la contrainte sans la valeur refusée, 500 neutre avec référence dans le log, « numéro du compte (user.id) » sous les id du Swagger — estimé 4 fiches ≈20 $ · cadré 2 · joué 2 fiches 8,10 $.
 
 **Session** : da42f1a3-d291-47c1-a710-979822a907ab
 
