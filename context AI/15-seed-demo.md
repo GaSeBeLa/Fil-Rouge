@@ -137,8 +137,9 @@ verte, compte brut ; `pyright` 0 erreur. Mutant : supprimer l'étape des visites
 ---
 
 <!-- FICHE:DEM3 -->
-## DEM3 [ ] — Finir le parcours : vente, paiement, note, avis
+## DEM3 [x] — Finir le parcours : vente, paiement, note, avis
 
+**Session** : 4b603c61-6273-4519-a6c1-80c6873b02e1
 **Dépend de** : `DEM2`.
 **Fichiers** : `API/src/app/scripts/seed_demo.py`, `API/tests/integration/test_seed_demo.py`, `tests/integration/test_constraints_db.py` (lecture : `sale_payload`), `API/README.md`.
 

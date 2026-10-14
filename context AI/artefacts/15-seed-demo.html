@@ -21,9 +21,9 @@
     <p>Une commande remplit la base de dev avec un parcours complet (demande, mandat, biens proposés, visites, vente, paiement, note, avis) et 4 comptes de démo activés, un par rôle : le Swagger et la soutenance ont de quoi montrer.</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">3 fiches · 2 faites · en cours : DEM3</p>
+    <p class="mono" style="margin-top:.5rem">3 fiches · 3 faites</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -45,13 +45,14 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">DEM2</span></span>
         <details><summary><span class="titre">Jouer le parcours jusqu'à la visite</span><span class="etat">Faite</span></summary>
         <span class="note">test_seed_demo.py : 10 passed (demande launched, 3 sélections, 3 propositions, 3 visites, le client ne voit que les siennes) ; suite 937 passed, 8 skipped, 6 xfailed ; pyright 0 error ; mutant sans visites : 2 failed</span></details>
-        <span class="cout mono">≈5,9M (5 904 873) · 30 tours · 2,18 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">DEM3</span></span>
-        <details open><summary><span class="titre">Finir le parcours : vente, paiement, note, avis</span><span class="etat">En cours</span></summary>
-        <span class="note">Vente, paiement calculé, note du chasseur, avis, README et petit ADR ; dépend de DEM2</span></details></li>
+        <span class="cout mono">≈6,1M (6 087 755) · 31 tours · 2,25 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">DEM3</span></span>
+        <details><summary><span class="titre">Finir le parcours : vente, paiement, note, avis</span><span class="etat">Faite</span></summary>
+        <span class="note">test_seed_demo.py : 13 passed ; base de dev : estate_proposed 3, estate_searchrequest 3, visit 3, sale 1, payment 1 (paid, 3242.05), hunter_performance 1, review_media 1 ; suite 941 passed, 8 skipped, 6 xfailed ; pyright 0 error ; mutant montant constant : 1 failed</span></details>
+        <span class="cout mono">≈12,2M (12 233 976) · 50 tours · 3,93 $</span></li>
     </ul>
-    <p class="mono cout-hors">Hors fiches : ≈9,2M (9 162 312) · 51 tours · 4,59 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈19,8M (19 785 164) · 117 tours · 9,02 $</p>
+    <p class="mono cout-hors">Hors fiches : ≈10,0M (10 044 150) · 57 tours · 4,99 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈33,1M (33 083 860) · 174 tours · 13,42 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 
@@ -69,6 +70,7 @@
     <!-- ZONE:journal — une ligne par décision imprévue tranchée en cours de fiche -->
     <ul class="journal">
       <li><time datetime="2026-10-14">2026-10-14</time><span>DEM1 : les comptes de démo sont en @example.com (RFC 2606), pas en .invalid comme le disait la fiche : UserCreate (email-validator) refuse les noms à usage spécial (.invalid, .test, .local) ; DEM2 et DEM3 gardent example.com.</span></li>
+      <li><time datetime="2026-10-14">2026-10-14</time><span>DEM3 : bug trouvé par le seed, corrigé à part sur choix A de Seb (Fil-Rouge-API 7e40e8d) : build_vente cherchait le chasseur par hunter.id au lieu de id_user, invisible sur les 6 chasseurs de 02 (id = id_user), 404 au paiement pour tout chasseur neuf. Et : review_media n'est ajouté que par le chasseur auteur de la note (ADR-051) ; l'avis de démo est donc sa note et son média, pas un avis du client.</span></li>
     </ul>
   </section>
 
