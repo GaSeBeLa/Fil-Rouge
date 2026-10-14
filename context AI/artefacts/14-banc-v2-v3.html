@@ -21,9 +21,9 @@
     <p>Le banc base neuve = base migrée rend IDENTIQUES, et il tourne à chaque pytest : un écart casse les tests au lieu de passer inaperçu.</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="encours"></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">3 fiches · 1 faite · en cours : BAN2</p>
+    <p class="mono" style="margin-top:.5rem">3 fiches · 2 faites · en cours : BAN3</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -41,16 +41,17 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">BAN1</span></span>
         <details><summary><span class="titre">Rendre le banc IDENTIQUES</span><span class="etat">Faite</span></summary>
         <span class="note">compare_v2_v3.sh : IDENTIQUES, exit 0, 617 faits. Mutant sans 44 : DIFFÉRENTES, exit 1, nomme commission_scale 0/5. Mutant sans liste de démo : exit 1, nomme estate_contact 0/2469. pytest 926 passed, 8 skipped, 6 xfailed</span></details>
-        <span class="cout mono">≈4,6M (4 588 992) · 39 tours · 2,22 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">BAN2</span></span>
-        <details open><summary><span class="titre">Donner au conteneur api les fichiers SQL et psql</span><span class="etat">En cours</span></summary>
-        <span class="note">Le conteneur api reçoit psql et voit les fichiers SQL, en lecture seule. Ne dépend de rien.</span></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">BAN3</span></span>
-        <details><summary><span class="titre">Faire du banc un test pytest</span><span class="etat">Après BAN2</span></summary>
+        <span class="cout mono">≈5,2M (5 167 196) · 43 tours · 2,40 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">BAN2</span></span>
+        <details><summary><span class="titre">Donner au conteneur api les fichiers SQL et psql</span><span class="etat">Faite</span></summary>
+        <span class="note">psql 17.11 ; /api/sql/v2-vers-v3 : 41 .sql dans le conteneur, 41 sur l'hôte (40 avant BAN1) ; 0 .env sous /api/sql ; image 227 MB -&gt; 286 MB ; pytest 926 passed, 8 skipped, 6 xfailed</span></details>
+        <span class="cout mono">≈2,1M (2 062 299) · 13 tours · 0,80 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">BAN3</span></span>
+        <details open><summary><span class="titre">Faire du banc un test pytest</span><span class="etat">En cours</span></summary>
         <span class="note">Le banc devient un test pytest, le script se réduit à le lancer. Attend BAN1 et BAN2.</span></details></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈4,3M (4 291 025) · 32 tours · 2,50 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈8,9M (8 880 017) · 71 tours · 4,72 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈11,5M (11 520 520) · 88 tours · 5,70 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 

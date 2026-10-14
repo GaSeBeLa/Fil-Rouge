@@ -99,8 +99,9 @@ et le diff nomme `commission_scale`. Mutant 2 : sans la liste de démo, il nomme
 ---
 
 <!-- FICHE:BAN2 -->
-## BAN2 [ ] — Donner au conteneur api les fichiers SQL et psql
+## BAN2 [x] — Donner au conteneur api les fichiers SQL et psql
 
+**Session** : 990a5a18-5517-41c2-b408-e47667014e06
 **Dépend de** : rien.
 **Fichiers** : `../Fil-Rouge-API/API/Dockerfile`, `../Fil-Rouge-API/docker/docker-compose.yml`
 (oui donné le 2026-10-14 pour ces montages seulement).
