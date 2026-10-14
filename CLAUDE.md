@@ -112,6 +112,7 @@ et seulement dans ce cas, ouvrir l'index.
 | relire une fiche `DRO1` à `DRO11` | `context AI/12-droits-moindre-privilege.md` — chantier « Droits : moindre privilège » **clos** le 2026-10-13, ne se rejoue pas |
 | relire une fiche `FIN1` à `FIN2` | `context AI/13-finitions-api.md` — chantier « Finitions de l'API : erreurs et Swagger » **clos** le 2026-10-14, ne se rejoue pas |
 | relire une fiche `BAN1` à `BAN3` | `context AI/14-banc-v2-v3.md` — chantier « Réparer le banc v2/v3 » **clos** le 2026-10-14, ne se rejoue pas |
+| jouer une fiche `DEM1` à `DEM3` | `context AI/15-seed-demo.md` — chantier « Seed de démo » **ouvert** le 2026-10-14 ; `/vlp:tache` n'en lit que le socle et la fiche |
 | reprendre après une longue interruption | `context AI/08-etat.md` |
 
 ## Économie de contexte

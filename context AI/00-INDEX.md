@@ -23,6 +23,7 @@ a l'air proche.
 |---|---|
 | `00-INDEX-archive.md` | on relit un chantier clos — chacun y a sa ligne, triée par numéro |
 | `09-annexe-*.md` | produits par les fiches `C*` — ne s'ouvrent que si une fiche les nomme |
+| `15-seed-demo.md` | on joue une fiche `DEM*` — chantier **ouvert** « Seed de démo », `DEM1..DEM3` |
 | *(hors dossier)* `livrables/2-modelisation/09-rapport-ecarts-contraintes.md` | le livrable du chantier `C` : écarts entre le MPD et les règles métier |
 
 ## Hors contexte IA — les sources de vérité du projet
