@@ -64,8 +64,8 @@ Proposé par le prof, **dépriorisé par lui** (« vous avez des choses plus imp
 
 1. **`user` sert à la connexion seulement.** Son `id` est une information sensible, c'est le `sub` du jeton JWT (`utils/security.py:143`), et il ne se propage pas dans les tables métier.
 2. **Les 11 clés visent la PK du profil** : `client(id)`, `hunter(id)`, `real_estate_manager(id)` (l'option 3 ci-dessus). Les noms `id_client`, `id_hunter` et `id_realestatemanager` deviennent exacts, sans renommage. `user.id` ne reste que dans la colonne `id_user` des trois profils.
-3. **`AbstractClient`, héritage dans le code** : une classe de base SQLModel, **sans table**. Elle porte les champs communs aux trois profils : `created_at`, `id_user`, `first_name`, `last_name`, `phone_number`, `country_iso`, `gender`. `Client`, `Hunter` et `RealEstateManager` en héritent ; les tables SQL ne changent pas. Écart à aligner d'abord : `country_iso` est obligatoire chez `Client` et facultatif chez `Hunter`.
-4. **Le rôle est lié à `AbstractClient`** : le constructeur de chaque profil pose son rôle par défaut (`Client` → rôle Client, `Hunter` → Hunter, `RealEstateManager` → Manager).
+3. **`AbstractPerson`, héritage dans le code** : une classe de base SQLModel, **sans table**. Nommée `AbstractClient` sur le schéma et dans le message de Robin ; renommée `AbstractPerson` sur la remarque de Laurence (Discord, 14/10/2026), car elle sert aussi à `Hunter` et à `RealEstateManager`. Elle porte les champs communs aux trois profils : `created_at`, `id_user`, `first_name`, `last_name`, `phone_number`, `country_iso`, `gender`. `Client`, `Hunter` et `RealEstateManager` en héritent ; les tables SQL ne changent pas. Écart à aligner d'abord : `country_iso` est obligatoire chez `Client` et facultatif chez `Hunter`.
+4. **Le rôle est lié à `AbstractPerson`** : le constructeur de chaque profil pose son rôle par défaut (`Client` → rôle Client, `Hunter` → Hunter, `RealEstateManager` → Manager).
 5. **Ce que le chantier devra aussi faire** :
    * une migration (la 45) qui convertit les valeurs des 11 colonnes, puis rebranche les FK ;
    * « le sien » compare à l'`id` du profil connecté, lu une fois par requête ;
@@ -98,5 +98,6 @@ Proposé par le prof, **dépriorisé par lui** (« vous avez des choses plus imp
 | Bug du paiement | Fil-Rouge-API `7e40e8d` |
 | Swagger expliqué | FIN2 ; Fil-Rouge-API `ea67e20` |
 | Refacto à venir, dépriorisée | Robin HOTTON, message relayé par Sébastien sur Discord, 14/10/2026 ; schéma `decoupage_robin.png` (Discord, même jour) |
+| Nom `AbstractPerson` au lieu de `AbstractClient` | Laurence, Discord, 14/10/2026 |
 | `user.id` = `sub` du JWT | `API/src/app/utils/security.py:143` |
 | `is_hunter_ai` déjà au schéma | `01_create_fil_rouge_immobilier.sql:300` |
