@@ -65,7 +65,7 @@ Le métier a sa propre règle : « Les mandats et le registre des mandats sont c
 
 La base ne peut pas supprimer une personne liée à autre chose. Ses 38 clés étrangères sont toutes en `ON DELETE RESTRICT`, aucune en `CASCADE` (`01`, compté le 08/10/2026). Un compte cité par un client renvoie 409 (`API/tests/integration/test_users_db.py:95-104`).
 
-L'API a pourtant une route DELETE sur ses 20 ressources (`API/src/app/routes/crud_router.py:104-110`). Un compte libre se supprime (`test_users_db.py:89-92`). Aucune anonymisation n'est codée (recherche de `anonym` dans `API/src` le 08/10/2026 : 0 occurrence).
+L'API a pourtant une route DELETE sur ses 20 ressources (`API/src/app/routes/crud_router.py:104-110`). Un compte libre se supprime (`test_users_db.py:89-92`). Aucune anonymisation n'est codée (recherche de `anonym` dans `API/src` le 08/10/2026 : 0 occurrence). État au 08/10/2026 : codé depuis le 12/10/2026 (Décision, points 3 et 10).
 
 **Options envisagées**
 
@@ -86,7 +86,7 @@ Sous-choix sur la route, laissé par le client (Q-JEF-15) :
 
 **Décision**
 
-✅ veut dire « établi par une source », pas « codé ». Rien de cette fiche n'est codé.
+✅ veut dire « établi par une source », pas « codé ». ~~Rien de cette fiche n'est codé.~~ Codé le 12/10/2026 (fiche API10) : la route d'anonymisation et la fermeture de DELETE (points 3 et 10). Pas encore codé : les dates `deactivated_at` et `anonymized_at` (Conséquences).
 
 1. ✅ **Sur une demande d'effacement, l'admin désactive le compte** : `is_activated = FALSE` (`01:173`). Le compte ne peut plus se connecter (ADR-028).
 2. ✅ **Aucune personne ne se supprime.** L'effacement passe par l'anonymisation (Q-ACC-08). La CNIL l'admet : « en lieu et place de mesures d'effacement, les données peuvent faire l'objet d'un processus d'anonymisation afin de rendre impossible pour quiconque la « ré-identification » des personnes concernées » (guide CNIL). Limite : voir Conséquences.
@@ -160,7 +160,7 @@ Sous-choix sur la route, laissé par le client (Q-JEF-15) :
 
 **Questions ouvertes** 🟡
 
-Aucune. Le point de départ des délais, la seconde étape et la fermeture de DELETE sont des propositions de l'équipe, adoptées avec la fiche (Décision, points 5, 9, 10). Ce qui reste est du code à écrire (Conséquences).
+Aucune. Le point de départ des délais, la seconde étape et la fermeture de DELETE sont des propositions de l'équipe, adoptées avec la fiche (Décision, points 5, 9, 10). ~~Ce qui reste est du code à écrire (Conséquences).~~ Codé le 12/10/2026 (fiche API10), sauf les dates `deactivated_at` et `anonymized_at` (Conséquences).
 
 Où l'on a cherché X et son point de départ : le StarterPack (`REGISTRE-RGPD.md`, X laissé vide, l. 27 ; `Readme.md:268-270` ; `SOUVERAINETE-SECURITE-IA.md` ; les autres fiches de `documents utiles/`, recherche de `anonym`, `effac`, `conservation`, `supprim`) ; le dépôt (`reg:253`, `:1063-1065` ; la carte Q-JEF-15 ; la matrice du 02/10, question 15 ; `md/` et `context AI/`, recherche de `anonymis`, `durée de conservation`, `prescription`) ; le web (voir le bandeau). Le décret ne fixe pas de point de départ dans l'article lu.
 
@@ -180,7 +180,7 @@ Où l'on a cherché X et son point de départ : le StarterPack (`REGISTRE-RGPD.m
 | 38 clés `RESTRICT`, 0 `CASCADE` | même fichier, compté le 08/10/2026 |
 | Route DELETE commune ; tests de suppression | `API/src/app/routes/crud_router.py:104-110` ; `API/tests/integration/test_users_db.py:89-104` |
 | Faux mot de passe : aucune connexion | `API/src/app/utils/security.py:41-43` |
-| Aucune anonymisation codée | recherche de `anonym` dans `API/src`, 08/10/2026 : 0 occurrence |
+| Aucune anonymisation codée, au 08/10/2026 (codée le 12/10/2026, fiche API10) | recherche de `anonym` dans `API/src`, 08/10/2026 : 0 occurrence ; `API/src/app/services/anonymization_service.py` |
 | Décret : « Les mandats et le registre des mandats sont conservés pendant dix ans. » | décret n° 72-678 du 20 juillet 1972, article 72, doc officielle, [Légifrance](https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000033202014), « Version en vigueur depuis le 01/10/2016 », lue le 08/10/2026 (relecteur, puis arbitre) |
 | Mandats de recherche dans le registre : « tous les mandats visés par ce texte sont mentionnés sur un registre unique » ; un registre séparé pour les mandats de recherche n'est pas conforme | Cass. 1re civ., 10/12/2014, n° 13-24.352, jurisprudence officielle, [Légifrance](https://www.legifrance.gouv.fr/juri/id/JURITEXT000029899112/), lue le 08/10/2026 (relecteur) |
 | Quelles activités le décret couvre | loi n° 70-9 du 2 janvier 1970, article 1 : **non lu** |
