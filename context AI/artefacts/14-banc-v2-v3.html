@@ -21,9 +21,9 @@
     <p>Le banc base neuve = base migrée rend IDENTIQUES, et il tourne à chaque pytest : un écart casse les tests au lieu de passer inaperçu.</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="encours"></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="encours"></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">3 fiches · 0 faite · en cours : BAN1</p>
+    <p class="mono" style="margin-top:.5rem">3 fiches · 1 faite · en cours : BAN2</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -38,16 +38,19 @@
     <h2>Les fiches, dans l'ordre des dépendances</h2>
     <!-- ZONE:fiches — data-etat vaut faite | encours | bloquee ; absent = à faire -->
     <ul class="fiches">
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">BAN1</span></span>
-        <details open><summary><span class="titre">Rendre le banc IDENTIQUES</span><span class="etat">En cours · BAN2 peut partir en même temps</span></summary>
-        <span class="note">Migration 44 pour les 7 lignes de paramètres ; le banc ne compte plus les contacts de démo. Ne dépend de rien.</span></details></li>
-      <li class="fiche"><span class="gauche"><span class="id">BAN2</span></span>
-        <details><summary><span class="titre">Donner au conteneur api les fichiers SQL et psql</span><span class="etat">À lancer · en même temps que BAN1</span></summary>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">BAN1</span></span>
+        <details><summary><span class="titre">Rendre le banc IDENTIQUES</span><span class="etat">Faite</span></summary>
+        <span class="note">compare_v2_v3.sh : IDENTIQUES, exit 0, 617 faits. Mutant sans 44 : DIFFÉRENTES, exit 1, nomme commission_scale 0/5. Mutant sans liste de démo : exit 1, nomme estate_contact 0/2469. pytest 926 passed, 8 skipped, 6 xfailed</span></details>
+        <span class="cout mono">≈4,6M (4 588 992) · 39 tours · 2,22 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">BAN2</span></span>
+        <details open><summary><span class="titre">Donner au conteneur api les fichiers SQL et psql</span><span class="etat">En cours</span></summary>
         <span class="note">Le conteneur api reçoit psql et voit les fichiers SQL, en lecture seule. Ne dépend de rien.</span></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">BAN3</span></span>
-        <details><summary><span class="titre">Faire du banc un test pytest</span><span class="etat">Après BAN1, BAN2</span></summary>
+        <details><summary><span class="titre">Faire du banc un test pytest</span><span class="etat">Après BAN2</span></summary>
         <span class="note">Le banc devient un test pytest, le script se réduit à le lancer. Attend BAN1 et BAN2.</span></details></li>
     </ul>
+    <p class="mono cout-hors">Hors fiches : ≈4,3M (4 291 025) · 32 tours · 2,50 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈8,9M (8 880 017) · 71 tours · 4,72 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 

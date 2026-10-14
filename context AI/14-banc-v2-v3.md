@@ -69,8 +69,9 @@
 ---
 
 <!-- FICHE:BAN1 -->
-## BAN1 [ ] — Rendre le banc IDENTIQUES
+## BAN1 [x] — Rendre le banc IDENTIQUES
 
+**Session** : 990a5a18-5517-41c2-b408-e47667014e06
 **Dépend de** : rien.
 **Fichiers** : `../Fil-Rouge-API/docker/migrations/v2-vers-v3/44_parametres-de-depart.sql` (nouveau),
 `../Fil-Rouge-API/docker/compare_v2_v3.sh`, `../Fil-Rouge-API/docker/init-v3/05_parametres.sql` (lu, pas modifié).
