@@ -228,10 +228,11 @@ sur `estate` → le test du prix mis à jour tombe.
 ---
 
 <!-- FICHE:FLX5 -->
-## FLX5 [ ] — Créer le schéma `olap` en étoile
+## FLX5 [x] — Créer le schéma `olap` en étoile
 
+**Session** : 53337d1c-79b2-439c-8cea-3a6e446e0d7b
 **Dépend de** : `FLX2`.
-**Fichiers** : `docker/init-v3/08_olap.sql`, `docker/migrations/v2-vers-v3/50_schema-olap.sql`
+**Fichiers** : `docker/init-v3/08_olap.sql`, `docker/migrations/v2-vers-v3/49_schema-olap.sql`
 (neufs), `docker/init-v3/README.md` ; lus : `documents utiles/OLAP.md` (StarterPack),
 `01_create_fil_rouge_immobilier.sql` (`sale`, `payment`, `mandate`, `visit`, `estate`,
 `hunter`, `client`) — et rien d'autre.
