@@ -119,8 +119,9 @@ identique (diff vide). Le nouveau test `test_profiles_share_abstract_person`
 ---
 
 <!-- FICHE:PRF2 -->
-## PRF2 [ ] — Faire viser la PK des fiches aux 11 FK, côté base
+## PRF2 [x] — Faire viser la PK des fiches aux 11 FK, côté base
 
+**Session** : 2531ac4a-0b87-425d-960c-b4cd009e06ba
 **Dépend de** : rien.
 **Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql`,
 `docker/init-v3/02_migration.sql`,
