@@ -338,8 +338,9 @@ semaines → le test du délai tombe.
 ---
 
 <!-- FICHE:FLX7 -->
-## FLX7 [ ] — Faire démarrer Elasticsearch et Kibana
+## FLX7 [x] — Faire démarrer Elasticsearch et Kibana
 
+**Session** : 53337d1c-79b2-439c-8cea-3a6e446e0d7b
 **Dépend de** : `FLX1`.
 **Fichiers** : `docker/docker-compose.yml`, `docker/.env.exemple`, `API/README.md`
 (§ profils) ; lu : `TP1 - Introduction/kit-TP/docker-compose.yml` du kit ELK — et

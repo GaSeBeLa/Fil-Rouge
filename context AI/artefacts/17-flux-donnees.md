@@ -8,7 +8,7 @@ Trois DAG tournent chaque nuit (annonces, OLAP, index), la recherche de biens pa
 - FLX4 : DAG annonces_import joué 2 fois le 15/10 : estate 2556 → 2707 (+151), historique 151 ; 2e passage +0, historique 151 ; airflow 78 passed ; API 975 passed, 7 xfailed ; banc 1 passed
 - FLX5 : \dt olap.* : 6 tables ; grep name|email|phone dans 08_olap.sql : 0 ; banc 1 passed (mutant : 1 failed) ; API 975 passed, 7 xfailed
 - FLX6 : dags test olap_refresh joué 2 fois : 501 lues, 501 chargées, 0 rejet ; fait_ventes 501 = sale 501 aux deux passages (max id 501) ; rapport gold/olap/2026-10-15.json ; airflow 93 passed (mutant délai en jours : 3 failed) ; API 988 passed, 7 xfailed
-- FLX7 : Elasticsearch et Kibana 9.5.4 dans le profil elk ; dépend de FLX1
+- FLX7 : --profile elk up -d : _cluster/health status green (1 nœud) ; api/status level available ; es-setup OK ; up -d seul : 2 services ; Kibana 981 Mio / 1 Gio ; API 988 passed, 7 xfailed
 - FLX8 : DAG estates_index : estate vers l'index estates, sans contact du vendeur ; dépend de FLX4, FLX7
 - FLX9 : Route GET /estates/search, 503 si Elasticsearch est absent ; dépend de FLX8
 - FLX10 : Logs JSON de l'API, Logstash, data stream logs-api-default ; dépend de FLX7
