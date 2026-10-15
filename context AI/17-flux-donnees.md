@@ -33,10 +33,12 @@ Airflow, sans Docker, sans MinIO (cours Airflow, exo 8). Python touché : `pyrig
 - **base d'Airflow** : une base `airflow` dans **notre** PostgreSQL (service `db`),
   jamais mêlée à `fil_rouge_immobilier` ; **OLAP** : schéma `olap` de `fil_rouge_immobilier` ;
 - **`estate.source_reference VARCHAR(20)`**, NULL permis, `UNIQUE` (migration **48**) ;
-  **`estate_price_history`** (migration **49**) : `id SERIAL PK`, `created_at TIMESTAMP
+  **`estate_price_history`** (migration **49**) : `id INTEGER GENERATED ALWAYS AS
+  IDENTITY PRIMARY KEY` (comme tout le schéma, jamais `SERIAL`), `created_at TIMESTAMP
   NOT NULL DEFAULT (now() AT TIME ZONE 'utc')`, `id_estate INTEGER NOT NULL REFERENCES
   estate(id) ON DELETE RESTRICT`, `price INTEGER NOT NULL CHECK (price >= 0)`,
-  `seen_at DATE NOT NULL`, `UNIQUE (id_estate, seen_at)` — noms donnés à Gabriel pour le MPD ;
+  `seen_at DATE NOT NULL`, `CONSTRAINT uq_estate_price_history_estate_seen UNIQUE
+  (id_estate, seen_at)` — recopiés du MPD de Gabriel (Discord, 2026-10-15) ;
 - **OLAP** = le modèle du sujet (`documents utiles/OLAP.md`, StarterPack) : `fait_ventes`
   (une ligne par vente) et `dim_temps`, `dim_chasseur`, `dim_client`, `dim_bien`,
   `dim_secteur` ; **aucun nom, e-mail ni téléphone** dans `olap` ;
@@ -236,7 +238,8 @@ Relie chaque colonne du modèle du sujet à sa source réelle, dans une table
 `honoraires`, `commission_chasseur`, `nb_visites_avant_achat`, `delai_semaines`,
 `mandat_exclusif`. Une mesure sans source se dit, elle ne s'invente pas.
 Crée le schéma `olap` : `fait_ventes` (grain : une vente, `sale.id` gardé comme
-clé naturelle unique) et les 5 dimensions, clés de substitution `SERIAL`. RGPD :
+clé naturelle unique) et les 5 dimensions, clés de substitution `GENERATED ALWAYS
+AS IDENTITY` (comme `01`). RGPD :
 les dimensions personnes n'ont **que** des numéros et des attributs non
 identifiants (ancienneté, IA ou non, ville) ; ni nom, ni e-mail, ni téléphone.
 `dim_temps` au jour. Montants : `INTEGER` pour les prix, `NUMERIC(12,2)` pour
