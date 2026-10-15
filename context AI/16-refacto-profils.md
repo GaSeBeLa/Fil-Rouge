@@ -265,8 +265,9 @@ tomber. Banc v2/v3 et pytest tout verts (comptes bruts).
 ---
 
 <!-- FICHE:PRF7 -->
-## PRF7 [ ] — Lire le rôle sur la fiche ou sur `system_role`
+## PRF7 [x] — Lire le rôle sur la fiche ou sur `system_role`
 
+**Session** : 719fade3-b24b-449b-b610-afa4674442a1
 **Dépend de** : `PRF5`, `PRF6`.
 **Fichiers** : sous `API/src/app/` : `utils/roles.py`, `services/signup_service.py`,
 `services/user_service.py`, `routes/user_router.py`, `scripts/create_admin.py`,

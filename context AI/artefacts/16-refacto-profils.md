@@ -8,7 +8,7 @@ Les 11 FK visent la PK des fiches, le rôle vit sur la fiche ou sur user.system_
 - PRF4 : hunter_rows, manager_rows, build_vente et seed_demo sur hunter.id ; test_sien_hunter_fiche passed ; mutants handles_mandate et search_request Hunter tués ; 2 oublis (actor.id) révélés par PRF5 et corrigés dans son commit ; relecture ACCEPTÉE
 - PRF5 : base de test : id = id_user vaut 0 sur 18 clients, 6 chasseurs, 1 manager (ids à partir de 1001) ; 967 passed, 7 xfailed ; pyright tests 0, src 2 anciennes ; 6 mutants user.id tués ; base de dev effacée et resemée (seed_demo passé) ; relecture ACCEPTÉE
 - PRF6 : test_une_fiche_par_compte : 3 passed (2e fiche 409, system_role sur compte à fiche 409, fiche sur compte Reader 409) ; mutant sans triggers : 3 failed ; pytest 970 passed, 7 xfailed (banc v2/v3 compris) ; pyright 2 errors avant / 2 après ; API b3c6d92
-- PRF7 : get_principal lit le rôle sur la fiche ou system_role ; dépend de PRF5 et PRF6
+- PRF7 : grep id_role src/app : 16 lignes, écritures + modèle + 1 commentaire ; test_roles 27 passed (5 rôles + 403) ; mutant id_role : 6 failed dont Reader ; pytest 976 passed, 7 xfailed ; pyright src 2 anciennes (user_service), tests 0 ; API c94519a
 - PRF8 : retrait de user.id_role, role à 3 lignes, migration 47 ; dépend de PRF7
 - PRF9 : ADR-057, README, matrice des droits, Swagger ; dépend de PRF8
 ## Journal
