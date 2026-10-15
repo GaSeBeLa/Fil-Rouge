@@ -12,7 +12,9 @@ vit sur le compte. Le chantier fait viser la PK des fiches et sort le rôle du c
 
 **Estimé.** 10 fiches · ≈48 $ — ≈4,81 $/fiche sur 7 clos (le 2026-10-15).
 
-**Fait.** Rien. Ouvert le 2026-10-15, cadré en 9 fiches, `PRF1` à jouer.
+**CLOS** le 2026-10-15. Ne se rejoue pas — ne sert plus qu'à relire son socle.
+
+**Fait.** PRF1..PRF9 (2026-10-15) : Les 11 FK visent la PK des fiches, le rôle vit sur la fiche ou sur user.system_role, une fiche au plus par compte (trigger), id_role retiré, ADR-057 codé — estimé 10 fiches ≈48 $ · cadré 9 · joué 9 fiches 62,51 $.
 
 **Session** : f022f081-0f47-40d8-a130-39e8bee7a307
 

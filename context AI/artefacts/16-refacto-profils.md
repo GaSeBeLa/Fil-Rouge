@@ -18,3 +18,6 @@ Les 11 FK visent la PK des fiches, le rôle vit sur la fiche ou sur user.system_
 - 2026-10-15 : PRF6 : system_role s'écrit par l'API (UserCreate, UserUpdate), réservé à l'Admin au PUT (ADMIN_ONLY_FIELDS) ; le 409 du trigger nomme la contrainte one_profile_per_user ; test_constraints_db prend un compte neuf (le compte 1 est un hunter) ; migration 46 jouée sur la base de dev.
 - 2026-10-15 : PRF8 : 46 rendue rejouable sans id_role ; test_a_missing_admin_role_is_said supprimé (create_admin ne lit plus role) ; base de dev refaite et seed rejoué : l'équipe refait sa base après le pull.
 ## Bilan
+- Livré : Les 11 FK visent la PK des fiches, le rôle vit sur la fiche ou sur user.system_role, une fiche au plus par compte (trigger), id_role retiré, ADR-057 codé
+- Surpris : Les tests supposaient id = id_user ; le décalage des ids de test à 1001 a révélé 2 oublis de PRF4 dans le code
+- Estimé : estimé 10 fiches ≈48 $ · cadré 9 · joué 9 fiches 62,51 $

@@ -19,15 +19,14 @@
   </header>
 
   <nav class="sommaire" aria-label="Sommaire"><a href="#encours">Chantier en cours</a><a href="#todo">Chantiers possibles</a><a href="#clos">Chantiers clos</a></nav>
-  <nav class="pages" aria-label="Les autres pages">Les autres pages : <a href="https://claude.ai/artifact/BFBj2LT7X1PwCu7mzbZFBy">la page du chantier</a></nav>
 
   <section id="encours">
     <h2>Chantier en cours</h2>
     <!-- ZONE:encours — remplacé à chaque ouverture, remis à « aucun » à chaque clôture.
          /tache n'y touche pas : l'avancement fiche par fiche est sur la page du chantier. -->
     <div class="encours">
-      <div class="titre">Refacto des profils <span class="badge" data-etat="cours">en cours</span></div>
-      <div>Fiches <span class="mono">PRF1–PRF9</span> — <a href="https://claude.ai/artifact/BFBj2LT7X1PwCu7mzbZFBy">la page du chantier</a></div>
+      <div class="titre">Aucun chantier ouvert</div>
+      <div>Lancer <span class="mono">/vlp:chantier</span> pour en ouvrir un.</div>
     </div>
   </section>
 
@@ -42,22 +41,28 @@
           <li class="carte-todo" data-taille="moyen" data-pret="oui"><span class="gauche"><span class="rang mono">7</span></span><details><summary><span class="titre">Livrable 1 — audit des données</span></summary><div class="detail">rapport de normalisation à partir de <span class="mono">normalised/rapport_anomalies.txt</span></div></details><span class="meta"><span class="seg">3–4 fiches</span></span></li>
           <li class="carte-todo" data-taille="moyen" data-pret="oui"><span class="gauche"><span class="rang mono">8</span><span class="dep mono">← 2</span></span><details><summary><span class="titre">Livrable 3 — architecture</span></summary><div class="detail">documente les trois couches et les choix (pas de PATCH, bases génériques, auth côté back)</div></details><span class="meta"><span class="seg">2–3 fiches</span></span></li>
           <li class="carte-todo" data-taille="pas-estime" data-pret="non"><span class="gauche"><span class="rang mono">9</span><span class="dep mono">← 1..8</span></span><details><summary><span class="titre">Déploiement sur le VPS</span></summary><div class="detail">mettre l'API et la base réparée sur le VPS de l'utilisateur ; hôte, accès et méthode <strong>à demander avant d'agir</strong>, aucun secret dans le dépôt</div></details><span class="meta"><span class="seg">🟡 à cadrer</span></span></li>
-          <li class="carte-todo" data-taille="gros" data-pret="oui"><span class="gauche"><span class="rang mono">10</span> <span class="badge" data-etat="cours">en cours</span></span><details><summary><span class="titre">Refacto des profils (découpage du prof Robin)</span></summary><div class="detail">⏬ <strong>dépriorisé</strong> par Robin le 2026-10-14, à garder comme refacto à venir (ADR-056) : les 11 FK <span class="mono">id_client</span> / <span class="mono">id_hunter</span> / <span class="mono">id_realestatemanager</span> visent la PK du profil (<span class="mono">client.id</span>, <span class="mono">hunter.id</span>, <span class="mono">real_estate_manager.id</span>), plus <span class="mono">id_user</span>, le <span class="mono">sub</span> du JWT, qui ne doit pas se propager ; <span class="mono">AbstractPerson</span> (nommée <span class="mono">AbstractClient</span> sur le schéma de Robin, renommée sur la remarque de Laurence), classe de base sans table pour les champs communs ; rôle par défaut posé par le constructeur de chaque profil ; base de test aux <span class="mono">id ≠ id_user</span></div></details><span class="meta"><span class="seg">💡 4-5 fiches</span></span></li>
+          <li class="carte-todo" data-taille="gros" data-pret="oui"><span class="gauche"><span class="rang mono">10</span></span><details><summary><span class="titre">Refacto des profils (découpage du prof Robin)</span></summary><div class="detail">⏬ <strong>dépriorisé</strong> par Robin le 2026-10-14, à garder comme refacto à venir (ADR-056, remplacé par ADR-057 le 2026-10-15) : les 11 FK <span class="mono">id_client</span> / <span class="mono">id_hunter</span> / <span class="mono">id_realestatemanager</span> visent la PK du profil (<span class="mono">client.id</span>, <span class="mono">hunter.id</span>, <span class="mono">real_estate_manager.id</span>), plus <span class="mono">id_user</span>, le <span class="mono">sub</span> du JWT, qui ne doit pas se propager ; <span class="mono">AbstractPerson</span> (nommée <span class="mono">AbstractClient</span> sur le schéma de Robin, renommée sur la remarque de Laurence), classe de base sans table pour les champs communs ; rôle par défaut posé par le constructeur de chaque profil ; base de test aux <span class="mono">id ≠ id_user</span> ; 🟢 <strong>ouvert le 2026-10-15</strong> en chantier PRF (<span class="mono">context AI/16-refacto-profils.md</span>, 9 fiches) : migrations 45, 46, 47 (PRF2, PRF6, PRF8) ; <strong>en fin de chantier (PRF8) : base de dev refaite et <span class="mono">seed_demo</span> rejoué</strong>, puis chaque membre refait sa base et rejoue le seed après le pull</div></details><span class="meta"><span class="seg">💡 4-5 fiches</span></span></li>
         </ol>
   </section>
 
   <section id="clos">
     <h2>Chantiers clos — ils ne se rejouent pas</h2>
     <!-- ZONE:clos — une ligne ajoutée à chaque clôture, la plus récente en haut -->
-    <img src="couts.svg" alt="Coût des chantiers clos en tokens : 7 barres, du plus ancien au plus récent ; le plus cher : Droits : moindre privilège" data-couts="{&quot;couleur&quot;: &quot;#8f5a0f&quot;, &quot;barres&quot;: [[&quot;Contraintes manquantes du MPD&quot;, 31326311, &quot;≈31,3M (31 326 311)&quot;], [&quot;Lot de migration (schéma v3)&quot;, 116219396, &quot;≈116,2M (116 219 396)&quot;], [&quot;API : auth, RGPD et règles métier&quot;, 140122204, &quot;≈140,1M (140 122 204)&quot;], [&quot;Droits : moindre privilège&quot;, 174326604, &quot;≈174,3M (174 326 604)&quot;], [&quot;Finitions de l'API : erreurs et Swagger&quot;, 19491473, &quot;≈19,5M (19 491 473)&quot;], [&quot;Réparer le banc v2/v3&quot;, 17998587, &quot;≈18,0M (17 998 587)&quot;], [&quot;Seed de démo&quot;, 33892230, &quot;≈33,9M (33 892 230)&quot;]]}">
+    <img src="couts.svg" alt="Coût des chantiers clos en tokens : 8 barres, du plus ancien au plus récent ; le plus cher : Droits : moindre privilège" data-couts="{&quot;couleur&quot;: &quot;#8f5a0f&quot;, &quot;barres&quot;: [[&quot;Contraintes manquantes du MPD&quot;, 31326311, &quot;≈31,3M (31 326 311)&quot;], [&quot;Lot de migration (schéma v3)&quot;, 116219396, &quot;≈116,2M (116 219 396)&quot;], [&quot;API : auth, RGPD et règles métier&quot;, 140122204, &quot;≈140,1M (140 122 204)&quot;], [&quot;Droits : moindre privilège&quot;, 174326604, &quot;≈174,3M (174 326 604)&quot;], [&quot;Finitions de l'API : erreurs et Swagger&quot;, 19491473, &quot;≈19,5M (19 491 473)&quot;], [&quot;Réparer le banc v2/v3&quot;, 17998587, &quot;≈18,0M (17 998 587)&quot;], [&quot;Seed de démo&quot;, 33892230, &quot;≈33,9M (33 892 230)&quot;], [&quot;Refacto des profils&quot;, 164941175, &quot;≈164,9M (164 941 175)&quot;]]}">
     <details class="clos">
-      <summary><span class="resume-clos">7 chantiers clos · ≈533,4M (533 376 805) tokens · 206,64 $ sur 6 clos mesurés</span></summary>
+      <summary><span class="resume-clos">8 chantiers clos · ≈698,3M (698 317 980) tokens · 269,15 $ sur 7 clos mesurés</span></summary>
     <div class="tableau">
       <table>
         <thead>
           <tr><th>Chantier</th><th>Fiches</th><th>Clos le</th><th>Tokens</th><th>Ce qu'il a livré</th></tr>
         </thead>
         <tbody>
+          <tr>
+            <td><a href="https://claude.ai/artifact/BFBj2LT7X1PwCu7mzbZFBy">Refacto des profils</a> <span class="badge" data-etat="clos">clos</span></td>
+            <td class="mono">PRF1–PRF9</td><td class="mono">2026-10-15</td>
+            <td class="mono">62,51 $ · ≈164,9M (164 941 175)</td>
+            <td>Les 11 FK visent la PK des fiches, le rôle vit sur la fiche ou sur user.system_role, une fiche au plus par compte (trigger), id_role retiré, ADR-057 codé</td>
+          </tr>
           <tr>
             <td><a href="https://claude.ai/artifact/K1Uj64nuaYSmLWdHGWLtnD">Seed de démo</a> <span class="badge" data-etat="clos">clos</span></td>
             <td class="mono">DEM1–DEM3</td><td class="mono">2026-10-14</td>
@@ -103,7 +108,7 @@
           </tr>
         </tbody>
         <tfoot>
-          <tr><td colspan="3">Total cumulé</td><td class="mono"><strong>≈533,4M (533 376 805)</strong></td><td class="mono">206,64 $ sur 6 clos mesurés</td></tr>
+          <tr><td colspan="3">Total cumulé</td><td class="mono"><strong>≈698,3M (698 317 980)</strong></td><td class="mono">269,15 $ sur 7 clos mesurés</td></tr>
         </tfoot>
       </table>
     </div>
