@@ -21,9 +21,9 @@
     <p>Les 11 FK visent la PK des fiches, le rôle vit sur la fiche ou sur user.system_role, une fiche au plus par compte ; tous les tests passent, banc v2/v3 compris</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">9 fiches · 2 faites · en cours : PRF3</p>
+    <p class="mono" style="margin-top:.5rem">9 fiches · 3 faites · en cours : PRF4</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -45,18 +45,19 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">PRF2</span></span>
         <details><summary><span class="titre">Faire viser la PK des fiches aux 11 FK, côté base</span><span class="etat">Faite</span></summary>
         <span class="note">11 FK vers client.id, hunter.id, real_estate_manager.id (01, 02, migration 45) ; 5 FK composées retirées puis recréées ; test_fk_fiches 3 passed ; suite rouge seule, commitée avec PRF3 à PRF5 (choix A de Seb) : 967 passed, 7 xfailed au bout ; coût de PRF2 à PRF5 compté ensemble sur PRF2 (un seul passage)</span></details>
-        <span class="cout mono">≈83,8M (83 756 677) · 481 tours · 31,64 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">PRF3</span></span>
-        <details open><summary><span class="titre">Basculer « le sien » du Client sur client.id</span><span class="etat">En cours · PRF6 peut partir en même temps</span></summary>
-        <span class="note">« le sien » du Client compare au numéro de fiche ; dépend de PRF2</span></details></li>
-      <li class="fiche"><span class="gauche"><span class="id">PRF4</span></span>
-        <details><summary><span class="titre">Basculer « le sien » du Hunter et du Manager, build_vente et le seed</span><span class="etat">À lancer</span></summary>
+        <span class="cout mono">≈77,0M (77 008 342) · 435 tours · 28,72 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">PRF3</span></span>
+        <details><summary><span class="titre">Basculer « le sien » du Client sur client.id</span><span class="etat">Faite</span></summary>
+        <span class="note">Principal.profile_id lu une fois dans get_principal ; branches Client sur client.id ; test_sien_client_fiche passed ; mutants mandates_of et requests_of en user.id tués ; relecture ACCEPTÉE</span></details>
+        <span class="cout mono">≈226,2k (226 168) · 1 tours · 0,08 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">PRF4</span></span>
+        <details open><summary><span class="titre">Basculer « le sien » du Hunter et du Manager, build_vente et le seed</span><span class="etat">En cours · PRF6 peut partir en même temps</span></summary>
         <span class="note">« le sien » du Hunter et du Manager, build_vente, seed ; dépend de PRF2</span></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">PRF5</span></span>
-        <details><summary><span class="titre">Décaler les id des fiches dans la base de test</span><span class="etat">Après PRF3, PRF4</span></summary>
+        <details><summary><span class="titre">Décaler les id des fiches dans la base de test</span><span class="etat">Après PRF4</span></summary>
         <span class="note">base de test aux id ≠ id_user, le filet ; dépend de PRF3 et PRF4</span></details></li>
       <li class="fiche"><span class="gauche"><span class="id">PRF6</span></span>
-        <details><summary><span class="titre">Ajouter system_role, role_wording et le trigger, côté base</span><span class="etat">À lancer · en même temps que PRF3</span></summary>
+        <details><summary><span class="titre">Ajouter system_role, role_wording et le trigger, côté base</span><span class="etat">À lancer · en même temps que PRF4</span></summary>
         <span class="note">system_role, role_wording, trigger une fiche au plus, migration 46 ; dépend de PRF2</span></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">PRF7</span></span>
         <details><summary><span class="titre">Lire le rôle sur la fiche ou sur system_role</span><span class="etat">Après PRF5, PRF6</span></summary>
@@ -68,8 +69,8 @@
         <details><summary><span class="titre">Écrire l'ADR, le README, la matrice des droits</span><span class="etat">Après PRF8</span></summary>
         <span class="note">ADR-057, README, matrice des droits, Swagger ; dépend de PRF8</span></details></li>
     </ul>
-    <p class="mono cout-hors">Hors fiches : ≈24,7M (24 745 190) · 135 tours · 9,84 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈113,1M (113 120 723) · 662 tours · 43,68 $</p>
+    <p class="mono cout-hors">Hors fiches : ≈31,5M (31 493 525) · 181 tours · 12,77 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈113,3M (113 346 891) · 663 tours · 43,77 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 

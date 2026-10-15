@@ -4,7 +4,7 @@ Les 11 FK visent la PK des fiches, le rôle vit sur la fiche ou sur user.system_
 ## Notes
 - PRF1 : openapi.json : contenu identique (JSON égal), id affiché après les champs hérités (choix A de Seb) ; mutant gender tué ; 962 passed, 7 xfailed (avant 961) ; pyright 0 erreur sur les fichiers touchés
 - PRF2 : 11 FK vers client.id, hunter.id, real_estate_manager.id (01, 02, migration 45) ; 5 FK composées retirées puis recréées ; test_fk_fiches 3 passed ; suite rouge seule, commitée avec PRF3 à PRF5 (choix A de Seb) : 967 passed, 7 xfailed au bout ; coût de PRF2 à PRF5 compté ensemble sur PRF2 (un seul passage)
-- PRF3 : « le sien » du Client compare au numéro de fiche ; dépend de PRF2
+- PRF3 : Principal.profile_id lu une fois dans get_principal ; branches Client sur client.id ; test_sien_client_fiche passed ; mutants mandates_of et requests_of en user.id tués ; relecture ACCEPTÉE
 - PRF4 : « le sien » du Hunter et du Manager, build_vente, seed ; dépend de PRF2
 - PRF5 : base de test aux id ≠ id_user, le filet ; dépend de PRF3 et PRF4
 - PRF6 : system_role, role_wording, trigger une fiche au plus, migration 46 ; dépend de PRF2

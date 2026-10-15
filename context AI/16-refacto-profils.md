@@ -151,8 +151,9 @@ tomber `test_fk_fiches`. Le compte rendu redit à l'équipe : base de dev à ref
 ---
 
 <!-- FICHE:PRF3 -->
-## PRF3 [ ] — Basculer « le sien » du Client sur `client.id`
+## PRF3 [x] — Basculer « le sien » du Client sur `client.id`
 
+**Session** : 2531ac4a-0b87-425d-960c-b4cd009e06ba
 **Dépend de** : `PRF2`.
 **Fichiers** : `utils/roles.py`, `utils/current_user.py`, `services/client_rows.py`,
 `services/client_service.py`, `services/search_request_service.py`,
