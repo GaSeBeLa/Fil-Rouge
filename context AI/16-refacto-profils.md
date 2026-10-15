@@ -37,6 +37,11 @@ https://claude.ai/artifact/YNT5ANwbWYKp6SERVvvn9K) :
   `'Client'`, `'Hunter'`, `'Manager'` (nom gardé) ;
 - **une fiche au plus par compte**, et pas de fiche pour un compte à
   `system_role` : garanti par un **trigger** ; sans fiche ni `system_role` = 403 ;
+- **noms et places fixés** (le MPD cible de Gabriel les recopie, 2026-10-15) :
+  `system_role` prend la place de `id_role` dans `"user"` ; `role_wording` suit
+  `id_user` dans chaque fiche ; fonction `check_one_profile_per_user()`, triggers
+  `trg_client_one_profile`, `trg_hunter_one_profile`,
+  `trg_real_estate_manager_one_profile` et `trg_user_system_role` ;
 - `AbstractPerson` : classe SQLModel sans table, champs `created_at`, `id_user`,
   `first_name`, `last_name`, `phone_number`, `country_iso` (facultatif ;
   `Client` le redéclare obligatoire), `gender` ;

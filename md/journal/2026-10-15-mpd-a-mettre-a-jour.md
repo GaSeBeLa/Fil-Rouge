@@ -188,7 +188,7 @@
 
 * ADR-057, Décision 3.
 * ➖ `id_role INTEGER NOT NULL REFERENCES role(id) ON DELETE RESTRICT` — 01:175 — cellule `-140`
-* ➕ `system_role VARCHAR(10) CHECK (system_role IN ('Admin', 'Reader'))`
+* ➕ `system_role VARCHAR(10) CHECK (system_role IN ('Admin', 'Reader'))`, à la place de `id_role` (fixé le 15/10/2026)
   * Sans NOT NULL : vide pour un compte qui a une fiche (ADR-057, Décision 3).
 * ➖ Le lien `Role` — `User` disparaît : arête `-279` (« Have a »), avec ses étiquettes `-280` (`0,n`), `-281` (`1,1`), `-282` (verbe).
 
@@ -199,7 +199,7 @@
 * ➕ `hunter` (cellule `-20`) : `role_wording VARCHAR(20) NOT NULL DEFAULT 'Hunter' CHECK (role_wording = 'Hunter') REFERENCES role(wording)`
 * ➕ `real_estate_manager` (cellule `-157`) : `role_wording VARCHAR(20) NOT NULL DEFAULT 'Manager' CHECK (role_wording = 'Manager') REFERENCES role(wording)`
   * `'Manager'`, pas `'RealEstateManager'` : nom gardé (ADR-057, « Le nom du rôle de gestionnaire »).
-* 🟡 Place de la ligne dans la table : l'ADR ne la fixe pas. Proposition : juste après `id_user`.
+* ✅ Place de la ligne : **juste après `id_user`**. Fixé le 15/10/2026 dans le socle du chantier (`context AI/16-refacto-profils.md`), pour que le SQL et le MPD disent pareil.
 
 ## B4. `role` : 3 lignes, et `wording` déjà UNIQUE
 
@@ -217,7 +217,10 @@
   * « Un `user.id` ne se trouve que dans une seule des trois tables `client`, `hunter`, `real_estate_manager`. »
   * « Un compte qui a un `system_role` ('Admin' ou 'Reader') n'a aucune fiche. »
   * « Un UNIQUE ne le peut pas : il ne regarde qu'une table à la fois. »
-* 🟡 Le nom du trigger et de sa fonction : pas encore dans le SQL. À recopier du `01` une fois la fiche PRF6 commitée.
+* ✅ Les noms sont fixés le 15/10/2026 dans le socle du chantier ; la fiche PRF6 les reprend :
+  * fonction `check_one_profile_per_user()` ;
+  * triggers `trg_client_one_profile`, `trg_hunter_one_profile`, `trg_real_estate_manager_one_profile` (une fiche refusée si le compte a déjà une fiche ou un `system_role`) ;
+  * trigger `trg_user_system_role` (un `system_role` refusé sur un compte qui a une fiche).
 * Une ligne « Voir note du trigger » dans chaque fiche, comme `-15` dans `Mandate`, est 💡 optionnelle.
 
 ## B6. Les liens qui changent
@@ -245,6 +248,63 @@
   * `estate_contact.id_author INTEGER REFERENCES "user"(id) ON DELETE RESTRICT` — 01:757 — cellule `-467`
 * Leurs arêtes vers `User` restent : `-192`, `-433`, `-400`, `-473`.
 * Les 3 `id_user` des fiches restent aussi vers `"user"(id)` (01:204, 01:255, 01:277).
+
+
+## B8. Les tables cibles, en entier
+
+Ce que diront les 5 tables touchées après le chantier. Base : le `01` d'aujourd'hui (HEAD), plus les décisions d'ADR-057. Les lignes sans changement sont résumées par « … inchangé ».
+
+```sql
+CREATE TABLE role (
+    id         INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    created_at TIMESTAMP NOT NULL DEFAULT (now() AT TIME ZONE 'utc'),
+    wording    VARCHAR(20) NOT NULL UNIQUE
+            CHECK (wording IN ('Client', 'Hunter', 'Manager'))
+);
+
+CREATE TABLE "user" (
+    id           INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    created_at   TIMESTAMP NOT NULL DEFAULT (now() AT TIME ZONE 'utc'),
+    email        VARCHAR(150) NOT NULL UNIQUE,
+    password     VARCHAR(255) NOT NULL,
+    is_activated BOOLEAN NOT NULL DEFAULT FALSE,
+    system_role  VARCHAR(10) CHECK (system_role IN ('Admin', 'Reader')),
+    CONSTRAINT ck_user_email_format … inchangé
+);
+
+CREATE TABLE client (
+    id           INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    created_at   … inchangé,
+    id_user      INTEGER NOT NULL UNIQUE REFERENCES "user"(id) ON DELETE RESTRICT,
+    role_wording VARCHAR(20) NOT NULL DEFAULT 'Client'
+                 CHECK (role_wording = 'Client') REFERENCES role(wording),
+    first_name   … et toutes les colonnes suivantes : inchangées
+);
+
+CREATE TABLE real_estate_manager (
+    id           INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    created_at   … inchangé,
+    id_user      INTEGER NOT NULL UNIQUE REFERENCES "user"(id) ON DELETE RESTRICT,
+    role_wording VARCHAR(20) NOT NULL DEFAULT 'Manager'
+                 CHECK (role_wording = 'Manager') REFERENCES role(wording),
+    first_name   … et toutes les colonnes suivantes : inchangées
+);
+
+CREATE TABLE hunter (
+    id                   INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    created_at           … inchangé,
+    id_user              INTEGER NOT NULL UNIQUE REFERENCES "user"(id) ON DELETE RESTRICT,
+    role_wording         VARCHAR(20) NOT NULL DEFAULT 'Hunter'
+                         CHECK (role_wording = 'Hunter') REFERENCES role(wording),
+    first_name           … inchangé jusqu'à is_hunter_ai,
+    id_realestatemanager INTEGER NOT NULL
+                         REFERENCES real_estate_manager(id) ON DELETE RESTRICT,
+    CONSTRAINT ck_hunter_phone_number_format … inchangé
+);
+```
+
+* Les 10 autres FK de B1 changent de la même façon : `(id_user)` devient `(id)`.
+* 🟡 Ce DDL est la **cible écrite d'après l'ADR**, pas le SQL livré. À la clôture du chantier PRF, on le compare au `01` final ; un écart se corrige dans le MPD (le SQL fait foi).
 
 ---
 
@@ -280,9 +340,9 @@
 * ✏️ **12** : les 11 FK (B1) ; le CHECK de `role.wording` passe à 3 valeurs (B4).
 * ➖ **2** : `user.id_role` ; l'arête `Role` — `User` et ses 3 étiquettes.
 * ➕ **8** : `system_role` ; 3 `role_wording` ; 3 liens `Role` — fiche ; 1 note du trigger.
-* 🟡 **5** : place de `role_wording` ; nom du trigger ; verbe des 3 liens neufs (compté 3).
+* 🟡 **3** : verbe des 3 liens neufs (compté 3). La place de `role_wording` et les noms du trigger sont fixés (B3, B5).
 * 💡 **1** : la ligne « Voir note du trigger » dans les fiches.
 * ✅ sans changement : 5 FK composées, 4 cibles UNIQUE, 4 `id_author`, 3 `id_user`, 3 liens `User` — fiche, `role.wording` déjà UNIQUE.
-* **Total B : 22 écarts à faire, 5 à décider, 1 optionnel.**
+* **Total B : 22 écarts à faire, 3 à décider, 1 optionnel.**
 
 **Partie C** : ⚠️ **6** remarques, hors du MPD.
