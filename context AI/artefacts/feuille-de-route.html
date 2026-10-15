@@ -19,14 +19,15 @@
   </header>
 
   <nav class="sommaire" aria-label="Sommaire"><a href="#encours">Chantier en cours</a><a href="#todo">Chantiers possibles</a><a href="#clos">Chantiers clos</a></nav>
+  <nav class="pages" aria-label="Les autres pages">Les autres pages : <a href="https://claude.ai/artifact/BFBj2LT7X1PwCu7mzbZFBy">la page du chantier</a></nav>
 
   <section id="encours">
     <h2>Chantier en cours</h2>
     <!-- ZONE:encours — remplacé à chaque ouverture, remis à « aucun » à chaque clôture.
          /tache n'y touche pas : l'avancement fiche par fiche est sur la page du chantier. -->
     <div class="encours">
-      <div class="titre">Aucun chantier ouvert</div>
-      <div>Lancer <span class="mono">/vlp:chantier</span> pour en ouvrir un.</div>
+      <div class="titre">Refacto des profils <span class="badge" data-etat="cours">en cours</span></div>
+      <div>Fiches <span class="mono">PRF1–PRF9</span> — <a href="https://claude.ai/artifact/BFBj2LT7X1PwCu7mzbZFBy">la page du chantier</a></div>
     </div>
   </section>
 
@@ -41,7 +42,7 @@
           <li class="carte-todo" data-taille="moyen" data-pret="oui"><span class="gauche"><span class="rang mono">7</span></span><details><summary><span class="titre">Livrable 1 — audit des données</span></summary><div class="detail">rapport de normalisation à partir de <span class="mono">normalised/rapport_anomalies.txt</span></div></details><span class="meta"><span class="seg">3–4 fiches</span></span></li>
           <li class="carte-todo" data-taille="moyen" data-pret="oui"><span class="gauche"><span class="rang mono">8</span><span class="dep mono">← 2</span></span><details><summary><span class="titre">Livrable 3 — architecture</span></summary><div class="detail">documente les trois couches et les choix (pas de PATCH, bases génériques, auth côté back)</div></details><span class="meta"><span class="seg">2–3 fiches</span></span></li>
           <li class="carte-todo" data-taille="pas-estime" data-pret="non"><span class="gauche"><span class="rang mono">9</span><span class="dep mono">← 1..8</span></span><details><summary><span class="titre">Déploiement sur le VPS</span></summary><div class="detail">mettre l'API et la base réparée sur le VPS de l'utilisateur ; hôte, accès et méthode <strong>à demander avant d'agir</strong>, aucun secret dans le dépôt</div></details><span class="meta"><span class="seg">🟡 à cadrer</span></span></li>
-          <li class="carte-todo" data-taille="gros" data-pret="oui"><span class="gauche"><span class="rang mono">10</span></span><details><summary><span class="titre">Refacto des profils (découpage du prof Robin)</span></summary><div class="detail">⏬ <strong>dépriorisé</strong> par Robin le 2026-10-14, à garder comme refacto à venir (ADR-056) : les 11 FK <span class="mono">id_client</span> / <span class="mono">id_hunter</span> / <span class="mono">id_realestatemanager</span> visent la PK du profil (<span class="mono">client.id</span>, <span class="mono">hunter.id</span>, <span class="mono">real_estate_manager.id</span>), plus <span class="mono">id_user</span>, le <span class="mono">sub</span> du JWT, qui ne doit pas se propager ; <span class="mono">AbstractPerson</span> (nommée <span class="mono">AbstractClient</span> sur le schéma de Robin, renommée sur la remarque de Laurence), classe de base sans table pour les champs communs ; rôle par défaut posé par le constructeur de chaque profil ; base de test aux <span class="mono">id ≠ id_user</span></div></details><span class="meta"><span class="seg">💡 4-5 fiches</span></span></li>
+          <li class="carte-todo" data-taille="gros" data-pret="oui"><span class="gauche"><span class="rang mono">10</span> <span class="badge" data-etat="cours">en cours</span></span><details><summary><span class="titre">Refacto des profils (découpage du prof Robin)</span></summary><div class="detail">⏬ <strong>dépriorisé</strong> par Robin le 2026-10-14, à garder comme refacto à venir (ADR-056) : les 11 FK <span class="mono">id_client</span> / <span class="mono">id_hunter</span> / <span class="mono">id_realestatemanager</span> visent la PK du profil (<span class="mono">client.id</span>, <span class="mono">hunter.id</span>, <span class="mono">real_estate_manager.id</span>), plus <span class="mono">id_user</span>, le <span class="mono">sub</span> du JWT, qui ne doit pas se propager ; <span class="mono">AbstractPerson</span> (nommée <span class="mono">AbstractClient</span> sur le schéma de Robin, renommée sur la remarque de Laurence), classe de base sans table pour les champs communs ; rôle par défaut posé par le constructeur de chaque profil ; base de test aux <span class="mono">id ≠ id_user</span></div></details><span class="meta"><span class="seg">💡 4-5 fiches</span></span></li>
         </ol>
   </section>
 
@@ -110,9 +111,9 @@
   </section>
 
   <footer>
-    <span>Lettres de fiche prises : <span class="mono">C, LOT, API, DRO, FIN, BAN, DEM</span></span>
+    <span>Lettres de fiche prises : <span class="mono">C, LOT, API, DRO, FIN, BAN, DEM, PRF</span></span>
     <span>État détaillé : <span class="mono">context AI/08-etat.md</span></span>
-    <span>Mis à jour le <span class="mono">2026-10-14</span></span>
+    <span>Mis à jour le <span class="mono">2026-10-15</span></span>
   </footer>
 </div>
 <script src="vlp.js"></script>
