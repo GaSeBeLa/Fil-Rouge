@@ -365,8 +365,9 @@ rend `"status":"green"` ou `"yellow"` ; `curl -s localhost:5601/api/status` rend
 ---
 
 <!-- FICHE:FLX8 -->
-## FLX8 [ ] — Remplir l'index `estates` chaque nuit
+## FLX8 [x] — Remplir l'index `estates` chaque nuit
 
+**Session** : 53337d1c-79b2-439c-8cea-3a6e446e0d7b
 **Dépend de** : `FLX4`, `FLX7`.
 **Fichiers** : `airflow/src/search/mapping.py`, `airflow/src/search/documents.py`,
 `airflow/dags/estates_index_dag.py`, `airflow/tests/test_search_documents.py`

@@ -21,9 +21,9 @@
     <p>Trois DAG tournent chaque nuit (annonces, OLAP, index), la recherche de biens passe par GET /estates/search, et Kibana montre le trafic de l'API</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">13 fiches · 8 faites · en cours : FLX8</p>
+    <p class="mono" style="margin-top:.5rem">13 fiches · 9 faites · en cours : FLX9</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -69,26 +69,27 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">FLX7</span></span>
         <details><summary><span class="titre">Faire démarrer Elasticsearch et Kibana</span><span class="etat">Faite</span></summary>
         <span class="note">--profile elk up -d : _cluster/health status green (1 nœud) ; api/status level available ; es-setup OK ; up -d seul : 2 services ; Kibana 981 Mio / 1 Gio ; API 988 passed, 7 xfailed</span></details>
-        <span class="cout mono">≈3,3M (3 276 997) · 22 tours · 1,82 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">FLX8</span></span>
-        <details open><summary><span class="titre">Remplir l'index estates chaque nuit</span><span class="etat">En cours · FLX12 peut partir en même temps</span></summary>
-        <span class="note">DAG estates_index : estate vers l'index estates, sans contact du vendeur ; dépend de FLX4, FLX7</span></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">FLX9</span></span>
-        <details><summary><span class="titre">Chercher un bien par GET /estates/search</span><span class="etat">Après FLX8</span></summary>
+        <span class="cout mono">≈3,5M (3 540 993) · 24 tours · 1,93 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">FLX8</span></span>
+        <details><summary><span class="titre">Remplir l'index estates chaque nuit</span><span class="etat">Faite</span></summary>
+        <span class="note">dags test estates_index 2 fois : estates/_count 2707 = count(estate) 2707 aux deux passages ; orphelin ajouté puis retiré (deleted 1) ; airflow_indexer : 403 hors estates, 400 sur un champ de contact ; airflow 102 passed (mutant champ de contact : 2 failed) ; API 988 passed, 7 xfailed</span></details>
+        <span class="cout mono">≈3,8M (3 830 399) · 24 tours · 1,68 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">FLX9</span></span>
+        <details open><summary><span class="titre">Chercher un bien par GET /estates/search</span><span class="etat">En cours · FLX12 peut partir en même temps</span></summary>
         <span class="note">Route GET /estates/search, 503 si Elasticsearch est absent ; dépend de FLX8</span></details></li>
       <li class="fiche"><span class="gauche"><span class="id">FLX10</span></span>
         <details><summary><span class="titre">Envoyer les logs de l'API dans Elasticsearch</span><span class="etat">À lancer</span></summary>
         <span class="note">Logs JSON de l'API, Logstash, data stream logs-api-default ; dépend de FLX7</span></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">FLX11</span></span>
-        <details><summary><span class="titre">Montrer le trafic et les biens dans Kibana</span><span class="etat">Après FLX8, FLX10</span></summary>
+        <details><summary><span class="titre">Montrer le trafic et les biens dans Kibana</span><span class="etat">Après FLX10</span></summary>
         <span class="note">Tableau de bord Kibana : trafic et carte des biens (visuel) ; dépend de FLX8, FLX10</span></details>
         <span class="badge visuel" title="Critère de fin visuel : il faudra regarder">visuel</span></li>
       <li class="fiche"><span class="gauche"><span class="id">FLX12</span></span>
-        <details><summary><span class="titre">Écrire la doc, le schéma du flux et les ADR</span><span class="etat">À lancer · en même temps que FLX8</span></summary>
+        <details><summary><span class="titre">Écrire la doc, le schéma du flux et les ADR</span><span class="etat">À lancer · en même temps que FLX9</span></summary>
         <span class="note">Doc, schéma du flux avec les vrais noms, ADR ; dépend de toutes</span></details></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈25,3M (25 308 050) · 99 tours · 7,97 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈82,2M (82 223 824) · 388 tours · 29,43 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈86,3M (86 318 219) · 414 tours · 31,22 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 
