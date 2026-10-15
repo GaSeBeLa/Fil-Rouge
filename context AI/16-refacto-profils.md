@@ -296,6 +296,10 @@ même sur une base existante. Les tests qui écrivaient `id_role` passent par
 `grep -rnw "id_role" API docker` ne rend plus que l'historique (migrations
 anciennes, `init-v2`) : compte brut. Banc v2/v3 et pytest tout verts (comptes
 bruts). Mutant : remettre `'Admin'` dans le CHECK de `role` fait tomber le banc.
+Base de dev refaite (`docker compose down -v && docker compose up -d` depuis
+`docker/`), puis `docker compose exec api python -m src.app.scripts.seed_demo`
+rejoué sans erreur (sortie recopiée). Le compte rendu redit à l'équipe : base à
+refaire et seed à rejouer après le pull.
 <!-- /FICHE -->
 
 ---
