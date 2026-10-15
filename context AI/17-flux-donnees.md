@@ -478,8 +478,9 @@ la main.
 ---
 
 <!-- FICHE:FLX12 -->
-## FLX12 [ ] — Écrire la doc, le schéma du flux et les ADR
+## FLX12 [x] — Écrire la doc, le schéma du flux et les ADR
 
+**Session** : 53337d1c-79b2-439c-8cea-3a6e446e0d7b
 **Dépend de** : toutes.
 **Fichiers** (dépôt **Fil-Rouge**) : `md/flux/cours-airflow-synthese.md`,
 `md/flux/cours-elasticsearch-synthese.md` (déjà copiées au cadrage),
