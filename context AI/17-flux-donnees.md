@@ -9,7 +9,7 @@
 **À quoi il sert.** Le livrable BC05 demande des flux de données : Airflow importe
 les annonces et nourrit l'OLAP, Elasticsearch sert la recherche de biens et les logs.
 
-**Fait.** Rien. Cadré le 2026-10-15 en 12 fiches, `FLX1` à jouer **après la fusion de PRF**.
+**Fait.** Rien. Cadré le 2026-10-15 en 12 fiches (13 depuis `FLX13`, faker de volume, ajoutée le même jour avant `FLX6`), `FLX1` à jouer **après la fusion de PRF**.
 
 **Session** : f022f081-0f47-40d8-a130-39e8bee7a307
 
@@ -81,7 +81,8 @@ reconnaître le même bien chez deux agences ; Airflow 3 ; Confluence et le MPD 
 | `FLX3` | Nettoyer et valider une annonce, sans Airflow | `FLX2` |
 | `FLX4` | Importer les annonces chaque nuit, sans doublon | `FLX3` |
 | `FLX5` | Créer le schéma `olap` en étoile | `FLX2` |
-| `FLX6` | Rafraîchir l'OLAP chaque nuit | `FLX5` |
+| `FLX13` | Fabriquer du volume : des centaines de ventes fausses | `FLX5` |
+| `FLX6` | Rafraîchir l'OLAP chaque nuit | `FLX13` |
 | `FLX7` | Faire démarrer Elasticsearch et Kibana | `FLX1` |
 | `FLX8` | Remplir l'index `estates` chaque nuit | `FLX4`, `FLX7` |
 | `FLX9` | Chercher un bien par `GET /estates/search` | `FLX8` |
@@ -259,10 +260,43 @@ colonne (comptes affichés) ; banc v2/v3 et pytest API verts, comptes affichés.
 
 ---
 
+<!-- FICHE:FLX13 -->
+## FLX13 [ ] — Fabriquer du volume : des centaines de ventes fausses
+
+**Dépend de** : `FLX5`.
+**Fichiers** : `API/src/app/scripts/seed_volume.py`, `API/tests/unit/test_seed_volume.py`
+(neufs), `API/README.md` (§ seed) ; lus : `API/src/app/scripts/seed_demo.py` (modèle),
+`services/payment_calculation_service.py`, `01_create_fil_rouge_immobilier.sql` (`sale`,
+`mandate`, `visit`, `payment`) — et rien d'autre.
+
+**Prompt**
+Décision de Seb (Discord, 2026-10-15, bouton `faker-volume:A` ; volume : question
+`flux-18`) : avec **1** vente en base, `fait_ventes` et Kibana sont vides. Écris
+`seed_volume.py` sur le modèle de `seed_demo.py` (ADR-055, ADR-046 corrigé) : il
+**passe par les services** de l'API, Faker `fr_FR` à **graine fixe**, e-mails en
+`example.com`, aucune personne réelle ; il **refuse** d'écrire dans `fil_rouge_test`
+et aucun test d'intégration ne l'appelle. Par vente : un client neuf, sa demande,
+un mandat signé (6 mois, exclusif ou non), des offres, des visites `'client'`
+datées dans le mandat, la vente (bien jamais vendu, `uq_sale_estate`) et son
+paiement par `PaymentCalculationService.build_payment` — **aucun montant tiré au
+hasard** (honoraires par `calculer_honoraires`). Chasseurs et managers : une
+poignée, réutilisés. Dates étalées sur deux ans, jamais dans le futur. Option
+`--sales N`, défaut fixé par `flux-18` ; un deuxième lancement ne double rien
+(marqueur, comme `seed_demo`). Les fonctions pures (dates, tirages) se testent
+sans base.
+
+**Critère de fin**
+Lancé sur la base de dev : `SELECT count(*) FROM sale` passe de **1** à 1 + N,
+`payment` pareil (comptes affichés) ; relancé : comptes inchangés. Tests unitaires
+verts ; pytest API vert, comptes affichés.
+<!-- /FICHE -->
+
+---
+
 <!-- FICHE:FLX6 -->
 ## FLX6 [ ] — Rafraîchir l'OLAP chaque nuit
 
-**Dépend de** : `FLX5`.
+**Dépend de** : `FLX13`.
 **Fichiers** : `airflow/src/olap/extract.py`, `airflow/src/olap/transform.py`,
 `airflow/src/olap/load.py`, `airflow/dags/olap_refresh_dag.py`,
 `airflow/tests/test_olap_transform.py` (neufs) — et rien d'autre.
