@@ -165,10 +165,11 @@ s'arrêtent : **« Exited (0) » est normal**. Pas de mémoire mesurée pour eux
   à refaire après chaque redémarrage de Windows.
 - **Code de sortie 137** : le conteneur a été tué faute de mémoire. Voir la
   section 4.
-- **`ELASTIC_PASSWORD` ou `KIBANA_PASSWORD` vide** : `es-setup` tourne en
-  boucle en affichant « Elasticsearch pas encore prêt », et **Kibana ne démarre
-  pas**. Le message trompe : c'est le mot de passe qui est refusé (6 caractères
-  au moins).
+- **`ELASTIC_PASSWORD` faux, ou `KIBANA_PASSWORD` vide ou trop court** :
+  `es-setup` s'arrête tout de suite, en erreur, et **Kibana ne démarre pas**.
+  Son log dit pourquoi : « Mot de passe elastic refusé (HTTP 401) », ou la
+  réponse d'Elasticsearch (« passwords must be at least [6] characters long »).
+  Lire le log : `docker compose logs es-setup`.
 - **`ES_INDEXER_PASSWORD`, `ES_API_PASSWORD` ou `LOGSTASH_INTERNAL_PASSWORD`
   vide** : le compte qui va avec n'est pas créé. Kibana démarre quand même, mais
   la fonction qui s'en sert rend une erreur (par exemple `GET /estates/search`
