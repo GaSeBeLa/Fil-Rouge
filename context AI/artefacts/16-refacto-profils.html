@@ -21,16 +21,18 @@
     <p>Les 11 FK visent la PK des fiches, le rôle vit sur la fiche ou sur user.system_role, une fiche au plus par compte ; tous les tests passent, banc v2/v3 compris</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">9 fiches · 1 faite · en cours : PRF2</p>
+    <p class="mono" style="margin-top:.5rem">9 fiches · 9 faites</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
-  <section hidden>
-    <h2>Chantier clos le </h2>
+  <section>
+    <h2>Chantier clos le 2026-10-15</h2>
     <div class="bilan">
-      <p></p>
+      <p>Livré : Les 11 FK visent la PK des fiches, le rôle vit sur la fiche ou sur user.system_role, une fiche au plus par compte (trigger), id_role retiré, ADR-057 codé</p>
+      <p>Surpris : Les tests supposaient id = id_user ; le décalage des ids de test à 1001 a révélé 2 oublis de PRF4 dans le code</p>
+      <p>Estimé : estimé 10 fiches ≈48 $ · cadré 9 · joué 9 fiches 62,51 $</p>
     </div>
   </section>
 
@@ -41,34 +43,42 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">PRF1</span></span>
         <details><summary><span class="titre">Poser AbstractPerson</span><span class="etat">Faite</span></summary>
         <span class="note">openapi.json : contenu identique (JSON égal), id affiché après les champs hérités (choix A de Seb) ; mutant gender tué ; 962 passed, 7 xfailed (avant 961) ; pyright 0 erreur sur les fichiers touchés</span></details>
-        <span class="cout mono">≈4,4M (4 382 690) · 44 tours · 2,10 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">PRF2</span></span>
-        <details open><summary><span class="titre">Faire viser la PK des fiches aux 11 FK, côté base</span><span class="etat">En cours</span></summary>
-        <span class="note">les 11 FK vers client.id, hunter.id, real_estate_manager.id : 01, 02, migration 45, test d'introspection</span></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">PRF3</span></span>
-        <details><summary><span class="titre">Basculer « le sien » du Client sur client.id</span><span class="etat">Après PRF2</span></summary>
-        <span class="note">« le sien » du Client compare au numéro de fiche ; dépend de PRF2</span></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">PRF4</span></span>
-        <details><summary><span class="titre">Basculer « le sien » du Hunter et du Manager, build_vente et le seed</span><span class="etat">Après PRF2</span></summary>
-        <span class="note">« le sien » du Hunter et du Manager, build_vente, seed ; dépend de PRF2</span></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">PRF5</span></span>
-        <details><summary><span class="titre">Décaler les id des fiches dans la base de test</span><span class="etat">Après PRF3, PRF4</span></summary>
-        <span class="note">base de test aux id ≠ id_user, le filet ; dépend de PRF3 et PRF4</span></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">PRF6</span></span>
-        <details><summary><span class="titre">Ajouter system_role, role_wording et le trigger, côté base</span><span class="etat">Après PRF2</span></summary>
-        <span class="note">system_role, role_wording, trigger une fiche au plus, migration 46 ; dépend de PRF2</span></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">PRF7</span></span>
-        <details><summary><span class="titre">Lire le rôle sur la fiche ou sur system_role</span><span class="etat">Après PRF5, PRF6</span></summary>
-        <span class="note">get_principal lit le rôle sur la fiche ou system_role ; dépend de PRF5 et PRF6</span></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">PRF8</span></span>
-        <details><summary><span class="titre">Retirer user.id_role</span><span class="etat">Après PRF7</span></summary>
-        <span class="note">retrait de user.id_role, role à 3 lignes, migration 47 ; dépend de PRF7</span></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">PRF9</span></span>
-        <details><summary><span class="titre">Écrire l'ADR, le README, la matrice des droits</span><span class="etat">Après PRF8</span></summary>
-        <span class="note">ADR-057, README, matrice des droits, Swagger ; dépend de PRF8</span></details></li>
+        <span class="cout mono">≈4,6M (4 618 856) · 46 tours · 2,20 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">PRF2</span></span>
+        <details><summary><span class="titre">Faire viser la PK des fiches aux 11 FK, côté base</span><span class="etat">Faite</span></summary>
+        <span class="note">11 FK vers client.id, hunter.id, real_estate_manager.id (01, 02, migration 45) ; 5 FK composées retirées puis recréées ; test_fk_fiches 3 passed ; suite rouge seule, commitée avec PRF3 à PRF5 (choix A de Seb) : 967 passed, 7 xfailed au bout ; coût de PRF2 à PRF5 compté ensemble sur PRF2 (un seul passage)</span></details>
+        <span class="cout mono">≈77,0M (77 008 342) · 435 tours · 28,72 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">PRF3</span></span>
+        <details><summary><span class="titre">Basculer « le sien » du Client sur client.id</span><span class="etat">Faite</span></summary>
+        <span class="note">Principal.profile_id lu une fois dans get_principal ; branches Client sur client.id ; test_sien_client_fiche passed ; mutants mandates_of et requests_of en user.id tués ; relecture ACCEPTÉE</span></details>
+        <span class="cout mono">≈410,2k (410 214) · 2 tours · 0,17 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">PRF4</span></span>
+        <details><summary><span class="titre">Basculer « le sien » du Hunter et du Manager, build_vente et le seed</span><span class="etat">Faite</span></summary>
+        <span class="note">hunter_rows, manager_rows, build_vente et seed_demo sur hunter.id ; test_sien_hunter_fiche passed ; mutants handles_mandate et search_request Hunter tués ; 2 oublis (actor.id) révélés par PRF5 et corrigés dans son commit ; relecture ACCEPTÉE</span></details>
+        <span class="cout mono">0 · 0 tours · 0,00 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">PRF5</span></span>
+        <details><summary><span class="titre">Décaler les id des fiches dans la base de test</span><span class="etat">Faite</span></summary>
+        <span class="note">base de test : id = id_user vaut 0 sur 18 clients, 6 chasseurs, 1 manager (ids à partir de 1001) ; 967 passed, 7 xfailed ; pyright tests 0, src 2 anciennes ; 6 mutants user.id tués ; base de dev effacée et resemée (seed_demo passé) ; relecture ACCEPTÉE</span></details>
+        <span class="cout mono">0 · 0 tours · 0,00 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">PRF6</span></span>
+        <details><summary><span class="titre">Ajouter system_role, role_wording et le trigger, côté base</span><span class="etat">Faite</span></summary>
+        <span class="note">test_une_fiche_par_compte : 3 passed (2e fiche 409, system_role sur compte à fiche 409, fiche sur compte Reader 409) ; mutant sans triggers : 3 failed ; pytest 970 passed, 7 xfailed (banc v2/v3 compris) ; pyright 2 errors avant / 2 après ; API b3c6d92</span></details>
+        <span class="cout mono">≈23,3M (23 267 855) · 120 tours · 8,82 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">PRF7</span></span>
+        <details><summary><span class="titre">Lire le rôle sur la fiche ou sur system_role</span><span class="etat">Faite</span></summary>
+        <span class="note">grep id_role src/app : 16 lignes, écritures + modèle + 1 commentaire ; test_roles 27 passed (5 rôles + 403) ; mutant id_role : 6 failed dont Reader ; pytest 976 passed, 7 xfailed ; pyright src 2 anciennes (user_service), tests 0 ; API c94519a</span></details>
+        <span class="cout mono">≈10,5M (10 527 519) · 42 tours · 3,37 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">PRF8</span></span>
+        <details><summary><span class="titre">Retirer user.id_role</span><span class="etat">Faite</span></summary>
+        <span class="note">grep -rnw id_role API docker (hors htmlcov) : 86 lignes, historique (init, init-v2, migrations) + 5 commentaires de retrait ; mutant 'Admin' dans le CHECK de role : banc 1 failed ; pytest 975 passed, 7 xfailed (1 test mort retiré) ; pyright src 2 anciennes, tests 0 ; base de dev refaite, seed_demo OK ; API 023b0e8</span></details>
+        <span class="cout mono">≈11,3M (11 261 016) · 47 tours · 3,89 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">PRF9</span></span>
+        <details><summary><span class="titre">Écrire l'ADR, le README, la matrice des droits</span><span class="etat">Faite</span></summary>
+        <span class="note">ADR-057 relu, conforme (11 FK vers la fiche, 7 vers user) ; état du code passé à codé ; README v3 (section PRF, Reader, role), README API, matrice des droits, Swagger à jour ; restes : 10 lignes, 0 fausse ; mutant Swagger tué ; pytest 975 passed, 7 xfailed ; pyright src 2 anciennes, tests 0 ; API 5c05b0a</span></details>
+        <span class="cout mono">≈6,2M (6 232 906) · 37 tours · 2,50 $</span></li>
     </ul>
-    <p class="mono cout-hors">Hors fiches : ≈24,7M (24 745 190) · 135 tours · 9,84 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈29,1M (29 127 880) · 179 tours · 11,94 $</p>
+    <p class="mono cout-hors">Hors fiches : ≈31,6M (31 614 467) · 182 tours · 12,84 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈164,9M (164 941 175) · 911 tours · 62,51 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 
@@ -85,8 +95,16 @@
     <h2>Journal des décisions</h2>
     <!-- ZONE:journal — une ligne par décision imprévue tranchée en cours de fiche -->
     <ul class="journal">
-      <li><time datetime="2026-10-15">2026-10-15</time><span>- **2026-10-15** — PRF1 : `id` (propre à chaque fiche) s'affiche après les 7 champs hérités d'`AbstractPerson` dans le Swagger : Pydantic range les champs de la classe mère en tête. Contenu d'`openapi.json` identique, ordre accepté (choix A de Seb, 15/10).</span></li>
+      <li><time datetime="2026-10-15">2026-10-15</time><span>- **2026-10-15** — PRF5 : les tests supposaient id = id_user (HUNTER_ID = 1 servait de compte et de fiche) : les comptes restent pour acting_as, les payloads reçoivent hunter_profile() / client_profile(). Le décalage à 1001 a révélé 2 oublis de PRF4 dans le code (estate_search_request_service.create et review_media_service._check_author comparaient user.id à id_hunter), corrigés. Base de dev refaite (down -v, volume minio compris) et seed_demo rejoué.</span></li>
+      <li><time datetime="2026-10-15">2026-10-15</time><span>PRF6 : system_role s'écrit par l'API (UserCreate, UserUpdate), réservé à l'Admin au PUT (ADMIN_ONLY_FIELDS) ; le 409 du trigger nomme la contrainte one_profile_per_user ; test_constraints_db prend un compte neuf (le compte 1 est un hunter) ; migration 46 jouée sur la base de dev.</span></li>
+      <li><time datetime="2026-10-15">2026-10-15</time><span>PRF8 : 46 rendue rejouable sans id_role ; test_a_missing_admin_role_is_said supprimé (create_admin ne lit plus role) ; base de dev refaite et seed rejoué : l'équipe refait sa base après le pull.</span></li>
     </ul>
+    <details class="journal-ancien"><summary>2 entrées plus anciennes</summary>
+    <ul class="journal">
+      <li><time datetime="2026-10-15">2026-10-15</time><span>- **2026-10-15** — PRF1 : `id` (propre à chaque fiche) s'affiche après les 7 champs hérités d'`AbstractPerson` dans le Swagger : Pydantic range les champs de la classe mère en tête. Contenu d'`openapi.json` identique, ordre accepté (choix A de Seb, 15/10).</span></li>
+      <li><time datetime="2026-10-15">2026-10-15</time><span>- **2026-10-15** — PRF2 : il y a **5 FK composées** (pas 4) qui portent les colonnes converties ; la migration 45 les retire puis les recrée. trg_mandate_exclusivity levait U02 par intermittence pendant la conversion de mandate : coupé le temps des 2 UPDATE, puis une requête vérifie qu'aucun exclusif ne chevauche (conseil du Glaude). Commits PRF2 à PRF5 faits ensemble, une fois la suite verte (choix A de Seb).</span></li>
+    </ul>
+    </details>
   </section>
 
   <footer>

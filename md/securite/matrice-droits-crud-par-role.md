@@ -18,6 +18,14 @@
 ## 1. L'essentiel
 
 * **5 rôles** : `Admin`, `Client`, `Hunter`, `Manager`, `Reader`.
+* **Où vit le rôle** (chantier PRF, 2026-10-15, ADR-057) : `Client`,
+  `Hunter`, `Manager` sur la fiche (`role_wording`) ; `Admin` et `Reader`,
+  sans fiche, dans `"user".system_role`. Une seule casquette par compte : la
+  base refuse une 2ᵉ fiche (`one_profile_per_user`, `409`) ; un compte sans
+  fiche ni `system_role` reçoit `403`.
+* **« Le sien » se lit par le numéro de la fiche** (`client.id`,
+  `hunter.id`, `real_estate_manager.id`), pas par celui du compte : les 11
+  `id_client`, `id_hunter`, `id_realestatemanager` visent la fiche (PRF2).
 * **91 opérations** dans l'API, relevées le 13/10/2026 au soir.
 * ✅ **Codé : le premier contrôle**, le rôle. Fermé par défaut : chaque route
   dit quels rôles passent, les autres reçoivent `403` (fiche DRO1). Les rôles
@@ -163,7 +171,7 @@ Relevé dans `API/src/app/services/` (Fil-Rouge-API) : le crochet
   champ sans limite** : l'annexe ne lui donne que signer, commenter,
   prioriser, faire une offre (P3, H6, H8). Seule l'appartenance est gardée.
 * 🟡 Le `Client` ne crée pas son compte par `POST /users` (fermé : il y
-  choisirait `id_role`) : il le crée par `POST /search-requests/submit`
+  choisirait son `system_role`) : il le crée par `POST /search-requests/submit`
   (Q-ACC-12).
 * 🟡 Le `Hunter` ne renouvelle pas le mandat d'un autre chasseur : la
   réaffectation attend Jeff (Q-JEF-30).

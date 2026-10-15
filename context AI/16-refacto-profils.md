@@ -12,7 +12,9 @@ vit sur le compte. Le chantier fait viser la PK des fiches et sort le rôle du c
 
 **Estimé.** 10 fiches · ≈48 $ — ≈4,81 $/fiche sur 7 clos (le 2026-10-15).
 
-**Fait.** Rien. Ouvert le 2026-10-15, cadré en 9 fiches, `PRF1` à jouer.
+**CLOS** le 2026-10-15. Ne se rejoue pas — ne sert plus qu'à relire son socle.
+
+**Fait.** PRF1..PRF9 (2026-10-15) : Les 11 FK visent la PK des fiches, le rôle vit sur la fiche ou sur user.system_role, une fiche au plus par compte (trigger), id_role retiré, ADR-057 codé — estimé 10 fiches ≈48 $ · cadré 9 · joué 9 fiches 62,51 $.
 
 **Session** : f022f081-0f47-40d8-a130-39e8bee7a307
 
@@ -119,8 +121,9 @@ identique (diff vide). Le nouveau test `test_profiles_share_abstract_person`
 ---
 
 <!-- FICHE:PRF2 -->
-## PRF2 [ ] — Faire viser la PK des fiches aux 11 FK, côté base
+## PRF2 [x] — Faire viser la PK des fiches aux 11 FK, côté base
 
+**Session** : 2531ac4a-0b87-425d-960c-b4cd009e06ba
 **Dépend de** : rien.
 **Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql`,
 `docker/init-v3/02_migration.sql`,
@@ -150,8 +153,9 @@ tomber `test_fk_fiches`. Le compte rendu redit à l'équipe : base de dev à ref
 ---
 
 <!-- FICHE:PRF3 -->
-## PRF3 [ ] — Basculer « le sien » du Client sur `client.id`
+## PRF3 [x] — Basculer « le sien » du Client sur `client.id`
 
+**Session** : 2531ac4a-0b87-425d-960c-b4cd009e06ba
 **Dépend de** : `PRF2`.
 **Fichiers** : `utils/roles.py`, `utils/current_user.py`, `services/client_rows.py`,
 `services/client_service.py`, `services/search_request_service.py`,
@@ -179,8 +183,9 @@ vert, `pyright` 0 erreur sur `API/src` (comptes bruts).
 ---
 
 <!-- FICHE:PRF4 -->
-## PRF4 [ ] — Basculer « le sien » du Hunter et du Manager, `build_vente` et le seed
+## PRF4 [x] — Basculer « le sien » du Hunter et du Manager, `build_vente` et le seed
 
+**Session** : 2531ac4a-0b87-425d-960c-b4cd009e06ba
 **Dépend de** : `PRF2`.
 **Fichiers** : sous `API/src/app/` : `utils/current_user.py`, `services/hunter_rows.py`,
 `services/hunter_service.py`, `services/real_estate_manager_service.py`,
@@ -209,8 +214,9 @@ pytest tout vert, `pyright` 0 erreur sur `API/src` (comptes bruts).
 ---
 
 <!-- FICHE:PRF5 -->
-## PRF5 [ ] — Décaler les `id` des fiches dans la base de test
+## PRF5 [x] — Décaler les `id` des fiches dans la base de test
 
+**Session** : 2531ac4a-0b87-425d-960c-b4cd009e06ba
 **Dépend de** : `PRF3`, `PRF4`.
 **Fichiers** : `docker/create_test_db.sh`, les tests qui tombent (à nommer après mesure).
 
@@ -232,8 +238,9 @@ et le nombre de tests corrigés). Mutant : remettre `user.id` dans
 ---
 
 <!-- FICHE:PRF6 -->
-## PRF6 [ ] — Ajouter `system_role`, `role_wording` et le trigger, côté base
+## PRF6 [x] — Ajouter `system_role`, `role_wording` et le trigger, côté base
 
+**Session** : 719fade3-b24b-449b-b610-afa4674442a1
 **Dépend de** : `PRF2`.
 **Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql`,
 `docker/init-v3/02_migration.sql`, `docker/init-v3/04_role-lecture-seule.sql`,
@@ -260,8 +267,9 @@ tomber. Banc v2/v3 et pytest tout verts (comptes bruts).
 ---
 
 <!-- FICHE:PRF7 -->
-## PRF7 [ ] — Lire le rôle sur la fiche ou sur `system_role`
+## PRF7 [x] — Lire le rôle sur la fiche ou sur `system_role`
 
+**Session** : 719fade3-b24b-449b-b610-afa4674442a1
 **Dépend de** : `PRF5`, `PRF6`.
 **Fichiers** : sous `API/src/app/` : `utils/roles.py`, `services/signup_service.py`,
 `services/user_service.py`, `routes/user_router.py`, `scripts/create_admin.py`,
@@ -285,8 +293,9 @@ un compte sans fiche ni `system_role` reçoit 403. Mutant : faire lire `id_role`
 ---
 
 <!-- FICHE:PRF8 -->
-## PRF8 [ ] — Retirer `user.id_role`
+## PRF8 [x] — Retirer `user.id_role`
 
+**Session** : 719fade3-b24b-449b-b610-afa4674442a1
 **Dépend de** : `PRF7`.
 **Fichiers** : `docker/init-v3/01`, `02`, `04`,
 `docker/migrations/v2-vers-v3/47_sans-id-role.sql` (neuf), `models/user_model.py`,
@@ -313,8 +322,9 @@ refaire et seed à rejouer après le pull.
 ---
 
 <!-- FICHE:PRF9 -->
-## PRF9 [ ] — Écrire l'ADR, le README, la matrice des droits
+## PRF9 [x] — Écrire l'ADR, le README, la matrice des droits
 
+**Session** : 719fade3-b24b-449b-b610-afa4674442a1
 **Dépend de** : `PRF8`.
 **Fichiers** : `md/securite/matrice-droits-crud-par-role.md`, `../Fil-Rouge-API/API/README.md`,
 `../Fil-Rouge-API/docker/init-v3/README.md` §0,

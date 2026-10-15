@@ -11,3 +11,4 @@ QUAND LIRE : on relit un chantier clos ; l'index n'en garde qu'une ligne qui ren
 | `13-finitions-api.md` | on relit le socle du chantier FIN — **clos** « Finitions de l'API : erreurs et Swagger », `FIN1..FIN2` |
 | `14-banc-v2-v3.md` | on relit le socle du chantier BAN — **clos** « Réparer le banc v2/v3 », `BAN1..BAN3` |
 | `15-seed-demo.md` | on relit le socle du chantier DEM — **clos** « Seed de démo », `DEM1..DEM3` |
+| `16-refacto-profils.md` | on relit le socle du chantier PRF — **clos** « Refacto des profils », `PRF1..PRF9` |
