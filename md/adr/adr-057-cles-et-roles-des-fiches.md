@@ -4,7 +4,7 @@
 
 * **Date :** 15/10/2026
 * **Statut :** ✅ accepté (Sébastien, Discord, 15/10/2026 : 11 questions tranchées aux boutons, après discussion avec Gabriel et Laurence). Remplace **ADR-056**.
-* **État du code :** en cours, chantier PRF (`context AI/16-refacto-profils.md`, fiches PRF1 à PRF9).
+* **État du code :** ✅ codé le 15/10/2026, chantier PRF (`context AI/16-refacto-profils.md`, fiches PRF1 à PRF9). Le trigger du point 5 pose aussi un 4ᵉ déclencheur, sur `"user".system_role`.
 * **Décideurs :** Sébastien ; proposition « drapeaux sur `user` » de Gabriel ; questions de Laurence sur `is_admin` et `is_reader` (Discord, 15/10/2026) ; découpage d'origine de Robin HOTTON (prof, 14/10/2026).
 * **Voir aussi :** ADR-056 (remplacé) ; ADR-027 (droits, « le sien ») ; ADR-052 (jeton JWT) ; ADR-058 (chasseur IA)
 

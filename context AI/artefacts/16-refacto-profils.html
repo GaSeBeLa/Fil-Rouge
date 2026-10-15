@@ -21,9 +21,9 @@
     <p>Les 11 FK visent la PK des fiches, le rôle vit sur la fiche ou sur user.system_role, une fiche au plus par compte ; tous les tests passent, banc v2/v3 compris</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">9 fiches · 8 faites · en cours : PRF9</p>
+    <p class="mono" style="margin-top:.5rem">9 fiches · 9 faites</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -69,13 +69,14 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">PRF8</span></span>
         <details><summary><span class="titre">Retirer user.id_role</span><span class="etat">Faite</span></summary>
         <span class="note">grep -rnw id_role API docker (hors htmlcov) : 86 lignes, historique (init, init-v2, migrations) + 5 commentaires de retrait ; mutant 'Admin' dans le CHECK de role : banc 1 failed ; pytest 975 passed, 7 xfailed (1 test mort retiré) ; pyright src 2 anciennes, tests 0 ; base de dev refaite, seed_demo OK ; API 023b0e8</span></details>
-        <span class="cout mono">≈11,0M (10 971 122) · 46 tours · 3,81 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">PRF9</span></span>
-        <details open><summary><span class="titre">Écrire l'ADR, le README, la matrice des droits</span><span class="etat">En cours</span></summary>
-        <span class="note">ADR-057, README, matrice des droits, Swagger ; dépend de PRF8</span></details></li>
+        <span class="cout mono">≈11,3M (11 261 016) · 47 tours · 3,89 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">PRF9</span></span>
+        <details><summary><span class="titre">Écrire l'ADR, le README, la matrice des droits</span><span class="etat">Faite</span></summary>
+        <span class="note">ADR-057 relu, conforme (11 FK vers la fiche, 7 vers user) ; état du code passé à codé ; README v3 (section PRF, Reader, role), README API, matrice des droits, Swagger à jour ; restes : 10 lignes, 0 fausse ; mutant Swagger tué ; pytest 975 passed, 7 xfailed ; pyright src 2 anciennes, tests 0 ; API 5c05b0a</span></details>
+        <span class="cout mono">≈6,1M (6 116 503) · 36 tours · 2,45 $</span></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈31,5M (31 493 525) · 181 tours · 12,77 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈158,3M (158 297 433) · 872 tours · 59,86 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈164,7M (164 703 830) · 909 tours · 62,39 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 

@@ -320,8 +320,9 @@ refaire et seed à rejouer après le pull.
 ---
 
 <!-- FICHE:PRF9 -->
-## PRF9 [ ] — Écrire l'ADR, le README, la matrice des droits
+## PRF9 [x] — Écrire l'ADR, le README, la matrice des droits
 
+**Session** : 719fade3-b24b-449b-b610-afa4674442a1
 **Dépend de** : `PRF8`.
 **Fichiers** : `md/securite/matrice-droits-crud-par-role.md`, `../Fil-Rouge-API/API/README.md`,
 `../Fil-Rouge-API/docker/init-v3/README.md` §0,
