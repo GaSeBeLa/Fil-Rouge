@@ -310,8 +310,9 @@ verts ; pytest API vert, comptes affichés.
 ---
 
 <!-- FICHE:FLX6 -->
-## FLX6 [ ] — Rafraîchir l'OLAP chaque nuit
+## FLX6 [x] — Rafraîchir l'OLAP chaque nuit
 
+**Session** : 53337d1c-79b2-439c-8cea-3a6e446e0d7b
 **Dépend de** : `FLX13`.
 **Fichiers** : `airflow/src/olap/extract.py`, `airflow/src/olap/transform.py`,
 `airflow/src/olap/load.py`, `airflow/dags/olap_refresh_dag.py`,

@@ -21,9 +21,9 @@
     <p>Trois DAG tournent chaque nuit (annonces, OLAP, index), la recherche de biens passe par GET /estates/search, et Kibana montre le trafic de l'API</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">13 fiches · 6 faites · en cours : FLX6</p>
+    <p class="mono" style="margin-top:.5rem">13 fiches · 7 faites · en cours : FLX7</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -62,11 +62,12 @@
         <details><summary><span class="titre">Fabriquer du volume : des centaines de ventes fausses</span><span class="etat">Faite</span></summary>
         <span class="note">faker lancé sur la base de dev : sale 1 → 501, payment 1 → 501 (463 paid, 21 scheduled, 17 announced, 0 refused) ; relancé : rien écrit, 501/501 ; 13 tests unitaires verts ; API 988 passed, 7 xfailed</span></details>
         <span class="cout mono">≈220,4k (220 382) · 1 tours · 0,06 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">FLX6</span></span>
-        <details open><summary><span class="titre">Rafraîchir l'OLAP chaque nuit</span><span class="etat">En cours · FLX7, FLX12 peuvent partir en même temps</span></summary>
-        <span class="note">DAG olap_refresh, rejouable, rapport qualité ; dépend de FLX5</span></details></li>
-      <li class="fiche"><span class="gauche"><span class="id">FLX7</span></span>
-        <details><summary><span class="titre">Faire démarrer Elasticsearch et Kibana</span><span class="etat">À lancer · en même temps que FLX6, FLX12</span></summary>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">FLX6</span></span>
+        <details><summary><span class="titre">Rafraîchir l'OLAP chaque nuit</span><span class="etat">Faite</span></summary>
+        <span class="note">dags test olap_refresh joué 2 fois : 501 lues, 501 chargées, 0 rejet ; fait_ventes 501 = sale 501 aux deux passages (max id 501) ; rapport gold/olap/2026-10-15.json ; airflow 93 passed (mutant délai en jours : 3 failed) ; API 988 passed, 7 xfailed</span></details>
+        <span class="cout mono">≈35,6M (35 585 986) · 136 tours · 11,25 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">FLX7</span></span>
+        <details open><summary><span class="titre">Faire démarrer Elasticsearch et Kibana</span><span class="etat">En cours · FLX12 peut partir en même temps</span></summary>
         <span class="note">Elasticsearch et Kibana 9.5.4 dans le profil elk ; dépend de FLX1</span></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">FLX8</span></span>
         <details><summary><span class="titre">Remplir l'index estates chaque nuit</span><span class="etat">Après FLX7</span></summary>
@@ -82,11 +83,11 @@
         <span class="note">Tableau de bord Kibana : trafic et carte des biens (visuel) ; dépend de FLX8, FLX10</span></details>
         <span class="badge visuel" title="Critère de fin visuel : il faudra regarder">visuel</span></li>
       <li class="fiche"><span class="gauche"><span class="id">FLX12</span></span>
-        <details><summary><span class="titre">Écrire la doc, le schéma du flux et les ADR</span><span class="etat">À lancer · en même temps que FLX6, FLX7</span></summary>
+        <details><summary><span class="titre">Écrire la doc, le schéma du flux et les ADR</span><span class="etat">À lancer · en même temps que FLX7</span></summary>
         <span class="note">Doc, schéma du flux avec les vrais noms, ADR ; dépend de toutes</span></details></li>
     </ul>
-    <p class="mono cout-hors">Hors fiches : ≈19,9M (19 902 393) · 80 tours · 6,38 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈59,1M (59 072 638) · 291 tours · 21,38 $</p>
+    <p class="mono cout-hors">Hors fiches : ≈3,4M (3 440 903) · 16 tours · 1,15 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈78,2M (78 197 134) · 363 tours · 27,40 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 
