@@ -291,8 +291,9 @@ un compte sans fiche ni `system_role` reçoit 403. Mutant : faire lire `id_role`
 ---
 
 <!-- FICHE:PRF8 -->
-## PRF8 [ ] — Retirer `user.id_role`
+## PRF8 [x] — Retirer `user.id_role`
 
+**Session** : 719fade3-b24b-449b-b610-afa4674442a1
 **Dépend de** : `PRF7`.
 **Fichiers** : `docker/init-v3/01`, `02`, `04`,
 `docker/migrations/v2-vers-v3/47_sans-id-role.sql` (neuf), `models/user_model.py`,
