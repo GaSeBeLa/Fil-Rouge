@@ -51,7 +51,7 @@ ordonné par ce qui débloque le reste.
 | # | Chantier | Ce qu'il apporte | Coût estimé | Dépend de |
 |---|---|---|---|---|
 | 4 | Les ADR | **une fiche par ADR**, chacune relue (Q15) ; chaque ADR cite ses cartes et ses sources, puis se copie sur Confluence. ✅ **Fait le 2026-10-09** : **27 ADR** (024, 027 à 052) + **2 annexes**, réponses du groupe intégrées (S1 à S12, M), publiés sur Confluence, dossier « Proposé » ; bandeau « remplacé par » sur ADR-012, ADR-019 et l'ancien ADR-027. Reste : validation de Jeff ; S4 (acte après la fin) et D1b avec lui ; S10 après les cours d'IA ; D8 après les cours ML/data | 🟢 rédigés, à valider | 1..3 |
-| 5 | Doc d'équipe | matrice des droits, RACI, registre RGPD, rapport de tests | 💡 3-4 fiches | 1..2 |
+| 5 | Doc d'équipe | matrice des droits, RACI, registre RGPD, rapport de tests. Registre RGPD **préparé le 2026-10-15** (inventaire, brouillon, 18 questions pour l'équipe, découpage `RGP1`..`RGP5`) : `md/securite/2026-10-15-preparation-chantier-rgpd.md` | 💡 3-4 fiches | 1..2 |
 | 6 | Livrable 2 — modélisation (MCD/MLD) | reconstruit le modèle depuis le schéma réparé, pour `livrables/2-modelisation/` | 3–4 fiches | 1 |
 | 7 | Livrable 1 — audit des données | rapport de normalisation à partir de `normalised/rapport_anomalies.txt` | 3–4 fiches | rien |
 | 8 | Livrable 3 — architecture | documente les trois couches et les choix (pas de PATCH, bases génériques, auth côté back) | 2–3 fiches | 2 |

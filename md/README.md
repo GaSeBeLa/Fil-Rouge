@@ -69,6 +69,7 @@
 | [matrice-droits-crud-par-role.md](securite/matrice-droits-crud-par-role.md) | qui peut faire quoi : la matrice d'accès par rôle | 📌 vivant |
 | [tuto-1-hachage-mots-de-passe.md](securite/tuto-1-hachage-mots-de-passe.md) | tuto : hacher les mots de passe (Argon2id) | 📌 vivant |
 | [tuto-2-authentification-jwt.md](securite/tuto-2-authentification-jwt.md) | tuto : authentification et droits d'accès (JWT) | 📌 vivant |
+| [2026-10-15-preparation-chantier-rgpd.md](securite/2026-10-15-preparation-chantier-rgpd.md) | préparation du chantier RGPD : lexique pour débutants, inventaire, registre en brouillon, 18 questions pour l'équipe | 📌 vivant, jusqu'au cadrage |
 
 ## journal/ — les photos d'un jour, de la plus ancienne à la plus récente
 
