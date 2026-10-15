@@ -264,7 +264,7 @@ colonne (comptes affichés) ; banc v2/v3 et pytest API verts, comptes affichés.
 ## FLX13 [ ] — Fabriquer du volume : des centaines de ventes fausses
 
 **Dépend de** : `FLX5`.
-**Fichiers** : `API/src/app/scripts/seed_volume.py`, `API/tests/unit/test_seed_volume.py`
+**Fichiers** : `API/src/app/scripts/seed_volume.py`, `API/tests/test_seed_volume.py`
 (neufs), `API/README.md` (§ seed) ; lus : `API/src/app/scripts/seed_demo.py` (modèle),
 `services/payment_calculation_service.py`, `01_create_fil_rouge_immobilier.sql` (`sale`,
 `mandate`, `visit`, `payment`) — et rien d'autre.
