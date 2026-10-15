@@ -3,7 +3,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 15/10/2026
-* **Statut :** ✅ accepté (Sébastien, Discord, 15/10/2026, question `flux-1b`, qui remplace `flux-1`). Pas encore publié sur Confluence.
+* **Statut :** ✅ accepté (Sébastien, Discord, 15/10/2026, question `flux-1b`, qui remplace `flux-1`). Publié sur Confluence le 15/10/2026, dans « Proposé », pour relecture par le groupe.
 * **Décideurs :** Sébastien.
 * **Voir aussi :** ADR-045, limite 7 (import des annonces par un flux Airflow) ; ADR-062 (profils Compose)
 

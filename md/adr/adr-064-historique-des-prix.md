@@ -3,7 +3,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 15/10/2026
-* **Statut :** ✅ accepté (Sébastien, Discord, 15/10/2026, question `flux-12b`). Pas encore publié sur Confluence.
+* **Statut :** ✅ accepté (Sébastien, Discord, 15/10/2026, question `flux-12b`). Publié sur Confluence le 15/10/2026, dans « Proposé », pour relecture par le groupe.
 * **Décideurs :** Sébastien ; colonnes recopiées du MPD de Gabriel (Discord, 15/10/2026).
 * **Voir aussi :** ADR-063 (clé d'une annonce) ; ADR-060 (MinIO)
 

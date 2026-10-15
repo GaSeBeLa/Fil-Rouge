@@ -3,7 +3,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 15/10/2026
-* **Statut :** ✅ accepté (Sébastien, Discord, 15/10/2026, questions `flux-2` et `flux-11`). Pas encore publié sur Confluence.
+* **Statut :** ✅ accepté (Sébastien, Discord, 15/10/2026, questions `flux-2` et `flux-11`). Publié sur Confluence le 15/10/2026, dans « Proposé », pour relecture par le groupe.
 * **Décideurs :** Sébastien.
 * **Voir aussi :** ADR-015 (MinIO, stockage objet) ; ADR-051 (médias de la note d'avis) ; ADR-059 (Airflow)
 

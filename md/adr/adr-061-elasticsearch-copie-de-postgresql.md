@@ -3,7 +3,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 15/10/2026
-* **Statut :** ✅ accepté (Sébastien, Discord, 15/10/2026, questions `flux-5`, `flux-6` et `flux-14`). Pas encore publié sur Confluence.
+* **Statut :** ✅ accepté (Sébastien, Discord, 15/10/2026, questions `flux-5`, `flux-6` et `flux-14`). Publié sur Confluence le 15/10/2026, dans « Proposé », pour relecture par le groupe.
 * **Décideurs :** Sébastien.
 * **Voir aussi :** ADR-054 (contact du vendeur) ; ADR-027 (droits par rôle) ; ADR-062 (profils Compose)
 

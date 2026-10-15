@@ -3,7 +3,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 15/10/2026
-* **Statut :** ✅ accepté (Sébastien, Discord, 15/10/2026, question `flux-10`). Pas encore publié sur Confluence.
+* **Statut :** ✅ accepté (Sébastien, Discord, 15/10/2026, question `flux-10`). Publié sur Confluence le 15/10/2026, dans « Proposé », pour relecture par le groupe.
 * **Décideurs :** Sébastien.
 * **Voir aussi :** ADR-059 (Airflow) ; ADR-060 (MinIO) ; ADR-061 (Elasticsearch)
 
