@@ -9,23 +9,31 @@
 **À quoi il sert.** Le livrable BC05 demande des flux de données : Airflow importe
 les annonces et nourrit l'OLAP, Elasticsearch sert la recherche de biens et les logs.
 
-**Fait.** Rien. Cadré le 2026-10-15 en 12 fiches (13 depuis `FLX13`, faker de volume, ajoutée le même jour avant `FLX6`), `FLX1` à jouer **après la fusion de PRF**.
+**Fait.** 6 fiches sur 13, le 2026-10-15, **rien de poussé** :
+- `FLX1` : compose en profils, Airflow 2.11.2 démarre (API `ceda732`) ;
+- `FLX2` : `airflow/`, connexions, DAG d'essai (`0d9f11c`) ;
+- `FLX3` : nettoyage et validation d'une annonce (`f8e5961`) ;
+- `FLX4` : import de nuit sans doublon, historique des prix, migration 48 (`0b7e256`) ;
+- `FLX5` : schéma `olap` en étoile, migration 49 (`5548e55`) ;
+- `FLX13` : faker de volume, base de dev à **501** ventes (`0d880e1`).
 
-**Session** : f022f081-0f47-40d8-a130-39e8bee7a307
+**À faire.** `FLX6` (rafraîchir l'OLAP), puis `FLX7` à `FLX12` (Elasticsearch, Kibana, doc). Cadré en 12 fiches ; `FLX13` ajoutée le même jour, avant `FLX6` (décision de Seb, bouton `faker-volume:A`).
+
+**Sessions** : f022f081-0f47-40d8-a130-39e8bee7a307 (cadrage, `FLX1`), 53337d1c-79b2-439c-8cea-3a6e446e0d7b (`FLX1` à `FLX5`, `FLX13`)
 
 ## Le socle commun
 
-Le code vit dans `../Fil-Rouge-API/` ; tout chemin ci-dessous s'y lit. **Aucune
-fiche ne se joue avant la fusion du chantier PRF** (migrations 45 à 47, `estate_service.py`).
+Le code vit dans `../Fil-Rouge-API/` ; tout chemin ci-dessous s'y lit. Le chantier
+PRF est fusionné et poussé (2026-10-15, migrations 45 à 47) : plus rien n'attend.
 Vérification API : depuis `docker/`, `docker compose exec -T api python -m pytest -q`
 (à mesurer au début de chaque fiche). Tests Airflow : `pytest airflow/tests -q`, **sans**
 Airflow, sans Docker, sans MinIO (cours Airflow, exo 8). Python touché : `pyright`.
 
-**Décisions de Seb** (Discord, 2026-10-15, questions `flux-1` à `flux-15`) :
+**Décisions de Seb** (Discord, 2026-10-15, questions `flux-1` à `flux-18`) :
 - **Airflow 2.11.2**, `LocalExecutor` (cours : 2.9.3 ; Airflow 2 est en fin de vie
   depuis le 2026-04-22 — [doc officielle](https://airflow.apache.org/docs/apache-airflow/stable/installation/supported-versions.html), à dire à l'oral) ;
-- **profils Compose** (oui de Seb pour `docker/docker-compose.yml`, **seulement**
-  dans `FLX1`, `FLX7`, `FLX10`) : sans profil `db`, `api` ; profil `airflow` :
+- **profils Compose** (oui de Seb pour `docker/docker-compose.yml` dans `FLX1`, `FLX7`,
+  `FLX10` ; `FLX2` accepté après coup, « oui ça va », 12 h 36 UTC ; `FLX4` : une ligne, `flux-17`) : sans profil `db`, `api` ; profil `airflow` :
   `minio`, `minio-setup`, `airflow-init`, `airflow-webserver`, `airflow-scheduler` ;
   profil `elk` : `elasticsearch`, `kibana`, `logstash`. Tout : `--profile "*"` ;
 - **MinIO** (déjà là : `minio`, `minio-setup`) : buckets `bronze`, `silver`, `gold`
@@ -49,6 +57,13 @@ Airflow, sans Docker, sans MinIO (cours Airflow, exo 8). Python touché : `pyrig
   **jamais** `estate_contact` dans l'index (ADR-054) ;
 - **horaires** : `annonces_import` à 2 h, `olap_refresh` à 3 h, `estates_index` à 4 h
   (cron), lançables à la main.
+- **générateur d'annonces** : copié à l'identique dans `airflow/tools/`, monté en lecture
+  seule (`flux-17`, tranchée A) ;
+- **faker de volume** (`FLX13`, `flux-18`, tranchée A) : **500** ventes par défaut,
+  `--sales N` ; les grilles (honoraires, barème, réglages du taux) ne commencent qu'au
+  **2026-01-01** : aucune vente avant ;
+- **`olap` fermé à `fil_rouge_reader`** (`FLX5`) : `commission_chasseur` vient de `payment`,
+  que la migration 43 lui a retiré ; à trancher s'il faut un lecteur.
 
 **Comment le cours écrit un DAG** (synthèse : `md/flux/cours-airflow-synthese.md`) :
 `with DAG(...)` + `PythonOperator`, **pas de TaskFlow** ; `start_date=datetime(2026, 10, 1)`,
@@ -90,7 +105,7 @@ reconnaître le même bien chez deux agences ; Airflow 3 ; Confluence et le MPD 
 | `FLX11` | Montrer le trafic et les biens dans Kibana | `FLX8`, `FLX10` |
 | `FLX12` | Écrire la doc, le schéma du flux et les ADR | toutes |
 
-Après `FLX2`, les branches annonces (`FLX3`-`FLX4`) et OLAP (`FLX5`-`FLX6`) sont
+Après `FLX2`, les branches annonces (`FLX3`-`FLX4`) et OLAP (`FLX5`-`FLX13`-`FLX6`) sont
 indépendantes ; `FLX7` et `FLX10` se jouent dès `FLX1`. Migrations : 48 en
 `FLX4`, 49 en `FLX5`.
 
