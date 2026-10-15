@@ -426,8 +426,9 @@ ville du seed rend au moins 1 bien. Mutant : routeur inclus après celui des bie
 ---
 
 <!-- FICHE:FLX10 -->
-## FLX10 [ ] — Envoyer les logs de l'API dans Elasticsearch
+## FLX10 [x] — Envoyer les logs de l'API dans Elasticsearch
 
+**Session** : 53337d1c-79b2-439c-8cea-3a6e446e0d7b
 **Dépend de** : `FLX7`.
 **Fichiers** : `API/src/app/conf/logging.py` (neuf), `API/src/app/main.py`,
 `docker/logstash/pipeline/api.conf`, `docker/logstash/pipelines.yml` (neufs),
