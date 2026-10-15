@@ -395,8 +395,9 @@ de la liste blanche tombe.
 ---
 
 <!-- FICHE:FLX9 -->
-## FLX9 [ ] — Chercher un bien par `GET /estates/search`
+## FLX9 [x] — Chercher un bien par `GET /estates/search`
 
+**Session** : 53337d1c-79b2-439c-8cea-3a6e446e0d7b
 **Dépend de** : `FLX8`.
 **Fichiers** : `API/src/app/routes/estate_search_router.py`,
 `API/src/app/services/estate_search_service.py`,
