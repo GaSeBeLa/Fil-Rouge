@@ -261,8 +261,9 @@ colonne (comptes affichés) ; banc v2/v3 et pytest API verts, comptes affichés.
 ---
 
 <!-- FICHE:FLX13 -->
-## FLX13 [ ] — Fabriquer du volume : des centaines de ventes fausses
+## FLX13 [x] — Fabriquer du volume : des centaines de ventes fausses
 
+**Session** : 53337d1c-79b2-439c-8cea-3a6e446e0d7b
 **Dépend de** : `FLX5`.
 **Fichiers** : `API/src/app/scripts/seed_volume.py`, `API/tests/test_seed_volume.py`
 (neufs), `API/README.md` (§ seed) ; lus : `API/src/app/scripts/seed_demo.py` (modèle),

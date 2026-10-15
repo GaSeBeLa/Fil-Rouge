@@ -16,14 +16,14 @@
 
 <div class="page">
   <header>
-    <div class="eyebrow">Fil Rouge Immobilier · fiches FLX1–FLX12 · <a href="https://claude.ai/artifact/Wu5xkSJUtfbjuhFdbvUq3C">la feuille de route</a></div>
+    <div class="eyebrow">Fil Rouge Immobilier · fiches FLX1–FLX13 · <a href="https://claude.ai/artifact/Wu5xkSJUtfbjuhFdbvUq3C">la feuille de route</a></div>
     <h1>Flux de données : Airflow et Elasticsearch</h1>
     <p>Trois DAG tournent chaque nuit (annonces, OLAP, index), la recherche de biens passe par GET /estates/search, et Kibana montre le trafic de l'API</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">12 fiches · 5 faites · en cours : FLX6</p>
+    <p class="mono" style="margin-top:.5rem">13 fiches · 6 faites · en cours : FLX6</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -57,7 +57,11 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">FLX5</span></span>
         <details><summary><span class="titre">Créer le schéma olap en étoile</span><span class="etat">Faite</span></summary>
         <span class="note">\dt olap.* : 6 tables ; grep name|email|phone dans 08_olap.sql : 0 ; banc 1 passed (mutant : 1 failed) ; API 975 passed, 7 xfailed</span></details>
-        <span class="cout mono">≈10,2M (10 180 159) · 59 tours · 3,74 $</span></li>
+        <span class="cout mono">≈11,0M (11 001 211) · 63 tours · 4,01 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">FLX13</span></span>
+        <details><summary><span class="titre">Fabriquer du volume : des centaines de ventes fausses</span><span class="etat">Faite</span></summary>
+        <span class="note">faker lancé sur la base de dev : sale 1 → 501, payment 1 → 501 (463 paid, 21 scheduled, 17 announced, 0 refused) ; relancé : rien écrit, 501/501 ; 13 tests unitaires verts ; API 988 passed, 7 xfailed</span></details>
+        <span class="cout mono">≈220,4k (220 382) · 1 tours · 0,06 $</span></li>
       <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">FLX6</span></span>
         <details open><summary><span class="titre">Rafraîchir l'OLAP chaque nuit</span><span class="etat">En cours · FLX7, FLX12 peuvent partir en même temps</span></summary>
         <span class="note">DAG olap_refresh, rejouable, rapport qualité ; dépend de FLX5</span></details></li>
@@ -81,8 +85,8 @@
         <details><summary><span class="titre">Écrire la doc, le schéma du flux et les ADR</span><span class="etat">À lancer · en même temps que FLX6, FLX7</span></summary>
         <span class="note">Doc, schéma du flux avec les vrais noms, ADR ; dépend de toutes</span></details></li>
     </ul>
-    <p class="mono cout-hors">Hors fiches : ≈906,9k (906 914) · 9 tours · 0,40 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈40,9M (40 872 302) · 230 tours · 15,85 $</p>
+    <p class="mono cout-hors">Hors fiches : ≈19,7M (19 704 729) · 85 tours · 6,48 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈60,7M (60 711 551) · 311 tours · 22,26 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 

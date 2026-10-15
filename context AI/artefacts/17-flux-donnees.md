@@ -14,6 +14,7 @@ Trois DAG tournent chaque nuit (annonces, OLAP, index), la recherche de biens pa
 - FLX10 : Logs JSON de l'API, Logstash, data stream logs-api-default ; dépend de FLX7
 - FLX11 : Tableau de bord Kibana : trafic et carte des biens (visuel) ; dépend de FLX8, FLX10
 - FLX12 : Doc, schéma du flux avec les vrais noms, ADR ; dépend de toutes
+- FLX13 : faker lancé sur la base de dev : sale 1 → 501, payment 1 → 501 (463 paid, 21 scheduled, 17 announced, 0 refused) ; relancé : rien écrit, 501/501 ; 13 tests unitaires verts ; API 988 passed, 7 xfailed
 ## Journal
 - 2026-10-15 : FLX3 : la clé d'annonce est `estate.reference` (déjà VARCHAR(50) NOT NULL UNIQUE, remplie sur 2556 biens sur 2556) ; pas de `source_reference` (question flux-16, tranchée A par Seb, MPD corrigé). Migrations renumérotées : 48 = estate_price_history (FLX4), 49 = olap (FLX5).
 - 2026-10-15 : flux-17 : volume ../airflow/tools monté en lecture seule (oui de Seb)
