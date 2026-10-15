@@ -30,6 +30,8 @@
 |---|---|---|
 | [kanban.md](equipe/kanban.md) | le kanban du développement (GitHub Projects) | 📌 vivant |
 | [depots-et-branches.md](equipe/depots-et-branches.md) | dépôts, branches, protection de `main` : 4 décisions à prendre | 📌 vivant |
+| [2026-10-16-presentation.md](equipe/2026-10-16-presentation.md) | la présentation aux autres groupes : plan des 20 minutes, 4 schémas, chiffres, questions | 📷 photo du 2026-10-15 |
+| [2026-10-16-presentation.html](equipe/2026-10-16-presentation.html) | la même, en page interactive : chrono, schémas animés (à ouvrir dans un navigateur) | 📷 photo du 2026-10-15 |
 
 ## questions/ — les questions à trancher
 

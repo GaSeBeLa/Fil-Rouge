@@ -1,0 +1,633 @@
+<title>Présentation GaSeBeLa</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Mise en page : une colonne de 46 rem (kit vlp) ; les schémas sortent de la colonne
+   et prennent la largeur de la fenêtre. Clair seulement : choix de lecture de l'équipe. */
+:root {
+  color-scheme: light;
+  --ground: #f3e8d4; --surface: #faf1e2; --creux: #efe2c9; --line: #dcd0b7; --line-fort: #c1b295;
+  --texte: #50433b; --doux: #6e6151; --accent: #2f5d8c;
+  --fait: #2d7551; --cours: #8f5a0f; --bloque: #a63d40;
+  --p-base: #2f5d8c; --p-airflow: #2d7551; --p-elk: #8f5a0f;
+  --f-texte: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--ground); color: var(--texte); font-family: var(--f-texte); font-size: 18px; line-height: 1.55; letter-spacing: .05em; overflow-wrap: break-word; overflow-x: hidden; }
+.page { max-width: 46rem; margin: 0 auto; padding-block: 2.5rem 4rem; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: flex; flex-direction: column; gap: 2.4rem; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+h1 { font-size: 1.95rem; }
+h2 { font-size: 1.4rem; }
+h3 { font-size: 1.1rem; }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, select:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+code, .mono { font-family: var(--f-mono); letter-spacing: normal; font-size: .92em; }
+.nowrap { white-space: nowrap; }
+ul, ol { margin: 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: .4rem; }
+header { display: flex; flex-direction: column; gap: .55rem; border-bottom: 2px solid var(--line-fort); padding-bottom: 1.3rem; }
+.eyebrow { font-size: 1rem; color: var(--accent); }
+header p { color: var(--doux); }
+section { display: flex; flex-direction: column; gap: 1rem; scroll-margin-top: 4rem; }
+.carte { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 1rem 1.15rem; display: flex; flex-direction: column; gap: .6rem; min-width: 0; }
+.note { font-size: 15px; color: var(--doux); }
+.bouton { font: inherit; font-size: 16px; letter-spacing: .05em; background: var(--surface); color: var(--texte); border: 1px solid var(--line-fort); border-radius: 999px; padding: .3rem .85rem; cursor: pointer; }
+.bouton[aria-pressed=true], .bouton.plein { background: var(--accent); color: var(--surface); border-color: var(--accent); }
+.boutons { display: flex; flex-wrap: wrap; gap: .45rem; align-items: center; }
+select { font: inherit; font-size: 16px; background: var(--surface); color: var(--texte); border: 1px solid var(--line-fort); border-radius: 4px; padding: .25rem .4rem; }
+
+/* sommaire collant */
+nav.sommaire { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--ground); border-bottom: 1px solid var(--line); padding-block: .5rem; display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: 16px; }
+nav.sommaire a { text-decoration: none; color: var(--doux); }
+nav.sommaire a.actif { color: var(--accent); font-weight: 700; }
+
+/* en bref */
+.bref { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: .8rem; }
+.bref .carte b { font-size: 1.7rem; font-variant-numeric: tabular-nums; }
+.bref .carte span { color: var(--doux); font-size: 16px; }
+
+/* frise des 20 minutes */
+.frise { display: flex; height: 3.4rem; border-radius: 6px; overflow: hidden; border: 1px solid var(--line-fort); }
+.frise button { font: inherit; font-size: 15px; letter-spacing: .03em; border: 0; border-right: 2px solid var(--surface); color: var(--surface); cursor: pointer; padding: 0 .3rem; display: flex; flex-direction: column; justify-content: center; align-items: center; line-height: 1.2; min-width: 0; overflow: hidden; background: var(--c); opacity: .78; transition: opacity .2s; }
+.frise button:last-child { border-right: 0; }
+.frise button.choisi, .frise button:hover { opacity: 1; }
+.frise button.choisi { box-shadow: inset 0 -5px 0 var(--texte); }
+.frise .m { font-family: var(--f-mono); letter-spacing: normal; }
+.regle { display: flex; justify-content: space-between; font-family: var(--f-mono); letter-spacing: normal; font-size: 15px; color: var(--doux); }
+.chrono { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.2rem; }
+.chrono .temps { font-family: var(--f-mono); letter-spacing: normal; font-size: 1.8rem; font-variant-numeric: tabular-nums; }
+.chrono .ou { color: var(--doux); }
+.curseur { position: relative; height: 0; }
+.curseur i { position: absolute; top: -3.75rem; width: 3px; height: 3.9rem; background: var(--texte); left: 0; transition: left .25s linear; }
+.partie { border-left: 6px solid var(--c); }
+.partie .tete { display: flex; flex-wrap: wrap; align-items: baseline; gap: .2rem .9rem; }
+.partie .duree { font-family: var(--f-mono); letter-spacing: normal; color: var(--doux); white-space: nowrap; }
+.partie .qui { font-size: 16px; color: var(--doux); }
+.partie dl { margin: 0; display: grid; grid-template-columns: 7.5rem 1fr; gap: .45rem .9rem; }
+.partie dt { color: var(--doux); }
+.partie dd { margin: 0; min-width: 0; }
+.phrase { background: var(--creux); border-radius: 4px; padding: .55rem .75rem; }
+.parties { display: flex; flex-direction: column; gap: 1rem; }
+.parties .partie.choisi { box-shadow: 0 0 0 2px var(--c); }
+
+/* schémas : hors de la colonne, à la largeur de la fenêtre */
+.large { position: relative; left: 50%; transform: translateX(-50%); width: min(1100px, calc(100vw - 32px)); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.large svg { display: block; width: 100%; height: auto; }
+svg text { font-family: var(--f-texte); fill: var(--texte); letter-spacing: .03em; }
+svg text.mono { font-family: var(--f-mono); letter-spacing: 0; fill: var(--doux); }
+svg .boite { stroke-width: 2; }
+svg .fil { fill: none; stroke: var(--line-fort); stroke-width: 2; transition: stroke .3s, opacity .3s; }
+svg .fil.on { stroke: var(--accent); stroke-width: 3; }
+svg .fil.off { opacity: .3; }
+svg .fil.courant { stroke: var(--cours); stroke-width: 4; }
+svg .grain { fill: var(--cours); }
+svg .noeud { cursor: pointer; }
+svg .noeud:focus { outline: none; }
+svg .noeud:focus .boite, svg .noeud.choisi .boite { stroke: var(--accent); stroke-width: 3.5; }
+svg .noeud.off { opacity: .4; }
+.g-airflow { fill: #e2efe4; stroke: var(--p-airflow); }
+.g-db { fill: #e1e9f2; stroke: var(--p-base); }
+.g-elk { fill: #f3e4cc; stroke: var(--p-elk); }
+.g-api { fill: #faf1e2; stroke: var(--texte); }
+.g-stop { fill: #f6e3d6; stroke: var(--bloque); }
+.duo { display: grid; grid-template-columns: 1fr; gap: .8rem; }
+@media (min-width: 700px) { .duo { grid-template-columns: 1fr 1fr; } }
+.etapes-flux { margin: 0; padding-left: 1.4rem; font-size: 16px; }
+.etapes-flux li.courant { color: var(--cours); font-weight: 700; }
+.verdict { font-family: var(--f-mono); letter-spacing: normal; font-size: 1.3rem; }
+.verdict.ok { color: var(--fait); } .verdict.ko { color: var(--bloque); }
+
+/* versions du schéma */
+.versions { display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem; }
+@media (max-width: 800px) { .versions { grid-template-columns: repeat(2, 1fr); } }
+.version { border-top: 6px solid var(--line-fort); opacity: .45; transition: opacity .4s, border-color .4s; }
+.version.vu { opacity: 1; border-top-color: var(--accent); }
+.version .n { font-family: var(--f-mono); letter-spacing: normal; font-size: 2rem; font-variant-numeric: tabular-nums; }
+.version .d { font-family: var(--f-mono); letter-spacing: normal; color: var(--doux); font-size: 15px; }
+@media (max-width: 600px) { .versions { grid-template-columns: 1fr; } }
+
+/* mémoire */
+.cases { display: flex; flex-wrap: wrap; gap: .5rem 1.2rem; }
+.cases label { display: flex; gap: .4rem; align-items: center; cursor: pointer; }
+.jauge { height: 2rem; background: var(--creux); border-radius: 4px; position: relative; overflow: hidden; display: flex; }
+.jauge span { height: 100%; transition: width .5s; }
+.jauge .six { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--bloque); }
+.total { font-family: var(--f-mono); letter-spacing: normal; font-size: 1.3rem; }
+
+/* chiffres */
+.chiffres { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .8rem; }
+.chiffres .carte b { font-size: 1.6rem; font-variant-numeric: tabular-nums; }
+.barre { height: .7rem; background: var(--creux); border-radius: 3px; overflow: hidden; }
+.barre i { display: block; height: 100%; background: var(--fait); width: 0; transition: width 1.2s ease-out; }
+
+/* questions */
+details.carte { gap: 0; }
+details summary { cursor: pointer; font-weight: 700; }
+details[open] summary { margin-bottom: .5rem; }
+.decider { border-left: 6px solid var(--cours); }
+footer { border-top: 1px solid var(--line-fort); padding-top: 1rem; font-size: 15px; color: var(--doux); display: flex; flex-direction: column; gap: .3rem; }
+@media (max-width: 520px) { .partie dl { grid-template-columns: 1fr; gap: 0; } .partie dt { margin-top: .4rem; } }
+@media (prefers-reduced-motion: reduce) { .curseur i, .jauge span, .barre i, .version { transition: none; } }
+</style>
+
+<div class="page">
+
+<header>
+  <p class="eyebrow">Projet fil rouge · groupe GaSeBeLa · demain, <span class="nowrap">14 h 55 → 15 h 25</span></p>
+  <h1>Présentation GaSeBeLa</h1>
+  <p>Le plan proposé pour présenter le projet aux autres groupes : l'ordre, ce qu'on montre, comment, et qui parle. Tout se discute : c'est une proposition du Glaude, à trancher par l'équipe.</p>
+</header>
+
+<nav class="sommaire" aria-label="Sommaire">
+  <a href="#s-bref">En bref</a>
+  <a href="#s-plan">Les 20 minutes</a>
+  <a href="#s-versions">Schéma 1</a>
+  <a href="#s-requete">Schéma 2</a>
+  <a href="#s-flux">Schéma 3</a>
+  <a href="#s-pile">Schéma 4</a>
+  <a href="#s-chiffres">Chiffres</a>
+  <a href="#s-questions">Questions</a>
+  <a href="#s-trancher">À trancher</a>
+</nav>
+
+<section id="s-bref" aria-labelledby="h-bref">
+  <h2 id="h-bref">En bref</h2>
+  <div class="bref">
+    <div class="carte"><b class="nowrap">20 min</b><span>de présentation, puis <span class="nowrap">≈ 10 min</span> de questions</span></div>
+    <div class="carte"><b>5 parties</b><span>l'ordre de la trame de soutenance du sujet</span></div>
+    <div class="carte"><b>4 voix</b><span>Gabriel, Seb, Békanty, Laurence</span></div>
+    <div class="carte"><b>0 démo</b><span>retirée par Seb : les schémas la remplacent</span></div>
+  </div>
+  <p>Le plan suit <code>TRAME-SOUTENANCE.md</code> du sujet : le problème, la démarche, les choix clés, les sujets transverses, le bilan. La démo est retirée (Seb) : ses 5 minutes vont aux choix clés, à la démarche et aux transverses. Les autres groupes ont le même sujet. Ils connaissent donc déjà le contexte : <strong>on passe vite sur le problème, et on prend du temps sur nos choix</strong>.</p>
+</section>
+
+<section id="s-plan" aria-labelledby="h-plan">
+  <h2 id="h-plan">Les 20 minutes</h2>
+  <p>Cliquer sur une partie de la frise pour la voir en détail. Le chrono sert à répéter : il avance sur la frise et dit quelle partie on devrait être en train de présenter.</p>
+  <div class="frise" id="frise" role="group" aria-label="Les cinq parties, à la largeur de leur durée"></div>
+  <div class="curseur" aria-hidden="true"><i id="curseur"></i></div>
+  <div class="regle" aria-hidden="true"><span>0 min</span><span>5</span><span>10</span><span>15</span><span>20 min</span></div>
+  <div class="carte">
+    <div class="chrono">
+      <span class="temps" id="ch-temps">00:00</span>
+      <span class="ou" id="ch-ou">Chrono arrêté.</span>
+    </div>
+    <div class="boutons">
+      <button type="button" class="bouton plein" id="ch-go">▶ Répéter</button>
+      <button type="button" class="bouton" id="ch-zero">Remettre à zéro</button>
+      <label for="ch-vitesse" class="note">Vitesse</label>
+      <select id="ch-vitesse">
+        <option value="1">temps réel</option>
+        <option value="10">× 10, pour voir l'enchaînement</option>
+      </select>
+    </div>
+  </div>
+  <div class="parties" id="parties"></div>
+</section>
+
+<section id="s-versions" aria-labelledby="h-versions">
+  <h2 id="h-versions">Schéma 1 · d'où on part, où on arrive</h2>
+  <p>Pour la partie « Le problème ». Les fixtures reçues avec le sujet, puis nos trois versions du schéma cible. Le bouton fait défiler les étapes.</p>
+  <div class="boutons">
+    <button type="button" class="bouton plein" id="v-go">▶ Montrer l'évolution</button>
+  </div>
+  <div class="versions" id="versions">
+    <div class="carte version vu"><span class="d">reçu avec le sujet</span><span class="n">3</span><span>tables : les <strong>fixtures</strong></span><span class="note"><code>secteurs</code>, <code>utilisateurs</code>, <code>mandats</code></span></div>
+    <div class="carte version"><span class="d">première cible</span><span class="n">12</span><span>tables, montants en <strong>milliers d'euros</strong></span><span class="note"><code>docker/init/</code>, plus monté : 37 montants sur 47 des fixtures y débordaient</span></div>
+    <div class="carte version"><span class="d">21/09</span><span class="n">18</span><span>tables : schéma v2</span><span class="note"><code>docker/init-v2/</code>, figé, gardé pour le banc v2/v3</span></div>
+    <div class="carte version"><span class="d">07/10 → 15/10</span><span class="n">22</span><span>tables : schéma v3, montants en <strong>euros</strong></span><span class="note"><code>docker/init-v3/</code> + migrations, monté aujourd'hui</span></div>
+  </div>
+  <p class="note">Le banc v2/v3 (<code>test_banc_v2_v3.py</code>) migre une base v2 et la compare au schéma v3 à chaque lancement des tests : c'est la réponse à « comment migrez-vous sans perdre de données ? ».</p>
+</section>
+
+<section id="s-requete" aria-labelledby="h-requete">
+  <p class="note">Le diaporama à télécharger en .pptx : <a href="https://claude.ai/artifact/GKEKGnngY3jKKbTf7ekEK4">Présentation GaSeBeLa, 15 diapos</a>.</p>
+  <h2 id="h-requete">Schéma 2 · le trajet d'une requête dans l'API</h2>
+  <p>Pour la partie « Choix clés ». Une requête traverse trois couches. Chaque couche peut l'arrêter, et le code de réponse dit où. Choisir un cas :</p>
+  <div class="boutons" role="group" aria-label="Choisir un cas">
+    <button type="button" class="bouton" data-cas="ok" aria-pressed="true">Tout va bien</button>
+    <button type="button" class="bouton" data-cas="e422" aria-pressed="false">Entrée invalide</button>
+    <button type="button" class="bouton" data-cas="e403" aria-pressed="false">Mauvais rôle</button>
+    <button type="button" class="bouton" data-cas="e404" aria-pressed="false">La ligne d'un autre</button>
+    <button type="button" class="bouton" id="r-pause" aria-pressed="false">⏸ Pause</button>
+  </div>
+  <div class="large"><svg id="r-svg" viewBox="0 0 1100 250" role="img" aria-label="Trajet d'une requête : utilisateur, jeton, routes, services, repositories, PostgreSQL"></svg></div>
+  <div class="duo">
+    <div class="carte"><span class="verdict ok" id="r-code">200</span><p id="r-texte"></p></div>
+    <div class="carte"><h3>Ce qu'on dit</h3><p id="r-dire"></p></div>
+  </div>
+</section>
+
+<section id="s-flux" aria-labelledby="h-flux">
+  <h2 id="h-flux">Schéma 3 · le chemin des données</h2>
+  <p>Pour la partie « Choix clés ». Les points qui avancent sont les données. Choisir un flux pour le suivre seul ; cliquer sur une boîte pour savoir ce qu'elle fait.</p>
+  <div class="boutons" role="group" aria-label="Choisir un flux">
+    <button type="button" class="bouton" data-flux="tout" aria-pressed="true">Tous les flux</button>
+    <button type="button" class="bouton" data-flux="import" aria-pressed="false">2 h · annonces</button>
+    <button type="button" class="bouton" data-flux="olap" aria-pressed="false">3 h · OLAP</button>
+    <button type="button" class="bouton" data-flux="index" aria-pressed="false">4 h · index</button>
+    <button type="button" class="bouton" data-flux="recherche" aria-pressed="false">Une recherche</button>
+    <button type="button" class="bouton" data-flux="logs" aria-pressed="false">Les logs</button>
+    <button type="button" class="bouton" id="f-pause" aria-pressed="false">⏸ Pause</button>
+  </div>
+  <div class="large"><svg id="f-svg" viewBox="0 0 950 430" role="img" aria-label="Schéma animé du chemin des données entre Airflow, MinIO, PostgreSQL, l'API, Logstash, Elasticsearch et Kibana"></svg></div>
+  <div class="duo">
+    <div class="carte"><h3 id="f-titre">Tous les flux</h3><ol class="etapes-flux" id="f-etapes"></ol></div>
+    <div class="carte"><h3 id="f-nom">Cliquer sur une boîte</h3><p id="f-desc">Sa couleur dit son profil : vert <code>airflow</code>, bleu la base, ocre <code>elk</code>.</p></div>
+  </div>
+</section>
+
+<section id="s-pile" aria-labelledby="h-pile">
+  <h2 id="h-pile">Schéma 4 · la pile, et ce qu'elle coûte</h2>
+  <p>Pour la partie « Transverses », côté éco-conception. Les 11 conteneurs sont rangés en profils : on ne lance que ce dont on a besoin. Cocher les profils pour voir la mémoire au repos.</p>
+  <div class="carte">
+    <div class="cases">
+      <label><input type="checkbox" id="p-base" checked disabled> base + API</label>
+      <label><input type="checkbox" id="p-airflow" checked> <code>airflow</code></label>
+      <label><input type="checkbox" id="p-elk" checked> <code>elk</code></label>
+    </div>
+    <div class="jauge" id="p-jauge" aria-hidden="true"><i class="six" id="p-six"></i></div>
+    <p><span class="total" id="p-total"></span> <span class="note" id="p-detail"></span></p>
+    <p class="note">Mesuré le 15/10 vers 16 h 30 (<code>docker stats --no-stream</code>). Trait rouge : 6 Go, la mémoire conseillée pour Docker quand tout tourne.</p>
+  </div>
+</section>
+
+<section id="s-chiffres" aria-labelledby="h-chiffres">
+  <h2 id="h-chiffres">Les chiffres à citer</h2>
+  <p>Relevés dans les dépôts le 15/10. Pour la partie « Bilan ».</p>
+  <div class="chiffres" id="chiffres">
+    <div class="carte"><b>1 010 tests</b><span>API : tous passent</span><span class="note">lignes couvertes : 94 %</span><div class="barre"><i data-v="94"></i></div></div>
+    <div class="carte"><b>102 tests</b><span>Airflow : tous passent</span><span class="note">lignes couvertes : 98 %</span><div class="barre"><i data-v="98"></i></div></div>
+    <div class="carte"><b>64 ADR</b><span>décisions écrites, sur Confluence</span><span class="note">ADR-001 à ADR-064</span></div>
+    <div class="carte"><b>22 tables</b><span>schéma v3, en euros</span><span class="note">5 rôles : Admin, Client, Hunter, Manager, Reader</span></div>
+    <div class="carte"><b>11 conteneurs</b><span>en 3 profils Docker</span><span class="note">≈ 234 Mio sans profil, ≈ 5 Gio pour tout</span></div>
+    <div class="carte"><b>601 commits</b><span>196 dans l'API, 405 dans les docs</span><span class="note">2 dépôts GitHub, un kanban</span></div>
+  </div>
+</section>
+
+<section id="s-questions" aria-labelledby="h-questions">
+  <h2 id="h-questions">Les questions qu'on risque</h2>
+  <p>Celles de la trame du sujet, avec où trouver notre réponse. Cliquer pour ouvrir.</p>
+  <details class="carte"><summary>Pourquoi séparer OLTP et OLAP ?</summary><p>Les tables du métier servent l'API au quotidien ; le schéma <code>olap</code> (<code>fait_ventes</code> et 5 dimensions) sert les chiffres. Airflow le recharge chaque nuit à 3 h, sans gêner l'API. Voir <code>livrables/2-modelisation/olap.md</code>.</p></details>
+  <details class="carte"><summary>Comment garantir qu'un client ne soit pas un chasseur ?</summary><p>Chaque fiche (client, chasseur, manager) est liée à son compte, avec son rôle. Voir ADR-057 « clés et rôles des fiches » (chantier PRF).</p></details>
+  <details class="carte"><summary>Quelles données personnelles, et comment les protéger ?</summary><p>Un compte effacé est désactivé puis anonymisé (ADR-049). L'index de recherche ne garde ni contact ni adresse (ADR-061). Les logs ne gardent ni e-mail ni mot de passe. Mots de passe hachés en Argon2, jeton JWT de 60 minutes (ADR-052).</p></details>
+  <details class="carte"><summary>Comment migrer sans perdre de données ?</summary><p>Les migrations <code>docker/migrations/v2-vers-v3/</code> mènent une base v2 au schéma v3. Le banc v2/v3 le vérifie à chaque lancement des tests.</p></details>
+  <details class="carte"><summary>Comment éviter qu'une IA branchée sur la base fasse des dégâts ?</summary><p>Un rôle PostgreSQL en lecture seule existe, <code>fil_rouge_reader</code>. Les droits du futur chasseur IA sont décidés dans l'ADR-058. Sur Elasticsearch, l'API lit avec un compte en lecture seule, <code>api_search</code>.</p></details>
+  <details class="carte"><summary>Qui a fait quoi ?</summary><p>🟡 À écrire par l'équipe : le kanban GitHub donne la trace de chaque carte.</p></details>
+  <details class="carte"><summary>Si c'était à refaire ?</summary><p>🟡 À écrire par l'équipe. Pistes : Airflow 2.11.2 arrive en fin de vie (ADR-059) ; la phase 4, le parcours avec l'IA, n'est pas codée.</p></details>
+</section>
+
+<section id="s-trancher" aria-labelledby="h-trancher">
+  <h2 id="h-trancher">À trancher avant demain</h2>
+  <div class="carte decider">
+    <ul>
+      <li>🟡 <strong>Qui parle quand</strong> : la répartition des voix ci-dessus est une proposition.</li>
+      <li>✅ <strong>Pas de démo</strong> : tranché par Seb. Ses 5 minutes vont aux choix clés (9 min), à la démarche (3 min) et aux transverses (4 min).</li>
+      <li>✅ <strong>Notre façon de travailler avec l'IA</strong> : tranché par Seb, oui. Une diapo dans la démarche (découper, une IA code, une autre relit, un humain tranche), dans les 3 minutes de la partie.</li>
+      <li>✅ <strong>Accessibilité</strong> : tranché par Seb, on le dit : pas d'interface, la même contrainte pour tous les groupes. Une phrase, sans s'y attarder.</li>
+      <li>✅ <strong>Support</strong> : tranché par Seb, le diaporama (15 diapos). Cette page sert à préparer.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p>Sources : <code>TRAME-SOUTENANCE.md</code> et <code>Readme.md</code> du sujet ; dépôts Fil-Rouge et Fil-Rouge-API au 15/10 (API <code>3729719</code>) ; rapport de couverture du 15/10 ; ADR dans <code>md/adr/</code>.</p>
+  <p>Proposition préparée par le Glaude le 15/10. Les phrases « on a choisi… parce que… » sont à relire par l'équipe : c'est vous qui les défendez.</p>
+</footer>
+</div>
+
+<script>
+(function () {
+  var calme = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(id) { return document.getElementById(id); }
+
+  // --- Les cinq parties ---
+  var PARTIES = [
+    { t: 'Le problème', min: 2, c: '#6e6151', qui: 'Laurence',
+      dire: 'Une société de chasse immobilière, un SI hérité qui ne suffit plus. Les autres groupes connaissent le sujet : seulement ce qu’on a trouvé en l’auditant.',
+      montrer: 'Schéma 1 : 3 tables reçues, une première cible de 12 tables en milliers d’euros où 37 montants sur 47 débordaient, 24 comptes reçus sans aucun mot de passe.',
+      comment: 'Une minute de contexte, une minute sur l’audit. Pas de lecture du sujet.',
+      phrase: 'On a d’abord audité l’existant avant de dessiner quoi que ce soit, parce que les données reçues ne tenaient pas debout.' },
+    { t: 'La démarche', min: 3, c: '#2f5d8c', qui: 'Gabriel',
+      dire: 'Les quatre phases du sujet, et notre méthode : user stories en Gherkin, décisions écrites en ADR, travail découpé en chantiers et en fiches, kanban GitHub.',
+      montrer: 'Le kanban GitHub, une page d’ADR sur Confluence, un fichier <code>.feature</code>.',
+      comment: 'Trois captures côte à côte. Dire combien : 64 ADR, 2 dépôts.',
+      phrase: 'On a écrit chaque décision dans un ADR, parce qu’on doit pouvoir défendre seul un choix fait par un autre.' },
+    { t: 'Les choix clés', min: 9, c: '#2d7551', qui: 'Gabriel et Seb',
+      dire: 'Quatre choix, chacun en « problème, options, choix, raison » : le schéma v3 en euros et sa migration ; l’API en trois couches avec les droits par rôle ; OLTP et OLAP séparés, nourris par Airflow ; la recherche dans Elasticsearch, copie de PostgreSQL.',
+      montrer: 'Schéma 2 (une requête et ses refus), puis schéma 3 (le chemin des données).',
+      comment: 'Un peu plus de 2 min par choix. Cliquer les cas du schéma 2 : 200, 422, 403, 404.',
+      phrase: 'On a mis les montants en euros entiers plutôt qu’en milliers d’euros, parce que le calcul de rémunération arrondit au centime (ADR-032).' },
+    { t: 'Les transverses', min: 4, c: '#a63d40', qui: 'Békanty',
+      dire: 'RGPD, éco-conception, souveraineté, accessibilité : ce qu’on a fait, et ce qu’on n’a pas fait.',
+      montrer: 'Schéma 4 (les profils et la mémoire). Les données retirées de l’index et des logs.',
+      comment: 'Une minute RGPD, deux minutes éco-conception avec le schéma 4, une minute souveraineté et accessibilité.',
+      phrase: 'On a rangé la pile en profils, parce que tout lancer coûte 5 Gio alors que coder l’API en demande 234 Mio.' },
+    { t: 'Bilan et limites', min: 2, c: '#50433b', qui: 'Békanty ou Laurence',
+      dire: 'Ce qui marche, avec les chiffres. Puis les limites, dites franchement : phase 4 pas codée, facture hors périmètre, Airflow 2.11.2 en fin de vie.',
+      montrer: 'Les chiffres : 1 010 tests, 94 % de lignes couvertes.',
+      comment: 'Finir sur une phrase claire, puis passer aux questions.',
+      phrase: 'On a préféré une API testée et défendable à une IA branchée trop tôt.' }
+  ];
+  var TOTAL = 0; PARTIES.forEach(function (p) { p.debut = TOTAL; TOTAL += p.min; });
+  var frise = $('frise'), box = $('parties');
+  PARTIES.forEach(function (p, i) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.style.flex = p.min; b.style.setProperty('--c', p.c);
+    b.innerHTML = '<span>' + p.t + '</span><span class="m">' + p.min + ' min</span>';
+    b.setAttribute('aria-label', p.t + ', ' + p.min + ' minutes');
+    b.addEventListener('click', function () { choisitPartie(i, true); });
+    frise.appendChild(b); p.bouton = b;
+    var a = document.createElement('article');
+    a.className = 'carte partie'; a.style.setProperty('--c', p.c); a.id = 'partie-' + i;
+    a.innerHTML = '<div class="tete"><h3>' + (i + 1) + '. ' + p.t + '</h3><span class="duree">' + p.debut + ' → ' + (p.debut + p.min) + ' min</span><span class="qui">voix proposée : ' + p.qui + '</span></div>' +
+      '<dl><dt>Quoi dire</dt><dd>' + p.dire + '</dd><dt>Quoi montrer</dt><dd>' + p.montrer + '</dd><dt>Comment</dt><dd>' + p.comment + '</dd></dl>' +
+      '<p class="phrase">« ' + p.phrase + ' »</p>';
+    box.appendChild(a); p.carte = a;
+  });
+  function choisitPartie(i, defile) {
+    PARTIES.forEach(function (p, j) { p.bouton.classList.toggle('choisi', i === j); p.carte.classList.toggle('choisi', i === j); });
+    if (defile) PARTIES[i].carte.scrollIntoView({ behavior: calme ? 'auto' : 'smooth', block: 'center' });
+  }
+
+  // --- Chrono de répétition ---
+  var ecoule = 0, enMarche = false, dernier = 0, minuteur = null, courante = -1;
+  function deux(n) { return (n < 10 ? '0' : '') + n; }
+  function affiche() {
+    var s = Math.min(ecoule, TOTAL * 60);
+    $('ch-temps').textContent = deux(Math.floor(s / 60)) + ':' + deux(Math.floor(s % 60));
+    $('curseur').style.left = 'calc(' + (s / (TOTAL * 60) * 100) + '% - 1px)';
+    var m = s / 60, i = 0;
+    while (i < PARTIES.length - 1 && m >= PARTIES[i].debut + PARTIES[i].min) i++;
+    if (s >= TOTAL * 60) { $('ch-ou').textContent = 'Fini : place aux questions.'; }
+    else if (enMarche || s > 0) {
+      var reste = Math.ceil((PARTIES[i].debut + PARTIES[i].min) * 60 - s);
+      $('ch-ou').textContent = 'Partie ' + (i + 1) + ', ' + PARTIES[i].t + ' : encore ' + Math.floor(reste / 60) + ' min ' + deux(reste % 60) + '.';
+    }
+    if (i !== courante && (enMarche || s > 0)) { courante = i; choisitPartie(i, false); }
+  }
+  function tic() {
+    var t = Date.now();
+    ecoule += (t - dernier) / 1000 * Number($('ch-vitesse').value);
+    dernier = t; affiche();
+    if (ecoule >= TOTAL * 60) arrete();
+  }
+  function arrete() { enMarche = false; clearInterval(minuteur); $('ch-go').textContent = ecoule >= TOTAL * 60 ? '▶ Recommencer' : '▶ Reprendre'; }
+  $('ch-go').addEventListener('click', function () {
+    if (enMarche) { arrete(); return; }
+    if (ecoule >= TOTAL * 60) { ecoule = 0; courante = -1; }
+    enMarche = true; dernier = Date.now(); minuteur = setInterval(tic, 200);
+    this.textContent = '⏸ Pause';
+  });
+  $('ch-zero').addEventListener('click', function () { arrete(); ecoule = 0; courante = -1; $('ch-go').textContent = '▶ Répéter'; $('ch-ou').textContent = 'Chrono arrêté.'; affiche(); });
+  affiche();
+
+  // --- Schéma 1 : les versions du schéma ---
+  var versions = document.querySelectorAll('.version');
+  $('v-go').addEventListener('click', function () {
+    var b = this; b.disabled = true;
+    versions.forEach(function (v, i) { v.classList.toggle('vu', i === 0); });
+    var i = 1;
+    var pas = setInterval(function () {
+      if (i >= versions.length) { clearInterval(pas); b.disabled = false; b.textContent = '▶ Rejouer'; return; }
+      versions[i].classList.add('vu'); i++;
+    }, calme ? 300 : 1300);
+  });
+  versions.forEach(function (v) { v.classList.add('vu'); });
+
+  // --- outils SVG ---
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(parent, nom, attrs) { var e = document.createElementNS(NS, nom); for (var k in attrs) e.setAttribute(k, attrs[k]); parent.appendChild(e); return e; }
+
+  // --- Schéma 2 : le trajet d'une requête ---
+  var rs = $('r-svg');
+  var ETAPES = [
+    { t: 'Utilisateur', s: 'Swagger, script', g: 'g-api' },
+    { t: 'Jeton JWT', s: '60 min, ADR-052', g: 'g-api' },
+    { t: 'routes/', s: 'revalide l’entrée', g: 'g-db' },
+    { t: 'services/', s: 'règles, droits', g: 'g-db' },
+    { t: 'repositories/', s: 'SQL', g: 'g-db' },
+    { t: 'PostgreSQL', s: '22 tables', g: 'g-db' }
+  ];
+  var RW = 150, RH = 70, RY = 60, RPAS = 186;
+  el(rs, 'rect', { x: 345, y: 22, width: 520, height: 140, rx: 8, fill: 'none', stroke: 'var(--line)', 'stroke-dasharray': '5 5' });
+  el(rs, 'text', { x: 357, y: 44, 'font-size': 15, 'class': 'mono' }).textContent = 'l’API FastAPI : trois couches';
+  for (var i = 0; i < ETAPES.length - 1; i++) {
+    el(rs, 'path', { 'class': 'fil', d: 'M' + (20 + i * RPAS + RW) + ' ' + (RY + RH / 2) + ' L' + (20 + (i + 1) * RPAS) + ' ' + (RY + RH / 2) });
+  }
+  ETAPES.forEach(function (e, i) {
+    var x = 20 + i * RPAS;
+    e.r = el(rs, 'rect', { 'class': 'boite ' + e.g, x: x, y: RY, width: RW, height: RH, rx: 6 });
+    el(rs, 'text', { x: x + 12, y: RY + 30, 'font-size': 17 }).textContent = e.t;
+    el(rs, 'text', { x: x + 12, y: RY + 54, 'font-size': 15, 'class': 'mono' }).textContent = e.s;
+    e.cx = x + RW / 2;
+  });
+  var retourY = 205;
+  el(rs, 'path', { 'class': 'fil', d: 'M' + ETAPES[5].cx + ' ' + (RY + RH) + ' L' + ETAPES[5].cx + ' ' + retourY + ' L' + ETAPES[0].cx + ' ' + retourY + ' L' + ETAPES[0].cx + ' ' + (RY + RH), 'stroke-dasharray': '6 6' });
+  el(rs, 'text', { x: 470, y: retourY + 28, 'font-size': 15, 'class': 'mono' }).textContent = 'la réponse revient, avec son code';
+  var bulle = el(rs, 'circle', { 'class': 'grain', r: 9, cx: ETAPES[0].cx, cy: RY + RH / 2 });
+  var CAS = {
+    ok: { arret: 5, code: '200', bon: true, txt: 'La requête traverse tout, la base répond, la réponse revient.', dire: 'Chaque couche a un seul métier : les routes parlent HTTP, les services portent les règles et les droits, les repositories parlent SQL.' },
+    e422: { arret: 2, code: '422', bon: false, txt: 'Entrée invalide : le routeur commun la refuse avant d’appeler la base.', dire: 'On revalide l’entrée dès la route (ADR-036), parce qu’une erreur claire vaut mieux qu’une erreur de la base.' },
+    e403: { arret: 3, code: '403', bon: false, txt: 'Le rôle n’a pas le droit sur cette table : « Action interdite au rôle ».', dire: 'Les droits se vérifient d’abord par rôle, table par table (ADR-027, chantier DRO) : 5 rôles, Admin, Client, Hunter, Manager, Reader.' },
+    e404: { arret: 3, code: '404', bon: false, txt: 'Le rôle a le droit, mais la ligne appartient à un autre : on répond comme si elle n’existait pas.', dire: 'Puis on vérifie « le sien ». Un 404 plutôt qu’un 403, pour ne pas révéler qu’une ligne existe.' }
+  };
+  var cas = 'ok', anim = 0, rPause = false, bRPause = $('r-pause');
+  function majRPause() { bRPause.textContent = rPause ? '▶ Lecture' : '⏸ Pause'; bRPause.setAttribute('aria-pressed', rPause ? 'true' : 'false'); }
+  function joueCas(k) {
+    cas = k; var c = CAS[k];
+    rPause = false; majRPause();
+    document.querySelectorAll('[data-cas]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.cas === k ? 'true' : 'false'); });
+    ETAPES.forEach(function (e, i) { e.r.setAttribute('class', 'boite ' + (i === c.arret && !c.bon ? 'g-stop' : e.g)); });
+    $('r-code').textContent = c.code; $('r-code').className = 'verdict ' + (c.bon ? 'ok' : 'ko');
+    $('r-texte').textContent = c.txt; $('r-dire').textContent = c.dire;
+    var mon = ++anim;
+    // aller jusqu'à l'arrêt, puis retour par le bas. Animé même en « mouvement réduit » :
+    // le trajet est le contenu du schéma ; le bouton Pause l'arrête.
+    var allerFin = ETAPES[c.arret].cx, d0 = performance.now(), avant = d0;
+    var dureeAller = 450 * c.arret + 300, dureeRetour = 1400;
+    function pas(t) {
+      if (mon !== anim) return;
+      if (rPause) { d0 += t - avant; avant = t; requestAnimationFrame(pas); return; }
+      avant = t;
+      var u = t - d0;
+      if (u < dureeAller) { bulle.setAttribute('cx', ETAPES[0].cx + (allerFin - ETAPES[0].cx) * (u / dureeAller)); bulle.setAttribute('cy', RY + RH / 2); }
+      else if (u < dureeAller + dureeRetour) {
+        var f = (u - dureeAller) / dureeRetour, x0 = allerFin, x1 = ETAPES[0].cx;
+        var desc = retourY - (RY + RH / 2), plat = x0 - x1, L = desc * 2 + plat, d = f * L;
+        if (d < desc) { bulle.setAttribute('cx', x0); bulle.setAttribute('cy', RY + RH / 2 + d); }
+        else if (d < desc + plat) { bulle.setAttribute('cx', x0 - (d - desc)); bulle.setAttribute('cy', retourY); }
+        else { bulle.setAttribute('cx', x1); bulle.setAttribute('cy', retourY - (d - desc - plat)); }
+      } else { d0 = t + 600; }
+      requestAnimationFrame(pas);
+    }
+    requestAnimationFrame(pas);
+  }
+  document.querySelectorAll('[data-cas]').forEach(function (b) { b.addEventListener('click', function () { joueCas(b.dataset.cas); }); });
+  bRPause.addEventListener('click', function () { rPause = !rPause; majRPause(); });
+  joueCas('ok');
+
+  // --- Schéma 3 : le chemin des données ---
+  var svg = $('f-svg'), W = 170, H = 52;
+  var NOEUDS = {
+    gen: { x: 10, y: 40, g: 'airflow', t: 'Générateur', s: 'airflow/tools/', d: 'Le générateur d’annonces du sujet. La tâche generate le lance chaque nuit et range son CSV brut dans MinIO.' },
+    bronze: { x: 200, y: 40, g: 'airflow', t: 'MinIO bronze', s: 'CSV brut', d: 'Le CSV tel qu’il est sorti du générateur, jamais modifié. On peut toujours rejouer le nettoyage depuis lui.' },
+    silver: { x: 390, y: 10, g: 'airflow', t: 'MinIO silver', s: 'annonces valides', d: 'Les annonces nettoyées et validées par clean_validate, prêtes à entrer en base.' },
+    quarantine: { x: 390, y: 80, g: 'airflow', t: 'MinIO quarantine', s: 'rejets + raison', d: 'Les annonces refusées, chacune avec la raison du refus. Rien ne se perd en silence.' },
+    estate: { x: 580, y: 40, g: 'db', t: 'PostgreSQL', s: 'estate', d: 'La table des biens. La tâche load y met un bien par reference, et le prix du jour dans estate_price_history.' },
+    idx: { x: 770, y: 40, g: 'elk', t: 'Elasticsearch', s: 'index estates', d: 'La copie des biens pour chercher vite : texte, ville, prix, distance. Sans contact ni adresse. Remplie par estates_index à 4 h.' },
+    oltp: { x: 10, y: 200, g: 'db', t: 'PostgreSQL', s: 'sale, payment…', d: 'Les tables du métier : ventes, paiements, mandats, visites. Ce que l’API écrit dans la journée.' },
+    olap: { x: 200, y: 200, g: 'db', t: 'Schéma olap', s: 'fait_ventes + 5 dim', d: 'Le modèle en étoile des ventes, pour les chiffres. olap_refresh le vide et le recharge à 3 h.' },
+    gold: { x: 390, y: 200, g: 'airflow', t: 'MinIO gold', s: 'bilan olap', d: 'Le bilan du rechargement de l’OLAP : combien de lignes lues, chargées, rejetées.' },
+    kb: { x: 770, y: 260, g: 'elk', t: 'Kibana', s: 'port 5601', d: 'Les tableaux de bord : trafic de l’API, taux d’erreur, carte des biens, prix moyen par ville.' },
+    user: { x: 10, y: 360, g: 'api', t: 'Utilisateur', s: 'avec un jeton', d: 'Une personne ou un programme qui appelle l’API, avec son jeton de connexion.' },
+    api: { x: 200, y: 360, g: 'api', t: 'api', s: 'FastAPI, port 8000', d: 'L’API. Pour GET /estates/search, elle lit l’index avec le compte api_search, en lecture seule. Chaque requête laisse une ligne de log.' },
+    ls: { x: 390, y: 360, g: 'elk', t: 'Logstash', s: 'pipeline api', d: 'Relit le journal de l’API (méthode, chemin, code, durée, rôle ; jamais d’e-mail ni de mot de passe) et l’envoie à Elasticsearch.' },
+    logs: { x: 580, y: 360, g: 'elk', t: 'Elasticsearch', s: 'logs-api-default', d: 'Les logs de l’API, rangés par Logstash avec le compte logstash_internal. Kibana les lit.' }
+  };
+  var LIENS = [
+    { de: 'gen', a: 'bronze', f: 'import', txt: 'generate : le CSV brut est rangé tel quel' },
+    { de: 'bronze', a: 'silver', f: 'import', txt: 'clean_validate : les annonces valides passent' },
+    { de: 'bronze', a: 'quarantine', f: 'import', txt: 'clean_validate : les rejets partent avec leur raison' },
+    { de: 'silver', a: 'estate', f: 'import', txt: 'load : un bien par reference, et le prix du jour' },
+    { de: 'oltp', a: 'olap', f: 'olap', txt: 'refresh : vide puis recharge l’étoile' },
+    { de: 'olap', a: 'gold', f: 'olap', txt: 'report : le bilan du chargement' },
+    { de: 'estate', a: 'idx', f: 'index', txt: 'index puis prune : copie sans contact ni adresse' },
+    { de: 'user', a: 'api', f: 'recherche', txt: 'GET /estates/search, avec un jeton' },
+    { de: 'api', a: 'idx', f: 'recherche', txt: 'le compte api_search lit l’index' },
+    { de: 'api', a: 'ls', f: 'logs', txt: 'une ligne JSON par requête, dans le volume api_logs' },
+    { de: 'ls', a: 'logs', f: 'logs', txt: 'le compte logstash_internal écrit les logs' },
+    { de: 'logs', a: 'kb', f: 'logs', txt: 'vue de données logs-api-*' },
+    { de: 'idx', a: 'kb', f: 'logs', txt: 'vue de données estates' }
+  ];
+  var TITRES = { tout: 'Tous les flux', 'import': '2 h · annonces_import', olap: '3 h · olap_refresh', index: '4 h · estates_index', recherche: 'Une recherche de bien', logs: 'Les logs jusqu’à Kibana' };
+  el(svg, 'rect', { x: 3, y: 3, width: 564, height: 140, rx: 8, fill: 'none', stroke: 'var(--line)', 'stroke-dasharray': '5 5' });
+  el(svg, 'text', { x: 14, y: 26, 'font-size': 15, 'class': 'mono' }).textContent = 'profil airflow';
+  el(svg, 'rect', { x: 763, y: 3, width: 184, height: 420, rx: 8, fill: 'none', stroke: 'var(--line)', 'stroke-dasharray': '5 5' });
+  el(svg, 'text', { x: 775, y: 26, 'font-size': 15, 'class': 'mono' }).textContent = 'profil elk';
+  function bord(n, cote) {
+    var o = NOEUDS[n];
+    if (cote === 'd') return [o.x + W, o.y + H / 2];
+    if (cote === 'g') return [o.x, o.y + H / 2];
+    if (cote === 'h') return [o.x + W / 2, o.y];
+    return [o.x + W / 2, o.y + H];
+  }
+  var couche = el(svg, 'g', {});
+  LIENS.forEach(function (l) {
+    var B = NOEUDS[l.a], p, q, d;
+    if (l.de === 'idx' && l.a === 'kb') { p = bord('idx', 'b'); q = bord('kb', 'h'); }
+    else if (l.de === 'api' && l.a === 'idx') { p = bord('api', 'h'); q = [B.x + 30, B.y + H]; }
+    else if (l.de === 'logs' && l.a === 'kb') { p = bord('logs', 'd'); q = [B.x, B.y + H - 10]; }
+    else { p = bord(l.de, 'd'); q = bord(l.a, 'g'); }
+    if (l.de === 'api' && l.a === 'idx') d = 'M' + p[0] + ' ' + p[1] + ' C' + p[0] + ' ' + (p[1] - 70) + ' ' + q[0] + ' ' + (q[1] + 150) + ' ' + q[0] + ' ' + q[1];
+    else if (p[0] === q[0]) d = 'M' + p[0] + ' ' + p[1] + ' L' + q[0] + ' ' + q[1];
+    else { var m = (p[0] + q[0]) / 2; d = 'M' + p[0] + ' ' + p[1] + ' C' + m + ' ' + p[1] + ' ' + m + ' ' + q[1] + ' ' + q[0] + ' ' + q[1]; }
+    l.path = el(couche, 'path', { 'class': 'fil', d: d });
+    l.len = l.path.getTotalLength();
+  });
+  var grains = el(svg, 'g', {}), noeudsEl = {};
+  Object.keys(NOEUDS).forEach(function (k) {
+    var o = NOEUDS[k];
+    var g = el(svg, 'g', { 'class': 'noeud', tabindex: 0, role: 'button', 'aria-label': o.t + ', ' + o.s });
+    el(g, 'rect', { 'class': 'boite g-' + o.g, x: o.x, y: o.y, width: W, height: H, rx: 6 });
+    el(g, 'text', { x: o.x + 12, y: o.y + 22, 'font-size': 16 }).textContent = o.t;
+    el(g, 'text', { x: o.x + 12, y: o.y + 42, 'font-size': 15, 'class': 'mono' }).textContent = o.s;
+    function montre() {
+      Object.keys(noeudsEl).forEach(function (j) { noeudsEl[j].classList.toggle('choisi', j === k); });
+      $('f-nom').textContent = o.t + ' · ' + o.s; $('f-desc').textContent = o.d;
+    }
+    g.addEventListener('click', montre);
+    g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); montre(); } });
+    noeudsEl[k] = g;
+  });
+  var flux = 'tout', enPause = !!calme, debut = 0;
+  function actifs() { return LIENS.filter(function (l) { return flux === 'tout' || l.f === flux; }); }
+  function place(l, frac) { l.grains.forEach(function (g) { var u = (frac + g.o) % 1; var pt = l.path.getPointAtLength(u * l.len); g.c.setAttribute('cx', pt.x); g.c.setAttribute('cy', pt.y); }); }
+  function choisitFlux(f) {
+    flux = f; debut = performance.now();
+    document.querySelectorAll('[data-flux]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.flux === f ? 'true' : 'false'); });
+    var act = actifs(), touches = {};
+    act.forEach(function (l) { touches[l.de] = 1; touches[l.a] = 1; });
+    LIENS.forEach(function (l) { var on = act.indexOf(l) >= 0; l.path.classList.toggle('on', on && f !== 'tout'); l.path.classList.toggle('off', !on); l.path.classList.remove('courant'); l.li = null; });
+    Object.keys(noeudsEl).forEach(function (k) { noeudsEl[k].classList.toggle('off', f !== 'tout' && !touches[k]); });
+    $('f-titre').textContent = TITRES[f];
+    var ol = $('f-etapes'); ol.innerHTML = '';
+    act.forEach(function (l) { var li = document.createElement('li'); li.textContent = NOEUDS[l.de].t + ' → ' + NOEUDS[l.a].t + ' : ' + l.txt; ol.appendChild(li); l.li = li; });
+    grains.innerHTML = '';
+    act.forEach(function (l) {
+      l.grains = [];
+      var n = f === 'tout' ? 2 : 3;
+      for (var i = 0; i < n; i++) l.grains.push({ c: el(grains, 'circle', { 'class': 'grain', r: 5 }), o: i / n });
+      place(l, 0.5);
+    });
+  }
+  function image(t) {
+    if (!enPause) {
+      var act = actifs();
+      if (flux === 'tout') { var frac = ((t - debut) / 3200) % 1; act.forEach(function (l) { place(l, frac); }); }
+      else {
+        var n = Math.floor((t - debut) / 2400) % act.length, fr = ((t - debut) % 2400) / 2400;
+        act.forEach(function (l, i) {
+          var c = i === n;
+          l.path.classList.toggle('courant', c);
+          if (l.li) l.li.classList.toggle('courant', c);
+          l.grains.forEach(function (g) { g.c.style.opacity = c ? 1 : 0.25; });
+          place(l, c ? fr : 0.5);
+        });
+      }
+    }
+    requestAnimationFrame(image);
+  }
+  document.querySelectorAll('[data-flux]').forEach(function (b) { b.addEventListener('click', function () { choisitFlux(b.dataset.flux); }); });
+  var bPause = $('f-pause');
+  function majPause() { bPause.textContent = enPause ? '▶ Lecture' : '⏸ Pause'; bPause.setAttribute('aria-pressed', enPause ? 'true' : 'false'); }
+  bPause.addEventListener('click', function () { enPause = !enPause; debut = performance.now(); majPause(); });
+  majPause(); choisitFlux('tout'); requestAnimationFrame(image);
+
+  // --- Schéma 4 : la mémoire par profil (Mio au repos, mesurée le 15/10) ---
+  var PROFILS = {
+    base: { mio: 234.3, c: 'var(--p-base)', nom: 'base + API' },
+    airflow: { mio: 1552.2, c: 'var(--p-airflow)', nom: 'airflow' },
+    elk: { mio: 3309.3, c: 'var(--p-elk)', nom: 'elk' }
+  };
+  var ECHELLE = 7000, jauge = $('p-jauge');
+  Object.keys(PROFILS).forEach(function (k) { var s = document.createElement('span'); s.style.background = PROFILS[k].c; s.style.width = '0'; jauge.insertBefore(s, $('p-six')); PROFILS[k].barre = s; });
+  $('p-six').style.left = (6 * 1024 / ECHELLE * 100) + '%';
+  function memoire() {
+    var tot = 0, noms = [];
+    Object.keys(PROFILS).forEach(function (k) {
+      var on = $('p-' + k).checked, p = PROFILS[k];
+      p.barre.style.width = on ? (p.mio / ECHELLE * 100) + '%' : '0';
+      if (on) { tot += p.mio; noms.push(p.nom); }
+    });
+    $('p-total').textContent = tot >= 1024 ? '≈ ' + (tot / 1024).toFixed(1).replace('.', ',') + ' Gio' : '≈ ' + Math.round(tot) + ' Mio';
+    $('p-detail').textContent = 'au repos, pour : ' + noms.join(', ') + '.';
+  }
+  ['airflow', 'elk'].forEach(function (k) { $('p-' + k).addEventListener('change', memoire); });
+  memoire();
+
+  // --- Chiffres : les barres se remplissent à l'arrivée ---
+  var barres = document.querySelectorAll('.barre i');
+  function remplit() { barres.forEach(function (b) { b.style.width = b.dataset.v + '%'; }); }
+  if (calme || !('IntersectionObserver' in window)) remplit();
+  else {
+    var vu = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { remplit(); vu.disconnect(); } }); });
+    vu.observe($('chiffres'));
+    setTimeout(remplit, 4000);
+  }
+
+  // --- Sommaire : la section en cours de lecture ---
+  var liens = document.querySelectorAll('nav.sommaire a');
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) liens.forEach(function (a) { a.classList.toggle('actif', a.getAttribute('href') === '#' + e.target.id); });
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    document.querySelectorAll('section[id]').forEach(function (s) { obs.observe(s); });
+  }
+})();
+</script>
