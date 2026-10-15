@@ -212,8 +212,9 @@ pytest tout vert, `pyright` 0 erreur sur `API/src` (comptes bruts).
 ---
 
 <!-- FICHE:PRF5 -->
-## PRF5 [ ] — Décaler les `id` des fiches dans la base de test
+## PRF5 [x] — Décaler les `id` des fiches dans la base de test
 
+**Session** : 2531ac4a-0b87-425d-960c-b4cd009e06ba
 **Dépend de** : `PRF3`, `PRF4`.
 **Fichiers** : `docker/create_test_db.sh`, les tests qui tombent (à nommer après mesure).
 

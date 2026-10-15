@@ -21,9 +21,9 @@
     <p>Les 11 FK visent la PK des fiches, le rôle vit sur la fiche ou sur user.system_role, une fiche au plus par compte ; tous les tests passent, banc v2/v3 compris</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">9 fiches · 4 faites · en cours : PRF5</p>
+    <p class="mono" style="margin-top:.5rem">9 fiches · 5 faites · en cours : PRF6</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -49,19 +49,20 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">PRF3</span></span>
         <details><summary><span class="titre">Basculer « le sien » du Client sur client.id</span><span class="etat">Faite</span></summary>
         <span class="note">Principal.profile_id lu une fois dans get_principal ; branches Client sur client.id ; test_sien_client_fiche passed ; mutants mandates_of et requests_of en user.id tués ; relecture ACCEPTÉE</span></details>
-        <span class="cout mono">≈226,2k (226 168) · 1 tours · 0,08 $</span></li>
+        <span class="cout mono">≈410,2k (410 214) · 2 tours · 0,17 $</span></li>
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">PRF4</span></span>
         <details><summary><span class="titre">Basculer « le sien » du Hunter et du Manager, build_vente et le seed</span><span class="etat">Faite</span></summary>
         <span class="note">hunter_rows, manager_rows, build_vente et seed_demo sur hunter.id ; test_sien_hunter_fiche passed ; mutants handles_mandate et search_request Hunter tués ; 2 oublis (actor.id) révélés par PRF5 et corrigés dans son commit ; relecture ACCEPTÉE</span></details>
         <span class="cout mono">0 · 0 tours · 0,00 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">PRF5</span></span>
-        <details open><summary><span class="titre">Décaler les id des fiches dans la base de test</span><span class="etat">En cours · PRF6 peut partir en même temps</span></summary>
-        <span class="note">base de test aux id ≠ id_user, le filet ; dépend de PRF3 et PRF4</span></details></li>
-      <li class="fiche"><span class="gauche"><span class="id">PRF6</span></span>
-        <details><summary><span class="titre">Ajouter system_role, role_wording et le trigger, côté base</span><span class="etat">À lancer · en même temps que PRF5</span></summary>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">PRF5</span></span>
+        <details><summary><span class="titre">Décaler les id des fiches dans la base de test</span><span class="etat">Faite</span></summary>
+        <span class="note">base de test : id = id_user vaut 0 sur 18 clients, 6 chasseurs, 1 manager (ids à partir de 1001) ; 967 passed, 7 xfailed ; pyright tests 0, src 2 anciennes ; 6 mutants user.id tués ; base de dev effacée et resemée (seed_demo passé) ; relecture ACCEPTÉE</span></details>
+        <span class="cout mono">0 · 0 tours · 0,00 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">PRF6</span></span>
+        <details open><summary><span class="titre">Ajouter system_role, role_wording et le trigger, côté base</span><span class="etat">En cours</span></summary>
         <span class="note">system_role, role_wording, trigger une fiche au plus, migration 46 ; dépend de PRF2</span></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">PRF7</span></span>
-        <details><summary><span class="titre">Lire le rôle sur la fiche ou sur system_role</span><span class="etat">Après PRF5, PRF6</span></summary>
+        <details><summary><span class="titre">Lire le rôle sur la fiche ou sur system_role</span><span class="etat">Après PRF6</span></summary>
         <span class="note">get_principal lit le rôle sur la fiche ou system_role ; dépend de PRF5 et PRF6</span></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">PRF8</span></span>
         <details><summary><span class="titre">Retirer user.id_role</span><span class="etat">Après PRF7</span></summary>
@@ -71,7 +72,7 @@
         <span class="note">ADR-057, README, matrice des droits, Swagger ; dépend de PRF8</span></details></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈31,5M (31 493 525) · 181 tours · 12,77 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈113,3M (113 346 891) · 663 tours · 43,77 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈113,5M (113 530 937) · 664 tours · 43,86 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 
@@ -90,6 +91,7 @@
     <ul class="journal">
       <li><time datetime="2026-10-15">2026-10-15</time><span>- **2026-10-15** — PRF1 : `id` (propre à chaque fiche) s'affiche après les 7 champs hérités d'`AbstractPerson` dans le Swagger : Pydantic range les champs de la classe mère en tête. Contenu d'`openapi.json` identique, ordre accepté (choix A de Seb, 15/10).</span></li>
       <li><time datetime="2026-10-15">2026-10-15</time><span>- **2026-10-15** — PRF2 : il y a **5 FK composées** (pas 4) qui portent les colonnes converties ; la migration 45 les retire puis les recrée. trg_mandate_exclusivity levait U02 par intermittence pendant la conversion de mandate : coupé le temps des 2 UPDATE, puis une requête vérifie qu'aucun exclusif ne chevauche (conseil du Glaude). Commits PRF2 à PRF5 faits ensemble, une fois la suite verte (choix A de Seb).</span></li>
+      <li><time datetime="2026-10-15">2026-10-15</time><span>- **2026-10-15** — PRF5 : les tests supposaient id = id_user (HUNTER_ID = 1 servait de compte et de fiche) : les comptes restent pour acting_as, les payloads reçoivent hunter_profile() / client_profile(). Le décalage à 1001 a révélé 2 oublis de PRF4 dans le code (estate_search_request_service.create et review_media_service._check_author comparaient user.id à id_hunter), corrigés. Base de dev refaite (down -v, volume minio compris) et seed_demo rejoué.</span></li>
     </ul>
   </section>
 
