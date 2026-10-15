@@ -194,8 +194,9 @@ prix tombe.
 ---
 
 <!-- FICHE:FLX4 -->
-## FLX4 [ ] — Importer les annonces chaque nuit, sans doublon
+## FLX4 [x] — Importer les annonces chaque nuit, sans doublon
 
+**Session** : 53337d1c-79b2-439c-8cea-3a6e446e0d7b
 **Dépend de** : `FLX3`.
 **Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql`,
 `docker/migrations/v2-vers-v3/48_historique-des-prix.sql` (neuve),

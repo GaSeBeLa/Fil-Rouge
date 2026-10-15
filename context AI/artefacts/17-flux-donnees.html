@@ -21,9 +21,9 @@
     <p>Trois DAG tournent chaque nuit (annonces, OLAP, index), la recherche de biens passe par GET /estates/search, et Kibana montre le trafic de l'API</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">12 fiches · 3 faites · en cours : FLX4</p>
+    <p class="mono" style="margin-top:.5rem">12 fiches · 4 faites · en cours : FLX5</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -49,21 +49,22 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">FLX3</span></span>
         <details><summary><span class="titre">Nettoyer et valider une annonce, sans Airflow</span><span class="etat">Faite</span></summary>
         <span class="note">pytest airflow/tests : 71 passed (mutant prix ÷ 1000 : 5 failed) ; annonces.csv : 2556 lus, 2556 valides, 0 rejeté ; étages et somme des prix (519 169 839 €) identiques à la base</span></details>
-        <span class="cout mono">≈5,5M (5 494 601) · 24 tours · 2,14 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">FLX4</span></span>
-        <details open><summary><span class="titre">Importer les annonces chaque nuit, sans doublon</span><span class="etat">En cours · FLX7, FLX12 peuvent partir en même temps</span></summary>
-        <span class="note">DAG annonces_import, clé estate.reference (flux-16) et historique des prix (migration 48) ; dépend de FLX3</span></details></li>
-      <li class="fiche"><span class="gauche"><span class="id">FLX5</span></span>
-        <details><summary><span class="titre">Créer le schéma olap en étoile</span><span class="etat">À lancer</span></summary>
+        <span class="cout mono">≈5,8M (5 750 404) · 25 tours · 2,21 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">FLX4</span></span>
+        <details><summary><span class="titre">Importer les annonces chaque nuit, sans doublon</span><span class="etat">Faite</span></summary>
+        <span class="note">DAG annonces_import joué 2 fois le 15/10 : estate 2556 → 2707 (+151), historique 151 ; 2e passage +0, historique 151 ; airflow 78 passed ; API 975 passed, 7 xfailed ; banc 1 passed</span></details>
+        <span class="cout mono">≈14,0M (13 968 384) · 61 tours · 4,90 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">FLX5</span></span>
+        <details open><summary><span class="titre">Créer le schéma olap en étoile</span><span class="etat">En cours · FLX12 peut partir en même temps</span></summary>
         <span class="note">Schéma olap : fait_ventes et 5 dimensions du sujet, sans donnée personnelle ; dépend de FLX2</span></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">FLX6</span></span>
         <details><summary><span class="titre">Rafraîchir l'OLAP chaque nuit</span><span class="etat">Après FLX5</span></summary>
         <span class="note">DAG olap_refresh, rejouable, rapport qualité ; dépend de FLX5</span></details></li>
       <li class="fiche"><span class="gauche"><span class="id">FLX7</span></span>
-        <details><summary><span class="titre">Faire démarrer Elasticsearch et Kibana</span><span class="etat">À lancer · en même temps que FLX4, FLX12</span></summary>
+        <details><summary><span class="titre">Faire démarrer Elasticsearch et Kibana</span><span class="etat">À lancer</span></summary>
         <span class="note">Elasticsearch et Kibana 9.5.4 dans le profil elk ; dépend de FLX1</span></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">FLX8</span></span>
-        <details><summary><span class="titre">Remplir l'index estates chaque nuit</span><span class="etat">Après FLX4, FLX7</span></summary>
+        <details><summary><span class="titre">Remplir l'index estates chaque nuit</span><span class="etat">Après FLX7</span></summary>
         <span class="note">DAG estates_index : estate vers l'index estates, sans contact du vendeur ; dépend de FLX4, FLX7</span></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">FLX9</span></span>
         <details><summary><span class="titre">Chercher un bien par GET /estates/search</span><span class="etat">Après FLX8</span></summary>
@@ -76,11 +77,11 @@
         <span class="note">Tableau de bord Kibana : trafic et carte des biens (visuel) ; dépend de FLX8, FLX10</span></details>
         <span class="badge visuel" title="Critère de fin visuel : il faudra regarder">visuel</span></li>
       <li class="fiche"><span class="gauche"><span class="id">FLX12</span></span>
-        <details><summary><span class="titre">Écrire la doc, le schéma du flux et les ADR</span><span class="etat">À lancer · en même temps que FLX4, FLX7</span></summary>
+        <details><summary><span class="titre">Écrire la doc, le schéma du flux et les ADR</span><span class="etat">À lancer · en même temps que FLX5</span></summary>
         <span class="note">Doc, schéma du flux avec les vrais noms, ADR ; dépend de toutes</span></details></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈906,9k (906 914) · 9 tours · 0,40 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈16,1M (16 084 398) · 105 tours · 7,02 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈30,3M (30 308 585) · 167 tours · 11,99 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 
@@ -98,6 +99,7 @@
     <!-- ZONE:journal — une ligne par décision imprévue tranchée en cours de fiche -->
     <ul class="journal">
       <li><time datetime="2026-10-15">2026-10-15</time><span>FLX3 : la clé d'annonce est `estate.reference` (déjà VARCHAR(50) NOT NULL UNIQUE, remplie sur 2556 biens sur 2556) ; pas de `source_reference` (question flux-16, tranchée A par Seb, MPD corrigé). Migrations renumérotées : 48 = estate_price_history (FLX4), 49 = olap (FLX5).</span></li>
+      <li><time datetime="2026-10-15">2026-10-15</time><span>flux-17 : volume ../airflow/tools monté en lecture seule (oui de Seb)</span></li>
     </ul>
   </section>
 
