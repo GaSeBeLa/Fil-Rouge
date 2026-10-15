@@ -2,7 +2,7 @@
 ## Résultat
 Trois DAG tournent chaque nuit (annonces, OLAP, index), la recherche de biens passe par GET /estates/search, et Kibana montre le trafic de l'API
 ## Notes
-- FLX1 : Compose en profils (rien, airflow, elk), Airflow 2.11.2 démarre ; après la fusion de PRF
+- FLX1 : up -d : 2 services (api, db) ; --profile airflow : /health metadatabase healthy, scheduler healthy ; psql -l : airflow à côté de fil_rouge_immobilier ; pytest 975 passed, 7 xfailed (= clôture PRF)
 - FLX2 : Dossier airflow/, connexions MinIO et PostgreSQL, un DAG d'essai ; dépend de FLX1
 - FLX3 : Nettoyer et valider une annonce en Python pur, rejets avec raison ; dépend de FLX2
 - FLX4 : DAG annonces_import, source_reference et historique des prix (migrations 48, 49) ; dépend de FLX3

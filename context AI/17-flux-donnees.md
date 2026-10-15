@@ -94,8 +94,9 @@ indépendantes ; `FLX7` et `FLX10` se jouent dès `FLX1`. Migrations : 48 et 49 
 ---
 
 <!-- FICHE:FLX1 -->
-## FLX1 [ ] — Découper le compose en profils et faire démarrer Airflow
+## FLX1 [x] — Découper le compose en profils et faire démarrer Airflow
 
+**Session** : 53337d1c-79b2-439c-8cea-3a6e446e0d7b
 **Dépend de** : PRF fusionné.
 **Fichiers** : `docker/docker-compose.yml`, `docker/.env.exemple`,
 `docker/init-v3/07_airflow-base.sh` (neuf), `airflow/Dockerfile` (neuf),
