@@ -42,13 +42,14 @@ modifiés**.
   (`services/remuneration.py`, code du sujet), branché sur la base par
   `POST /sales/{id}/payment` (fiche API12).
 - `normalised/` porte la normalisation des annonces et son rapport d'anomalies.
-- `livrables/2-modelisation/` porte trois rapports du chantier `C` ; les trois
-  autres livrables sont vides. Détail daté dans `context AI/08-etat.md`.
-- Clos le 2026-10-13 : droits codés au moindre privilège, rôle puis « le sien », dans l'API et en base (chantier DRO).
+- `livrables/2-modelisation/` porte trois rapports du chantier `C` et le
+  schéma OLAP (`olap.md`, chantier FLX) ; `4-application/` le rapport de
+  tests ; les deux autres livrables sont vides. Détail daté dans `context AI/08-etat.md`.
 - Clos le 2026-10-14 : erreurs 409 et 500 lisibles, id de compte expliqués dans le Swagger (chantier FIN).
 - Clos le 2026-10-14 : banc v2/v3 réparé et devenu un test pytest (chantier BAN).
 - Clos le 2026-10-14 : seed de démo du parcours complet, une commande (chantier DEM).
 - Clos le 2026-10-15 : clés vers les fiches et rôles des fiches (chantier PRF).
+- Clos le 2026-10-15 : Airflow, Elasticsearch, Logstash et Kibana branchés sur l'API (chantier FLX).
 
 ## Cinq règles non négociables
 
@@ -114,6 +115,7 @@ et seulement dans ce cas, ouvrir l'index.
 | relire une fiche `FIN1` à `FIN2` | `context AI/13-finitions-api.md` — chantier « Finitions de l'API : erreurs et Swagger » **clos** le 2026-10-14, ne se rejoue pas |
 | relire une fiche `BAN1` à `BAN3` | `context AI/14-banc-v2-v3.md` — chantier « Réparer le banc v2/v3 » **clos** le 2026-10-14, ne se rejoue pas |
 | relire une fiche `DEM1` à `DEM3` | `context AI/15-seed-demo.md` — chantier « Seed de démo » **clos** le 2026-10-14, ne se rejoue pas |
+| relire une fiche `FLX1` à `FLX13` | `context AI/17-flux-donnees.md` — chantier « Flux de données : Airflow et Elasticsearch » **clos** le 2026-10-15, ne se rejoue pas ; le flux en un dessin : `md/flux/schema-du-flux.md` |
 | reprendre après une longue interruption | `context AI/08-etat.md` |
 
 ## Économie de contexte

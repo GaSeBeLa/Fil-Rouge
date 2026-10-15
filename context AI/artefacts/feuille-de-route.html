@@ -19,15 +19,14 @@
   </header>
 
   <nav class="sommaire" aria-label="Sommaire"><a href="#encours">Chantier en cours</a><a href="#todo">Chantiers possibles</a><a href="#clos">Chantiers clos</a></nav>
-  <nav class="pages" aria-label="Les autres pages">Les autres pages : <a href="https://claude.ai/artifact/SrKZDJPDDdM4GpoVufYdWK">la page du chantier</a></nav>
 
   <section id="encours">
     <h2>Chantier en cours</h2>
     <!-- ZONE:encours — remplacé à chaque ouverture, remis à « aucun » à chaque clôture.
          /tache n'y touche pas : l'avancement fiche par fiche est sur la page du chantier. -->
     <div class="encours">
-      <div class="titre">Flux de données : Airflow et Elasticsearch <span class="badge" data-etat="cours">en cours</span></div>
-      <div>Fiches <span class="mono">FLX1–FLX12</span> — <a href="https://claude.ai/artifact/SrKZDJPDDdM4GpoVufYdWK">la page du chantier</a> · cadré dans la copie <span class="mono">Fil-Rouge-flux</span>, aucune fiche avant la fusion de PRF</div>
+      <div class="titre">Aucun chantier ouvert</div>
+      <div>Lancer <span class="mono">/vlp:chantier</span> pour en ouvrir un.</div>
     </div>
   </section>
 
@@ -48,15 +47,21 @@
   <section id="clos">
     <h2>Chantiers clos — ils ne se rejouent pas</h2>
     <!-- ZONE:clos — une ligne ajoutée à chaque clôture, la plus récente en haut -->
-    <img src="couts.svg" alt="Coût des chantiers clos en tokens : 8 barres, du plus ancien au plus récent ; le plus cher : Droits : moindre privilège" data-couts="{&quot;couleur&quot;: &quot;#8f5a0f&quot;, &quot;barres&quot;: [[&quot;Contraintes manquantes du MPD&quot;, 31326311, &quot;≈31,3M (31 326 311)&quot;], [&quot;Lot de migration (schéma v3)&quot;, 116219396, &quot;≈116,2M (116 219 396)&quot;], [&quot;API : auth, RGPD et règles métier&quot;, 140122204, &quot;≈140,1M (140 122 204)&quot;], [&quot;Droits : moindre privilège&quot;, 174326604, &quot;≈174,3M (174 326 604)&quot;], [&quot;Finitions de l'API : erreurs et Swagger&quot;, 19491473, &quot;≈19,5M (19 491 473)&quot;], [&quot;Réparer le banc v2/v3&quot;, 17998587, &quot;≈18,0M (17 998 587)&quot;], [&quot;Seed de démo&quot;, 33892230, &quot;≈33,9M (33 892 230)&quot;], [&quot;Refacto des profils&quot;, 164941175, &quot;≈164,9M (164 941 175)&quot;]]}">
+    <img src="couts.svg" alt="Coût des chantiers clos en tokens : 9 barres, du plus ancien au plus récent ; le plus cher : Droits : moindre privilège" data-couts="{&quot;couleur&quot;: &quot;#8f5a0f&quot;, &quot;barres&quot;: [[&quot;Contraintes manquantes du MPD&quot;, 31326311, &quot;≈31,3M (31 326 311)&quot;], [&quot;Lot de migration (schéma v3)&quot;, 116219396, &quot;≈116,2M (116 219 396)&quot;], [&quot;API : auth, RGPD et règles métier&quot;, 140122204, &quot;≈140,1M (140 122 204)&quot;], [&quot;Droits : moindre privilège&quot;, 174326604, &quot;≈174,3M (174 326 604)&quot;], [&quot;Finitions de l'API : erreurs et Swagger&quot;, 19491473, &quot;≈19,5M (19 491 473)&quot;], [&quot;Réparer le banc v2/v3&quot;, 17998587, &quot;≈18,0M (17 998 587)&quot;], [&quot;Seed de démo&quot;, 33892230, &quot;≈33,9M (33 892 230)&quot;], [&quot;Refacto des profils&quot;, 164941175, &quot;≈164,9M (164 941 175)&quot;], [&quot;Flux de données : Airflow et Elasticsearch&quot;, 122713269, &quot;≈122,7M (122 713 269)&quot;]]}">
     <details class="clos">
-      <summary><span class="resume-clos">8 chantiers clos · ≈698,3M (698 317 980) tokens · 269,15 $ sur 7 clos mesurés</span></summary>
+      <summary><span class="resume-clos">9 chantiers clos · ≈821,0M (821 031 249) tokens · 313,87 $ sur 8 clos mesurés</span></summary>
     <div class="tableau">
       <table>
         <thead>
           <tr><th>Chantier</th><th>Fiches</th><th>Clos le</th><th>Tokens</th><th>Ce qu'il a livré</th></tr>
         </thead>
         <tbody>
+          <tr>
+            <td><a href="https://claude.ai/artifact/SrKZDJPDDdM4GpoVufYdWK">Flux de données : Airflow et Elasticsearch</a> <span class="badge" data-etat="clos">clos</span></td>
+            <td class="mono">FLX1–FLX13</td><td class="mono">2026-10-15</td>
+            <td class="mono">44,72 $ · ≈122,7M (122 713 269)</td>
+            <td>Trois DAG Airflow chaque nuit (annonces, OLAP, index), recherche GET /estates/search par Elasticsearch, logs de l'API dans Kibana, schéma du flux et ADR 059 à 064</td>
+          </tr>
           <tr>
             <td><a href="https://claude.ai/artifact/BFBj2LT7X1PwCu7mzbZFBy">Refacto des profils</a> <span class="badge" data-etat="clos">clos</span></td>
             <td class="mono">PRF1–PRF9</td><td class="mono">2026-10-15</td>
@@ -108,7 +113,7 @@
           </tr>
         </tbody>
         <tfoot>
-          <tr><td colspan="3">Total cumulé</td><td class="mono"><strong>≈698,3M (698 317 980)</strong></td><td class="mono">269,15 $ sur 7 clos mesurés</td></tr>
+          <tr><td colspan="3">Total cumulé</td><td class="mono"><strong>≈821,0M (821 031 249)</strong></td><td class="mono">313,87 $ sur 8 clos mesurés</td></tr>
         </tfoot>
       </table>
     </div>
@@ -116,7 +121,7 @@
   </section>
 
   <footer>
-    <span>Lettres de fiche prises : <span class="mono">C, LOT, API, DRO, FIN, BAN, DEM, PRF</span></span>
+    <span>Lettres de fiche prises : <span class="mono">C, LOT, API, DRO, FIN, BAN, DEM, PRF, FLX</span></span>
     <span>État détaillé : <span class="mono">context AI/08-etat.md</span></span>
     <span>Mis à jour le <span class="mono">2026-10-15</span></span>
   </footer>
