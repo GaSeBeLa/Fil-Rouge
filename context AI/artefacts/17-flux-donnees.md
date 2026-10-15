@@ -12,7 +12,7 @@ Trois DAG tournent chaque nuit (annonces, OLAP, index), la recherche de biens pa
 - FLX8 : dags test estates_index 2 fois : estates/_count 2707 = count(estate) 2707 aux deux passages ; orphelin ajouté puis retiré (deleted 1) ; airflow_indexer : 403 hors estates, 400 sur un champ de contact ; airflow 102 passed (mutant champ de contact : 2 failed) ; API 988 passed, 7 xfailed
 - FLX9 : test_estate_search 13 passed (401 sans jeton, 503 sur erreur de connexion) ; pile lancée : city=Toulouse → 1129 = 1129 en base, q=lumineux → 221, 10 km autour de Toulouse → 571 ; mutant routeur après estate_router : 5 failed ; API 1006 passed, 7 xfailed
 - FLX10 : 10 appels à l'API : logs-api-default/_count 10 ; http.response.status_code présent (200×6, 404×2, 401, 403), user.roles Client×6 ; grep password|token|email sur le document du login : 0 ; mutant corps du login : 1 failed ; API 1010 passed, 7 xfailed (1006 + 4 neufs), log réel inchangé par pytest
-- FLX11 : Tableau de bord Kibana : trafic et carte des biens (visuel) ; dépend de FLX8, FLX10
+- FLX11 : Seb a vu le tableau de bord (capture) : 211 requêtes, taux d'erreur 27,0 %, codes 200/403/401/404 empilés, /estates/search en tête (42), carte : 5 villes, prix moyen par ville Dijon 279 379 € → Limoges 93 695 € ; import README : successCount 9 ; grep secret dans le ndjson : 0 ; API 1010 passed, 7 xfailed
 - FLX12 : Doc, schéma du flux avec les vrais noms, ADR ; dépend de toutes
 - FLX13 : faker lancé sur la base de dev : sale 1 → 501, payment 1 → 501 (463 paid, 21 scheduled, 17 announced, 0 refused) ; relancé : rien écrit, 501/501 ; 13 tests unitaires verts ; API 988 passed, 7 xfailed
 ## Journal

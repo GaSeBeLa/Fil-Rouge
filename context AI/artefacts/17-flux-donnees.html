@@ -21,9 +21,9 @@
     <p>Trois DAG tournent chaque nuit (annonces, OLAP, index), la recherche de biens passe par GET /estates/search, et Kibana montre le trafic de l'API</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">13 fiches · 11 faites · en cours : FLX11</p>
+    <p class="mono" style="margin-top:.5rem">13 fiches · 12 faites · en cours : FLX12</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -81,17 +81,17 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">FLX10</span></span>
         <details><summary><span class="titre">Envoyer les logs de l'API dans Elasticsearch</span><span class="etat">Faite</span></summary>
         <span class="note">10 appels à l'API : logs-api-default/_count 10 ; http.response.status_code présent (200×6, 404×2, 401, 403), user.roles Client×6 ; grep password|token|email sur le document du login : 0 ; mutant corps du login : 1 failed ; API 1010 passed, 7 xfailed (1006 + 4 neufs), log réel inchangé par pytest</span></details>
-        <span class="cout mono">≈6,3M (6 345 704) · 28 tours · 2,28 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">FLX11</span></span>
-        <details open><summary><span class="titre">Montrer le trafic et les biens dans Kibana</span><span class="etat">En cours · FLX12 peut partir en même temps</span></summary>
-        <span class="note">Tableau de bord Kibana : trafic et carte des biens (visuel) ; dépend de FLX8, FLX10</span></details>
-        <span class="badge visuel" title="Critère de fin visuel : il faudra regarder">visuel</span></li>
-      <li class="fiche"><span class="gauche"><span class="id">FLX12</span></span>
-        <details><summary><span class="titre">Écrire la doc, le schéma du flux et les ADR</span><span class="etat">À lancer · en même temps que FLX11</span></summary>
+        <span class="cout mono">≈6,8M (6 795 884) · 30 tours · 2,42 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">FLX11</span></span>
+        <details><summary><span class="titre">Montrer le trafic et les biens dans Kibana</span><span class="etat">Faite</span></summary>
+        <span class="note">Seb a vu le tableau de bord (capture) : 211 requêtes, taux d'erreur 27,0 %, codes 200/403/401/404 empilés, /estates/search en tête (42), carte : 5 villes, prix moyen par ville Dijon 279 379 € → Limoges 93 695 € ; import README : successCount 9 ; grep secret dans le ndjson : 0 ; API 1010 passed, 7 xfailed</span></details>
+        <span class="cout mono">≈8,5M (8 453 328) · 50 tours · 3,76 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">FLX12</span></span>
+        <details open><summary><span class="titre">Écrire la doc, le schéma du flux et les ADR</span><span class="etat">En cours</span></summary>
         <span class="note">Doc, schéma du flux avec les vrais noms, ADR ; dépend de toutes</span></details></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈25,3M (25 308 050) · 99 tours · 7,97 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈102,0M (101 990 734) · 488 tours · 36,67 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈110,9M (110 894 242) · 540 tours · 40,57 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 

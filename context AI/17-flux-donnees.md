@@ -455,8 +455,9 @@ pytest API : même compte qu'au début. Mutant : logger le corps de la requête 
 ---
 
 <!-- FICHE:FLX11 -->
-## FLX11 [ ] — Montrer le trafic et les biens dans Kibana
+## FLX11 [x] — Montrer le trafic et les biens dans Kibana
 
+**Session** : 53337d1c-79b2-439c-8cea-3a6e446e0d7b
 **Dépend de** : `FLX8`, `FLX10`.
 **Fichiers** : `docker/kibana/dashboards.ndjson` (neuf, export des objets),
 `API/README.md` (§ Kibana : importer, ouvrir) — et rien d'autre.
