@@ -21,9 +21,9 @@
     <p>Les 11 FK visent la PK des fiches, le rôle vit sur la fiche ou sur user.system_role, une fiche au plus par compte ; tous les tests passent, banc v2/v3 compris</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">9 fiches · 0 faite · en cours : PRF1</p>
+    <p class="mono" style="margin-top:.5rem">9 fiches · 1 faite · en cours : PRF2</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -38,11 +38,12 @@
     <h2>Les fiches, dans l'ordre des dépendances</h2>
     <!-- ZONE:fiches — data-etat vaut faite | encours | bloquee ; absent = à faire -->
     <ul class="fiches">
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">PRF1</span></span>
-        <details open><summary><span class="titre">Poser AbstractPerson</span><span class="etat">En cours · PRF2 peut partir en même temps</span></summary>
-        <span class="note">AbstractPerson, classe commune sans table ; indépendante</span></details></li>
-      <li class="fiche"><span class="gauche"><span class="id">PRF2</span></span>
-        <details><summary><span class="titre">Faire viser la PK des fiches aux 11 FK, côté base</span><span class="etat">À lancer · en même temps que PRF1</span></summary>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">PRF1</span></span>
+        <details><summary><span class="titre">Poser AbstractPerson</span><span class="etat">Faite</span></summary>
+        <span class="note">openapi.json : contenu identique (JSON égal), id affiché après les champs hérités (choix A de Seb) ; mutant gender tué ; 962 passed, 7 xfailed (avant 961) ; pyright 0 erreur sur les fichiers touchés</span></details>
+        <span class="cout mono">≈4,4M (4 382 690) · 44 tours · 2,10 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">PRF2</span></span>
+        <details open><summary><span class="titre">Faire viser la PK des fiches aux 11 FK, côté base</span><span class="etat">En cours</span></summary>
         <span class="note">les 11 FK vers client.id, hunter.id, real_estate_manager.id : 01, 02, migration 45, test d'introspection</span></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">PRF3</span></span>
         <details><summary><span class="titre">Basculer « le sien » du Client sur client.id</span><span class="etat">Après PRF2</span></summary>
@@ -66,6 +67,8 @@
         <details><summary><span class="titre">Écrire l'ADR, le README, la matrice des droits</span><span class="etat">Après PRF8</span></summary>
         <span class="note">ADR-057, README, matrice des droits, Swagger ; dépend de PRF8</span></details></li>
     </ul>
+    <p class="mono cout-hors">Hors fiches : ≈24,7M (24 745 190) · 135 tours · 9,84 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈29,1M (29 127 880) · 179 tours · 11,94 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 
@@ -82,6 +85,7 @@
     <h2>Journal des décisions</h2>
     <!-- ZONE:journal — une ligne par décision imprévue tranchée en cours de fiche -->
     <ul class="journal">
+      <li><time datetime="2026-10-15">2026-10-15</time><span>- **2026-10-15** — PRF1 : `id` (propre à chaque fiche) s'affiche après les 7 champs hérités d'`AbstractPerson` dans le Swagger : Pydantic range les champs de la classe mère en tête. Contenu d'`openapi.json` identique, ordre accepté (choix A de Seb, 15/10).</span></li>
     </ul>
   </section>
 

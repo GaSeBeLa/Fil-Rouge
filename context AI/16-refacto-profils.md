@@ -83,8 +83,9 @@ Les migrations se suivent : `PRF2` avant `PRF6` avant `PRF8`.
 ---
 
 <!-- FICHE:PRF1 -->
-## PRF1 [ ] — Poser `AbstractPerson`
+## PRF1 [x] — Poser `AbstractPerson`
 
+**Session** : 2531ac4a-0b87-425d-960c-b4cd009e06ba
 **Dépend de** : rien.
 **Fichiers** : `API/src/app/models/abstract_person_model.py` (neuf),
 `models/client_model.py`, `models/hunter_model.py`,
