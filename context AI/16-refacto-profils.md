@@ -181,8 +181,9 @@ vert, `pyright` 0 erreur sur `API/src` (comptes bruts).
 ---
 
 <!-- FICHE:PRF4 -->
-## PRF4 [ ] — Basculer « le sien » du Hunter et du Manager, `build_vente` et le seed
+## PRF4 [x] — Basculer « le sien » du Hunter et du Manager, `build_vente` et le seed
 
+**Session** : 2531ac4a-0b87-425d-960c-b4cd009e06ba
 **Dépend de** : `PRF2`.
 **Fichiers** : sous `API/src/app/` : `utils/current_user.py`, `services/hunter_rows.py`,
 `services/hunter_service.py`, `services/real_estate_manager_service.py`,

@@ -21,9 +21,9 @@
     <p>Les 11 FK visent la PK des fiches, le rôle vit sur la fiche ou sur user.system_role, une fiche au plus par compte ; tous les tests passent, banc v2/v3 compris</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">9 fiches · 3 faites · en cours : PRF4</p>
+    <p class="mono" style="margin-top:.5rem">9 fiches · 4 faites · en cours : PRF5</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -50,14 +50,15 @@
         <details><summary><span class="titre">Basculer « le sien » du Client sur client.id</span><span class="etat">Faite</span></summary>
         <span class="note">Principal.profile_id lu une fois dans get_principal ; branches Client sur client.id ; test_sien_client_fiche passed ; mutants mandates_of et requests_of en user.id tués ; relecture ACCEPTÉE</span></details>
         <span class="cout mono">≈226,2k (226 168) · 1 tours · 0,08 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">PRF4</span></span>
-        <details open><summary><span class="titre">Basculer « le sien » du Hunter et du Manager, build_vente et le seed</span><span class="etat">En cours · PRF6 peut partir en même temps</span></summary>
-        <span class="note">« le sien » du Hunter et du Manager, build_vente, seed ; dépend de PRF2</span></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">PRF5</span></span>
-        <details><summary><span class="titre">Décaler les id des fiches dans la base de test</span><span class="etat">Après PRF4</span></summary>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">PRF4</span></span>
+        <details><summary><span class="titre">Basculer « le sien » du Hunter et du Manager, build_vente et le seed</span><span class="etat">Faite</span></summary>
+        <span class="note">hunter_rows, manager_rows, build_vente et seed_demo sur hunter.id ; test_sien_hunter_fiche passed ; mutants handles_mandate et search_request Hunter tués ; 2 oublis (actor.id) révélés par PRF5 et corrigés dans son commit ; relecture ACCEPTÉE</span></details>
+        <span class="cout mono">0 · 0 tours · 0,00 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">PRF5</span></span>
+        <details open><summary><span class="titre">Décaler les id des fiches dans la base de test</span><span class="etat">En cours · PRF6 peut partir en même temps</span></summary>
         <span class="note">base de test aux id ≠ id_user, le filet ; dépend de PRF3 et PRF4</span></details></li>
       <li class="fiche"><span class="gauche"><span class="id">PRF6</span></span>
-        <details><summary><span class="titre">Ajouter system_role, role_wording et le trigger, côté base</span><span class="etat">À lancer · en même temps que PRF4</span></summary>
+        <details><summary><span class="titre">Ajouter system_role, role_wording et le trigger, côté base</span><span class="etat">À lancer · en même temps que PRF5</span></summary>
         <span class="note">system_role, role_wording, trigger une fiche au plus, migration 46 ; dépend de PRF2</span></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">PRF7</span></span>
         <details><summary><span class="titre">Lire le rôle sur la fiche ou sur system_role</span><span class="etat">Après PRF5, PRF6</span></summary>
