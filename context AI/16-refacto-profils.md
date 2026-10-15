@@ -236,8 +236,9 @@ et le nombre de tests corrigés). Mutant : remettre `user.id` dans
 ---
 
 <!-- FICHE:PRF6 -->
-## PRF6 [ ] — Ajouter `system_role`, `role_wording` et le trigger, côté base
+## PRF6 [x] — Ajouter `system_role`, `role_wording` et le trigger, côté base
 
+**Session** : 719fade3-b24b-449b-b610-afa4674442a1
 **Dépend de** : `PRF2`.
 **Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql`,
 `docker/init-v3/02_migration.sql`, `docker/init-v3/04_role-lecture-seule.sql`,
