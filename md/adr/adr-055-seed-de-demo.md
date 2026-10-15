@@ -3,7 +3,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 14/10/2026
-* **Statut :** 💡 proposé (Sébastien, Discord, 14/10/2026, choix A). Pas de report Confluence pour l'instant.
+* **Statut :** ✅ accepté (Sébastien, Discord, 15/10/2026, question `adr15-2`) ; proposé le 14/10/2026 (choix A). Publié sur Confluence le 15/10/2026.
 * **Décideurs :** Sébastien (questions Q1 à Q4 du chantier DEM, Discord, 14/10/2026).
 * **Voir aussi :** ADR-016 (mot de passe haché) ; ADR-027 et ADR-028 (rôles) ; ADR-035 et ADR-038 (paiement et note du chasseur)
 

@@ -62,6 +62,20 @@ Préparé le 12/10/2026. Le numéro entre parenthèses renvoie à l'ADR, pour qu
 - On garde le manager actuel d'un chasseur, pas l'historique.
 - Les annonces sont chargées une fois ; un nouveau bien se saisit à la main.
 
+## À lui dire : 4 ADR acceptés sans lui (15/10)
+
+Le groupe a accepté 024, 027, 039 et 050 le 15/10/2026, sans attendre Jeff
+(Sébastien, Discord), comme 033 le 12/10. Les questions 1 à 3 ci-dessous
+restent posées : si Jeff répond autrement, l'ADR touché est rouvert et le
+code suit.
+
+- **039** : l'exclusivité vaut **par client**. Un client n'a qu'un mandat exclusif à la fois.
+- **050 et 024** : un acte signé après la fin d'un mandat non renouvelé, **la
+  vente s'enregistre, le paiement du chasseur est refusé** (motif `mandate_expired`).
+  Gabriel défendait l'autre voie : refuser la vente.
+- **027** : le chasseur voit son barème ; le client crée lui-même son compte ;
+  le chasseur enregistre la visite.
+
 ## Les questions à lui poser
 
 1. **L'exclusivité vaut-elle par client, ou par recherche ?** Aujourd'hui : par client. Un client peut-il signer deux mandats exclusifs pour deux recherches différentes ? (039)
@@ -78,5 +92,5 @@ Préparé le 12/10/2026. Le numéro entre parenthèses renvoie à l'ADR, pour qu
 - 20 acceptés par le groupe le 12/10/2026.
 - 3 à accepter après une petite retouche : 028, 043, 048.
 - 1 attend la question des étages, que le groupe tranche : 053.
-- 4 attendent les réponses de Jeff : 024, 027, 039, 050.
+- 4 acceptés le 15/10 sans attendre Jeff : 024, 027, 039, 050 (voir « À lui dire »).
 - 2 vieux brouillons remplacés : 025 (par 029), 026 (par 028).

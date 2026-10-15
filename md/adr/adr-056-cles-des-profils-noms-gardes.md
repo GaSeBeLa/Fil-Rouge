@@ -1,9 +1,11 @@
 ### ADR-056 : Les clés des profils — `id` gardé, liens par `id_user`, noms gardés
 
+> ⚠️ **Remplacé par ADR-057** (`md/adr/adr-057-cles-et-roles-des-fiches.md`, 15/10/2026) : la « Refacto à venir » ci-dessous est lancée (chantier PRF). Ce texte reste comme historique ; il ne se réécrit pas.
+
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 14/10/2026
-* **Statut :** 💡 proposé (Sébastien, Discord, 14/10/2026 : « on garde mais on doit le documenter ») ; refacto à venir, dépriorisée par Robin HOTTON (14/10/2026). Pas de report Confluence pour l'instant.
+* **Statut :** remplacé par ADR-057 (15/10/2026) ; était 💡 proposé (Sébastien, Discord, 14/10/2026 : « on garde mais on doit le documenter ») ; refacto à venir, dépriorisée par Robin HOTTON (14/10/2026). Pas de report Confluence pour l'instant.
 * **Décideurs :** Sébastien ; question soulevée par Laurence (Discord, 14/10/2026) ; refacto à venir proposée et dépriorisée par Robin HOTTON (prof, 14/10/2026, relayé par Sébastien).
 * **Voir aussi :** ADR-025 et ADR-029 (lien chasseur–manager vers `real_estate_manager(id_user)`) ; ADR-027 (droits, « le sien ») ; fiche FIN2 (Swagger)
 

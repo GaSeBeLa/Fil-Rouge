@@ -47,7 +47,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 08/10/2026 (décisions du 05/10 et du 07/10/2026)
-* **Statut :** proposé
+* **Statut :** accepté (le groupe, 15/10/2026 : Sébastien, Discord, sans attendre Jeff, comme ADR-033). Ses questions ouvertes restent posées à Jeff (`md/questions/2026-10-12-pense-bete-reunion-jeff.md`, « À lui dire ») ; s'il répond autrement, l'ADR se rouvre et le code suit.
 * **Décideurs :**
   * le sujet du formateur, pour les règles de fond (6 mois, exclusivité) ;
   * le groupe, pour leur mise en œuvre (registre, Q-MAN-01, Q-MAN-02 et Q-MAN-07, 05/10/2026 ; cartes du lot 4 gardées le 07/10/2026) ;

@@ -62,7 +62,7 @@ l'ont pas (compté le 2026-10-15) : entre `PRF2` et `PRF3`/`PRF4`, des tests du
 Client et du Manager tombent — on les compte, on ne commite pas PRF2 seul en rouge.
 
 Hors du chantier : le MPD (`vrac/v9.drawio`) et Confluence (le groupe) ; l'ADR du
-chasseur IA (plus tard) ; l'avis de Robin (Seb : on n'attend pas) ;
+chasseur IA (ADR-058, écrit à part) ; l'avis de Robin (Seb : on n'attend pas) ;
 `docker/docker-compose.yml`.
 
 ## L'ordre des fiches
@@ -311,16 +311,14 @@ refaire et seed à rejouer après le pull.
 ## PRF9 [ ] — Écrire l'ADR, le README, la matrice des droits
 
 **Dépend de** : `PRF8`.
-**Fichiers** : `md/adr/adr-057-cles-et-roles-des-fiches.md` (neuf, dans Fil-Rouge),
-`md/adr/adr-056-cles-des-profils-noms-gardes.md` (bandeau seulement),
-`md/securite/matrice-droits-crud-par-role.md`, `../Fil-Rouge-API/API/README.md`,
+**Fichiers** : `md/securite/matrice-droits-crud-par-role.md`, `../Fil-Rouge-API/API/README.md`,
 `../Fil-Rouge-API/docker/init-v3/README.md` §0,
-`../Fil-Rouge-API/API/src/app/models/field_descriptions.py`.
+`../Fil-Rouge-API/API/src/app/models/field_descriptions.py` ; à relire seulement :
+`md/adr/adr-057-cles-et-roles-des-fiches.md`.
 
 **Prompt**
-L'ADR-057 dit les décisions du socle, leurs options écartées et leur source
-(Discord, 2026-10-15). L'ADR-056 passe à « remplacé par ADR-057 » (bandeau, pas
-de réécriture). La matrice et les deux README disent `system_role`, le rôle par
+L'ADR-057 est déjà écrit (le Glaude, 2026-10-15, choix de Seb) : le relire, et
+signaler tout écart avec le code livré, sans le réécrire. La matrice et les deux README disent `system_role`, le rôle par
 la fiche, et « une fiche au plus ». Le Swagger dit que `id_client` est un
 `client.id` (et de même pour les deux autres). Grep des anciennes phrases
 (« numéro du compte », `user.id` sous ces champs) dans les deux dépôts.

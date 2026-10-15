@@ -66,7 +66,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 22/09/2026 ; réécrit le 08/10/2026 (réponses du groupe : 07/10/2026)
-* **Statut :** proposé
+* **Statut :** accepté (le groupe, 15/10/2026 : Sébastien, Discord, sans attendre Jeff, comme ADR-033). Ses questions ouvertes restent posées à Jeff (`md/questions/2026-10-12-pense-bete-reunion-jeff.md`, « À lui dire ») ; s'il répond autrement, l'ADR se rouvre et le code suit.
 * **Décideurs :**
   * l'équipe projet : réponses du 07/10/2026 aux cartes Q-ACC-02 à 07, 10, 12, 13, 15, et aux questions Q7, Q8 et Q14 du plan d'action ; Q-ACC-08 et Q-ACC-09, le 06/10/2026 ;
   * le client (Jeff, formateur jouant le commanditaire et le PO) : « role, droit » dans les outils à fournir (Q-JEF-14), et oui au rôle en lecture seule (Discord, 07/10/2026).

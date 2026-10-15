@@ -7,7 +7,7 @@
 >
 > Deux matrices, à ne pas confondre :
 >
-> * **La cible** : ce qu'on veut. Elle est dans ADR-027 (statut **proposé**)
+> * **La cible** : ce qu'on veut. Elle est dans ADR-027 (statut **accepté** le 15/10/2026)
 >   et son annexe, case par case, avec ses sources :
 >   `md/adr/adr-027-annexe-matrice-detaillee.md`. Elle n'est pas recopiée ici.
 > * **Le code** : ce que l'API fait aujourd'hui. Relevé dans l'API elle-même,
@@ -179,7 +179,7 @@ Relevé dans `API/src/app/services/` (Fil-Rouge-API) : le crochet
 
 ## 4. Ce qui reste à décider ou à faire
 
-* 🟡 **Jeff** : ADR-027 est « proposé » ; trois cases attendent sa
+* 🟡 **Jeff** : ADR-027 est accepté sans lui (15/10/2026) ; trois cases attendent encore sa
   confirmation (Q-ACC-06, 12, 13), appliquées comme l'annexe les donne. Plus
   les deux cas 🟡 du § 3 (Q-JEF-30, la demande partagée entre deux équipes).
 * ➡️ Les écarts ⚠️ du § 3 sont dans `API/README.md`, « Limites connues ».

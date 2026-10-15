@@ -59,7 +59,7 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 21/09/2026 (proposé) ; complété le 08/10/2026
-* **Statut :** proposé
+* **Statut :** accepté (le groupe, 15/10/2026 : Sébastien, Discord, sans attendre Jeff, comme ADR-033). Ses questions ouvertes restent posées à Jeff (`md/questions/2026-10-12-pense-bete-reunion-jeff.md`, « À lui dire ») ; s'il répond autrement, l'ADR se rouvre et le code suit.
 * **Décideurs :**
   * l'équipe projet, pour le motif sur le paiement (21/09/2026) ;
   * le groupe, pour la vente perdue (Q-REM-02 le 02/10/2026, Q-REM-14 le 05/10/2026) et pour la version des réglages du taux (G1, 08/10/2026) ;
