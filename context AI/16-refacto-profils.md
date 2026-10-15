@@ -56,8 +56,10 @@ https://claude.ai/artifact/YNT5ANwbWYKp6SERVvvn9K) :
 bougent) **et** écrit sa migration jumelle dans `docker/migrations/v2-vers-v3/` :
 45 pour `PRF2`, 46 pour `PRF6`, 47 pour `PRF8`. Le banc garde les deux alignés.
 **Un test qui touche une fiche** en crée une neuve où `id ≠ id_user` : dans la
-base de test, les fiches de `02` ont `id = id_user` et cachent l'erreur
-(Fil-Rouge-API `7e40e8d`), jusqu'à `PRF5`.
+base de test, les 6 `hunter` ont `id = id_user` et cachent l'erreur
+(Fil-Rouge-API `7e40e8d`), jusqu'à `PRF5` ; les 18 `client` et le manager ne
+l'ont pas (compté le 2026-10-15) : entre `PRF2` et `PRF3`/`PRF4`, des tests du
+Client et du Manager tombent — on les compte, on ne commite pas PRF2 seul en rouge.
 
 Hors du chantier : le MPD (`vrac/v9.drawio`) et Confluence (le groupe) ; l'ADR du
 chasseur IA (plus tard) ; l'avis de Robin (Seb : on n'attend pas) ;
