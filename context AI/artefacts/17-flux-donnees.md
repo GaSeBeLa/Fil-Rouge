@@ -4,8 +4,8 @@ Trois DAG tournent chaque nuit (annonces, OLAP, index), la recherche de biens pa
 ## Notes
 - FLX1 : up -d : 2 services (api, db) ; --profile airflow : /health metadatabase healthy, scheduler healthy ; psql -l : airflow à côté de fil_rouge_immobilier ; pytest 975 passed, 7 xfailed (= clôture PRF)
 - FLX2 : pytest airflow/tests : 10 passed (mutant : 2 failed) ; dags test smoke_dag : state=success, 2556 biens ; mc ls : bronze/smoke/2026-10-15.json (40 o) et quarantine/ ; API 975 passed, 7 xfailed
-- FLX3 : Nettoyer et valider une annonce en Python pur, rejets avec raison ; dépend de FLX2
-- FLX4 : DAG annonces_import, source_reference et historique des prix (migrations 48, 49) ; dépend de FLX3
+- FLX3 : pytest airflow/tests : 71 passed (mutant prix ÷ 1000 : 5 failed) ; annonces.csv : 2556 lus, 2556 valides, 0 rejeté ; étages et somme des prix (519 169 839 €) identiques à la base
+- FLX4 : DAG annonces_import, clé estate.reference (flux-16) et historique des prix (migration 48) ; dépend de FLX3
 - FLX5 : Schéma olap : fait_ventes et 5 dimensions du sujet, sans donnée personnelle ; dépend de FLX2
 - FLX6 : DAG olap_refresh, rejouable, rapport qualité ; dépend de FLX5
 - FLX7 : Elasticsearch et Kibana 9.5.4 dans le profil elk ; dépend de FLX1
@@ -15,4 +15,5 @@ Trois DAG tournent chaque nuit (annonces, OLAP, index), la recherche de biens pa
 - FLX11 : Tableau de bord Kibana : trafic et carte des biens (visuel) ; dépend de FLX8, FLX10
 - FLX12 : Doc, schéma du flux avec les vrais noms, ADR ; dépend de toutes
 ## Journal
+- 2026-10-15 : FLX3 : la clé d'annonce est `estate.reference` (déjà VARCHAR(50) NOT NULL UNIQUE, remplie sur 2556 biens sur 2556) ; pas de `source_reference` (question flux-16, tranchée A par Seb, MPD corrigé). Migrations renumérotées : 48 = estate_price_history (FLX4), 49 = olap (FLX5).
 ## Bilan

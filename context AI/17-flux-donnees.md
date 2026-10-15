@@ -32,8 +32,10 @@ Airflow, sans Docker, sans MinIO (cours Airflow, exo 8). Python touché : `pyrig
   gardés (= raw, cleansed, curated du cours), **`quarantine`** ajouté ;
 - **base d'Airflow** : une base `airflow` dans **notre** PostgreSQL (service `db`),
   jamais mêlée à `fil_rouge_immobilier` ; **OLAP** : schéma `olap` de `fil_rouge_immobilier` ;
-- **`estate.source_reference VARCHAR(20)`**, NULL permis, `UNIQUE` (migration **48**) ;
-  **`estate_price_history`** (migration **49**) : `id INTEGER GENERATED ALWAYS AS
+- **clé d'une annonce : `estate.reference`**, déjà `VARCHAR(50) NOT NULL UNIQUE` et
+  déjà remplie par la référence d'annonce (2556 biens sur 2556, compté le 2026-10-15) ;
+  **pas** de colonne `source_reference` (question `flux-16`, tranchée A par Seb le
+  2026-10-15, MPD corrigé) ; **`estate_price_history`** (migration **48**) : `id INTEGER GENERATED ALWAYS AS
   IDENTITY PRIMARY KEY` (comme tout le schéma, jamais `SERIAL`), `created_at TIMESTAMP
   NOT NULL DEFAULT (now() AT TIME ZONE 'utc')`, `id_estate INTEGER NOT NULL REFERENCES
   estate(id) ON DELETE RESTRICT`, `price INTEGER NOT NULL CHECK (price >= 0)`,
@@ -88,8 +90,8 @@ reconnaître le même bien chez deux agences ; Airflow 3 ; Confluence et le MPD 
 | `FLX12` | Écrire la doc, le schéma du flux et les ADR | toutes |
 
 Après `FLX2`, les branches annonces (`FLX3`-`FLX4`) et OLAP (`FLX5`-`FLX6`) sont
-indépendantes ; `FLX7` et `FLX10` se jouent dès `FLX1`. Migrations : 48 et 49 en
-`FLX4`, 50 en `FLX5`.
+indépendantes ; `FLX7` et `FLX10` se jouent dès `FLX1`. Migrations : 48 en
+`FLX4`, 49 en `FLX5`.
 
 ---
 
@@ -160,8 +162,9 @@ biens ; `mc ls` montre l'objet `bronze/smoke/2026-10-15.json` et le bucket
 ---
 
 <!-- FICHE:FLX3 -->
-## FLX3 [ ] — Nettoyer et valider une annonce, sans Airflow
+## FLX3 [x] — Nettoyer et valider une annonce, sans Airflow
 
+**Session** : 53337d1c-79b2-439c-8cea-3a6e446e0d7b
 **Dépend de** : `FLX2`.
 **Fichiers** : `airflow/src/annonces/clean.py`, `airflow/src/annonces/validate.py`,
 `airflow/tests/test_annonces_clean.py`, `airflow/tests/test_annonces_validate.py`
@@ -195,22 +198,20 @@ prix tombe.
 
 **Dépend de** : `FLX3`.
 **Fichiers** : `docker/init-v3/01_create_fil_rouge_immobilier.sql`,
-`docker/migrations/v2-vers-v3/48_bien-reference-source.sql`,
-`docker/migrations/v2-vers-v3/49_historique-des-prix.sql` (neuves),
+`docker/migrations/v2-vers-v3/48_historique-des-prix.sql` (neuve),
 `API/src/app/models/estate_model.py`, `airflow/tools/generer_annonces.py` (copie),
 `airflow/src/annonces/load.py`, `airflow/dags/annonces_import_dag.py`,
 `airflow/tests/test_annonces_load.py` — et rien d'autre.
 
 **Prompt**
-Schéma : `estate.source_reference` et `estate_price_history` exactement comme le
-socle, dans `01` et en migrations 48 et 49 ; le modèle SQLModel suit. Compte d'abord
-combien de lignes de `03_populate_estate.sql` portent une référence : si toutes,
-48 la remplit ; sinon, dis-le. Copie `generer_annonces.py` **à l'identique** dans
+Schéma : `estate_price_history` exactement comme le socle, dans `01` et en
+migration 48 ; le modèle SQLModel suit. La clé d'annonce est `estate.reference`
+(`flux-16`). Copie `generer_annonces.py` **à l'identique** dans
 `airflow/tools/` (en-tête : source, date) ; la tâche la recopie dans `<tmp>/outils/`
 et la lance : elle écrit dans `<tmp>/fixtures/annonces/`, jamais dans le StarterPack.
 DAG `annonces_import` (`0 2 * * *`) : générer → `bronze/annonces/{ds}/` (brut, jamais
 réécrit) → nettoyer et valider (`FLX3`) → `silver/annonces/{ds}.json` et
-`quarantine/annonces/{ds}.json` → `load.py` : `INSERT … ON CONFLICT (source_reference)
+`quarantine/annonces/{ds}.json` → `load.py` : `INSERT … ON CONFLICT (reference)
 DO UPDATE` sur `estate`, et une ligne `estate_price_history` (`ON CONFLICT DO
 NOTHING`) par bien vu ce jour-là. `id_author` : le compte prévu par ADR-047 pour
 l'import (lis-le).
@@ -245,7 +246,7 @@ AS IDENTITY` (comme `01`). RGPD :
 les dimensions personnes n'ont **que** des numéros et des attributs non
 identifiants (ancienneté, IA ou non, ville) ; ni nom, ni e-mail, ni téléphone.
 `dim_temps` au jour. Montants : `INTEGER` pour les prix, `NUMERIC(12,2)` pour
-honoraires et commission (règle 4). Migration 50 jumelle ; le banc suit.
+honoraires et commission (règle 4). Migration 49 jumelle ; le banc suit.
 Envoie à Gabriel (Discord) les colonnes, types, clés et cardinalités, au format
 déjà utilisé le 2026-10-15.
 
@@ -435,7 +436,7 @@ annonces → `bronze`/`silver`/`quarantine` → `estate` → `estates` → `GET
 les 3 DAG et leurs heures ; la RAM par profil (mesurée par `docker stats`). En
 Mermaid, une phrase par flèche. ADR, un par décision du socle qui n'en a pas :
 Airflow 2.11.2 en fin de vie, MinIO et ses buckets, Elasticsearch copie de
-PostgreSQL, profils Compose, `source_reference` et historique des prix. Remplis la
+PostgreSQL, profils Compose, `estate.reference` comme clé d'annonce (`flux-16`) et historique des prix. Remplis la
 « Décision » de `OLAP.md` dans notre livrable (pas dans le StarterPack).
 
 **Critère de fin**
