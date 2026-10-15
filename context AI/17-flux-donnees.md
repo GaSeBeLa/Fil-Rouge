@@ -9,13 +9,9 @@
 **À quoi il sert.** Le livrable BC05 demande des flux de données : Airflow importe
 les annonces et nourrit l'OLAP, Elasticsearch sert la recherche de biens et les logs.
 
-**Fait.** 6 fiches sur 13, le 2026-10-15, **rien de poussé** :
-- `FLX1` : compose en profils, Airflow 2.11.2 démarre (API `ceda732`) ;
-- `FLX2` : `airflow/`, connexions, DAG d'essai (`0d9f11c`) ;
-- `FLX3` : nettoyage et validation d'une annonce (`f8e5961`) ;
-- `FLX4` : import de nuit sans doublon, historique des prix, migration 48 (`0b7e256`) ;
-- `FLX5` : schéma `olap` en étoile, migration 49 (`5548e55`) ;
-- `FLX13` : faker de volume, base de dev à **501** ventes (`0d880e1`).
+**CLOS** le 2026-10-15. Ne se rejoue pas — ne sert plus qu'à relire son socle.
+
+**Fait.** FLX1..FLX13 (2026-10-15) : Trois DAG Airflow chaque nuit (annonces, OLAP, index), recherche GET /estates/search par Elasticsearch, logs de l'API dans Kibana, schéma du flux et ADR 059 à 064 — estimé non noté · cadré 13 · joué 13 fiches 44,72 $.
 
 **À faire.** `FLX6` (rafraîchir l'OLAP), puis `FLX7` à `FLX12` (Elasticsearch, Kibana, doc). Cadré en 12 fiches ; `FLX13` ajoutée le même jour, avant `FLX6` (décision de Seb, bouton `faker-volume:A`).
 

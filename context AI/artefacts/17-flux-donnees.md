@@ -20,3 +20,6 @@ Trois DAG tournent chaque nuit (annonces, OLAP, index), la recherche de biens pa
 - 2026-10-15 : flux-17 : volume ../airflow/tools monté en lecture seule (oui de Seb)
 - 2026-10-15 : FLX5 : olap fermé au rôle lecteur (commission issue de payment, migration 43)
 ## Bilan
+- Livré : Trois DAG Airflow chaque nuit (annonces, OLAP, index), recherche GET /estates/search par Elasticsearch, logs de l'API dans Kibana, schéma du flux et ADR 059 à 064
+- Surpris : estate.reference portait déjà la clé d'annonce (flux-16) ; Kibana refuse un import si la version de migration dépasse celle du type
+- Estimé : estimé non noté · cadré 13 · joué 13 fiches 44,72 $

@@ -27,10 +27,12 @@
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
-  <section hidden>
-    <h2>Chantier clos le </h2>
+  <section>
+    <h2>Chantier clos le 2026-10-15</h2>
     <div class="bilan">
-      <p></p>
+      <p>Livré : Trois DAG Airflow chaque nuit (annonces, OLAP, index), recherche GET /estates/search par Elasticsearch, logs de l'API dans Kibana, schéma du flux et ADR 059 à 064</p>
+      <p>Surpris : estate.reference portait déjà la clé d'annonce (flux-16) ; Kibana refuse un import si la version de migration dépasse celle du type</p>
+      <p>Estimé : estimé non noté · cadré 13 · joué 13 fiches 44,72 $</p>
     </div>
   </section>
 
@@ -89,10 +91,10 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">FLX12</span></span>
         <details><summary><span class="titre">Écrire la doc, le schéma du flux et les ADR</span><span class="etat">Faite</span></summary>
         <span class="note">8 fichiers neufs (schema-du-flux.md, ADR 059 à 064, livrables/2-modelisation/olap.md) ; mermaid-cli (image Docker) : 2 schémas rendus, exit 0 ; grep TODO|à remplir : 0 ; chaque ADR cite flux-n, cours ou doc officielle ; RAM docker stats : 234 Mio / 1 552 Mio / 3 309 Mio ; API 1010 passed, 7 xfailed</span></details>
-        <span class="cout mono">≈11,0M (10 991 556) · 58 tours · 3,87 $</span></li>
+        <span class="cout mono">≈11,2M (11 217 807) · 59 tours · 3,94 $</span></li>
     </ul>
-    <p class="mono cout-hors">Hors fiches : ≈25,3M (25 308 050) · 99 tours · 7,97 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈122,0M (122 028 376) · 599 tours · 44,50 $</p>
+    <p class="mono cout-hors">Hors fiches : ≈25,8M (25 766 692) · 101 tours · 8,12 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈122,7M (122 713 269) · 602 tours · 44,72 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 

@@ -12,3 +12,4 @@ QUAND LIRE : on relit un chantier clos ; l'index n'en garde qu'une ligne qui ren
 | `14-banc-v2-v3.md` | on relit le socle du chantier BAN — **clos** « Réparer le banc v2/v3 », `BAN1..BAN3` |
 | `15-seed-demo.md` | on relit le socle du chantier DEM — **clos** « Seed de démo », `DEM1..DEM3` |
 | `16-refacto-profils.md` | on relit le socle du chantier PRF — **clos** « Refacto des profils », `PRF1..PRF9` |
+| `17-flux-donnees.md` | on relit le socle du chantier FLX — **clos** « Flux de données : Airflow et Elasticsearch », `FLX1..FLX13` |
