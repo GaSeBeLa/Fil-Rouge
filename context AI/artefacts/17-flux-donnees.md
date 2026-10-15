@@ -3,7 +3,7 @@
 Trois DAG tournent chaque nuit (annonces, OLAP, index), la recherche de biens passe par GET /estates/search, et Kibana montre le trafic de l'API
 ## Notes
 - FLX1 : up -d : 2 services (api, db) ; --profile airflow : /health metadatabase healthy, scheduler healthy ; psql -l : airflow à côté de fil_rouge_immobilier ; pytest 975 passed, 7 xfailed (= clôture PRF)
-- FLX2 : Dossier airflow/, connexions MinIO et PostgreSQL, un DAG d'essai ; dépend de FLX1
+- FLX2 : pytest airflow/tests : 10 passed (mutant : 2 failed) ; dags test smoke_dag : state=success, 2556 biens ; mc ls : bronze/smoke/2026-10-15.json (40 o) et quarantine/ ; API 975 passed, 7 xfailed
 - FLX3 : Nettoyer et valider une annonce en Python pur, rejets avec raison ; dépend de FLX2
 - FLX4 : DAG annonces_import, source_reference et historique des prix (migrations 48, 49) ; dépend de FLX3
 - FLX5 : Schéma olap : fait_ventes et 5 dimensions du sujet, sans donnée personnelle ; dépend de FLX2

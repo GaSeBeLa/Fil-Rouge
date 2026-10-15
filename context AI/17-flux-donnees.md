@@ -128,8 +128,9 @@ liste **2** services (`db`, `api`) ; `docker compose --profile airflow up -d` pu
 ---
 
 <!-- FICHE:FLX2 -->
-## FLX2 [ ] — Poser `airflow/`, ses connexions et un DAG d'essai
+## FLX2 [x] — Poser `airflow/`, ses connexions et un DAG d'essai
 
+**Session** : 53337d1c-79b2-439c-8cea-3a6e446e0d7b
 **Dépend de** : `FLX1`.
 **Fichiers** : `airflow/dags/smoke_dag.py`, `airflow/src/__init__.py`,
 `airflow/src/config.py`, `airflow/tests/conftest.py`, `airflow/tests/test_config.py`,
