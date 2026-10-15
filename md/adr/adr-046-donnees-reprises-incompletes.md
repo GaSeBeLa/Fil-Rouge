@@ -122,7 +122,8 @@ Partie 1 — Les données qui manquent
 2. ✅ Une donnée absente de la source reste vide (`NULL`) si la colonne l'accepte. Vide veut dire « inconnu ».
 3. ✅ Si la colonne refuse le vide, elle reçoit une valeur factice. La valeur respecte le format de la colonne. Elle est documentée : un commentaire dans le script, une ligne dans `docker/init-v3/README.md` §0.
 4. ✅ Aucune donnée ancienne n'est supprimée (Jeff, Q-JEF-26).
-5. ✅ Pour tester les contraintes, un faker forké du script du sujet servira (registre `:240`). Il **devra** s'écrire : aucun faker n'existe dans le dépôt.
+5. ✅ Pour tester les contraintes, un faker forké du script du sujet servira (registre `:240`). ~~Il **devra** s'écrire : aucun faker n'existe dans le dépôt.~~
+   > 🔄 **Mis à jour le 15/10/2026** (Sébastien, Discord) : un faker existe depuis le 14/10, le seed de démo (ADR-055, `API/src/app/scripts/seed_demo.py`, Faker `fr_FR`). Il joue un parcours complet, en petit volume ; les contraintes sont vérifiées par les tests d'intégration. Un faker de **gros volume** reste une piste, à voir avec l'équipe.
 
 Ce que cela donne, colonne par colonne :
 
@@ -194,7 +195,8 @@ Partie 3 — Rangé ailleurs, pas redécidé ici
   * Le comment se choisit en codant. 💡 Piste : une opération du service des mandats passe en `'expired'` tout mandat `'active'` dont `ends_at` est passée ; une route réservée au manager l'appelle ; rejouée, elle ne change rien de plus ; un test d'intégration la couvre. La règle se range avec les règles du mandat (ADR-039).
   * Aujourd'hui, `MandateService` n'a aucune règle (`API/src/app/services/mandate_service.py:1-8`).
 * ➡️ **Reste à coder : `energy_class_scheme = 'FR-DPE-2021'`** sur les 1 623 biens qui ont une lettre (ADR-018). ✅ Confirmé par le groupe le 09/10/2026 (S11). Déduit — demande du code, non fait. Une ligne dans `03_populate_estate.sql` pour une base neuve ; une dans `docker/migrations/v2-vers-v3/09_biens.sql` pour une base v2 ; un test.
-* ➡️ **Reste à écrire : le faker forké** du script du sujet, pour tester les contraintes.
+* ~~➡️ **Reste à écrire : le faker forké** du script du sujet, pour tester les contraintes.~~
+  * 🔄 **Mis à jour le 15/10/2026** : fait autrement, par le seed de démo (ADR-055) ; voir le point 5. 🟡 Un faker de gros volume : à voir avec l'équipe.
 * **Soutenance**
   * « Comment migrez-vous sans perdre de données ? » (`TRAME-SOUTENANCE.md:32`). 💡 Réponse : la source reste intacte. Ses 24 utilisateurs et ses 18 mandats sont repris, le mandat 13 compris. Chaque trou est compté et documenté.
   * « Comment garantissez-vous l'intégrité (ex. qu'un client ne soit pas un chasseur) ? » (`:29`). 💡 Réponse : le mandat 13. En v3, `mandate.id_client` pointe vers `client(id_user)` (`01:461-462`). Un chasseur sans fiche client ne peut plus être client d'un mandat.
