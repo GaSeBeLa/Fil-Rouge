@@ -15,6 +15,8 @@ les annonces et nourrit l'OLAP, Elasticsearch sert la recherche de biens et les 
 
 **À faire.** `FLX6` (rafraîchir l'OLAP), puis `FLX7` à `FLX12` (Elasticsearch, Kibana, doc). Cadré en 12 fiches ; `FLX13` ajoutée le même jour, avant `FLX6` (décision de Seb, bouton `faker-volume:A`).
 
+**Ajoutée après la clôture.** `FLX14` (contact du vendeur dans l'import de nuit), écrite le 2026-10-19 : constat de Gabriel, option A tranchée par Seb (bouton `contact-import:A`). À jouer.
+
 **Sessions** : f022f081-0f47-40d8-a130-39e8bee7a307 (cadrage, `FLX1`), 53337d1c-79b2-439c-8cea-3a6e446e0d7b (`FLX1` à `FLX5`, `FLX13`)
 
 ## Le socle commun
@@ -100,6 +102,7 @@ reconnaître le même bien chez deux agences ; Airflow 3 ; Confluence et le MPD 
 | `FLX10` | Envoyer les logs de l'API dans Elasticsearch | `FLX7` |
 | `FLX11` | Montrer le trafic et les biens dans Kibana | `FLX8`, `FLX10` |
 | `FLX12` | Écrire la doc, le schéma du flux et les ADR | toutes |
+| `FLX14` | Ranger le contact du vendeur dans l'import de nuit | `FLX4` |
 
 Après `FLX2`, les branches annonces (`FLX3`-`FLX4`) et OLAP (`FLX5`-`FLX13`-`FLX6`) sont
 indépendantes ; `FLX7` et `FLX10` se jouent dès `FLX1`. Migrations : 48 en
@@ -499,4 +502,51 @@ Les fichiers existent ; chaque ADR cite ses sources (`Discord flux-<n>`, cours,
 doc officielle) ; le schéma se rend sur GitHub (Mermaid valide : `npx -y
 @mermaid-js/mermaid-cli` ou aperçu GitHub) ; grep `TODO|à remplir` dans les
 fichiers neufs : 0.
+<!-- /FICHE -->
+
+---
+
+<!-- FICHE:FLX14 -->
+## FLX14 [ ] — Ranger le contact du vendeur dans l'import de nuit
+
+**Dépend de** : `FLX4`.
+**Fichiers** : `airflow/src/annonces/clean.py`, `airflow/src/annonces/load.py`,
+`airflow/dags/annonces_import_dag.py`, `airflow/tests/test_annonces_clean.py`,
+`airflow/tests/test_annonces_load.py`, `md/flux/schema-du-flux.md` (dépôt **Fil-Rouge**)
+— et rien d'autre.
+
+**Prompt**
+Ajoutée après la clôture : constat de Gabriel (Discord, 2026-10-18), vérifié par le
+Glaude, option **A** tranchée par Seb le 2026-10-19 (bouton `contact-import:A`).
+Aujourd'hui `clean.py` ignore les colonnes `contact.nom`, `contact.telephone`,
+`contact.email`, `contact.agence` et `particulier` du CSV du générateur, et `load.py`
+n'écrit que dans `estate` : un bien importé la nuit n'a jamais de contact. L'ADR-054
+ne l'interdit pas (sa « minimisation » vise la lecture par le rôle Reader) : le renvoi
+de `clean.py:15-16` est faux, il disparaît.
+Dans `clean_validate`, chaque annonce gagne une clé `contact` (dict ou `None`), rangée
+avec elle dans `silver`. Mêmes règles que `docker/tools/generate_estate_contact.py`
+(lis-le) : champ vide ou blanc → `None` ; pas de contact si les quatre champs sont
+vides ; téléphone `0XXXXXXXXX` → `+33XXXXXXXXX` ; `is_private` = `particulier` vrai,
+sinon faux, jamais vide ; nom et agence ≤ 100 caractères. Un champ qui ne passerait
+pas les CHECK de `estate_contact` (`docker/init-v3/01`, `CREATE TABLE estate_contact`)
+est **vidé seul** et compté : le bien n'est pas perdu pour un téléphone sale.
+`load_estates` écrit ensuite le contact dans **la même transaction** que le bien :
+`INSERT … ON CONFLICT (id_estate) DO UPDATE … WHERE estate_contact.id_author IS NULL`
+(un contact saisi à la main n'est jamais écrasé, comme `estate`) ; rien pour un bien
+saisi à la main (`skipped_manual`) ; `id_author` reste vide. `LoadReport` gagne
+`contacts_added`, `contacts_updated`, `contact_fields_dropped`, logués par le DAG.
+Le SQL reste lisible par SQLite (tests sans Docker, comme `FLX4`). `estate_contact`
+n'entre toujours **pas** dans l'index `estates` (`FLX8`). Le schéma du flux dit que
+le contact suit le bien jusqu'à `estate_contact`.
+
+**Critère de fin**
+`pytest airflow/tests -q` vert, compte affiché, avec des tests neufs : contact
+complet, contact vide (aucune ligne), téléphone national converti, téléphone sale
+vidé seul, rejeu du même jour (0 contact ajouté), contact saisi à la main gardé.
+`docker compose exec airflow-scheduler airflow dags test annonces_import <date neuve>`
+deux fois : `SELECT count(*) FROM estate_contact` gagne N lignes au 1er passage,
+**0** au 2e ; aucune ligne avec `id_author` renseigné modifiée. pytest API vert,
+compte affiché. `pyright` : 0 erreur sur les fichiers touchés. Grep `ADR-054` dans
+`airflow/src/annonces/` : plus de renvoi faux. Mutant : retirer la clause `WHERE
+estate_contact.id_author IS NULL` → le test du contact saisi à la main tombe.
 <!-- /FICHE -->
