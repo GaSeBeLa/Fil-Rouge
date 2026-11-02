@@ -107,6 +107,7 @@ et seulement dans ce cas, ouvrir l'index.
 | comprendre un choix du schéma (euros, migration, hypothèses, changements v3) | `../Fil-Rouge-API/docker/init-v3/README.md` |
 | relire une décision d'architecture (ADR) | **Confluence**, espace `GaSeBeLa1` — [wiki du projet](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/overview?homepageId=15008134). Le dossier `decisions/` du dépôt est **vide**, rien n'y est écrit |
 | ouvrir un chantier, ou le découper en fiches | **lancer `/vlp:chantier`** — la méthode vit dans le kit, pas ici |
+| jouer une fiche du chantier MER (modèle de données en Merise (MCD + MLD)) | `context AI/18-merise-mocodo.md` — chantier **ouvert**, par `/vlp:tache MER<n>` |
 | relire un chantier clos | `context AI/00-INDEX-archive.md` — sa ligne y nomme le fichier de fiches |
 | relire une fiche `C1` à `C5` | `context AI/09-contraintes-mpd.md` — chantier **clos** le 2026-09-11, ne se rejoue pas |
 | relire une fiche `LOT1` à `LOT12` | `context AI/10-lot-migration.md` — chantier « Lot de migration (schéma v3) » **clos** le 2026-10-07, ne se rejoue pas |
