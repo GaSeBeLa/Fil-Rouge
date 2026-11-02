@@ -20,7 +20,7 @@ flowchart LR
     end
 
     subgraph PG["Service db : PostgreSQL"]
-        EST[("fil_rouge_immobilier<br/>estate + estate_price_history")]
+        EST[("fil_rouge_immobilier<br/>estate + estate_price_history + estate_contact")]
         OLTP[("fil_rouge_immobilier<br/>sale, payment, mandate, visit…")]
         OLAP[("schéma olap<br/>fait_ventes + 5 dim_*")]
     end
@@ -38,7 +38,7 @@ flowchart LR
     GEN -- "annonces_import, tâche generate (2 h) : le CSV brut est rangé tel quel" --> BR
     BR -- "tâche clean_validate : les annonces valides passent" --> SI
     BR -- "tâche clean_validate : les rejets partent avec leur raison" --> QU
-    SI -- "tâche load : un bien par reference, et le prix du jour" --> EST
+    SI -- "tâche load : un bien par reference, le prix du jour, et le contact du vendeur (FLX14)" --> EST
     OLTP -- "olap_refresh, tâche refresh (3 h) : vide puis recharge l'étoile" --> OLAP
     OLAP -- "tâche report : le bilan du chargement" --> GO
     EST -- "estates_index, tâches index puis prune (4 h) : copie sans contact ni adresse" --> IDX
@@ -54,7 +54,7 @@ flowchart LR
 
 | DAG | Heure (cron) | Tâches | Ce qu'il lit | Ce qu'il écrit |
 |---|---|---|---|---|
-| `annonces_import` | 2 h (`0 2 * * *`) | `generate` → `clean_validate` → `load` | le générateur du sujet | `bronze`, `silver`, `quarantine`, `estate`, `estate_price_history` |
+| `annonces_import` | 2 h (`0 2 * * *`) | `generate` → `clean_validate` → `load` | le générateur du sujet | `bronze`, `silver`, `quarantine`, `estate`, `estate_price_history`, `estate_contact` |
 | `olap_refresh` | 3 h (`0 3 * * *`) | `refresh` → `report` | `sale`, `payment`, `mandate`, `visit`… | schéma `olap`, `gold/olap/{ds}.json` |
 | `estates_index` | 4 h (`0 4 * * *`) | `index` → `prune` | `estate` | index `estates` |
 

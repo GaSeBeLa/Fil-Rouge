@@ -507,8 +507,9 @@ fichiers neufs : 0.
 ---
 
 <!-- FICHE:FLX14 -->
-## FLX14 [ ] — Ranger le contact du vendeur dans l'import de nuit
+## FLX14 [x] — Ranger le contact du vendeur dans l'import de nuit
 
+**Session** : 1abb9954-636f-4727-aa4a-97bd9123c07f
 **Dépend de** : `FLX4`.
 **Fichiers** : `airflow/src/annonces/clean.py`, `airflow/src/annonces/load.py`,
 `airflow/dags/annonces_import_dag.py`, `airflow/tests/test_annonces_clean.py`,
