@@ -85,6 +85,7 @@
 | [2026-10-07-rapport-lot1-a-lot5.html](journal/2026-10-07-rapport-lot1-a-lot5.html) | le rapport au groupe sur LOT1 à LOT5 | 📷 photo du 2026-10-07 |
 | [2026-10-07-rapport-final-chantier-lot.html](journal/2026-10-07-rapport-final-chantier-lot.html) | le rapport final du chantier LOT (LOT1 à LOT12) | 📷 photo du 2026-10-07 |
 | [2026-10-08-tables-parametres-et-schema.html](journal/2026-10-08-tables-parametres-et-schema.html) | les deux tables de réglages, et les 38 changements du schéma v3 justifiés | 📷 photo du 2026-10-08 |
+| [2026-11-02-suggestion-de-biens.md](journal/2026-11-02-suggestion-de-biens.md) | suggérer des biens au chasseur : 4 décisions votées, état du code, propositions, liste pour le lendemain | 📷 photo du 2026-11-02 |
 
 ## Les règles de nommage
 
