@@ -63,7 +63,7 @@
 
 ## 3 ter. Gouvernance — à ajouter (💡 pratique courante)
 
-- **Le Product Owner** (les formateurs) valide le périmètre et les livrables.
+- **Le Product Owner**, qui représente l'entreprise, valide le périmètre et les livrables.
 - **L'équipe décide ensemble** : une question ouverte se vote sur Discord ;
   la décision est écrite dans un ADR (journal de décisions, Confluence).
 - **Chaque livrable a un responsable (R) et un valideur (A)** : voir le RACI.
@@ -100,18 +100,20 @@ D'après le RACI (proposition du 03/11, à valider) :
 
 ## 7. Ressources — à écrire
 
-- **Humaines** : 4 étudiants (Sébastien, Laurence, Békanty, Gabriel) ; les
-  formateurs jouent le Product Owner.
+- **Humaines** : une équipe de 4 data engineers (Sébastien, Laurence,
+  Békanty, Gabriel), qui reprend le SI de la société de chasse immobilière
+  après le consultant précédent (`SP/Readme.md:71`, `:304`) ; le Product
+  Owner représente l'entreprise.
 - **Techniques** : nos ordinateurs, et une pile Docker locale : PostgreSQL,
   l'API, MinIO, Airflow, Elasticsearch, Logstash, Kibana.
 - **Outils de travail** : GitHub (code, et un kanban GitHub Projects),
   Confluence (documentation), Discord (échanges), un assistant IA (Claude)
   pour aider à coder et à relire.
-- **Budget** : 0 €. Tous les outils sont gratuits ou en offre étudiante.
+- **Budget** : 0 €. Tous les outils utilisés sont gratuits.
 
 ---
 
-## 7 bis. Démarche et qualité — à ajouter (demandé par le jury)
+## 7 bis. Démarche et qualité — à ajouter (compétence notée, `TRACABILITE-COMPETENCES.md:50`)
 
 - **Démarche** : un projet découpé en **chantiers**, eux-mêmes découpés en
   petites tâches d'une séance ; chaque tâche suivie sur le kanban ; les
@@ -144,7 +146,7 @@ D'après le RACI (proposition du 03/11, à valider) :
 - La base v3 tourne, la migration se rejoue, et les tests passent.
 - Les règles métier du sujet sont respectées (rémunération, mandats, droits).
 - **Chaque membre sait expliquer tout le projet**, y compris les parties des
-  autres : le jury interroge chacun seul (`SP/Readme.md:322`).
+  autres, et peut le présenter seul (`SP/Readme.md:322`).
 
 **Indicateurs** (💡 un chiffre par objectif ; les cibles sont à valider)
 
