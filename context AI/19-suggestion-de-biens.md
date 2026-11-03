@@ -89,8 +89,9 @@ Aujourd'hui, un client peut tout réécrire par `PUT /estate-proposed/{id}` : st
 ---
 
 <!-- FICHE:SUG2 -->
-## SUG2 [ ] — Refuser la signature d'un mandat sans critères
+## SUG2 [x] — Refuser la signature d'un mandat sans critères
 
+**Session** : 673e24d2-f496-48d7-b069-a1ee74532d62
 **Dépend de** : rien.
 **Fichiers** : `API/src/app/services/mandate_service.py`, `API/tests/integration/test_signature_vente.py`, `API/src/app/scripts/seed_demo.py`, `API/src/app/scripts/seed_volume.py`, et les tests qui signent un mandat sans critères (à lister par `grep -rln signature_date API/tests`).
 **Tests** : modifiés — les tests qui signent un mandat sans aucun `criteria` doivent d'abord en créer un : la règle M1 (votée le 2026-11-03) rend cette signature impossible.
