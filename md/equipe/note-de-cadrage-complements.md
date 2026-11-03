@@ -129,6 +129,34 @@ D'après le RACI (proposition du 03/11, à valider) :
 
 ## 8. Risques identifiés — à écrire
 
+Deux familles de risques : ceux du **système d'information** (trouvés à
+l'audit de la phase 1), et ceux de la **conduite du projet**.
+
+### 8.1 Les risques du SI, repris de la phase 1
+
+Sources (Confluence) : « Audit du système d'information » (Gabriel, 05/08) et
+« Registre des anomalies — Existant » (Sébastien, 17/08). L'audit a coté
+**16 problèmes** (probabilité × gravité, de 1 à 9) : **3** en priorité absolue,
+**9** à corriger impérativement, **4** mineurs.
+
+⚠️ La cote de chaque risque est dans la page « Cartographie du SI + analyse
+de risques » sous forme d'**images** : je n'ai pas pu la lire. 🟡 Békanty :
+recopier la cote de chaque ligne depuis la matrice.
+
+| Risque trouvé à l'audit | Impact | Parade dans le nouveau système |
+|---|---|---|
+| Des mandats « actifs » ont dépassé leurs 6 mois (6 sur 11 au 25/07) | facturer sur un mandat expiré : risque juridique | date de signature et date de fin calculée (signature + 6 mois), contrôlées par la base |
+| Un chasseur enregistré comme client (mandat 13) | les rôles se mélangent | clients et chasseurs dans des tables séparées : l'erreur devient impossible |
+| Les honoraires n'existent nulle part | pas d'historique du chiffre d'affaires | tables des ventes et des paiements, et calcul de la rémunération |
+| Taux de commission fixe, alors que la règle est un barème | rémunération fausse | une table de barème (tranches de montant) |
+| Critères de recherche en texte libre | impossible de filtrer, ni de nourrir l'IA | critères structurés et gardés version par version |
+| Email, téléphone, code postal sans contrôle | données fausses ou en double | contrôles de format dans la base |
+| Le code de l'application est perdu | plus personne ne peut faire évoluer le système | une nouvelle API, sur GitHub, couverte par des tests |
+| Données personnelles en clair | non-conformité RGPD | registre RGPD, droits par rôle, compte en lecture seule pour l'IA |
+| La croissance (des milliers de mandats par semaine) | le système ne tient pas la charge | architecture dimensionnée : note 3V, schéma OLAP, Elasticsearch |
+
+### 8.2 Les risques de la conduite du projet
+
 | Risque | Impact | Parade envisagée |
 |---|---|---|
 | Un membre absent ou surchargé | des livrables en retard | le RACI répartit le travail ; chacun a un remplaçant qui valide (A) |
