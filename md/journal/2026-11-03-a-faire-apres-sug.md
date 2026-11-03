@@ -71,6 +71,34 @@ avant la ligne `CONSTRAINT` :
   et demander la comparaison ; elle doit dire « 22 tables, 22 swimlanes », sans
   aucun écart.
 
+✅ Fait par Seb le 2026-11-03 : l'export `vrac/mpd 33 11 2.drawio.xml`,
+recomparé, donne 22 tables et **0 écart**.
+
+### Le texte à recopier dans le MLD — vérifié le 2026-11-03
+
+Comparé par script à l'export `vrac/mld 03 11.drawio.xml` : **22 tables**
+de chaque côté. Il manque **4 lignes**, toutes de SUG. Le MLD ne porte ni
+`CHECK` ni contrainte : les 3 contraintes du MPD n'y vont pas.
+
+**Table `Estate_SearchRequest`** — 1 ligne, après `id_hunter` :
+
+| Nom | Type |
+|---|---|
+| `status :` | `String` |
+
+**Table `EstateProposed`** — 3 lignes, juste après `client_priority` :
+
+| Nom | Type |
+|---|---|
+| `client_decision :` | `String` |
+| `client_decided_at :` | `DateTime` |
+| `decline_reason :` | `String` |
+
+- Aucune relation ne change.
+- 💡 Facultatif : dans `Hunter` et `SearchRequest`, le MLD écrit
+  `id_realEstateManager` ; le SQL dit `id_realestatemanager` (tout en
+  minuscules, comme PostgreSQL le range).
+
 Le détail, point par point :
 
 ### 1️⃣ `estate_searchrequest` : ajouter `status`
