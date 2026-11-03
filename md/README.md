@@ -32,6 +32,7 @@
 | [depots-et-branches.md](equipe/depots-et-branches.md) | dépôts, branches, protection de `main` : 4 décisions à prendre | 📌 vivant |
 | [2026-10-16-presentation.md](equipe/2026-10-16-presentation.md) | la présentation aux autres groupes : plan des 20 minutes, 4 schémas, chiffres, questions | 📷 photo du 2026-10-15 |
 | [2026-10-16-presentation.html](equipe/2026-10-16-presentation.html) | la même, en page interactive : chrono, schémas animés (à ouvrir dans un navigateur) | 📷 photo du 2026-10-15 |
+| [raci-propositions.md](equipe/raci-propositions.md) | le RACI des phases 2 à 4 : R et A proposés, répartition des livrables sans personne, à valider puis copier sur Confluence | 📌 vivant, jusqu'à la copie |
 
 ## questions/ — les questions à trancher
 
@@ -72,6 +73,7 @@
 | [tuto-1-hachage-mots-de-passe.md](securite/tuto-1-hachage-mots-de-passe.md) | tuto : hacher les mots de passe (Argon2id) | 📌 vivant |
 | [tuto-2-authentification-jwt.md](securite/tuto-2-authentification-jwt.md) | tuto : authentification et droits d'accès (JWT) | 📌 vivant |
 | [2026-10-15-preparation-chantier-rgpd.md](securite/2026-10-15-preparation-chantier-rgpd.md) | préparation du chantier RGPD : lexique pour débutants, inventaire, registre en brouillon, 18 questions pour l'équipe | 📌 vivant, jusqu'au cadrage |
+| [note-souverainete-securite-ia.md](securite/note-souverainete-securite-ia.md) | la note souveraineté et sécurité des données face à l'IA (brouillon, R proposé : Laurence) | 📌 vivant, jusqu'à la copie sur Confluence |
 
 ## journal/ — les photos d'un jour, de la plus ancienne à la plus récente
 
@@ -86,6 +88,7 @@
 | [2026-10-07-rapport-final-chantier-lot.html](journal/2026-10-07-rapport-final-chantier-lot.html) | le rapport final du chantier LOT (LOT1 à LOT12) | 📷 photo du 2026-10-07 |
 | [2026-10-08-tables-parametres-et-schema.html](journal/2026-10-08-tables-parametres-et-schema.html) | les deux tables de réglages, et les 38 changements du schéma v3 justifiés | 📷 photo du 2026-10-08 |
 | [2026-11-02-suggestion-de-biens.md](journal/2026-11-02-suggestion-de-biens.md) | suggérer des biens au chasseur : 4 décisions votées, état du code, propositions, liste pour le lendemain ; § 7, les 3 incohérences de Gabriel | 📷 photo du 2026-11-02, ajout du 2026-11-03 |
+| [2026-11-03-eco-conception-corrections.md](journal/2026-11-03-eco-conception-corrections.md) | ce qui a changé depuis la note d'éco-conception de Gabriel (Confluence, 2 sept.) : corrections, ajouts, logs gardés 6 mois, Bronze non purgé | 📷 photo du 2026-11-03 |
 
 ## Les règles de nommage
 
