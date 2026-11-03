@@ -109,7 +109,8 @@ D'après le RACI (proposition du 03/11, à valider) :
 - **Outils de travail** : GitHub (code, et un kanban GitHub Projects),
   Confluence (documentation), Discord (échanges), un assistant IA (Claude)
   pour aider à coder et à relire.
-- **Budget** : 0 €. Tous les outils utilisés sont gratuits.
+- **Budget** : non communiqué par l'entreprise (choix de Békanty, 03/11 ;
+  à revoir si le Product Owner en donne un). Les outils utilisés sont gratuits.
 
 ---
 
