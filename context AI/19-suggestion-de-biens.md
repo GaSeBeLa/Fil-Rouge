@@ -144,8 +144,9 @@ Aujourd'hui, un client peut tout réécrire par `PUT /estate-proposed/{id}` : st
 ---
 
 <!-- FICHE:SUG4 -->
-## SUG4 [ ] — Donner un état à chaque bien de la sélection
+## SUG4 [x] — Donner un état à chaque bien de la sélection
 
+**Session** : 673e24d2-f496-48d7-b069-a1ee74532d62
 **Dépend de** : rien.
 **Fichiers** :
 - `docker/init-v3/01_create_fil_rouge_immobilier.sql` (table `estate_searchrequest`) ;
