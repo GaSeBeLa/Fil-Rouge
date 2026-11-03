@@ -4,7 +4,7 @@ Le chasseur obtient par POST /search-requests/{id}/suggestions jusqu'à 10 biens
 ## Notes
 - SUG1 : Rouge : client met accepted, 200 ; vert : 403, ligne intacte ; mutant retombe ; suite 1012 passed, 7 xfailed
 - SUG2 : Rouge : signature sans critères 201 (POST), 200 (PUT) ; vert : 409 ; mutant retombe (2 tests) ; seeds passent sur base jetable ; suite 1016 passed, 7 xfailed
-- SUG3 : Budget et type de bien dans le dépôt de demande, qui crée la 1re version des critères. Dépend de rien.
+- SUG3 : Rouge : 7 failed ; vert : dépôt crée 1 criteria (budget, type, auteur), budget nul ou type inconnu 422 ; mutant retombe (2 tests) ; suite 1024 passed, 7 xfailed
 - SUG4 : Colonne status dans la sélection (suggested, kept, dismissed) ; P19 renforcée. Dépend de rien.
 - SUG5 : Décision du client sur un bien proposé, sa date, son motif et les CHECK de Gabriel. Dépend de rien, après SUG4.
 - SUG6 : Route POST /estate-proposed/{id}/offer. Dépend de SUG1 et SUG5.

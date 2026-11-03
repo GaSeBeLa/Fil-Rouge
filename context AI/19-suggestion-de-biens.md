@@ -115,8 +115,9 @@ Aujourd'hui, un client peut tout réécrire par `PUT /estate-proposed/{id}` : st
 ---
 
 <!-- FICHE:SUG3 -->
-## SUG3 [ ] — Faire naître la demande déposée avec budget et type
+## SUG3 [x] — Faire naître la demande déposée avec budget et type
 
+**Session** : 673e24d2-f496-48d7-b069-a1ee74532d62
 **Dépend de** : rien.
 **Fichiers** : `API/src/app/services/signup_service.py`, `API/src/app/routes/signup_router.py` (en-tête), `API/tests/integration/test_demande_avant_compte.py`.
 **Tests** : modifiés — les formulaires des tests existants doivent porter les deux champs devenus obligatoires (vote M2 du 2026-11-03).

@@ -21,9 +21,9 @@
     <p>Le chasseur obtient par POST /search-requests/{id}/suggestions jusqu'à 10 biens qui collent aux critères, sans vendus ni déjà vus ; le client ne réécrit plus que sa note, fait son offre par une route dédiée, et un mandat ne se signe plus sans critères.</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span><span></span><span></span><span></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">8 fiches · 2 faites · en cours : SUG3</p>
+    <p class="mono" style="margin-top:.5rem">8 fiches · 3 faites · en cours : SUG4</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -45,12 +45,13 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">SUG2</span></span>
         <details><summary><span class="titre">Refuser la signature d'un mandat sans critères</span><span class="etat">Faite</span></summary>
         <span class="note">Rouge : signature sans critères 201 (POST), 200 (PUT) ; vert : 409 ; mutant retombe (2 tests) ; seeds passent sur base jetable ; suite 1016 passed, 7 xfailed</span></details>
-        <span class="cout mono">≈11,2M (11 236 258) · 74 tours · 4,15 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">SUG3</span></span>
-        <details open><summary><span class="titre">Faire naître la demande déposée avec budget et type</span><span class="etat">En cours · SUG4, SUG7 peuvent partir en même temps</span></summary>
-        <span class="note">Budget et type de bien dans le dépôt de demande, qui crée la 1re version des critères. Dépend de rien.</span></details></li>
-      <li class="fiche"><span class="gauche"><span class="id">SUG4</span></span>
-        <details><summary><span class="titre">Donner un état à chaque bien de la sélection</span><span class="etat">À lancer · en même temps que SUG3, SUG7</span></summary>
+        <span class="cout mono">≈11,4M (11 405 135) · 75 tours · 4,21 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">SUG3</span></span>
+        <details><summary><span class="titre">Faire naître la demande déposée avec budget et type</span><span class="etat">Faite</span></summary>
+        <span class="note">Rouge : 7 failed ; vert : dépôt crée 1 criteria (budget, type, auteur), budget nul ou type inconnu 422 ; mutant retombe (2 tests) ; suite 1024 passed, 7 xfailed</span></details>
+        <span class="cout mono">≈4,3M (4 251 629) · 22 tours · 1,41 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">SUG4</span></span>
+        <details open><summary><span class="titre">Donner un état à chaque bien de la sélection</span><span class="etat">En cours · SUG7 peut partir en même temps</span></summary>
         <span class="note">Colonne status dans la sélection (suggested, kept, dismissed) ; P19 renforcée. Dépend de rien.</span></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">SUG5</span></span>
         <details><summary><span class="titre">Enregistrer la décision du client sur un bien proposé</span><span class="etat">Après SUG4</span></summary>
@@ -59,14 +60,14 @@
         <details><summary><span class="titre">Ouvrir la route de l'offre du client</span><span class="etat">Après SUG5</span></summary>
         <span class="note">Route POST /estate-proposed/{id}/offer. Dépend de SUG1 et SUG5.</span></details></li>
       <li class="fiche"><span class="gauche"><span class="id">SUG7</span></span>
-        <details><summary><span class="titre">Traduire des critères en requête Elasticsearch</span><span class="etat">À lancer · en même temps que SUG3, SUG4</span></summary>
+        <details><summary><span class="titre">Traduire des critères en requête Elasticsearch</span><span class="etat">À lancer · en même temps que SUG4</span></summary>
         <span class="note">Fonction pure : critères vers requête Elasticsearch, testée sans ES. Dépend de rien.</span></details></li>
       <li class="fiche" data-attend><span class="gauche"><span class="id">SUG8</span></span>
         <details><summary><span class="titre">Ouvrir la route des suggestions</span><span class="etat">Après SUG4, SUG7</span></summary>
         <span class="note">Route POST /search-requests/{id}/suggestions. Dépend de SUG4 et SUG7.</span></details></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈10,3M (10 326 017) · 36 tours · 3,47 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈25,1M (25 058 975) · 143 tours · 9,38 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈29,5M (29 479 481) · 166 tours · 10,85 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 
