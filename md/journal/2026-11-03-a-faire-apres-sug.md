@@ -4,7 +4,7 @@ Le chantier SUG (moteur de suggestion de biens) est **clos et poussé**.
 Ce fichier liste ce qui reste à faire **par le groupe**, dans l'ordre.
 
 - Dépôt API : `GaSeBeLa/Fil-Rouge-API`, jusqu'à `f3fd402`
-- Dépôt docs : `GaSeBeLa/Fil-Rouge`, jusqu'à `f2733b4`
+- Dépôt docs : `GaSeBeLa/Fil-Rouge`, jusqu'à `f2733b4` (le chantier RGP, après, n'a pas touché au schéma)
 - Suite de tests : **1070 passed, 7 xfailed**
 
 ---
@@ -34,6 +34,44 @@ bash docker/create_test_db.sh
 Deux tables changent.
 Aucune table créée, aucune supprimée.
 Référence : `docker/init-v3/01_create_fil_rouge_immobilier.sql` (dépôt API).
+
+### Le texte à recopier dans le MPD — vérifié le 2026-11-03
+
+Comparé par script à l'export `vrac/mpd 03 11.drawio.xml` (Seb, 03/11/2026) :
+**22 tables** de chaque côté, et **il ne manque que ces 7 lignes**. Tout le
+reste (PRF, `estate_price_history`, `estate_contact`…) y est déjà.
+
+Chaque ligne : à gauche, le nom de la colonne ; à droite, son texte, comme
+les autres lignes du MPD.
+
+**Table `Estate_SearchRequest`** — 1 ligne à ajouter, après `id_hunter`,
+avant la ligne `CONSTRAINT` :
+
+| Nom | Texte |
+|---|---|
+| `status` | `VARCHAR(20) NOT NULL DEFAULT 'suggested' CHECK (status IN ('suggested', 'kept', 'dismissed'))` |
+
+**Table `EstateProposed`** — 3 lignes à ajouter, juste après `client_priority` :
+
+| Nom | Texte |
+|---|---|
+| `client_decision` | `VARCHAR(20) NOT NULL DEFAULT 'pending' CHECK (client_decision IN ('pending', 'interested', 'declined'))` |
+| `client_decided_at` | `TIMESTAMP` |
+| `decline_reason` | `VARCHAR(20) CHECK (decline_reason IN ('too_expensive', 'too_far', 'too_small', 'wrong_type', 'other'))` |
+
+**Table `EstateProposed`** — la ligne `CONSTRAINT` : ajouter à la fin, après
+`chk_offer …`, ces 3 contraintes :
+
+```text
+, CONSTRAINT chk_decline_reason_if_declined CHECK (decline_reason IS NULL OR client_decision = 'declined'), CONSTRAINT chk_decided_at_once_decided CHECK (client_decision = 'pending' OR client_decided_at IS NOT NULL), CONSTRAINT chk_offer_needs_interest CHECK (proposition_status = 'proposed' OR client_decision = 'interested')
+```
+
+- Aucune relation ne change : pas de flèche à ajouter ni à retirer.
+- Pour revérifier après la mise à jour : déposer le nouvel export dans `vrac/`
+  et demander la comparaison ; elle doit dire « 22 tables, 22 swimlanes », sans
+  aucun écart.
+
+Le détail, point par point :
 
 ### 1️⃣ `estate_searchrequest` : ajouter `status`
 
