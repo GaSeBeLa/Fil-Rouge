@@ -26,7 +26,7 @@
 * **« Le sien » se lit par le numéro de la fiche** (`client.id`,
   `hunter.id`, `real_estate_manager.id`), pas par celui du compte : les 11
   `id_client`, `id_hunter`, `id_realestatemanager` visent la fiche (PRF2).
-* **91 opérations** dans l'API, relevées le 13/10/2026 au soir.
+* **94 opérations** dans l'API, recomptées le 2026-11-03 par `app.openapi()` (après la fiche SUG8).
 * ✅ **Codé : le premier contrôle**, le rôle. Fermé par défaut : chaque route
   dit quels rôles passent, les autres reçoivent `403` (fiche DRO1). Les rôles
   suivent l'annexe d'ADR-027, case par case ; `test_droits_par_role.py` les
@@ -89,7 +89,7 @@ Sortie brute de l'outil, recopiée telle quelle :
 | `POST /estate-proposed/{item_id}/offer` | Client du mandat (fiche SUG6) |
 | `POST /search-requests/{item_id}/suggestions` | Hunter de la demande (fiche SUG8) |
 
-91 opérations relevées.
+94 opérations relevées (recompte du 2026-11-03).
 
 **Refaire le relevé** : le tableau sort de
 `docker/tools/print_rights_matrix.py`, dans le dépôt Fil-Rouge-API, depuis
