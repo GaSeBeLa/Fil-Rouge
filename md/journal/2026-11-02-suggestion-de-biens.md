@@ -207,6 +207,67 @@ status VARCHAR(20) NOT NULL DEFAULT 'suggested'
 9. En option : le DAG de 5 h.
 10. Corriger l'aide de `airflow/tools/generer_annonces.py`.
 
+## 7. Ajout du 2026-11-03 : les 3 incohérences relevées par Gabriel
+
+> Gabriel les a postées sur Discord dans la nuit (messages 1566959152255737978
+> à 00 h 36 et 1566963768100003932 à 00 h 54, heure de Paris). Relues dans le
+> code le 2026-11-03 au matin : **les 3 sont exactes.**
+
+### 7.1 Un mandat se signe sans aucun critère
+
+- ✅ **Le constat.** `API/src/app/services/mandate_service.py:67-76` : à la
+  pose de `signature_date`, à la création ou par un PUT, la demande passe à
+  `launched`. **Rien ne vérifie** qu'elle a des `criteria`.
+- ✅ Le formulaire du site, `POST /search-requests/submit`, ne prend que
+  l'identité du visiteur : email, nom, téléphone, pays, adresse
+  (`API/src/app/services/signup_service.py:80-94`). Une demande naît donc
+  **toujours sans critères**.
+- ➡️ Conséquence : on lance une recherche sans savoir ce qu'on cherche, et le
+  moteur de suggestion (§ 4.2) n'a rien à lire.
+- 💡 **La proposition de Gabriel.**
+  - À la pose de `signature_date`, si la demande n'a aucune version de critères, l'API rend **409** : « La demande n'a aucun critère : le mandat ne peut pas être signé ».
+  - Le statut `pending_signature`, qui existe (SQL v3 l.557 et 602), reste possible sans critères.
+  - La règle vit dans le service, sans trigger, comme le veut notre convention.
+- 🟡 **À décider.**
+  - Ajoute-t-on la règle 409 à la signature ? Gabriel la recommande.
+  - Ajoute-t-on au moins le budget et le type de bien au formulaire du site ? Ils sont `NOT NULL` dans `criteria`, et la story 08 le suggère.
+- Test à écrire : un test d'intégration. Une signature sans critères rend 409 ; avec critères, 201.
+  - Les tests et les seeds qui signent un mandat sans critères sont à adapter.
+
+### 7.2 Un client peut modifier n'importe quel champ d'une proposition
+
+- ✅ **Le constat.** `API/src/app/services/estate_proposed_service.py:84-88` :
+  `replace` ne contrôle que le bien et le mandat. Rien ne restreint les champs
+  qu'un client peut changer.
+  - Gabriel l'a testé : un PUT d'un client avec `proposition_status="accepted"`, `amount_proposition=1` et un `comment_hunter` rend 200, et tout est écrit.
+  - ⚠️ Ce test n'a **pas** été rejoué ici. Le code lu dit la même chose.
+- 💡 **La solution.** Surcharger `replace_visible` avec `fields_changed_outside`
+  (`services/base_service.py:76`), qui rend 403.
+  - C'est déjà fait dans `search_request_service.py:59-71`, et aussi dans `hunter_service.py`, `real_estate_manager_service.py` et `review_media_service.py`.
+  - Le client ne change que `client_priority` et `comment_client`.
+- 🟡 **À décider.** Son offre d'achat passe-t-elle aussi par ce PUT ?
+- Test à écrire : un client qui change le statut reçoit 403. Ce point ne demande **pas de migration**.
+
+### 7.3 `estate_proposed` porte deux étapes
+
+- ✅ **Le constat.** La table sert à la fois à « bien présenté au client » et à
+  « offre en cours ».
+  - `chk_offer` (SQL v3 l.917-919) exige un montant dès que le statut n'est plus `proposed`. On ne peut donc pas ajouter de statut « refusé par le client » sans montant.
+  - `rejected` ne dit pas qui refuse, le client ou le vendeur (§ 3).
+  - Le chasseur commente à deux endroits : `estate_searchrequest.review_hunter` (l.869) et `estate_proposed.comment_hunter` (l.894).
+- 💡 **Deux options**, selon Gabriel.
+  - **La légère** : une colonne `client_decision` (`pending`, `interested`, `declined`), avec un `CHECK` de cohérence. Elle touche la migration, le modèle, les seeds et les tests.
+  - **La structurelle** : une table `offer` séparée. Elle est plus propre, mais elle touche aussi l'OLAP.
+- 🟡 **À décider par le groupe**, en même temps que la colonne `status` de
+  `estate_searchrequest` (§ 4.1). Les deux touchent les mêmes tables.
+
+### 7.4 L'ordre conseillé
+
+1. **7.2**, le PUT du client : c'est petit, sans migration.
+2. **7.1**, le 409 à la signature : c'est petit. Les seeds sont à vérifier.
+3. Les décisions de schéma : `status` (§ 4.1), puis `client_decision` ou `offer` (7.3), en une seule migration si possible.
+4. Le moteur de suggestion (§ 4.2) : il a besoin de 7.1, car une demande sans critère ne donne rien à chercher.
+
 ## Sources de la discussion
 
 - Discord, salon `le-glaude`, le 2026-11-02, de 14 h 37 à 16 h 28 (heure UTC).
