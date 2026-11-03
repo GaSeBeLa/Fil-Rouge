@@ -42,6 +42,34 @@
 
 ---
 
+## 3 bis. Contraintes et hypothèses — à ajouter (💡 pratique courante)
+
+**Contraintes** (ce qui nous est imposé)
+
+- La base est **PostgreSQL** (ADR-001) ; les noms du code sont en anglais (ADR-002).
+- Tous les montants sont en **euros**.
+- Les fichiers d'origine du sujet (le StarterPack) ne se modifient jamais.
+- Tout tourne en local, avec Docker, et sans budget.
+- Les données sont **fictives** : celles du sujet, et des données générées.
+
+**Hypothèses** (ce qu'on suppose vrai)
+
+- La croissance prévue : plusieurs milliers de mandats par semaine, et des
+  centaines à des milliers de biens par recherche (`SP/Readme.md:160`).
+- Les chiffres de la rémunération sont ceux proposés par le sujet ; ils
+  restent des paramètres, que l'entreprise pourra changer.
+
+---
+
+## 3 ter. Gouvernance — à ajouter (💡 pratique courante)
+
+- **Le Product Owner** (les formateurs) valide le périmètre et les livrables.
+- **L'équipe décide ensemble** : une question ouverte se vote sur Discord ;
+  la décision est écrite dans un ADR (journal de décisions, Confluence).
+- **Chaque livrable a un responsable (R) et un valideur (A)** : voir le RACI.
+
+---
+
 ## 5. Parties prenantes — lignes « à définir » à remplacer
 
 D'après le RACI (proposition du 03/11, à valider) :
@@ -117,3 +145,22 @@ D'après le RACI (proposition du 03/11, à valider) :
 - Les règles métier du sujet sont respectées (rémunération, mandats, droits).
 - **Chaque membre sait expliquer tout le projet**, y compris les parties des
   autres : le jury interroge chacun seul (`SP/Readme.md:322`).
+
+**Indicateurs** (💡 un chiffre par objectif ; les cibles sont à valider)
+
+| Objectif (section 2) | Indicateur | Cible |
+|---|---|---|
+| Fiabiliser l'intégrité des données | anomalies du registre d'audit traitées par la migration | toutes |
+| Sécuriser la conformité juridique | mandats expirés encore actifs | 0 |
+| Structurer la recherche de biens | critères de recherche en texte libre | 0 |
+| Pérenniser l'architecture | tests automatiques verts | 100 % |
+| Livrer le projet | livrables de la grille présents (`GRILLE-EVALUATION.md`, 21 lignes) | 21 sur 21 |
+
+---
+
+## 10. Validation — à ajouter (💡 pratique courante)
+
+| Version | Date | Rédigée par | Validée par |
+|---|---|---|---|
+| 1 | 21 août 2026 | Békanty | 🟡 |
+| 2 | 🟡 | Békanty | 🟡 (A du RACI : Sébastien) |
