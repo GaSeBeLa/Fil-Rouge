@@ -132,7 +132,9 @@ Relevé dans `API/src/app/services/` (Fil-Rouge-API) : le crochet
 * **En écriture**, le crochet `owns` refuse une ligne qui ne serait pas à
   lui → `409` (8 services). Les champs gardés → `403` : le rôle et
   l'activation d'un compte, les coordonnées seules pour le chasseur et le
-  manager, l'affectation seule pour le Manager sur une demande (Q-ACC-10).
+  manager, l'affectation seule pour le Manager sur une demande (Q-ACC-10),
+  la note et le commentaire seuls pour le Client sur un bien proposé
+  (`client_priority`, `comment_client` ; fiche SUG1).
 * **`Reader`** lit ses tables en entier, sans « le sien » : la cible ne lui
   en donne pas.
 * **L'`Admin`** voit tout : le crochet n'est pas appelé pour lui.

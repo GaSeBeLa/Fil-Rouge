@@ -67,8 +67,9 @@ Le chantier ferme aussi trois trous de cohérence trouvés par Gabriel : la sign
 ---
 
 <!-- FICHE:SUG1 -->
-## SUG1 [ ] — Limiter le PUT du client à sa note et son commentaire
+## SUG1 [x] — Limiter le PUT du client à sa note et son commentaire
 
+**Session** : 673e24d2-f496-48d7-b069-a1ee74532d62
 **Dépend de** : rien.
 **Fichiers** : `API/src/app/services/estate_proposed_service.py`, `API/tests/integration/test_propositions_visites.py` (ajout pur), `md/securite/matrice-droits-crud-par-role.md`.
 
