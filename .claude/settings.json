@@ -13,5 +13,8 @@
       "mcp__9bd19151-fd62-4332-b5d9-4b565bb47365__searchConfluenceUsingCql",
       "mcp__terminal__read_terminal"
     ]
+  },
+  "enabledPlugins": {
+    "discord@claude-plugins-official": true
   }
 }

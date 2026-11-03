@@ -68,8 +68,9 @@ les deux StarterPack en lecture seule ; aucun ADR créé ni réécrit.
 ---
 
 <!-- FICHE:RGP1 -->
-## RGP1 [ ] — Recompter l'inventaire des données personnelles
+## RGP1 [x] — Recompter l'inventaire des données personnelles
 
+**Session** : 5e8e0bd7-7c11-4e35-8104-73f5c1d4c279
 **Dépend de** : rien.
 **Fichiers** : `../Fil-Rouge-API/docker/init-v3/01_create_fil_rouge_immobilier.sql`,
 `../Fil-Rouge-API/docker/init-v3/08_olap.sql`, la matière § 3 ; écrit
