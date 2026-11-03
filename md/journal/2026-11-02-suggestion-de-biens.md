@@ -268,6 +268,35 @@ status VARCHAR(20) NOT NULL DEFAULT 'suggested'
 3. Les décisions de schéma : `status` (§ 4.1), puis `client_decision` ou `offer` (7.3), en une seule migration si possible.
 4. Le moteur de suggestion (§ 4.2) : il a besoin de 7.1, car une demande sans critère ne donne rien à chercher.
 
+## 8. Les 4 décisions du 2026-11-03 au matin (3/3 votants, Békanty absente)
+
+Seb, Gabriel et amethyste ont choisi A aux 4 questions. Le vote a été clos à 8 h 55 (UTC).
+
+| # | Question | Choix |
+|---|---|---|
+| M1 | Signer un mandat sans critères (§ 7.1) | **Bloquer la signature** : 409 « La demande n'a aucun critère : le mandat ne peut pas être signé ». Le statut `pending_signature` reste possible. |
+| M2 | La demande déposée, `POST /search-requests/submit` (§ 7.1) | **Ajouter `budget_max` et `estate_type`** au JSON. La demande naît avec une 1ʳᵉ version de `criteria`. |
+| M3 | L'offre du client (§ 7.2) | **Une route à part**, du type `POST /estate-proposed/{id}/offer`. Le PUT du client se limite à `client_priority` et `comment_client`. |
+| M4 | « Bien présenté » et « offre » (§ 7.3) | **Une colonne `client_decision`** (`pending` / `interested` / `declined`) dans `estate_proposed`, avec un `CHECK` de cohérence. |
+
+- Messages Discord : 1567094970353979403 (M1), 1567095079988895748 (M2),
+  1567095083717890139 (M3), 1567095086678806599 (M4).
+- 🟡 Il reste à préciser au chantier :
+  - qui est l'auteur (`id_author`) de la 1ʳᵉ version de `criteria` créée par M2 ;
+  - les transitions permises de `client_decision`, et son lien avec `proposition_status` ;
+  - si M3 et M4 se codent dans la même migration que la colonne `status` de `estate_searchrequest` (§ 4.1).
+
+### 8.1 Les 3 ajouts proposés par Gabriel pour M4 (💡, Discord 1567100134888706089)
+
+1. **`client_decided_at`** : la date de la décision du client.
+   - Nuance : elle garde la **dernière** décision, pas un historique. Un vrai historique demanderait des versions, comme `criteria`. La date suffit ici.
+2. **Un motif de refus optionnel**, en **liste fermée** (`CHECK IN`) : `too_expensive`, `too_far`, `too_small`, `wrong_type`, `other`.
+   - Un `CHECK` de plus : un motif **seulement si** `client_decision = 'declined'`.
+3. **Un `CHECK`** : si `proposition_status <> 'proposed'`, alors `client_decision = 'interested'`.
+   - `rejected` ne veut alors plus dire que « le vendeur refuse l'offre ».
+   - ⚠️ Un client qui retire son offre ne peut plus passer en `declined` tant que le statut n'est pas revenu à `proposed`. Il faut un chemin « retrait », ou accepter cette limite.
+   - ⚠️ La migration doit d'abord passer à `interested` les lignes au-delà de `proposed`. `seed_volume`, qui crée des offres, doit aussi écrire `interested`.
+
 ## Sources de la discussion
 
 - Discord, salon `le-glaude`, le 2026-11-02, de 14 h 37 à 16 h 28 (heure UTC).
