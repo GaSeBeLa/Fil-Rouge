@@ -87,6 +87,7 @@ Sortie brute de l'outil, recopiée telle quelle :
 | `POST /estate-contacts/anonymize-expired` | Admin |
 | `POST /sales/{item_id}/payment` | Admin |
 | `POST /estate-proposed/{item_id}/offer` | Client du mandat (fiche SUG6) |
+| `POST /search-requests/{item_id}/suggestions` | Hunter de la demande (fiche SUG8) |
 
 91 opérations relevées.
 
@@ -152,8 +153,9 @@ Relevé dans `API/src/app/services/` (Fil-Rouge-API) : le crochet
 
 ### Conformes
 
-* ✅ Le rôle, sur les 21 tables et les 7 routes à part : la grille de
-  l'annexe, rejouée par `test_droits_par_role.py` (fiches DRO1 à DRO3).
+* ✅ Le rôle, sur les 21 tables et les 10 routes à part (`SPECIAL_ROUTES`,
+  recompté à la fiche SUG8) : la grille de l'annexe, rejouée par
+  `test_droits_par_role.py` (fiches DRO1 à DRO3).
 * ✅ L'argent : barèmes et réglages écrits par l'`Admin` seul (Q-ACC-07) ;
   un paiement n'est jamais saisi à la main, il naît du calcul, lancé par
   l'`Admin` (point 10 ; fiche DRO2) ; ni `Client` ni `Reader` ne le lisent.

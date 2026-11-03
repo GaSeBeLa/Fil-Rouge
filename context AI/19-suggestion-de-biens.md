@@ -274,8 +274,9 @@ Aujourd'hui, un client peut tout réécrire par `PUT /estate-proposed/{id}` : st
 ---
 
 <!-- FICHE:SUG8 -->
-## SUG8 [ ] — Ouvrir la route des suggestions
+## SUG8 [x] — Ouvrir la route des suggestions
 
+**Session** : 673e24d2-f496-48d7-b069-a1ee74532d62
 **Dépend de** : `SUG4`, `SUG7`.
 **Fichiers** :
 - `API/src/app/routes/search_request_router.py`, ou un routeur neuf branché dans `API/src/app/main.py` ;
