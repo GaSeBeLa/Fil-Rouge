@@ -156,8 +156,9 @@ limites RGPD-10 et RGPD-14 y figurent (grep de « RGPD-10 », « RGPD-14 »).
 ---
 
 <!-- FICHE:RGP4 -->
-## RGP4 [ ] — Écrire la note souveraineté & IA
+## RGP4 [x] — Écrire la note souveraineté & IA
 
+**Session** : 5e8e0bd7-7c11-4e35-8104-73f5c1d4c279
 **Dépend de** : `RGP2`.
 **Fichiers** : Confluence page 63438854 (lecture),
 `md/securite/note-souverainete-securite-ia.md`, la matière § 6 ; écrit

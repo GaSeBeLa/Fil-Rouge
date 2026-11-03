@@ -1,5 +1,10 @@
 # Note souveraineté et sécurité des données face à l'IA
 
+> ⚠️ **Remplacée** le 2026-11-03 (fiche RGP4) par
+> [`livrables/5-transverse/note-souverainete-securite-ia.md`](../../livrables/5-transverse/note-souverainete-securite-ia.md),
+> mise d'accord avec le registre. Ce brouillon reste pour l'historique ; il
+> ne se met plus à jour.
+
 > Brouillon du 2026-11-03 (vote « suite » A), à reprendre par Laurence (R
 > proposé au RACI). Format : 1 page (`SP/documents utiles/GRILLE-EVALUATION.md:38`).
 > Modèle suivi : `SP/documents utiles/SOUVERAINETE-SECURITE-IA.md`.
