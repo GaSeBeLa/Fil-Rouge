@@ -128,8 +128,9 @@ recopié dans le compte rendu).
 ---
 
 <!-- FICHE:RGP3 -->
-## RGP3 [ ] — Écrire les droits, les consignes et les limites
+## RGP3 [x] — Écrire les droits, les consignes et les limites
 
+**Session** : 5e8e0bd7-7c11-4e35-8104-73f5c1d4c279
 **Dépend de** : `RGP2`.
 **Fichiers** : la matière § 5 et § 7, `md/securite/matrice-droits-crud-par-role.md`
 § 3, `livrables/5-transverse/registre-rgpd.md` ; écrit une section « Droits

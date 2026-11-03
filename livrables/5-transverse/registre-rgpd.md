@@ -98,4 +98,76 @@ sur Confluence : le groupe décide (règle du projet, `CLAUDE.md`).
 
 🟡 **Bases légales à relire par le groupe** (RGPD-16, sans Jeff) : surtout
 les lignes 7, 8 et 10 (intérêt légitime), qui ne viennent pas du modèle du
-sujet. Demande envoyée sur Discord (fiche RGP2).
+sujet. Demande envoyée sur Discord (fiche RGP2) ; « relues » cliqué par
+Seb le 2026-11-03.
+
+---
+
+## 5. Droits des personnes
+
+La liste vient de la CNIL : [« Les droits pour maîtriser vos données
+personnelles »](https://www.cnil.fr/fr/mes-demarches/les-droits-pour-maitriser-vos-donnees-personnelles)
+(doc officielle, lue le 2026-11-03 ; la page n'affiche pas de date). Elle
+compte **9 droits**, dans cet ordre. La question du sujet : « comment un
+client peut-il consulter, corriger ou faire effacer ses données ? »
+(`REG:38`).
+
+Les routes et les rôles viennent de `md/securite/matrice-droits-crud-par-role.md`
+§ 3 et du code (`Fil-Rouge-API`, `API/src/app/routes/`).
+
+| # | Droit (titre CNIL) | Ce que l'API offre | Le trou |
+|---|---|---|---|
+| 1 | Rester informé | rien dans l'API : pas de front. Vendeur : consigne 3 ci-dessous (RGPD-15) | 🟡 aucune mention d'information affichée au client |
+| 2 | Vous opposer | prospection (registre, ligne 6) : sous consentement, donc retirable | 🟡 aucune route pour noter une opposition ; l'`Admin` la traite à la main |
+| 3 | Vérifier vos données (accès) | `GET /auth/me` (`auth_router.py:83`) ; `GET` sur « le sien », table par table, pour `Client`, `Hunter`, `Manager` (matrice § 3) | 🟡 pas d'export de tout en une fois |
+| 4 | Rectifier vos données | `PUT` sur sa fiche et `PUT /users` sur son compte, avec « le sien » ; rôle et activation gardés → `403` (matrice § 3) | — |
+| 5 | Déréférencer un contenu | sans objet : l'API n'est indexée par aucun moteur de recherche public | — |
+| 6 | Effacer vos données | `POST /users/{id}/anonymize`, `Admin`, sur demande (`user_router.py:46`, ADR-049) ; contact du vendeur : `POST /estate-contacts/anonymize-expired`, `Admin` (ADR-054). Aucune route `DELETE` (matrice § 3) | 🟡 la date de la demande n'est pas gardée (RGPD-14) ; ce qu'une loi impose reste 10 ans (registre, lignes 2 à 4) |
+| 7 | Emporter vos données (portabilité) | les `GET` du droit 3, en JSON | 🟡 pas d'export d'un seul tenant |
+| 8 | Demander une intervention humaine | la rémunération est calculée par la machine, mais lancée par l'`Admin` (matrice § 3, point 10) ; les biens suggérés (`suggested`) ne vont au client qu'une fois gardés par un chasseur (`kept`, SUG4) | 💡 la note du chasseur (`hunter_performance.score`) est automatique : le recours passe par son manager, à la main |
+| 9 | Geler l'utilisation de vos données (limitation) | désactiver le compte (`is_activated`) : son profil n'est plus lu que par l'`Admin` (matrice § 3, fiche DRO8) | ⚠️ désactivé ne dit pas pourquoi (voir les limites) |
+
+Compte : **9** lignes, pour **9** droits sur la page CNIL.
+
+### Les trois consignes
+
+1. **Jamais de nom dans un texte libre** (RGPD-8). Un commentaire, un avis
+   ou une note (`comment_client`, `comment_hunter`, `review_hunter`,
+   `estate.information`, `criteria.change_reason`) ne cite personne par son
+   nom.
+2. **Jamais de personne sur une photo** (RGPD-9). Une photo de bien
+   (`picture`) ne montre ni un occupant ni un visage.
+3. **Au premier appel, le chasseur informe le vendeur** (RGPD-15,
+   ADR-054). Il lui dit d'où vient son contact (l'annonce qu'il a publiée)
+   et qu'on le garde **3 ans** après la dernière activité du bien. La CNIL
+   demande d'informer « au plus tard, dans le délai d'1 mois »
+   ([cnil.fr](https://cnil.fr/fr/cnil-direct/question/reglement-europeen-quand-informer-les-personnes-concernees-par-un-fichier),
+   lu le 2026-11-03, socle du chantier).
+
+---
+
+## 6. Limites
+
+À dire à l'oral. Elles viennent d'ADR-049, § Conséquences, sauf mention.
+
+- ⚠️ **Une pseudonymisation, pas une anonymisation.** Un compte effacé
+  laisse sa vente : l'adresse du bien, la date et le prix. En les croisant,
+  on peut retrouver la personne. L'OLAP garde aussi `id_client` et
+  `id_hunter` (`08_olap.sql:91`, `:100`) : les numéros ramènent aux fiches
+  (RGPD-13).
+- ⚠️ **Les textes libres.** Un programme ne sait pas trouver un nom écrit
+  dans un commentaire pour l'effacer : la consigne 1 est la seule garde
+  (RGPD-8).
+- ⚠️ **`is_activated` a deux sens.** Faux veut dire « compte pas encore
+  fini » ou « compte désactivé, peut-être effacé » ; rien ne les distingue
+  (matrice § 3, « Écarts qui restent »).
+- ⚠️ **Les comptes dormants** (RGPD-10). Un compte jamais utilisé n'est
+  effacé que **sur demande**. La cible v2 : 2 ans sans connexion, puis
+  anonymisé ; il faudrait d'abord la date de dernière connexion, absente de
+  la base.
+- ⚠️ **La date d'effacement** (RGPD-14). Rien ne note quand un compte a été
+  désactivé ou anonymisé (`deactivated_at`, `anonymized_at`) : remis en
+  **v2**, sans code.
+- ✅ **`fil_rouge_reader`** ne lit plus ni les comptes désactivés, ni les
+  paiements, ni le mot de passe, ni le contact du vendeur (fiches DRO8,
+  DRO9 ; matrice § 3) : la limite d'ADR-049 est réglée.

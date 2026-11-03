@@ -4,7 +4,7 @@ Le registre des traitements, les droits des personnes et la note souveraineté I
 ## Notes
 - RGP1 : 22 CREATE TABLE dans 01 = 22 lignes de table ; 4 colonnes neuves depuis le 15/10 (SUG4, SUG5) ; OLAP : 0 street/latitude/longitude
 - RGP2 : 11 traitements (6 sur Confluence) ; 0 durée sans source ; Écart E1-E13 ; Discord 1567176892467904544
-- RGP3 : Les droits des personnes, les 3 consignes et les limites pour l'oral ; dépend de RGP2
+- RGP3 : 9 droits CNIL = 9 lignes ; 3 consignes ; RGPD-10 x3, RGPD-14 x3
 - RGP4 : La note souveraineté et IA, reprise du brouillon Confluence ; dépend de RGP2
 ## Journal
 ## Bilan
