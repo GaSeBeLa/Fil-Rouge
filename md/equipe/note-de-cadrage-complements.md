@@ -49,7 +49,7 @@
 - La base est **PostgreSQL** (ADR-001) ; les noms du code sont en anglais (ADR-002).
 - Tous les montants sont en **euros**.
 - Les fichiers d'origine du sujet (le StarterPack) ne se modifient jamais.
-- Tout tourne en local, avec Docker, et sans budget.
+- Tout tourne en local, avec Docker et des outils gratuits.
 - Les données sont **fictives** : celles du sujet, et des données générées.
 
 **Hypothèses** (ce qu'on suppose vrai)
