@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Schéma du programme IA</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f3f5f7;
+  --surface: #ffffff;
+  --fg: #16212b;
+  --muted: #5a6877;
+  --line: #d3dae1;
+  --v1: #0d6b78;
+  --v1-soft: #e2f1f3;
+  --v2: #a45a00;
+  --v2-soft: #fbefdc;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.55;
+  padding-block: 32px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+main { max-width: 1080px; margin: 0 auto; display: grid; gap: 28px; }
+h1 { font-size: 30px; line-height: 1.15; margin: 0 0 6px; font-weight: 600; text-wrap: balance; }
+.lead { margin: 0; color: var(--muted); max-width: 62ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.chip {
+  font-family: var(--font-mono); font-size: 15px; padding: 4px 10px;
+  border-radius: 4px; border: 1.5px solid var(--v1); color: var(--v1); background: var(--v1-soft);
+}
+.chip.v2 { border-style: dashed; border-color: var(--v2); color: var(--v2); background: var(--v2-soft); }
+
+.flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
+.step {
+  position: relative; min-width: 0;
+  background: var(--surface); border: 1.5px solid var(--v1); border-radius: 6px;
+  padding: 16px 16px 18px; display: grid; gap: 8px; align-content: start;
+}
+.step:not(:last-child)::after {
+  content: ""; position: absolute; right: -22px; top: 34px; width: 16px; height: 16px;
+  border-top: 2px solid var(--v1); border-right: 2px solid var(--v1); transform: rotate(45deg);
+}
+.eyebrow { font-family: var(--font-mono); font-size: 15px; font-weight: 500; color: var(--v1); }
+.step h2 { font-size: 19px; line-height: 1.25; margin: 0; font-weight: 600; text-wrap: balance; }
+.step p, .step li { margin: 0; color: var(--muted); font-size: 16px; }
+.step ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+code {
+  font-family: var(--font-mono); font-size: 15px; color: var(--fg);
+  background: var(--bg); border: 1px solid var(--line); border-radius: 3px; padding: 1px 5px; overflow-wrap: anywhere;
+}
+.note { font-size: 15px; border-top: 1px solid var(--line); padding-top: 8px; margin-top: 4px; }
+.no-learn { color: var(--v1); font-weight: 500; }
+
+.v2band {
+  background: var(--v2-soft); border: 1.5px dashed var(--v2); border-radius: 6px;
+  padding: 16px 18px; display: grid; gap: 14px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 1fr); align-items: center;
+}
+.v2band .eyebrow { color: var(--v2); }
+.v2band h2 { font-size: 19px; margin: 2px 0 0; font-weight: 600; }
+.v2band p { margin: 0; font-size: 16px; color: var(--muted); }
+.flowline { font-family: var(--font-mono); font-size: 15px; color: var(--v2); }
+
+.guard { display: grid; gap: 10px; }
+.guard h2 { font-size: 19px; margin: 0; font-weight: 600; }
+.guard ul { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.guard li { border-left: 3px solid var(--line); padding-left: 12px; font-size: 16px; color: var(--muted); }
+.guard strong { color: var(--fg); font-weight: 600; display: block; }
+
+@media (max-width: 860px) {
+  .flow { grid-template-columns: minmax(0, 1fr); gap: 30px; }
+  .step:not(:last-child)::after { right: auto; left: 28px; top: auto; bottom: -22px; transform: rotate(135deg); }
+  .v2band { grid-template-columns: minmax(0, 1fr); }
+  .guard ul { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Schéma du programme IA</h1>
+    <p class="lead">La machine suggère, le chasseur trie, le client décide. Chaque décision devient la donnée qui apprendra plus tard les goûts réels.</p>
+    <div class="legend">
+      <span class="chip">Trait plein : v1, codé (chantier SUG)</span>
+      <span class="chip v2">Pointillés : v2, sur le papier</span>
+    </div>
+  </header>
+
+  <section class="flow" aria-label="Déroulé de la suggestion">
+    <article class="step">
+      <span class="eyebrow">Ce qui entre</span>
+      <h2>La demande et les annonces</h2>
+      <ul>
+        <li>La demande du client : budget et type de bien (<code>criteria</code>, versionnés)</li>
+        <li>Les annonces indexées dans Elasticsearch</li>
+      </ul>
+      <p class="note">Chaque nuit (Airflow) : import des annonces à 2 h, index de recherche à 4 h.</p>
+    </article>
+
+    <article class="step">
+      <span class="eyebrow">Le moteur · v1</span>
+      <h2>Filtres durs, puis score bonus</h2>
+      <p>Des règles fixes écartent les biens qui ne conviennent pas, puis classent les autres.</p>
+      <p class="no-learn">Il n'apprend rien.</p>
+    </article>
+
+    <article class="step">
+      <span class="eyebrow">Ce qui sort</span>
+      <h2>10 suggestions au plus</h2>
+      <p>Ni vendus, ni déjà vus. Elles sont enregistrées au statut <code>suggested</code>.</p>
+      <p class="note">La machine n'écrit jamais directement chez le client.</p>
+    </article>
+
+    <article class="step">
+      <span class="eyebrow">Les décisions</span>
+      <h2>Le chasseur trie, le client décide</h2>
+      <ul>
+        <li>Chasseur : <code>kept</code> ou <code>dismissed</code></li>
+        <li>Client : <code>interested</code> ou <code>declined</code> avec un motif</li>
+        <li>Si intéressé : offre, puis vente</li>
+      </ul>
+    </article>
+  </section>
+
+  <section class="v2band" aria-label="Version 2">
+    <div>
+      <span class="eyebrow">Reçoit</span>
+      <p class="flowline">décisions du chasseur et du client, offres et ventes</p>
+    </div>
+    <div>
+      <span class="eyebrow">v2 · apprentissage</span>
+      <h2>Modèle de reclassement</h2>
+      <p>Il apprend de ces décisions, pas de règles écrites à la main. Conçu, pas encore codé.</p>
+    </div>
+    <div>
+      <span class="eyebrow">Renvoie</span>
+      <p class="flowline">un ordre de pertinence au moteur</p>
+    </div>
+  </section>
+
+  <section class="guard" aria-label="Garde-fous">
+    <h2>Les garde-fous</h2>
+    <ul>
+      <li><strong>Le chasseur reste dans la boucle</strong>Seul un bien <code>kept</code> peut être proposé au client.</li>
+      <li><strong>Lecture seule pour l'IA</strong>Tout outil d'IA branché sur la base passe par le rôle <code>fil_rouge_reader</code>.</li>
+      <li><strong>Aucune donnée personnelle</strong>Ni nom, ni âge, ni situation familiale : le modèle juge un couple demande et bien.</li>
+      <li><strong>Le chasseur IA a moins de droits qu'un humain</strong>Il cherche et suggère ; l'offre, la vente et le paiement restent humains (ADR-058, proposé).</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

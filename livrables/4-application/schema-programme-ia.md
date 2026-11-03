@@ -6,56 +6,69 @@
 
 ## En une phrase
 
-La machine **suggère**, le chasseur **trie**, le client **décide** — et chaque
-décision devient, plus tard, la donnée qui apprendra au système les goûts réels.
+La machine **suggère**, le chasseur **trie**, le client **décide**. Chaque
+décision deviendra, plus tard, la donnée qui apprend au système les goûts réels.
 
 ## Le schéma
 
-```mermaid
-flowchart LR
-    subgraph NUIT["La nuit (Airflow)"]
-        A["Annonces<br/>generer_annonces.py"] -->|DAG annonces_import| B[("PostgreSQL<br/>estate")]
-        B -->|DAG estates_index, 4 h| C[("Elasticsearch<br/>index estates")]
-    end
+Le schéma est une page HTML : [`schema-programme-ia.html`](schema-programme-ia.html),
+dessinée par Gabriel le 2026-11-03. Sur Confluence, elle se colle dans un bloc
+« HTML Macro Pro Block » (`/html`).
 
-    subgraph DEMANDE["La demande"]
-        D["Client"] -->|POST /search-requests/submit<br/>budget + type| E[("criteria<br/>versionnés")]
-    end
+Il se lit de gauche à droite, en quatre cases, puis la v2 en dessous :
 
-    subgraph V1["v1 — moteur de suggestion (chantier SUG)"]
-        F["Chasseur"] -->|POST /search-requests/:id/suggestions| G{"Filtres durs<br/>+ score bonus"}
-        E --> G
-        C --> G
-        G -->|10 au plus, ni vendus ni déjà vus| H[("estate_searchrequest<br/>status = suggested")]
-        H -->|le chasseur trie| I{"kept ?<br/>dismissed ?"}
-        I -->|kept| J[("estate_proposed<br/>proposed")]
-        J -->|le client décide| K{"interested ?<br/>declined + motif ?"}
-        K -->|POST …/offer| L["offre → vente"]
-    end
+1. **Ce qui entre** → 2. **Le moteur (v1)** → 3. **Ce qui sort** → 4. **Les décisions**
+5. En pointillés : **la v2**, qui apprend des décisions et renvoie un ordre au moteur.
 
-    subgraph V2["v2 — sur le papier"]
-        M["Modèle de reclassement<br/>(apprend des décisions)"]
-    end
+## Les quatre cases, expliquées
 
-    I -. dismissed .-> M
-    K -. interested / declined .-> M
-    L -. accepted / signed .-> M
-    M -. reclasse les suggestions .-> G
-```
+### 1. Ce qui entre
 
-- Trait plein : ce qui existe ou se code dans le chantier SUG.
-- Pointillés : la v2, conçue mais non codée.
+- **La demande du client** : son budget et le type de bien. Ses critères
+  (`criteria`) sont gardés version par version. Route : `POST /search-requests/submit` (✅ SUG3).
+- **Les annonces**, indexées dans Elasticsearch (index `estates`).
+- Chaque nuit, Airflow importe les annonces à 2 h (`annonces_import`) et
+  refait l'index à 4 h (`estates_index`) (✅ chantier FLX).
+
+### 2. Le moteur, v1
+
+- Des **filtres durs** écartent les biens qui ne conviennent pas, puis un
+  **score bonus** classe les autres.
+- Route : `POST /search-requests/{id}/suggestions`, appelée par le chasseur (✅ SUG7, SUG8).
+- ➡️ **Il n'apprend rien** : ce sont des règles écrites à la main.
+  L'énoncé demande de concevoir l'IA, pas d'entraîner un modèle (`SP/Readme.md:257`).
+
+### 3. Ce qui sort
+
+- **10 suggestions au plus**, ni vendues, ni déjà vues.
+- Elles sont enregistrées dans `estate_searchrequest` au statut `suggested` (✅ SUG8).
+- La machine n'écrit **jamais** directement chez le client.
+
+### 4. Les décisions
+
+- **Le chasseur trie** : il garde (`kept`) ou il écarte (`dismissed`) (✅ SUG4).
+  Seul un bien gardé peut être proposé au client.
+- **Le client décide** : `interested`, ou `declined` avec un motif : trop
+  cher, trop loin, trop petit, mauvais type, autre (✅ SUG5).
+- **S'il est intéressé** : offre (`POST /estate-proposed/{id}/offer`), puis vente (✅ SUG6).
+
+### La v2, sur le papier
+
+- Un **modèle de reclassement** apprend des décisions du chasseur et du
+  client, des offres et des ventes. Une vente signée est le signal le plus fort.
+- Il renvoie au moteur **un ordre de pertinence**.
+- 💡 Conçu, pas codé. Le détail des features : `conception-matching-features.md`.
 
 ## Ce qui entre, ce qui sort
 
 | Étape | Entrée | Sortie | Statut |
 |---|---|---|---|
 | Import et index | annonces CSV | lignes `estate`, documents de l'index `estates` | ✅ codé (chantier FLX) |
-| Dépôt de la demande | formulaire JSON du client | `search_request` + 1ʳᵉ version de `criteria` | ✅ voté, codé en SUG3 |
-| Suggestion | dernière version de `criteria`, index `estates` | ≤ 10 lignes `estate_searchrequest` en `suggested` | ✅ voté, codé en SUG7 et SUG8 |
-| Tri du chasseur | les `suggested` | `kept` ou `dismissed` | ✅ voté, codé en SUG4 |
-| Décision du client | un bien proposé | `interested` ou `declined` + motif | ✅ voté, codé en SUG5 |
-| Reclassement v2 | les décisions passées d'une demande | un ordre de pertinence | 💡 sur le papier |
+| Dépôt de la demande | formulaire JSON du client | `search_request` + 1ʳᵉ version de `criteria` | ✅ codé en SUG3 |
+| Suggestion | dernière version de `criteria`, index `estates` | ≤ 10 lignes `estate_searchrequest` en `suggested` | ✅ codé en SUG7 et SUG8 |
+| Tri du chasseur | les `suggested` | `kept` ou `dismissed` | ✅ codé en SUG4 |
+| Décision du client | un bien proposé | `interested` ou `declined` + motif | ✅ codé en SUG5 |
+| Reclassement v2 | décisions, offres et ventes passées | un ordre de pertinence | 💡 sur le papier |
 
 ## Les briques de l'énoncé, et où elles en sont
 
@@ -70,11 +83,12 @@ L'énoncé liste les assistances voulues (`SP/user-stories/09_futur_chasseur_ass
 
 ## Les garde-fous
 
-- **Le chasseur reste dans la boucle** : la machine écrit en `suggested`, jamais
-  directement chez le client. Seul un bien `kept` se propose (règle P19 renforcée, SUG4).
-- **Lecture seule** pour tout outil d'IA branché sur la base : le rôle
-  `fil_rouge_reader` existe déjà (chantier LOT, LOT12).
-- **Aucune donnée personnelle dans les features** : ni nom, ni âge, ni
+- **Le chasseur reste dans la boucle** : seul un bien `kept` peut être proposé
+  au client (règle P19 renforcée, SUG4).
+- **Lecture seule pour l'IA** : tout outil d'IA branché sur la base passe par
+  le rôle `fil_rouge_reader` (chantier LOT, LOT12).
+- **Aucune donnée personnelle** dans les features : ni nom, ni âge, ni
   situation familiale. Le modèle juge un couple (demande, bien), pas une personne.
-- Les droits propres du chasseur IA : ADR-058, **proposé**, pas encore codé (🟡).
-- Le détail : la note souveraineté / sécurité IA, [`md/securite/note-souverainete-securite-ia.md`](../../md/securite/note-souverainete-securite-ia.md).
+- **Le chasseur IA a moins de droits qu'un humain** : il cherche et suggère ;
+  l'offre, la vente et le paiement restent humains (ADR-058, 🟡 proposé, pas codé).
+- Le détail : [`../5-transverse/note-souverainete-securite-ia.md`](../5-transverse/note-souverainete-securite-ia.md).
