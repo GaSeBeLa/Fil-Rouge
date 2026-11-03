@@ -21,9 +21,9 @@
     <p>Le chasseur obtient par POST /search-requests/{id}/suggestions jusqu'à 10 biens qui collent aux critères, sans vendus ni déjà vus ; le client ne réécrit plus que sa note, fait son offre par une route dédiée, et un mandat ne se signe plus sans critères.</p>
     <!-- ZONE:avancement — un span par fiche, dans l'ordre, même data-etat que la fiche -->
     <div class="avancement">
-      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span><span></span>
+      <span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="faite"></span><span data-etat="encours"></span>
     </div>
-    <p class="mono" style="margin-top:.5rem">8 fiches · 6 faites · en cours : SUG7</p>
+    <p class="mono" style="margin-top:.5rem">8 fiches · 7 faites · en cours : SUG8</p>
   </header>
 
   <!-- ZONE:bilan — remplie à la clôture, en même temps que « clos » en tête du fichier de fiches -->
@@ -61,16 +61,17 @@
       <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">SUG6</span></span>
         <details><summary><span class="titre">Ouvrir la route de l'offre du client</span><span class="etat">Faite</span></summary>
         <span class="note">Rouge : 6 failed ; vert : offre 200 (4 champs), autre client 404, 2e offre 409, chasseur 403, montant nul 422 ; mutant retombe ; suite 1045 passed, 7 xfailed</span></details>
-        <span class="cout mono">≈6,7M (6 729 053) · 22 tours · 2,15 $</span></li>
-      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">SUG7</span></span>
-        <details open><summary><span class="titre">Traduire des critères en requête Elasticsearch</span><span class="etat">En cours</span></summary>
-        <span class="note">Fonction pure : critères vers requête Elasticsearch, testée sans ES. Dépend de rien.</span></details></li>
-      <li class="fiche" data-attend><span class="gauche"><span class="id">SUG8</span></span>
-        <details><summary><span class="titre">Ouvrir la route des suggestions</span><span class="etat">Après SUG7</span></summary>
+        <span class="cout mono">≈7,1M (7 058 099) · 23 tours · 2,24 $</span></li>
+      <li class="fiche" data-etat="faite"><span class="gauche"><span class="id">SUG7</span></span>
+        <details><summary><span class="titre">Traduire des critères en requête Elasticsearch</span><span class="etat">Faite</span></summary>
+        <span class="note">Rouge : module absent ; vert : 16 passed ; mutant lte→gte retombe (2 tests) ; pyright 0 erreur ; suite 1061 passed, 7 xfailed</span></details>
+        <span class="cout mono">≈3,4M (3 430 904) · 10 tours · 1,01 $</span></li>
+      <li class="fiche" data-etat="encours"><span class="gauche"><span class="id">SUG8</span></span>
+        <details open><summary><span class="titre">Ouvrir la route des suggestions</span><span class="etat">En cours</span></summary>
         <span class="note">Route POST /search-requests/{id}/suggestions. Dépend de SUG4 et SUG7.</span></details></li>
     </ul>
     <p class="mono cout-hors">Hors fiches : ≈10,3M (10 326 017) · 36 tours · 3,47 $</p>
-    <p class="mono cout-total">Coût du chantier : ≈59,9M (59 896 949) · 287 tours · 20,62 $</p>
+    <p class="mono cout-total">Coût du chantier : ≈63,7M (63 656 899) · 298 tours · 21,72 $</p>
     <!-- hors fiches (coupé aux commits `<ID> :` seulement) et total, absents si rien n'est mesuré -->
   </section>
 

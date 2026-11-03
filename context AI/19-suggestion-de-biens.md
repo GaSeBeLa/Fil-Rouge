@@ -245,8 +245,9 @@ Aujourd'hui, un client peut tout réécrire par `PUT /estate-proposed/{id}` : st
 ---
 
 <!-- FICHE:SUG7 -->
-## SUG7 [ ] — Traduire des critères en requête Elasticsearch
+## SUG7 [x] — Traduire des critères en requête Elasticsearch
 
+**Session** : 673e24d2-f496-48d7-b069-a1ee74532d62
 **Dépend de** : rien.
 **Fichiers** : `API/src/app/services/suggestion_query.py` (neuf), `API/tests/test_suggestion_query.py` (neuf), `airflow/src/search/mapping.py` (lu seulement : les noms des champs de l'index).
 
