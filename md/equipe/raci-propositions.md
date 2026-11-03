@@ -19,6 +19,7 @@
 |---|---|---|---|---|---|
 | Note stratégique (axes d'évolution) | | | R | **A** | auteur Confluence : Békanty. ✅ voté le 2026-11-03 (Q3 A) : R Békanty, au lieu de Gabriel |
 | Note de cadrage | **A** | | R | | auteur Confluence : Békanty |
+| Étude d'opportunité | C | A | C | R | ✅ déjà remplie sur la page Confluence, recopiée telle quelle (comparé le 2026-11-03) |
 | Backlog priorisé (MoSCoW) | | | | | ❌ pas trouvé sur Confluence |
 | MCD/MLD cible | R | **A** | | | auteur de la page « Schémas – Cible » : Sébastien |
 | `migration.sql` + note d'indexation | R | | | **A** | commits de `docker/migrations/` : Sébastien 59, CaBaSS 8. ❌ note d'indexation pas trouvée |
@@ -69,6 +70,11 @@
 1. ✅ R de la note stratégique : **Békanty** (Q3 A).
 2. 💡 Les livrables ❌ et le A du backend : répartition proposée plus bas (Q6 B).
 3. ✅ CaBaSS = Gabriel, ange11-K = Békanty (Q1, Q2).
+4. 🟡 **Dossier professionnel assemblé** (phase « Consolidation & soutenance »
+   de la page Confluence) : vide sur la page, et aucun R ni A proposé ici.
+   Oubli relevé le 2026-11-03, en comparant avec la page.
+5. ⚠️ **Note stratégique** : la page Confluence dit R Gabriel ; le vote Q3 A
+   la passe à Békanty. Cette ligne est à corriger sur Confluence.
 
 ## Proposition de répartition des livrables ❌ (vote Q6 B du 2026-11-03)
 
