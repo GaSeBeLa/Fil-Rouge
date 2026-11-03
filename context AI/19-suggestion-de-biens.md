@@ -179,8 +179,9 @@ Aujourd'hui, un client peut tout réécrire par `PUT /estate-proposed/{id}` : st
 ---
 
 <!-- FICHE:SUG5 -->
-## SUG5 [ ] — Enregistrer la décision du client sur un bien proposé
+## SUG5 [x] — Enregistrer la décision du client sur un bien proposé
 
+**Session** : 673e24d2-f496-48d7-b069-a1ee74532d62
 **Dépend de** : rien. À jouer après SUG4 : même SQL, même banc.
 **Fichiers** :
 - `docker/init-v3/01_create_fil_rouge_immobilier.sql` (table `estate_proposed`) ;
