@@ -12,7 +12,11 @@ le MLD ; les schémas 5 à 8 du livrable 3 s'alignent dessus.
 
 **Estimé.** 8 fiches · ≈39 $ — ≈4,83 $/fiche sur 9 clos (le 2026-11-02).
 
-**Fait.** Rien. Ouvert le 2026-11-02, cadré en 5 fiches, `MER1` à jouer.
+**CLOS** le 2026-11-03. Ne se rejoue pas — ne sert plus qu'à relire son socle.
+
+Abandonnées : MER1 à MER5 abandonnées : le gros MCD Mocodo (22 entités) a été jugé illisible par Seb le 2026-11-02, MER1 et MER2 effacées à sa demande ; Merise sera recadré plus tard en petits schémas.
+
+**Fait.** MER1..MER5 (2026-11-03) : Rien de livré : chantier clos avant sa première fiche — estimé 8 fiches ≈39 $ · cadré 5 · joué 0 fiches ? $.
 
 **Session** : 3981bffb-3aad-4d2a-9725-537990e72dc9
 

@@ -13,3 +13,4 @@ QUAND LIRE : on relit un chantier clos ; l'index n'en garde qu'une ligne qui ren
 | `15-seed-demo.md` | on relit le socle du chantier DEM — **clos** « Seed de démo », `DEM1..DEM3` |
 | `16-refacto-profils.md` | on relit le socle du chantier PRF — **clos** « Refacto des profils », `PRF1..PRF9` |
 | `17-flux-donnees.md` | on relit le socle du chantier FLX — **clos** « Flux de données : Airflow et Elasticsearch », `FLX1..FLX13` |
+| `18-merise-mocodo.md` | on relit le socle du chantier MER — **clos** « Modèle de données en Merise (MCD + MLD) », `MER1..MER5` |

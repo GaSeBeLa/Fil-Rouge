@@ -9,3 +9,6 @@ Le MCD Merise des 22 tables et son MLD, générés par Mocodo depuis une source 
 - MER5 : Le schéma 8 en organigramme Mermaid. Dépend de rien.
 ## Journal
 ## Bilan
+- Livré : Rien de livré : chantier clos avant sa première fiche
+- Surpris : Mocodo ne place pas un MCD de 22 entités (Err.41, plongement planaire impossible) : seuls les zooms d'environ 5 entités se dessinent
+- Estimé : estimé 8 fiches ≈39 $ · cadré 5 · joué 0 fiches ? $
