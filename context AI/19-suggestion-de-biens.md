@@ -9,7 +9,9 @@
 **À quoi il sert.** Le chasseur demande des biens qui collent aux critères de son client, sans biens vendus ni déjà vus.
 Le chantier ferme aussi trois trous de cohérence trouvés par Gabriel : la signature sans critères, le PUT libre du client, et l'offre mêlée à la proposition.
 
-**Fait.** Rien. Cadré le 2026-11-03 en 8 fiches ; `SUG1` est à jouer.
+**CLOS** le 2026-11-03. Ne se rejoue pas — ne sert plus qu'à relire son socle.
+
+**Fait.** SUG1..SUG8 (2026-11-03) : Moteur de suggestion POST /search-requests/{id}/suggestions (10 biens max, sans vendus ni déjà vus), état de la sélection, décision et offre du client, mandat refusé sans critères — estimé non noté · cadré 8 · joué 8 fiches 25,63 $.
 
 **Session** : 1abb9954-636f-4727-aa4a-97bd9123c07f
 
