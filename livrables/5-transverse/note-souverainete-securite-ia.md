@@ -7,7 +7,8 @@
 > `SP/documents utiles/SOUVERAINETE-SECURITE-IA.md`. D'accord avec le
 > registre : `registre-rgpd.md`. Statuts : ✅ établi · 🟡 ouvert · 💡 proposé.
 > ✅ Écart avec Confluence (N1 à N7) **validé par le groupe** le 2026-11-03
-> (Seb ; Laurence et Gabriel, rapporté par Seb) ; report sur Confluence à faire.
+> (Seb ; Laurence et Gabriel, rapporté par Seb) ; reporté sur Confluence
+> le 2026-11-03 (page 63438854, version 2).
 
 **Le principe.** L'IA voit le strict nécessaire, en lecture seule quand elle
 lit, et jamais une donnée personnelle en clair qui ne sert pas sa tâche.

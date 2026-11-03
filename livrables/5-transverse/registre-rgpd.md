@@ -50,7 +50,7 @@ Compte : **11** traitements, pour **6** lignes sur la page de Gabriel.
 ## 2. À quoi servent les 5 colonnes de `client` (RGPD-6)
 
 Les cinq sont **gardées**. La minimisation demande d'écrire pourquoi
-(`REG:36`). 💡 Usages proposés, à relire par le groupe :
+(`REG:36`). ✅ Usages validés par le groupe le 2026-11-03 (E13) :
 
 | Colonne | Usage dans la chasse |
 |---|---|
@@ -103,7 +103,7 @@ Seb le 2026-11-03.
 
 ✅ **Validé par le groupe le 2026-11-03** : E1 à E13 et les bases légales
 (Seb par ses clics ; Gabriel et Laurence, rapporté par Seb sur Discord).
-Le report sur Confluence reste à faire.
+Reporté sur Confluence le 2026-11-03 (page 44826725, version 2).
 
 ---
 
