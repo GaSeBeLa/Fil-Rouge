@@ -86,6 +86,7 @@ Sortie brute de l'outil, recopiée telle quelle :
 | `POST /users/{item_id}/anonymize` | Admin |
 | `POST /estate-contacts/anonymize-expired` | Admin |
 | `POST /sales/{item_id}/payment` | Admin |
+| `POST /estate-proposed/{item_id}/offer` | Client du mandat (fiche SUG6) |
 
 91 opérations relevées.
 

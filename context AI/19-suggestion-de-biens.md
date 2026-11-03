@@ -215,8 +215,9 @@ Aujourd'hui, un client peut tout réécrire par `PUT /estate-proposed/{id}` : st
 ---
 
 <!-- FICHE:SUG6 -->
-## SUG6 [ ] — Ouvrir la route de l'offre du client
+## SUG6 [x] — Ouvrir la route de l'offre du client
 
+**Session** : 673e24d2-f496-48d7-b069-a1ee74532d62
 **Dépend de** : `SUG1`, `SUG5`.
 **Fichiers** : `API/src/app/routes/estate_proposed_router.py`, `API/src/app/services/estate_proposed_service.py`, `API/tests/integration/test_propositions_visites.py` (ajout pur), `API/README.md`, `md/securite/matrice-droits-crud-par-role.md`.
 
