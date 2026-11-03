@@ -101,6 +101,10 @@ les lignes 7, 8 et 10 (intérêt légitime), qui ne viennent pas du modèle du
 sujet. Demande envoyée sur Discord (fiche RGP2) ; « relues » cliqué par
 Seb le 2026-11-03.
 
+✅ **Validé par le groupe le 2026-11-03** : E1 à E13 et les bases légales
+(Seb par ses clics ; Gabriel et Laurence, rapporté par Seb sur Discord).
+Le report sur Confluence reste à faire.
+
 ---
 
 ## 5. Droits des personnes
