@@ -19,15 +19,14 @@
   </header>
 
   <nav class="sommaire" aria-label="Sommaire"><a href="#encours">Chantier en cours</a><a href="#todo">Chantiers possibles</a><a href="#clos">Chantiers clos</a></nav>
-  <nav class="pages" aria-label="Les autres pages">Les autres pages : <a href="https://claude.ai/artifact/TZTF4sADykj2TBW8gmmw5a">la page du chantier</a></nav>
 
   <section id="encours">
     <h2>Chantier en cours</h2>
     <!-- ZONE:encours — remplacé à chaque ouverture, remis à « aucun » à chaque clôture.
          /tache n'y touche pas : l'avancement fiche par fiche est sur la page du chantier. -->
     <div class="encours">
-      <div class="titre">RGPD : registre, droits et note souveraineté IA <span class="badge" data-etat="cours">en cours</span></div>
-      <div>Fiches <span class="mono">RGP1–RGP4</span> — <a href="https://claude.ai/artifact/TZTF4sADykj2TBW8gmmw5a">la page du chantier</a></div>
+      <div class="titre">Aucun chantier ouvert</div>
+      <div>Lancer <span class="mono">/vlp:chantier</span> pour en ouvrir un.</div>
     </div>
   </section>
 
@@ -48,15 +47,21 @@
   <section id="clos">
     <h2>Chantiers clos — ils ne se rejouent pas</h2>
     <!-- ZONE:clos — une ligne ajoutée à chaque clôture, la plus récente en haut -->
-    <img src="couts.svg" alt="Coût des chantiers clos en tokens : 10 barres, du plus ancien au plus récent ; le plus cher : Droits : moindre privilège" data-couts="{&quot;couleur&quot;: &quot;#8f5a0f&quot;, &quot;barres&quot;: [[&quot;Contraintes manquantes du MPD&quot;, 31326311, &quot;≈31,3M (31 326 311)&quot;], [&quot;Lot de migration (schéma v3)&quot;, 116219396, &quot;≈116,2M (116 219 396)&quot;], [&quot;API : auth, RGPD et règles métier&quot;, 140122204, &quot;≈140,1M (140 122 204)&quot;], [&quot;Droits : moindre privilège&quot;, 174326604, &quot;≈174,3M (174 326 604)&quot;], [&quot;Finitions de l'API : erreurs et Swagger&quot;, 19491473, &quot;≈19,5M (19 491 473)&quot;], [&quot;Réparer le banc v2/v3&quot;, 17998587, &quot;≈18,0M (17 998 587)&quot;], [&quot;Seed de démo&quot;, 33892230, &quot;≈33,9M (33 892 230)&quot;], [&quot;Refacto des profils&quot;, 164941175, &quot;≈164,9M (164 941 175)&quot;], [&quot;Flux de données : Airflow et Elasticsearch&quot;, 122713269, &quot;≈122,7M (122 713 269)&quot;], [&quot;Moteur de suggestion de biens et cohérence des propositions&quot;, 74014246, &quot;≈74,0M (74 014 246)&quot;]]}">
+    <img src="couts.svg" alt="Coût des chantiers clos en tokens : 11 barres, du plus ancien au plus récent ; le plus cher : Droits : moindre privilège" data-couts="{&quot;couleur&quot;: &quot;#8f5a0f&quot;, &quot;barres&quot;: [[&quot;Contraintes manquantes du MPD&quot;, 31326311, &quot;≈31,3M (31 326 311)&quot;], [&quot;Lot de migration (schéma v3)&quot;, 116219396, &quot;≈116,2M (116 219 396)&quot;], [&quot;API : auth, RGPD et règles métier&quot;, 140122204, &quot;≈140,1M (140 122 204)&quot;], [&quot;Droits : moindre privilège&quot;, 174326604, &quot;≈174,3M (174 326 604)&quot;], [&quot;Finitions de l'API : erreurs et Swagger&quot;, 19491473, &quot;≈19,5M (19 491 473)&quot;], [&quot;Réparer le banc v2/v3&quot;, 17998587, &quot;≈18,0M (17 998 587)&quot;], [&quot;Seed de démo&quot;, 33892230, &quot;≈33,9M (33 892 230)&quot;], [&quot;Refacto des profils&quot;, 164941175, &quot;≈164,9M (164 941 175)&quot;], [&quot;Flux de données : Airflow et Elasticsearch&quot;, 122713269, &quot;≈122,7M (122 713 269)&quot;], [&quot;Moteur de suggestion de biens et cohérence des propositions&quot;, 74014246, &quot;≈74,0M (74 014 246)&quot;], [&quot;RGPD : registre, droits et note souveraineté IA&quot;, 18931004, &quot;≈18,9M (18 931 004)&quot;]]}">
     <details class="clos">
-      <summary><span class="resume-clos">11 chantiers clos · ≈895,0M (895 045 495) tokens · 339,50 $ sur 9 clos mesurés</span></summary>
+      <summary><span class="resume-clos">12 chantiers clos · ≈914,0M (913 976 499) tokens · 347,81 $ sur 10 clos mesurés</span></summary>
     <div class="tableau">
       <table>
         <thead>
           <tr><th>Chantier</th><th>Fiches</th><th>Clos le</th><th>Tokens</th><th>Ce qu'il a livré</th></tr>
         </thead>
         <tbody>
+          <tr>
+            <td><a href="https://claude.ai/artifact/TZTF4sADykj2TBW8gmmw5a">RGPD : registre, droits et note souveraineté IA</a> <span class="badge" data-etat="clos">clos</span></td>
+            <td class="mono">RGP1–RGP4</td><td class="mono">2026-11-03</td>
+            <td class="mono">8,31 $ · ≈18,9M (18 931 004)</td>
+            <td>inventaire recompté (22 tables), registre à 11 traitements avec droits CNIL et limites, note souveraineté &amp; IA, écarts Confluence envoyés sur Discord</td>
+          </tr>
           <tr>
             <td><a href="https://claude.ai/artifact/SW6QYU4ha96r2QfXPtb4nH">Moteur de suggestion de biens et cohérence des propositions</a> <span class="badge" data-etat="clos">clos</span></td>
             <td class="mono">SUG1–SUG8</td><td class="mono">2026-11-03</td>
@@ -126,7 +131,7 @@
           </tr>
         </tbody>
         <tfoot>
-          <tr><td colspan="3">Total cumulé</td><td class="mono"><strong>≈895,0M (895 045 495)</strong></td><td class="mono">339,50 $ sur 9 clos mesurés</td></tr>
+          <tr><td colspan="3">Total cumulé</td><td class="mono"><strong>≈914,0M (913 976 499)</strong></td><td class="mono">347,81 $ sur 10 clos mesurés</td></tr>
         </tfoot>
       </table>
     </div>

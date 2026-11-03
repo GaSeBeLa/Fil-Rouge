@@ -9,7 +9,9 @@
 **À quoi il sert.** Le sujet exige un registre de traitement et une note
 souveraineté & IA (« pas optionnel », `SP/Readme.md:266`) : ce chantier les écrit.
 
-**Fait.** Rien. Ouvert le 2026-11-03, cadré en 4 fiches d'écriture, `RGP1` à jouer.
+**CLOS** le 2026-11-03. Ne se rejoue pas — ne sert plus qu'à relire son socle.
+
+**Fait.** RGP1..RGP4 (2026-11-03) : inventaire recompté (22 tables), registre à 11 traitements avec droits CNIL et limites, note souveraineté & IA, écarts Confluence envoyés sur Discord — estimé non noté · cadré 4 · joué 4 fiches 8,31 $.
 
 **Session** : 812d8351-8578-4762-9a91-978550768445
 

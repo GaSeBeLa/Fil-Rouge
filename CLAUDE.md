@@ -45,11 +45,11 @@ modifiés**.
 - `livrables/2-modelisation/` porte trois rapports du chantier `C` et le
   schéma OLAP (`olap.md`, chantier FLX) ; `4-application/` le rapport de
   tests et, en brouillon, le schéma du programme d'IA et la conception du matching (2026-11-03) ; `3-architecture/` porte 8 schémas ; `1-audit/` est vide : l'audit vit sur Confluence. Détail daté dans `context AI/08-etat.md`.
-- Clos le 2026-10-14 : seed de démo du parcours complet, une commande (chantier DEM).
 - Clos le 2026-10-15 : clés vers les fiches et rôles des fiches (chantier PRF).
 - Clos le 2026-10-15 : Airflow, Elasticsearch, Logstash et Kibana branchés sur l'API (chantier FLX).
 - Clos le 2026-11-03 : clos sans rien livrer, recadrage à venir (chantier MER).
 - Clos le 2026-11-03 : un moteur de suggestion de biens et des propositions cohérentes (chantier SUG).
+- Clos le 2026-11-03 : RGPD : registre, droits et note IA (chantier RGP).
 
 ## Cinq règles non négociables
 
@@ -107,7 +107,6 @@ et seulement dans ce cas, ouvrir l'index.
 | comprendre un choix du schéma (euros, migration, hypothèses, changements v3) | `../Fil-Rouge-API/docker/init-v3/README.md` |
 | relire une décision d'architecture (ADR) | **Confluence**, espace `GaSeBeLa1` — [wiki du projet](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/overview?homepageId=15008134). Le dossier `decisions/` du dépôt est **vide**, rien n'y est écrit |
 | ouvrir un chantier, ou le découper en fiches | **lancer `/vlp:chantier`** — la méthode vit dans le kit, pas ici |
-| jouer une fiche du chantier RGP (rGPD : registre, droits et note IA) | `context AI/20-rgpd.md` — chantier **ouvert**, par `/vlp:tache RGP<n>` |
 | relire un chantier clos | `context AI/00-INDEX-archive.md` — sa ligne y nomme le fichier de fiches |
 | relire une fiche `C1` à `C5` | `context AI/09-contraintes-mpd.md` — chantier **clos** le 2026-09-11, ne se rejoue pas |
 | relire une fiche `LOT1` à `LOT12` | `context AI/10-lot-migration.md` — chantier « Lot de migration (schéma v3) » **clos** le 2026-10-07, ne se rejoue pas |

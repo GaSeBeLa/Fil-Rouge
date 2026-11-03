@@ -15,3 +15,4 @@ QUAND LIRE : on relit un chantier clos ; l'index n'en garde qu'une ligne qui ren
 | `17-flux-donnees.md` | on relit le socle du chantier FLX — **clos** « Flux de données : Airflow et Elasticsearch », `FLX1..FLX13` |
 | `18-merise-mocodo.md` | on relit le socle du chantier MER — **clos** « Modèle de données en Merise (MCD + MLD) », `MER1..MER5` |
 | `19-suggestion-de-biens.md` | on relit le socle du chantier SUG — **clos** « Moteur de suggestion de biens et cohérence des propositions », `SUG1..SUG8` |
+| `20-rgpd.md` | on relit le socle du chantier RGP — **clos** « RGPD : registre, droits et note IA », `RGP1..RGP4` |
