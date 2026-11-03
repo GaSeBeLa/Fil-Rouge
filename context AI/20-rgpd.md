@@ -97,8 +97,9 @@ du fichier concordent (comptes affichés) ; une section « Changé depuis le
 ---
 
 <!-- FICHE:RGP2 -->
-## RGP2 [ ] — Écrire le registre des traitements
+## RGP2 [x] — Écrire le registre des traitements
 
+**Session** : 5e8e0bd7-7c11-4e35-8104-73f5c1d4c279
 **Dépend de** : `RGP1`.
 **Fichiers** : Confluence page 44826725 (lecture), la matière § 4,
 `livrables/5-transverse/inventaire-donnees-personnelles.md` ; écrit
