@@ -65,7 +65,7 @@ flowchart TB
         M3["3 · Donne le code d'activation<br/>POST /users/{id}/activation-code"]
     end
     subgraph CHA["Chasseur"]
-        C5["5 · Rendez-vous : critères, mandat signé<br/>POST /criteria · POST /mandates<br/>Contrôle : fin = signature + 6 mois ;<br/>un seul mandat exclusif à la fois<br/>Règles R01, R04, R10"]
+        C5["5 · Rendez-vous : critères, mandat signé<br/>POST /criteria · POST /mandates<br/>Contrôle : fin = signature + 6 mois ;<br/>un seul mandat exclusif à la fois<br/>Règles R01, R04 ; R10 en partie"]
         C6["6 · Propose un bien<br/>POST /estate-proposed<br/>Contrôle : avec son propre mandat"]
         C10{"10 · Le vendeur<br/>accepte l'offre ?"}
     end
@@ -151,7 +151,7 @@ flowchart TB
 | R07 critères en texte libre | « T3 Ecusson, budget… » | particulier 1, chasseur 3-4 : critères typés et versionnés, lus par le moteur |
 | R08 taux fixe | un taux par chasseur | chasseur 10 : barème par tranches, ancienneté, performance |
 | R09 code perdu | backend sans source | toutes : une API sur GitHub, couverte par 1 116 tests |
-| R10 armoire papier | aucun lien | particulier 5 : le mandat est en base, avec sa date et son mode de signature |
+| R10 armoire papier | aucun lien | **en partie**, particulier 5 : le mandat est en base, avec sa date et son mode de signature (`paper` ou `electronic`) ; le document papier reste dans l'armoire, sa numérisation est prévue plus tard (ADR-065, proposé) |
 | R16 données en clair | sans droits | particulier 4 : comptes et droits par rôle ; « le sien » sur chaque lecture |
 
 ---
