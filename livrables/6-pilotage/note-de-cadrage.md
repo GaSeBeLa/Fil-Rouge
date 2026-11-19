@@ -1,4 +1,4 @@
-> **Copie de Confluence** — page « Note de cadrage » (id 17498130, version 12), espace GaSeBeLa1, copiée le 2026-11-19.
+> **Copie de Confluence** — page « Note de cadrage » (id 17498130, version 13), espace GaSeBeLa1, copiée le 2026-11-19.
 > La source qui fait foi reste Confluence : https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/17498130/Note+de+cadrage. Les images, schémas draw.io et encadrés ne passent pas dans l'export : ils sont signalés par une ligne « 🖼️ Image ou schéma non copié : <nom ou légende si connue> ».
 
 **À COMPLÉTER** — sections 3 à 10 complétées le 2026-11-03 depuis le brouillon v5 (`md/equipe/note-de-cadrage-complements.md`), avec l'accord de Békanty (R) et de Sébastien. Les points 🟡 restent à compléter par l'équipe. La version précédente est dans l'historique de la page.
@@ -186,14 +186,17 @@ Sources : pages « Audit du système d'information » et « Registre des anomali
 
 ### 8.2 Les risques de la conduite du projet
 
-| Risque | Impact | Parade envisagée |
-| --- | --- | --- |
-| Un membre absent ou surchargé | des livrables en retard | le RACI répartit le travail ; chacun a un remplaçant qui valide (A) |
-| Le travail repose trop sur une personne | un oral fragile, une charge inégale | répartir les livrables manquants (RACI du 03/11) ; chacun relit les parties des autres |
-| Perdre des données ou du travail | des jours de travail perdus | tout est sur GitHub et Confluence ; sauvegardes et plan de reprise (PCA/PRA) |
-| Données personnelles mal protégées | non-conformité RGPD | registre RGPD, droits par rôle, compte en lecture seule, données pseudonymisées |
-| L'assistant IA se trompe | un livrable faux | relire chaque sortie, tout vérifier contre le sujet et le code |
-| Le périmètre déborde | du temps perdu sur l'inutile | le hors-périmètre ci-dessus, validé avec le Product Owner |
+**Cotes** : probabilité × impact, de 1 à 9, même méthode que l'audit (P 3 = déjà arrivé dans le projet). 🟥 7 à 9 · 🟨 4 à 6 · 🟩 1 à 3.
+
+| Cote | Risque | Impact | Parade envisagée |
+| --- | --- | --- | --- |
+| 🟨 P2 × I2 = 4 | Un membre absent ou surchargé | des livrables en retard | le RACI répartit le travail ; chacun a un remplaçant qui valide (A) |
+| 🟥 P3 × I3 = 9 — 88 % des commits sont de Sébastien (645 sur 729, dépôts Fil-Rouge et Fil-Rouge-API, au 19/11) | Le travail repose trop sur une personne | un oral fragile, une charge inégale | répartir les livrables manquants (RACI du 03/11) ; chacun relit les parties des autres |
+| 🟩 P1 × I3 = 3 — restauration testée le 19/11 (2,82 s, 0 écart) | Perdre des données ou du travail | des jours de travail perdus | tout est sur GitHub et Confluence ; sauvegardes et plan de reprise (PCA/PRA) |
+| 🟩 P1 × I3 = 3 — données fictives ; droits par rôle testés | Données personnelles mal protégées | non-conformité RGPD | registre RGPD, droits par rôle, compte en lecture seule, données pseudonymisées |
+| 🟨 P3 × I2 = 6 — erreurs constatées et corrigées à la relecture le 19/11 | L'assistant IA se trompe | un livrable faux | relire chaque sortie, tout vérifier contre le sujet et le code |
+| 🟨 P3 × I2 = 6 — chantier MER clos sans rien livrer (03/11) | Le périmètre déborde | du temps perdu sur l'inutile | le hors-périmètre ci-dessus, validé avec le Product Owner |
+| 🟨 P3 × I2 = 6 — constaté le 19/11 | Le Product Owner est injoignable | des priorités et des choix restent sans validation | l'équipe tranche et l'écrit (backlog MoSCoW, ADR) ; les questions restent prêtes pour lui |
 
 ---
 
