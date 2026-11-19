@@ -131,12 +131,16 @@ Relevé dans `API/src/app/services/` (Fil-Rouge-API) : le crochet
 
 * **L'équipe** du Manager : ses chasseurs (`hunter.id_realestatemanager`) et
   les demandes qui lui sont confiées (`search_request.id_realestatemanager`).
+* **Les demandes « à prendre »** (2026-11-19, choix B de Seb) : tout Manager
+  voit une demande `'confirmed'` sans chasseur ni manager (celles du
+  formulaire du site), et la prend pour lui seul (`id_realestatemanager` = sa
+  fiche) ; les autres ne la voient plus. La confier à un autre manager : `403`.
 * **Les chemins** suivent les clés du schéma : `services/client_rows.py`,
   `hunter_rows.py`, `manager_rows.py`.
 * **En écriture**, le crochet `owns` refuse une ligne qui ne serait pas à
   lui → `409` (8 services). Les champs gardés → `403` : le rôle et
   l'activation d'un compte, les coordonnées seules pour le chasseur et le
-  manager, l'affectation seule pour le Manager sur une demande (Q-ACC-10),
+  manager, l'affectation seule pour le Manager sur une demande (Q-ACC-10 ; prendre une demande à prendre, pour lui seul),
   la note, le commentaire et la décision seuls pour le Client sur un bien
   proposé (`client_priority`, `comment_client` ; fiche SUG1 — `client_decision`,
   `client_decided_at`, `decline_reason` ; fiche SUG5).

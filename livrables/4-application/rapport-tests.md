@@ -272,7 +272,7 @@ Un test par règle ajoutée à la base par ADR-053 (migrations 22 à 38). Le n°
 
 | Manque | Pourquoi | Statut |
 | --- | --- | --- |
-| **Tests fonctionnels** (un parcours métier complet, de bout en bout) | les règles sont branchées sur l'API depuis le 2026-10-13 (chantier API) ; aucun parcours de bout en bout n'est encore écrit | ⬜ |
+| **Tests fonctionnels** (un parcours métier complet, de bout en bout) | écrit le 2026-11-19 : `test_parcours_particulier.py` ; la matrice des 80 scénarios, et leurs 5 trous : `tests-fonctionnels.md` | ✅ |
 | **Authentification** : connexion, JWT, rôles, droits | codée et testée le 2026-10-12 (fiches API1 à API3) ; la matrice des droits (ADR-027) codée le 2026-10-13 (chantier DRO, `test_droits_par_role.py`) ; frein aux essais en série et activation du compte le 2026-11-19 (`test_login_throttle.py`, `test_activation.py`) | ✅ |
 | Trous de l'audit **côté API** (ADR-053 : P2 `EmailStr`, P5, P16, P19…) | codés et testés le 2026-10-12 (fiches API4, API7 à API9 : `test_entrees.py`, `test_propositions_visites.py`, `test_signature_vente.py`, `test_demande_avant_compte.py`) | ✅ |
 | Calcul de rémunération **branché sur la base** (lire le barème, écrire le paiement) | codé et testé le 2026-10-13 (fiche API12 : `test_calcul_paiement.py`) | ✅ |
@@ -283,7 +283,7 @@ Un test par règle ajoutée à la base par ADR-053 (migrations 22 à 38). Le n°
 | ENF-03 : accès croisé aux données de rémunération | la matrice des droits est codée et testée (chantier DRO, `test_droits_par_role.py`) | ✅ |
 | Les tests du seed **dans le conteneur** | ils tournent depuis : plus aucun test sauté le 2026-11-19 (§ 1) | ✅ |
 
-⚠️ Le sujet demande des tests **unitaires et fonctionnels** (`Readme.md:256`). Les **fonctionnels** restent à écrire.
+✅ Le sujet demande des tests **unitaires et fonctionnels** (`Readme.md:256`). Les **fonctionnels** sont dans [`tests-fonctionnels.md`](./tests-fonctionnels.md) (2026-11-19).
 
 ---
 
