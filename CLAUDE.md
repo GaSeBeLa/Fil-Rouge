@@ -44,7 +44,7 @@ modifiés**.
 - `normalised/` porte la normalisation des annonces et son rapport d'anomalies.
 - `livrables/2-modelisation/` porte trois rapports du chantier `C` et le
   schéma OLAP (`olap.md`, chantier FLX) ; `4-application/` le rapport de
-  tests et, en brouillon, le schéma du programme d'IA et la conception du matching (2026-11-03) ; `3-architecture/` porte 8 schémas ; `1-audit/` porte la phase 1 (cartographie, registre coté, analyse ; Gabriel, 2026-11-19) ; `0-confluence/` copie les pages Confluence (2026-11-19), qui font foi. Détail daté dans `context AI/08-etat.md`.
+  tests et, en brouillon, le schéma du programme d'IA et la conception du matching (2026-11-03) ; `3-architecture/` porte 8 schémas ; `1-audit/` porte la phase 1 (cartographie, registre coté, analyse ; Gabriel, 2026-11-19) ; 12 pages Confluence y sont copiées dans le dossier de leur phase (2026-11-19 ; en-tête « Copie de Confluence », Confluence fait foi). Détail daté dans `context AI/08-etat.md`.
 - Clos le 2026-10-15 : clés vers les fiches et rôles des fiches (chantier PRF).
 - Clos le 2026-10-15 : Airflow, Elasticsearch, Logstash et Kibana branchés sur l'API (chantier FLX).
 - Clos le 2026-11-03 : clos sans rien livrer, recadrage à venir (chantier MER).
