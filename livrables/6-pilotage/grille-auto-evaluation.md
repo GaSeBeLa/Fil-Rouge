@@ -1,0 +1,42 @@
+> **Copie de Confluence** — page « Grille d'auto-évaluation » (id 24051723, version 10), espace GaSeBeLa1, copiée le 2026-11-19.
+> La source qui fait foi reste Confluence : https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/24051723
+
+Liens vers les preuves ajoutés le 19/11/2026. Chacun coche son niveau (NA / EC / A) ; les ❌ sont les livrables manquants.
+
+| Compétence | Preuve attendue | NA | EC | A |
+|---|---|---|---|---|
+| **BC05 — Big data & IA** | | | | |
+| Analyser 3V (volume, vélocité, variété) | Note de dimensionnement → [Note 3V](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/45252610) | | | ✅ |
+| Concevoir/évaluer un modèle ML | Conception matching + features → [Conception du matching](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/63635457) | | | |
+| Extraction/transformation/chargement + qualité + RGPD | Schéma OLAP + description alimentation + note qualité → [OLAP et alimentation](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/67371019) | | | |
+| Concevoir la base pour analytique/IA | MCD + migration + indexation → [MCD/MLD/MPD](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/16121940) · [Migration v2 vers v3](https://github.com/GaSeBeLa/Fil-Rouge-API/tree/main/docker/migrations/v2-vers-v3) · [Note d'indexation](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/67534903) | | | |
+| Schématiser/concevoir un programme d'IA | Schéma du programme d'IA → [Schéma du programme d'IA](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/63602689) | | | |
+| **BC01 — Stratégie SI** | | | | |
+| Cartographier le SI (analyse de risques) | Dossier d'audit → [Dossier d'audit](https://github.com/GaSeBeLa/Fil-Rouge/tree/main/livrables/1-audit) · [Rapport d'audit](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/19038211) | | | ✅ |
+| Élaborer la stratégie SI | Note stratégique → [Note stratégique](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/18022434) | | | |
+| Comparer les architectures | Dossier d'architecture → [Dossier d'architecture](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/67764232) | | | |
+| Analyser les composants d'architecture | Schéma de composants → [8 schémas](https://github.com/GaSeBeLa/Fil-Rouge/tree/main/livrables/3-architecture) · [Cahier des charges § 6.1](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/25165826) | | | |
+| Arbitrer perf/scalabilité/sécurité/éco | Matrice de décision → [Matrice de décision](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/67928098) | | | |
+| Présenter des solutions écoresponsables | Note éco + oral → [Note d'éco-conception](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/33783821) | | | |
+| **BC02 — Piloter des projets** | | | | |
+| Étude d'opportunité | Document dédié → [Étude d'opportunité](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/25165844) | | | ✅ |
+| Prioriser les fonctionnalités | Backlog priorisé → [Backlog MoSCoW](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/67534849) | | | |
+| CDC technique (RGPD + PSH) | CDC + registre RGPD + note PSH → [Cahier des charges](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/25165826) · [Registre RGPD](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/44826725) · [Note PSH](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/67141645) | | | |
+| Modéliser les processus métier | Schémas BPMN → [Processus métier](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/67272805) | | | |
+| Note de cadrage | Document dédié → [Note de cadrage](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/17498130) | | | |
+| Planifier | Gantt + jalons → [Planning (Gantt) et jalons](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/67534945) | | | |
+| Mitigation des risques | Matrice + PCA/PRA → [Note de cadrage § 8](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/17498130) · [PCA, PRA et plan de migration](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/67043342) | | | |
+| Engagement des parties prenantes | RACI + CR d'ateliers → [RACI](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/15597589) · ❌ comptes rendus d'ateliers : aucun | | | |
+| **BC03 — Concevoir & développer** | | | | |
+| Architecture applicative + maquettes | Dossier de conception → [Dossier de conception applicative](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/67305485) | | | |
+| Schématiser les processus métier | Schémas de processus → [Processus métier](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/67272805) | | | |
+| Environnement + réduction d'impact éco | Note d'environnement → ❌ note d'environnement : pas écrite ; s'en approche : [Pile Docker (schéma 04)](https://github.com/GaSeBeLa/Fil-Rouge/blob/main/livrables/3-architecture/04-pile-docker.md) | | | |
+| Justifier les patterns | Dossier de conception → [Dossier de conception applicative](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/67305485) | | | |
+| Sécurité applicative | Code + note sécurité → [Note de sécurité applicative](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/67534880) | | | |
+| Scénarios de tests exécutés | Plan de tests + rapports → [Rapport de tests](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/67272708) · [Tests fonctionnels](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/67141669) | | | |
+| Suivi qualité automatisé | Pipeline CI + indicateurs → ❌ aucune pipeline CI : les 1 116 tests se lancent à la main | | | |
+| **Transverses** | | | | |
+| RGPD | Registre de traitement → [Registre RGPD](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/44826725) | | | |
+| Éco-conception | Note dédiée → [Note d'éco-conception](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/33783821) | | | |
+| Accessibilité PSH | Note dédiée → [Note d'accessibilité (PSH)](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/67141645) | | | |
+| Souveraineté/sécurité IA | Note dédiée → [Note souveraineté et sécurité IA](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/63438854) | | | |
