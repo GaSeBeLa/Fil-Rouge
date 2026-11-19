@@ -15,7 +15,7 @@ modifiés**.
   côté : `../Fil-Rouge-API/`. Ce dépôt-ci garde les docs, les ADR, les
   livrables et le suivi des chantiers. **Tout chemin `API/…` ou `docker/…`
   cité ici, dans `context AI/` ou dans `md/` se lit dans `../Fil-Rouge-API/`.**
-- Le schéma PostgreSQL **v3** (**21 tables** depuis le 2026-10-13, `estate_contact`, ADR-054 ; montants en **euros**) est posé
+- Le schéma PostgreSQL **v3** (**22 tables** depuis le 2026-10-15 : `estate_contact`, ADR-054, puis `estate_price_history`, FLX4 ; montants en **euros**) est posé
   dans `docker/init-v3/` et monté par `docker compose` : chantier LOT, LOT1 à
   LOT12 faits le 2026-10-07 (LOT12 : rôle en lecture seule `fil_rouge_reader`).
   Changements par thème : `docker/init-v3/README.md` §0. `docker/init-v2/` est
@@ -28,10 +28,10 @@ modifiés**.
   `docker compose down -v && docker compose up -d` (⚠️ efface la base de dev
   locale), puis `bash docker/create_test_db.sh`.
 - L'API expose un CRUD complet en trois couches (routes / services /
-  repositories) sur les **21 tables** ; le routeur commun revalide l'entrée
+  repositories) sur **21 des 22 tables** ; le routeur commun revalide l'entrée
   (`422` avant la base). 91 opérations vérifiées en `200` contre la base
-  (mesuré avant LOT6). **911 passed, 8 skipped, 6 xfailed** (au 2026-10-13,
-  fiche DRO11), unitaires sans base et intégration sur la base de test isolée
+  (mesuré avant LOT6). **1 116 passed, 7 xfailed** (au 2026-11-19, rapport :
+  `livrables/4-application/rapport-tests.md`), unitaires sans base et intégration sur la base de test isolée
   `fil_rouge_test` (`docker/create_test_db.sh`) — voir `API/README.md` § Tests.
 - **Les droits sont codés** (chantier DRO, 2026-10-13) : le rôle, table par
   table, puis « le sien » (la ligne d'un autre rend `404`) ; les comptes
