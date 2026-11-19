@@ -3,27 +3,24 @@
 > **Plan de tests et rapport d'exécution** (BC03).
 > Suit le modèle du sujet : `documents utiles/PLAN-DE-TESTS.md` (StarterPack - BASE).
 > Exigé par `GRILLE-EVALUATION.md:34` : « Plan de tests (unitaires + fonctionnels) | Scénarios + rapports d'exécution ».
-> Remplace le rapport du 2026-10-02 (121 tests, commit `8ee413e`), toujours lisible dans l'historique git.
+> Remplace le rapport du 2026-10-12 (258 tests, commit `128e266`), toujours lisible dans l'historique git.
 
 ---
 
 ## 1. Le résultat, en une ligne
 
-**258 tests, 258 réussis, 0 échec.**
+**1 103 tests : 1 096 réussis, 7 en échec attendu, 0 échec.**
 
 | | |
 | --- | --- |
-| Date de l'exécution | **2026-10-12, 16:17** |
-| Version du code | commit **`128e266`** (branche `main`) |
-| Environnement | conteneur Docker `api`, **Python 3.12.15**, **PostgreSQL 16.15** |
-| Commande | `docker compose exec -T api python -m pytest -v -rs -p no:cacheprovider` (depuis `docker/`) |
-| Sortie brute | `251 passed, 7 skipped, 1 warning in 7.14s` |
-| Les 7 sautés, rejoués | `8 passed, 1 warning in 0.94s` (voir ci-dessous) |
+| Date de l'exécution | **2026-11-19, 11:35** |
+| Version du code | dépôt `Fil-Rouge-API`, commit **`141d068`** (branche `main`) |
+| Environnement | conteneur Docker `api`, **Python 3.12.16**, **PostgreSQL 16.15** |
+| Commande | `docker compose exec -T api python -m pytest -rs -p no:cacheprovider` (depuis `Fil-Rouge-API/docker/`) |
+| Sortie brute | `1096 passed, 7 xfailed, 1 warning in 110.67s` |
 
-⚠️ **Les 7 tests sautés** lisent le seed `docker/init-v3/05_parametres.sql` : 4 dans `test_seed_parametres.py`, 3 dans `test_parametrage_service.py`. Le conteneur `api` ne monte que `src/` et `tests/` : il ne voit pas `docker/`, et les tests se sautent eux-mêmes, avec un message (`test_seed_parametres.py:57-59`).
-
-- Rejoués le même jour : le fichier copié dans le conteneur (`docker compose cp`), les deux fichiers de tests relancés, le fichier retiré ensuite. **8 réussis** sur 8 (les 7 sautés, plus le 4ᵉ test du paramétrage, qui n'a pas besoin du seed).
-- `docker-compose.yml` n'a pas été modifié.
+- **Les 7 échecs attendus** (`xfail`) sont des cas chiffrés du sujet que notre règle contredit **exprès** (ADR-048 : le critère « mandats signés » est noté par le taux de transformation, pas par le volume). 5 cas de `test_criteres_de_volume_cas_du_sujet`, `test_calcul_de_bout_en_bout_cas_du_sujet`, et `test_seed_gives_the_worked_example_of_the_subject`. Ils sont marqués `xfail(strict=True)` : s'ils se remettaient à passer, c'est que l'ancienne formule serait revenue, et **la suite tomberait**.
+- **Plus aucun test sauté** : les tests du seed tournent maintenant dans le conteneur (ils se sautaient le 2026-10-12).
 
 ⚠️ L'unique avertissement vient d'une bibliothèque (`starlette` signale que `httpx` est déprécié dans son `TestClient`). Il ne concerne pas notre code.
 
@@ -33,12 +30,14 @@
 
 | Niveau | Nombre | Ce qu'il prouve | Base de données ? |
 | --- | ---: | --- | --- |
-| 🧱 **Unitaires — socle de l'API** | 44 | la logique du code : sécurité, services, erreurs | ❌ aucune |
-| 💶 **Unitaires — rémunération** | 55 | les 55 cas du calcul de rémunération du sujet | ❌ aucune |
-| 🗄️ **Intégration — base de test** | 159 | les règles de PostgreSQL et leurs codes HTTP | ✅ `fil_rouge_test` |
-| **Total** | **258** | | |
+| 🧱 **Unitaires — socle de l'API** | 194 | la logique du code : sécurité, services, erreurs, droits | ❌ aucune |
+| 💶 **Unitaires — rémunération** | 65 | les cas du calcul de rémunération du sujet | ❌ aucune |
+| 🗄️ **Intégration — base de test** | 844 | les règles de PostgreSQL, les droits par rôle et leurs codes HTTP | ✅ `fil_rouge_test` |
+| **Total** | **1 103** | | |
 
-Évolution : **121** tests le 2026-10-02 · **193** le 2026-10-08 · **258** le 2026-10-12. La hausse vient de l'intégration : schéma v3 (chantier LOT), puis les trous de l'audit (ADR-053).
+Compté le 2026-11-19 par `pytest --co` (tests collectés, `xfail` compris), fichier par fichier.
+
+Évolution : **121** tests le 2026-10-02 · **258** le 2026-10-12 · **1 103** le 2026-11-19. La hausse vient surtout de l'intégration : les droits par rôle, testés route par route (chantier DRO), les fiches des profils (PRF), le flux de données (FLX), les suggestions de biens (SUG), le RGPD (RGP), puis le frein de connexion et l'activation du compte (2026-11-19).
 
 ---
 
@@ -91,6 +90,8 @@ Un test qui passe ne prouve rien s'il passerait **aussi** quand le code est faux
 ---
 
 ## 5. Les cas de test
+
+⚠️ **Le détail ci-dessous date du 2026-10-12 (258 tests)**. Les tests ajoutés depuis ne sont pas listés un par un ici : ils se lisent par fichier dans `Fil-Rouge-API/API/tests/`, et le § 2 les compte.
 
 Statut : ✅ réussi · ❌ échoué · ⬜ à faire.
 Une ligne qui porte « × N » regroupe N cas d'un même test paramétré.
@@ -272,15 +273,15 @@ Un test par règle ajoutée à la base par ADR-053 (migrations 22 à 38). Le n°
 | Manque | Pourquoi | Statut |
 | --- | --- | --- |
 | **Tests fonctionnels** (un parcours métier complet, de bout en bout) | les règles sont branchées sur l'API depuis le 2026-10-13 (chantier API) ; aucun parcours de bout en bout n'est encore écrit | ⬜ |
-| **Authentification** : connexion, JWT, rôles, droits | codée et testée le 2026-10-12 (fiches API1 à API3 : `test_auth.py`, `test_roles.py`, `test_api_keys.py`) ; la matrice complète des droits (ADR-027) n'est pas codée | ✅ |
+| **Authentification** : connexion, JWT, rôles, droits | codée et testée le 2026-10-12 (fiches API1 à API3) ; la matrice des droits (ADR-027) codée le 2026-10-13 (chantier DRO, `test_droits_par_role.py`) ; frein aux essais en série et activation du compte le 2026-11-19 (`test_login_throttle.py`, `test_activation.py`) | ✅ |
 | Trous de l'audit **côté API** (ADR-053 : P2 `EmailStr`, P5, P16, P19…) | codés et testés le 2026-10-12 (fiches API4, API7 à API9 : `test_entrees.py`, `test_propositions_visites.py`, `test_signature_vente.py`, `test_demande_avant_compte.py`) | ✅ |
 | Calcul de rémunération **branché sur la base** (lire le barème, écrire le paiement) | codé et testé le 2026-10-13 (fiche API12 : `test_calcul_paiement.py`) | ✅ |
 | Critère « mandats signés » noté par le taux de transformation (ADR-048) | codé le 2026-10-13 (fiche API11) ; les cas du sujet R07 et R15 restent, en échec attendu | ✅ |
 | « Un seul chasseur est rémunéré pour une vente » (`.feature` l. 52) | demande plusieurs mandats en base, pas une fonction pure | ⬜ |
 | Règle `@tracabilite` (`.feature` l. 275-300) : montant figé, notifications | relève de la persistance | ⬜ |
 | ENF-01 : rémunération calculée en moins de 2 s pour 500 mandats (test de charge) | le calcul est branché (fiche API12) ; le test de charge n'est pas écrit | ⬜ |
-| ENF-03 : accès croisé aux données de rémunération | les rôles sont codés (fiche API2), pas la matrice des droits (ADR-027) | ⬜ |
-| Les 7 tests du seed **dans le conteneur** | le conteneur `api` ne voit pas `docker/` ; ils passent quand le fichier est présent (§ 1) | ⬜ |
+| ENF-03 : accès croisé aux données de rémunération | la matrice des droits est codée et testée (chantier DRO, `test_droits_par_role.py`) | ✅ |
+| Les tests du seed **dans le conteneur** | ils tournent depuis : plus aucun test sauté le 2026-11-19 (§ 1) | ✅ |
 
 ⚠️ Le sujet demande des tests **unitaires et fonctionnels** (`Readme.md:256`). Les **fonctionnels** restent à écrire.
 
@@ -288,7 +289,7 @@ Un test par règle ajoutée à la base par ADR-053 (migrations 22 à 38). Le n°
 
 ## 7. Rejouer les tests
 
-Depuis `Fil-Rouge/docker/`, avec les conteneurs `db` et `api` démarrés :
+Depuis `Fil-Rouge-API/docker/`, avec les conteneurs `db` et `api` démarrés :
 
 ```bash
 docker compose up -d db api
@@ -299,20 +300,12 @@ bash create_test_db.sh
 ```
 
 ```bash
-docker compose exec -T api python -m pytest -v -rs -p no:cacheprovider
+docker compose exec -T api python -m pytest -rs -p no:cacheprovider
 ```
 
-- La 2ᵉ commande ne sert qu'**une fois**, puis après chaque modification de `docker/init-v3/01`, `02` ou `04`.
-- Sans base de test, les tests d'intégration sont **sautés**, sans échouer.
+- La 2ᵉ commande ne sert qu'**une fois**, puis après chaque modification de `docker/init-v3/`.
 - Pour ne lancer que les tests sans base : ajouter `-m "not integration"`.
-- Pour rejouer les 7 tests du seed dans le conteneur (sous Git Bash, préfixer par `MSYS_NO_PATHCONV=1`) :
-
-```bash
-docker compose exec -T api mkdir -p /docker/init-v3
-docker compose cp init-v3/05_parametres.sql api:/docker/init-v3/05_parametres.sql
-docker compose exec -T api python -m pytest -v -p no:cacheprovider tests/integration/test_seed_parametres.py tests/integration/test_parametrage_service.py
-docker compose exec -T api rm -rf /docker
-```
+- Pour le détail de chaque test : ajouter `-v`.
 
 ---
 
@@ -326,6 +319,8 @@ docker compose exec -T api rm -rf /docker
 | `a395b8e` | LOT12 : rôle en lecture seule et ses tests |
 | `6369e45` | premier trou de l'audit testé (P2, ADR-053) |
 | `00f5074` | dernier trou testé : un bien vendu une fois (P37) |
-| `128e266` | version du code de cette exécution |
+| `128e266` | version du code du rapport du 2026-10-12 |
+| `e6f4b87` | frein aux mots de passe essayés en série (`Fil-Rouge-API`) |
+| `141d068` | activation du compte par le particulier ; version du code de cette exécution (`Fil-Rouge-API`) |
 
 Détail daté des décisions : `context AI/08-etat.md` ; trous de l'audit : `md/journal/problemes-a-regler.md` et ADR-053.
