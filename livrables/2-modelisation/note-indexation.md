@@ -63,7 +63,7 @@ APRÈS  ->  Index Scan using idx_search_request_hunter_created on search_request
 - **Le coût** : environ **7,8 Mo** pour les trois index, et une écriture un peu plus lente à chaque nouvelle sélection. Pour une table qu'on lit bien plus qu'on ne l'écrit, l'échange est bon.
 - ⚠️ **Au volume d'aujourd'hui, le gain est nul** : le planificateur préfère lire toute la table, et il a raison. Ces index préparent la croissance. Ils ne réparent pas une lenteur constatée.
 
-## 6. La proposition
+## 6. La décision
 
 ```sql
 CREATE INDEX idx_estate_searchrequest_request ON estate_searchrequest (id_search_request);
@@ -71,7 +71,13 @@ CREATE INDEX idx_estate_searchrequest_hunter  ON estate_searchrequest (id_hunter
 CREATE INDEX idx_search_request_hunter_created ON search_request (id_hunter, created_at DESC);
 ```
 
-🟡 **Pas tranché** : ces index ne sont **pas** posés dans le schéma. Les ajouter demande une migration (`docker/migrations/`) et l'accord du groupe.
+✅ **Posés le 2026-11-19** (choix A de Sébastien), dépôt `Fil-Rouge-API`, commit `eda0a35` :
+
+- dans le schéma de référence `docker/init-v3/01_create_fil_rouge_immobilier.sql` ;
+- dans la migration `docker/migrations/v2-vers-v3/52_index-chasseur-et-demande.sql`, pour une base qui existe déjà ;
+- prouvés par `API/tests/integration/test_index_cles_etrangeres.py`. Le banc v2/v3 échoue sans la migration (vérifié) et passe avec.
+
+➡️ **Pour l'équipe, après un pull** : rejouer la migration 52 sur sa base de dev, ou la recréer (`docker compose down -v && docker compose up -d`).
 
 ## 7. Limites
 
