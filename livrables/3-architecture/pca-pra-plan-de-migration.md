@@ -102,7 +102,7 @@ Deux limites à dire :
    `init-v3/04` sur un volume neuf.
 6. **Vérifier l'intégrité** :
    - comptage des lignes par table, comparé à la sauvegarde ;
-   - `pytest` : la suite (1 102 tests réussis au 2026-11-19) contrôle les règles et les
+   - `pytest` : la suite (1 116 tests réussis au 2026-11-19, commit `31094a8`) contrôle les règles et les
      contraintes. ⚠️ Ses tests d'intégration tournent sur `fil_rouge_test`,
      pas sur la base restaurée : pour juger la copie, il faut les y pointer ;
    - `POST /auth/login` et `GET /auth/me` répondent.

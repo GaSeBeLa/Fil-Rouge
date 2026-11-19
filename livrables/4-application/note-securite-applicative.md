@@ -106,7 +106,7 @@ Gabriel a essayé **4 attaques** sur l'API (résultats rapportés le 2026-11-09)
 
 ## 4. Les preuves par les tests automatiques
 
-- Toute la suite : **1096 tests réussis**, 7 échecs attendus (`xfail`), **0 échec** (2026-11-19, conteneur `api`).
+- Toute la suite : **1 116 tests réussis**, 7 échecs attendus (`xfail`), **0 échec** (2026-11-19, conteneur `api`).
 - Les tests qui prouvent la sécurité :
   - `tests/test_login_throttle.py` : le frein (10 tests) ;
   - `tests/test_activation_token.py` et `tests/integration/test_activation.py` : le code d'activation (15 tests) ;

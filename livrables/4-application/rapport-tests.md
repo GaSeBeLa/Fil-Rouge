@@ -9,15 +9,15 @@
 
 ## 1. Le résultat, en une ligne
 
-**1 103 tests : 1 096 réussis, 7 en échec attendu, 0 échec.**
+**1 123 tests : 1 116 réussis, 7 en échec attendu, 0 échec.**
 
 | | |
 | --- | --- |
-| Date de l'exécution | **2026-11-19, 11:35** |
-| Version du code | dépôt `Fil-Rouge-API`, commit **`141d068`** (branche `main`) |
+| Date de l'exécution | **2026-11-19, 15:53** |
+| Version du code | dépôt `Fil-Rouge-API`, commit **`31094a8`** (branche `main`) |
 | Environnement | conteneur Docker `api`, **Python 3.12.16**, **PostgreSQL 16.15** |
 | Commande | `docker compose exec -T api python -m pytest -rs -p no:cacheprovider` (depuis `Fil-Rouge-API/docker/`) |
-| Sortie brute | `1096 passed, 7 xfailed, 1 warning in 110.67s` |
+| Sortie brute | `1116 passed, 7 xfailed, 1 warning in 109.25s` |
 
 - **Les 7 échecs attendus** (`xfail`) sont des cas chiffrés du sujet que notre règle contredit **exprès** (ADR-048 : le critère « mandats signés » est noté par le taux de transformation, pas par le volume). 5 cas de `test_criteres_de_volume_cas_du_sujet`, `test_calcul_de_bout_en_bout_cas_du_sujet`, et `test_seed_gives_the_worked_example_of_the_subject`. Ils sont marqués `xfail(strict=True)` : s'ils se remettaient à passer, c'est que l'ancienne formule serait revenue, et **la suite tomberait**.
 - **Plus aucun test sauté** : les tests du seed tournent maintenant dans le conteneur (ils se sautaient le 2026-10-12).
@@ -32,12 +32,12 @@
 | --- | ---: | --- | --- |
 | 🧱 **Unitaires — socle de l'API** | 194 | la logique du code : sécurité, services, erreurs, droits | ❌ aucune |
 | 💶 **Unitaires — rémunération** | 65 | les cas du calcul de rémunération du sujet | ❌ aucune |
-| 🗄️ **Intégration — base de test** | 844 | les règles de PostgreSQL, les droits par rôle et leurs codes HTTP | ✅ `fil_rouge_test` |
-| **Total** | **1 103** | | |
+| 🗄️ **Intégration — base de test** | 864 | les règles de PostgreSQL, les droits par rôle et leurs codes HTTP | ✅ `fil_rouge_test` |
+| **Total** | **1 123** | | |
 
 Compté le 2026-11-19 par `pytest --co` (tests collectés, `xfail` compris), fichier par fichier.
 
-Évolution : **121** tests le 2026-10-02 · **258** le 2026-10-12 · **1 103** le 2026-11-19. La hausse vient surtout de l'intégration : les droits par rôle, testés route par route (chantier DRO), les fiches des profils (PRF), le flux de données (FLX), les suggestions de biens (SUG), le RGPD (RGP), puis le frein de connexion et l'activation du compte (2026-11-19).
+Évolution : **121** tests le 2026-10-02 · **258** le 2026-10-12 · **1 123** le 2026-11-19. La hausse vient surtout de l'intégration : les droits par rôle, testés route par route (chantier DRO), les fiches des profils (PRF), le flux de données (FLX), les suggestions de biens (SUG), le RGPD (RGP), puis le frein de connexion et l'activation du compte (2026-11-19).
 
 ---
 
@@ -272,7 +272,7 @@ Un test par règle ajoutée à la base par ADR-053 (migrations 22 à 38). Le n°
 
 | Manque | Pourquoi | Statut |
 | --- | --- | --- |
-| **Tests fonctionnels** (un parcours métier complet, de bout en bout) | écrit le 2026-11-19 : `test_parcours_particulier.py` ; la matrice des 80 scénarios, et leurs 5 trous : `tests-fonctionnels.md` | ✅ |
+| **Tests fonctionnels** (un parcours métier complet, de bout en bout) | écrit le 2026-11-19 : `test_parcours_particulier.py` ; la matrice des 80 scénarios, et les 3 trous qu'ils ont trouvés, réparés le même jour : `tests-fonctionnels.md` | ✅ |
 | **Authentification** : connexion, JWT, rôles, droits | codée et testée le 2026-10-12 (fiches API1 à API3) ; la matrice des droits (ADR-027) codée le 2026-10-13 (chantier DRO, `test_droits_par_role.py`) ; frein aux essais en série et activation du compte le 2026-11-19 (`test_login_throttle.py`, `test_activation.py`) | ✅ |
 | Trous de l'audit **côté API** (ADR-053 : P2 `EmailStr`, P5, P16, P19…) | codés et testés le 2026-10-12 (fiches API4, API7 à API9 : `test_entrees.py`, `test_propositions_visites.py`, `test_signature_vente.py`, `test_demande_avant_compte.py`) | ✅ |
 | Calcul de rémunération **branché sur la base** (lire le barème, écrire le paiement) | codé et testé le 2026-10-13 (fiche API12 : `test_calcul_paiement.py`) | ✅ |
@@ -321,6 +321,7 @@ docker compose exec -T api python -m pytest -rs -p no:cacheprovider
 | `00f5074` | dernier trou testé : un bien vendu une fois (P37) |
 | `128e266` | version du code du rapport du 2026-10-12 |
 | `e6f4b87` | frein aux mots de passe essayés en série (`Fil-Rouge-API`) |
-| `141d068` | activation du compte par le particulier ; version du code de cette exécution (`Fil-Rouge-API`) |
+| `141d068` | activation du compte par le particulier (`Fil-Rouge-API`) |
+| `31094a8` | seed des paramètres en transaction ; version du code de cette exécution (`Fil-Rouge-API`) |
 
 Détail daté des décisions : `context AI/08-etat.md` ; trous de l'audit : `md/journal/problemes-a-regler.md` et ADR-053.

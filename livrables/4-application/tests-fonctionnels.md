@@ -2,7 +2,7 @@
 
 > **Plan de tests, partie fonctionnelle** (BC03). Complète `rapport-tests.md` (unitaires et intégration).
 > Exigé par `GRILLE-EVALUATION.md` : « Plan de tests (unitaires + fonctionnels) | Scénarios + rapports d'exécution ».
-> État : dépôt `Fil-Rouge-API`, commit `8ed2591` (2026-11-19) ; suite complète **1 115 passed, 7 xfailed, 0 failed**.
+> État : dépôt `Fil-Rouge-API`, commit `8ed2591` (2026-11-19) pour la matrice ; suite complète relancée au commit `31094a8` : **1 116 passed, 7 xfailed, 0 failed**.
 > Matrice établie le 2026-11-19 : noms des tests lus, et corps lus pour les cas douteux ; 24 noms vérifiés par `grep`.
 
 ---
