@@ -1,0 +1,100 @@
+> **Copie de Confluence** — page « RACI » (id 15597589, version 16), espace GaSeBeLa1, copiée le 2026-11-19.
+> La source qui fait foi reste Confluence : https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/15597589/RACI. Les images, schémas draw.io et encadrés ne passent pas dans l'export : ils sont signalés par une ligne « 🖼️ Image ou schéma non copié : <nom ou légende si connue> ».
+
+# RACI initiale — Projet fil rouge « Chasse immobilière »
+
+> **⚠️ À COMPLÉTER — mise à jour du 03/11/2026**
+>
+> Les lignes des phases 2 à 4, vides jusqu'ici, sont remplies avec une **proposition**. Elle a été vue par **2 membres sur 4** : les deux autres doivent encore la confirmer ou la corriger.
+>
+> Source : dépôt Fil-Rouge, `md/equipe/raci-propositions.md`, commit `5d62274`. L'amorçage, la phase 1 et les oraux M1 à M4 ne changent pas.
+>
+> Ce qui change par rapport à la version du 18 août :
+>
+> * **Note stratégique** : le R passe de Gabriel à Bekanty, autrice de la page (vote du 03/11) ;
+> * `migration.sql` **et note d'indexation** : séparés en deux lignes, car ils n'ont pas le même A ;
+> * **Dossier professionnel assemblé** : toujours vide, R et A à désigner.
+
+> Une seule RACI pour tout le projet.
+>
+> Document vivant, unique, à mettre à jour au fil du projet (voir `RACI.md`).
+>
+> **R** = Réalise · **A** = Autorité/valide (un seul par ligne) · **C** = Consulté · **I** = Informé
+>
+> Les formateurs Jean-François VIAL joue le rôle de **Product Owner**
+
+## Amorçage (avant Phase 1)
+
+| **Livrable** | **Sébastien** | **Laurence** | **Bekanty** | **Gabriel** | **Product Owner** | **Jury** |
+| --- | --- | --- | --- | --- | --- | --- |
+| Organisation du dépôt + conventions | A | C | C | R | I | — |
+| Journal de décisions (mise en place) | C | A | C | R | I | I |
+
+## Phase 1 — Audit
+
+| **Livrable** | **Sébastien** | **Laurence** | **Bekanty** | **Gabriel** | **Product Owner** | **Jury** |
+| --- | --- | --- | --- | --- | --- | --- |
+| Cartographie SI et des risques | C | C | A | R | C | I |
+| Registre des anomalies - Existant | A | R | C | C | C | I |
+| SWOT de l'existant | A | C | R | C | C | I |
+| MCD/MLD/MPD de l’existant | R | C/A | R | R | C | I |
+| RACI Phase 1-Audit | C | C | R | A | C | I |
+
+## Phase 2 — Besoin actuel
+
+| **Livrable** | **Sébastien** | **Laurence** | **Bekanty** | **Gabriel** | **Product Owner** | **Jury** |
+| --- | --- | --- | --- | --- | --- | --- |
+| Note stratégique (axes d'évolution) |  |  | R | A | C | I |
+| Note de cadrage | A |  | R |  | C | I |
+| Étude d'opportunité | C | A | C | R | C | I |
+| Backlog priorisé (MoSCoW) | A |  | R |  | C | I |
+| MCD/MLD cible | R | A |  |  | C | I |
+| `migration.sql` | R |  |  | A | C | I |
+| Note d'indexation | A |  |  | R | C | I |
+| Cahier des charges technique | A |  | R |  | C | I |
+| Registre RGPD |  | A |  | R | C | I |
+| Note d'accessibilité PSH |  | A | R |  | I | I |
+
+## Phase 3 — Croissance
+
+| **Livrable** | **Sébastien** | **Laurence** | **Bekanty** | **Gabriel** | **Product Owner** | **Jury** |
+| --- | --- | --- | --- | --- | --- | --- |
+| Dossier d'architecture + matrice de décision | R (dossier) | R (matrice) | A |  | C | I |
+| Note de dimensionnement 3V | A |  |  | R | C | I |
+| Schéma analytique OLAP + alimentation | R |  |  | A | I | I |
+| Note d'éco-conception |  | A |  | R | I | I |
+| PCA/PRA + plan de migration |  | A |  | R | C | I |
+
+## Phase 4 — Application & IA
+
+| **Livrable** | **Sébastien** | **Laurence** | **Bekanty** | **Gabriel** | **Product Owner** | **Jury** |
+| --- | --- | --- | --- | --- | --- | --- |
+| Dossier de conception applicative + maquettes | A | R |  |  | I | I |
+| Backend / API | R | C |  | A | I | I |
+| Plan de tests + exécution | R | A |  |  | I | I |
+| Schéma du programme d'IA + conception matching | R | C |  | A | C | I |
+| Note souveraineté/sécurité IA |  | R |  | A | C | I |
+
+## Consolidation & soutenance
+
+| **Livrable** | **Sébastien** | **Laurence** | **Bekanty** | **Gabriel** | **Product Owner** | **Jury** |
+| --- | --- | --- | --- | --- | --- | --- |
+| Dossier professionnel assemblé | à désigner | à désigner | à désigner | à désigner | I | I |
+| Préparation orale — M1 | **R/A** |  |  |  | C | I |
+| Préparation orale — M2 |  | **R/A** |  |  | C | I |
+| Préparation orale — M3 |  |  | **R/A** |  | C | I |
+| Préparation orale — M4 |  |  |  | **R/A** | C | I |
+
+**Règles à vérifier avant de figer :**
+
+* un seul A par ligne
+* au moins un R par ligne
+* chaque membre porte au moins un A, quelque part dans le tableau (sinon il n'aura jamais défendu de choix structurant seul avant la soutenance individuelle)
+
+**Vérification de la proposition du 03/11** :
+
+* ✅ un seul A par ligne, sur toutes les lignes remplies ;
+* ⚠️ au moins un R par ligne : faux pour le **Dossier professionnel assemblé**, encore à désigner ;
+* ✅ chaque membre porte au moins un A.
+
+**Conclusion** _(à remplir après discussion du groupe)_ :

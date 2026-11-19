@@ -1,0 +1,54 @@
+> **Copie de Confluence** — page « Étude d'opportunité » (id 25165844, version 4), espace GaSeBeLa1, copiée le 2026-11-19.
+> La source qui fait foi reste Confluence : https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/25165844/tude+d+opportunit. Les images, schémas draw.io et encadrés ne passent pas dans l'export : ils sont signalés par une ligne « 🖼️ Image ou schéma non copié : <nom ou légende si connue> ».
+
+## 1. Executive summary
+
+Le système d'information actuel de l'entreprise ne permet pas de gérer fiablement le métier existant, ni d'absorber la croissance annoncée (rachat d'agences, couverture France + DOM-TOM + sept pays européens, plusieurs milliers de mandats par semaine). Le projet vise une refonte complète : modèle de données cible, architecture de montée en charge, backend repris de zéro, et conception des briques d'IA d'assistance aux chasseurs. La maîtrise d'ouvrage est portée par la direction de l'entreprise ; aucun budget chiffré n'a été communiqué à ce stade.
+
+## 2. Exposé du problème
+
+Le SI hérité repose sur trois tables seulement (`secteurs`, `utilisateurs`, `mandats`), conçues par un dirigeant sans compétence technique. Le seul développeur ayant maintenu l'application métier est aujourd'hui en arrêt maladie longue durée, sans code source récupérable. Concrètement, l'entreprise ne peut ni garantir l'intégrité de ses données, ni tracer le paiement de ses honoraires, ni exploiter automatiquement les critères de recherche de ses clients.
+
+## 3. Analyse de la situation
+
+**Comment on en est arrivé là** : le SI a été pensé pour répondre à des besoins immédiats, sans anticipation de ce qui deviendrait structurant. Trois indicateurs, mesurés directement sur les données, le confirment :
+
+* **Un tiers des mandats (6/18) affiche un statut « actif » faux** — dépassement de la validité légale de 6 mois jusqu'à 247 jours, sans que le système ne le détecte.
+* **Le champ de critères de recherche est en texte libre** : 8 vocabulaires différents pour désigner un type de bien, 83 % des surfaces ambiguës ou absentes, 22 % de critères alternatifs (« terrasse ou jardin ») qu'aucune structure ne peut représenter.
+* **Une incohérence de rôle déjà réalisée** : un mandat référence comme client un utilisateur enregistré comme chasseur, parce qu'aucune contrainte n'empêche la confusion entre les deux rôles dans le schéma actuel.
+
+Ce n'est pas une dégradation hypothétique : le taux d'erreur est déjà mesurable à faible volume (18 mandats). Il ne peut que s'aggraver avec la croissance annoncée. Le périmètre du projet est fixé par cette analyse : refondre le modèle de données et l'architecture, pas seulement corriger des symptômes ponctuels.
+
+## 4. Les options et le choix de la solution
+
+**Option A — Refonte complète du SI** (modèle de données, architecture, backend). Traite l'ensemble des risques identifiés et s'aligne avec la stratégie de croissance.
+
+**Option B — Corrections ciblées** sur les trois risques cotés au maximum (continuité du développement, traçabilité des honoraires, scalabilité), sans reconstruire le modèle de données. Plus rapide, mais laisse subsister l'anomalie d'intégrité et l'inexploitabilité des critères de recherche — les deux prérequis techniques du volet IA explicitement visé par l'entreprise.
+
+**Option C — Statu quo**, en attendant les rachats pour réévaluer. Écartée d'emblée : c'est précisément la croissance qui rend le défaut actuel ingérable, et le backend n'est déjà plus maintenable indépendamment de toute croissance.
+
+**Solution retenue : Option A.** Une correction partielle réglerait la crise immédiate sans répondre à l'ambition stratégique qui justifie le projet.
+
+## 5. Gains attendus
+
+**Opérationnels** — fiabilisation du pilotage de l'activité (statuts de mandat exacts, relances de renouvellement déclenchées au bon moment) ; traçabilité des honoraires, aujourd'hui absente de toute table.
+
+**Non financiers** — intégrité garantie structurellement plutôt que par discipline applicative ; critères de recherche exploitables, condition du matching automatisé et de l'IA visée ; architecture dimensionnée pour la croissance annoncée plutôt qu'un système qui casse déjà à faible volume.
+
+## 6. Coûts et moyens engagés
+
+Aucun budget ni délai n'a été communiqué par le commanditaire à ce stade — cette étude ne peut pas chiffrer un coût en euros sans l'inventer. Ce qui peut être dit : la refonte touche l'intégralité du SI (modèle de données, backend, architecture), pas un correctif ponctuel — c'est un projet structurant qui mobilise le groupe sur sa durée complète. Le chiffrage précis (ressources, jalons) relève de la note de cadrage (Phase 2), une fois le périmètre validé par le commanditaire.
+
+## 7. Planification
+
+Le projet suit les quatre phases du fil rouge : audit de l'existant (Phase 1), conception du modèle cible et migration (Phase 2), architecture de montée en charge (Phase 3), backend et briques IA (Phase 4). Les jalons précis (dates, responsables) seront posés dans la note de cadrage et le planning associé, une fois la présente étude validée par le commanditaire.
+
+## 8. Risques et contraintes
+
+Cotation probabilité × impact (matrice 3×3, dossier d'audit — 16 risques cotés au total) : trois risques au maximum (score 9, priorité absolue) — continuité du développement (déjà réalisé), absence de traçabilité des honoraires (potentiel), et scalabilité face à la croissance annoncée (potentiel). Neuf risques structurels supplémentaires cotés 6 (réduire impérativement) touchent l'intégrité des données, la fiabilité des statuts, l'exploitabilité des critères de recherche, le barème de commission, les données personnelles et la gouvernance technique.
+
+**Contrainte transverse** : la soutenance du projet est individuelle bien que le travail soit produit en groupe — chaque membre doit être en mesure de défendre l'intégralité des choix, y compris ceux qu'il n'a pas lui-même rédigés.
+
+---
+
+_Structure : plan en 8 parties (business case),_ [_manager-go.com_](http://manager-go.com)_. Chiffres des sections 3 et 8 recalculés depuis_ `fixtures/MySQL.sql`/`fixtures/PgSQL.sql`, règle des 6 mois du Readme, date de référence 25/07/2026.
