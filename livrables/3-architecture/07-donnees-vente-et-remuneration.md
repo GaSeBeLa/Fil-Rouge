@@ -64,7 +64,7 @@ erDiagram
 
 ## Sources
 
-- `01_create_fil_rouge_immobilier.sql` : `parameters_fees` (l. 962), `sale`
-  (l. 975), `commission_scale` (l. 1014), `hunter_rate_parameters`
-  (l. 1065), `payment` (l. 1103), `hunter_performance` (l. 1246).
+- `01_create_fil_rouge_immobilier.sql` : `parameters_fees` (l. 993), `sale`
+  (l. 1006), `commission_scale` (l. 1045), `hunter_rate_parameters`
+  (l. 1096), `payment` (l. 1134), `hunter_performance` (l. 1277).
 - La traçabilité du calcul : [`md/regles-metier/schema-tracabilite-remuneration-chasseur_v4.md`](../../md/regles-metier/schema-tracabilite-remuneration-chasseur_v4.md).

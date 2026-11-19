@@ -61,7 +61,7 @@ erDiagram
 
 - `01_create_fil_rouge_immobilier.sql` : `search_request` (l. 392),
   `criteria` (l. 418), `mandate` (l. 546), `estate` (l. 709), `picture`
-  (l. 799), `estate_contact` (l. 812), `estate_price_history` (l. 846),
-  `estate_searchrequest` (l. 866), `review_media` (l. 881),
-  `estate_proposed` (l. 891), `visit` (l. 928).
+  (l. 799), `estate_contact` (l. 816), `estate_price_history` (l. 850),
+  `estate_searchrequest` (l. 870), `review_media` (l. 890),
+  `estate_proposed` (l. 900), `visit` (l. 959).
 - Liens vers `user` (auteurs : `id_author`) non dessinés, pour rester lisible.

@@ -47,7 +47,7 @@ Ce ne sont pas des critères WCAG, mais des **bonnes pratiques**. Une personne d
 
 | Besoin du site | État dans l'API | À faire |
 | --- | --- | --- |
-| Un **texte alternatif** pour chaque photo | ❌ la table `picture` n'a que `url` et `id_estate` : **aucun champ de description** | ajouter une colonne `alt_text` (migration + modèle), remplie par le chasseur |
+| Un **texte alternatif** pour chaque photo | ✅ colonne `picture.alt_text`, facultative, 300 caractères au plus, ajoutée le 2026-11-19 (`Fil-Rouge-API` `981c1c7`, migration 53, testée) | le chasseur la remplit quand il ajoute une photo ; les photos importées n'en ont pas |
 | Des **messages d'erreur clairs**, en français | ✅ le routeur commun rend un `422` qui nomme le champ fautif ; les contraintes de la base ont un message lisible (fiche FIN1) | — |
 | Les **motifs de refus** dits en mots | ✅ liste fermée (`too_expensive`, `too_far`…) : le site les traduit en phrases | — |
 | Pas de **délai trop court** | ✅ le jeton dure 60 min, le code d'activation 7 jours | — |
@@ -61,4 +61,4 @@ Ce ne sont pas des critères WCAG, mais des **bonnes pratiques**. Une personne d
 ## 6. Limites
 
 - ⚠️ Pas de site, donc **aucun audit réel** : cette note fixe des exigences, elle ne prouve rien.
-- ⚠️ Le champ `alt_text` n'existe pas encore : c'est le seul trou de l'API pour l'accessibilité.
+- ⚠️ Les **photos importées** des annonces n'ont pas de texte alternatif : seules les photos ajoutées à la main en auront un.
