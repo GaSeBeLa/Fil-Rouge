@@ -5,6 +5,7 @@
 >
 > Les schémas 1 à 4 viennent de la présentation du 2026-10-16
 > (`md/equipe/2026-10-16-presentation.md`) ; les schémas 5 à 8 manquaient.
+> Le 2026-11-19, les schémas 5 à 7 (données) sont rangés en `2-modelisation/`, le schéma 8 (connexion) en `4-application/` : chacun dans sa phase. Ce dossier garde aussi le dossier d'architecture, la matrice de décision, la note 3V, le PCA/PRA et la SWOT de croissance.
 > Le code lu est celui du dépôt **Fil-Rouge-API**, au commit `01514b2`.
 
 ## Les schémas
@@ -15,10 +16,10 @@
 | 2 | [02-trajet-requete.md](02-trajet-requete.md) | une requête dans l'API, et ses refus 401, 422, 403, 404 | présentation, complété |
 | 3 | [03-chemin-des-donnees.md](03-chemin-des-donnees.md) | Airflow, MinIO, PostgreSQL, Elasticsearch, Kibana | présentation |
 | 4 | [04-pile-docker.md](04-pile-docker.md) | les 11 conteneurs, leurs profils, ports, ordre de démarrage, mémoire | présentation, complété |
-| 5 | [05-donnees-comptes-et-fiches.md](05-donnees-comptes-et-fiches.md) | comptes, fiches et les 5 rôles | nouveau |
-| 6 | [06-donnees-recherche-et-mandat.md](06-donnees-recherche-et-mandat.md) | demande, critères, mandat, biens proposés et visités | nouveau |
-| 7 | [07-donnees-vente-et-remuneration.md](07-donnees-vente-et-remuneration.md) | vente, paiement du chasseur, paramètres | nouveau |
-| 8 | [08-connexion-et-jeton.md](08-connexion-et-jeton.md) | se connecter, puis appeler une route avec son jeton | nouveau |
+| 5 | [05-donnees-comptes-et-fiches.md](../2-modelisation/05-donnees-comptes-et-fiches.md) (phase 2) | comptes, fiches et les 5 rôles | nouveau |
+| 6 | [06-donnees-recherche-et-mandat.md](../2-modelisation/06-donnees-recherche-et-mandat.md) (phase 2) | demande, critères, mandat, biens proposés et visités | nouveau |
+| 7 | [07-donnees-vente-et-remuneration.md](../2-modelisation/07-donnees-vente-et-remuneration.md) (phase 2) | vente, paiement du chasseur, paramètres | nouveau |
+| 8 | [08-connexion-et-jeton.md](../4-application/08-connexion-et-jeton.md) (phase 4) | se connecter, puis appeler une route avec son jeton | nouveau |
 
 ## Déjà ailleurs, pas recopié ici
 
