@@ -1,4 +1,4 @@
-# 🔀 Processus métier — du parcours au système
+# Processus métier — du parcours au système
 
 > Compétence : « Schématiser les processus métier en tenant compte des contraintes, de l'existant et des vulnérabilités » — schémas de processus, du parcours utilisateur au processus système (`documents utiles/TRACABILITE-COMPETENCES.md:49` et `:62`, StarterPack). Phases 2 à 4.
 > Rédigé le 2026-11-19 par le Glaude, à la demande de Gabriel. Sources : le `Readme.md` du sujet (les parcours), les user stories (`user-stories/01` à `07`), et les routes réelles de l'API (`GET /openapi.json`, `Fil-Rouge-API` au commit `31094a8`).
@@ -12,24 +12,24 @@
 
 ```mermaid
 flowchart TB
-    subgraph PART["👤 Particulier"]
+    subgraph PART["Particulier"]
         P1["1 · Dépose sa demande, sans compte<br/>POST /search-requests/submit"]
         P4["4 · Active son compte avec le code<br/>POST /auth/activate · POST /auth/login"]
         P7["7 · Voit ses propositions, commente, priorise<br/>GET /estate-proposed · PUT /estate-proposed/{id}"]
         P9{"9 · Le bien convient ?"}
         P10["10 · Fait une offre d'achat<br/>POST /estate-proposed/{id}/offer"]
     end
-    subgraph MAN["🧑‍💼 Manager"]
+    subgraph MAN["Manager"]
         M2["2 · Prend la demande « à prendre »,<br/>affecte un chasseur<br/>PUT /search-requests/{id}"]
         M3["3 · Donne le code d'activation<br/>POST /users/{id}/activation-code"]
     end
-    subgraph CHA["🧭 Chasseur"]
+    subgraph CHA["Chasseur"]
         C5["5 · Premier rendez-vous : affine les critères,<br/>fait signer le mandat<br/>POST /criteria · POST /mandates"]
         C6["6 · Propose des biens<br/>POST /estate-proposed"]
         C8["8 · Visite, rédige son avis<br/>POST /visits · POST /estate-search-requests"]
         C11{"11 · Le vendeur accepte ?"}
     end
-    subgraph SYS["⚙️ Système"]
+    subgraph SYS["Système (API et base)"]
         S12["12 · Acte signé : vente et honoraires<br/>POST /sales"]
     end
 
@@ -66,10 +66,10 @@ flowchart TB
 
 ```mermaid
 flowchart TB
-    subgraph MAN2["🧑‍💼 Manager"]
+    subgraph MAN2["Manager"]
         A1["1 · Affecte la demande à un chasseur<br/>PUT /search-requests/{id}"]
     end
-    subgraph CHA2["🧭 Chasseur"]
+    subgraph CHA2["Chasseur"]
         A2{"2 · Accepte la demande ?"}
         A3["3 · Rendez-vous, critères, mandat<br/>POST /criteria · POST /mandates"]
         A4["4 · Demande une sélection de biens au moteur<br/>de suggestion à règles (Elasticsearch)<br/>POST /search-requests/{id}/suggestions"]
@@ -78,7 +78,7 @@ flowchart TB
         A7{"7 · Le client est intéressé ?"}
         A8["8 · Organise la visite, transmet l'offre<br/>POST /visits"]
     end
-    subgraph SYS2["⚙️ Système"]
+    subgraph SYS2["Système (API et base)"]
         B2["9 · Vente enregistrée<br/>POST /sales"]
         B3["10 · Rémunération calculée une fois<br/>POST /sales/{id}/payment (Admin)"]
         B4["11 · Paiement programmé, puis payé ;<br/>note de performance recalculée<br/>PUT /payments/{id}"]
@@ -104,7 +104,7 @@ flowchart TB
 | 3 | un chasseur et un client sont deux fiches séparées ; un compte n'a qu'une fiche (3 triggers) | un chasseur enregistré comme client du mandat 13 | R02, R05, R06 |
 | 4 | suggestions limitées à 10 biens, classées par pertinence ; un bien écarté n'est plus proposé | les critères en texte libre, illisibles par une machine | R07 |
 | 5 | l'avis peut être un texte seul ; les médias ont leur propre table | rien | — |
-| 7 | 🟡 la sélection **chaque jour** n'est pas planifiée : le chasseur la demande (backlog, Should) | rien | — |
+| 7 | à noter : la sélection **chaque jour** n'est pas planifiée : le chasseur la demande (backlog, Should) | rien | — |
 | 9 | une seule vente par mandat et par bien | les ventes n'existaient pas | R03 |
 | 10 | calcul du sujet (barème par tranches, ancienneté, performance) ; un second appel rend `409` | un taux fixe par chasseur | R08 |
 | 11 | le montant annoncé est figé jusqu'au paiement ; un refus met le montant à 0 | aucune trace du paiement | R03 |
