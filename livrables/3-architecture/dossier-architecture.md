@@ -94,6 +94,17 @@ performance et la scalabilité.
 ✅ **Retenue : B.** Elle sépare ce que le sujet demande de séparer, sans second
 moteur ni exploitation que l'équipe ne pourrait pas tenir.
 
+### 3.3 Les arbitrages
+
+Sept compromis tranchés, chacun avec ce qu'il coûte : matrice, § 6. Les trois
+qui pèsent le plus :
+- **sécurité avant performance** : argon2 à 512 Mo par connexion, et le compte
+  relu à chaque appel ;
+- **simplicité avant scalabilité** : une seule instance pour le métier et
+  l'analyse, tant que 133 Go y tiennent ;
+- **éco-conception avant disponibilité** : pas de réplique, tant que le projet
+  reste un MVP local.
+
 ## 4. Les leviers de la croissance
 
 Le sujet en nomme quatre (`SP/Readme.md:246`). Aucun n'est un « oui » ou un

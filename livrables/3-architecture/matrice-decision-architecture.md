@@ -86,7 +86,32 @@ l'analytique (`SP/Readme.md:247`), sans payer un second moteur ni une
 exploitation que l'équipe ne peut pas tenir. Elle met l'analyse dans un schéma
 pseudonymisé, ce qui sert aussi l'ouverture des données à l'IA.
 
-## 6. Options écartées, et quand les reprendre
+## 6. Les arbitrages : ce qu'on gagne, ce qu'on paie
+
+Un choix d'architecture ne gagne pas sur tous les critères : il en sacrifie un
+pour un autre. Voici les sept compromis réels du projet, chacun tranché, avec
+la raison.
+
+| # | Tension | Ce qu'on a choisi | Ce qu'on gagne | Ce qu'on paie | Pourquoi ce sens |
+|---|---|---|---|---|---|
+| 1 | **Sécurité ↔ performance** | argon2 à 512 Mo et ~298 ms par mot de passe (`utils/security.py:45`) | un mot de passe volé en base coûte très cher à casser | ~5 Go de mémoire pour dix connexions simultanées ; freinage obligatoire (commit `e6f4b87`) | la base est nominative : une fuite coûte plus qu'une connexion lente |
+| 2 | **Sécurité ↔ performance** | le compte relu en base à **chaque** appel (ADR-052) | un compte désactivé perd ses droits tout de suite | une requête de plus par appel | des droits qui survivent 60 min à une désactivation, c'est une faille RGPD |
+| 3 | **Fraîcheur ↔ coût et simplicité** | OLAP et index recalculés **une fois par nuit** (ADR-061, `olap.md`) | un seul traitement par jour, pas de flux continu à faire tourner | analyse et recherche en retard de 24 h au plus | personne ne pilote à la minute ; un bien vu le lendemain suffit (éco-conception) |
+| 4 | **Simplicité et coût ↔ scalabilité** | OLTP et OLAP dans la **même** instance (option B) | un seul moteur, une seule exploitation | l'analyse partage le processeur du métier | 133 Go tiennent sur une instance (note 3V § 6) ; l'entrepôt séparé attend un ralentissement mesuré |
+| 5 | **Éco-conception ↔ disponibilité** | une instance de chaque service, **sans réplique** | moitié moins de machines, de mémoire, d'énergie | une panne arrête le service ; reprise à la main (PCA/PRA) | MVP local, pas en production ; la réplique est le premier ajout avant une mise en ligne |
+| 6 | **Éco-conception et droit ↔ fiabilité** | photos des agences **liées, pas copiées** (note 3V, hypothèse L) | 29 à 188 To de stockage évités ; pas de litige sur le droit d'auteur | une photo retirée par l'agence casse le lien | le stockage et le risque juridique coûtent plus qu'un lien cassé |
+| 7 | **Sécurité ↔ coût** | l'OLAP **pseudonymisé** : numéros, pas de noms (RGPD-13) | l'analyse et l'IA lisent sans voir de personne | pas d'analyse par nom ; il faut repasser par l'OLTP | la minimisation RGPD l'impose ; un nom n'apporte rien à une moyenne |
+
+**La règle qui départage** : quand la sécurité s'oppose à la performance, la
+sécurité gagne (poids 5 contre 4, § 2), à condition que le coût reste
+supportable à notre échelle. Quand l'éco-conception s'oppose à la
+disponibilité, l'éco-conception gagne **tant que le projet reste un MVP** ; ce
+sens s'inverse le jour d'une mise en production.
+
+🟡 Ces arbitrages sont ceux du code et des ADR. Ils restent à valider par
+l'équipe comme une seule position, à défendre d'une voix au jury.
+
+## 7. Options écartées, et quand les reprendre
 
 | Option | Écartée parce que | À reprendre quand |
 |---|---|---|
