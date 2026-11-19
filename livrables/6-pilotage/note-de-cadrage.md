@@ -1,4 +1,4 @@
-> **Copie de Confluence** — page « Note de cadrage » (id 17498130, version 11), espace GaSeBeLa1, copiée le 2026-11-19.
+> **Copie de Confluence** — page « Note de cadrage » (id 17498130, version 12), espace GaSeBeLa1, copiée le 2026-11-19.
 > La source qui fait foi reste Confluence : https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/17498130/Note+de+cadrage. Les images, schémas draw.io et encadrés ne passent pas dans l'export : ils sont signalés par une ligne « 🖼️ Image ou schéma non copié : <nom ou légende si connue> ».
 
 **À COMPLÉTER** — sections 3 à 10 complétées le 2026-11-03 depuis le brouillon v5 (`md/equipe/note-de-cadrage-complements.md`), avec l'accord de Békanty (R) et de Sébastien. Les points 🟡 restent à compléter par l'équipe. La version précédente est dans l'historique de la page.
@@ -122,12 +122,12 @@ _Pour les rôles et responsabilités des parties prenantes du projet, voir le_ `
 
 | **Jalon** | **Date cible** | **Livrables associés** |
 | --- | --- | --- |
-| Phase 1 — Audit de l’existant | du 25 au 31 juillet | registre des anomalies, cartographie, rapport d'audit |
-| Phase 2 — Besoin actuel | à partir du 17 août · 🟡 fin à compléter | note de cadrage, MoSCoW, CDC technique, MCD/MLD cible, `migration.sql`, note d'indexation |
-| Phase 3 — Croissance | 🟡 à compléter | dossier d'architecture, matrice de décision, note 3V, schéma OLAP, éco-conception, PCA/PRA |
-| Phase 4 — Parcours futur avec l'IA | 🟡 à compléter | API, plan de tests, schéma du programme d'IA, conception du matching, note souveraineté |
+| Phase 1 — Audit de l’existant | du 27 juillet au 19 août 2026 | registre des anomalies, cartographie, rapport d'audit |
+| Phase 2 — Besoin actuel | du 17 août au 7 octobre 2026 | note de cadrage, MoSCoW, CDC technique, MCD/MLD cible, `migration.sql`, note d'indexation |
+| Phase 3 — Croissance | du 8 octobre au 19 novembre 2026 | dossier d'architecture, matrice de décision, note 3V, schéma OLAP, éco-conception, PCA/PRA |
+| Phase 4 — Parcours futur avec l'IA | du 8 octobre au 27 novembre 2026 (fin proposée) | API, plan de tests, schéma du programme d'IA, conception du matching, note souveraineté |
 | Présentation intermédiaire | 2026-10-16 | diaporama |
-| Soutenance | 🟡 à compléter | dossier professionnel, oral individuel |
+| Soutenance | 11 mars 2027 | dossier professionnel, oral individuel |
 
 ---
 
@@ -137,7 +137,9 @@ _Pour les rôles et responsabilités des parties prenantes du projet, voir le_ `
 * **Phase 2 :** cette étape porte sur la modélisation relationnelle (MCD/MLD cible) qui permettra de passer d'un schéma "à plat" (historique) à une architecture relationnelle normalisée.
 * **Phase 3 et 4 :** Ces phases conditionnent la montée en charge vers l'international et l'intégration des fonctionnalités avancées (IA) qui dépendent directement de la qualité du modèle de données structuré en phase 2.
 
-**Diagramme de Gantt (à compléter)**
+**Diagramme de Gantt** — première version du 19/11/2026, à ajuster par le groupe ; 3 dates sont proposées (fin de la phase 4, rendu des livrables le 18/12/2026, début de la préparation de l'oral le 04/01/2027). Détail et sources : page « Planning (Gantt) et jalons ».
+
+![Gantt](https://raw.githubusercontent.com/GaSeBeLa/Fil-Rouge/main/livrables/6-pilotage/images/gantt.png)
 
 ---
 
