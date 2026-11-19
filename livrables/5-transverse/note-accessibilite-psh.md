@@ -61,4 +61,4 @@ Ce ne sont pas des critères WCAG, mais des **bonnes pratiques**. Une personne d
 ## 6. Limites
 
 - ⚠️ Pas de site, donc **aucun audit réel** : cette note fixe des exigences, elle ne prouve rien.
-- ⚠️ Les **photos importées** des annonces n'ont pas de texte alternatif : seules les photos ajoutées à la main en auront un.
+- ⚠️ Les **photos importées** des annonces n'ont pas de texte alternatif : seules les photos ajoutées à la main en auront un. Nos données sont fictives : les remplir n'aurait pas de sens. La colonne est **prête** ; son remplissage, par le chasseur ou par une IA relue, est prévu en **v2** (remarque de Laurence, 2026-11-19).
