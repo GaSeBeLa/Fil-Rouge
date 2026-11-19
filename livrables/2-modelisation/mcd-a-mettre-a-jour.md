@@ -12,36 +12,39 @@
 
 - ✅ Les **22 entités** du schéma v3 sont toutes dans le MCD : rien à ajouter, rien à retirer.
 
-## 2. Les liens à corriger ou à compléter
+## 2. Ce qu'il faut changer (comparaison du 2026-11-19, 15 h 40)
 
-Cases : ⬜ à faire · ✅ fait. Côté gauche = la table qui porte la clé.
+> Refaite sur les **fichiers de Confluence** envoyés par Gabriel (`MCD - Cible`, `MLD CIBLE`, « Diagramme sans nom » = MPD), plus récents que celui de `vrac/`. Comparés au fichier `docker/init-v3/01_create_fil_rouge_immobilier.sql` (la base de dev n'a pas les migrations 50 et 51 : elle ne sert pas de référence).
 
-### 2.1 Cardinalités à vérifier (le schéma dit « peut être vide »)
+### 2.1 MCD
 
-- ⬜ **SearchRequest — Hunter** (« Handled_by ») : du côté SearchRequest, **0,1** (pas 1,1). Une demande déposée par le formulaire n'a pas encore de chasseur (`search_request.id_hunter` nullable).
-- ⬜ **SearchRequest — RealEstateManager** (« Manages ») : du côté SearchRequest, **0,1**. Une demande « à prendre » n'a pas encore de manager (`id_realestatemanager` nullable, choix B du 19/11).
-- ⬜ **Estate — EstateContact** : une cardinalité **1,1 en trop** est accrochée au lien ; il doit rester EstateContact **1,1**, Estate **0,1**.
-- ⬜ **Role — Client, Hunter, RealEstateManager** (« Has role ») : le script voit les trois « Has role » accrochés à RealEstateManager. Vérifier qu'il y a **un lien par fiche** : chaque fiche **1,1**, Role **0,n**. Le lien Client — Role semble manquer.
+Déjà corrigés depuis le 03/11 : ✅ SearchRequest — Hunter et — RealEstateManager en 0,1 · ✅ Payment — Hunter (« is for ») · ✅ le 1,1 en trop d'EstateContact · ✅ Hunter — Role nommé.
 
-### 2.2 Associations sans nom ni cardinalités (le lien existe, il est nu)
+- ⬜ **Estate — Sale** (« is sold through ») : le lien a **disparu** ; à remettre (Sale **1,1**, Estate **0,1**).
+- ⬜ **User — Client**, **— Hunter**, **— RealEstateManager** : nommer ; fiche **1,1**, User **0,1**.
+- ⬜ **Estate_SearchRequest — Estate**, **— SearchRequest**, **— Hunter** : nommer ; Estate_SearchRequest **1,1**, les autres **0,n**.
+- ⬜ **ReviewMedia — Estate_SearchRequest** : ReviewMedia **1,1**, Estate_SearchRequest **0,n**.
+- ⬜ **EstatePriceHistory — Estate** : EstatePriceHistory **1,1**, Estate **0,n**.
+- ⬜ **Payment — HunterRateParameters** : Payment **0,1**, HunterRateParameters **0,n**.
+- ⬜ **Sale — ParametersFees** : le nom manque (« is based on ») ; Sale **1,1**, ParametersFees **0,n**.
+- ⬜ **Client — Role** : vérifier que le lien existe (le script voit les « Has role » accrochés à RealEstateManager).
+- ⬜ **EstateContact — User** : une seule cardinalité posée ; EstateContact **0,1**, User **0,n**.
+- 🟡 **Les auteurs** (`criteria`, `estate`, `estate_contact` vers User) : tous les montrer, ou aucun et l'écrire dans les justifications.
 
-- ⬜ **User — Client**, **User — Hunter**, **User — RealEstateManager** : nommer (ex. « est le compte de ») ; fiche **1,1**, User **0,1** (une seule fiche par compte, 3 triggers).
-- ⬜ **Estate_SearchRequest — Estate**, **— SearchRequest**, **— Hunter** : nommer (les étiquettes « Targets », « Belongs to », « Select » semblent posées sans lien) ; Estate_SearchRequest **1,1** à chaque fois, les autres **0,n**.
-- ⬜ **ReviewMedia — Estate_SearchRequest** (« Accompanies » ?) : ReviewMedia **1,1**, Estate_SearchRequest **0,n**.
-- ⬜ **EstatePriceHistory — Estate** : nommer ; EstatePriceHistory **1,1**, Estate **0,n**.
-- ⬜ **Payment — HunterRateParameters** : nommer (« is based on » ?) ; Payment **0,1**, HunterRateParameters **0,n**.
-- ⬜ **Sale — ParametersFees** : cardinalités présentes, **nom absent** (« is based on » ?) ; Sale **1,1**, ParametersFees **0,n**.
+### 2.2 MLD — 16 tables justes sur 22
 
-### 2.3 Liens absents du MCD
+- ⬜ `estate` : ajouter `energy_kwh_m2`, `energy_co2_m2`.
+- ⬜ `picture` : ajouter `alt_text` (migration 53).
+- ⬜ `payment` : ajouter `id_hunter_rate_parameters`.
+- ⬜ `sale` : ajouter `id_parameters_fees`.
+- ⬜ `review_media` : ajouter `id_estate_searchrequest`.
 
-- ⬜ **Payment — Hunter** (`payment.id_hunter`, obligatoire) : Payment **1,1**, Hunter **0,n**. C'est le chasseur payé.
-- 🟡 **Les auteurs** : `criteria.id_author`, `estate.id_author`, `estate_contact.id_author` vers User. Le MCD n'en montre qu'un (SearchRequest — User, « Creates »), et EstateContact — User sans nom. **À trancher** : tous les montrer (Criteria **1,1**, Estate **0,1**, EstateContact **0,1** ; User **0,n**), ou n'en montrer aucun et l'écrire dans les justifications (« les auteurs sont de la traçabilité, pas du métier »).
+### 2.3 MPD — 17 tables justes sur 22
 
-### 2.4 Déjà justes (rien à faire)
-
-Client — Mandate (« Signs ») · Hunter — Mandate (« Creates ») · SearchRequest — Mandate (« Formalises ») · SearchRequest — Client (« Owns ») · SearchRequest — User (« Creates ») · Criteria — SearchRequest (« Contains ») · Criteria — Criteria (« Follows ») · Mandate — Mandate (« Renews ») · EstateProposed — Estate, — Hunter, — Mandate · Visit — Estate, — Mandate · Sale — Estate, — Mandate · Payment — Sale · Picture — Estate · RealEstateManager — Hunter · Hunter — CommissionScale · CommissionScale — Payment · Hunter — HunterPerformance · HunterPerformance — Payment, — Mandate.
-
----
+- ⬜ `estate` : ajouter `energy_kwh_m2`, `energy_co2_m2`.
+- ⬜ `picture` : ajouter `alt_text`.
+- ⬜ `hunter_performance` : ajouter `id_hunter`.
+- ⬜ `estate_proposed` : ajouter `client_decided_at`, `decline_reason` (migration 51).
 
 ## 3. Les justifications à écrire sous le schéma
 
