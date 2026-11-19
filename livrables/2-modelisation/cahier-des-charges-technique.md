@@ -1,4 +1,4 @@
-> **Copie de Confluence** — page « Cahier des Charges Technique » (id 25165826, version 13), espace GaSeBeLa1, copiée le 2026-11-19.
+> **Copie de Confluence** — page « Cahier des Charges Technique » (id 25165826, version 14), espace GaSeBeLa1, copiée le 2026-11-19.
 > La source qui fait foi reste Confluence : https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/25165826/Cahier+des+Charges+Technique. Les images, schémas draw.io et encadrés ne passent pas dans l'export : ils sont signalés par une ligne « 🖼️ Image ou schéma non copié : <nom ou légende si connue> ».
 
 # Cahier des charges technique — Refonte du SI de chasse immobilière
@@ -282,6 +282,26 @@ L'architecture repose sur une **séparation du transactionnel et de l'analytique
 Références : `MCD-MERISE.md`, `OLTP.md`, `OLAP.md`, Journal de décisions (`ADR-001`, `ADR-016`).
 
 🟡 Le style d'architecture applicative — monolithe modulaire ou services séparés — n'a pas encore fait l'objet d'un ADR. À trancher en Phase 4.
+
+### 6.1 Les schémas de l'architecture
+
+Repris de la présentation du 16/10/2026. Source Mermaid et explications : dépôt `GaSeBeLa/Fil-Rouge`, dossier `livrables/3-architecture/`, fichiers 01 à 04.
+
+**Schéma 1 — d'où on part, où on arrive** : 3 tables reçues, une première cible de 12 tables en milliers d'euros, puis 18, puis 22 tables en euros.
+
+![Schéma 1 : évolution du schéma de la base](https://raw.githubusercontent.com/GaSeBeLa/Fil-Rouge/main/livrables/3-architecture/images/01-evolution-du-schema.png)
+
+**Schéma 2 — le trajet d'une requête dans l'API** : chaque couche, et le refus qu'elle renvoie (401, 422, 403, 404).
+
+![Schéma 2 : trajet d'une requête dans l'API](https://raw.githubusercontent.com/GaSeBeLa/Fil-Rouge/main/livrables/3-architecture/images/02-trajet-requete.png)
+
+**Schéma 3 — le chemin des données** : Airflow, MinIO, PostgreSQL, Elasticsearch, Logstash, Kibana.
+
+![Schéma 3 : chemin des données](https://raw.githubusercontent.com/GaSeBeLa/Fil-Rouge/main/livrables/3-architecture/images/03-chemin-des-donnees.png)
+
+**Schéma 4 — la pile Docker** : les conteneurs, leurs profils, leur ordre de démarrage et leur mémoire.
+
+![Schéma 4 : pile Docker](https://raw.githubusercontent.com/GaSeBeLa/Fil-Rouge/main/livrables/3-architecture/images/04-pile-docker.png)
 
 ---
 
