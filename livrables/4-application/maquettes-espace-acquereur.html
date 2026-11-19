@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maquettes de l'espace acquéreur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --page: #f3e8d4;
+    --card: #faf1e2;
+    --ink: #50433b;
+    --soft: #6e5f54;
+    --line: #c9b79c;
+    --field: #fffaf1;
+    --accent: #8a4b1f;
+    --accent-ink: #fffaf1;
+    --ok: #3f6b3a;
+    --no: #8f3b2e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--page);
+    color: var(--ink);
+    font-family: "Atkinson Hyperlegible", Verdana, sans-serif;
+    font-size: 18px;
+    line-height: 1.55;
+    letter-spacing: 0.05em;
+  }
+  main { max-width: 46rem; margin: 0 auto; padding: 2rem 16px 4rem; }
+  h1 { font-size: 1.7rem; margin: 0 0 0.5rem; }
+  h2 { font-size: 1.25rem; margin: 0 0 0.25rem; }
+  p { margin: 0.4rem 0; }
+  code { font-family: "IBM Plex Mono", monospace; letter-spacing: 0; font-size: 16px; }
+  .intro { margin-bottom: 2rem; }
+  .screen {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin: 0 0 1.75rem;
+  }
+  .who { color: var(--soft); font-size: 16px; margin-bottom: 0.9rem; }
+  .frame {
+    border: 2px solid var(--line);
+    border-radius: 10px;
+    background: var(--field);
+    padding: 1rem;
+  }
+  .bar {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid var(--line); padding-bottom: 0.5rem; margin-bottom: 0.9rem;
+    font-weight: 700;
+  }
+  .field { margin: 0 0 0.8rem; }
+  .field label { display: block; font-weight: 700; font-size: 16px; }
+  .input {
+    border: 2px solid var(--soft); border-radius: 6px; min-height: 44px;
+    padding: 0.5rem 0.7rem; background: #fff; color: var(--soft); font-size: 16px;
+  }
+  .row { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+  .row .field { flex: 1 1 12rem; }
+  .btn {
+    display: inline-block; min-height: 44px; min-width: 44px;
+    padding: 0.6rem 1.1rem; border-radius: 8px; font-weight: 700;
+    border: 2px solid var(--accent); background: var(--accent); color: var(--accent-ink);
+  }
+  .btn.ghost { background: transparent; color: var(--accent); }
+  .item {
+    display: flex; gap: 0.8rem; align-items: center;
+    border: 1px solid var(--line); border-radius: 8px; padding: 0.6rem; margin-bottom: 0.6rem; background: #fff;
+  }
+  .thumb {
+    width: 88px; height: 66px; border-radius: 6px; flex: none;
+    background: repeating-linear-gradient(45deg, #e6d6bb, #e6d6bb 8px, #efe2cb 8px, #efe2cb 16px);
+  }
+  .photo { height: 170px; border-radius: 8px; margin-bottom: 0.5rem;
+    background: repeating-linear-gradient(45deg, #e6d6bb, #e6d6bb 10px, #efe2cb 10px, #efe2cb 20px); }
+  .alt { font-size: 16px; color: var(--soft); border-left: 4px solid var(--line); padding-left: 0.6rem; margin-bottom: 0.8rem; }
+  .tag { display: inline-block; font-size: 15px; border-radius: 999px; padding: 0.1rem 0.7rem; border: 1px solid var(--line); white-space: nowrap; }
+  .tag.ok { color: var(--ok); border-color: var(--ok); }
+  .tag.no { color: var(--no); border-color: var(--no); }
+  .error { color: var(--no); font-size: 16px; margin-top: 0.3rem; }
+  .api { margin-top: 0.9rem; font-size: 16px; }
+  .api strong { font-weight: 700; }
+  .grow { flex: 1; }
+  .nowrap { white-space: nowrap; }
+  .a11y { font-size: 16px; color: var(--soft); margin-top: 0.4rem; }
+</style>
+</head>
+<body>
+<main>
+  <header class="intro">
+    <h1>Maquettes de l'espace acquéreur</h1>
+    <p>Six écrans d'un futur site, dessinés pour le dossier de conception (BC03). Le projet ne livre pas de site : chaque maquette dit quelle route de l'API la nourrit.</p>
+    <p>Elles suivent la note d'accessibilité PSH : étiquettes visibles, cibles d'au moins <span class="nowrap">44 px</span> (le minimum WCAG est de <span class="nowrap">24 px</span>), erreurs dites en texte, texte alternatif des photos.</p>
+  </header>
+
+  <section class="screen" aria-labelledby="e1">
+    <h2 id="e1">1. Déposer une demande de recherche</h2>
+    <p class="who">Pour un visiteur, sans compte · user story 01, @formulaire</p>
+    <div class="frame">
+      <div class="bar"><span>Chasse immobilière</span><span class="btn ghost">Se connecter</span></div>
+      <div class="row">
+        <div class="field"><label>Prénom</label><div class="input">Léa</div></div>
+        <div class="field"><label>Nom</label><div class="input">Dupont</div></div>
+      </div>
+      <div class="field"><label>Email</label><div class="input">lea.dupont@exemple.fr</div></div>
+      <div class="field"><label>Téléphone</label><div class="input">+33 6 12 34 56 78</div></div>
+      <div class="field"><label>Adresse</label><div class="input">12 rue de la Roquette, 75011 Paris</div></div>
+      <div class="row">
+        <div class="field"><label>Budget maximum, en euros</label><div class="input">400 000</div></div>
+        <div class="field"><label>Type de bien</label><div class="input">Appartement ▾</div></div>
+      </div>
+      <span class="btn">Envoyer ma demande</span>
+    </div>
+    <p class="api"><strong>API</strong> : <code>POST /search-requests/submit</code> crée le compte inactif, la fiche client, la demande et ses premiers critères, en une transaction. La réponse est la même pour tous : elle ne dit pas si l'email existait.</p>
+  </section>
+
+  <section class="screen" aria-labelledby="e2">
+    <h2 id="e2">2. Finaliser son compte</h2>
+    <p class="who">Pour le particulier, après l'affectation de son chasseur · user story 01, @creation-compte</p>
+    <div class="frame">
+      <div class="bar"><span>Votre chasseur vous attend</span></div>
+      <p>Marc Roussel s'occupe de votre recherche. Choisissez votre mot de passe pour suivre votre dossier.</p>
+      <div class="field"><label>Code reçu</label><div class="input">•••• collé depuis le message</div></div>
+      <div class="field"><label>Mot de passe, <span class="nowrap">12 caractères</span> au moins</label><div class="input">••••••••</div>
+        <p class="error">⚠️ Le mot de passe doit faire <span class="nowrap">12 caractères</span> au moins.</p></div>
+      <span class="btn">Activer mon compte</span>
+    </div>
+    <p class="api"><strong>API</strong> : le manager obtient le code par <code>POST /users/{id}/activation-code</code> (<span class="nowrap">7 jours</span>) ; le particulier l'envoie à <code>POST /auth/activate</code>, qui rend aussitôt un jeton de connexion.</p>
+  </section>
+
+  <section class="screen" aria-labelledby="e3">
+    <h2 id="e3">3. Les biens que mon chasseur me propose</h2>
+    <p class="who">Pour le particulier connecté · user story 02</p>
+    <div class="frame">
+      <div class="bar"><span>Mes propositions</span><span class="tag">3 nouveaux</span></div>
+      <div class="item"><div class="thumb" role="img" aria-label="Façade d'un immeuble ancien"></div>
+        <div class="grow"><strong>Appartement, 3 pièces, 68 m²</strong><br><span class="nowrap">385 000 €</span> · Paris 11ᵉ</div><span class="tag">À voir</span></div>
+      <div class="item"><div class="thumb" role="img" aria-label="Séjour avec balcon"></div>
+        <div class="grow"><strong>Appartement, 2 pièces, 52 m²</strong><br><span class="nowrap">342 000 €</span> · Paris 20ᵉ</div><span class="tag ok">Intéressé</span></div>
+      <div class="item"><div class="thumb" role="img" aria-label="Cuisine ouverte"></div>
+        <div class="grow"><strong>Duplex, 4 pièces, 81 m²</strong><br><span class="nowrap">399 000 €</span> · Montreuil</div><span class="tag no">Refusé : trop loin</span></div>
+    </div>
+    <p class="api"><strong>API</strong> : <code>GET /estate-proposed</code> ne rend que les propositions de ce client (« le sien ») ; un bien n'y arrive que si le chasseur l'a gardé.</p>
+  </section>
+
+  <section class="screen" aria-labelledby="e4">
+    <h2 id="e4">4. La fiche d'un bien, et ma décision</h2>
+    <p class="who">Pour le particulier connecté · user story 02</p>
+    <div class="frame">
+      <div class="photo" role="img" aria-label="Salon lumineux, cheminée en pierre, parquet clair"></div>
+      <p class="alt">Texte lu par un lecteur d'écran : « Salon lumineux, cheminée en pierre, parquet clair » (<code>picture.alt_text</code>)</p>
+      <p><strong>Appartement, 3 pièces, 68 m²</strong> · <span class="nowrap">385 000 €</span> · classe énergie C</p>
+      <p>L'avis de mon chasseur : « Calme, lumineux, à rafraîchir. Prix un peu haut pour le quartier. »</p>
+      <div class="field"><label>Si ce bien ne vous convient pas, pourquoi ?</label><div class="input">Trop cher ▾</div></div>
+      <div class="row"><span class="btn">Ce bien m'intéresse</span><span class="btn ghost">Il ne me convient pas</span></div>
+    </div>
+    <p class="api"><strong>API</strong> : <code>GET /estates/{id}</code> et <code>GET /pictures</code> ; la décision part par <code>PUT /estate-proposed/{id}</code>, où le client ne change que sa note, son commentaire et sa décision. Les motifs viennent d'une liste fermée : trop cher, trop loin, trop petit, mauvais type, autre.</p>
+  </section>
+
+  <section class="screen" aria-labelledby="e5">
+    <h2 id="e5">5. Mes demandes</h2>
+    <p class="who">Pour le chasseur connecté · user story 04</p>
+    <div class="frame">
+      <div class="bar"><span>Mes demandes en cours</span><span class="tag">les 20 plus récentes</span></div>
+      <div class="item"><div class="grow"><strong>Léa Dupont</strong> · appartement, <span class="nowrap">400 000 €</span> au plus, Paris</div><span class="tag">Lancée</span></div>
+      <div class="item"><div class="grow"><strong>Paul Martin</strong> · maison, <span class="nowrap">520 000 €</span> au plus, Toulouse</div><span class="tag">Acceptée</span></div>
+      <div class="item"><div class="grow"><strong>Inès Morel</strong> · studio, <span class="nowrap">190 000 €</span> au plus, Lyon</div><span class="tag">Confirmée</span></div>
+    </div>
+    <p class="api"><strong>API</strong> : <code>GET /search-requests</code> ne rend que les demandes de ce chasseur. L'index <code>idx_search_request_hunter_created</code> les sert déjà triées (note d'indexation).</p>
+  </section>
+
+  <section class="screen" aria-labelledby="e6">
+    <h2 id="e6">6. Les suggestions du jour</h2>
+    <p class="who">Pour le chasseur connecté · user story 05</p>
+    <div class="frame">
+      <div class="bar"><span>Suggestions pour Léa Dupont</span><span class="btn ghost">Relancer</span></div>
+      <div class="item"><div class="thumb" role="img" aria-label="Façade en briques"></div>
+        <div class="grow"><strong>Appartement, 3 pièces</strong> · <span class="nowrap">379 000 €</span> · Paris 11ᵉ</div>
+        <div class="row"><span class="btn">Garder</span><span class="btn ghost">Écarter</span></div></div>
+      <div class="item"><div class="thumb" role="img" aria-label="Terrasse sur les toits"></div>
+        <div class="grow"><strong>Appartement, 2 pièces</strong> · <span class="nowrap">355 000 €</span> · Paris 12ᵉ</div>
+        <div class="row"><span class="btn">Garder</span><span class="btn ghost">Écarter</span></div></div>
+    </div>
+    <p class="api"><strong>API</strong> : <code>POST /search-requests/{id}/suggestions</code> traduit les derniers critères en requête Elasticsearch. Garder ou écarter met à jour <code>estate_searchrequest.status</code> (<code>kept</code>, <code>dismissed</code>).</p>
+  </section>
+</main>
+</body>
+</html>
