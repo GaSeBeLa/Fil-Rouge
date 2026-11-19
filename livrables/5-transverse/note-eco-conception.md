@@ -1,0 +1,54 @@
+# 🌱 Note d'éco-conception — Fil Rouge Immobilier
+
+> **Note d'éco-conception** (transverse ; BC01, BC03, BC05).
+> Exigée par `GRILLE-EVALUATION.md` (StarterPack - BASE) : « 1-2 pages (dont arbitrage sauvegardes) ». Cas d'école imposé par le `Readme.md` du sujet : les **sauvegardes multi-fréquences** (minute, heure, 12 h, 24 h).
+> Version courte, 2026-11-19, rédigée par le Glaude à partir de la note de Gabriel (Confluence, page 33783821) et du code réel. **À relire par Gabriel.** Remplace la version longue (~2 200 mots), qui contredisait la note 3V sur les photos.
+
+---
+
+## 1. Le principe
+
+**Ne garder et ne calculer que ce qui a de la valeur.** Une donnée qui se refait ne se sauvegarde pas. Une donnée qui ne se refait pas se garde, et se sauvegarde.
+
+## 2. Les sauvegardes : l'arbitrage imposé
+
+Le sujet propose quatre fréquences : à la minute, à l'heure, toutes les 12 h, toutes les 24 h. Les copier toutes, pour toutes les tables, multiplierait le stockage pour un gain faible.
+
+| Option | Données perdues au pire | Stockage | Verdict |
+|---|---|---|---|
+| Une copie complète à chaque minute | 1 minute | 1 440 copies par jour | ❌ |
+| Une copie par tranche (1 h, 12 h, 24 h) selon la table | 1 h à 24 h | 3 jeux de copies | 🟡 |
+| **Une copie complète par jour + les journaux de la base (WAL)** | **quelques minutes**, pour toutes les tables | 1 copie par jour + des journaux légers | ✅ **retenue** |
+
+- Les journaux de transactions (WAL) gardent chaque écriture : on rejoue la journée jusqu'à la minute voulue, sans stocker une copie à chaque minute.
+- **Rétention** : les durées de la note d'origine, **7, 30 et 90 jours**, selon la valeur des données. 90 jours est aussi le délai pendant lequel une donnée effacée (RGPD) reste dans une copie.
+- 📏 **Mesuré le 2026-11-19** : une copie complète de la base de dev pèse **573 Ko** compressée, en 0,96 s (`pca-pra-plan-de-migration.md`, § 2.4). Le coût est donc minime aujourd'hui. À **22 à 133 Go** (projection de la note 3V à 2 ans), il faudra le revoir.
+- Mêmes règles que le PCA/PRA : les données contractuelles (`mandate`, `estate_proposed`, `sale`, `payment`, `visit`) sont les plus précieuses, et la copie quotidienne avec les WAL les couvre toutes.
+
+## 3. Ce qu'on ne sauvegarde pas, parce que ça se refait
+
+| Donnée | Pourquoi elle ne se sauvegarde pas | Comment elle se refait |
+|---|---|---|
+| L'index Elasticsearch des biens | une copie de PostgreSQL (ADR-061) | le DAG `estates_index`, chaque nuit à 4 h |
+| Le schéma OLAP | calculé depuis la base | le DAG `olap_refresh`, chaque nuit à 3 h |
+| MinIO `bronze`, `silver`, `quarantine`, `gold` | le brut des annonces, et des bilans de chargement (ADR-060) | le DAG `annonces_import` les regénère |
+| Les photos des annonces importées | **liées, pas copiées** : on garde leur adresse (`picture.url`) | elles restent sur le site d'origine |
+
+**La règle des médias** :
+- **Ce qui vient d'ailleurs se lie.** Les photos d'une annonce importée appartiennent au site d'origine : on garde leur lien. Les copier coûterait du stockage, et poserait un problème de droits.
+- **Ce qu'on produit se garde.** Les médias faits par le chasseur (photo, audio ou vidéo de la note d'avis, ADR-051) n'existent nulle part ailleurs : ils iront dans MinIO, et **se sauvegarderont** comme la base.
+
+## 4. Un code sobre, avec des preuves
+
+- **Trois index** posés après mesure : les filtres par chasseur et par demande vont de **15 à 100 fois plus vite** à 500 000 sélections (`note-indexation.md`). On n'a posé que les index utiles : chacun coûte de la place, et ralentit un peu chaque écriture.
+- **Le calcul de rémunération** ne tourne qu'une fois par vente (`POST /sales/{id}/payment`, 409 au second appel).
+- **Les suggestions** sont limitées à 10 biens par demande, et un bien écarté n'est plus proposé.
+- **Les logs de l'API** : leur durée est fixée à **6 mois** (registre RGPD, ligne 10).
+- **Elasticsearch** tourne avec 1 shard et 0 réplique : assez pour un seul serveur, sans copie inutile.
+
+## 5. Les limites, dites franchement
+
+- ⚠️ **Aucune sauvegarde n'est planifiée** dans le projet : la politique est écrite, pas codée (comme le dit le PCA/PRA).
+- ⚠️ **La purge du brut n'est pas codée** : MinIO `bronze` garde tout ce qu'il reçoit.
+- ⚠️ **La suppression des logs après 6 mois** n'est pas codée non plus : la durée est fixée, pas appliquée.
+- ⚠️ **L'envoi des médias du chasseur dans MinIO** est prévu (ADR-015, ADR-051), pas codé : la table ne garde aujourd'hui qu'une adresse.
