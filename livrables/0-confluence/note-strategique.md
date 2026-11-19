@@ -1,9 +1,9 @@
-> **Copie de Confluence** — page « Note stratégique (axes d’évolution) » (id 18022434, version 5), espace GaSeBeLa1, copiée le 2026-11-19.
+> **Copie de Confluence** — page « Note stratégique (axes d’évolution) » (id 18022434, version 7), espace GaSeBeLa1, copiée le 2026-11-19.
 > La source qui fait foi reste Confluence : https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/18022434/Note+strat+gique+axes+d+volution. Les images, schémas draw.io et encadrés ne passent pas dans l'export : ils sont signalés par une ligne « 🖼️ Image ou schéma non copié : <nom ou légende si connue> ».
 
 ### 1. Synthèse de l'existant et diagnostic technique
 
-Le système d'information actuel de la société de chasse immobilière repose sur une architecture artisanale limitant son périmètre à seulement 3 tables (`secteurs`, `utilisateurs`, `mandats`), ce qui constitue aujourd'hui un frein structurel majeur. L'audit a formellement qualifié 16 risques, dont trois classés en priorité absolue : l'absence totale de code source exploitable pour le backend métier, l'incapacité de l'architecture à absorber la charge future, et l'absence critique de traçabilité financière (paiement des honoraires notariés).
+Le système d'information actuel de la société de chasse immobilière repose sur une architecture artisanale limitant son périmètre à seulement 3 tables (`secteurs`, `utilisateurs`, `mandats`), ce qui constitue aujourd'hui un frein structurel majeur. L'audit a formellement qualifié 16 risques, dont trois classés en priorité absolue (cote 9 sur 9) : des mandats marqués « actifs » alors qu'ils ont expiré (R01), un chasseur enregistré comme client (R02), et l'absence de toute trace des honoraires (R03). S'y ajoutent la perte du code source du backend (R09, cote 6) et une architecture qui ne pourra pas absorber la charge future.
 
 L'analyse directe des données illustre la criticité de la situation :
 
@@ -17,7 +17,7 @@ L'analyse directe des données illustre la criticité de la situation :
 
 Le SI doit impérativement se transformer pour soutenir le modèle économique rentable et le plan de développement de l'entreprise.
 
-* **Hyper-croissance et Internationalisation :** Le système doit absorber un passage à l'échelle massif prévoyant le rachat d'agences, un déploiement sur 7 pays européens ainsi que les DROM, générant plusieurs milliers de mandats par semaine.
+* **Hyper-croissance et Internationalisation :** Le système doit absorber un passage à l'échelle massif prévoyant le rachat d'agences, un déploiement dans 9 autres pays européens (Espagne, Allemagne, Royaume-Uni, Irlande, les 3 pays du BeNeLux, Italie, Suisse) ainsi que les DROM, générant plusieurs milliers de mandats par semaine.
 * **Intégration de l'Intelligence Artificielle :** La structuration absolue des données est le prérequis technique non négociable pour déployer les modèles de _matching_ entre biens et demandes, ainsi que les futurs « chasseurs-IA » d'assistance.
 * **Sécurisation juridique et financière :** Le SI doit refléter fidèlement l'exhaustivité du métier (statuts réels des mandats, paiements notariés, barèmes de commission variables) tout en garantissant la stricte conformité réglementaire.
 

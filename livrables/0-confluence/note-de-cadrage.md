@@ -1,4 +1,4 @@
-> **Copie de Confluence** — page « Note de cadrage » (id 17498130, version 10), espace GaSeBeLa1, copiée le 2026-11-19.
+> **Copie de Confluence** — page « Note de cadrage » (id 17498130, version 11), espace GaSeBeLa1, copiée le 2026-11-19.
 > La source qui fait foi reste Confluence : https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/17498130/Note+de+cadrage. Les images, schémas draw.io et encadrés ne passent pas dans l'export : ils sont signalés par une ligne « 🖼️ Image ou schéma non copié : <nom ou légende si connue> ».
 
 **À COMPLÉTER** — sections 3 à 10 complétées le 2026-11-03 depuis le brouillon v5 (`md/equipe/note-de-cadrage-complements.md`), avec l'accord de Békanty (R) et de Sébastien. Les points 🟡 restent à compléter par l'équipe. La version précédente est dans l'historique de la page.
@@ -168,19 +168,19 @@ Deux familles de risques : ceux du **système d'information** (trouvés à l'aud
 
 Sources : pages « Audit du système d'information » et « Registre des anomalies — Existant ». L'audit a coté **16 problèmes** (probabilité × gravité, de 1 à 9) : **3** en priorité absolue, **9** à corriger impérativement, **4** mineurs.
 
-🟡 **À compléter** : la cote de chaque risque, à recopier depuis la matrice de la page « Cartographie du SI + analyse de risques ».
+**Cotes** : registre coté de la phase 1 (`livrables/1-audit/02-registre-anomalies-risques.md`, dépôt Fil-Rouge), probabilité × impact, de 1 à 9. 🟥 7 à 9 : priorité absolue · 🟨 4 à 6 : impérative · 🟩 1 à 3 : mineure.
 
-| Risque trouvé à l'audit | Impact | Parade dans le nouveau système |
-| --- | --- | --- |
-| Des mandats « actifs » ont dépassé leurs 6 mois (6 sur 11 au 25/07) | facturer sur un mandat expiré : risque juridique | date de signature et date de fin calculée (signature + 6 mois), contrôlées par la base |
-| Un chasseur enregistré comme client (mandat 13) | les rôles se mélangent | clients et chasseurs dans des tables séparées : l'erreur devient impossible |
-| Les honoraires n'existent nulle part | pas d'historique du chiffre d'affaires | tables des ventes et des paiements, et calcul de la rémunération |
-| Taux de commission fixe, alors que la règle est un barème | rémunération fausse | une table de barème (tranches de montant) |
-| Critères de recherche en texte libre | impossible de filtrer, ni de nourrir l'IA | critères structurés et gardés version par version |
-| Email, téléphone, code postal sans contrôle | données fausses ou en double | contrôles de format dans la base |
-| Le code de l'application est perdu | plus personne ne peut faire évoluer le système | une nouvelle API, sur GitHub, couverte par des tests |
-| Données personnelles en clair | non-conformité RGPD | registre RGPD, droits par rôle, compte en lecture seule pour l'IA |
-| La croissance (des milliers de mandats par semaine) | le système ne tient pas la charge | architecture dimensionnée : note 3V, schéma OLAP, Elasticsearch |
+| Cote | Risque trouvé à l'audit | Impact | Parade dans le nouveau système |
+| --- | --- | --- | --- |
+| 🟥 R01 · 9 | Des mandats « actifs » ont dépassé leurs 6 mois (6 sur 11 au 25/07) | facturer sur un mandat expiré : risque juridique | date de signature et date de fin calculée (signature + 6 mois), contrôlées par la base |
+| 🟥 R02 · 9 | Un chasseur enregistré comme client (mandat 13) | les rôles se mélangent | clients et chasseurs dans des tables séparées : l'erreur devient impossible |
+| 🟥 R03 · 9 | Les honoraires n'existent nulle part | pas d'historique du chiffre d'affaires | tables des ventes et des paiements, et calcul de la rémunération |
+| 🟨 R08 · 6 | Taux de commission fixe, alors que la règle est un barème | rémunération fausse | une table de barème (tranches de montant) |
+| 🟨 R07 · 6 | Critères de recherche en texte libre | impossible de filtrer, ni de nourrir l'IA | critères structurés et gardés version par version |
+| 🟩 R11 · 2 · 🟨 R12 · 4 · 🟩 R13 · 2 | Email, téléphone, code postal sans contrôle | données fausses ou en double | contrôles de format dans la base |
+| 🟨 R09 · 6 | Le code de l'application est perdu | plus personne ne peut faire évoluer le système | une nouvelle API, sur GitHub, couverte par des tests |
+| 🟨 R16 · 6 | Données personnelles en clair | non-conformité RGPD | registre RGPD, droits par rôle, compte en lecture seule pour l'IA |
+| — (enjeu du projet, pas un défaut de l'existant) | La croissance (des milliers de mandats par semaine) | le système ne tient pas la charge | architecture dimensionnée : note 3V, schéma OLAP, Elasticsearch |
 
 ### 8.2 Les risques de la conduite du projet
 
