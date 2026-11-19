@@ -1,0 +1,190 @@
+ etape | selections | demandes 
+-------+------------+----------
+ demo  |       1016 |      519
+(1 row)
+
+                                                            QUERY PLAN                                                            
+----------------------------------------------------------------------------------------------------------------------------------
+ Gather  (cost=1000.00..7289.68 rows=1 width=178) (actual time=0.697..17.757 rows=2 loops=1)
+   Workers Planned: 2
+   Workers Launched: 2
+   Buffers: shared hit=3682
+   ->  Parallel Seq Scan on estate_searchrequest  (cost=0.00..6289.58 rows=1 width=178) (actual time=3.649..6.767 rows=1 loops=3)
+         Filter: (id_search_request = 42)
+         Rows Removed by Filter: 338
+         Buffers: shared hit=3682
+ Planning:
+   Buffers: shared hit=19
+ Planning Time: 0.243 ms
+ Execution Time: 17.787 ms
+(12 rows)
+
+  etape  | selections | demandes 
+---------+------------+----------
+ projete |     500656 |   104319
+(1 row)
+
+ etape | une_demande | un_chasseur 
+-------+-------------+-------------
+ cles  |         500 |           1
+(1 row)
+
+===== Q1 AVANT : selections d une demande
+                                                              QUERY PLAN                                                               
+---------------------------------------------------------------------------------------------------------------------------------------
+ Gather  (cost=1000.00..11062.68 rows=991 width=178) (actual time=0.308..43.347 rows=1002 loops=1)
+   Workers Planned: 2
+   Workers Launched: 2
+   Buffers: shared hit=7356
+   ->  Parallel Seq Scan on estate_searchrequest  (cost=0.00..9963.58 rows=413 width=178) (actual time=0.039..19.763 rows=334 loops=3)
+         Filter: (id_search_request = 42)
+         Rows Removed by Filter: 166551
+         Buffers: shared hit=7356
+ Planning:
+   Buffers: shared hit=9
+ Planning Time: 0.117 ms
+ Execution Time: 43.495 ms
+(12 rows)
+
+                                                              QUERY PLAN                                                               
+---------------------------------------------------------------------------------------------------------------------------------------
+ Gather  (cost=1000.00..11062.68 rows=991 width=178) (actual time=0.261..44.134 rows=1002 loops=1)
+   Workers Planned: 2
+   Workers Launched: 2
+   Buffers: shared hit=7356
+   ->  Parallel Seq Scan on estate_searchrequest  (cost=0.00..9963.58 rows=413 width=178) (actual time=0.045..21.432 rows=334 loops=3)
+         Filter: (id_search_request = 42)
+         Rows Removed by Filter: 166551
+         Buffers: shared hit=7356
+ Planning Time: 0.085 ms
+ Execution Time: 44.252 ms
+(10 rows)
+
+===== Q2 AVANT : selections d un chasseur
+                                                               QUERY PLAN                                                                
+-----------------------------------------------------------------------------------------------------------------------------------------
+ Gather  (cost=1000.00..11364.08 rows=4005 width=178) (actual time=3.170..43.129 rows=4000 loops=1)
+   Workers Planned: 2
+   Workers Launched: 2
+   Buffers: shared hit=7356
+   ->  Parallel Seq Scan on estate_searchrequest  (cost=0.00..9963.58 rows=1669 width=178) (actual time=1.015..19.069 rows=1333 loops=3)
+         Filter: (id_hunter = 1)
+         Rows Removed by Filter: 165552
+         Buffers: shared hit=7356
+ Planning Time: 0.058 ms
+ Execution Time: 43.373 ms
+(10 rows)
+
+===== Q3 AVANT : demandes d un chasseur, les 20 plus recentes
+                                                         QUERY PLAN                                                         
+----------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=3263.91..3263.96 rows=20 width=37) (actual time=7.562..7.566 rows=20 loops=1)
+   Buffers: shared hit=1938
+   ->  Sort  (cost=3263.91..3265.97 rows=824 width=37) (actual time=7.560..7.562 rows=20 loops=1)
+         Sort Key: created_at DESC
+         Sort Method: top-N heapsort  Memory: 26kB
+         Buffers: shared hit=1938
+         ->  Seq Scan on search_request  (cost=0.00..3241.99 rows=824 width=37) (actual time=0.006..7.468 rows=804 loops=1)
+               Filter: (id_hunter = 1)
+               Rows Removed by Filter: 103515
+               Buffers: shared hit=1938
+ Planning:
+   Buffers: shared hit=29
+ Planning Time: 0.207 ms
+ Execution Time: 7.581 ms
+(14 rows)
+
+                                                         QUERY PLAN                                                         
+----------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=3263.91..3263.96 rows=20 width=37) (actual time=8.488..8.492 rows=20 loops=1)
+   Buffers: shared hit=1938
+   ->  Sort  (cost=3263.91..3265.97 rows=824 width=37) (actual time=8.486..8.488 rows=20 loops=1)
+         Sort Key: created_at DESC
+         Sort Method: top-N heapsort  Memory: 26kB
+         Buffers: shared hit=1938
+         ->  Seq Scan on search_request  (cost=0.00..3241.99 rows=824 width=37) (actual time=0.009..8.380 rows=804 loops=1)
+               Filter: (id_hunter = 1)
+               Rows Removed by Filter: 103515
+               Buffers: shared hit=1938
+ Planning Time: 0.141 ms
+ Execution Time: 8.512 ms
+(12 rows)
+
+ taille_q1 | taille_q2 | taille_q3 
+-----------+-----------+-----------
+ 3600 kB   | 3424 kB   | 752 kB
+(1 row)
+
+===== Q1 APRES
+                                                                  QUERY PLAN                                                                   
+-----------------------------------------------------------------------------------------------------------------------------------------------
+ Bitmap Heap Scan on estate_searchrequest  (cost=12.15..2762.17 rows=997 width=56) (actual time=0.283..1.175 rows=1002 loops=1)
+   Recheck Cond: (id_search_request = 42)
+   Heap Blocks: exact=1001
+   Buffers: shared hit=1001 read=4
+   ->  Bitmap Index Scan on idx_estate_searchrequest_request  (cost=0.00..11.90 rows=997 width=0) (actual time=0.155..0.156 rows=1002 loops=1)
+         Index Cond: (id_search_request = 42)
+         Buffers: shared read=4
+ Planning:
+   Buffers: shared hit=22 read=2
+ Planning Time: 0.243 ms
+ Execution Time: 1.232 ms
+(11 rows)
+
+                                                                  QUERY PLAN                                                                   
+-----------------------------------------------------------------------------------------------------------------------------------------------
+ Bitmap Heap Scan on estate_searchrequest  (cost=12.15..2762.17 rows=997 width=56) (actual time=0.250..1.195 rows=1002 loops=1)
+   Recheck Cond: (id_search_request = 42)
+   Heap Blocks: exact=1001
+   Buffers: shared hit=1005
+   ->  Bitmap Index Scan on idx_estate_searchrequest_request  (cost=0.00..11.90 rows=997 width=0) (actual time=0.070..0.071 rows=1002 loops=1)
+         Index Cond: (id_search_request = 42)
+         Buffers: shared hit=4
+ Planning Time: 0.077 ms
+ Execution Time: 1.252 ms
+(9 rows)
+
+===== Q2 APRES
+                                                                  QUERY PLAN                                                                   
+-----------------------------------------------------------------------------------------------------------------------------------------------
+ Bitmap Heap Scan on estate_searchrequest  (cost=48.24..6578.07 rows=4105 width=56) (actual time=0.574..2.531 rows=4000 loops=1)
+   Recheck Cond: (id_hunter = 1)
+   Heap Blocks: exact=1097
+   Buffers: shared hit=1097 read=6
+   ->  Bitmap Index Scan on idx_estate_searchrequest_hunter  (cost=0.00..47.21 rows=4105 width=0) (actual time=0.412..0.413 rows=4000 loops=1)
+         Index Cond: (id_hunter = 1)
+         Buffers: shared read=6
+ Planning Time: 0.107 ms
+ Execution Time: 2.780 ms
+(9 rows)
+
+===== Q3 APRES
+                                                                          QUERY PLAN                                                                           
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=0.29..66.95 rows=20 width=37) (actual time=0.061..0.070 rows=20 loops=1)
+   Buffers: shared hit=6 read=2
+   ->  Index Scan using idx_search_request_hunter_created on search_request  (cost=0.29..2573.24 rows=772 width=37) (actual time=0.060..0.068 rows=20 loops=1)
+         Index Cond: (id_hunter = 1)
+         Buffers: shared hit=6 read=2
+ Planning:
+   Buffers: shared hit=24 read=1
+ Planning Time: 0.261 ms
+ Execution Time: 0.080 ms
+(9 rows)
+
+                                                                          QUERY PLAN                                                                           
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=0.29..66.95 rows=20 width=37) (actual time=0.009..0.017 rows=20 loops=1)
+   Buffers: shared hit=8
+   ->  Index Scan using idx_search_request_hunter_created on search_request  (cost=0.29..2573.24 rows=772 width=37) (actual time=0.009..0.015 rows=20 loops=1)
+         Index Cond: (id_hunter = 1)
+         Buffers: shared hit=8
+ Planning Time: 0.056 ms
+ Execution Time: 0.026 ms
+(7 rows)
+
+ selections_chasseur_1 
+-----------------------
+                  4000
+(1 row)
+
