@@ -3,8 +3,8 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 * **Date :** 19/11/2026
-* **Statut :** 💡 proposé. Discuté entre nous sans être tracé (Laurence, Discord, 19/11/2026) ; écrit pour garder la trace. À accepter par le groupe, puis à publier sur Confluence.
-* **Décideurs :** le groupe.
+* **Statut :** ✅ accepté (Laurence et Sébastien, Discord, 19/11/2026). Discuté entre nous sans être tracé ; écrit pour garder la trace. Publié sur Confluence le 19/11/2026, dossier « Accepté ».
+* **Décideurs :** Laurence, Sébastien.
 * **Voir aussi :** registre de l'audit, faille R10 (`livrables/1-audit/02-registre-anomalies-risques.md`) ; cahier des charges, § 2.2 ; ADR-015 et ADR-051 (médias dans MinIO).
 
 **Contexte**

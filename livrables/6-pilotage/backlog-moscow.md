@@ -115,6 +115,12 @@
 |---|---|---|---|
 | 10 | Les 26 scénarios du calcul (droit, assiette, critères, barème, plafond, arrondi…) | Must | ✅ 23 · ✅📝 3 (ADR-048, ADR-035) |
 
+### Hors user stories — l'existant
+
+| # | Élément | Priorité | État |
+|---|---|---|---|
+| ADR-065 | Numériser les mandats papier de l'armoire (scan PDF dans MinIO, relié au mandat) | Could | ➖ prévu plus tard ; la v1 garde la date et le mode de signature |
+
 ---
 
 ## 3. Le bilan
@@ -125,10 +131,10 @@ Comptes faits sur les lignes du § 2 (une ligne = un élément ; la ligne 10 com
 |---|---|---|---|---|
 | **Must** | 31 | 31 | 0 | 0 |
 | **Should** | 4 | 2 | 2 | 0 |
-| **Could** | 2 | 0 | 0 | 2 |
+| **Could** | 3 | 0 | 0 | 3 |
 | **Won't** | 7 | — | — | 7 |
-| **Total** | **44** | | | |
+| **Total** | **45** | | | |
 
 - ✅ **Tous les Must sont codés et testés.**
 - 🟡 Les 2 Should en partie (05:14, 07:37) demandent une tâche planifiée (Airflow) : écrites, codées s'il reste du temps.
-- ➖ Les 2 Could sont écartés par écrit : agenda externe (04:30), offre pré-remplie en v2 (06:18).
+- ➖ Les 3 Could sont écartés par écrit : agenda externe (04:30), offre pré-remplie en v2 (06:18), numérisation de l'armoire (ADR-065).
