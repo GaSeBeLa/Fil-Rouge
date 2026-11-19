@@ -2,7 +2,7 @@
 
 > **Plan de tests, partie fonctionnelle** (BC03). Complète `rapport-tests.md` (unitaires et intégration).
 > Exigé par `GRILLE-EVALUATION.md` : « Plan de tests (unitaires + fonctionnels) | Scénarios + rapports d'exécution ».
-> État : dépôt `Fil-Rouge-API`, commit `f8b821e` (2026-11-19) ; suite complète **1 108 passed, 7 xfailed, 0 failed**.
+> État : dépôt `Fil-Rouge-API`, commit `8ed2591` (2026-11-19) ; suite complète **1 115 passed, 7 xfailed, 0 failed**.
 > Matrice établie le 2026-11-19 : noms des tests lus, et corps lus pour les cas douteux ; 24 noms vérifiés par `grep`.
 
 ---
@@ -25,7 +25,7 @@
 
 ## 2. La matrice : chaque scénario, et sa preuve
 
-Statuts : ✅ couvert · 🟡 en partie (ce qui manque est dit) · ❌ non couvert, dans le périmètre · ➖ hors périmètre.
+Statuts : ✅ couvert par un test · ✅📝 couvert par un **choix écrit** (la règle diffère du scénario, exprès, et la raison est donnée) · 🟡 en partie, limite connue · ❌ non couvert, dans le périmètre · ➖ hors périmètre.
 Hors périmètre, décidé par le groupe : le front, l'envoi d'emails (donc les notifications), la facture, l'acte notarié, l'IA générative.
 Les tests unitaires sont dans `tests/`, ceux d'intégration dans `tests/integration/`.
 
@@ -35,7 +35,7 @@ Les tests unitaires sont dans `tests/`, ceux d'intégration dans `tests/integrat
 |---|---|---|---|
 | 15 | Exclusif : rémunéré même en découverte autonome | ✅ | `test_remuneration.py::test_droit_selon_exclusivite_et_origine` · `test_constraints_db.py::test_mandate_second_mandate_during_exclusive_returns_409` |
 | 23 | Non exclusif : pas de rémunération automatique | ✅ | `test_remuneration.py::test_droit_selon_exclusivite_et_origine` · `test_calcul_paiement.py::test_sale_out_of_scope_gives_a_refused_payment` |
-| 30 | Non exclusif : un autre chasseur peut agir | 🟡 aucun test ne montre deux mandats non exclusifs en même temps | `test_remuneration.py::test_droit_selon_exclusivite_et_origine` |
+| 30 | Non exclusif : un autre chasseur peut agir | ✅ | `test_scenarios_restants.py::test_00_30_another_hunter_can_act_under_a_non_exclusive_mandate` |
 | 37 | Durée 6 mois, renouvelable | ✅ | `test_constraints_db.py::test_mandate_seven_months_returns_409` · `test_trous_audit_db.py::test_p13_renewal_at_term_is_accepted` |
 | 43 | Rémunération collectée par le notaire | ✅ (collecte ➖) | `test_remuneration.py::test_honoraires_sur_le_prix_acte` |
 | 51 | Barème selon montant, ancienneté, performance | ✅ | `test_remuneration.py::test_bareme_du_chasseur_prevaut_sur_le_defaut` · `test_remuneration.py::test_bareme_en_vigueur_a_la_date_de_l_acte` |
@@ -56,7 +56,7 @@ Les tests unitaires sont dans `tests/`, ceux d'intégration dans `tests/integrat
 |---|---|---|---|
 | 14 | Reçoit des propositions, choisit quoi visiter | ✅ | `test_propositions_visites.py::test_selected_estate_can_be_proposed` · `test_parcours_particulier.py::test_particulier_from_form_to_interest` |
 | 20 | Reçoit l'avis du chasseur après visite | ✅ | `test_le_sien.py::test_client_sees_his_rows_not_the_other_clients` · `test_auteurs.py::test_only_hunters_write_reviews` |
-| 26 | Aucun bien ne convient, les propositions reprennent | 🟡 le refus s'enregistre, le bien écarté n'est plus suggéré ; la reprise n'est pas automatique | `test_constraints_db.py::test_decline_reason_with_declined_is_accepted` · `test_suggestions.py::test_dismissed_estate_is_not_written_again` |
+| 26 | Aucun bien ne convient, les propositions reprennent | ✅📝 le refus s'enregistre, le bien écarté n'est plus suggéré ; le chasseur **relance** les suggestions (route à la demande), voulu : il garde la main sur ce qu'il propose | `test_constraints_db.py::test_decline_reason_with_declined_is_accepted` · `test_suggestions.py::test_dismissed_estate_is_not_written_again` |
 | 32 | Un bien convient : visiter ou faire une offre | ✅ | `test_propositions_visites.py::test_client_makes_an_offer` · `test_propositions_visites.py::test_client_visit_on_a_proposed_estate_is_accepted` |
 
 ### 03 — Le particulier : offre et signature
@@ -64,8 +64,8 @@ Les tests unitaires sont dans `tests/`, ceux d'intégration dans `tests/integrat
 | Ligne | Scénario | Statut | Test(s) |
 |---|---|---|---|
 | 14 | Fait une offre d'achat | ✅ | `test_propositions_visites.py::test_client_makes_an_offer` · `test_propositions_visites.py::test_second_offer_returns_409` |
-| 19 | Offre non acceptée | ❌ le statut `rejected` existe en base ; aucun test ne le pose, ni la suite | — |
-| 25 | Offre acceptée, signature organisée | 🟡 la vente exige une offre acceptée ; le passage à `accepted` n'est pas testé ; le notaire ➖ | `test_signature_vente.py::test_hunter_sale_with_an_accepted_offer_is_accepted` |
+| 19 | Offre non acceptée | ✅ | `test_scenarios_restants.py::test_06_37_seller_refuses_the_offer` · `test_scenarios_restants.py::test_03_19_after_a_refusal_the_hunter_proposes_other_estates` |
+| 25 | Offre acceptée, signature organisée | ✅ (le notaire ➖) | `test_scenarios_restants.py::test_06_44_seller_accepts_the_offer` · `test_signature_vente.py::test_hunter_sale_with_an_accepted_offer_is_accepted` |
 | 31 | Acte signé, honoraires payés | ✅ (collecte ➖) | `test_remuneration.py::test_honoraires_sur_le_prix_acte` · `test_signature_vente.py::test_sale_completes_its_mandate` |
 | 38 | Facture et retour d'expérience | ➖ facture exclue, pas d'email | — |
 
@@ -74,19 +74,19 @@ Les tests unitaires sont dans `tests/`, ceux d'intégration dans `tests/integrat
 | Ligne | Scénario | Statut | Test(s) |
 |---|---|---|---|
 | 11 | Reçoit une demande | ➖ notification, pas d'email | (affectation : `test_le_sien.py::test_manager_assigns_a_request_to_one_of_his_hunters_only`) |
-| 17 | N'accepte pas la demande | ❌ refus par le chasseur et réaffectation non testés | — |
+| 17 | N'accepte pas la demande | ✅ | `test_scenarios_restants.py::test_04_17_hunter_refuses_and_the_request_is_reassigned` |
 | 24 | Accepte et consulte une recherche initiale | ✅ | `test_suggestions.py::test_suggestions_are_written_as_suggested` · `test_parcours_particulier.py::test_particulier_from_form_to_interest` |
-| 30 | Prend contact, fixe un rendez-vous | ❌ aucune table ni route de rendez-vous | — |
+| 30 | Prend contact, fixe un rendez-vous | ➖ un agenda est un outil externe (agenda partagé, prise de rendez-vous en ligne) : pas de table de rendez-vous, décidé le 2026-11-19 | — |
 | 36 | Affine les critères, fait signer le mandat | ✅ | `test_trous_audit_db.py::test_p8_next_version_on_same_request_is_accepted` · `test_signature_vente.py::test_signing_a_request_with_one_criteria_is_accepted` |
 
 ### 05 — Le chasseur : sélection quotidienne
 
 | Ligne | Scénario | Statut | Test(s) |
 |---|---|---|---|
-| 14 | Reçoit une sélection quotidienne | 🟡 le moteur répond à la demande ; aucun déclenchement planifié | `test_suggestions.py::test_suggestions_are_written_as_suggested` · `test_suggestions.py::test_never_more_than_ten` |
+| 14 | Reçoit une sélection quotidienne | 🟡 **limite connue** : le moteur répond à la demande ; aucun déclenchement planifié chaque matin (il faudrait un DAG Airflow qui l'appelle) | `test_suggestions.py::test_suggestions_are_written_as_suggested` · `test_suggestions.py::test_never_more_than_ten` |
 | 20 | Transmet une sélection au client | ✅ | `test_constraints_db.py::test_proposing_a_kept_estate_is_accepted` · `test_constraints_db.py::test_proposing_an_estate_not_kept_returns_409` |
 | 26 | Alerte quand le client a commenté | ➖ alerte = notification | (priorité : `test_propositions_visites.py::test_client_can_set_his_priority`) |
-| 32 | Engage les discussions ou organise une visite | 🟡 une visite faite s'enregistre ; une visite future est refusée (P24) | `test_propositions_visites.py::test_client_visit_on_a_proposed_estate_is_accepted` · `test_trous_audit_db.py::test_p24_visit_in_the_future_is_refused` |
+| 32 | Engage les discussions ou organise une visite | ✅📝 une visite s'enregistre **une fois faite** ; une visite future est refusée, exprès (P24, ADR-053) : la table trace les visites, pas un agenda | `test_propositions_visites.py::test_client_visit_on_a_proposed_estate_is_accepted` · `test_trous_audit_db.py::test_p24_visit_in_the_future_is_refused` |
 | 38 | Requalifie si rien ne convient | ✅ | `test_trous_audit_db.py::test_p9_next_version_without_reason_is_refused` · `test_suggestions.py::test_query_comes_from_the_latest_criteria` |
 
 ### 06 — Le chasseur : avis et offre d'achat
@@ -94,11 +94,11 @@ Les tests unitaires sont dans `tests/`, ceux d'intégration dans `tests/integrat
 | Ligne | Scénario | Statut | Test(s) |
 |---|---|---|---|
 | 11 | Note d'avis avec audio et vidéo | ✅ | `test_constraints_db.py::test_review_accepts_several_media` |
-| 18 | Offre pré-remplie selon l'avis | ❌ l'avis n'a pas de montant conseillé | — |
-| 25 | Le client ne veut pas acquérir | 🟡 le refus s'enregistre ; la nouvelle sélection n'est pas automatique | `test_constraints_db.py::test_decline_reason_with_declined_is_accepted` |
+| 18 | Offre pré-remplie selon l'avis | ➖ fonction nouvelle (un montant conseillé dans l'avis, et sa règle) : reportée en **v2**, décidé le 2026-11-19 | — |
+| 25 | Le client ne veut pas acquérir | ✅📝 le refus s'enregistre ; la nouvelle sélection est relancée par le chasseur, comme 02:26 | `test_constraints_db.py::test_decline_reason_with_declined_is_accepted` |
 | 31 | Transmet l'offre, statut en attente | ✅ | `test_propositions_visites.py::test_client_makes_an_offer` |
-| 37 | Offre refusée par le vendeur | ❌ statut `rejected` et nouvelle offre non testés | — |
-| 44 | Offre acceptée par le vendeur | 🟡 comme 03:25 ; le notaire ➖ | `test_signature_vente.py::test_hunter_sale_with_an_accepted_offer_is_accepted` |
+| 37 | Offre refusée par le vendeur | ✅ (trou réparé le 2026-11-19 : une nouvelle offre était refusée) | `test_scenarios_restants.py::test_06_37_seller_refuses_the_offer` · `test_scenarios_restants.py::test_06_37_a_new_offer_can_follow_a_refusal` |
+| 44 | Offre acceptée par le vendeur | ✅ (le notaire ➖) | `test_scenarios_restants.py::test_06_44_seller_accepts_the_offer` |
 
 ### 07 — Le chasseur : rémunération et performance
 
@@ -108,41 +108,41 @@ Les tests unitaires sont dans `tests/`, ceux d'intégration dans `tests/integrat
 | 18 | Envoie sa facture | ➖ facture exclue | — |
 | 24 | Paiement programmé | ✅ (facture ➖) | `test_versions_paiement.py::test_payment_moves_forward_step_by_step` |
 | 30 | Marqué payé, indicateurs recalculés | ✅ | `test_calcul_paiement.py::test_journal_note_is_written_only_when_paid` · `test_versions_paiement.py::test_paid_payment_is_frozen` |
-| 37 | Mandat échu : renouveler, score à la baisse | 🟡 renouvellement et baisse au calcul suivant ; aucune note `mandate_expired` écrite à l'échéance | `test_calcul_paiement.py::test_a_lost_mandate_is_an_issue_without_sale` · `test_trous_audit_db.py::test_p13_renewal_at_term_is_accepted` |
+| 37 | Mandat échu : renouveler, score à la baisse | 🟡 **limite connue** : renouvellement et baisse au calcul suivant ; aucune note `mandate_expired` n'est écrite à l'échéance (il faudrait une tâche planifiée) | `test_calcul_paiement.py::test_a_lost_mandate_is_an_issue_without_sale` · `test_trous_audit_db.py::test_p13_renewal_at_term_is_accepted` |
 
 ### 08 et 09 — Le futur, avec l'IA
 
 - **08** (4 scénarios) : ➖ tous. Faisabilité, descriptions et articles rédigés par une IA générative, front.
-- **09** (9 scénarios) : ➖ 7 ; 🟡 2.
-  - 09:35, sélection ordonnée par pertinence : l'ordre est prouvé (`test_suggestion_query.py::test_wanted_features_raise_the_score`), pas le dédoublonnage.
-  - 09:43, écarter les biens ressemblants : le bien écarté lui-même est exclu (`test_suggestions.py::test_dismissed_estate_is_not_written_again`), pas les biens « ressemblants ».
+- **09** (9 scénarios) : ➖ tous. Deux ont déjà une part faite, sans IA :
+  - 09:35, sélection ordonnée par pertinence : l'ordre est prouvé (`test_suggestion_query.py::test_wanted_features_raise_the_score`) ; le dédoublonnage est de l'IA future.
+  - 09:43, écarter les biens ressemblants : le bien écarté lui-même est exclu (`test_suggestions.py::test_dismissed_estate_is_not_written_again`) ; les biens « ressemblants » sont de l'IA future.
 
 ### 10 — Le calcul de la rémunération (26 scénarios)
 
 - ✅ **22** : droit, échéance, assiette, cinq critères, score de 73,5, barème, ancienneté, performance, taux final de 46,16 %, plafond et plancher, arrondi, barème figé. Tous dans `test_remuneration.py`, et dans `test_calcul_paiement.py` pour la vente en base.
-- 🟡 **4** :
+- ✅ **10:277** : le montant annoncé est figé jusqu'au paiement (`test_scenarios_restants.py::test_10_277_announced_amount_cannot_change_before_payment`). Trou réparé le 2026-11-19 : il pouvait changer.
+- ✅📝 **3** :
   - 10:140 et 10:255 : la formule « mandats × 10 » du sujet est remplacée par le taux de transformation (ADR-048). Les cas du sujet restent, en `xfail(strict=True)`.
-  - 10:277 : rien ne prouve que le montant reste le même entre `announced` et `paid`.
-  - 10:289 : rien ne prouve que le nouveau score sert à la rémunération suivante.
+  - 10:289 : le calcul ne relit pas la note du journal ; il **recompte tout en base à chaque vente** (ADR-035, « note recalculée à chaque vente »). Le journal trace, le calcul recompte.
 
 ## 3. Le bilan
 
-| | ✅ | 🟡 | ❌ | ➖ | Total |
-|---|---|---|---|---|---|
-| **Scénarios** | **44** | **14** | **5** | **17** | **80** |
+| | ✅ testé | ✅📝 choix écrit | 🟡 limite connue | ❌ | ➖ | Total |
+|---|---|---|---|---|---|---|
+| **Scénarios** | **51** | **6** | **2** | **0** | **21** | **80** |
 
-- Hors du périmètre (➖), **63** scénarios. **44** sont couverts, soit **70 %**, et **14** en partie.
-
-**Les 5 trous, par importance** :
-1. **Offre refusée par le vendeur** (03:19, 06:37) : le statut existe, aucun test ne le pose. C'est une branche centrale du parcours d'achat.
-2. **Le chasseur refuse une demande** (04:17) : ni le refus ni la réaffectation ne sont testés.
-3. **Offre pré-remplie selon l'avis** (06:18) : l'avis n'a pas de montant conseillé.
-4. **Rendez-vous de prise de contact** (04:30) : aucune table, aucune route. À classer ➖ si le groupe l'écarte par écrit.
+- Dans le périmètre (➖ retirés), **59** scénarios : **57** couverts, par un test (51) ou par un choix écrit (6), soit **97 %**.
+- **Plus aucun trou** (❌) : les 3 scénarios sans test l'ont eu le 2026-11-19, et deux ont été écartés par écrit (rendez-vous, offre pré-remplie).
+- **Les tests ont trouvé 3 vrais trous**, réparés le même jour :
+  1. une demande du formulaire ne pouvait être confiée à personne (`f8b821e`) ;
+  2. après un refus du vendeur, le client ne pouvait pas refaire d'offre (`8ed2591`) ;
+  3. le montant annoncé au chasseur pouvait changer avant le paiement (`8ed2591`).
+- **Les 2 limites connues** (05:14, 07:37) demandent une tâche planifiée (Airflow) : écrites ici, codées s'il reste du temps.
 
 ## 4. Rejouer
 
 Depuis `Fil-Rouge-API/docker/` :
 
 ```bash
-docker compose exec -T api python -m pytest -v -p no:cacheprovider tests/integration/test_parcours_particulier.py tests/integration/test_demande_a_prendre.py
+docker compose exec -T api python -m pytest -v -p no:cacheprovider tests/integration/test_parcours_particulier.py tests/integration/test_demande_a_prendre.py tests/integration/test_scenarios_restants.py
 ```
