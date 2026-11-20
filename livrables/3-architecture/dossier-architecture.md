@@ -61,7 +61,7 @@ flowchart LR
 | PostgreSQL, OLTP | 22 tables, contraintes, triggers | ✅ **7 index** posés à la main, dont 3 le 2026-11-19 après mesure (× 15 à × 100, `../2-modelisation/note-indexation.md`) ; ⚠️ PostgreSQL n'indexe pas seul les clés étrangères : les autres n'ont pas d'index dédié, sauf quand une contrainte `UNIQUE` les couvre. **0** table partitionnée | `init-v3/01_create_fil_rouge_immobilier.sql` |
 | PostgreSQL, `olap` | l'étoile du sujet, une ligne par vente | ✅ précalculée : l'analyse ne refait pas les jointures du métier. ⚠️ recalcul **complet** chaque nuit, 0 index | `airflow/src/olap/load.py`, `08_olap.sql` |
 | Elasticsearch | recherche texte, ville, prix, distance | ✅ arrêté, seule la recherche répond `503`. ⚠️ 1 shard, 0 réplique ; jusqu'à 24 h de retard | ADR-061, `airflow/src/search/mapping.py` |
-| Airflow | import, OLAP, index : trois DAG de nuit | ⚠️ `LocalExecutor`, une seule machine : ne tiendra pas 9 à 56 pages par seconde | ADR-059, note 3V § 6 |
+| Airflow | sauvegarde, import, OLAP, index : quatre DAG de nuit | ⚠️ `LocalExecutor`, une seule machine : ne tiendra pas 9 à 56 pages par seconde | ADR-059, note 3V § 6 |
 | MinIO | traces de chaque étape du flux | ✅ un rejet garde sa raison (`quarantine`) ; ⚠️ aucune réplication | ADR-060 |
 | Logstash, Kibana | logs de l'API, tableau de bord | ✅ hors du chemin des requêtes : un ELK arrêté ne bloque pas l'API | `docker/logstash/` |
 
@@ -142,7 +142,7 @@ Deux changements suivent le volume, sans être des leviers du sujet :
 - Quatre traitements **par nuit** (sauvegarde, import, OLAP, index), pas en continu : un recalcul quotidien suffit
   au besoin.
 - Les photos des agences sont **liées, pas copiées** : de 29 à 188 To de
-  stockage évités (note 3V § 7).
+  stockage évités (note 3V § 6).
 
 ## 6. Limites, à dire au jury
 
