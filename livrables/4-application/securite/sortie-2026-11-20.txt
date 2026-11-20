@@ -1,0 +1,14 @@
+Rejoué le 2026-11-20 par le Glaude (attaques.py), dépôt Fil-Rouge-API au commit 83b7c0d, API locale.
+
+TIENT  | SQL : email de connexion     | POST /auth/login email=' OR '1'='1' --                       | 401 application/json
+TIENT  | SQL : id dans le chemin      | GET /estates/1 OR 1=1                                        | 422 application/json
+TIENT  | SQL : requête empilée        | GET /estates/1;DROP TABLE estate                             | 422 application/json
+TIENT  | XSS : script dans un champ   | POST /auth/login email=<script>…                             | 401 application/json
+TIENT  | CSRF : cookie seul           | GET /estates/1 avec cookie, sans Authorization               | 401 application/json
+        CORS : Access-Control-Allow-Origin = None (None : aucun site tiers autorisé)
+        Set-Cookie à la connexion : None (None : le jeton n'est jamais un cookie)
+        codes reçus : [401, 401, 401, 401, 401, 429, 429, 429, 429, 429, 429, 429, 429, 429, 429]
+TIENT  | Force brute : 15 essais      | 15 x POST /auth/login ; 1er 429 à l'essai 6                  | 429 application/json
+        Retry-After : '300' secondes
+
+Bilan : 6 essais tiennent sur 6

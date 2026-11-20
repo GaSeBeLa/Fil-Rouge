@@ -4,7 +4,7 @@
 > Exigée par `GRILLE-EVALUATION.md` (StarterPack - BASE) : « Sécurité applicative | Code + note sécurité ».
 > `TRACABILITE-COMPETENCES.md:65` précise : « Extraits de code commentés + note sécurité ».
 > Le bloc **BC04 cybersécurité** n'est pas au programme du projet (`Readme.md` l. 7, option BC05). Cette note décrit donc les **pratiques de sécurité du code**, pas un audit d'intrusion complet.
-> État du code : dépôt `Fil-Rouge-API`, commit **`141d068`** (2026-11-19). Brouillon du Glaude, **à relire par Gabriel**.
+> État du code : dépôt `Fil-Rouge-API`, commit **`83b7c0d`** (2026-11-20). Les extraits du § 2 ont été relevés sur `141d068` ; depuis, `utils/security.py` a seulement gagné la constante `MIGRATED_PASSWORD` (comptes repris, activation), sans toucher aux extraits. Rédigée par le Glaude ; § 3 rejoué le 2026-11-20. **À relire par l'équipe.**
 
 ---
 
@@ -87,7 +87,7 @@ payload = {"sub": str(user_id), "aud": "activate", "iat": now, "exp": now + expi
 
 ---
 
-## 3. Les tests d'attaque de Gabriel
+## 3. Les tests d'attaque
 
 Gabriel a essayé **4 attaques** sur l'API (résultats rapportés le 2026-11-09) :
 
@@ -100,7 +100,24 @@ Gabriel a essayé **4 attaques** sur l'API (résultats rapportés le 2026-11-09)
 
 ➡️ **Faille corrigée le 2026-11-19** : c'est le frein du §2.3 (commit `e6f4b87`).
 
-✍️ **À compléter par Gabriel** : la méthode et les outils de chaque test, et les requêtes envoyées.
+### 3.1 Rejoués le 2026-11-20 : méthode, requêtes, réponses
+
+Les 4 attaques ont été **rejouées après la correction**, par un script qu'on peut relancer : `securite/attaques.py` (sortie brute : `securite/sortie-2026-11-20.txt`). Il envoie de vraies requêtes HTTP à l'API locale, dans le conteneur `api`, et n'écrit rien en base.
+
+**Outil** : `httpx` (client HTTP Python), la clé d'API du conteneur, et un jeton de Manager fabriqué sur place (aucun mot de passe lu ni affiché).
+
+| Attaque | Requête envoyée | Réponse | Verdict |
+| --- | --- | --- | --- |
+| Injection SQL, champ texte | `POST /auth/login`, email `' OR '1'='1' --`, mot de passe `x' OR '1'='1` | `401` | ✅ la chaîne est comparée comme un texte, pas lue comme du SQL |
+| Injection SQL, chemin | `GET /estates/1 OR 1=1` | `422` | ✅ l'id doit être un entier : refusé **avant** la base |
+| Injection SQL, requête empilée | `GET /estates/1;DROP TABLE estate` | `422` | ✅ idem ; la table est toujours là |
+| XSS | `POST /auth/login`, email `<script>alert(1)</script>` | `401`, `application/json` | ✅ aucune réponse en HTML : rien à exécuter pour un navigateur |
+| CSRF | `GET /estates/1` avec un cookie et une origine `https://site-pirate.example`, sans en-tête `Authorization` | `401` | ✅ le jeton n'est jamais un cookie (aucun `Set-Cookie` à la connexion), et aucun site tiers n'est autorisé (pas d'en-tête CORS) |
+| Force brute | 15 × `POST /auth/login`, même email, mots de passe faux | `401` ×5, puis `429` ×10, `Retry-After: 300` | ✅ bloqué **au 6e essai**, pour 5 minutes |
+
+**Bilan : 6 essais sur 6 tiennent.** La faille du 2026-11-09 (15 essais sans blocage) est fermée.
+
+⚠️ Ce que ces essais ne couvrent pas : un outil d'audit automatique (OWASP ZAP, sqlmap), le Swagger `/docs` (seule page HTML, page de développement), et une attaque répartie sur plusieurs adresses IP (le frein par IP s'arrête à 20 échecs en 15 minutes).
 
 ---
 
