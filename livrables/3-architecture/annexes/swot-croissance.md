@@ -1,5 +1,5 @@
-> **Copie de Confluence** — page « SWOT - Phase 3 (croissance) » (id 27033601, version 3), espace GaSeBeLa1, copiée le 2026-11-19.
-> La source qui fait foi reste Confluence : https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/27033601.
+> D'après la page de travail « SWOT - Phase 3 (croissance) » de l'équipe, copiée le 2026-11-19. **Le dépôt fait foi** depuis le 2026-11-20.
+> 
 
 # 🧭 SWOT — le nouveau SI, face à la croissance
 
