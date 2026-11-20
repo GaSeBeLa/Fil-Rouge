@@ -179,9 +179,9 @@ Relevé dans `API/src/app/services/` (Fil-Rouge-API) : le crochet
 
 ### Écarts qui restent
 
-* ⚠️ Le `Client` modifie son mandat et ses biens proposés **champ par
-  champ sans limite** : l'annexe ne lui donne que signer, commenter,
-  prioriser, faire une offre (P3, H6, H8). Seule l'appartenance est gardée.
+* ✅ Réglé : le `Client` ne change de ses biens proposés que sa note, son
+  commentaire et sa décision (SUG1), et de son mandat que la signature
+  (2026-11-20, `mandate_service.py`, P3).
 * 🟡 Le `Client` ne crée pas son compte par `POST /users` (fermé : il y
   choisirait son `system_role`) : il le crée par `POST /search-requests/submit`
   (Q-ACC-12).
