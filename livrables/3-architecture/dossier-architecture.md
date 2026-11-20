@@ -165,7 +165,7 @@ note 3V. »
 
 | Affirmation | Source |
 |---|---|
-| Volumes, vélocité, part des tables de liens, `BIGINT` | `note-dimensionnement-3v.md` § 3, 4, 6, 7 |
+| Volumes, vélocité, part des tables de liens, `BIGINT` | `note-dimensionnement-3v.md` § 3, 4, 6 |
 | Étoile, grain, mesures, rafraîchissement à 3 h | `../2-modelisation/olap.md` |
 | Airflow, MinIO, Elasticsearch, profils, clé d'annonce, historique des prix | ADR-059 à ADR-064 |
 | 22 tables, 7 index, 0 partition | `Fil-Rouge-API/docker/init-v3/01_create_fil_rouge_immobilier.sql`, recompté le 2026-11-19 |
