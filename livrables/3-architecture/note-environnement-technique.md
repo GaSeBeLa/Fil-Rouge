@@ -12,7 +12,7 @@ Un seul fichier lance tout : `docker/docker-compose.yml`. Les services lourds ne
 
 | Groupe | Services | Version | Ports | Mémoire au repos |
 |---|---|---|---|---|
-| **Toujours lancé** | `db` (PostgreSQL), `api` (FastAPI) | `postgres:16` ; `python:3.12-slim` | 5432 ; 8000 (Swagger : `/docs`) | **≈ 234 Mio** |
+| **Toujours lancé** | `db` (PostgreSQL), `api` (FastAPI) | `postgres:16.15` ; `python:3.12-slim` | 5432 ; 8000 (Swagger : `/docs`) | **≈ 234 Mio** |
 | **Profil `airflow`** | `minio`, `minio-setup`, `airflow-init`, `airflow-webserver`, `airflow-scheduler` | Airflow 2.11.2 ; MinIO épinglé par empreinte (`sha256`) | 9000, 9001 ; 8080 | **≈ 1,5 Gio** |
 | **Profil `elk`** | `elasticsearch`, `es-setup`, `kibana`, `logstash` | 9.5.4 | 9200 ; 5601 ; 9600 (supervision de Logstash), ouverts sur la machine seule (`127.0.0.1`) | **≈ 3,2 Gio** |
 
@@ -35,7 +35,7 @@ Un seul fichier lance tout : `docker/docker-compose.yml`. Les services lourds ne
 | Profils | chacun ne lance que ce dont il a besoin | ADR-062 |
 | Outils libres et gratuits | aucun coût de licence, aujourd'hui comme à la croissance | note de cadrage, § 3 bis |
 
-⚠️ **Un écart à ADR-015** : `postgres:16` fixe la version majeure, pas la mineure (le conteneur tourne en 16.15). À épingler en `postgres:16.15` avant une mise en production.
+✅ **Écart à ADR-015 corrigé le 2026-11-20** : `postgres:16` ne fixait que la version majeure ; l'image est épinglée en `postgres:16.15` (dépôt `Fil-Rouge-API`, commit `68ce316`), la version qui tournait déjà.
 
 ## 3. Le volet green IT : ce qui réduit l'impact, déjà en place
 
