@@ -107,7 +107,7 @@ L'énoncé liste les assistances voulues (`SP/user-stories/09_futur_chasseur_ass
 
 | Scénario (ligne) | Ce que nous faisons |
 |---|---|
-| Sélection dédoublonnée et ordonnée par pertinence (l.34-40) | ✅ v1 : filtres + score ; la pertinence apprise viendra en v2 |
+| Sélection dédoublonnée et ordonnée par pertinence (l.34-40) | 🟢 en partie : la v1 ordonne par score et écarte les biens déjà vus ; le dédoublonnage des annonces en double et la pertinence apprise viendront en v2 |
 | Écarter les biens qui ressemblent aux biens rejetés (l.42-46) | 💡 v2 : vecteur par bien, recherche des plus proches (`dense_vector` + kNN d'Elasticsearch) |
 | Offre sous le prix affiché pré-calculée (l.40, l.54-58) | 💡 feature « baisse de prix » tirée de `estate_price_history` |
 | Rapport de faisabilité et reformulation (l.15-19) | 💡 conçu ci-dessus, pas codé |
@@ -122,5 +122,5 @@ L'énoncé liste les assistances voulues (`SP/user-stories/09_futur_chasseur_ass
 - **Aucune donnée personnelle** dans les features : ni nom, ni âge, ni
   situation familiale. Le modèle juge un couple (demande, bien), pas une personne.
 - **Le chasseur IA a moins de droits qu'un humain** : il cherche et suggère ;
-  l'offre, la vente et le paiement restent humains (ADR-058, 🟡 proposé, pas codé).
+  l'offre, la vente et le paiement restent humains (ADR-058, 💡 proposé, pas codé).
 - Le détail : [`../5-transverse/note-souverainete-securite-ia.md`](../5-transverse/note-souverainete-securite-ia.md).

@@ -20,7 +20,7 @@ Quand elle agit, elle a moins de droits qu'un humain, et un humain engage.
 |---|---|---|
 | `estate`, `estate_price_history`, index `estates` | lecture | nécessaire au matching |
 | `criteria` de la demande confiée | lecture | nécessaire au matching |
-| `estate_searchrequest`, `estate_proposed` | lecture ; écriture en `suggested` seulement (SUG8) | un chasseur humain garde (`kept`) avant toute proposition |
+| `estate_searchrequest`, `estate_proposed` | lecture ; le moteur de suggestion n'écrit qu'en `suggested`. ⚠️ Un chasseur-IA a aujourd'hui les droits d'un chasseur humain : la restriction (ADR-058) est proposée, pas codée | un chasseur humain garde (`kept`) avant toute proposition |
 | `"user".password` | ✅ fermé au lecteur, colonne par colonne | aucun usage |
 | `estate_contact` (vendeur) | ✅ fermé au lecteur ; 💡 fermé au chasseur IA (ADR-058) | donnée d'un tiers (ADR-054) |
 | `payment` (montants, taux, score) | ✅ fermé au lecteur | données financières (ADR-027) |

@@ -3,7 +3,7 @@
 
 ## 1. Executive summary
 
-Le système d'information actuel de l'entreprise ne permet pas de gérer fiablement le métier existant, ni d'absorber la croissance annoncée (rachat d'agences, couverture France + DOM-TOM + sept pays européens, plusieurs milliers de mandats par semaine). Le projet vise une refonte complète : modèle de données cible, architecture de montée en charge, backend repris de zéro, et conception des briques d'IA d'assistance aux chasseurs. La maîtrise d'ouvrage est portée par la direction de l'entreprise ; aucun budget chiffré n'a été communiqué à ce stade.
+Le système d'information actuel de l'entreprise ne permet pas de gérer fiablement le métier existant, ni d'absorber la croissance annoncée (rachat d'agences, couverture France + DOM-TOM + neuf pays européens, plusieurs milliers de mandats par semaine). Le projet vise une refonte complète : modèle de données cible, architecture de montée en charge, backend repris de zéro, et conception des briques d'IA d'assistance aux chasseurs. La maîtrise d'ouvrage est portée par la direction de l'entreprise ; aucun budget chiffré n'a été communiqué à ce stade.
 
 ## 2. Exposé du problème
 
@@ -23,7 +23,7 @@ Ce n'est pas une dégradation hypothétique : le taux d'erreur est déjà mesura
 
 **Option A — Refonte complète du SI** (modèle de données, architecture, backend). Traite l'ensemble des risques identifiés et s'aligne avec la stratégie de croissance.
 
-**Option B — Corrections ciblées** sur les trois risques cotés au maximum (continuité du développement, traçabilité des honoraires, scalabilité), sans reconstruire le modèle de données. Plus rapide, mais laisse subsister l'anomalie d'intégrité et l'inexploitabilité des critères de recherche — les deux prérequis techniques du volet IA explicitement visé par l'entreprise.
+**Option B — Corrections ciblées** sur les trois risques cotés au maximum (statut de mandat faux, chasseur enregistré comme client, honoraires absents de la base), sans reconstruire le modèle de données. Plus rapide, mais laisse subsister l'anomalie d'intégrité et l'inexploitabilité des critères de recherche — les deux prérequis techniques du volet IA explicitement visé par l'entreprise.
 
 **Option C — Statu quo**, en attendant les rachats pour réévaluer. Écartée d'emblée : c'est précisément la croissance qui rend le défaut actuel ingérable, et le backend n'est déjà plus maintenable indépendamment de toute croissance.
 
@@ -45,7 +45,7 @@ Le projet suit les quatre phases du fil rouge : audit de l'existant (Phase 1), c
 
 ## 8. Risques et contraintes
 
-Cotation probabilité × impact (matrice 3×3, dossier d'audit — 16 risques cotés au total) : trois risques au maximum (score 9, priorité absolue) — continuité du développement (déjà réalisé), absence de traçabilité des honoraires (potentiel), et scalabilité face à la croissance annoncée (potentiel). Neuf risques structurels supplémentaires cotés 6 (réduire impérativement) touchent l'intégrité des données, la fiabilité des statuts, l'exploitabilité des critères de recherche, le barème de commission, les données personnelles et la gouvernance technique.
+Cotation probabilité × impact (matrice 3×3, dossier d'audit — 16 risques cotés au total) : trois risques au maximum (score 9, priorité absolue) — des mandats dits « actifs » alors qu'ils sont échus (R01), un chasseur enregistré comme client (R02), et des honoraires absents de la base (R03). Huit risques structurels supplémentaires cotés 6, dont la perte du code du backend (R09), (réduire impérativement) touchent l'intégrité des données, la fiabilité des statuts, l'exploitabilité des critères de recherche, le barème de commission, les données personnelles et la gouvernance technique.
 
 **Contrainte transverse** : la soutenance du projet est individuelle bien que le travail soit produit en groupe — chaque membre doit être en mesure de défendre l'intégralité des choix, y compris ceux qu'il n'a pas lui-même rédigés.
 

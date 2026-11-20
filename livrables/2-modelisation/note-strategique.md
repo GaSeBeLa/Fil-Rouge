@@ -30,13 +30,13 @@ Pour combler l'écart entre le SI hérité et la vision cible, la stratégie s'a
 **Axe 1 : Refonte structurelle du modèle de données (Data)**
 
 * **Ségrégation des rôles :** Démembrement de la table unique `utilisateurs` en entités distinctes (`Client` et `Hunter`) pour éradiquer les failles d'intégrité et les valeurs nulles par conception.
-* **Modélisation du parcours métier complet :** Création des entités manquantes fondamentales permettant le calcul de performance et la comptabilité : `biens`, `visites`, `offres`, `baremes_commission` et `paiements`.
-* **Maîtrise temporelle et historique :** Implémentation d'une table de suivi des signatures, historisation des demandes de recherche en versions successives, et matérialisation informatique du cycle de vie légal des mandats.
+* **Modélisation du parcours métier complet :** Création des entités manquantes fondamentales permettant le calcul de performance et la comptabilité : `biens`, `visites`, le suivi des offres (statuts d'une proposition), `baremes_commission` et `paiements`.
+* **Maîtrise temporelle et historique :** Dates et mode de signature portés par le mandat, historisation des demandes de recherche en versions successives, et matérialisation informatique du cycle de vie légal des mandats.
 * **Structuration pour l'IA :** Typage strict des critères de recherche et normalisation des entités géographiques (`secteurs`) pour rendre les données exploitables par les algorithmes.
 
 **Axe 2 : Modernisation de l'architecture technique (Build)**
 
-* **Changement de paradigme SGBD :** Migration vers PostgreSQL pour bénéficier de son partitionnement déclaratif natif (indispensable pour gérer le volume international) et de la richesse de ses types complexes (JSONB).
+* **Exploiter pleinement le SGBD :** Rester sur PostgreSQL (déjà utilisé par l'existant) et tirer parti de son partitionnement déclaratif natif (indispensable pour gérer le volume international) et de la richesse de ses types complexes (JSONB).
 * **Standardisation linguistique :** Adoption de l'anglais pour l'ensemble du code, des schémas de base de données cibles et de la documentation technique afin de faciliter l'intégration de développeurs lors des futurs rachats d'agences étrangères.
 * **Séparation OLTP/OLAP :** Isolation de la base de production (transactionnelle) et du système décisionnel (analytique) pour garantir la vélocité du SI sous très forte charge.
 

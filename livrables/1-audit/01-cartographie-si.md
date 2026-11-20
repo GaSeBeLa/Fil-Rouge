@@ -1,7 +1,7 @@
 # Livrable 1 — cartographie du SI existant et de ses risques
 
 > Phase 1, BC01 : « Schématiser une cartographie du SI en utilisant une
-> méthode d'analyse de risques » (`SP/Readme.md:220`). Format cible :
+> méthode d'analyse de risques » (`SP/Readme.md:222`). Format cible :
 > 1 schéma (`SP/documents utiles/GRILLE-EVALUATION.md`).
 >
 > Reprise en Mermaid, le 2026-11-19, de la page Confluence « Cartographie du
@@ -9,7 +9,7 @@
 > 5 images : le schéma ci-dessous les **reconstruit** d'après son texte, le sujet
 > et les fixtures. 🟡 À comparer aux images avant de remplacer quoi que ce soit.
 >
-> Date de référence : **25/07/2026** (`SP/Readme.md:306`).
+> Date de référence : **25/07/2026** (`SP/Readme.md:308`).
 
 ## Le schéma
 
@@ -19,7 +19,7 @@ Chaque risque `Rnn` est posé sur le composant qu'il touche. Sa cote
 
 ```mermaid
 flowchart LR
-    subgraph HORS["Hors périmètre de développement (SP/Readme.md:208-210)"]
+    subgraph HORS["Hors périmètre de développement (SP/Readme.md:208)"]
         WEB["Site web<br/>prospects"]
         APP["Logiciel métier<br/>chasseurs"]
     end

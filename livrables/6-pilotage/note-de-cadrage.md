@@ -5,7 +5,7 @@
 
 ## 1. Contexte 
 
-L’entreprise GaseBela, actuellement en phase d'expansion à l'échelle nationale et européenne, repose sur un Système d'Information (SI) artisanal présentant une dette technique majeure (Voir phase 1). Le backend actuel, dont le code source n'est plus exploitable, utilise un modèle de données rigide, des champs en texte libre inexploitables pour l'IA, et une absence de gestion temporelle des mandats, représentant un frein majeur à la croissance européenne visée et une exposition juridique réelle (litiges sur mandats expirés).
+L’entreprise de chasse immobilière du sujet (l'équipe projet s'appelle GaSeBeLa), actuellement en phase d'expansion à l'échelle nationale et européenne, repose sur un Système d'Information (SI) artisanal présentant une dette technique majeure (Voir phase 1). Le backend actuel, dont le code source n'est plus exploitable, utilise un modèle de données rigide, des champs en texte libre inexploitables pour l'IA, et une absence de gestion temporelle des mandats, représentant un frein majeur à la croissance européenne visée et une exposition juridique réelle (litiges sur mandats expirés).
 
 ---
 

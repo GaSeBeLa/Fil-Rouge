@@ -19,7 +19,10 @@ sequenceDiagram
     participant B as PostgreSQL
 
     Note over U,A: 1. Se connecter
-    U->>A: POST /login (X-API-Key, email, mot de passe)
+    U->>A: POST /auth/login (X-API-Key, email, mot de passe)
+    opt trop d'échecs récents (5 par email ou 20 par IP en 15 min)
+        A-->>U: 429 et Retry-After, sans lire la base
+    end
     A->>B: chercher le compte par email
     B-->>A: le compte, ou rien
     A->>A: vérifier le mot de passe (Argon2)

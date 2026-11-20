@@ -25,7 +25,7 @@
 | --- | --- | --- | --- |
 | 🎨 **Contraste** du texte | « a contrast ratio of at least 4.5:1 » entre le texte et son fond | 1.4.3 | AA |
 | 🎨 Contraste des **boutons, champs, icônes** | « at least 3:1 against adjacent color(s) » | 1.4.11 | AA |
-| ⌨️ **Clavier** | tout le parcours se fait **sans souris** : remplir le formulaire, ouvrir un bien, dire « intéressé » | 2.1.1 | — |
+| ⌨️ **Clavier** | tout le parcours se fait **sans souris** : remplir le formulaire, ouvrir un bien, dire « intéressé » | 2.1.1 | A |
 | ⌨️ **Focus visible** | on voit toujours où est le curseur du clavier | 2.4.7 | AA |
 | ⌨️ Focus **pas caché** | un bandeau (cookies, menu collant) ne recouvre pas l'élément actif | 2.4.11 | AA |
 | 👆 **Taille des cibles** | « at least 24 by 24 CSS pixels » pour chaque bouton ou lien | 2.5.8 | AA |
