@@ -110,7 +110,7 @@ _Pour les rôles et responsabilités des parties prenantes du projet, voir le_ `
 
 | **Partie prenante** | **Fonction dans le projet** |
 | --- | --- |
-| Formateurs (Jean-François, Richard) | **Product Owner** |
+| Formateur (Jean-François) | **Product Owner** |
 | Jury | **Sponsor** |
 | **Equipe technique** |  |
 | Sébastien | l'API backend, le modèle cible, la migration, l'architecture, l'OLAP, les tests |
