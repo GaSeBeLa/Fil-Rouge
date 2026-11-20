@@ -1,0 +1,8 @@
+Mesure du 2026-11-20, 10 h 05, poste de développement (Docker Desktop, Windows).
+API : un seul processus uvicorn, en mode développement (--reload), PostgreSQL 16.15.
+Base de dev : 3 219 biens. Commande : voir l'en-tête de mesure_charge.py.
+
+1000 requêtes par route, 10 en parallèle, sur http://localhost:8000
+/estates             200: 1000  médiane  1251.5 ms  p95  1667.4 ms  max  2112.3 ms  débit    7.9 req/s
+/estates/1           200: 1000  médiane    69.8 ms  p95    97.3 ms  max   154.9 ms  débit  138.1 req/s
+/search-requests     200: 1000  médiane    70.7 ms  p95    99.2 ms  max   136.3 ms  débit  136.4 req/s

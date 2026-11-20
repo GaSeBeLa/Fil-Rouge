@@ -58,9 +58,25 @@ Un seul fichier lance tout : `docker/docker-compose.yml`. Les services lourds ne
 
 Pour l'impact écologique, la règle reste la même à chaque étape : **ajouter une machine seulement quand une mesure le demande**, et préférer un hébergeur qui publie l'énergie et l'origine de son électricité. 💡 Le choix de l'hébergeur n'est pas fait : aucun budget n'est communiqué (note de cadrage, § 7).
 
-## 5. Limites, dites franchement
+## 5. Première mesure de charge (2026-11-20)
+
+✅ Mesurée par `charge/mesure_charge.py` (sortie brute : `charge/sortie-2026-11-20.txt`) : **1 000 requêtes par route, 10 en parallèle**, un vrai jeton, sur le poste de développement (un seul processus uvicorn, en mode `--reload`).
+
+| Route | Réponses 200 | Médiane | 95e centile | Débit |
+|---|---|---|---|---|
+| `GET /estates` (les 3 219 biens d'un coup) | 1 000 | **1 251 ms** | 1 667 ms | **7,9 req/s** |
+| `GET /estates/1` (un bien) | 1 000 | 70 ms | 97 ms | 138 req/s |
+| `GET /search-requests` (les demandes visibles) | 1 000 | 71 ms | 99 ms | 136 req/s |
+
+**Ce qu'elle apprend :**
+- Une lecture ciblée tient **moins de 100 ms** au 95e centile, à 10 requêtes en même temps.
+- **Le goulot est la liste sans pagination** : rendre 3 219 biens d'un coup coûte 18 fois plus cher qu'un bien. C'est la limite déjà écrite dans `API/README.md` (« pas de pagination sur les routes de liste ») ; la paginer passe **avant** toute machine en plus.
+- Ces chiffres sont le **point de départ** des déclencheurs du § 4. Un serveur de production (plusieurs processus, sans `--reload`) ferait mieux ; ce n'est pas mesuré.
+- Non mesuré : la recherche Elasticsearch (profil `elk` non lancé) et les écritures.
+
+## 6. Limites, dites franchement
 
 - ⚠️ **Aucune mesure d'énergie** : on mesure la mémoire et le temps, pas les watts.
-- ⚠️ **Aucune mesure de charge** : les déclencheurs du § 4 sont conçus, pas éprouvés (dossier d'architecture, § 6).
+- ⚠️ **Une seule mesure de charge**, sur un poste de développement, en lecture seule (§ 5) : les déclencheurs du § 4 ont un point de départ, pas une preuve en production.
 - ⚠️ **Pas de sauvegarde planifiée** aujourd'hui : la politique est écrite, pas codée (PCA/PRA).
 - ⚠️ Airflow 2.11.2 est en fin de vie depuis avril 2026 (ADR-059).
