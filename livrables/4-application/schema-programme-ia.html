@@ -79,11 +79,23 @@ code {
 .guard li { border-left: 3px solid var(--line); padding-left: 12px; font-size: 16px; color: var(--muted); }
 .guard strong { color: var(--fg); font-weight: 600; display: block; }
 
+.more { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+.paper {
+  background: var(--v2-soft); border: 1.5px dashed var(--v2); border-radius: 6px;
+  padding: 16px 16px 18px; display: grid; gap: 8px; align-content: start; min-width: 0;
+}
+.paper .eyebrow { color: var(--v2); }
+.paper h2 { font-size: 19px; line-height: 1.25; margin: 0; font-weight: 600; }
+.paper p, .paper li { margin: 0; color: var(--muted); font-size: 16px; }
+.paper ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.paper .io { font-family: var(--font-mono); font-size: 15px; color: var(--v2); }
+
 @media (max-width: 860px) {
   .flow { grid-template-columns: minmax(0, 1fr); gap: 30px; }
   .step:not(:last-child)::after { right: auto; left: 28px; top: auto; bottom: -22px; transform: rotate(135deg); }
   .v2band { grid-template-columns: minmax(0, 1fr); }
   .guard ul { grid-template-columns: minmax(0, 1fr); }
+  .more { grid-template-columns: minmax(0, 1fr); }
 }
 </style>
 </head>
@@ -91,7 +103,7 @@ code {
 <main>
   <header>
     <h1>Schéma du programme IA</h1>
-    <p class="lead">La machine suggère, le chasseur trie, le client décide. Chaque décision devient la donnée qui apprendra plus tard les goûts réels.</p>
+    <p class="lead">Trois pièces : la faisabilité juge la demande, le matching cherche les biens, le chasseur-IA fait tourner le tout. La machine suggère, le chasseur trie, le client décide ; chaque décision devient la donnée qui apprendra plus tard les goûts réels.</p>
     <div class="legend">
       <span class="chip">Trait plein : v1, codé (chantier SUG)</span>
       <span class="chip v2">Pointillés : v2, sur le papier</span>
@@ -148,6 +160,30 @@ code {
       <span class="eyebrow">Renvoie</span>
       <p class="flowline">un ordre de pertinence au moteur</p>
     </div>
+  </section>
+
+  <section class="more" aria-label="Faisabilité et chasseur-IA">
+    <article class="paper">
+      <span class="eyebrow">Avant la recherche · sur le papier</span>
+      <h2>Le rapport de faisabilité</h2>
+      <p class="io">Reçoit : la demande acceptée (budget, type, surface, zone), les biens et les ventes de la zone, l'historique des prix</p>
+      <ul>
+        <li>Combien de biens collent aujourd'hui, avec la même recherche que le moteur</li>
+        <li>Le budget face au prix médian de la zone</li>
+        <li>Le critère qui bloque le plus</li>
+      </ul>
+      <p class="io">Rend au chasseur : faisable, difficile ou irréaliste, et comment reformuler (élargir la zone, revoir la surface)</p>
+    </article>
+    <article class="paper">
+      <span class="eyebrow">Qui fait tourner le programme · sur le papier</span>
+      <h2>Le chasseur-IA</h2>
+      <p>Il épaule les chasseurs humains, et travaille seul dans les zones qu'aucun humain ne couvre.</p>
+      <ul>
+        <li>Il peut : lire les demandes qui lui sont confiées, lancer le moteur, proposer des biens</li>
+        <li>Il ne peut pas : faire une offre, conclure une vente, toucher au paiement</li>
+      </ul>
+      <p class="io">En base : une fiche <code>hunter</code> avec <code>is_hunter_ai</code>, rattachée à un manager humain (ADR-029, ADR-058 proposé)</p>
+    </article>
   </section>
 
   <section class="guard" aria-label="Garde-fous">

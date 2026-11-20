@@ -1,13 +1,17 @@
 # Livrable 4 — Le schéma du programme d'IA
 
-> Brouillon du 2026-11-03, à relire par l'équipe. Format attendu : « 1 schéma
-> + description entrées/sorties » (`SP/documents utiles/GRILLE-EVALUATION.md:32`).
+> Version du 2026-11-20 (brouillon du 2026-11-03 complété par le Glaude, à la demande de Gabriel) :
+> le sujet veut un schéma « (chasseurs-IA, faisabilité, matching) » (`SP/Readme.md:256`) ; la faisabilité
+> et le chasseur-IA y sont ajoutés. Format attendu : « 1 schéma + description entrées/sorties »
+> (`SP/documents utiles/GRILLE-EVALUATION.md:32`).
 > Statuts : ✅ établi (codé ou voté) · 🟡 à décider · 💡 proposé.
 
 ## En une phrase
 
-La machine **suggère**, le chasseur **trie**, le client **décide**. Chaque
-décision deviendra, plus tard, la donnée qui apprend au système les goûts réels.
+Trois pièces : la **faisabilité** juge la demande, le **matching** cherche les
+biens, le **chasseur-IA** fait tourner le tout. La machine **suggère**, le
+chasseur **trie**, le client **décide** ; chaque décision deviendra, plus tard,
+la donnée qui apprend au système les goûts réels.
 
 ## Le schéma
 
@@ -19,6 +23,7 @@ Il se lit de gauche à droite, en quatre cases, puis la v2 en dessous :
 
 1. **Ce qui entre** → 2. **Le moteur (v1)** → 3. **Ce qui sort** → 4. **Les décisions**
 5. En pointillés : **la v2**, qui apprend des décisions et renvoie un ordre au moteur.
+6. En pointillés, dessous : **le rapport de faisabilité** et **le chasseur-IA**, conçus, pas codés.
 
 ## Les quatre cases, expliquées
 
@@ -59,6 +64,30 @@ Il se lit de gauche à droite, en quatre cases, puis la v2 en dessous :
 - Il renvoie au moteur **un ordre de pertinence**.
 - 💡 Conçu, pas codé. Le détail des features : `conception-matching-features.md`.
 
+### Le rapport de faisabilité, sur le papier
+
+Le sujet le demande à l'acceptation d'une demande (`SP/user-stories/09_futur_chasseur_assistance_ia.feature`,
+scénario `@rapport-faisabilite`, l.15-19) : un rapport « complet », et comment reformuler la demande.
+
+- **Il reçoit** la demande acceptée (budget, type, surface, zone), les biens et les
+  ventes de la zone (`estate`, `sale`, et le schéma `olap`), l'historique des prix
+  (`estate_price_history`).
+- **Il calcule** : combien de biens collent aujourd'hui, avec la même recherche que
+  le moteur v1 ; le budget face au prix médian de la zone ; le critère qui bloque le plus.
+- **Il rend au chasseur** : faisable, difficile ou irréaliste, et une piste de
+  reformulation (élargir la zone, revoir la surface ou le budget).
+- 💡 Conçu, pas codé. Toutes ses données existent déjà en base : c'est un calcul,
+  pas un modèle à entraîner.
+
+### Le chasseur-IA, sur le papier
+
+- Le sujet le veut capable d'**épauler** les chasseurs humains, et d'**opérer seul**
+  dans les zones non couvertes physiquement (rappel en tête du même fichier `.feature`).
+- ✅ En base : une fiche `hunter` avec `is_hunter_ai`, rattachée à un manager humain (ADR-029).
+- **Il peut** : lire les demandes et les mandats qui lui sont confiés, lancer le moteur, proposer des biens.
+- **Il ne peut pas** : faire une offre, conclure une vente, toucher au paiement (ADR-058,
+  💡 proposé). Aujourd'hui il a les droits d'un `Hunter` : la restriction n'est pas codée.
+
 ## Ce qui entre, ce qui sort
 
 | Étape | Entrée | Sortie | Statut |
@@ -69,6 +98,8 @@ Il se lit de gauche à droite, en quatre cases, puis la v2 en dessous :
 | Tri du chasseur | les `suggested` | `kept` ou `dismissed` | ✅ codé en SUG4 |
 | Décision du client | un bien proposé | `interested` ou `declined` + motif | ✅ codé en SUG5 |
 | Reclassement v2 | décisions, offres et ventes passées | un ordre de pertinence | 💡 sur le papier |
+| Rapport de faisabilité | demande acceptée, biens, ventes et prix de la zone | faisable / difficile / irréaliste + piste de reformulation | 💡 sur le papier |
+| Chasseur-IA | demandes qui lui sont confiées | suggestions, comme un chasseur humain ; jamais d'offre ni de vente | 💡 droits réduits proposés (ADR-058), fiche `is_hunter_ai` ✅ en base |
 
 ## Les briques de l'énoncé, et où elles en sont
 
@@ -79,7 +110,8 @@ L'énoncé liste les assistances voulues (`SP/user-stories/09_futur_chasseur_ass
 | Sélection dédoublonnée et ordonnée par pertinence (l.34-40) | ✅ v1 : filtres + score ; la pertinence apprise viendra en v2 |
 | Écarter les biens qui ressemblent aux biens rejetés (l.42-46) | 💡 v2 : vecteur par bien, recherche des plus proches (`dense_vector` + kNN d'Elasticsearch) |
 | Offre sous le prix affiché pré-calculée (l.40, l.54-58) | 💡 feature « baisse de prix » tirée de `estate_price_history` |
-| Rapport de faisabilité, prise de contact, avis pré-rédigés, facture, renouvellement (l.15-32, 48-71) | 🟡 hors périmètre de ce livrable |
+| Rapport de faisabilité et reformulation (l.15-19) | 💡 conçu ci-dessus, pas codé |
+| Prise de contact, affinage assisté, avis pré-rédigés, facture, renouvellement (l.21-32, 48-71) | 🟡 hors périmètre de ce livrable |
 
 ## Les garde-fous
 
