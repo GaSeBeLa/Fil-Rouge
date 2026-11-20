@@ -1,7 +1,7 @@
 # Note souveraineté et sécurité des données face à l'IA
 
 > ⚠️ **Remplacée** le 2026-11-03 (fiche RGP4) par
-> [`livrables/5-transverse/note-souverainete-securite-ia.md`](../../livrables/5-transverse/note-souverainete-securite-ia.md),
+> [`livrables/5-transverse/5.4-note-souverainete-securite-ia.md`](../../livrables/5-transverse/5.4-note-souverainete-securite-ia.md),
 > mise d'accord avec le registre. Ce brouillon reste pour l'historique ; il
 > ne se met plus à jour.
 
@@ -50,7 +50,7 @@ Deux usages, deux portes :
   - C'est une **pseudonymisation**, pas une anonymisation : l'id renvoie à la
     base de production, pour qui y a accès.
 - ✅ **Les features du matching** n'utilisent **aucune donnée personnelle**
-  ([`livrables/4-application/conception-matching-features.md`](../../livrables/4-application/conception-matching-features.md), § 3) : le modèle juge un couple
+  ([`livrables/4-application/4.7-conception-matching-features.md`](../../livrables/4-application/4.7-conception-matching-features.md), § 3) : le modèle juge un couple
   (demande, bien), pas une personne.
 - ✅ **Le droit à l'effacement** : la route `POST /users/{id}/anonymize`
   anonymise un compte sans `DELETE` (chantier API).

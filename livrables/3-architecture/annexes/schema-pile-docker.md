@@ -72,4 +72,4 @@ flowchart TB
 ## Sources
 
 - `docker/docker-compose.yml` : services, `profiles`, `ports`, `depends_on`.
-- Comment lancer chaque profil : [`md/equipe/tuto-lancer-la-pile.md`](../../md/equipe/tuto-lancer-la-pile.md).
+- Comment lancer chaque profil : [`md/equipe/tuto-lancer-la-pile.md`](../../../md/equipe/tuto-lancer-la-pile.md).

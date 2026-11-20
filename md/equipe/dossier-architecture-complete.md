@@ -1,4 +1,4 @@
-> **Version complète, gardée en annexe.** Le livrable est la version courte : `livrables/3-architecture/dossier-architecture.md` (2026-11-20).
+> **Version complète, gardée en annexe.** Le livrable est la version courte : `livrables/3-architecture/3.2-dossier-architecture.md` (2026-11-20).
 
 # Dossier d'architecture — absorber la croissance
 
@@ -25,8 +25,8 @@ et un scraping de **9 à 56 pages par seconde** (note 3V § 3 et § 4).
 
 ## 2. Les composants
 
-Le schéma de composants est déjà fait : [04 — la pile Docker](../../livrables/3-architecture/04-pile-docker.md)
-(11 conteneurs, 3 profils) et [03 — le chemin des données](../../livrables/3-architecture/03-chemin-des-donnees.md)
+Le schéma de composants est déjà fait : [04 — la pile Docker](../../livrables/3-architecture/annexes/schema-pile-docker.md)
+(11 conteneurs, 3 profils) et [03 — le chemin des données](../../livrables/3-architecture/annexes/schema-chemin-des-donnees.md)
 (flux de nuit, recherche, logs). En voici la lecture par couche, avec le point
 de performance de chacune.
 
@@ -60,7 +60,7 @@ flowchart LR
 | `api` (FastAPI) | règles métier, droits, calcul du paiement | ⚠️ connexion : argon2 à **512 Mo et ~298 ms par essai** ; dix connexions simultanées ≈ 5 Go. Freinées depuis le 2026-11-19 : 5 échecs par email ou 20 par IP en 15 min → `429` | `utils/security.py:45`, commit `e6f4b87` |
 | | | ⚠️ le compte est relu en base à **chaque** appel : une requête de plus, voulue pour la sécurité | ADR-052, décision 3 |
 | | | ⚠️ pas de pagination : `GET /estates` rend tous les biens d'un coup (3 219 sur la base de développement : 1,25 s, mesuré le 2026-11-20) | `API/README.md`, « Limites connues » |
-| PostgreSQL, OLTP | 22 tables, contraintes, triggers | ✅ **7 index** posés à la main, dont 3 le 2026-11-19 après mesure (× 15 à × 100, `../2-modelisation/note-indexation.md`) ; ⚠️ PostgreSQL n'indexe pas seul les clés étrangères : les autres n'ont pas d'index dédié, sauf quand une contrainte `UNIQUE` les couvre. **0** table partitionnée | `init-v3/01_create_fil_rouge_immobilier.sql` |
+| PostgreSQL, OLTP | 22 tables, contraintes, triggers | ✅ **7 index** posés à la main, dont 3 le 2026-11-19 après mesure (× 15 à × 100, `livrables/2-modelisation/2.8-note-indexation.md`) ; ⚠️ PostgreSQL n'indexe pas seul les clés étrangères : les autres n'ont pas d'index dédié, sauf quand une contrainte `UNIQUE` les couvre. **0** table partitionnée | `init-v3/01_create_fil_rouge_immobilier.sql` |
 | PostgreSQL, `olap` | l'étoile du sujet, une ligne par vente | ✅ précalculée : l'analyse ne refait pas les jointures du métier. ⚠️ recalcul **complet** chaque nuit, 0 index | `airflow/src/olap/load.py`, `08_olap.sql` |
 | Elasticsearch | recherche texte, ville, prix, distance | ✅ arrêté, seule la recherche répond `503`. ⚠️ 1 shard, 0 réplique ; jusqu'à 24 h de retard | ADR-061, `airflow/src/search/mapping.py` |
 | Airflow | sauvegarde, import, OLAP, index : quatre DAG de nuit | ⚠️ `LocalExecutor`, une seule machine : ne tiendra pas 9 à 56 pages par seconde | ADR-059, note 3V § 6 |
@@ -87,7 +87,7 @@ et demain à l'IA, une vue **sans nom ni contact**.
 
 ### 3.2 Quatre architectures comparées
 
-La [matrice de décision](../../livrables/3-architecture/matrice-decision-architecture.md) compare quatre
+La [matrice de décision](../../livrables/3-architecture/3.3-matrice-decision-architecture.md) compare quatre
 options sur six critères pondérés : une base unique (**77**/120), **OLTP + OLAP
 dans la même instance (92)**, un entrepôt séparé (81), des microservices (65).
 B reste en tête si l'on change les poids, sauf à ne regarder que la
@@ -114,9 +114,9 @@ Le sujet en nomme quatre (`SP/Readme.md:246`). Aucun n'est un « oui » ou un
 
 | Levier | Ce qu'il résout | Aujourd'hui | Quand l'activer | Statut |
 |---|---|---|---|---|
-| **Indexation** | une lecture qui parcourt toute la table | 7 index, dont 3 posés après mesure le 2026-11-19 | **Maintenant** : sur les clés étrangères jointes (`id_search_request`, `id_mandate`, `id_estate`, `id_hunter`, `id_client`) et sur les filtres du matching (`estate.town`, `estate.price`, `estate.estate_type`), vérifiés par `EXPLAIN ANALYZE` avant et après | ✅ 3 posés et mesurés (`../2-modelisation/note-indexation.md`) · 💡 les autres |
+| **Indexation** | une lecture qui parcourt toute la table | 7 index, dont 3 posés après mesure le 2026-11-19 | **Maintenant** : sur les clés étrangères jointes (`id_search_request`, `id_mandate`, `id_estate`, `id_hunter`, `id_client`) et sur les filtres du matching (`estate.town`, `estate.price`, `estate.estate_type`), vérifiés par `EXPLAIN ANALYZE` avant et après | ✅ 3 posés et mesurés (`livrables/2-modelisation/2.8-note-indexation.md`) · 💡 les autres |
 | **Partitionnement** | une table si grosse que l'entretien et les lectures ralentissent | 0 table partitionnée | Quand les deux tables de liens dépassent quelques dizaines de Go : elles font **84 à 87 %** du volume dans le scénario Complet (note 3V § 6). Partitions par mois de création, ou par pays | 🟡 |
-| **Réplication** | une panne de la seule instance ; les lectures qui saturent | aucune | **Avant la mise en production** : une réplique en lecture, promue si l'instance tombe. C'est aussi ce qui tient le temps de reprise du PCA/PRA à 133 Go | 💡 voir `pca-pra-plan-de-migration.md` § 4 |
+| **Réplication** | une panne de la seule instance ; les lectures qui saturent | aucune | **Avant la mise en production** : une réplique en lecture, promue si l'instance tombe. C'est aussi ce qui tient le temps de reprise du PCA/PRA à 133 Go | 💡 voir `3.5-pca-pra-plan-de-migration.md` § 4 |
 | **Sharding** | un volume qu'une seule machine ne tient plus | aucun | **Pas avant longtemps** : 133 Go tiennent sur une instance. Si un jour il le faut, découper par pays, puisque les mandats d'un pays ne croisent pas ceux d'un autre | 🟡 écarté pour l'instant |
 
 Deux changements suivent le volume, sans être des leviers du sujet :
@@ -130,7 +130,7 @@ Deux changements suivent le volume, sans être des leviers du sujet :
 
 ## 5. Sécurité et éco-conception
 
-**Sécurité** (le détail : `../4-application/note-securite-applicative.md`)
+**Sécurité** (le détail : `livrables/4-application/4.5-note-securite-applicative.md`)
 - Deux contrôles à chaque appel : la clé dit quel programme appelle, le jeton
   quelle personne agit (ADR-028).
 - Un compte par usage : `api_search` lit l'index, `airflow_indexer` l'écrit,
@@ -167,8 +167,8 @@ note 3V. »
 
 | Affirmation | Source |
 |---|---|
-| Volumes, vélocité, part des tables de liens, `BIGINT` | `note-dimensionnement-3v.md` § 3, 4, 6 |
-| Étoile, grain, mesures, rafraîchissement à 3 h | `../2-modelisation/olap.md` |
+| Volumes, vélocité, part des tables de liens, `BIGINT` | `3.1-note-dimensionnement-3v.md` § 3, 4, 6 |
+| Étoile, grain, mesures, rafraîchissement à 3 h | `livrables/3-architecture/3.4-olap.md` |
 | Airflow, MinIO, Elasticsearch, profils, clé d'annonce, historique des prix | ADR-059 à ADR-064 |
 | 22 tables, 7 index, 0 partition | `Fil-Rouge-API/docker/init-v3/01_create_fil_rouge_immobilier.sql`, recompté le 2026-11-19 |
 | Recalcul complet de l'OLAP | `Fil-Rouge-API/airflow/src/olap/load.py` |

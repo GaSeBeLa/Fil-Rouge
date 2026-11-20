@@ -102,4 +102,4 @@ Mesurée au repos le 2026-10-15 vers 16 h 30, tous profils lancés, par
   `md/flux/cours-elasticsearch-synthese.md`.
 - Lancer, tester, importer le tableau de bord : `API/README.md` du dépôt
   Fil-Rouge-API, sections « Airflow » et « Elasticsearch et Kibana ».
-- Le modèle en étoile et ses choix : `livrables/2-modelisation/olap.md`.
+- Le modèle en étoile et ses choix : `livrables/3-architecture/3.4-olap.md`.

@@ -1,4 +1,4 @@
-> **Version complète, gardée en annexe.** Le livrable est la version courte : `livrables/3-architecture/matrice-decision-architecture.md` (2026-11-20).
+> **Version complète, gardée en annexe.** Le livrable est la version courte : `livrables/3-architecture/3.3-matrice-decision-architecture.md` (2026-11-20).
 
 # Matrice de décision d'architecture
 
@@ -9,9 +9,9 @@
 > Modèle suivi : `SP/documents utiles/MATRICE-DECISION.md`.
 >
 > Brouillon du 2026-11-19, à relire par l'équipe. Elle s'appuie sur la note 3V
-> (`note-dimensionnement-3v.md`), le schéma OLAP (`../2-modelisation/olap.md`)
+> (`3.1-note-dimensionnement-3v.md`), le schéma OLAP (`livrables/3-architecture/3.4-olap.md`)
 > et les ADR 059 à 064. Le dossier qui la commente :
-> [`dossier-architecture.md`](../../livrables/3-architecture/dossier-architecture.md).
+> [`3.2-dossier-architecture.md`](../../livrables/3-architecture/3.2-dossier-architecture.md).
 >
 > Statuts : ✅ établi (lu ou mesuré) · 🟡 à décider · 💡 proposé.
 
@@ -98,7 +98,7 @@ la raison.
 |---|---|---|---|---|---|
 | 1 | **Sécurité ↔ performance** | argon2 à 512 Mo et ~298 ms par mot de passe (`utils/security.py:45`) | un mot de passe volé en base coûte très cher à casser | ~5 Go de mémoire pour dix connexions simultanées ; freinage obligatoire (commit `e6f4b87`) | la base est nominative : une fuite coûte plus qu'une connexion lente |
 | 2 | **Sécurité ↔ performance** | le compte relu en base à **chaque** appel (ADR-052) | un compte désactivé perd ses droits tout de suite | une requête de plus par appel | des droits qui survivent 60 min à une désactivation, c'est une faille RGPD |
-| 3 | **Fraîcheur ↔ coût et simplicité** | OLAP et index recalculés **une fois par nuit** (ADR-061, `olap.md`) | un seul traitement par jour, pas de flux continu à faire tourner | analyse et recherche en retard de 24 h au plus | personne ne pilote à la minute ; un bien vu le lendemain suffit (éco-conception) |
+| 3 | **Fraîcheur ↔ coût et simplicité** | OLAP et index recalculés **une fois par nuit** (ADR-061, `3.4-olap.md`) | un seul traitement par jour, pas de flux continu à faire tourner | analyse et recherche en retard de 24 h au plus | personne ne pilote à la minute ; un bien vu le lendemain suffit (éco-conception) |
 | 4 | **Simplicité et coût ↔ scalabilité** | OLTP et OLAP dans la **même** instance (option B) | un seul moteur, une seule exploitation | l'analyse partage le processeur du métier | 133 Go tiennent sur une instance (note 3V § 6) ; l'entrepôt séparé attend un ralentissement mesuré |
 | 5 | **Éco-conception ↔ disponibilité** | une instance de chaque service, **sans réplique** | moitié moins de machines, de mémoire, d'énergie | une panne arrête le service ; reprise à la main (PCA/PRA) | MVP local, pas en production ; la réplique est le premier ajout avant une mise en ligne |
 | 6 | **Éco-conception et droit ↔ fiabilité** | photos des agences **liées, pas copiées** (note 3V, hypothèse L) | 29 à 188 To de stockage évités ; pas de litige sur le droit d'auteur | une photo retirée par l'agence casse le lien | le stockage et le risque juridique coûtent plus qu'un lien cassé |

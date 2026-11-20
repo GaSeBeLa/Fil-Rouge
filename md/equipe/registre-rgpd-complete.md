@@ -1,4 +1,4 @@
-> **Version complète, gardée en annexe.** Le livrable est la version courte : `livrables/5-transverse/registre-rgpd.md` (2026-11-20).
+> **Version complète, gardée en annexe.** Le livrable est la version courte : `livrables/5-transverse/5.1-registre-rgpd.md` (2026-11-20).
 
 # Registre des traitements
 

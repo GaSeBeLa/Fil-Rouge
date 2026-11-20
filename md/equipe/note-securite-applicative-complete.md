@@ -1,4 +1,4 @@
-> **Version complète, gardée en annexe.** Le livrable est la version courte : `livrables/4-application/note-securite-applicative.md` (2026-11-20).
+> **Version complète, gardée en annexe.** Le livrable est la version courte : `livrables/4-application/4.5-note-securite-applicative.md` (2026-11-20).
 
 # 🔐 Note de sécurité applicative — API Fil Rouge Immobilier
 

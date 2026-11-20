@@ -33,7 +33,7 @@
 |---|---|---|---|---|---|
 | Dossier d'architecture + matrice de décision | R | | **A** | | `livrables/3-architecture/` (8 schémas) : Sébastien. ❌ matrice pas trouvée |
 | Note de dimensionnement 3V | **A** | | | R | auteur Confluence : Gabriel |
-| Schéma OLAP + alimentation | R | | | **A** | `livrables/2-modelisation/olap.md`, chantier FLX : Sébastien |
+| Schéma OLAP + alimentation | R | | | **A** | `livrables/3-architecture/3.4-olap.md`, chantier FLX : Sébastien |
 | Note d'éco-conception | | **A** | | R | auteur Confluence : Gabriel |
 | PCA/PRA + plan de migration | | | | | ❌ pas trouvé |
 
@@ -43,7 +43,7 @@
 |---|---|---|---|---|---|
 | Dossier de conception applicative + maquettes | | | | | ❌ pas trouvé. 🟡 « pas de front » : que montrent les maquettes ? |
 | Backend / API | R | C | | C | commits de Fil-Rouge-API : Sébastien 172, CaBaSS 23, Amethyste34 3. **A** : 🟡 à choisir |
-| Plan de tests + exécution | R | **A** | | | `livrables/4-application/rapport-tests.md` : Sébastien |
+| Plan de tests + exécution | R | **A** | | | `livrables/4-application/4.4-rapport-tests.md` : Sébastien |
 | Schéma du programme d'IA + conception matching | R | C | | **A** | brouillons du 2026-11-03 ; Gabriel a relevé les incohérences du chantier SUG |
 | Note souveraineté / sécurité IA | | | | | ❌ pas trouvée |
 

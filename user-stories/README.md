@@ -12,16 +12,16 @@ Ce dossier contient des **user stories au format Gherkin**, déduites du [`Readm
 
 | Fichier | Contenu | Source (Readme.md) |
 |---|---|---|
-| [`00_regles_metier_mandat_remuneration.feature`](./00_regles_metier_mandat_remuneration.feature) | Règles transverses : mandat exclusif/non-exclusif, rémunération via le notaire, barème, performance | « Le contexte » |
-| [`01_particulier_demande_et_compte.feature`](./01_particulier_demande_et_compte.feature) | Dépôt de la demande, affectation du chasseur, création de compte, signature du mandat | Parcours particulier, étapes 1-3 |
-| [`02_particulier_recherche_et_visites.feature`](./02_particulier_recherche_et_visites.feature) | Réception des propositions, avis du chasseur, boucle de sélection | Parcours particulier, étapes 4-6 |
-| [`03_particulier_offre_et_signature.feature`](./03_particulier_offre_et_signature.feature) | Offre d'achat, signature de l'acte, facturation | Parcours particulier, étapes 6-9 |
-| [`04_chasseur_prise_en_charge_demande.feature`](./04_chasseur_prise_en_charge_demande.feature) | Réception/acceptation d'une demande, prise de contact, signature du mandat | Parcours chasseur, étapes 1-4 |
-| [`05_chasseur_selection_quotidienne_biens.feature`](./05_chasseur_selection_quotidienne_biens.feature) | Sélection quotidienne de biens, retour client, requalification | Parcours chasseur, étapes 5-6 |
-| [`06_chasseur_avis_et_offre_achat.feature`](./06_chasseur_avis_et_offre_achat.feature) | Note d'avis, offre d'achat pré-remplie, transmission au vendeur | Parcours chasseur, étapes 7-9 |
-| [`07_chasseur_remuneration_et_performance.feature`](./07_chasseur_remuneration_et_performance.feature) | Facturation du chasseur, paiement, recalcul de performance, renouvellement de mandat | Parcours chasseur, étapes 10-13 |
-| [`08_futur_particulier_assistance_ia.feature`](./08_futur_particulier_assistance_ia.feature) | Ajouts IA côté particulier (faisabilité, personnalisation, recommandations) | « Le futur du parcours utilisateur » — particulier |
-| [`09_futur_chasseur_assistance_ia.feature`](./09_futur_chasseur_assistance_ia.feature) | Ajouts IA côté chasseur (faisabilité, dédoublonnage, pré-rédaction, vérification autonome) | « Le futur du parcours utilisateur » — chasseur |
+| [`00_regles_metier_mandat_remuneration.feature`](00_regles_metier_mandat_remuneration.feature) | Règles transverses : mandat exclusif/non-exclusif, rémunération via le notaire, barème, performance | « Le contexte » |
+| [`01_particulier_demande_et_compte.feature`](01_particulier_demande_et_compte.feature) | Dépôt de la demande, affectation du chasseur, création de compte, signature du mandat | Parcours particulier, étapes 1-3 |
+| [`02_particulier_recherche_et_visites.feature`](02_particulier_recherche_et_visites.feature) | Réception des propositions, avis du chasseur, boucle de sélection | Parcours particulier, étapes 4-6 |
+| [`03_particulier_offre_et_signature.feature`](03_particulier_offre_et_signature.feature) | Offre d'achat, signature de l'acte, facturation | Parcours particulier, étapes 6-9 |
+| [`04_chasseur_prise_en_charge_demande.feature`](04_chasseur_prise_en_charge_demande.feature) | Réception/acceptation d'une demande, prise de contact, signature du mandat | Parcours chasseur, étapes 1-4 |
+| [`05_chasseur_selection_quotidienne_biens.feature`](05_chasseur_selection_quotidienne_biens.feature) | Sélection quotidienne de biens, retour client, requalification | Parcours chasseur, étapes 5-6 |
+| [`06_chasseur_avis_et_offre_achat.feature`](06_chasseur_avis_et_offre_achat.feature) | Note d'avis, offre d'achat pré-remplie, transmission au vendeur | Parcours chasseur, étapes 7-9 |
+| [`07_chasseur_remuneration_et_performance.feature`](07_chasseur_remuneration_et_performance.feature) | Facturation du chasseur, paiement, recalcul de performance, renouvellement de mandat | Parcours chasseur, étapes 10-13 |
+| [`08_futur_particulier_assistance_ia.feature`](08_futur_particulier_assistance_ia.feature) | Ajouts IA côté particulier (faisabilité, personnalisation, recommandations) | « Le futur du parcours utilisateur » — particulier |
+| [`09_futur_chasseur_assistance_ia.feature`](09_futur_chasseur_assistance_ia.feature) | Ajouts IA côté chasseur (faisabilité, dédoublonnage, pré-rédaction, vérification autonome) | « Le futur du parcours utilisateur » — chasseur |
 
 ## Conventions
 

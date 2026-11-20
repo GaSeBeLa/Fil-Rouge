@@ -1,4 +1,4 @@
-> **Version complète, gardée en annexe.** Le livrable est la version courte : `livrables/5-transverse/note-accessibilite-psh.md` (2026-11-20).
+> **Version complète, gardée en annexe.** Le livrable est la version courte : `livrables/5-transverse/5.3-note-accessibilite-psh.md` (2026-11-20).
 
 # ♿ Note d'accessibilité (PSH) — l'espace acquéreur
 

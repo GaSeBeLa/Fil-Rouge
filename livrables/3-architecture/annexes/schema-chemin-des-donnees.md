@@ -2,7 +2,7 @@
 
 > Tiré de la présentation du 2026-10-16 (schéma 3). C'est la **vue
 > d'ensemble**. Le détail, avec les noms exacts des fichiers MinIO et des
-> tâches, est dans [`md/flux/schema-du-flux.md`](../../md/flux/schema-du-flux.md) :
+> tâches, est dans [`md/flux/schema-du-flux.md`](../../../md/flux/schema-du-flux.md) :
 > en cas d'écart, c'est lui qui fait foi.
 
 ## À quoi il sert

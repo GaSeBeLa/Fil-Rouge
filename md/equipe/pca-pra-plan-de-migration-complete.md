@@ -1,4 +1,4 @@
-> **Version complète, gardée en annexe.** Le livrable est la version courte : `livrables/3-architecture/pca-pra-plan-de-migration.md` (2026-11-20).
+> **Version complète, gardée en annexe.** Le livrable est la version courte : `livrables/3-architecture/3.5-pca-pra-plan-de-migration.md` (2026-11-20).
 
 # PCA, PRA et plan de migration
 

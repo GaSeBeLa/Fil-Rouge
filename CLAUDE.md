@@ -31,7 +31,7 @@ modifiés**.
   repositories) sur **21 des 22 tables** ; le routeur commun revalide l'entrée
   (`422` avant la base). 91 opérations vérifiées en `200` contre la base
   (mesuré avant LOT6). **1 120 passed, 7 xfailed** (au 2026-11-20, après les en-têtes de sécurité ; rapport du 2026-11-19, 1 116 :
-  `livrables/4-application/rapport-tests.md`), unitaires sans base et intégration sur la base de test isolée
+  `livrables/4-application/4.4-rapport-tests.md`), unitaires sans base et intégration sur la base de test isolée
   `fil_rouge_test` (`docker/create_test_db.sh`) — voir `API/README.md` § Tests.
 - **Les droits sont codés** (chantier DRO, 2026-10-13) : le rôle, table par
   table, puis « le sien » (la ligne d'un autre rend `404`) ; les comptes
@@ -42,9 +42,7 @@ modifiés**.
   (`services/remuneration.py`, code du sujet), branché sur la base par
   `POST /sales/{id}/payment` (fiche API12).
 - `normalised/` porte la normalisation des annonces et son rapport d'anomalies.
-- `livrables/2-modelisation/` porte le
-  schéma OLAP (`olap.md`, chantier FLX) ; `4-application/` le rapport de
-  tests et, en brouillon, le schéma du programme d'IA et la conception du matching (2026-11-03) ; `3-architecture/` porte les schémas 01 à 04, le dossier d'architecture, la matrice de décision et la note d'environnement (les schémas 05 à 07 sont en `2-modelisation/`, le 08 en `4-application/`) ; `1-audit/` porte la phase 1 (cartographie, registre coté, analyse ; Gabriel, 2026-11-19) ; 12 pages Confluence y sont copiées dans le dossier de leur phase (2026-11-19 ; en-tête « Copie de Confluence », Confluence fait foi). Les documents de travail en sont sortis le 2026-11-20 : rapports du chantier `C` dans `md/regles-metier/09-*`, inventaire RGPD dans `md/securite/`. Détail daté dans `context AI/08-etat.md`.
+- `livrables/` est rangé par phase depuis le 2026-11-20 (choix A de Gabriel) : `1-audit/` à `6-pilotage/`, les livrables numérotés `<phase>.<ordre>` (`2.3-note-de-cadrage.md`…), les appuis sans numéro dans `<phase>/annexes/` (les 8 schémas Mermaid `schema-*.md`, SWOT, scripts de mesure, images). `livrables/README.md` est la liste officielle des 36 livrables du sujet, pour le jury. 12 pages Confluence y sont copiées (en-tête « Copie de Confluence », Confluence fait foi) ; les versions longues sont en `md/equipe/*-complete.md` ; les documents de travail sont dans `md/`. Détail daté dans `context AI/08-etat.md`.
 - Clos le 2026-10-15 : clés vers les fiches et rôles des fiches (chantier PRF).
 - Clos le 2026-10-15 : Airflow, Elasticsearch, Logstash et Kibana branchés sur l'API (chantier FLX).
 - Clos le 2026-11-03 : clos sans rien livrer, recadrage à venir (chantier MER).

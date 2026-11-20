@@ -1,4 +1,4 @@
-> **Version complète, gardée en annexe.** Le livrable est la version courte : `livrables/6-pilotage/note-de-cadrage.md` (2026-11-20).
+> **Version complète, gardée en annexe.** Le livrable est la version courte : `livrables/2-modelisation/2.3-note-de-cadrage.md` (2026-11-20).
 
 > **Copie de Confluence** — page « Note de cadrage » (id 17498130, version 13), espace GaSeBeLa1, copiée le 2026-11-19.
 > La source qui fait foi reste Confluence : https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/17498130/Note+de+cadrage. Les images, schémas draw.io et encadrés ne passent pas dans l'export : ils sont signalés par une ligne « 🖼️ Image ou schéma non copié : <nom ou légende si connue> ».
@@ -172,7 +172,7 @@ Deux familles de risques : ceux du **système d'information** (trouvés à l'aud
 
 Sources : pages « Audit du système d'information » et « Registre des anomalies — Existant ». L'audit a coté **16 problèmes** (probabilité × gravité, de 1 à 9) : **3** en priorité absolue, **9** à corriger impérativement, **4** mineurs.
 
-**Cotes** : registre coté de la phase 1 (`livrables/1-audit/02-registre-anomalies-risques.md`, dépôt Fil-Rouge), probabilité × impact, de 1 à 9. 🟥 7 à 9 : priorité absolue · 🟨 4 à 6 : impérative · 🟩 1 à 3 : mineure.
+**Cotes** : registre coté de la phase 1 (`livrables/1-audit/1.2-registre-anomalies-risques.md`, dépôt Fil-Rouge), probabilité × impact, de 1 à 9. 🟥 7 à 9 : priorité absolue · 🟨 4 à 6 : impérative · 🟩 1 à 3 : mineure.
 
 | Cote | Risque trouvé à l'audit | Impact | Parade dans le nouveau système |
 | --- | --- | --- | --- |

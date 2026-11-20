@@ -1,4 +1,4 @@
-> **Version complète, gardée en annexe.** Le livrable est la version courte : `livrables/5-transverse/note-souverainete-securite-ia.md` (2026-11-20).
+> **Version complète, gardée en annexe.** Le livrable est la version courte : `livrables/5-transverse/5.4-note-souverainete-securite-ia.md` (2026-11-20).
 
 # Note souveraineté et sécurité des données face à l'IA
 
@@ -7,7 +7,7 @@
 > A : Gabriel (RACI proposé, RGPD-1). Format : 1 page
 > (`SP/documents utiles/GRILLE-EVALUATION.md:38`). Modèle :
 > `SP/documents utiles/SOUVERAINETE-SECURITE-IA.md`. D'accord avec le
-> registre : `registre-rgpd.md`. Statuts : ✅ établi · 🟡 ouvert · 💡 proposé.
+> registre : `5.1-registre-rgpd.md`. Statuts : ✅ établi · 🟡 ouvert · 💡 proposé.
 > ✅ Écart avec Confluence (N1 à N7) **validé par le groupe** le 2026-11-03
 > (Seb ; Laurence et Gabriel, rapporté par Seb) ; reporté sur Confluence
 > le 2026-11-03 (page 63438854, version 2).
@@ -47,7 +47,7 @@ Quand elle agit, elle a moins de droits qu'un humain, et un humain engage.
   comme les ventes (RGPD-12).
 - ✅ **Le matching** n'utilise aucune donnée personnelle : il juge un
   couple (demande, bien), pas une personne
-  (`livrables/4-application/conception-matching-features.md`, § 3).
+  (`livrables/4-application/4.7-conception-matching-features.md`, § 3).
 - ✅ **L'effacement** : `POST /users/{id}/anonymize`, sans `DELETE`
   (ADR-049) ; la date de l'effacement n'est pas gardée (v2, RGPD-14).
 - 💡 Si un LLM arrive en v2 : il ne reçoit que les colonnes du bien et des

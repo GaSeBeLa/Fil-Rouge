@@ -1,4 +1,4 @@
-> **Version complète, gardée en annexe** (hypothèses A à M, 14 calculs, 14 sources). Le livrable est la version courte : `livrables/3-architecture/note-dimensionnement-3v.md` (2026-11-20).
+> **Version complète, gardée en annexe** (hypothèses A à M, 14 calculs, 14 sources). Le livrable est la version courte : `livrables/3-architecture/3.1-note-dimensionnement-3v.md` (2026-11-20).
 
 > **Copie de Confluence** — page « Note de dimensionnement 3V — deux scénarios » (id 45252610, version 13), espace GaSeBeLa1, copiée le 2026-11-19.
 > La source qui fait foi reste Confluence : https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/45252610/Note+de+dimensionnement+3V+deux+sc+narios. Les images, schémas draw.io et encadrés ne passent pas dans l'export : ils sont signalés par une ligne « 🖼️ Image ou schéma non copié : <nom ou légende si connue> ».
