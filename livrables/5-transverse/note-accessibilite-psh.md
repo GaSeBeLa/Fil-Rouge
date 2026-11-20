@@ -1,7 +1,7 @@
 # Note d'accessibilité (PSH) — l'espace acquéreur
 
 > Équipe du projet — version courte du 2026-11-20. [Version complète](../../md/equipe/note-accessibilite-psh-complete.md).
-> Exigée par le sujet : « Visez au minimum les critères de contraste, navigation clavier, tailles de cibles, alternatives textuelles ». Cahier des charges, exigence **ENF-05** : « L'espace acquéreur respecte le RGAA niveau AA ».
+> Exigée par le sujet : « Visez au minimum les critères de contraste, navigation clavier, tailles de cibles, alternatives textuelles ». Cahier des charges, exigence **ENF-13** : des préconisations pour l'espace acquéreur sur le contraste, le clavier, la taille des cibles et les textes alternatifs.
 
 ## 1. Périmètre
 
