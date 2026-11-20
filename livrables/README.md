@@ -80,4 +80,4 @@ Appuis : [schéma de connexion](4-application/annexes/schema-connexion-et-jeton.
 | 6.1 | Planning (Gantt) et jalons | [6.1-gantt.md](6-pilotage/6.1-gantt.md) |
 | 6.2 | RACI | [6.2-raci.md](6-pilotage/6.2-raci.md) |
 | 6.3 | Grille d'auto-évaluation | [6.3-grille-auto-evaluation.md](6-pilotage/6.3-grille-auto-evaluation.md) |
-| 6.4 | Comptes rendus d'ateliers | à venir |
+| 6.4 | Comptes rendus d'ateliers | [6.4-comptes-rendus-ateliers.md](6-pilotage/6.4-comptes-rendus-ateliers.md) |
