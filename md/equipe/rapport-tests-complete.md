@@ -287,7 +287,7 @@ Un test par règle ajoutée à la base par ADR-053 (migrations 22 à 38). Le n°
 | ENF-03 : accès croisé aux données de rémunération | la matrice des droits est codée et testée (chantier DRO, `test_droits_par_role.py`) | ✅ |
 | Les tests du seed **dans le conteneur** | ils tournent depuis : plus aucun test sauté le 2026-11-19 (§ 1) | ✅ |
 
-✅ Le sujet demande des tests **unitaires et fonctionnels** (`Readme.md:256`). Les **fonctionnels** sont dans [`tests-fonctionnels.md`](./tests-fonctionnels.md) (2026-11-19).
+✅ Le sujet demande des tests **unitaires et fonctionnels** (`Readme.md:256`). Les **fonctionnels** sont dans [`tests-fonctionnels.md`](../../livrables/4-application/tests-fonctionnels.md) (2026-11-19).
 
 ---
 
