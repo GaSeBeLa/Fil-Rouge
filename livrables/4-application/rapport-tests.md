@@ -9,7 +9,9 @@
 
 ## 1. Le résultat, en une ligne
 
-**1 123 tests : 1 116 réussis, 7 en échec attendu, 0 échec.**
+**1 127 tests : 1 120 réussis, 7 en échec attendu, 0 échec** (2026-11-20).
+
+Le détail par niveau (§ 2) date du 2026-11-19 (1 123 tests) ; le 2026-11-20 a ajouté 4 tests unitaires, sur les en-têtes de sécurité.
 
 | | |
 | --- | --- |
@@ -37,7 +39,7 @@
 
 Compté le 2026-11-19 par `pytest --co` (tests collectés, `xfail` compris), fichier par fichier.
 
-Évolution : **121** tests le 2026-10-02 · **258** le 2026-10-12 · **1 123** le 2026-11-19. La hausse vient surtout de l'intégration : les droits par rôle, testés route par route (chantier DRO), les fiches des profils (PRF), le flux de données (FLX), les suggestions de biens (SUG), le RGPD (RGP), puis le frein de connexion et l'activation du compte (2026-11-19).
+Évolution : **121** tests le 2026-10-02 · **258** le 2026-10-12 · **1 123** le 2026-11-19 · **1 127** le 2026-11-20. La hausse vient surtout de l'intégration : les droits par rôle, testés route par route (chantier DRO), les fiches des profils (PRF), le flux de données (FLX), les suggestions de biens (SUG), le RGPD (RGP), puis le frein de connexion et l'activation du compte (2026-11-19).
 
 ---
 
