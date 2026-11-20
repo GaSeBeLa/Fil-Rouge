@@ -29,7 +29,7 @@
 >
 > * `docker/init-v3/01_create_fil_rouge_immobilier.sql:712` dit « Visites
 >   (décision D10 […]) ». D10, c'est la table des rendez-vous
->   (`livrables/2-modelisation/09-decisions-a-prendre.md:439-448`). L'erreur était
+>   (`md/regles-metier/09-decisions-a-prendre.md:439-448`). L'erreur était
 >   déjà relevée en v2 (registre `:1358`) ; elle est restée en v3.
 > * `09-decisions-a-prendre.md:72-74` : D10, D11, D12 « ouverte ». Après cet
 >   ADR : D10 fermée (pas de table), D11 et D12 reportées au parcours IA.
@@ -225,7 +225,7 @@ Aucune.
 | Les rendez-vous du parcours ; la sélection « chaque jour » ; refaire une offre | `Readme.md:125-127`, `:131`, `:135` (StarterPack) |
 | Rendez-vous automatisables ; pertinence, offres multiples ; « opérer seuls » | `user-stories/09_futur_chasseur_assistance_ia.feature:6-7`, `:23-26`, `:33-39`, `:53-58` (StarterPack) |
 | `visit` | `01_create_fil_rouge_immobilier.sql:712-726` |
-| D10, D11, D12 ; « Pas urgent » | `livrables/2-modelisation/09-decisions-a-prendre.md:72-74`, `:439-468` |
+| D10, D11, D12 ; « Pas urgent » | `md/regles-metier/09-decisions-a-prendre.md:72-74`, `:439-468` |
 | Q-SCH-08 « Reporter au parcours IA » | `questions-a-trancher.md:163`, `:925` |
 | Sélection, priorité du client, montant de l'offre | `01_create_fil_rouge_immobilier.sql:659-668`, `:684-710` |
 | Nouvelle offre après un refus : une nouvelle ligne (déduit) | ADR-041 (accepté), Questions tranchées |

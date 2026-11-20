@@ -41,7 +41,7 @@
 >   fort : le sujet dit qu'une couche au-dessus du calcul le charge
 >   (`REGLES-CALCUL-REMUNERATION.md:641`, `:760`). Seule la forme (un service)
 >   est un choix de l'équipe. À corriger.
-> * `livrables/2-modelisation/09-rapport-ecarts-contraintes.md:560-569` décrit
+> * `md/regles-metier/09-rapport-ecarts-contraintes.md:560-569` décrit
 >   encore les bornes v2 de `seniority_rate` (0 à 0,10) et de
 >   `performance_rate` (−0,20 à 0,20). Sa ligne R22 propose même de graver le
 >   pas de 2 % dans un `CHECK`. À aligner ou à dater.

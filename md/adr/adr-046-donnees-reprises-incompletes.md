@@ -254,7 +254,7 @@ Aucune. Ce qui reste est du code à écrire, listé dans les Conséquences : l'e
 | Q-MIG-05 porte sur `energetic_score` et les colonnes chiffrées | `questions-a-trancher.html:1517` ; `questions-a-trancher.md:276-281` |
 | DPE : validité selon la date | [service-public.gouv.fr, fiche F16096](https://www.service-public.gouv.fr/particuliers/vosdroits/F16096), doc officielle, « vérifiée le 01/01/2026 », lue par le relecteur le 08/10/2026 |
 | Échéance sans vente : invitation à renouveler, note à la baisse | `user-stories/07_chasseur_remuneration_et_performance.feature:38-41` ; `00_…feature:40` ; `Readme.md:135` (StarterPack) |
-| Une note `'mandate_expired'` par mandat ; contrôle C6 | `01:1020` ; `livrables/2-modelisation/09-contraintes-a-coder.md:190`, `:217-219` |
+| Une note `'mandate_expired'` par mandat ; contrôle C6 | `01:1020` ; `md/regles-metier/09-contraintes-a-coder.md:190`, `:217-219` |
 | Questions du jury | `documents utiles/TRAME-SOUTENANCE.md:29`, `:32` (StarterPack) |
 | `hire_date`, taux de commission, manager fictif | `questions-a-trancher.md:179`, `:231`, `:235` |
 | Service des mandats sans règle | `API/src/app/services/mandate_service.py:1-8` |

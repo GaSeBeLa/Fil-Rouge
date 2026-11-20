@@ -1,3 +1,5 @@
+> **Document de travail, pas un livrable** : sorti de `livrables/` le 2026-11-20 (autodiagnostic, choix DIAG-RANGE). Il peut être daté ou périmé.
+
 # Rapport — écarts entre le MPD et les règles métier
 
 > **Pour qui ?** Toute l'équipe du fil rouge. Pas besoin d'avoir suivi

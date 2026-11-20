@@ -23,10 +23,10 @@
 >
 > 🧹 **À faire ailleurs** (des tâches, pas la décision) :
 >
-> * `livrables/2-modelisation/09-contraintes-a-coder.md`, contrainte C6 :
+> * `md/regles-metier/09-contraintes-a-coder.md`, contrainte C6 :
 >   « Dépend de : D9 » (l. 191) et « Fermer la période du score précédent
 >   (`valid_until`) » (l. 220-221) sont sans objet depuis le journal.
-> * `livrables/2-modelisation/09-decisions-a-prendre.md` : D9 a encore
+> * `md/regles-metier/09-decisions-a-prendre.md` : D9 a encore
 >   « Décision retenue » vide (l. 435) et « ouverte » au tableau de bord (l. 71).
 > * MPD v8 : l'index `idx_perf_hunter_scored_at` manque
 >   (`md/adr/2026-10-08-notes-seance-adr.md:114`). Il fait partie de la décision
@@ -36,7 +36,7 @@
 >   citer comme le schéma actuel.
 > * Le commentaire du test `API/tests/integration/test_constraints_db.py:729-731`
 >   dit qu'en v2 « il fallait un jour d'écart ». D9 dit « au moins deux jours »
->   (`livrables/2-modelisation/09-decisions-a-prendre.md:422-423`) : à aligner.
+>   (`md/regles-metier/09-decisions-a-prendre.md:422-423`) : à aligner.
 >
 > ✂️ **Ne pas copier ce bandeau.** Le texte à coller commence sous le trait.
 
@@ -49,7 +49,7 @@
 * **Date :** 08/10/2026 (décision du groupe : 05/10/2026)
 * **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
 * **Décideurs :** le groupe — réponse du 05/10/2026 à la carte Q-SCH-06. La case cochée était « tsrange » ; le commentaire dit « ni « garder », ni tsrange ». Le registre retient le commentaire : « le commentaire fait foi » (`md/questions/questions-a-trancher.md:102`, `:161`, `:438`).
-* **Remplace :** aucun ADR. Ferme la décision D9 de `livrables/2-modelisation/09-decisions-a-prendre.md`.
+* **Remplace :** aucun ADR. Ferme la décision D9 de `md/regles-metier/09-decisions-a-prendre.md`.
 * **Lien :** suit ADR-035 (lettre E, accepté) : la note est recalculée à chaque vente (Q-REM-06).
 
 **Contexte**
@@ -137,7 +137,7 @@ Aucune. Ce qui reste est du code à écrire, listé dans les Conséquences.
 | MPD = « Le SQL réel (types MySQL/PostgreSQL, index…) » | `documents utiles/MCD-MERISE.md:15` (StarterPack) |
 | v2 : périodes, `chk_perf_period`, `excl_perf_no_overlap`, TODO D9 | `docker/init-v2/01_create_fil_rouge_immobilier.sql:798-825` |
 | Origine de l'`EXCLUDE` : retrouver le taux par date | `md/regles-metier/schema-tracabilite-remuneration-chasseur_v4.md:70`, `:138` |
-| D9 : deux jours d'écart ; options A, B, C | `livrables/2-modelisation/09-decisions-a-prendre.md:418-435` |
+| D9 : deux jours d'écart ; options A, B, C | `md/regles-metier/09-decisions-a-prendre.md:418-435` |
 | Q-SCH-06 : journal ; le commentaire fait foi | `md/questions/questions-a-trancher.md:102`, `:161`, `:438` ; `questions-a-trancher.html:1179-1203` |
 | `'[)'` ne suffit pas | `questions-a-trancher.md:952-953` |
 | Q-REM-06 : recalcul à chaque vente ; table = historique ; Jeff Q-JEF-17 | `questions-a-trancher.md:126`, `:230`, `:599-615` |
@@ -151,7 +151,7 @@ Aucune. Ce qui reste est du code à écrire, listé dans les Conséquences.
 | Modèle de l'API | `API/src/app/models/hunter_performance_model.py:1-18`, `:35` |
 | Tests | `API/tests/integration/test_constraints_db.py:710`, `:720`, `:728-736` |
 | `PUT` et `DELETE` ouverts | `API/src/app/routes/crud_router.py:95-111` |
-| Contrôles C6 ; période à fermer (obsolète) | `livrables/2-modelisation/09-contraintes-a-coder.md:186-221` |
+| Contrôles C6 ; période à fermer (obsolète) | `md/regles-metier/09-contraintes-a-coder.md:186-221` |
 | Table « écrite par le système » | `md/securite/matrice-droits-crud-par-role.md:199` |
 | Index absent du MPD | `md/adr/2026-10-08-notes-seance-adr.md:114` |
 | Table lue pour l'affichage ; « historique » | `07_…feature:34` (StarterPack) ; `questions-a-trancher.md:608` |

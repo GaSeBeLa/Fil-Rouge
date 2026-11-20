@@ -1,3 +1,5 @@
+> **Document de travail, pas un livrable** : sorti de `livrables/` le 2026-11-20 (autodiagnostic, choix DIAG-RANGE). Il peut être daté ou périmé.
+
 # Contraintes à coder dans l'API (ou en trigger)
 
 > **Extrait de** [`09-rapport-ecarts-contraintes.md`](09-rapport-ecarts-contraintes.md)

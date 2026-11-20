@@ -14,7 +14,7 @@
 >
 > 🧹 **À faire ailleurs** (des tâches, pas la décision) — documents à aligner :
 >
-> * `livrables/2-modelisation/09-contraintes-a-coder.md:134` écrit encore
+> * `md/regles-metier/09-contraintes-a-coder.md:134` écrit encore
 >   `amount_min <= purchase_amount < amount_max` (borne exclue) ;
 > * `docker/init-v3/02_migration.sql:15-16` et `docker/init-v3/README.md:257-262`
 >   parlent encore de `320000.00` ; les `INSERT` de `criteria` dans `02`
@@ -44,7 +44,7 @@ ADR-012 range trois budgets sur la table `Client` : `min_budget`, `max_budget`, 
 
 L'unité monétaire n'a jamais eu d'ADR (`md/adr/2026-10-07-liste-adr-chantier-4.md:49`). Elle a pourtant changé :
 
-* le 11/09/2026, le groupe retient les milliers d'euros (K€) : « ce n'est pas un logiciel de paye, doit rester indicatif » (`livrables/2-modelisation/09-decisions-a-prendre.md:306`) ;
+* le 11/09/2026, le groupe retient les milliers d'euros (K€) : « ce n'est pas un logiciel de paye, doit rester indicatif » (`md/regles-metier/09-decisions-a-prendre.md:306`) ;
 * le 21/09/2026, « `X02` tranché : l'unité monétaire est l'euro », en `NUMERIC(12,2)`, sur trois mesures (`context AI/08-etat.md:108-114`).
 
 Reste la borne haute d'une tranche du barème (Q-REM-01). Le sujet se contredit :
@@ -126,7 +126,7 @@ Aucune.
 | ADR-012 : trois budgets Numeric sur `Client` ; règle de rapprochement | journal Confluence, copie du 07/10/2026, ADR-012, Décision et Conséquences |
 | `estate` n'a pas d'estimation des travaux, seulement `needs_renovation BOOLEAN` | `docker/init-v3/01_create_fil_rouge_immobilier.sql:611` |
 | Aucun ADR ne porte l'euro ; ADR-012 dépassé | `md/adr/2026-10-07-liste-adr-chantier-4.md:45-49` |
-| K€ retenus le 11/09/2026 | `livrables/2-modelisation/09-decisions-a-prendre.md:263-306` |
+| K€ retenus le 11/09/2026 | `md/regles-metier/09-decisions-a-prendre.md:263-306` |
 | L'euro le 21/09/2026, trois mesures | `context AI/08-etat.md:108-114` ; `docker/init-v3/README.md:157-194` ; commit `44f9054` |
 | Q-REM-01 : `INTEGER`, `'[]'`, options A, B, C | `md/questions/questions-a-trancher.md:121`, `:491-515` |
 | Le sujet se contredit sur la borne | `REGLES-CALCUL-REMUNERATION.md:173-174`, `:188`, `:249` (StarterPack) ; `questions-a-trancher.md:1395` |

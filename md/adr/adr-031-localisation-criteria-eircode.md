@@ -46,7 +46,7 @@
 
 ADR-009 (accepté, 19/08/2026) range la localisation sur `SearchRequest`. Il passe par deux clés étrangères : `id_town` pour la ville, `id_area` pour le quartier. Il rend `id_area` facultatif, car certaines villes n'ont pas de quartier.
 
-ADR-021 (accepté, 10/09/2026) met la ville, le code postal et le pays sur `Criteria`, en texte. Il écrit lui-même qu'il « ne tranche pas laquelle des deux approches remplace l'autre ». C'est la décision ouverte N2 (`livrables/2-modelisation/09-decisions-a-prendre.md:233-251`).
+ADR-021 (accepté, 10/09/2026) met la ville, le code postal et le pays sur `Criteria`, en texte. Il écrit lui-même qu'il « ne tranche pas laquelle des deux approches remplace l'autre ». C'est la décision ouverte N2 (`md/regles-metier/09-decisions-a-prendre.md:233-251`).
 
 Le schéma réel a déjà choisi. `search_request` n'a aucune colonne de lieu. Il n'existe ni `id_town`, ni `id_area`, ni table des villes ou des quartiers. Le lieu est sur `criteria` seule : `country_iso`, `town`, `postal_code`, `district`.
 
@@ -142,7 +142,7 @@ Aucune. Les trois sujets sont tranchés par le groupe et déjà dans le code.
 | ADR-021 et ADR-022 écrivent l'Eircode avec un espace | même copie, ADR-021 et ADR-022, Décision |
 | ADR-022 : un format Eircode révisé se reporte sur les deux tables | même copie, ADR-022, Conséquences |
 | ADR-021 : l'API formate NL/GB/IE avant insertion | même copie, ADR-021, Conséquences |
-| Conflit N2, ses trois options | `livrables/2-modelisation/09-decisions-a-prendre.md:233-251` |
+| Conflit N2, ses trois options | `md/regles-metier/09-decisions-a-prendre.md:233-251` |
 | Q-SCH-02 : garder `criteria`, un ADR remplace ADR-009 ; la ligne sur ADR-009 | `md/questions/questions-a-trancher.md:158` |
 | Q-MIG-08 : « ajoute dans criteraia, sector nullable , idem dans estate » (06/10/2026) | même registre, l. 181 |
 | Q-SCH-12 : sans espace (05/10/2026), pas l'option recommandée ; qui tranche : le groupe | même registre, l. 167 ; `questions-a-trancher.html:1297-1316` |

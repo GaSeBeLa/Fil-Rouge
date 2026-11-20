@@ -96,7 +96,7 @@ de ce que le code dit déjà.
   par deux `EXCLUDE`) et `HunterPerformance.id_payment`, déclaré deux fois.
 - **2026-09-11** — **chantier `C` clos** (contraintes du MPD). Livré :
   l'inventaire du MPD, les annexes de règles (51 en user stories, 84 en notes)
-  et `livrables/2-modelisation/09-rapport-ecarts-contraintes.md` (sorti de
+  et `md/regles-metier/09-rapport-ecarts-contraintes.md` (sorti de
   `context AI/` le jour même) — 150 verdicts sur 18 tables (84
   couvertes, 49 partielles, 16 absentes, 1 fausse), 133 règles reprises sur
   135. Laissé ouvert : `X01`, `X02` (unité de H), l'exemple Bruno, `U29` et

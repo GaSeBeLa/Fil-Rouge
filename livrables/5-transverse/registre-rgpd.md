@@ -12,7 +12,7 @@ de chasse immobilière » (`SP/Readme.md:71`).
 Gabriel sur Confluence (page 44826725 « RGPD », modifiée le 22/09/2026) et
 garde sa structure (RGPD-3). Il le complète par le brouillon du 15/10
 (`md/securite/2026-10-15-preparation-chantier-rgpd.md`, § 4, T1 à T10) et
-par l'inventaire recompté (`inventaire-donnees-personnelles.md`, RGP1).
+par l'inventaire recompté (`md/securite/inventaire-donnees-personnelles.md`, document de travail).
 
 Abréviations des sources :
 

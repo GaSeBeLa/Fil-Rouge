@@ -12,7 +12,7 @@
 > arbitre. Aucune question ne reste ouverte.
 >
 > 🎤 **Pour l'oral :** dire « X01 », pas « D2 ». Nos livrables appellent cette
-> contradiction « D2 » (`livrables/2-modelisation/09-decisions-a-prendre.md:310`),
+> contradiction « D2 » (`md/regles-metier/09-decisions-a-prendre.md:310`),
 > mais le sujet nomme « D2 » une autre décision, le mandat non exclusif
 > (`REGLES-CALCUL-REMUNERATION.md:322`).
 >
@@ -26,7 +26,7 @@
 >   `livrables/4-application/rapport-tests.md:250` ;
 >   `docker/init-v3/01_create_fil_rouge_immobilier.sql:138` (« Décisions encore
 >   ouvertes : D2 (ancienneté) »).
-> * `livrables/2-modelisation/09-decisions-a-prendre.md` : D2 « ouverte (à acter) »
+> * `md/regles-metier/09-decisions-a-prendre.md` : D2 « ouverte (à acter) »
 >   (l. 64), et « Décision retenue » vide (l. 331).
 > * Le registre cite des lignes qui ont bougé : `09-dec:303-324` est
 >   aujourd'hui l. 310-331 (`questions-a-trancher.md:403`, `:730`) ;
@@ -48,8 +48,8 @@
 
 * **Date :** 08/10/2026 (décision du groupe : 05/10/2026)
 * **Statut :** accepté (le groupe, 12/10/2026 : Sébastien, Discord, « accepte les ADR qui ne posent pas de souci »)
-* **Décideurs :** l'équipe projet — réponse du groupe du 05/10/2026 à la carte Q-REM-18 (« Acter B dans un ADR maintenant »). Le constat « il suffit de l'acter » date du 11/09/2026 (`livrables/2-modelisation/09-decisions-a-prendre.md:15`, `:329`). X01 n'a pas été posée à Jeff ; il a validé les chiffres de l'option retenue (Q-JEF-01)
-* **Ferme :** la contradiction X01 entre nos deux notes d'équipe (`livrables/2-modelisation/09-rapport-ecarts-contraintes.md:103` ; options : `09-decisions-a-prendre.md:310-331`)
+* **Décideurs :** l'équipe projet — réponse du groupe du 05/10/2026 à la carte Q-REM-18 (« Acter B dans un ADR maintenant »). Le constat « il suffit de l'acter » date du 11/09/2026 (`md/regles-metier/09-decisions-a-prendre.md:15`, `:329`). X01 n'a pas été posée à Jeff ; il a validé les chiffres de l'option retenue (Q-JEF-01)
+* **Ferme :** la contradiction X01 entre nos deux notes d'équipe (`md/regles-metier/09-rapport-ecarts-contraintes.md:103` ; options : `09-decisions-a-prendre.md:310-331`)
 
 Abréviations : RCR = `documents utiles/REGLES-CALCUL-REMUNERATION.md` ; F10 = `user-stories/10_calcul_remuneration_chasseur.feature` (StarterPack) ; `01` = `docker/init-v3/01_create_fil_rouge_immobilier.sql` ; `rem.py` = `API/src/app/services/remuneration.py`.
 
@@ -59,7 +59,7 @@ Le sujet impose que le taux du chasseur dépende de deux choses : « Le taux dé
 
 Le Readme le dit ainsi : le barème est « différent pour chaque chasseur (en fonction de leur ancienneté et de leur performance) » (`Readme.md:80`). Cette phrase seule se lit de deux façons.
 
-Nos deux notes d'équipe l'ont lue différemment (contradiction X01, `livrables/2-modelisation/09-rapport-ecarts-contraintes.md:103`) :
+Nos deux notes d'équipe l'ont lue différemment (contradiction X01, `md/regles-metier/09-rapport-ecarts-contraintes.md:103`) :
 
 * `md/regles-metier/BAREME-COMMISSION.md:31` : ancienneté et performance donnent « un niveau/score chasseur, qui sert de clé » pour chercher le taux dans le barème. La même ligne avoue : « Ni le Readme ni les user stories ne donnent la formule exacte ».
 * `md/regles-metier/NOTES-REMUNERATION-CHASSEUR.md:58-62` : elles majorent le taux de la tranche, par une formule.
@@ -134,8 +134,8 @@ Aucune. La décision était faite de fait ; cet ADR l'écrit.
 | Barème « différent pour chaque chasseur » | `Readme.md:80` (StarterPack) |
 | Option A, « un niveau/score chasseur » | `md/regles-metier/BAREME-COMMISSION.md:31` |
 | Option B, la formule | `md/regles-metier/NOTES-REMUNERATION-CHASSEUR.md:56-62` |
-| X01 | `livrables/2-modelisation/09-rapport-ecarts-contraintes.md:103`, `:572`, `:597` |
-| X01 : options, « Il suffit de l'acter », daté du 11/09/2026 | `livrables/2-modelisation/09-decisions-a-prendre.md:15`, `:89`, `:310-331` |
+| X01 | `md/regles-metier/09-rapport-ecarts-contraintes.md:103`, `:572`, `:597` |
+| X01 : options, « Il suffit de l'acter », daté du 11/09/2026 | `md/regles-metier/09-decisions-a-prendre.md:15`, `:89`, `:310-331` |
 | Les notes d'équipe ne font pas foi | même fichier, l. 36-38 |
 | Q-REM-18 : « Acter B », 05/10/2026 | `md/questions/questions-a-trancher.md:139`, `:724-733` |
 | Code du taux | `API/src/app/services/remuneration.py:230-264`, `:278-281` |

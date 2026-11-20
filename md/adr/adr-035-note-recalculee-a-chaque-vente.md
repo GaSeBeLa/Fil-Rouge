@@ -17,7 +17,7 @@
 >
 > 🧹 **À faire ailleurs** (des tâches, pas la décision) :
 >
-> * `livrables/2-modelisation/09-contraintes-a-coder.md`, contrainte C4 :
+> * `md/regles-metier/09-contraintes-a-coder.md`, contrainte C4 :
 >   `HunterPerformance` est listée parmi les tables lues (l. 124-125), et le
 >   score proposé est celui « en vigueur à `Sale.signature_date` » (l. 163-165).
 >   Les deux sont contredits ici.
@@ -70,7 +70,7 @@ De l'autre, un scénario lit un score gardé :
 Nos notes penchaient pour le score gardé :
 
 * la note v4 : le paiement calcule `performance_rate` « à partir du score courant » (`md/regles-metier/schema-tracabilite-remuneration-chasseur_v4.md:74`) ;
-* la contrainte C4 : le score « en vigueur à `Sale.signature_date` » (`livrables/2-modelisation/09-contraintes-a-coder.md:163-165`).
+* la contrainte C4 : le score « en vigueur à `Sale.signature_date` » (`md/regles-metier/09-contraintes-a-coder.md:163-165`).
 
 Le registre range cette contradiction parmi les défauts du sujet (`md/questions/questions-a-trancher.md:1397`).
 
@@ -141,7 +141,7 @@ Aucune. Ce qui reste est du code à écrire (Conséquences) et le contenu d'ADR-
 | Q-REM-06 : options, réponse du 02/10/2026 | `md/questions/questions-a-trancher.md:599-615`, `:126` |
 | Q-JEF-17 : validé par Jeff | `md/questions/2026-10-07-questions-pour-jeff.html:1152-1161` ; `questions-a-trancher.md:230` |
 | Position de Sébastien du 21/09/2026 | `md/journal/2026-09-21-point-etape.md:106-113`, `:136-147` (note IA, « ne fait pas foi ») |
-| Score courant (note v4), score en vigueur (C4) | `md/regles-metier/schema-tracabilite-remuneration-chasseur_v4.md:74` ; `livrables/2-modelisation/09-contraintes-a-coder.md:124-125`, `:163-165` |
+| Score courant (note v4), score en vigueur (C4) | `md/regles-metier/schema-tracabilite-remuneration-chasseur_v4.md:74` ; `md/regles-metier/09-contraintes-a-coder.md:124-125`, `:163-165` |
 | Défaut du sujet : `F10:293` contre le code | `questions-a-trancher.md:1397` |
 | Journal des notes : schéma, déclencheurs, index | `docker/init-v3/01_create_fil_rouge_immobilier.sql:996-1025` |
 | Score du paiement ≠ note du journal | même fichier, l. 923-925 |

@@ -2,7 +2,7 @@
 
 > **Note d'éco-conception** (transverse ; BC01, BC03, BC05).
 > Exigée par `GRILLE-EVALUATION.md` (StarterPack - BASE) : « 1-2 pages (dont arbitrage sauvegardes) ». Cas d'école imposé par le `Readme.md` du sujet : les **sauvegardes multi-fréquences** (minute, heure, 12 h, 24 h).
-> Version courte, 2026-11-19, rédigée par le Glaude à partir de la note de Gabriel (Confluence, page 33783821) et du code réel. **À relire par Gabriel.** Remplace la version longue (~2 200 mots), qui contredisait la note 3V sur les photos.
+> Version courte, 2026-11-19, rédigée par le Glaude à partir de la note de Gabriel (Confluence, page 33783821) et du code réel. **À relire par Gabriel.** Remplace la version longue (~2 200 mots, gardée comme document de travail : `md/equipe/note-eco-conception-confluence-v2.md`), qui contredisait la note 3V sur les photos.
 
 ---
 

@@ -14,7 +14,7 @@
 >
 > 🧹 **À faire ailleurs** (des tâches, pas la décision) :
 >
-> * `livrables/2-modelisation/09-contraintes-a-coder.md`, contrainte C2
+> * `md/regles-metier/09-contraintes-a-coder.md`, contrainte C2
 >   (l. 88-107), décrit encore `valid_until` et l'`EXCLUDE` : à aligner.
 > * Les notes du jour (`md/adr/2026-10-08-notes-seance-adr.md:119`) disent que
 >   « les 2 `EXCLUDE` de `commission_scale` » dépendent de `btree_gist`. Seul
@@ -80,7 +80,7 @@ B. Éviter les trous entre deux grilles (Q-SCH-17)
 * Un trou entre deux grilles devient impossible : il n'y a plus de date de fin à saisir. Aucun code de contrôle à écrire pour une erreur qui ne peut plus arriver.
 * La clé suit le sujet : « On stocke donc tous les termes du calcul, y compris `bareme_id` » (`REGLES-CALCUL-REMUNERATION.md:292`), pour rejouer un calcul des années plus tard. Le même raisonnement vaut pour la grille d'honoraires.
 * Elle aligne la vente sur le paiement, qui pointe déjà sa tranche (`payment.id_commission_scale`) et ses réglages (`payment.id_hunter_rate_parameters`, décision G1 du groupe du 08/10/2026).
-* L'argument central d'ADR-019 était trop fort : l'`EXCLUDE` garantissait « au plus une » grille, pas « exactement une » (carte Q-SCH-17 ; déjà noté dans `livrables/2-modelisation/09-contraintes-a-coder.md:100-103`).
+* L'argument central d'ADR-019 était trop fort : l'`EXCLUDE` garantissait « au plus une » grille, pas « exactement une » (carte Q-SCH-17 ; déjà noté dans `md/regles-metier/09-contraintes-a-coder.md:100-103`).
 
 **Conséquences**
 
@@ -123,7 +123,7 @@ Aucune. Ce qui reste est du code à écrire, listé dans les Conséquences.
 | Q-REM-13 : « Ajouter une clé », pas l'option recommandée | `md/questions/questions-a-trancher.md:134`, `:678-684` ; `questions-a-trancher.html:735-756` |
 | Q-SCH-17 : « par construction », le commentaire fait foi | `questions-a-trancher.md:102`, `:172` ; `questions-a-trancher.html:1391-1416` |
 | Q-SCH-16 sans objet | `questions-a-trancher.md:171`, `:440` |
-| « au plus une », pas « exactement une » | `questions-a-trancher.html:1391-1416` ; `livrables/2-modelisation/09-contraintes-a-coder.md:100-103` |
+| « au plus une », pas « exactement une » | `questions-a-trancher.html:1391-1416` ; `md/regles-metier/09-contraintes-a-coder.md:100-103` |
 | `parameters_fees` v3 : `effective_from`, `uq_fees_effective_from` | `docker/init-v3/01_create_fil_rouge_immobilier.sql:733-751` |
 | `sale.id_parameters_fees NOT NULL`, TODO de la date | même fichier, l. 765-770 |
 | `excl_fees_no_overlap` en v2 (plage seule) | `docker/init-v2/01_create_fil_rouge_immobilier.sql:685-686` |

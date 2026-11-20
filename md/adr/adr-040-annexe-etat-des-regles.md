@@ -16,7 +16,7 @@
 >   `postal_code`, ni `'renewed'`, ni `'lost'` ;
 > * une seule règle est codée : l'exclusivité du mandat, par un trigger (B1).
 >
-> ➡️ **Place finale : `livrables/2-modelisation/09-contraintes-a-coder.md`.**
+> ➡️ **Place finale : `md/regles-metier/09-contraintes-a-coder.md`.**
 > Le groupe y range ces règles (carte Q-MAN-06 : « Ces règles se rangent dans
 > `09-contraintes-a-coder.md` », `md/questions/questions-a-trancher.md:871`).
 > Ce fichier date du 11/09/2026 et est en partie périmé (bandeau d'ADR-040).
@@ -35,7 +35,7 @@
 | A1 | Une visite ne précède pas la signature du mandat. | `docker/init-v3/01_create_fil_rouge_immobilier.sql:721-725` ; Q-MAN-06 | ❌ pas codé ; aucun test de visite |
 | A2 | Une vente porte sur un mandat signé, et pas avant sa signature. Après la fin du mandat, la vente s'enregistre et le paiement est refusé. | `01:774-784` ; ADR-050 ; ADR-024 | ❌ pas codé |
 | A3 | La vente pointe la grille d'honoraires en vigueur à la date de l'acte. | ADR-030 ; `01:767-768` | ❌ pas codé |
-| A4 | Les honoraires se calculent depuis cette grille (C2). | `livrables/2-modelisation/09-contraintes-a-coder.md:88-107` | ❌ pas codé : le client de l'API envoie `fees_amount` (`API/tests/integration/test_constraints_db.py:496`). Le code pur sait choisir la grille (`API/src/app/services/remuneration.py:177-183`), pas branché. |
+| A4 | Les honoraires se calculent depuis cette grille (C2). | `md/regles-metier/09-contraintes-a-coder.md:88-107` | ❌ pas codé : le client de l'API envoie `fees_amount` (`API/tests/integration/test_constraints_db.py:496`). Le code pur sait choisir la grille (`API/src/app/services/remuneration.py:177-183`), pas branché. |
 | A5 | Une grille d'honoraires déjà citée par une vente ne se modifie pas. De même pour une tranche du barème ou une version de réglages déjà citée par un paiement. | ADR-030 ; ADR-034 (Décision 6) | ❌ pas codé : `PUT /parameters-fees/{id}`, `/commission-scales/{id}`, `/hunter-rate-parameters/{id}` l'acceptent (`API/src/app/routes/crud_router.py:95-102`) |
 | A6 | Le droit au paiement (C1) : le bon chasseur (U04) ; exclusif, ou vente due au chasseur (R01, R02) ; dans les délais (R04). Un droit fermé s'écrit `'refused'` avec son motif. | `01:985-993` ; `09-contraintes-a-coder.md:56-84` ; ADR-024 | ❌ pas codé. R01, R02 et R04 existent dans le code pur (`remuneration.py:166-174`), pas branché. U04 n'existe nulle part. |
 | A7 | La tranche du barème est en vigueur à la date de l'acte, et c'est le barème par défaut ou celui de ce chasseur. | `01:985-989` ; carte Q-MAN-06 (`questions-a-trancher.md:863-864`) | ❌ pas codé. Le code pur fait ce choix (`remuneration.py:230-248`), pas branché. |
@@ -88,7 +88,7 @@
 | Règles des lots 2 et 3 | `md/adr/adr-033-tracabilite-du-calcul.md` (Décisions 3 à 5) ; `adr-034-parametres-remuneration-table-datee.md` (Décision 6, Conséquences) ; `adr-035-note-recalculee-a-chaque-vente.md` (Questions tranchées) ; `adr-038-etapes-du-paiement-sans-facture.md` (Décision 3, Conséquences) ; `adr-041-statuts-demande-et-offre.md` (Conséquences, Questions tranchées) ; `adr-042-journal-des-notes-du-chasseur.md` (Conséquences) |
 | TODO du schéma renvoyés à l'API | `docker/init-v3/01_create_fil_rouge_immobilier.sql:624-627`, `:721-725`, `:767-768`, `:774-784`, `:936-941`, `:985-993` |
 | Le seul trigger | `01:522-550` |
-| Les blocs C1 à C9 | `livrables/2-modelisation/09-contraintes-a-coder.md` |
+| Les blocs C1 à C9 | `md/regles-metier/09-contraintes-a-coder.md` |
 | Comptes repris | `docker/init-v3/02_migration.sql:132` (manager 25), `:139-144` (chasseurs 1 à 6), `:155-172` (clients 7 à 24) |
 | `PUT` et `DELETE` ouverts | `API/src/app/routes/crud_router.py:95-110` |
 | Tests | `API/tests/integration/test_constraints_db.py` (lignes citées dans les tableaux) |

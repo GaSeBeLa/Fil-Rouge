@@ -1,3 +1,5 @@
+> **Document de travail, pas un livrable** : sorti de `livrables/` le 2026-11-20 (autodiagnostic, choix DIAG-RANGE). Il peut être daté ou périmé.
+
 # Inventaire des données personnelles
 
 Recompté le 2026-11-03 (fiche RGP1, chantier RGP) sur le schéma du jour,

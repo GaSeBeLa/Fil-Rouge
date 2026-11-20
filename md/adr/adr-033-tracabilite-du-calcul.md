@@ -27,7 +27,7 @@
 >
 > 🧹 **À faire ailleurs** (des tâches, pas la décision) :
 >
-> * `livrables/2-modelisation/09-contraintes-a-coder.md`, contrainte C5
+> * `md/regles-metier/09-contraintes-a-coder.md`, contrainte C5
 >   (l. 169-182), ne protège que « cinq colonnes » : la liste s'allonge (Décision, point 4).
 >   La contrainte C4 (l. 163-165) propose le score « en vigueur à `Sale.signature_date` » :
 >   contredit par ADR-035.
@@ -222,6 +222,6 @@ Aucune. La Décision 3 est confirmée par Sébastien le 2026-10-09 (Discord) (vo
 | Tests ; fixture `payment_payload` | `API/tests/integration/test_constraints_db.py:507-531`, `:565-589`, `:603-624` |
 | Carte D8 : « pas obligatoire ailleurs », « Pris par Claude, seul », « Défaire » ; questions laissées au groupe | `md/journal/2026-10-07-rapport-lot1-a-lot5.html:540-552`, `:624`, `:627` |
 | Les 9 cartes du rapport LOT1→LOT5 gardées par Sébastien | `context AI/08-etat.md:240-243` |
-| C3 et C5 | `livrables/2-modelisation/09-contraintes-a-coder.md:110-117`, `:169-182` |
+| C3 et C5 | `md/regles-metier/09-contraintes-a-coder.md:110-117`, `:169-182` |
 | ADR-002 (anglais pour les schémas de données), ADR-019 (« déjà actée »), ADR-027 (pas d'effacement) | journal Confluence, copie du 07/10/2026 : ADR-002, Décision ; ADR-019, Conséquences ; ADR-027, Décision |
 | Modèle d'ADR ; pas d'ADR pour les micro-décisions ; « ne jamais effacer » | `documents utiles/JOURNAL-DE-DECISIONS.md:13`, `:19-40`, `:72` (StarterPack) |

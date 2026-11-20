@@ -85,12 +85,12 @@ Une sous-décision par bloc. L'option retenue est marquée **retenue** ; les aut
 2. **Exclusivité**
    * `EXCLUDE … WHERE (is_exclusive)`. Écartée : elle ne compare que les exclusifs entre eux ; un non-exclusif posé pendant un exclusif passe (`docker/init-v3/01_create_fil_rouge_immobilier.sql:501-502`).
    * `EXCLUDE` sans filtre. Écartée : elle refuse aussi deux non-exclusifs, que le sujet autorise (`01:503-505`).
-   * Contrôle dans l'API (envisagé : « un trigger (ou l'API) », `livrables/2-modelisation/09-contraintes-a-coder.md:269-272`). Écartée par le registre : Q-MAN-02 dit « corriger, activer » le trigger déjà écrit.
+   * Contrôle dans l'API (envisagé : « un trigger (ou l'API) », `md/regles-metier/09-contraintes-a-coder.md:269-272`). Écartée par le registre : Q-MAN-02 dit « corriger, activer » le trigger déjà écrit.
    * Un trigger, `trg_mandate_exclusivity`. **Retenue** (`01:506-507`, `:522-550`).
 3. **Ne pas bloquer un renouvellement** (le renouvellement lui-même : ADR-050)
    * Exclure du contrôle le parent et l'enfant d'un renouvellement. **Retenue** (lot 4, carte gardée par le groupe le 07/10/2026).
    * Exclure du contrôle les mandats déjà finis (proposé par le registre, `questions-a-trancher.md:817`). Pas retenu pour le renouvellement : le groupe a gardé l'autre moyen. L'idée revient au bloc 5.
-4. **Mandat annulé** (décision D7, `livrables/2-modelisation/09-decisions-a-prendre.md:404-409`)
+4. **Mandat annulé** (décision D7, `md/regles-metier/09-decisions-a-prendre.md:404-409`)
    * A : il bloque le client jusqu'à `ends_at`. Écartée.
    * B : l'annulation libère le client tout de suite. **Retenue** (Jeff, Q-JEF-06).
    * Annuler un mandat jamais signé : interdit par `chk_status_signature` en v2, ou permis. **Permis** (Q-MAN-07).

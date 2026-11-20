@@ -40,7 +40,7 @@ qui reste ouverte à part.
 | `context AI/09-annexe-inventaire-mpd.md` | écrit par `C1` — les tables et leurs contraintes, lisible |
 | `context AI/09-annexe-domaines-user-stories.md` | écrit par `C2` |
 | `context AI/09-annexe-domaines-notes.md` | écrit par `C3` |
-| `livrables/2-modelisation/09-rapport-ecarts-contraintes.md` | écrit par `C4`, complété par `C5` — le livrable ; sorti de `context AI/` après la clôture, les fiches le citent à son ancien chemin |
+| `md/regles-metier/09-rapport-ecarts-contraintes.md` | écrit par `C4`, complété par `C5` — le livrable ; sorti de `context AI/` après la clôture, les fiches le citent à son ancien chemin |
 
 **Les 18 tables du MPD**, relevées sur l'export PNG du diagramme — ce sont les
 seuls noms de tables qu'une fiche a le droit d'employer : `User`, `Role`,

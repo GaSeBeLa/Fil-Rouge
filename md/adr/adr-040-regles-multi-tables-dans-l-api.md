@@ -21,14 +21,14 @@
 > des règles d'ADR-033 à ADR-042. Un ADR fige un raisonnement ; un état devient
 > faux dès qu'une règle est codée.
 >
-> ➡️ **Place finale du tableau : `livrables/2-modelisation/09-contraintes-a-coder.md`**
+> ➡️ **Place finale du tableau : `md/regles-metier/09-contraintes-a-coder.md`**
 > (« Ces règles se rangent dans `09-contraintes-a-coder.md` »,
 > `md/questions/questions-a-trancher.md:871`). **Tâche pour l'équipe** : l'y
 > reporter, puis retirer l'annexe.
 >
 > 🧹 **À faire ailleurs** (des tâches, pas la décision) — documents à aligner :
 >
-> * `livrables/2-modelisation/09-contraintes-a-coder.md` (daté du 11/09/2026) :
+> * `md/regles-metier/09-contraintes-a-coder.md` (daté du 11/09/2026) :
 >   * son titre (l. 1) et l. 21-24 disent encore « dans l'API … ou dans un trigger » : Q-MAN-06 a choisi l'API ;
 >   * C2 (l. 97-99) lit `valid_from` et `valid_until` sur la grille d'honoraires : il n'y a plus qu'`effective_from` (`docker/init-v3/01_create_fil_rouge_immobilier.sql:743-744`, ADR-030) ;
 >   * C6 (l. 220-221) ferme le `valid_until` de la note précédente : retiré par Q-SCH-06 (`md/questions/questions-a-trancher.md:161`) ;
@@ -57,7 +57,7 @@
 
 **Contexte**
 
-Un `CHECK` ne voit qu'une ligne d'une table. Il ne peut pas lire une autre table, compter des lignes, ni comparer avec l'ancienne valeur (`livrables/2-modelisation/09-contraintes-a-coder.md:15-19`). Le livrable compte 9 blocs à coder, qui regroupent 23 règles (même fichier, l. 30-34, l. 280).
+Un `CHECK` ne voit qu'une ligne d'une table. Il ne peut pas lire une autre table, compter des lignes, ni comparer avec l'ancienne valeur (`md/regles-metier/09-contraintes-a-coder.md:15-19`). Le livrable compte 9 blocs à coder, qui regroupent 23 règles (même fichier, l. 30-34, l. 280).
 
 Un jeu de tests adverses, écrit à partir des `.feature`, donnait sur le schéma « 2 réussites / 14 lacunes / 1 à trancher (17 tests) ». Avec les deux règles du mandat actives (six mois, exclusivité ; LOT4) : « 5 réussites / 11 lacunes / 1 à trancher ». Le jeu n'a pas été rejoué depuis. Conclusion du schéma : « un schéma seul ne protège PAS la plupart des règles métier » (`docker/init-v3/01_create_fil_rouge_immobilier.sql:127-136`).
 
@@ -143,7 +143,7 @@ Aucune.
 | Q-MAN-06 : « Toutes dans l'API, chacune testée », 05/10/2026 | `md/questions/questions-a-trancher.md:155`, `:408`, `:856-872` ; carte, `questions-a-trancher.html:990-1014` |
 | Les deux options, avantages et inconvénients | `questions-a-trancher.html:1013-1014` |
 | Trois TODO, quatre trous ; « les plus graves » | `questions-a-trancher.md:859-866` |
-| Un `CHECK` ne voit qu'une ligne ; 9 blocs, 23 règles ; ordre conseillé | `livrables/2-modelisation/09-contraintes-a-coder.md:15-24`, `:30-34`, `:45-52`, `:280` |
+| Un `CHECK` ne voit qu'une ligne ; 9 blocs, 23 règles ; ordre conseillé | `md/regles-metier/09-contraintes-a-coder.md:15-24`, `:30-34`, `:45-52`, `:280` |
 | Tests adverses : 2 réussites et 14 lacunes ; 5 et 11 après LOT4 ; pas rejoué | `docker/init-v3/01_create_fil_rouge_immobilier.sql:127-136` |
 | Les TODO du schéma renvoyés à l'API | `01:624-627`, `:721-725`, `:767-768`, `:774-784`, `:936-941`, `:985-993` |
 | Le seul trigger | `01:522-550` ; `md/adr/2026-10-08-notes-seance-adr.md:118` |

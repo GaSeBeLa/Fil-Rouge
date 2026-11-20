@@ -25,12 +25,12 @@
 >   **complète** ADR-010 et **amende** ADR-013 (voir l'en-tête) :
 >   * `docker/init-v3/01_create_fil_rouge_immobilier.sql:468` ;
 >   * `docker/migrations/v2-vers-v3/16_mandat-renouvellement-sans-avenant.sql:9-10` ;
->   * `livrables/2-modelisation/09-decisions-a-prendre.md:101-102` ;
+>   * `md/regles-metier/09-decisions-a-prendre.md:101-102` ;
 >   * `md/adr/2026-10-08-notes-seance-adr.md:26` et `:54`.
 > * `01:774` dit que la vente doit tomber « DANS la validité du mandat ». Le
 >   commentaire juste en dessous le nuance (`01:781-784`). À fusionner quand la
 >   règle sera codée.
-> * `livrables/2-modelisation/09-contraintes-a-coder.md:80-81` (« à
+> * `md/regles-metier/09-contraintes-a-coder.md:80-81` (« à
 >   préciser ») est réglé par Q-MAN-04 : la vente pointe vers le nouveau mandat.
 > * Page Confluence d'ADR-013 : 💡 ajouter une note « partie `Mandate` amendée
 >   par ADR-050 : plus d'avenant », si le groupe garde le mot « amende » (le

@@ -1,3 +1,5 @@
+> **Document de travail, pas un livrable** : sorti de `livrables/` le 2026-11-20 (autodiagnostic, choix DIAG-RANGE). Il peut être daté ou périmé.
+
 > **Copie de Confluence** — page « Notes de Eco-conception » (id 33783821, version 2), espace GaSeBeLa1, copiée le 2026-11-19.
 > La source qui fait foi reste Confluence : https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/33783821/Notes+de+Eco-conception. Les images, schémas draw.io et encadrés ne passent pas dans l'export : ils sont signalés par une ligne « 🖼️ Image ou schéma non copié : <nom ou légende si connue> ».
 

@@ -35,9 +35,9 @@
 > * `docker/init-v3/README.md` ne cite ni `review_media` ni la migration 17.
 > * `md/securite/matrice-droits-crud-par-role.md` n'a pas de ligne
 >   `review_media` : à ajouter avec la réécriture d'ADR-027.
-> * `livrables/2-modelisation/09-decisions-a-prendre.md:486` : le nom de la
+> * `md/regles-metier/09-decisions-a-prendre.md:486` : le nom de la
 >   « table des médias d'un avis » est vide. Nom retenu : `review_media`.
-> * `livrables/2-modelisation/09-rapport-ecarts-contraintes.md:137` : case
+> * `md/regles-metier/09-rapport-ecarts-contraintes.md:137` : case
 >   « une table de médias pour les avis (U33) » à cocher ; l. 284-285 citent
 >   encore `media_url` et `media_type` sur `Estate_SearchRequest`.
 >
@@ -66,7 +66,7 @@ Jusqu'au 08/10/2026, cette même ligne portait **un seul** média (`docker/init-
 * `media_type VARCHAR(10) CHECK (media_type IN ('audio', 'video'))` ;
 * `chk_media` : les deux remplis, ou aucun.
 
-Le rapport d'écarts du 11/09/2026 l'avait vu : « « des » audios **et** des vidéos pour un même avis demandent plusieurs médias par avis, donc une table à part » (`livrables/2-modelisation/09-rapport-ecarts-contraintes.md:394`). La case était restée ouverte (même fichier, l. 137).
+Le rapport d'écarts du 11/09/2026 l'avait vu : « « des » audios **et** des vidéos pour un même avis demandent plusieurs médias par avis, donc une table à part » (`md/regles-metier/09-rapport-ecarts-contraintes.md:394`). La case était restée ouverte (même fichier, l. 137).
 
 Le 08/10/2026, Gabriel a posé la question sur Discord. Sébastien a choisi « option 2 ».
 
@@ -135,9 +135,9 @@ Aucune.
 | « au lieu de 2 colonnes » ; aucun ADR sur les médias | même fichier, l. 57 |
 | MPD v8 : `ReviewMedia`, « Accompanies », (0,n) / (1,1) | même fichier, l. 74-78, l. 107-108 |
 | v2 : un seul couple `media_url` / `media_type`, `chk_media` | `docker/init-v2/01_create_fil_rouge_immobilier.sql:590-598` |
-| U33 : il faut une table à part | `livrables/2-modelisation/09-rapport-ecarts-contraintes.md:137`, `:394` |
+| U33 : il faut une table à part | `md/regles-metier/09-rapport-ecarts-contraintes.md:137`, `:394` |
 | Note d'avis sur `Estate_SearchRequest` | même fichier, l. 284-285 |
-| Nom à choisir : « table des médias d'un avis » | `livrables/2-modelisation/09-decisions-a-prendre.md:486` |
+| Nom à choisir : « table des médias d'un avis » | `md/regles-metier/09-decisions-a-prendre.md:486` |
 | `review_media` ; `estate_searchrequest` sans médias | `docker/init-v3/01_create_fil_rouge_immobilier.sql:659-681` |
 | `picture` : une adresse par photo | même fichier, l. 644-649 |
 | Migration v2 | `docker/migrations/v2-vers-v3/17_medias-de-la-note-d-avis.sql:1-64` |

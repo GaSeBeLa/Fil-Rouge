@@ -18,7 +18,7 @@
 >   (`md/securite/matrice-droits-crud-par-role.md:228`, question 4). Repris
 >   par la matrice d'ADR-027.
 >
-> * `livrables/2-modelisation/09-rapport-ecarts-contraintes.md` range encore la
+> * `md/regles-metier/09-rapport-ecarts-contraintes.md` range encore la
 >   facture dans `payment.status` (l. 471-472) et dit U38, U39 et F08
 >   « couverte » (l. 548-552). Ce n'est plus vrai. À aligner ou à dater.
 > * `md/securite/matrice-droits-crud-par-role.md`, § 5.4 : le chasseur
@@ -133,7 +133,7 @@ Ce qui reste couvert : le chasseur prévenu (l. 10-15), le paiement programmé (
 * **Tests :** `'announced'` sans date, `'scheduled'` sans date : 409 ; un paiement payé garde ses dates (`API/tests/integration/test_constraints_db.py:591-624`). Tests non relancés pour cet ADR.
 * **L'ordre des statuts n'est tenu nulle part.** Le `CHECK` ne liste que les valeurs permises. `PUT /payments/{id}` est ouvert (`API/src/app/routes/crud_router.py:95-102`). Faire respecter l'ordre compare à l'ancienne valeur : à coder dans l'API, comme les autres règles de ce genre (ADR-040).
 * **Ordre des dates — ✅ confirmé par le groupe le 09/10/2026 (S9), demande du code, non fait.** Le rapport du lot 5 l'a laissé ouvert : « L'ordre des dates (annonce avant virement) n'est pas vérifié » (carte D7, `md/journal/2026-10-07-rapport-lot1-a-lot5.html:528` ; question, l. 626). Réponse déduite : **un `CHECK` sur `payment`**.
-  * La règle ne lit qu'une ligne : c'est le cas d'un `CHECK`, pas de l'API (`livrables/2-modelisation/09-contraintes-a-coder.md:13-19`).
+  * La règle ne lit qu'une ligne : c'est le cas d'un `CHECK`, pas de l'API (`md/regles-metier/09-contraintes-a-coder.md:13-19`).
   * Pour la même sorte de règle, « une fin après le début » sur la grille d'honoraires, le groupe a répondu « Ajouter le CHECK » (Q-SCH-16, `questions-a-trancher.md:171`). Le schéma le fait déjà pour le barème (`chk_scale_period`, `01:805-806`).
   * ✅ Forme retenue par le groupe le 09/10/2026 (S9) : `announced_at::date <= scheduled_for` et `announced_at <= paid_at`. `paid_at` reste libre face à `scheduled_for` : un virement peut partir avant ou après le jour prévu.
   * À faire : le `CHECK`, une migration v2 → v3, un test refusé et un accepté.
@@ -175,7 +175,7 @@ Aucune. L'ordre des dates est une micro-décision (`JOURNAL-DE-DECISIONS.md:13`)
 | Les trois options de Q3 | `md/journal/2026-10-07-plan-action.html:366-379` |
 | Cartes D6 et D7 | `md/journal/2026-10-07-rapport-lot1-a-lot5.html:507-537` |
 | Ordre des dates : question posée, « n'est pas vérifié » | même fichier, l. 528, l. 626 ; `md/journal/2026-10-07-rapport-final-chantier-lot.html:681` |
-| Un `CHECK` ne voit qu'une ligne | `livrables/2-modelisation/09-contraintes-a-coder.md:13-19` |
+| Un `CHECK` ne voit qu'une ligne | `md/regles-metier/09-contraintes-a-coder.md:13-19` |
 | Q-SCH-16 : « Ajouter le CHECK » ; `chk_scale_period` | `questions-a-trancher.md:171` ; `docker/init-v3/01_create_fil_rouge_immobilier.sql:805-806` |
 | `PUT` ouvert | `API/src/app/routes/crud_router.py:95-102` |
 | Décisions de LOT5 gardées par Sébastien | `context AI/08-etat.md:236-243` |

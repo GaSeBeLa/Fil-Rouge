@@ -71,7 +71,7 @@ Chacune porte sa **source**, **qui tranche**, les **options**, et une
 - `rem.py` = `API/src/app/services/remuneration.py`
 - `F00` à `F10` = `user-stories/00_…` à `10_….feature` (ex. `F07` = `07_…`)
 - `RCR` = `REGLES-CALCUL-REMUNERATION.md` du sujet
-- `09-dec` = `livrables/2-modelisation/09-decisions-a-prendre.md`
+- `09-dec` = `md/regles-metier/09-decisions-a-prendre.md`
 
 ---
 
@@ -1336,7 +1336,7 @@ Q-JEF-20 le 2026-10-05, Q-JEF-21 à 26 le 2026-10-06.
   confirmation. (Q-REM-03, Q-REM-04)
 - **Q-JEF-25** — 🆕 Ajoutée le 2026-10-06. **Confirmation** : il est notre **PO** ;
   valide-t-il nos ADR **en une séance**, après ses réponses ? Seul « accepté »
-  compte (`livrables/2-modelisation/09-decisions-a-prendre.md:34-35`). (Q-PRO-01, Q-PRO-03)
+  compte (`md/regles-metier/09-decisions-a-prendre.md:34-35`). (Q-PRO-01, Q-PRO-03)
   - Le journal d'ADR sera tenu par un membre du groupe, à nommer dans la RACI.
 
 ---

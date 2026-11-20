@@ -76,7 +76,7 @@ les deux StarterPack en lecture seule ; aucun ADR créé ni réécrit.
 **Dépend de** : rien.
 **Fichiers** : `../Fil-Rouge-API/docker/init-v3/01_create_fil_rouge_immobilier.sql`,
 `../Fil-Rouge-API/docker/init-v3/08_olap.sql`, la matière § 3 ; écrit
-`livrables/5-transverse/inventaire-donnees-personnelles.md` — et rien d'autre.
+`md/securite/inventaire-donnees-personnelles.md` — et rien d'autre.
 
 **Prompt**
 Refais l'inventaire du § 3 sur le schéma du jour. Compte les tables par grep
@@ -104,7 +104,7 @@ du fichier concordent (comptes affichés) ; une section « Changé depuis le
 **Session** : 5e8e0bd7-7c11-4e35-8104-73f5c1d4c279
 **Dépend de** : `RGP1`.
 **Fichiers** : Confluence page 44826725 (lecture), la matière § 4,
-`livrables/5-transverse/inventaire-donnees-personnelles.md` ; écrit
+`md/securite/inventaire-donnees-personnelles.md` ; écrit
 `livrables/5-transverse/registre-rgpd.md` — et rien d'autre.
 
 **Prompt**

@@ -29,7 +29,7 @@
 >   **17** mandats. Le même README en compte **18** depuis LOT10 (l. 91-93).
 > * `md/questions/questions-a-trancher.md:239` : « Les 17 demandes en
 >   `'launched'` (`02:241-246`) ». C'est **18**, et l'`UPDATE` est à `02:275-277`.
-> * `livrables/2-modelisation/09-decisions-a-prendre.md` : D4 et D5 ont encore
+> * `md/regles-metier/09-decisions-a-prendre.md` : D4 et D5 ont encore
 >   « Décision retenue » vide (l. 354, l. 377), « ouverte » au tableau de bord
 >   (l. 66-67), et deux noms à choisir vides (l. 483, l. 485).
 > * **Trou repéré, hors de cette fiche.** L'offre est « déjà pré-remplie suivant
@@ -51,7 +51,7 @@
 * **Décideurs :**
   * le groupe — réponses du 05/10/2026 aux cartes Q-SCH-03 (« Acter les 4 statuts ») et Q-SCH-04 (« Ajouter 'signed' ») ;
   * pour la reprise des demandes : Sébastien, au questionnaire de LOT10 (07/10/2026), d'après la réponse de Jeff à Q-JEF-13 (« pas de nouvel état »).
-* **Remplace :** aucun ADR. Ferme les décisions D4 et D5 de `livrables/2-modelisation/09-decisions-a-prendre.md`.
+* **Remplace :** aucun ADR. Ferme les décisions D4 et D5 de `md/regles-metier/09-decisions-a-prendre.md`.
 
 **Contexte**
 
@@ -162,8 +162,8 @@ Aucune. Ce qui reste est du code à écrire, listé dans les Conséquences.
 | Refus du vendeur, côté client | `03_particulier_offre_et_signature.feature:21`, `:27` (StarterPack) |
 | Refus du chasseur → Fin ; « en refaire une autre » ; offre pré-remplie | `Readme.md:140`, `:131`, `:130` (StarterPack) |
 | F02, parcours futur | `08_futur_particulier_assistance_ia.feature:6`, `:29` (StarterPack) |
-| « aucune colonne de statut » au 11/09 | `livrables/2-modelisation/09-rapport-ecarts-contraintes.md:337-341` |
-| D4, D5 : questions, liste des stories, F02 « plus tard » | `livrables/2-modelisation/09-decisions-a-prendre.md:335-377` |
+| « aucune colonne de statut » au 11/09 | `md/regles-metier/09-rapport-ecarts-contraintes.md:337-341` |
+| D4, D5 : questions, liste des stories, F02 « plus tard » | `md/regles-metier/09-decisions-a-prendre.md:335-377` |
 | U34 : `'proposed'` interdit le montant, `chk_offer` ne change pas | `09-rapport-ecarts-contraintes.md:410` |
 | Q-SCH-03 : « Acter les 4 statuts » (05/10/2026) | `md/questions/questions-a-trancher.md:159` ; `questions-a-trancher.html:1143-1160` |
 | Q-SCH-04 : « Ajouter 'signed' » (05/10/2026) | `questions-a-trancher.md:160` ; `questions-a-trancher.html:1161-1178` |

@@ -56,7 +56,7 @@ La lettre X est sautée : X01 la prend déjà.
   et phrase « validé par le groupe » ➡️ à finir, avec B dedans.
 - **D3** (acte signé après la fin du mandat : pas de paiement, sauf
   renouvellement) : « puis un ADR »
-  (`livrables/2-modelisation/09-decisions-a-prendre.md:178`), oublié
+  (`md/regles-metier/09-decisions-a-prendre.md:178`), oublié
   ➡️ dans L.
 - **Acte notarié hors périmètre** (dit le 2026-10-02 ; qui l'a décidé n'est
   pas noté, registre `:62`) ➡️ une ligne dans T.
