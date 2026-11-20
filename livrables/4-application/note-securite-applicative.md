@@ -4,7 +4,7 @@
 > Exigée par `GRILLE-EVALUATION.md` (StarterPack - BASE) : « Sécurité applicative | Code + note sécurité ».
 > `TRACABILITE-COMPETENCES.md:65` précise : « Extraits de code commentés + note sécurité ».
 > Le bloc **BC04 cybersécurité** n'est pas au programme du projet (`Readme.md` l. 7, option BC05). Cette note décrit donc les **pratiques de sécurité du code**, pas un audit d'intrusion complet.
-> État du code : dépôt `Fil-Rouge-API`, commit **`83b7c0d`** (2026-11-20). Les extraits du § 2 ont été relevés sur `141d068` ; depuis, `utils/security.py` a seulement gagné la constante `MIGRATED_PASSWORD` (comptes repris, activation), sans toucher aux extraits. Rédigée par le Glaude ; § 3 rejoué le 2026-11-20. **À relire par l'équipe.**
+> État du code : dépôt `Fil-Rouge-API`, commit **`aa149c0`** (2026-11-20). Les extraits du § 2 ont été relevés sur `141d068` ; depuis, `utils/security.py` a seulement gagné la constante `MIGRATED_PASSWORD` (comptes repris, activation), sans toucher aux extraits. Rédigée par le Glaude ; § 3 rejoué le 2026-11-20. **À relire par l'équipe.**
 
 ---
 
@@ -27,6 +27,7 @@ Chaque appel à l'API passe **deux contrôles**, qui ne se remplacent pas (ADR-0
 | **Code d'activation** à usage unique, valable 7 jours | Un compte que seul un admin pouvait activer | `services/activation_service.py` | user story 01 |
 | Requêtes SQL **paramétrées** (SQLModel) | L'injection SQL | `repositories/` | — |
 | Effacement = **désactiver et anonymiser** | Garder des données personnelles en clair | `services/anonymization_service.py` | ADR-049 |
+| **En-têtes de sécurité** sur chaque réponse ; nom du serveur caché | Qu'un navigateur devine le type d'un contenu, affiche l'API dans le cadre d'un autre site, ou garde une réponse en cache | `main.py`, `security_headers_middleware` | SEC-HEAD, 2026-11-20 |
 
 Tous les chemins de ce tableau partent de `API/src/app/`.
 
@@ -123,12 +124,13 @@ Les 4 attaques ont été **rejouées après la correction**, par un script qu'on
 
 ## 4. Les preuves par les tests automatiques
 
-- Toute la suite : **1 116 tests réussis**, 7 échecs attendus (`xfail`), **0 échec** (2026-11-19, conteneur `api`).
+- Toute la suite : **1 120 tests réussis**, 7 échecs attendus (`xfail`), **0 échec** (2026-11-20, conteneur `api`, après les en-têtes de sécurité).
 - Les tests qui prouvent la sécurité :
   - `tests/test_login_throttle.py` : le frein (10 tests) ;
   - `tests/test_activation_token.py` et `tests/integration/test_activation.py` : le code d'activation (15 tests) ;
   - `tests/integration/test_droits_par_role.py` : **chaque route** a un test qui juge ses droits. Une route ajoutée sans ce test fait échouer la suite.
   - `tests/test_access_log.py` : aucun mot de passe, jeton ni email n'apparaît dans le journal d'accès.
+  - `tests/test_security_headers.py` : les 4 en-têtes de sécurité sont sur les réponses 200, 401 et 404 (4 tests).
 
 ---
 
@@ -158,6 +160,7 @@ Les 4 attaques ont été **rejouées après la correction**, par un script qu'on
 | Broken Access Control (OWASP) | Le rôle est vérifié **côté serveur** sur chaque route ; la ligne d'un autre rend `404`, pas `403`, pour ne pas dire qu'elle existe | `utils/roles.py` (le rôle), les services (« le sien ») |
 | Validation en entrée | Chaque corps et chaque paramètre est validé par un schéma : une valeur hors type rend `422` **avant** la base (§ 3.1) | modèles SQLModel |
 | Minimisation et pseudonymisation | Effacer un compte = le désactiver et l'**anonymiser** | `services/anonymization_service.py`, ADR-049 |
+| En-têtes de sécurité | **Posés le 2026-11-20** (SEC-HEAD, `aa149c0`) : `X-Content-Type-Options`, `X-Frame-Options`, `Cache-Control: no-store`, `Referrer-Policy` ; `server: uvicorn` retiré. ⚠️ Pas de `Content-Security-Policy` (elle casserait le Swagger), et une erreur 500 n'a pas ces en-têtes | `main.py`, `security_headers_middleware` ; `Dockerfile` |
 
 ### 6.2 Absent : les limites qu'on assume
 
@@ -168,7 +171,6 @@ Les 4 attaques ont été **rejouées après la correction**, par un script qu'on
 | Mots de passe fuités (NIST) | Aucune comparaison avec une liste de mots de passe connus | Possible sans envoyer le mot de passe (service à préfixe de hachage) ; non fait |
 | Chiffrement au repos | La base et les sauvegardes MinIO ne sont pas chiffrées | Seuls les mots de passe sont protégés (Argon2) ; en production, chiffrer le disque et le bucket `backup` |
 | Rotation des secrets | `JWT_SECRET` et les clés d'API ne changent jamais | Changer `JWT_SECRET` déconnecte tout le monde : à faire seulement sur soupçon de fuite, avec une procédure écrite |
-| En-têtes de sécurité | ✅ **Posés le 2026-11-20** (choix SEC-HEAD, `Fil-Rouge-API` `aa149c0`) : `X-Content-Type-Options`, `X-Frame-Options`, `Cache-Control: no-store`, `Referrer-Policy` ; `server: uvicorn` retiré. Avant : seuls `content-type` et `server: uvicorn` | Reste : pas de `Content-Security-Policy` (elle casserait le Swagger) ; une erreur 500 n'a pas ces en-têtes |
 | Composants vulnérables | Analyse **faite une fois** (2026-11-20, `pip-audit`, conteneur `api`) : **0 faille** dans les dépendances de `requirements.txt` ; **6 failles connues** dans `pip` 25.0.1, l'outil d'installation fourni par l'image `python:3.12-slim` (corrigées en 26.2), qui ne sert pas quand l'API tourne | Relancer `pip-audit` à chaque changement de dépendance, idéalement dans la CI ; mettre `pip` à jour dans le `Dockerfile` (choix SEC-PIP) |
 | Limiter les ressources (OWASP API n° 4) | Seule la connexion a un frein ; les listes ne sont pas paginées (`GET /estates` rend 3 219 biens en 1,25 s) | Choix PAGIN, en attente |
 | Réponse à incident | Les journaux d'accès vont dans Elasticsearch (on peut **détecter**) ; aucune marche à suivre pour **répondre** | À écrire avec le PCA/PRA |
