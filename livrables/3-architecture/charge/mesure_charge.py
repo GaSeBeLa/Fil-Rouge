@@ -21,11 +21,11 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 
 import httpx
-from sqlalchemy import text
+from sqlalchemy import text  # pyright: ignore[reportMissingImports]  (installé dans le conteneur api seulement)
 
 sys.path.insert(0, "/api")
-from src.app.conf.database import engine  # noqa: E402  (l'engine de l'API, même base)
-from src.app.utils.security import create_access_token  # noqa: E402
+from src.app.conf.database import engine  # noqa: E402  # pyright: ignore[reportMissingImports]  (code de l'API, lu dans le conteneur)
+from src.app.utils.security import create_access_token  # noqa: E402  # pyright: ignore[reportMissingImports]  (idem)
 
 BASE = "http://localhost:8000"
 N = 1000      # requêtes par route
