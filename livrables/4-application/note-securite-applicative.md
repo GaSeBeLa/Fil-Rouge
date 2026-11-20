@@ -169,7 +169,7 @@ Les 4 attaques ont été **rejouées après la correction**, par un script qu'on
 | Chiffrement au repos | La base et les sauvegardes MinIO ne sont pas chiffrées | Seuls les mots de passe sont protégés (Argon2) ; en production, chiffrer le disque et le bucket `backup` |
 | Rotation des secrets | `JWT_SECRET` et les clés d'API ne changent jamais | Changer `JWT_SECRET` déconnecte tout le monde : à faire seulement sur soupçon de fuite, avec une procédure écrite |
 | En-têtes de sécurité | Mesuré le 2026-11-20 : la réponse ne porte que `content-type` et `server: uvicorn` | Choix SEC-HEAD, en attente |
-| Composants vulnérables | Aucune analyse des dépendances | Choix SEC-SCA (`pip-audit`), en attente |
+| Composants vulnérables | Analyse **faite une fois** (2026-11-20, `pip-audit`, conteneur `api`) : **0 faille** dans les dépendances de `requirements.txt` ; **6 failles connues** dans `pip` 25.0.1, l'outil d'installation fourni par l'image `python:3.12-slim` (corrigées en 26.2), qui ne sert pas quand l'API tourne | Relancer `pip-audit` à chaque changement de dépendance, idéalement dans la CI ; mettre `pip` à jour dans le `Dockerfile` (choix SEC-PIP) |
 | Limiter les ressources (OWASP API n° 4) | Seule la connexion a un frein ; les listes ne sont pas paginées (`GET /estates` rend 3 219 biens en 1,25 s) | Choix PAGIN, en attente |
 | Réponse à incident | Les journaux d'accès vont dans Elasticsearch (on peut **détecter**) ; aucune marche à suivre pour **répondre** | À écrire avec le PCA/PRA |
 
