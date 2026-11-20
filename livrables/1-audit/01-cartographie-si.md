@@ -82,6 +82,27 @@ d'auto-évaluation, note de cadrage).
 
 Entre parenthèses : la cote de la case. 🟥 7 à 9 · 🟨 4 à 6 · 🟩 1 à 3.
 
+**Rnn = risque n° nn** du registre
+([`02-registre-anomalies-risques.md`](02-registre-anomalies-risques.md), preuves
+et cotes détaillées). En bref :
+
+- 🟥 **R01** statut « actif » faux : 6 mandats sur 11 ont dépassé leurs 6 mois.
+- 🟥 **R02** un chasseur enregistré comme client (mandat 13).
+- 🟥 **R03** les honoraires n'existent nulle part en base.
+- 🟨 **R04** ni date de signature, ni date de fin de mandat.
+- 🟨 **R05** clients et chasseurs dans la même table : colonnes vides.
+- 🟨 **R06** client et chasseur visent la même table, rôle non contrôlé.
+- 🟨 **R07** critères de recherche en texte libre.
+- 🟨 **R08** taux de commission fixe, au lieu d'un barème par tranches.
+- 🟨 **R09** code source du backend perdu, développeur absent.
+- 🟨 **R10** dossiers papier sans lien avec la base.
+- 🟨 **R12** téléphone sans format ni indicatif, parfois vide.
+- 🟨 **R16** données personnelles en clair, sans droits par rôle.
+- 🟩 **R11** email sans contrôle de format.
+- 🟩 **R13** code postal sans contrôle.
+- 🟩 **R14** pas d'unicité sur (ville, quartier).
+- 🟩 **R15** un seul secteur par mandat.
+
 Comptes : 🟥 **3** risques cotés 9, 🟨 **9** cotés 4 à 6, 🟩 **4** cotés 1 à 3.
 **16** au total, la même répartition que l'analyse
 ([`03-analyse.md`](03-analyse.md)) et la page Confluence « Audit du système
