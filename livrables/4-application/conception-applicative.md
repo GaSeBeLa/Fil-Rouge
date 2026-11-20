@@ -4,7 +4,7 @@
 > Exigé par `GRILLE-EVALUATION.md` (StarterPack - BASE) : « Maquettes + patterns justifiés, 3-5 pages ».
 > État du code : dépôt `Fil-Rouge-API`, commit **`aa149c0`** (2026-11-20). **96 opérations**, recomptées par `app.openapi()` le 2026-11-20.
 > Les maquettes : [`maquettes-espace-acquereur.html`](./maquettes-espace-acquereur.html), dans ce dossier.
-> Écrit par le Glaude le 2026-11-19, remis à jour le 2026-11-20. Contenu complet ; **reste la validation du groupe**.
+> Écrit par le Glaude le 2026-11-19, remis à jour le 2026-11-20, validé par Gabriel le 2026-11-20 (Discord).
 
 ---
 
