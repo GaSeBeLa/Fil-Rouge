@@ -10,6 +10,7 @@ La liste est tirée de trois documents du sujet : le `Readme.md` (livrables par 
 - **Un dossier par phase**, dans l'ordre du sujet : `1-audit/` à `4-application/`, puis `5-transverse/` et `6-pilotage/`.
 - **Les livrables portent un numéro** `phase.ordre` : on les lit dans cet ordre.
 - **Les appuis** (schémas, scripts de mesure, images) sont dans le sous-dossier `annexes/` de chaque phase, sans numéro.
+- Les **décisions d'architecture** (ADR-001 à ADR-065) sont dans [`decisions/`](../decisions/README.md).
 - Le **code de l'API** est dans un second dépôt : [GaSeBeLa/Fil-Rouge-API](https://github.com/GaSeBeLa/Fil-Rouge-API).
 
 ## Phase 1 — Auditer l'existant (BC01)

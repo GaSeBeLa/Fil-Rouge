@@ -42,7 +42,7 @@ modifiés**.
   (`services/remuneration.py`, code du sujet), branché sur la base par
   `POST /sales/{id}/payment` (fiche API12).
 - `normalised/` porte la normalisation des annonces et son rapport d'anomalies.
-- `livrables/` est rangé par phase depuis le 2026-11-20 (choix A de Gabriel) : `1-audit/` à `6-pilotage/`, les livrables numérotés `<phase>.<ordre>` (`2.3-note-de-cadrage.md`…), les appuis sans numéro dans `<phase>/annexes/` (les 8 schémas Mermaid `schema-*.md`, SWOT, scripts de mesure, images). `livrables/README.md` est la liste officielle des 36 livrables du sujet, pour le jury. 12 pages Confluence y sont copiées (en-tête « Copie de Confluence », Confluence fait foi) ; les versions longues sont en `md/equipe/*-complete.md` ; les documents de travail sont dans `md/`. Détail daté dans `context AI/08-etat.md`.
+- `livrables/` est rangé par phase depuis le 2026-11-20 (choix A de Gabriel) : `1-audit/` à `6-pilotage/`, les livrables numérotés `<phase>.<ordre>` (`2.3-note-de-cadrage.md`…), les appuis sans numéro dans `<phase>/annexes/` (les 8 schémas Mermaid `schema-*.md`, SWOT, scripts de mesure, images). `livrables/README.md` est la liste officielle des 36 livrables du sujet, pour le jury. 12 pages de travail y sont copiées (le dépôt fait foi) ; les versions longues sont en `md/equipe/*-complete.md` ; les documents de travail sont dans `md/`. Détail daté dans `context AI/08-etat.md`.
 - Clos le 2026-10-15 : clés vers les fiches et rôles des fiches (chantier PRF).
 - Clos le 2026-10-15 : Airflow, Elasticsearch, Logstash et Kibana branchés sur l'API (chantier FLX).
 - Clos le 2026-11-03 : clos sans rien livrer, recadrage à venir (chantier MER).
@@ -65,9 +65,9 @@ modifiés**.
    **`NUMERIC(12,2)`** (`Decimal`), car le sujet arrondit au centime.
 5. **Aucun secret ni `.env` dans git**, aucun chemin absolu dans le code.
 
-Les ADR ne vivent pas dans le dépôt mais sur Confluence : le dossier
-`decisions/` ne contient qu'un `.gitkeep`, et rien ne s'écrit sur Confluence
-depuis le dépôt — la synchronisation est manuelle, et décidée par le groupe.
+**Tout vit sur GitHub depuis le 2026-11-20** (choix de Gabriel) : les ADR sont dans
+`decisions/` (69 fichiers, copiés de Confluence, index `decisions/README.md`),
+et le dépôt fait foi. Confluence n'est plus mis à jour ; aucun livrable n'y renvoie.
 
 Prose et commentaires de code en français ; noms de code en anglais.
 Le contexte IA (`CLAUDE.md`, `context AI/`) est **versionné** : le projet se
@@ -88,7 +88,7 @@ Une modification n'est finie que quand ce qu'elle a rendu faux a disparu
    réécrit pas.
 6. ADR : un ADR accepté ne se réécrit pas. Créer ou modifier un ADR → les ADR
    qu'il contredit passent à « remplacé par ADR-0XX », renvois mis à jour des
-   deux côtés (`md/adr/`, et Confluence avec l'accord du groupe).
+   deux côtés, dans `decisions/`.
 
 ## Routage — ouvrir ceci, et rien d'autre
 
@@ -103,7 +103,7 @@ et seulement dans ce cas, ouvrir l'index.
 | vérifier une règle métier | `user-stories/<NN>_*.feature` |
 | vérifier une table, une colonne, une contrainte | `../Fil-Rouge-API/docker/init-v3/01_create_fil_rouge_immobilier.sql` |
 | comprendre un choix du schéma (euros, migration, hypothèses, changements v3) | `../Fil-Rouge-API/docker/init-v3/README.md` |
-| relire une décision d'architecture (ADR) | **Confluence**, espace `GaSeBeLa1` — [wiki du projet](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/overview?homepageId=15008134). Le dossier `decisions/` du dépôt est **vide**, rien n'y est écrit |
+| relire une décision d'architecture (ADR) | `decisions/README.md`, puis le fichier de l'ADR |
 | ouvrir un chantier, ou le découper en fiches | **lancer `/vlp:chantier`** — la méthode vit dans le kit, pas ici |
 | relire un chantier clos | `context AI/00-INDEX-archive.md` — sa ligne y nomme le fichier de fiches |
 | relire une fiche `C1` à `C5` | `context AI/09-contraintes-mpd.md` — chantier **clos** le 2026-09-11, ne se rejoue pas |
