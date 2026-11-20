@@ -61,7 +61,7 @@ Appuis : [4 schémas d'architecture, la SWOT de croissance, les mesures de charg
 | 4.5 | Note de sécurité applicative | [4.5-note-securite-applicative.md](4-application/4.5-note-securite-applicative.md) |
 | 4.6 | Schéma du programme d'IA | [4.6-schema-programme-ia.md](4-application/4.6-schema-programme-ia.md) (et sa version [HTML](4-application/4.6-schema-programme-ia.html)) |
 | 4.7 | Conception du modèle de matching et features | [4.7-conception-matching-features.md](4-application/4.7-conception-matching-features.md) |
-| 4.8 | Pipeline d'intégration continue | à venir |
+| 4.8 | Pipeline d'intégration continue et indicateurs de qualité | [4.8-pipeline-ci.md](4-application/4.8-pipeline-ci.md) |
 
 Appuis : [schéma de connexion](4-application/annexes/schema-connexion-et-jeton.md), script des essais d'attaque, images des processus.
 
