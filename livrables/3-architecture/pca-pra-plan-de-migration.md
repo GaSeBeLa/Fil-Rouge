@@ -19,7 +19,7 @@ place.
 
 | Fait | Statut |
 |---|---|
-| Aucune sauvegarde n'est codée : ni `pg_dump`, ni script, ni DAG de sauvegarde, dans aucun des deux dépôts | ⚠️ |
+| Sauvegarde quotidienne codée le 2026-11-20 : DAG `db_backup` (dépôt `Fil-Rouge-API`, commit `83b7c0d`, 2026-11-20), chaque nuit à 1 h, base + rôles sans mot de passe dans MinIO (bucket `backup`), 7 jours gardés. Restauration éprouvée dans une base à part : mêmes comptes (3 219 biens, 539 comptes, 501 ventes, 22 tables). ⚠️ MinIO est sur la même machine : pas de copie hors site, ni de journaux WAL | ✅ / ⚠️ |
 | Un test de restauration a été joué **une fois, à la main**, le 2026-11-19 : 0 écart sur 28 tables (§ 2.4). Rien ne l'automatise | ✅ / ⚠️ |
 | `db` et `api` redémarrent seuls après un plantage (`restart: unless-stopped`, posé le 2026-11-19, `Fil-Rouge-API` `557964d` ; crash simulé : relancé seul, `GET /` en `200`) | ✅ |
 | Une seule instance de chaque service ; Elasticsearch en 1 shard, 0 réplique (`mapping.py`) | ✅ |
@@ -231,6 +231,6 @@ pendant une période à fixer (🟡).
 3. 💡 Où garder `docker/.env` et la liste des comptes effacés.
 4. 🟡 Date de bascule du site et de l'application métier.
 5. 🟡 Durée de garde de l'ancienne base en lecture seule.
-6. ✅ `restart: unless-stopped` posé sur `db` et `api` (2026-11-19). 💡 Reste
-   un **script de sauvegarde** planifié : hors du minimum demandé par le
-   sujet, gardé comme limite connue.
+6. ✅ `restart: unless-stopped` posé sur `db` et `api` (2026-11-19). ✅ Sauvegarde
+   quotidienne planifiée le 2026-11-20 (DAG `db_backup`). 💡 Reste : une
+   copie hors site et l'archivage des journaux WAL.

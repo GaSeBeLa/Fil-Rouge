@@ -48,7 +48,7 @@ Le sujet propose quatre fréquences : à la minute, à l'heure, toutes les 12 h,
 
 ## 5. Les limites, dites franchement
 
-- ⚠️ **Aucune sauvegarde n'est planifiée** dans le projet : la politique est écrite, pas codée (comme le dit le PCA/PRA).
+- ✅ **La copie quotidienne est codée** depuis le 2026-11-20 : DAG `db_backup` (dépôt `Fil-Rouge-API`, commit `83b7c0d`, 2026-11-20), 7 jours gardés. ⚠️ Les journaux WAL et la copie hors site ne le sont pas.
 - ⚠️ **La purge du brut n'est pas codée** : MinIO `bronze` garde tout ce qu'il reçoit.
 - ⚠️ **La suppression des logs après 6 mois** n'est pas codée non plus : la durée est fixée, pas appliquée.
 - ⚠️ **L'envoi des médias du chasseur dans MinIO** est prévu (ADR-015, ADR-051), pas codé : la table ne garde aujourd'hui qu'une adresse.

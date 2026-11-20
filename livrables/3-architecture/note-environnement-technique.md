@@ -45,7 +45,7 @@ Un seul fichier lance tout : `docker/docker-compose.yml`. Les services lourds ne
 - ✅ **Des index posés après mesure, pas par défaut** : 3 index, de 15 à 100 fois plus rapides ; chaque index en plus coûterait de la place et ralentirait l'écriture (note d'indexation).
 - ✅ **Elasticsearch sans copie inutile** : 1 shard, 0 réplique, mémoire bornée (`-Xmx1g`, `mem_limit` 2 Go).
 - ✅ **Des images légères** : `python:3.12-slim` pour l'API.
-- ✅ **Sauvegarder juste** : une copie complète par jour + les journaux WAL, plutôt qu'une copie à la minute (note d'éco-conception).
+- ✅ **Sauvegarder juste** : une copie complète par jour, gardée 7 jours (DAG `db_backup`, ~0,7 Mo), plutôt qu'une copie à la minute (note d'éco-conception). Les journaux WAL restent à poser.
 
 ## 4. Recommandation pour la croissance (💡 proposé)
 
@@ -78,5 +78,5 @@ Pour l'impact écologique, la règle reste la même à chaque étape : **ajouter
 
 - ⚠️ **Aucune mesure d'énergie** : on mesure la mémoire et le temps, pas les watts.
 - ⚠️ **Une seule mesure de charge**, sur un poste de développement, en lecture seule (§ 5) : les déclencheurs du § 4 ont un point de départ, pas une preuve en production.
-- ⚠️ **Pas de sauvegarde planifiée** aujourd'hui : la politique est écrite, pas codée (PCA/PRA).
+- ✅ **Sauvegarde quotidienne codée** le 2026-11-20 : DAG `db_backup` (dépôt `Fil-Rouge-API`, commit `83b7c0d`, 2026-11-20), restauration éprouvée. ⚠️ Reste sur la même machine que la base (pas de copie hors site), et sans journaux WAL.
 - ⚠️ Airflow 2.11.2 est en fin de vie depuis avril 2026 (ADR-059).
