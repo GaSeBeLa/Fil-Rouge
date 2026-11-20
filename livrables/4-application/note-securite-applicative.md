@@ -138,3 +138,46 @@ Les 4 attaques ont été **rejouées après la correction**, par un script qu'on
 - ⚠️ **Pas de serveur d'email** : le code d'activation est rendu au manager par l'API, pas envoyé par mail au client.
 - ⚠️ **Pas de HTTPS** dans la pile Docker locale. En production, il faudrait un proxy TLS devant l'API.
 - ⚠️ **Pas de jeton de rafraîchissement** : on se reconnecte toutes les 60 minutes. C'est un choix assumé (ADR-052), plus simple et plus sûr.
+
+---
+
+## 6. Ce que le cours aborde, point par point
+
+> Ajouté le 2026-11-20 (choix SEC-COURS, accepté par Gabriel). Grille : les sommaires des 4 supports du cours (authentification, cryptographie, sécurité des applications par l'attaque, vulnérabilités), comparés au code de `Fil-Rouge-API` (`83b7c0d`). Chaque ligne « en place » se vérifie dans le fichier cité, depuis `API/src/app/`.
+
+### 6.1 En place, sans être écrit plus haut
+
+| Thème du cours | Ce que fait l'API | Où |
+| --- | --- | --- |
+| Contrôler un jeton reçu | L'algorithme est **figé** au décodage (`algorithms=["HS256"]`) : un jeton signé autrement, ou « sans signature », est refusé. Le jeton expiré est refusé | `utils/security.py`, `decode_access_token` |
+| Clé secrète robuste | `JWT_SECRET` de **32 caractères au moins**, sinon l'API refuse de démarrer | `utils/security.py`, `_load_jwt_secret` |
+| Politique de mot de passe (NIST 800-63B) | **12 caractères au moins**, aucune règle de complexité, aucun changement forcé : ce que recommande le NIST. ⚠️ Le seuil de 12 reste « à confirmer en réunion » (commentaire du code) | `models/user_model.py` |
+| Ne rien exposer | Une erreur 500 rend un **message neutre et un numéro** ; la pile reste dans le journal | `main.py`, `internal_error_with_reference` |
+| Fail-closed | Sans clé d'API valable, **tout est refusé**, avant même de lire le jeton | `utils/api_keys.py`, `require_api_key` |
+| Défense en profondeur | Trois barrières qui ne se remplacent pas : la clé (le programme), le jeton (la personne), le rôle **relu en base** à chaque appel | § 1 |
+| Broken Access Control (OWASP) | Le rôle est vérifié **côté serveur** sur chaque route ; la ligne d'un autre rend `404`, pas `403`, pour ne pas dire qu'elle existe | `utils/roles.py` (le rôle), les services (« le sien ») |
+| Validation en entrée | Chaque corps et chaque paramètre est validé par un schéma : une valeur hors type rend `422` **avant** la base (§ 3.1) | modèles SQLModel |
+| Minimisation et pseudonymisation | Effacer un compte = le désactiver et l'**anonymiser** | `services/anonymization_service.py`, ADR-049 |
+
+### 6.2 Absent : les limites qu'on assume
+
+| Thème du cours | Ce qui manque | Pourquoi, et ce qu'il faudrait |
+| --- | --- | --- |
+| MFA, passkeys | Pas de second facteur | Hors du sujet ; à prévoir pour les comptes Manager et Admin avant une mise en production |
+| Révocation d'un jeton | Un jeton vit 60 min, sans liste noire | **En partie couvert** : un compte désactivé est refusé à l'appel suivant, car il est relu en base |
+| Mots de passe fuités (NIST) | Aucune comparaison avec une liste de mots de passe connus | Possible sans envoyer le mot de passe (service à préfixe de hachage) ; non fait |
+| Chiffrement au repos | La base et les sauvegardes MinIO ne sont pas chiffrées | Seuls les mots de passe sont protégés (Argon2) ; en production, chiffrer le disque et le bucket `backup` |
+| Rotation des secrets | `JWT_SECRET` et les clés d'API ne changent jamais | Changer `JWT_SECRET` déconnecte tout le monde : à faire seulement sur soupçon de fuite, avec une procédure écrite |
+| En-têtes de sécurité | Mesuré le 2026-11-20 : la réponse ne porte que `content-type` et `server: uvicorn` | Choix SEC-HEAD, en attente |
+| Composants vulnérables | Aucune analyse des dépendances | Choix SEC-SCA (`pip-audit`), en attente |
+| Limiter les ressources (OWASP API n° 4) | Seule la connexion a un frein ; les listes ne sont pas paginées (`GET /estates` rend 3 219 biens en 1,25 s) | Choix PAGIN, en attente |
+| Réponse à incident | Les journaux d'accès vont dans Elasticsearch (on peut **détecter**) ; aucune marche à suivre pour **répondre** | À écrire avec le PCA/PRA |
+
+### 6.3 Non concernés, et pourquoi
+
+- **SSRF** : l'API ne va chercher **aucune** URL donnée par un utilisateur ; les photos sont des liens, jamais téléchargés par le serveur.
+- **XXE** : l'API ne lit pas de XML, seulement du JSON.
+- **Désérialisation dangereuse** : aucun `pickle` ni format qui exécute du code ; le JSON est validé par des schémas.
+- **Prototype pollution** : propre au JavaScript ; l'API est en Python.
+- **Sessions et cookies** (fixation, détournement, flags) : l'API n'a **pas de session** ni de cookie ; le jeton passe dans l'en-tête `Authorization`.
+
