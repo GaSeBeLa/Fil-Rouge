@@ -5,7 +5,7 @@
 
 > Matrice SWOT (Forces, Faiblesses, Opportunités, Menaces), selon le modèle du sujet (`documents utiles/MODELE-SWOT.md`, StarterPack), qui la prévoit en phase 1 et en **phase 3**. Bloc BC01.
 > La SWOT de **départ** (le SI hérité, phase 1) est la page « Matrice SWOT » de Békanty (19/08/2026). Celle-ci est la SWOT d'**arrivée** : le SI que nous avons construit, face à la croissance.
-> Rédigée le 2026-11-19 avec l'assistant IA du projet, à partir du dépôt (`Fil-Rouge`, `Fil-Rouge-API`) et du `Readme.md` du sujet.
+> Établie le 2026-11-19 à partir du dépôt (`Fil-Rouge`, `Fil-Rouge-API`) et du `Readme.md` du sujet.
 
 ## Contexte analysé
 

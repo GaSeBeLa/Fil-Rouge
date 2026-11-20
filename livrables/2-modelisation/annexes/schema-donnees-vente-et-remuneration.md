@@ -58,7 +58,7 @@ erDiagram
   Une ligne naît d'un paiement, d'un mandat échu, ou au départ
   (`trigger_type` : `payment`, `mandate_expired`, `initial`).
 - Montants : prix en **euros entiers**, honoraires et paiements **au
-  centime** (règle 4 du `CLAUDE.md`).
+  centime** (règle du projet : tout montant en euros).
 - Le calcul lui-même : `services/remuneration.py`, branché par
   `POST /sales/{id}/payment`.
 
