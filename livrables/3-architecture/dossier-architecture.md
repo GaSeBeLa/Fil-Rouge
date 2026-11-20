@@ -6,8 +6,8 @@
 > partitionnement, sharding), analyser les composants et leurs points de
 > performance (`SP/documents utiles/TRACABILITE-COMPETENCES.md:35-37`).
 >
-> Brouillon du 2026-11-19, à relire par l'équipe. Ce document **relie** ce qui
-> existe : les 8 schémas de ce dossier, la note 3V, l'OLAP et les ADR. Il ne les
+> Version du 2026-11-20. Ce document **relie** ce qui
+> existe : les 4 schémas de ce dossier, la note 3V, l'OLAP et les ADR. Il ne les
 > recopie pas.
 >
 > Statuts : ✅ établi (lu dans le code ou mesuré) · 🟡 à décider · 💡 proposé ·
@@ -37,7 +37,7 @@ flowchart LR
     end
     API --> OLTP
     API -->|"GET /estates/search"| ES[("Elasticsearch<br/>index estates · copie")]
-    AIR["Airflow · 3 DAG de nuit"] -->|"2 h · annonces"| OLTP
+    AIR["Airflow · 4 DAG de nuit"] -->|"1 h · sauvegarde ; 2 h · annonces"| OLTP
     AIR -->|"3 h · TRUNCATE + recalcul"| OLAP
     AIR -->|"4 h · copie des biens"| ES
     AIR <--> MIN[("MinIO · bronze, silver,<br/>quarantine, gold")]
@@ -57,7 +57,7 @@ flowchart LR
 |---|---|---|---|
 | `api` (FastAPI) | règles métier, droits, calcul du paiement | ⚠️ connexion : argon2 à **512 Mo et ~298 ms par essai** ; dix connexions simultanées ≈ 5 Go. Freinées depuis le 2026-11-19 : 5 échecs par email ou 20 par IP en 15 min → `429` | `utils/security.py:45`, commit `e6f4b87` |
 | | | ⚠️ le compte est relu en base à **chaque** appel : une requête de plus, voulue pour la sécurité | ADR-052, décision 3 |
-| | | ⚠️ pas de pagination : `GET /estates` rend les 2 556 biens d'un coup | `API/README.md`, « Limites connues » |
+| | | ⚠️ pas de pagination : `GET /estates` rend tous les biens d'un coup (3 219 sur la base de développement : 1,25 s, mesuré le 2026-11-20) | `API/README.md`, « Limites connues » |
 | PostgreSQL, OLTP | 22 tables, contraintes, triggers | ✅ **7 index** posés à la main, dont 3 le 2026-11-19 après mesure (× 15 à × 100, `../2-modelisation/note-indexation.md`) ; ⚠️ PostgreSQL n'indexe pas seul les clés étrangères : les autres n'ont pas d'index dédié, sauf quand une contrainte `UNIQUE` les couvre. **0** table partitionnée | `init-v3/01_create_fil_rouge_immobilier.sql` |
 | PostgreSQL, `olap` | l'étoile du sujet, une ligne par vente | ✅ précalculée : l'analyse ne refait pas les jointures du métier. ⚠️ recalcul **complet** chaque nuit, 0 index | `airflow/src/olap/load.py`, `08_olap.sql` |
 | Elasticsearch | recherche texte, ville, prix, distance | ✅ arrêté, seule la recherche répond `503`. ⚠️ 1 shard, 0 réplique ; jusqu'à 24 h de retard | ADR-061, `airflow/src/search/mapping.py` |
@@ -139,18 +139,19 @@ Deux changements suivent le volume, sans être des leviers du sujet :
 **Éco-conception** (le détail : la note d'éco-conception)
 - Les outils de données ne tournent qu'à la demande, par profil : **234 Mio**
   au lieu de **5,0 Gio** pour qui travaille sur l'API (ADR-062).
-- Trois traitements **par nuit**, pas en continu : un recalcul quotidien suffit
+- Quatre traitements **par nuit** (sauvegarde, import, OLAP, index), pas en continu : un recalcul quotidien suffit
   au besoin.
 - Les photos des agences sont **liées, pas copiées** : de 29 à 188 To de
   stockage évités (note 3V § 7).
 
 ## 6. Limites, à dire au jury
 
-- ⚠️ Une seule instance de chaque service : pas de reprise automatique (voir le
-  PCA/PRA).
-- ⚠️ Les leviers du § 4 sont **conçus, pas mesurés** : aucune mesure de charge
-  n'a été faite. La seule mesure est celle de la note d'indexation (3 requêtes,
-  `EXPLAIN ANALYZE` avant et après).
+- ⚠️ Une seule instance de chaque service : `db` et `api` redémarrent seuls
+  après un plantage, mais rien ne bascule sur une autre machine (voir le PCA/PRA).
+- ⚠️ Les leviers du § 4 sont **conçus, pas éprouvés** : une seule mesure de
+  charge, sur un poste de développement (note d'environnement § 5 : 70 ms pour
+  un bien, 1,25 s pour la liste entière), et celle de la note d'indexation
+  (3 requêtes, `EXPLAIN ANALYZE` avant et après).
 - ⚠️ Airflow 2.11.2 est en fin de vie depuis avril 2026 (ADR-059).
 - 🟡 Le seuil où l'entrepôt séparé (option C) devient nécessaire n'est pas
   chiffré : il se mesurera sur les premières données réelles.

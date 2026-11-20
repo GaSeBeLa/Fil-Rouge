@@ -1,7 +1,7 @@
 # Note d'environnement technique — et son volet green IT
 
 > Compétence : « Recommander un environnement informatique en intégrant les techniques de réduction d'impact écologique » — « Note d'environnement technique + volet green IT » (`documents utiles/TRACABILITE-COMPETENCES.md:63`, StarterPack). Phases 3 et 4, bloc BC03.
-> Rédigée le 2026-11-20 par le Glaude. Tout chiffre vient du dépôt `Fil-Rouge-API` (`docker/docker-compose.yml`, `API/Dockerfile`, `API/requirements.txt`, lus le 2026-11-20) ou d'une mesure déjà publiée, citée à côté.
+> Rédigée le 2026-11-20. Tout chiffre vient du dépôt `Fil-Rouge-API` (`docker/docker-compose.yml`, `API/Dockerfile`, `API/requirements.txt`, lus le 2026-11-20) ou d'une mesure déjà publiée, citée à côté.
 > Statuts : ✅ établi (lu ou mesuré) · 💡 proposé · ⚠️ limite connue.
 
 ---
@@ -18,7 +18,7 @@ Un seul fichier lance tout : `docker/docker-compose.yml`. Les services lourds ne
 
 ✅ Mémoire mesurée le 2026-10-15 (ADR-062) : **5,0 Gio** avec tous les profils, **234 Mio** pour qui ne travaille que sur l'API. Le schéma : `04-pile-docker.md`.
 
-**Les briques du code** (`API/requirements.txt`) : FastAPI 0.143.0, SQLModel 0.0.48, uvicorn 0.54.0, psycopg2-binary 2.9.13, argon2-cffi 25.1.0, PyJWT 2.15.1. Tests : pytest, 1 116 réussis (commit `31094a8`).
+**Les briques du code** (`API/requirements.txt`) : FastAPI 0.143.0, SQLModel 0.0.48, uvicorn 0.54.0, psycopg2-binary 2.9.13, argon2-cffi 25.1.0, PyJWT 2.15.1. Tests : pytest, 1 120 réussis, 7 échecs attendus (2026-11-20).
 
 **Lancer** (depuis `Fil-Rouge-API/docker/`) :
 - l'API seule : `docker compose up -d` ;
@@ -30,7 +30,7 @@ Un seul fichier lance tout : `docker/docker-compose.yml`. Les services lourds ne
 | Choix | Raison | Source |
 |---|---|---|
 | PostgreSQL, une instance | un seul moteur pour le métier et l'analyse (schéma `olap` à part) ; 133 Go à 2 ans y tiennent | ADR-001 ; matrice de décision (option B) |
-| Docker Compose, pas Kubernetes | 4 personnes, un poste chacun, pas de production : l'orchestration lourde n'apporte rien | dossier d'architecture |
+| Docker Compose, pas Kubernetes | 4 personnes, un poste chacun, pas de production : l'orchestration lourde n'apporte rien | 💡 justification de cette note (aucun ADR ne la tranche) |
 | Images à version fixe | le même environnement pour tous, et un retour arrière possible | ADR-015 |
 | Profils | chacun ne lance que ce dont il a besoin | ADR-062 |
 | Outils libres et gratuits | aucun coût de licence, aujourd'hui comme à la croissance | note de cadrage, § 3 bis |
@@ -40,7 +40,7 @@ Un seul fichier lance tout : `docker/docker-compose.yml`. Les services lourds ne
 ## 3. Le volet green IT : ce qui réduit l'impact, déjà en place
 
 - ✅ **Lancer à la demande** : 234 Mio au lieu de 5,0 Gio pour le travail courant, soit **environ 22 fois moins** de mémoire (ADR-062).
-- ✅ **Traiter la nuit, pas en continu** : trois traitements planifiés (import 2 h, OLAP 3 h, index 4 h), au lieu de flux allumés en permanence.
+- ✅ **Traiter la nuit, pas en continu** : quatre traitements planifiés (sauvegarde 1 h, import 2 h, OLAP 3 h, index 4 h), au lieu de flux allumés en permanence.
 - ✅ **Ne pas copier ce qui existe ailleurs** : les photos des annonces sont liées, pas copiées ; de 29 à 188 To de stockage évités (note 3V, § 7).
 - ✅ **Des index posés après mesure, pas par défaut** : 3 index, de 15 à 100 fois plus rapides ; chaque index en plus coûterait de la place et ralentirait l'écriture (note d'indexation).
 - ✅ **Elasticsearch sans copie inutile** : 1 shard, 0 réplique, mémoire bornée (`-Xmx1g`, `mem_limit` 2 Go).

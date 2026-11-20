@@ -61,7 +61,8 @@ flowchart LR
 ## Comment le lire
 
 - 🟩 Vert : le profil `airflow`. 🟦 Bleu : la base. 🟧 Ocre : le profil `elk`.
-- Trois traitements de nuit, chacun à son heure :
+- Quatre traitements de nuit, chacun à son heure :
+  - **1 h** · `db_backup` : la base et les rôles → le bucket `backup` de MinIO, 7 jours gardés (ajouté le 2026-11-20, absent de l'image ci-dessus) ;
   - **2 h** · `annonces_import` : le CSV brut → bronze → silver ou
     quarantine → la table `estate` ;
   - **3 h** · `olap_refresh` : les tables du métier → le schéma `olap` ;
