@@ -2,7 +2,7 @@
 
 > **Note d'indexation** (BC05).
 > Exigée par `GRILLE-EVALUATION.md` (StarterPack - BASE) : « Note d'indexation (EXPLAIN avant/après) | 1 page + captures ».
-> Mesuré le **2026-11-19** sur la base de dev locale (conteneur `db`, PostgreSQL 16.15), schéma v3 (`Fil-Rouge-API`, commit `141d068`).
+> Mesuré le **2026-11-19** sur la base de dev locale (conteneur `db`, PostgreSQL 16.15), schéma v3 (`Fil-Rouge-API`).
 > Les captures : la sortie brute complète, dans `indexation/sortie-2026-11-19.txt`. Le script rejouable : `indexation/mesure-index.sql`.
 
 ---
@@ -71,7 +71,7 @@ CREATE INDEX idx_estate_searchrequest_hunter  ON estate_searchrequest (id_hunter
 CREATE INDEX idx_search_request_hunter_created ON search_request (id_hunter, created_at DESC);
 ```
 
-✅ **Posés le 2026-11-19** (choix A de Sébastien), dépôt `Fil-Rouge-API`, commit `eda0a35` :
+✅ **Posés le 2026-11-19**, dépôt `Fil-Rouge-API` :
 
 - dans le schéma de référence `docker/init-v3/01_create_fil_rouge_immobilier.sql` ;
 - dans la migration `docker/migrations/v2-vers-v3/52_index-chasseur-et-demande.sql`, pour une base qui existe déjà ;

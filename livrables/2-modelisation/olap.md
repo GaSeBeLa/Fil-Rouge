@@ -4,7 +4,7 @@
 > « 1 schéma + description (script SQL ou code) » (StarterPack - BASE,
 > `documents utiles/GRILLE-EVALUATION.md:29`). Le cours et le modèle sont
 > dans `documents utiles/OLAP.md` du StarterPack ; ce fichier-ci est **notre**
-> réponse. Chantier FLX, fiches FLX5 (schéma) et FLX6 (alimentation), 2026-10-15.
+> réponse. 2026-10-15.
 
 ## La matrice de cadrage, remplie
 
@@ -114,7 +114,7 @@ Le DAG Airflow `olap_refresh`, chaque nuit à 3 h, suit les trois temps du cours
 La tâche `report` écrit ensuite le bilan (lues, chargées, rejetées par raison)
 dans MinIO, `gold/olap/{ds}.json`.
 
-Mesuré le 2026-10-15 (fiche FLX6), sur 501 ventes fausses du faker (FLX13) :
+Mesuré le 2026-10-15, sur 501 ventes fausses générées pour les tests :
 501 lues, 501 chargées, 0 rejet ; rejoué : toujours 501 lignes dans
 `fait_ventes`.
 

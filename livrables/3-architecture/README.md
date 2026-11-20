@@ -6,7 +6,7 @@
 > Les schémas 1 à 4 viennent de la présentation du 2026-10-16
 > (`md/equipe/2026-10-16-presentation.md`) ; les schémas 5 à 8 manquaient.
 > Le 2026-11-19, les schémas 5 à 7 (données) sont rangés en `2-modelisation/`, le schéma 8 (connexion) en `4-application/` : chacun dans sa phase. Ce dossier garde aussi le dossier d'architecture, la matrice de décision, la note 3V, le PCA/PRA et la SWOT de croissance.
-> Le code lu est celui du dépôt **Fil-Rouge-API**, au commit `01514b2`.
+> Le code lu est celui du dépôt **Fil-Rouge-API**, au.
 
 ## Les schémas
 

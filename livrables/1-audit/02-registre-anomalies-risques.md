@@ -81,17 +81,17 @@ Reprise de la page Confluence, § 1. Aucune remarque n'est écartée sans motif.
 ## 4. Observations hors registre
 
 - Le client 19 (Nina Girard) n'a aucun mandat : un prospect, pas une anomalie.
-  La migration v3 lui rattache le mandat 13 (LOT10, `Fil-Rouge-API/docker/migrations/v2-vers-v3/10_reprise-mandats.sql`).
+  La migration v3 lui rattache le mandat 13 (`Fil-Rouge-API/docker/migrations/v2-vers-v3/10_reprise-mandats.sql`).
 - Le statut `suspendu` (2 mandats, dont le 16, encore dans ses 6 mois) n'a pas
   d'équivalent dans le sujet, qui ne décrit pas de pause d'un mandat.
-  ✅ Tranché en phase 2 : `suspendu` devient `'canceled'` (Q-MIG-13).
+  ✅ Tranché en phase 2 : `suspendu` devient `'canceled'`.
 
 ## 5. Pistes — indicatives, traitées en phase 2
 
 | Risque | Piste | Où c'est fait aujourd'hui |
 |---|---|---|
-| R01, R04 | date de signature, mode, fin = signature + 6 mois | `mandate.signature_date`, `chk_mandate_six_months` (LOT4) |
-| R02, R05, R06 | une fiche par rôle, FK vers la fiche | tables `client`, `hunter`, `real_estate_manager` ; trigger `check_one_profile_per_user` (PRF6) |
+| R01, R04 | date de signature, mode, fin = signature + 6 mois | `mandate.signature_date`, `chk_mandate_six_months` |
+| R02, R05, R06 | une fiche par rôle, FK vers la fiche | tables `client`, `hunter`, `real_estate_manager` ; trigger `check_one_profile_per_user` |
 | R03, R08 | vente, honoraires, barème, paiement | `sale`, `parameters_fees`, `commission_scale`, `payment` |
 | R07 | critères typés, versionnés | `criteria` (`id_previous_version`) |
 | R11 à R13 | contrôles de format | `CHECK` email, téléphone (ADR-007), code postal par pays |

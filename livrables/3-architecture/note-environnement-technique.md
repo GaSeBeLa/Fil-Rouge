@@ -35,7 +35,7 @@ Un seul fichier lance tout : `docker/docker-compose.yml`. Les services lourds ne
 | Profils | chacun ne lance que ce dont il a besoin | ADR-062 |
 | Outils libres et gratuits | aucun coût de licence, aujourd'hui comme à la croissance | note de cadrage, § 3 bis |
 
-✅ **Écart à ADR-015 corrigé le 2026-11-20** : `postgres:16` ne fixait que la version majeure ; l'image est épinglée en `postgres:16.15` (dépôt `Fil-Rouge-API`, commit `68ce316`), la version qui tournait déjà.
+✅ **Écart à ADR-015 corrigé le 2026-11-20** : `postgres:16` ne fixait que la version majeure ; l'image est épinglée en `postgres:16.15` (dépôt `Fil-Rouge-API`), la version qui tournait déjà.
 
 ## 3. Le volet green IT : ce qui réduit l'impact, déjà en place
 
@@ -78,5 +78,5 @@ Pour l'impact écologique, la règle reste la même à chaque étape : **ajouter
 
 - ⚠️ **Aucune mesure d'énergie** : on mesure la mémoire et le temps, pas les watts.
 - ⚠️ **Une seule mesure de charge**, sur un poste de développement, en lecture seule (§ 5) : les déclencheurs du § 4 ont un point de départ, pas une preuve en production.
-- ✅ **Sauvegarde quotidienne codée** le 2026-11-20 : DAG `db_backup` (dépôt `Fil-Rouge-API`, commit `83b7c0d`, 2026-11-20), restauration éprouvée. ⚠️ Reste sur la même machine que la base (pas de copie hors site), et sans journaux WAL.
+- ✅ **Sauvegarde quotidienne codée** le 2026-11-20 : DAG `db_backup` (dépôt `Fil-Rouge-API`, 2026-11-20), restauration éprouvée. ⚠️ Reste sur la même machine que la base (pas de copie hors site), et sans journaux WAL.
 - ⚠️ Airflow 2.11.2 est en fin de vie depuis avril 2026 (ADR-059).

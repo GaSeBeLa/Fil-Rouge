@@ -1,9 +1,9 @@
 # Livrable 4 — La conception du modèle de matching et ses features
 
-> Brouillon du 2026-11-03, à relire par l'équipe. Format attendu : « 2 pages
+> Version du 2026-11-03, relue le 2026-11-20. Format attendu : « 2 pages
 > (conception, pas entraînement) » (`SP/documents utiles/GRILLE-EVALUATION.md:31`).
 > L'énoncé : « on conçoit la base qui nourrit le modèle, l'entraînement n'est
-> pas exigé » (`SP/Readme.md:257`).
+> pas exigé » (`SP/Readme.md:256`).
 > Statuts : ✅ établi · 🟡 à décider · 💡 proposé.
 
 ## 1. Le problème posé
@@ -66,11 +66,11 @@ On lit les décisions déjà enregistrées. Plus la décision engage, plus le si
 |---|---|---|---|
 | Offre acceptée ou signée | `estate_proposed.proposition_status` ∈ `accepted`, `signed` | plaît | très forte |
 | Offre faite | `proposition_status = 'offer_pending'` | plaît | forte |
-| Client intéressé | `client_decision = 'interested'` (SUG5) | plaît | moyenne |
+| Client intéressé | `client_decision = 'interested'` | plaît | moyenne |
 | Bonne note du client | `client_priority` 4 ou 5 (échelle 1 à 5) | plaît | moyenne |
 | Visite du client | `visit.visitor_type = 'client'` | plaît un peu | faible |
-| Client refuse | `client_decision = 'declined'` + `decline_reason` (SUG5) | ne plaît pas | forte |
-| Chasseur écarte | `estate_searchrequest.status = 'dismissed'` (SUG4) | ne plaît pas, selon le chasseur | faible : c'est son avis, pas celui du client |
+| Client refuse | `client_decision = 'declined'` + `decline_reason` | ne plaît pas | forte |
+| Chasseur écarte | `estate_searchrequest.status = 'dismissed'` | ne plaît pas, selon le chasseur | faible : c'est son avis, pas celui du client |
 | Bien proposé sans réponse | `client_decision = 'pending'` | inconnu | exclu de l'apprentissage |
 
 - ✅ Le **motif de refus** (`too_expensive`, `too_far`, `too_small`,
@@ -80,7 +80,7 @@ On lit les décisions déjà enregistrées. Plus la décision engage, plus le si
 ## 5. Le modèle proposé
 
 - ✅ **v1 — des règles explicables** : les filtres, puis un score de bonus
-  (jardin, ascenseur, cave, garage, parking). Codée en SUG7 et SUG8.
+  (jardin, ascenseur, cave, garage, parking). Codée.
 - 💡 **v2 — apprendre à ordonner** (« learning to rank ») : un modèle de type
   gradient boosting prend les features 1 à 11 et apprend, du label, l'ordre qui
   plaît. Il remplace le score de bonus, pas les filtres.
@@ -98,8 +98,8 @@ On lit les décisions déjà enregistrées. Plus la décision engage, plus le si
   que le hasard du générateur, pas les goûts des clients.
 - ✅ **`recherches.csv` n'apprend rien** : il ne contient que des exemples
   positifs, fabriqués par les règles mêmes du générateur. Il sert à tester, pas à entraîner.
-- ✅ **Ce qui manque, c'est le label réel** : les colonnes de décision (SUG4,
-  SUG5) se posent maintenant, pour que les vraies décisions s'accumulent dès la mise en service.
+- ✅ **Ce qui manque, c'est le label réel** : les colonnes de décision (tri du chasseur,
+  décision du client) existent déjà, pour que les vraies décisions s'accumulent dès la mise en service.
 - 🟡 **Combien de décisions faut-il avant la v2 ?** Nous ne le savons pas : cela
   se mesure sur les premières données réelles, aucun chiffre n'est avancé ici.
 - 🟡 **Démarrage à froid** : une demande neuve n'a aucune décision ; la v1 reste

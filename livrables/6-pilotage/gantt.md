@@ -1,7 +1,7 @@
 # 📅 Planning (Gantt) et jalons
 
 > Livrable de pilotage (BC02) : « Planning (Gantt) + jalons — 1 schéma + légende » (`GRILLE-EVALUATION.md`).
-> Première version du 2026-11-19, rédigée par le Glaude, proposée par Gabriel et à ajuster par le groupe. Hypothèse : **2 à 3 jours de travail par semaine**.
+> Première version du 2026-11-19, rédigé avec l'assistant IA du projet, proposée par Gabriel et à ajuster par le groupe. Hypothèse : **2 à 3 jours de travail par semaine**.
 > Les dates viennent du projet lui-même (📜) : note de cadrage, pages Confluence, commits GitHub, chantiers clos. **Trois dates sont proposées** (💡), faute de date réelle.
 > Image : [`images/gantt.png`](images/gantt.png), rendue depuis le Mermaid ci-dessous.
 

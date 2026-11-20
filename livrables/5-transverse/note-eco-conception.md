@@ -2,7 +2,7 @@
 
 > **Note d'éco-conception** (transverse ; BC01, BC03, BC05).
 > Exigée par `GRILLE-EVALUATION.md` (StarterPack - BASE) : « 1-2 pages (dont arbitrage sauvegardes) ». Cas d'école imposé par le `Readme.md` du sujet : les **sauvegardes multi-fréquences** (minute, heure, 12 h, 24 h).
-> Version courte, 2026-11-19, rédigée par le Glaude à partir de la note de Gabriel (Confluence, page 33783821) et du code réel. **À relire par Gabriel.** Remplace la version longue (~2 200 mots, gardée comme document de travail : `md/equipe/note-eco-conception-confluence-v2.md`), qui contredisait la note 3V sur les photos.
+> Version courte, 2026-11-19, rédigé avec l'assistant IA du projet à partir de la note de Gabriel (Confluence, page 33783821) et du code réel. Remplace la version longue (~2 200 mots, gardée comme document de travail : `md/equipe/note-eco-conception-confluence-v2.md`), qui contredisait la note 3V sur les photos.
 
 ---
 
@@ -48,7 +48,7 @@ Le sujet propose quatre fréquences : à la minute, à l'heure, toutes les 12 h,
 
 ## 5. Les limites, dites franchement
 
-- ✅ **La copie quotidienne est codée** depuis le 2026-11-20 : DAG `db_backup` (dépôt `Fil-Rouge-API`, commit `83b7c0d`, 2026-11-20), 7 jours gardés. ⚠️ Les journaux WAL et la copie hors site ne le sont pas.
+- ✅ **La copie quotidienne est codée** depuis le 2026-11-20 : DAG `db_backup` (dépôt `Fil-Rouge-API`, 2026-11-20), 7 jours gardés. ⚠️ Les journaux WAL et la copie hors site ne le sont pas.
 - ⚠️ **La purge du brut n'est pas codée** : MinIO `bronze` garde tout ce qu'il reçoit.
 - ⚠️ **La suppression des logs après 6 mois** n'est pas codée non plus : la durée est fixée, pas appliquée.
 - ⚠️ **L'envoi des médias du chasseur dans MinIO** est prévu (ADR-015, ADR-051), pas codé : la table ne garde aujourd'hui qu'une adresse.

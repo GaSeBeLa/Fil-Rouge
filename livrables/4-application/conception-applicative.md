@@ -2,9 +2,9 @@
 
 > **Dossier de conception applicative + maquettes** (BC03).
 > Exigé par `GRILLE-EVALUATION.md` (StarterPack - BASE) : « Maquettes + patterns justifiés, 3-5 pages ».
-> État du code : dépôt `Fil-Rouge-API`, commit **`aa149c0`** (2026-11-20). **96 opérations**, recomptées par `app.openapi()` le 2026-11-20.
+> État du code : dépôt `Fil-Rouge-API` (2026-11-20). **96 opérations**, recomptées par `app.openapi()` le 2026-11-20.
 > Les maquettes : [`maquettes-espace-acquereur.html`](./maquettes-espace-acquereur.html), dans ce dossier.
-> Écrit par le Glaude le 2026-11-19, remis à jour le 2026-11-20, validé par Gabriel le 2026-11-20 (Discord).
+> Écrit avec l'assistant IA du projet le 2026-11-19, remis à jour le 2026-11-20, validé par Gabriel le 2026-11-20 (Discord).
 
 ---
 
@@ -38,7 +38,7 @@ Une requête traverse trois couches, **toujours dans le même ordre** (`API/src/
 | **Modèles d'entrée et de sortie séparés** | `UserCreate`, `UserUpdate`, `UserPublic` | `password` entre, mais **ne sort jamais** ; le PUT accepte des champs facultatifs |
 | **Erreurs métier traduites à un seul endroit** | `utils/exceptions.py`, puis `crud_router.py` | un service lève `NotFoundError`, `ConflictError` ou `ForbiddenError` ; seule la route les change en 404, 409 ou 403 |
 | **Fermé par défaut** | `require_roles` ; `read_roles`, `write_roles`, `create_roles` | une route qui ne dit pas ses rôles est **fermée à tous** (403), jamais ouverte par oubli |
-| **Middleware** | `conf/logging.py`, `access_log_middleware` ; `main.py`, `security_headers_middleware` | une ligne JSON par requête (méthode, chemin, code, durée, rôle), sans mot de passe, ni jeton, ni email ; les en-têtes de sécurité posés sur **chaque** réponse, à un seul endroit (SEC-HEAD, 2026-11-20) |
+| **Middleware** | `conf/logging.py`, `access_log_middleware` ; `main.py`, `security_headers_middleware` | une ligne JSON par requête (méthode, chemin, code, durée, rôle), sans mot de passe, ni jeton, ni email ; les en-têtes de sécurité posés sur **chaque** réponse, à un seul endroit (ajoutés le 2026-11-20) |
 | **La base juge** | les `CHECK` de `docker/init-v3/01` | les formats et les règles croisées vivent en SQL : ni l'API, ni un script SQL direct ne les contournent |
 
 ### Les choix écartés

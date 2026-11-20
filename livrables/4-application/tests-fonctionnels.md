@@ -2,7 +2,7 @@
 
 > **Plan de tests, partie fonctionnelle** (BC03). Complète `rapport-tests.md` (unitaires et intégration).
 > Exigé par `GRILLE-EVALUATION.md` : « Plan de tests (unitaires + fonctionnels) | Scénarios + rapports d'exécution ».
-> État : dépôt `Fil-Rouge-API`, commit `8ed2591` (2026-11-19) pour la matrice ; suite complète relancée le 2026-11-20 : **1 120 passed, 7 xfailed, 0 failed**.
+> État : dépôt `Fil-Rouge-API` (2026-11-19) pour la matrice ; suite complète relancée le 2026-11-20 : **1 120 passed, 7 xfailed, 0 failed**.
 > Matrice établie le 2026-11-19 : noms des tests lus, et corps lus pour les cas douteux ; 24 noms vérifiés par `grep`.
 
 ---
@@ -21,7 +21,7 @@
 
 - **Outils** : pytest et le `TestClient` de FastAPI (de vraies requêtes HTTP, sur la vraie application), sur la base PostgreSQL de test `fil_rouge_test`, annulée après le test. Pas de navigateur : le projet n'a pas de front.
 - **Le vrai contrôle d'accès** : pour les étapes du particulier, le test retire le compte simulé des autres tests. Il se connecte avec un vrai mot de passe et un **vrai jeton JWT**.
-- 🔎 **Ce test a trouvé un trou** : une demande du formulaire n'avait ni chasseur ni manager, et **aucune route ne pouvait la confier**. Corrigé le même jour (choix B de Sébastien : les managers voient les demandes « à prendre » et en prennent une ; `test_demande_a_prendre.py`, 5 tests, `f8b821e`).
+- 🔎 **Ce test a trouvé un trou** : une demande du formulaire n'avait ni chasseur ni manager, et **aucune route ne pouvait la confier**. Corrigé le même jour : les managers voient les demandes « à prendre » et en prennent une (`test_demande_a_prendre.py`, 5 tests).
 
 ## 2. La matrice : chaque scénario, et sa preuve
 
@@ -134,9 +134,9 @@ Les tests unitaires sont dans `tests/`, ceux d'intégration dans `tests/integrat
 - Dans le périmètre (➖ retirés), **59** scénarios : **57** couverts, par un test (51) ou par un choix écrit (6), soit **97 %**.
 - **Plus aucun trou** (❌) : les 3 scénarios sans test l'ont eu le 2026-11-19, et deux ont été écartés par écrit (rendez-vous, offre pré-remplie).
 - **Les tests ont trouvé 3 vrais trous**, réparés le même jour :
-  1. une demande du formulaire ne pouvait être confiée à personne (`f8b821e`) ;
-  2. après un refus du vendeur, le client ne pouvait pas refaire d'offre (`8ed2591`) ;
-  3. le montant annoncé au chasseur pouvait changer avant le paiement (`8ed2591`).
+  1. une demande du formulaire ne pouvait être confiée à personne ;
+  2. après un refus du vendeur, le client ne pouvait pas refaire d'offre ;
+  3. le montant annoncé au chasseur pouvait changer avant le paiement.
 - **Les 2 limites connues** (05:14, 07:37) demandent une tâche planifiée (Airflow) : écrites ici, codées s'il reste du temps.
 
 ## 4. Rejouer

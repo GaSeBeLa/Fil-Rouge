@@ -1,6 +1,6 @@
 # Livrable 4 — Le schéma du programme d'IA
 
-> Version du 2026-11-20 (brouillon du 2026-11-03 complété par le Glaude, à la demande de Gabriel) :
+> Version du 2026-11-20 (première version du 2026-11-03, complétée à la demande de Gabriel) :
 > le sujet veut un schéma « (chasseurs-IA, faisabilité, matching) » (`SP/Readme.md:256`) ; la faisabilité
 > et le chasseur-IA y sont ajoutés. Format attendu : « 1 schéma + description entrées/sorties »
 > (`SP/documents utiles/GRILLE-EVALUATION.md:32`).
@@ -30,7 +30,7 @@ Il se lit de gauche à droite, en quatre cases, puis la v2 en dessous :
 ### 1. Ce qui entre
 
 - **La demande du client** : son budget et le type de bien. Ses critères
-  (`criteria`) sont gardés version par version. Route : `POST /search-requests/submit` (✅ SUG3).
+  (`criteria`) sont gardés version par version. Route : `POST /search-requests/submit` (✅ codé).
 - **Les annonces**, indexées dans Elasticsearch (index `estates`).
 - Chaque nuit, Airflow importe les annonces à 2 h (`annonces_import`) et
   refait l'index à 4 h (`estates_index`) (✅ chantier FLX).
@@ -39,23 +39,23 @@ Il se lit de gauche à droite, en quatre cases, puis la v2 en dessous :
 
 - Des **filtres durs** écartent les biens qui ne conviennent pas, puis un
   **score bonus** classe les autres.
-- Route : `POST /search-requests/{id}/suggestions`, appelée par le chasseur (✅ SUG7, SUG8).
+- Route : `POST /search-requests/{id}/suggestions`, appelée par le chasseur (✅ codé).
 - ➡️ **Il n'apprend rien** : ce sont des règles écrites à la main.
-  L'énoncé demande de concevoir l'IA, pas d'entraîner un modèle (`SP/Readme.md:257`).
+  L'énoncé demande de concevoir l'IA, pas d'entraîner un modèle (`SP/Readme.md:256`).
 
 ### 3. Ce qui sort
 
 - **10 suggestions au plus**, ni vendues, ni déjà vues.
-- Elles sont enregistrées dans `estate_searchrequest` au statut `suggested` (✅ SUG8).
+- Elles sont enregistrées dans `estate_searchrequest` au statut `suggested` (✅ codé).
 - La machine n'écrit **jamais** directement chez le client.
 
 ### 4. Les décisions
 
-- **Le chasseur trie** : il garde (`kept`) ou il écarte (`dismissed`) (✅ SUG4).
+- **Le chasseur trie** : il garde (`kept`) ou il écarte (`dismissed`) (✅ codé).
   Seul un bien gardé peut être proposé au client.
 - **Le client décide** : `interested`, ou `declined` avec un motif : trop
-  cher, trop loin, trop petit, mauvais type, autre (✅ SUG5).
-- **S'il est intéressé** : offre (`POST /estate-proposed/{id}/offer`), puis vente (✅ SUG6).
+  cher, trop loin, trop petit, mauvais type, autre (✅ codé).
+- **S'il est intéressé** : offre (`POST /estate-proposed/{id}/offer`), puis vente (✅ codé).
 
 ### La v2, sur le papier
 
@@ -93,10 +93,10 @@ scénario `@rapport-faisabilite`, l.15-19) : un rapport « complet », et commen
 | Étape | Entrée | Sortie | Statut |
 |---|---|---|---|
 | Import et index | annonces CSV | lignes `estate`, documents de l'index `estates` | ✅ codé (chantier FLX) |
-| Dépôt de la demande | formulaire JSON du client | `search_request` + 1ʳᵉ version de `criteria` | ✅ codé en SUG3 |
-| Suggestion | dernière version de `criteria`, index `estates` | ≤ 10 lignes `estate_searchrequest` en `suggested` | ✅ codé en SUG7 et SUG8 |
-| Tri du chasseur | les `suggested` | `kept` ou `dismissed` | ✅ codé en SUG4 |
-| Décision du client | un bien proposé | `interested` ou `declined` + motif | ✅ codé en SUG5 |
+| Dépôt de la demande | formulaire JSON du client | `search_request` + 1ʳᵉ version de `criteria` | ✅ codé |
+| Suggestion | dernière version de `criteria`, index `estates` | ≤ 10 lignes `estate_searchrequest` en `suggested` | ✅ codé |
+| Tri du chasseur | les `suggested` | `kept` ou `dismissed` | ✅ codé |
+| Décision du client | un bien proposé | `interested` ou `declined` + motif | ✅ codé |
 | Reclassement v2 | décisions, offres et ventes passées | un ordre de pertinence | 💡 sur le papier |
 | Rapport de faisabilité | demande acceptée, biens, ventes et prix de la zone | faisable / difficile / irréaliste + piste de reformulation | 💡 sur le papier |
 | Chasseur-IA | demandes qui lui sont confiées | suggestions, comme un chasseur humain ; jamais d'offre ni de vente | 💡 droits réduits proposés (ADR-058), fiche `is_hunter_ai` ✅ en base |
@@ -116,9 +116,9 @@ L'énoncé liste les assistances voulues (`SP/user-stories/09_futur_chasseur_ass
 ## Les garde-fous
 
 - **Le chasseur reste dans la boucle** : seul un bien `kept` peut être proposé
-  au client (règle P19 renforcée, SUG4).
+  au client (règle renforcée dans l'API).
 - **Lecture seule pour l'IA** : tout outil d'IA branché sur la base passe par
-  le rôle `fil_rouge_reader` (chantier LOT, LOT12).
+  le rôle `fil_rouge_reader`, en lecture seule.
 - **Aucune donnée personnelle** dans les features : ni nom, ni âge, ni
   situation familiale. Le modèle juge un couple (demande, bien), pas une personne.
 - **Le chasseur IA a moins de droits qu'un humain** : il cherche et suggère ;

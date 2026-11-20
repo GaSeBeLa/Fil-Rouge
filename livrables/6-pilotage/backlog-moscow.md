@@ -1,8 +1,8 @@
 # 📋 Backlog priorisé (MoSCoW)
 
 > **Backlog priorisé** (phase 2, pilotage). Exigé par `GRILLE-EVALUATION.md` l. 72 : « backlog priorisé, MoSCoW ou équivalent ».
-> Rédigé le 2026-11-19 par le Glaude ; priorités retenues par l'équipe (Sébastien, 2026-11-19), le Product Owner n'ayant pas pu être joint.
-> Une ligne par scénario des user stories (`user-stories/00` à `10`). L'état vient de la matrice des tests (`livrables/4-application/tests-fonctionnels.md`, dépôt `Fil-Rouge-API` au commit `8ed2591`).
+> Rédigé le 2026-11-19 avec l'assistant IA du projet ; priorités retenues par l'équipe (Sébastien, 2026-11-19), le Product Owner n'ayant pas pu être joint.
+> Une ligne par scénario des user stories (`user-stories/00` à `10`). L'état vient de la matrice des tests (`livrables/4-application/tests-fonctionnels.md`, dépôt `Fil-Rouge-API` au).
 
 ---
 

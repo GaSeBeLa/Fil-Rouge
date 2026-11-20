@@ -1,8 +1,8 @@
 # Processus métier — de l'existant au système cible
 
 > Compétence : « Schématiser les processus métier en tenant compte des contraintes, de l'existant et des vulnérabilités » — schémas de processus, du parcours utilisateur au processus système (`documents utiles/TRACABILITE-COMPETENCES.md:49` et `:62`, StarterPack). Phases 2 à 4.
-> Version 2 du 2026-11-19, rédigée par le Glaude après la relecture de Gabriel (v1 : l'existant n'était pas dessiné, les failles et les contraintes n'étaient pas sur le schéma, des chemins manquaient).
-> Sources : le `Readme.md` du sujet (les parcours), l'audit de la phase 1 (`livrables/1-audit/`, failles `R01` à `R16`), les user stories (`user-stories/01` à `07`), le schéma v3 (valeurs des statuts, `docker/init-v3/01_create_fil_rouge_immobilier.sql`) et les routes réelles de l'API (`GET /openapi.json`, `Fil-Rouge-API` au commit `31094a8`).
+> Version 2 du 2026-11-19, rédigé avec l'assistant IA du projet après la relecture de Gabriel (v1 : l'existant n'était pas dessiné, les failles et les contraintes n'étaient pas sur le schéma, des chemins manquaient).
+> Sources : le `Readme.md` du sujet (les parcours), l'audit de la phase 1 (`livrables/1-audit/`, failles `R01` à `R16`), les user stories (`user-stories/01` à `07`), le schéma v3 (valeurs des statuts, `docker/init-v3/01_create_fil_rouge_immobilier.sql`) et les routes réelles de l'API (`GET /openapi.json`, `Fil-Rouge-API` au).
 > Images : [`images/processus-existant.png`](images/processus-existant.png), [`images/processus-particulier.png`](images/processus-particulier.png), [`images/processus-chasseur.png`](images/processus-chasseur.png).
 
 **Comment lire.**
