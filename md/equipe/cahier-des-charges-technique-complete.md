@@ -1,5 +1,5 @@
 > **Version complète, gardée en annexe.** Le livrable est la version courte : `livrables/2-modelisation/2.5-cahier-des-charges-technique.md` (2026-11-20).
-> ⚠️ **Numéros d'ADR décalés** dans cette annexe, par rapport au journal sur Confluence (vérifié le 2026-11-20) : images à version fixe = **ADR-014** (écrit 015), MinIO = **ADR-015** (écrit 016), Argon2 = **ADR-016** (écrit 017). La version courte du CDC est corrigée.
+> ⚠️ **Numéros d'ADR décalés** dans cette annexe : plusieurs sont écrits avec un cran de trop (par exemple 015 pour les images fixes, qui sont l'ADR-014 ; 011 pour les mandats parents, qui sont l'ADR-010). Vérifié le 2026-11-20 sur le journal de décisions : la version courte du CDC et `decisions/README.md` font foi.
 
 > **Copie de Confluence** — page « Cahier des Charges Technique » (id 25165826, version 14), espace GaSeBeLa1, copiée le 2026-11-19.
 > La source qui fait foi reste Confluence : https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/25165826/Cahier+des+Charges+Technique. Les images, schémas draw.io et encadrés ne passent pas dans l'export : ils sont signalés par une ligne « 🖼️ Image ou schéma non copié : <nom ou légende si connue> ».
