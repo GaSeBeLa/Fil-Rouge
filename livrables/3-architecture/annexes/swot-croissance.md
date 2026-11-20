@@ -20,7 +20,7 @@
 ### 💪 Forces *(interne, positif)*
 
 - **Un modèle qui couvre tout le métier** : 22 tables, des comptes aux paiements ; montants en euros ; les rôles séparés, l'erreur du mandat 13 devient impossible (3 triggers d'exclusivité).
-- **Des règles prouvées** : 1 124 tests passent (2026-11-20) ; les 33 éléments « Must » du backlog sont codés et testés (backlog MoSCoW).
+- **Des règles prouvées** : 1 125 tests passent (2026-11-20) ; les 33 éléments « Must » du backlog sont codés et testés (backlog MoSCoW).
 - **Des mandats datés** : fin = signature + 6 mois, contrôlée par la base ; plus de statut « actif » faux.
 - **Des critères structurés et versionnés**, avec la localisation de la demande : la base qui nourrira le matching existe.
 - **Une pile prête pour le volume** : import des annonces chaque nuit (Airflow), stockage brut (MinIO), recherche (Elasticsearch), logs (Kibana), schéma analytique séparé (OLAP).
