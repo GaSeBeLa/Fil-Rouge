@@ -61,14 +61,13 @@ flowchart LR
     style PAPIER fill:#f4f5f7,stroke:#97a0af
 ```
 
-Couleurs : la palette des tableaux Confluence de l'équipe (grille
-d'auto-évaluation, note de cadrage).
+Couleurs :
 
-- 🟥 Rouge `#ffbdad` : au moins un risque coté 7 à 9 (priorité absolue).
-- 🟨 Jaune `#fffae6` : risques cotés 4 à 6 (impératifs).
-- 🟩 Vert `#abf5d1` : risques cotés 1 à 3 (mineurs).
-- ⬜ Gris `#f4f5f7` : hors périmètre, ou ce qui n'existe pas.
-- 🟦 Bleu `#deebff` : le cadre du SI hérité.
+- 🟥 Rouge : au moins un risque coté 7 à 9 (priorité absolue).
+- 🟨 Jaune : risques cotés 4 à 6 (impératifs).
+- 🟩 Vert : risques cotés 1 à 3 (mineurs).
+- ⬜ Gris : hors périmètre, ou ce qui n'existe pas.
+- 🟦 Bleu : le cadre du SI hérité.
 - Les deux flèches `client_id` et `chasseur_id` vont vers **la même table** :
   c'est la cause structurelle de R01 et R06.
 
