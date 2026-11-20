@@ -103,4 +103,4 @@ Six écrans, dessinés dans [`maquettes-espace-acquereur.html`](./maquettes-espa
 ## 6. Limites
 
 - ⚠️ **Pas de front** : les maquettes sont des dessins, pas des écrans codés.
-- Le schéma a **22** tables ; **21** ont un routeur CRUD commun (compté le 2026-11-19). L'en-tête de `main.py`, signalé périmé le 2026-11-19, a été corrigé depuis (vérifié le 2026-11-20 : plus de « 11 fois »).
+- Le schéma a **22** tables ; **21** ont un routeur CRUD commun (compté le 2026-11-19).

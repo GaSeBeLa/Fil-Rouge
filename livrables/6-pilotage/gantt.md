@@ -56,4 +56,4 @@ gantt
 
 - Vert : fini · orange : en cours · bleu : à venir · losange : jalon · ligne rouge : aujourd'hui (date du rendu de l'image).
 - Les phases 1 et 2 se **chevauchent** (17 au 19/08) : on finissait l'audit en commençant le cadrage. Les phases 3 et 4 se mènent **en parallèle** depuis le 08/10.
-- La note de cadrage (§ 6) disait « phase 1 du 25 au 31 juillet » : les pages de l'audit datent d'août (05/08 à 19/08), d'où la fin au 19/08.
+- Les pages de l'audit datent d'août (05/08 à 19/08), d'où la fin de la phase 1 au 19/08.

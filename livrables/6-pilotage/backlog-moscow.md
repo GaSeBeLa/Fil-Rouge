@@ -1,8 +1,8 @@
 # 📋 Backlog priorisé (MoSCoW)
 
-> **Backlog priorisé** (phase 2, pilotage). Exigé par `GRILLE-EVALUATION.md` l. 72 : « backlog priorisé, MoSCoW ou équivalent ».
+> **Backlog priorisé** (phase 2, pilotage). Exigé par la grille du sujet (`GRILLE-EVALUATION.md` l. 72, « Prioriser les fonctionnalités : backlog priorisé ») ; la méthode « MoSCoW ou équivalent » vient de `TRACABILITE-COMPETENCES.md` l. 47.
 > Rédigé le 2026-11-19 avec l'assistant IA du projet ; priorités retenues par l'équipe (Sébastien, 2026-11-19), le Product Owner n'ayant pas pu être joint.
-> Une ligne par scénario des user stories (`user-stories/00` à `10`). L'état vient de la matrice des tests (`livrables/4-application/tests-fonctionnels.md`, dépôt `Fil-Rouge-API` au).
+> Une ligne par scénario des user stories (`user-stories/00` à `10`). L'état vient de la matrice des tests (`livrables/4-application/tests-fonctionnels.md`, état du 2026-11-19).
 
 ---
 
@@ -30,6 +30,8 @@
 | 00:30 | Non exclusif : un autre chasseur peut agir | Must | ✅ |
 | 00:37 | Mandat de 6 mois, renouvelable | Must | ✅ |
 | 00:43 | Honoraires collectés par le notaire | Must (calcul) · Won't (collecte) | ✅ calcul · ➖ collecte |
+| 00:51 | Barème selon montant, ancienneté et performance | Must | ✅ |
+| 00:58 | Performance recalculée sur des critères définis | Must | ✅ |
 
 ### 01 — Le particulier : demande et compte
 
@@ -129,11 +131,11 @@ Comptes faits sur les lignes du § 2 (une ligne = un élément ; la ligne 10 com
 
 | Priorité | Lignes | ✅ ou ✅📝 | 🟡 | ➖ |
 |---|---|---|---|---|
-| **Must** | 31 | 31 | 0 | 0 |
+| **Must** | 33 | 33 | 0 | 0 |
 | **Should** | 4 | 2 | 2 | 0 |
 | **Could** | 3 | 0 | 0 | 3 |
 | **Won't** | 7 | — | — | 7 |
-| **Total** | **45** | | | |
+| **Total** | **47** | | | |
 
 - ✅ **Tous les Must sont codés et testés.**
 - 🟡 Les 2 Should en partie (05:14, 07:37) demandent une tâche planifiée (Airflow) : écrites, codées s'il reste du temps.

@@ -7,7 +7,7 @@
 > Reprise en Mermaid, le 2026-11-19, de la page Confluence « Cartographie du
 > SI + analyse de risques » (Sébastien, 05/08/2026). Cette page ne contient que
 > 5 images : le schéma ci-dessous les **reconstruit** d'après son texte, le sujet
-> et les fixtures. 🟡 À comparer aux images avant de remplacer quoi que ce soit.
+> et les fixtures.
 >
 > Date de référence : **25/07/2026** (`SP/Readme.md:308`).
 
