@@ -1,4 +1,5 @@
 > **Version complète, gardée en annexe.** Le livrable est la version courte : `livrables/4-application/4.4-rapport-tests.md` (2026-11-20).
+> ⚠️ La liste des cas est **datée du 2026-10-12** (258 tests à cette date). Les chiffres à jour (1 127 tests, 2026-11-20) sont dans le livrable.
 
 # ✅ Rapport de tests — API Fil Rouge Immobilier
 
@@ -171,7 +172,7 @@ La longueur minimale de **12 caractères** est celle d'ADR-026, remis en vigueur
 
 #### Routes génériques — `tests/test_crud_router.py` (9)
 
-Valent pour les **20 ressources** de l'API, qui partagent le même router (`API/src/app/main.py` : 20 `include_router`).
+Valent pour les **20 ressources** de l'API au 2026-10-12, qui partagent le même router (`API/src/app/main.py` : 20 `include_router` à cette date ; 25 au 2026-11-20).
 
 | ID | Ce qu'on teste | Given | When | Then | Statut |
 | --- | --- | --- | --- | --- | --- |
