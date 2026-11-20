@@ -1,81 +1,45 @@
 # Note souveraineté et sécurité des données face à l'IA
 
-> Écrite le 2026-11-03 (fiche RGP4), d'après le brouillon Confluence
-> 63438854 et `md/securite/note-souverainete-securite-ia.md`. R : Laurence,
-> A : Gabriel (RACI proposé, RGPD-1). Format : 1 page
-> (`SP/documents utiles/GRILLE-EVALUATION.md:38`). Modèle :
-> `SP/documents utiles/SOUVERAINETE-SECURITE-IA.md`. D'accord avec le
-> registre : `registre-rgpd.md`. Statuts : ✅ établi · 🟡 ouvert · 💡 proposé.
-> ✅ Écart avec Confluence (N1 à N7) **validé par le groupe** le 2026-11-03
-> (Seb ; Laurence et Gabriel, rapporté par Seb) ; reporté sur Confluence
-> le 2026-11-03 (page 63438854, version 2).
+> Laurence (rédaction), Gabriel (validation) ; d'après la page Confluence id 63438854 — version courte du 2026-11-20. [Version complète](../../md/equipe/note-souverainete-securite-ia-complete.md). Registre : [registre-rgpd.md](registre-rgpd.md). ✅ établi · 🟡 ouvert · 💡 proposé.
 
-**Le principe.** L'IA voit le strict nécessaire, en lecture seule quand elle
-lit, et jamais une donnée personnelle en clair qui ne sert pas sa tâche.
-Quand elle agit, elle a moins de droits qu'un humain, et un humain engage.
+**Le principe.** L'IA voit le strict nécessaire, en lecture seule, et jamais une donnée personnelle qui ne sert pas sa tâche. Quand elle agit, elle a moins de droits qu'un humain, et un humain engage.
 
-## 1. Périmètre d'accès — qui voit quoi
+## 1. Ce que l'IA peut voir
 
-| Ressource | Accès accordé à l'IA | Justification |
+| Ressource | Accès de l'IA | Pourquoi |
 |---|---|---|
-| `estate`, `estate_price_history`, index `estates` | lecture | nécessaire au matching |
-| `criteria` de la demande confiée | lecture | nécessaire au matching |
-| `estate_searchrequest`, `estate_proposed` | lecture ; le moteur de suggestion n'écrit qu'en `suggested`. ⚠️ Un chasseur-IA a aujourd'hui les droits d'un chasseur humain : la restriction (ADR-058) est proposée, pas codée | un chasseur humain garde (`kept`) avant toute proposition |
-| `"user".password` | ✅ fermé au lecteur, colonne par colonne | aucun usage |
-| `estate_contact` (vendeur) | ✅ fermé au lecteur ; 💡 fermé au chasseur IA (ADR-058) | donnée d'un tiers (ADR-054) |
-| `payment` (montants, taux, score) | ✅ fermé au lecteur | données financières (ADR-027) |
-| comptes désactivés | ✅ invisibles au lecteur (politique par ligne) | ADR-027, point 7 |
+| biens, prix, critères de la demande confiée | lecture | nécessaire au matching (rapprocher demande et bien) |
+| biens suggérés et proposés | le moteur n'écrit qu'en « suggéré » | un chasseur humain garde (« retenu ») avant toute proposition |
+| mot de passe | ✅ fermé au compte lecture seule | aucun usage |
+| contact du vendeur | ✅ fermé au compte lecture seule ; 💡 fermé au chasseur IA | donnée d'un tiers (ADR-054) |
+| paiements, comptes désactivés | ✅ fermés au compte lecture seule | argent ; comptes fermés |
 | offre, vente, paiement, barème | 💡 interdits au chasseur IA | engager reste humain |
 
-- Le chasseur IA passe par l'API, avec un compte `hunter` à
-  `is_hunter_ai` vrai : droits réduits selon **ADR-058, proposé** (pas
-  accepté, pas codé ; RGPD-18).
-- ⚠️ **Le trou** : `fil_rouge_reader` (`SELECT` seul, `04_role-lecture-seule.sql`)
-  lit `client` et `hunter` en clair. Voulu pour un analyste humain, pas pour
-  une IA. 🟡 Parade : une IA lirait l'OLAP (ADR-027, l. 165) — mais
-  `fil_rouge_reader` n'a aucun droit sur `olap` (`init-v3/README.md:180`) :
-  il faudrait un rôle à part, cible v2.
+- ⚠️ **Le chasseur IA n'est pas encore bridé.** C'est un compte chasseur marqué « IA ». Ses droits réduits (ADR-058) sont **proposés, ni acceptés ni codés** : aujourd'hui, il a les droits d'un chasseur humain.
+- ⚠️ **Le trou.** Le compte lecture seule lit les fiches clients et chasseurs en clair : voulu pour un analyste humain, pas pour une IA. 🟡 Parade : une IA lirait la base d'analyse (OLAP), avec un rôle à part, cible v2.
 
-## 2. Masquage — anonymisation et pseudonymisation
+## 2. Masquage
 
-- ✅ **L'OLAP est pseudonymisé** (RGPD-13) : ni nom, ni email, ni téléphone,
-  ni adresse, ni rue, ni GPS (`08_olap.sql:54-57` ; inventaire RGP1 § 5).
-  Il garde `id_client` et `id_hunter` (`08_olap.sql:91`, `:100`) : une clé
-  de retour vers la base, donc pas une anonymisation. Gardé **10 ans**,
-  comme les ventes (RGPD-12).
-- ✅ **Le matching** n'utilise aucune donnée personnelle : il juge un
-  couple (demande, bien), pas une personne
-  (`livrables/4-application/conception-matching-features.md`, § 3).
-- ✅ **L'effacement** : `POST /users/{id}/anonymize`, sans `DELETE`
-  (ADR-049) ; la date de l'effacement n'est pas gardée (v2, RGPD-14).
-- 💡 Si un LLM arrive en v2 : il ne reçoit que les colonnes du bien et des
-  critères, **jamais** un texte libre (`comment_client`…, RGPD-8).
+- ✅ **L'OLAP est pseudonymisé** : ni nom, ni email, ni téléphone, ni adresse, ni GPS. Il garde les numéros client et chasseur : une clé de retour, donc pas une anonymisation. Gardé **10 ans**.
+- ✅ **Le matching** n'utilise aucune donnée personnelle : il juge un couple (demande, bien), pas une personne.
+- ✅ **L'effacement** anonymise, sans supprimer (ADR-049). La date de l'effacement n'est pas gardée (v2).
+- 💡 Si un LLM arrive en v2 : il ne reçoit que les colonnes du bien et des critères, **jamais** un texte libre.
 
-## 3. Souveraineté et localisation
+## 3. Souveraineté
 
-- ✅ **v1 : aucun LLM, tout en local** (RGPD-17). PostgreSQL,
-  Elasticsearch, MinIO, Airflow et Kibana sont des conteneurs
-  `docker compose` sur la machine du développeur : aucune donnée ne sort.
-- ✅ Le moteur de suggestion v1 est une requête Elasticsearch locale (SUG7,
-  SUG8) : aucun service externe.
-- 🟡 **v2 ouverte** : un LLM hébergé hors UE poserait la question du
-  transfert hors UE. Choix à faire alors : modèle hébergé dans l'UE, ou local.
-- 🟡 Le pays de l'hébergeur, le jour d'un déploiement (VPS), s'écrira ici.
+- ✅ **v1 : aucun LLM, tout en local.** Toute la pile tourne en conteneurs sur la machine du développeur : aucune donnée ne sort. Le moteur de suggestion reste local.
+- 🟡 **v2** : un LLM hébergé hors UE poserait la question du transfert. Choix alors : modèle hébergé dans l'UE, ou local.
 
-## 4. Journalisation et risques
+## 4. Journaux et risques
 
-- ✅ **Qui a fait quoi** : chaque appel à l'API est journalisé (FLX10),
-  sans mot de passe ni email, lu dans Kibana. Gardé **6 mois** (RGPD-11,
-  vote du 2026-11-03, CNIL). 🟡 Le compte Kibana reste à définir.
+- ✅ Chaque appel à l'API est journalisé, sans mot de passe ni email, lu dans Kibana, gardé **6 mois** (recommandation CNIL). 🟡 Le compte Kibana reste à définir.
 
 | Risque | Parade | État |
 |---|---|---|
 | requête destructrice | compte en lecture seule | ✅ codé |
 | données personnelles inutiles | OLAP pseudonymisé ; contact et paiement fermés | ✅ en partie (le trou du § 1) |
-| le chasseur IA engage seul | il cherche et suggère, un humain engage | 💡 ADR-058, proposé |
-| une suggestion part sans contrôle | `suggested`, puis `kept` par un humain | ✅ SUG4, SUG8 |
-| fuite par un LLM externe | aucun LLM en v1 ; v2 : colonnes minimales, UE ou local | 🟡 v2 |
+| le chasseur IA engage seul | il suggère, un humain engage | 💡 ADR-058, pas codé |
+| une suggestion part sans contrôle | « suggéré », puis « retenu » par un humain | ✅ codé |
+| fuite par un LLM externe | aucun LLM en v1 | 🟡 v2 |
 
-**Au jury, en une phrase.** « L'IA lit en lecture seule des données
-pseudonymisées, elle suggère sans jamais engager, un humain trie et signe,
-et rien ne quitte nos machines. »
+**En une phrase.** L'IA lit des données pseudonymisées, suggère sans engager ; un humain trie et signe, et rien ne quitte nos machines.

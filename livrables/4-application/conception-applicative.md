@@ -25,7 +25,7 @@ Une requête traverse trois couches, **toujours dans le même ordre** (`API/src/
 | **Repository** | `repositories/` | lire et écrire en base, par SQLModel | les règles, HTTP |
 
 - ➡️ Une couche ne parle qu'à **celle du dessous**. Le trajet complet d'une requête, avec ses codes 401, 422, 403, 404 et 200 : `livrables/3-architecture/02-trajet-requete.md`.
-- **Pourquoi** : on peut changer une règle métier sans toucher au HTTP, et **tester un service sans base**. Les 194 tests unitaires le font, avec une base factice (`rapport-tests.md`, § 3.1).
+- **Pourquoi** : on peut changer une règle métier sans toucher au HTTP, et **tester un service sans base**. Les 198 tests unitaires du socle le font, avec une base factice (`rapport-tests.md`, § 3).
 
 ## 3. Les patterns, et pourquoi chacun
 
