@@ -18,10 +18,10 @@ Le sujet propose quatre fréquences : à la minute, à l'heure, toutes les 12 h,
 |---|---|---|---|
 | Une copie complète à chaque minute | 1 minute | 1 440 copies par jour | ❌ |
 | Une copie par tranche (1 h, 12 h, 24 h) selon la table | 1 h à 24 h | 3 jeux de copies | 🟡 |
-| **Une copie complète par jour + les journaux de la base (WAL)** | **quelques minutes**, pour toutes les tables | 1 copie par jour + des journaux légers | ✅ **retenue** |
+| **Une copie complète par jour + les journaux de la base (WAL)** | **quelques minutes**, pour toutes les tables | 1 copie par jour + des journaux légers | ✅ **retenue** (copie quotidienne codée ; WAL pas encore) |
 
 - Les journaux de transactions (WAL) gardent chaque écriture : on rejoue la journée jusqu'à la minute voulue, sans stocker une copie à chaque minute.
-- **Rétention** : les durées de la note d'origine, **7, 30 et 90 jours**, selon la valeur des données. 90 jours est aussi le délai pendant lequel une donnée effacée (RGPD) reste dans une copie.
+- **Rétention** : visée, les durées de la note d'origine, **7, 30 et 90 jours**, selon la valeur des données ; codée aujourd'hui, **7 jours** pour toutes (DAG `db_backup`). 90 jours est aussi le délai pendant lequel une donnée effacée (RGPD) reste dans une copie.
 - 📏 **Mesuré le 2026-11-19** : une copie complète de la base de dev pèse **573 Ko** compressée, en 0,96 s (`pca-pra-plan-de-migration.md`, § 2.4). Le coût est donc minime aujourd'hui. À **22 à 133 Go** (projection de la note 3V à 2 ans), il faudra le revoir.
 - Mêmes règles que le PCA/PRA : les données contractuelles (`mandate`, `estate_proposed`, `sale`, `payment`, `visit`) sont les plus précieuses, et la copie quotidienne avec les WAL les couvre toutes.
 

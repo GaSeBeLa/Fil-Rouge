@@ -58,12 +58,15 @@ le sujet n'en donne aucune.
 
 | Donnée | RPO (perte tolérée) | RTO (reprise) | Lien |
 |---|---|---|---|
-| Contractuel et financier : `mandate`, `estate_proposed`, `sale`, `payment`, `visit` | **1 h** | **4 h** | Éco-conception : tranche horaire. ⚠️ Cette note (11 tables) ne cite pas `sale`, `payment` ni `visit` : à y ajouter |
+| Contractuel et financier : `mandate`, `estate_proposed`, `sale`, `payment`, `visit` | **1 h** | **4 h** | Éco-conception : données les plus précieuses |
 | Demandes et critères : `search_request`, `criteria` | **12 h** | 4 h | Tranche 12 h |
 | Référentiels : comptes, fiches, `estate` | **24 h** | 8 h | Tranche 24 h |
 | Index, OLAP, MinIO `gold` | sans objet | **24 h** (une nuit) | Refait par les DAG |
 
-Deux limites à dire :
+Trois limites à dire :
+- ⚠️ **Ces RPO sont visés, pas tenus aujourd'hui.** La sauvegarde codée (DAG
+  `db_backup`, 2026-11-20) est **quotidienne**, sans journaux WAL : le RPO réel
+  est de **24 h** pour toutes les tables. Le RPO de 1 h demande l'archivage des WAL.
 - 🟡 Le RTO suppose une base petite. La note 3V prévoit de 22 à 133 Go après
   2 ans : restaurer 133 Go prend des heures, pas des minutes. À ce volume,
   une restauration complète ne tient plus 4 h ; il faudra une réplique
@@ -102,7 +105,7 @@ Deux limites à dire :
    `init-v3/04` sur un volume neuf.
 6. **Vérifier l'intégrité** :
    - comptage des lignes par table, comparé à la sauvegarde ;
-   - `pytest` : la suite (1 116 tests réussis au 2026-11-19, commit `31094a8`) contrôle les règles et les
+   - `pytest` : la suite (1 120 tests réussis au 2026-11-20) contrôle les règles et les
      contraintes. ⚠️ Ses tests d'intégration tournent sur `fil_rouge_test`,
      pas sur la base restaurée : pour juger la copie, il faut les y pointer ;
    - `POST /auth/login` et `GET /auth/me` répondent.
@@ -191,7 +194,7 @@ développeurs doivent pointer vers la nouvelle API (route, clé d'API, jeton)
 | 5 | **Passage v2 → v3** | Les **50 migrations** `docker/migrations/v2-vers-v3/` par ordre de nom (de `03` à `53`, compté le 2026-11-19) | Chacune a son `COMMIT` (50 sur 50) ; plusieurs **s'arrêtent d'elles-mêmes** si le comptage ne correspond pas | Une migration échouée annule sa transaction ; reprendre à son numéro |
 | 6 | **Vérification** | `test_banc_v2_v3.py` : base migrée comparée à une base neuve de `init-v3/` (colonnes, contraintes, index, triggers, fonctions, nombre de lignes) | `1 passed` (mesuré à 9,2 s le 2026-10-14) ; sinon le diff | Ne pas basculer |
 | 7 | **Comptages** | Lignes avant/après, table par table (§ 3.1) | Aucune donnée perdue | Ne pas basculer |
-| 8 | **Bascule** | Rouvrir l'API ; créer l'Admin (`create_admin`) ; relancer les DAG | Fenêtre hors 2 h à 4 h (imports de nuit) | Voir ci-dessous |
+| 8 | **Bascule** | Rouvrir l'API ; créer l'Admin (`create_admin`) ; relancer les DAG | Fenêtre hors 1 h à 4 h (traitements de nuit) | Voir ci-dessous |
 
 **Retour arrière** : avant l'étape 8, il suffit d'abandonner la base neuve ;
 l'ancienne n'a pas bougé. Après la bascule, deux filets : (1) la sauvegarde
@@ -226,8 +229,8 @@ pendant une période à fixer (🟡).
 ## 5. À décider
 
 1. 🟡 RTO et RPO du § 1.3, par le Product Owner.
-2. 💡 Sauvegarde complète quotidienne + WAL, ou rester sur les tranches par
-   table de l'éco-conception ?
+2. ✅ Tranché : sauvegarde complète quotidienne + WAL (note d'éco-conception).
+   La copie quotidienne est codée (2026-11-20) ; l'archivage des WAL reste à faire.
 3. 💡 Où garder `docker/.env` et la liste des comptes effacés.
 4. 🟡 Date de bascule du site et de l'application métier.
 5. 🟡 Durée de garde de l'ancienne base en lecture seule.

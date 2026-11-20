@@ -30,11 +30,11 @@ Liens vers les preuves ajoutés le 19/11/2026. Chacun coche son niveau (NA / EC 
 | **BC03 — Concevoir & développer** | | | | |
 | Architecture applicative + maquettes | Dossier de conception → [Dossier de conception applicative](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/67305485) | | | |
 | Schématiser les processus métier | Schémas de processus → [Processus métier](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/67272805) | | | |
-| Environnement + réduction d'impact éco | Note d'environnement → ❌ note d'environnement : pas écrite ; s'en approche : [Pile Docker (schéma 04)](https://github.com/GaSeBeLa/Fil-Rouge/blob/main/livrables/3-architecture/04-pile-docker.md) | | | |
+| Environnement + réduction d'impact éco | Note d'environnement → [Note d'environnement technique](https://github.com/GaSeBeLa/Fil-Rouge/blob/main/livrables/3-architecture/note-environnement-technique.md) (2026-11-20) | | | |
 | Justifier les patterns | Dossier de conception → [Dossier de conception applicative](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/67305485) | | | |
 | Sécurité applicative | Code + note sécurité → [Note de sécurité applicative](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/67534880) | | | |
 | Scénarios de tests exécutés | Plan de tests + rapports → [Rapport de tests](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/67272708) · [Tests fonctionnels](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/67141669) | | | |
-| Suivi qualité automatisé | Pipeline CI + indicateurs → ❌ aucune pipeline CI : les 1 116 tests se lancent à la main | | | |
+| Suivi qualité automatisé | Pipeline CI + indicateurs → ❌ aucune pipeline CI : les 1 120 tests se lancent à la main | | | |
 | **Transverses** | | | | |
 | RGPD | Registre de traitement → [Registre RGPD](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/44826725) | | | |
 | Éco-conception | Note dédiée → [Note d'éco-conception](https://laurenceamethyste.atlassian.net/wiki/spaces/GaSeBeLa1/pages/33783821) | | | |
