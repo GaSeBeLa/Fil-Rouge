@@ -45,8 +45,9 @@ Appuis : [3 schémas des données](2-modelisation/annexes/) et le script de mesu
 | 3.4 | Schéma analytique (OLAP) et alimentation des données | [3.4-olap.md](3-architecture/3.4-olap.md) |
 | 3.5 | PCA / PRA et plan de migration | [3.5-pca-pra-plan-de-migration.md](3-architecture/3.5-pca-pra-plan-de-migration.md) |
 | 3.6 | Note d'environnement technique | [3.6-note-environnement-technique.md](3-architecture/3.6-note-environnement-technique.md) |
+| 3.7 | Note de qualité des données | [3.7-note-qualite-donnees.md](3-architecture/3.7-note-qualite-donnees.md) |
 
-Appuis : [4 schémas d'architecture, la SWOT de croissance, la mesure de charge](3-architecture/annexes/README.md).
+Appuis : [4 schémas d'architecture, la SWOT de croissance, les mesures de charge et de qualité](3-architecture/annexes/README.md).
 
 ## Phase 4 — Réaliser le parcours futur avec l'IA (BC03, BC05)
 

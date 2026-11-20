@@ -1,0 +1,46 @@
+== Source brute : 2556 annonces, 36 colonnes
+remplissage moyen des colonnes : 55.4 %
+   10.1 %  surface_m2
+   11.0 %  terrasse
+   15.8 %  cave
+   15.9 %  particulier
+   17.4 %  ascenseur
+   17.6 %  balcon
+   19.8 %  charges_mensuelles
+   21.4 %  calme
+   22.3 %  jardin
+   24.6 %  annee_construction
+   25.4 %  photos
+   31.2 %  meuble
+   37.5 %  lumineux
+   40.1 %  etage
+   40.1 %  contact.agence
+   41.1 %  exclusivite
+   48.9 %  contact.email
+   49.6 %  nb_chambres
+   50.6 %  adresse
+   50.6 %  latitude
+   50.6 %  longitude
+   60.3 %  contact.nom
+   63.5 %  dpe
+   70.1 %  contact.telephone
+   78.2 %  description
+   89.9 %  surface
+   91.5 %  nb_pieces
+  100.0 %  id
+  100.0 %  reference
+  100.0 %  recherche_ref
+  100.0 %  type_bien
+  100.0 %  titre
+  100.0 %  ville
+  100.0 %  code_postal
+  100.0 %  date_publication
+  100.0 %  prix
+formats de date de publication : {'horodatage Unix': 414, 'en toutes lettres': 409, 'JJ-MM-AAAA': 402, 'JJ/MM/AAAA': 434, 'AAAA-MM-JJThh:mm:ss': 439, 'AAAA-MM-JJ': 458}
+prix écrits avec « € » : 382
+surface : dans 1 seule des 2 colonnes 2556, dans les 2 0, aucune 0
+identifiants en double : 0 ; références en double : 0
+recherches : 5 ; annonces dont la recherche est inconnue : 0
+== Sortie normalisée : 2556 annonces, 50 colonnes
+remplissage moyen (hors « NULL ») : 70.2 %
+colonnes vides partout (5) : nb_bathrooms, nb_toilets, nb_swimming_pool, energetic_score, land_surface
