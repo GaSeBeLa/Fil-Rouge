@@ -27,10 +27,11 @@ modifiés**.
   `docker/.env` (voir `.env.exemple`), puis depuis `docker/`,
   `docker compose down -v && docker compose up -d` (⚠️ efface la base de dev
   locale), puis `bash docker/create_test_db.sh`.
-- L'API expose un CRUD complet en trois couches (routes / services /
-  repositories) sur **21 des 22 tables** ; le routeur commun revalide l'entrée
-  (`422` avant la base). 91 opérations vérifiées en `200` contre la base
-  (mesuré avant LOT6). **1 120 passed, 7 xfailed** (au 2026-11-20, après les en-têtes de sécurité ; rapport du 2026-11-19, 1 116 :
+- L'API expose, en trois couches (routes / services / repositories), la
+  lecture, la création et la modification sur **21 des 22 tables**, **sans
+  suppression** (ADR-049 : un compte se désactive puis s'anonymise) ; le routeur
+  commun revalide l'entrée (`422` avant la base). **96 opérations** (recomptées
+  le 2026-11-20, livrable 4.1). **1 120 passed, 7 xfailed** (au 2026-11-20, après les en-têtes de sécurité ; rapport du 2026-11-19, 1 116 :
   `livrables/4-application/4.4-rapport-tests.md`), unitaires sans base et intégration sur la base de test isolée
   `fil_rouge_test` (`docker/create_test_db.sh`) — voir `API/README.md` § Tests.
 - **Les droits sont codés** (chantier DRO, 2026-10-13) : le rôle, table par
