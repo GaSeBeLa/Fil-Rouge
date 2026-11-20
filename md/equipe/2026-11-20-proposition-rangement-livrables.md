@@ -31,11 +31,11 @@ Statut : ✅ existe · ⚠️ incomplet ou hors de `livrables/` · ❌ manque.
 |---|---|---|---|---|
 | 4 | Étude d'opportunité | R, G, T | `1-audit/etude-opportunite.md` | ✅ (rangé en phase 1) |
 | 5 | Note stratégique | G, T | `2-modelisation/note-strategique.md` | ✅ |
-| 6 | Note de cadrage | R, G, T | `6-pilotage/note-de-cadrage.md` | ⚠️ « À compléter » |
+| 6 | Note de cadrage | R, G, T | `6-pilotage/note-de-cadrage.md` | ⚠️ pas de validation écrite (valideur : Sébastien) ; cibles des indicateurs « à valider » |
 | 7 | Backlog priorisé (MoSCoW) | T | `6-pilotage/backlog-moscow.md` | ✅ |
 | 8 | Cahier des charges technique | R, T | `2-modelisation/cahier-des-charges-technique.md` | ✅ |
 | 9 | MCD / MLD cible | R, G, T | `2-modelisation/mcd.md` | ⚠️ vide (travail humain) |
-| 10 | `migration.sql` | R, G, T | dans **Fil-Rouge-API** `docker/migrations/v2-vers-v3/` | ⚠️ aucun renvoi depuis `livrables/` |
+| 10 | `migration.sql` | R, G, T | dans **Fil-Rouge-API** `docker/migrations/v2-vers-v3/` | ⚠️ aucun renvoi depuis `livrables/` → copie demandée (Gabriel, 20/11) |
 | 11 | Note d'indexation (EXPLAIN avant/après) | G, T | `2-modelisation/note-indexation.md` | ✅ |
 
 ### Phase 3 — Absorber la croissance (BC01, BC02, BC05)
@@ -46,7 +46,7 @@ Statut : ✅ existe · ⚠️ incomplet ou hors de `livrables/` · ❌ manque.
 | 13 | Dossier d'architecture | R, G, T | `3-architecture/dossier-architecture.md` | ✅ |
 | 14 | Matrice de décision | R, G, T | `3-architecture/matrice-decision-architecture.md` | ✅ |
 | 15 | Schéma OLAP + alimentation | R, G, T | `2-modelisation/olap.md` | ✅ (rangé en phase 2) |
-| 16 | Note qualité des données | T | `normalised/rapport_anomalies.txt` | ⚠️ hors de `livrables/` |
+| 16 | Note qualité des données | T | `normalised/rapport_anomalies.txt` | ⚠️ hors de `livrables/` → copie demandée (Gabriel, 20/11) |
 | 17 | PCA / PRA | R, T | `3-architecture/pca-pra-plan-de-migration.md` | ✅ |
 | 18 | Plan de migration | R | même fichier que 17 | ✅ |
 | 19 | Note d'environnement technique | T | `3-architecture/note-environnement-technique.md` | ✅ |
@@ -79,9 +79,9 @@ Statut : ✅ existe · ⚠️ incomplet ou hors de `livrables/` · ❌ manque.
 |---|---|---|---|---|
 | 32 | Planning (Gantt) + jalons | G, T | `6-pilotage/gantt.md` | ⚠️ 3 dates à confirmer |
 | 33 | Matrice des risques + mitigation | G, T | dans la note de cadrage (tableau des risques) | ✅ (pas de fichier à part) |
-| 34 | RACI | G, T | `6-pilotage/raci.md` | ⚠️ « À compléter » |
+| 34 | RACI | G, T | `6-pilotage/raci.md` | ⚠️ « À compléter » : proposition des phases 2-4 vue par 2 membres sur 4 ; R et A du dossier professionnel à désigner |
 | 35 | Comptes rendus d'ateliers | T | — | ❌ |
-| 36 | Grille d'auto-évaluation | R, G | `6-pilotage/grille-auto-evaluation.md` | ⚠️ pas remplie |
+| 36 | Grille d'auto-évaluation | R, G | `6-pilotage/grille-auto-evaluation.md` | ⚠️ pas remplie (« pas grave », Gabriel, 20/11) |
 
 **Compte** : 36 lignes ; ✅ 27 · ⚠️ 7 · ❌ 2.
 
