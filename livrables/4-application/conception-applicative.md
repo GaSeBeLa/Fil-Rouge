@@ -2,9 +2,9 @@
 
 > **Dossier de conception applicative + maquettes** (BC03).
 > Exigé par `GRILLE-EVALUATION.md` (StarterPack - BASE) : « Maquettes + patterns justifiés, 3-5 pages ».
-> État du code : dépôt `Fil-Rouge-API`, commit **`db2ae3c`** (2026-11-19). **96 opérations**, recomptées par `app.openapi()`.
+> État du code : dépôt `Fil-Rouge-API`, commit **`aa149c0`** (2026-11-20). **96 opérations**, recomptées par `app.openapi()` le 2026-11-20.
 > Les maquettes : [`maquettes-espace-acquereur.html`](./maquettes-espace-acquereur.html), dans ce dossier.
-> Brouillon du Glaude, **à relire par le groupe**.
+> Écrit par le Glaude le 2026-11-19, remis à jour le 2026-11-20. Contenu complet ; **reste la validation du groupe**.
 
 ---
 
@@ -38,7 +38,7 @@ Une requête traverse trois couches, **toujours dans le même ordre** (`API/src/
 | **Modèles d'entrée et de sortie séparés** | `UserCreate`, `UserUpdate`, `UserPublic` | `password` entre, mais **ne sort jamais** ; le PUT accepte des champs facultatifs |
 | **Erreurs métier traduites à un seul endroit** | `utils/exceptions.py`, puis `crud_router.py` | un service lève `NotFoundError`, `ConflictError` ou `ForbiddenError` ; seule la route les change en 404, 409 ou 403 |
 | **Fermé par défaut** | `require_roles` ; `read_roles`, `write_roles`, `create_roles` | une route qui ne dit pas ses rôles est **fermée à tous** (403), jamais ouverte par oubli |
-| **Middleware** | `conf/logging.py`, `access_log_middleware` | une ligne JSON par requête (méthode, chemin, code, durée, rôle), sans mot de passe, ni jeton, ni email |
+| **Middleware** | `conf/logging.py`, `access_log_middleware` ; `main.py`, `security_headers_middleware` | une ligne JSON par requête (méthode, chemin, code, durée, rôle), sans mot de passe, ni jeton, ni email ; les en-têtes de sécurité posés sur **chaque** réponse, à un seul endroit (SEC-HEAD, 2026-11-20) |
 | **La base juge** | les `CHECK` de `docker/init-v3/01` | les formats et les règles croisées vivent en SQL : ni l'API, ni un script SQL direct ne les contournent |
 
 ### Les choix écartés
@@ -103,4 +103,4 @@ Six écrans, dessinés dans [`maquettes-espace-acquereur.html`](./maquettes-espa
 ## 6. Limites
 
 - ⚠️ **Pas de front** : les maquettes sont des dessins, pas des écrans codés.
-- ⚠️ L'en-tête de `main.py` est en partie périmé : « 11 fois », et « pas encore nécessaire » pour le hachage, qui est fait depuis (`UserService`). Le schéma a **22** tables ; **21** ont un routeur CRUD commun (compté le 2026-11-19).
+- Le schéma a **22** tables ; **21** ont un routeur CRUD commun (compté le 2026-11-19). L'en-tête de `main.py`, signalé périmé le 2026-11-19, a été corrigé depuis (vérifié le 2026-11-20 : plus de « 11 fois »).
