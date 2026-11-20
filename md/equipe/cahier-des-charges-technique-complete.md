@@ -363,7 +363,7 @@ Référence : `PLAN-DE-TESTS.md`.
 
 ### 10.1 Couverture des scénarios Gherkin
 
-Vérification effectuée scénario par scénario sur les 10 fichiers `.feature` : **49 scénarios, 49 couverts**.
+Vérification effectuée scénario par scénario sur les 10 fichiers `.feature` : **49 scénarios, 49 couverts**. ⚠️ Compte du 2026-09-06 ; au 2026-11-20, la matrice des tests fonctionnels compte 80 scénarios, dont 57 couverts sur les 59 du périmètre (`livrables/4-application/4.3-tests-fonctionnels.md`).
 
 | Fichier | Scénarios | Exigences couvrantes |
 | --- | --- | --- |
