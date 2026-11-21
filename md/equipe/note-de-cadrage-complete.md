@@ -149,7 +149,7 @@ _Pour les rôles et responsabilités des parties prenantes du projet, voir le_ `
 
 * **Humaines** : une équipe de 4 data engineers (Sébastien, Laurence, Békanty, Gabriel), qui reprend le SI de la société de chasse immobilière après le consultant précédent ; le Product Owner représente l'entreprise.
 * **Techniques** : nos ordinateurs, et une pile Docker locale : PostgreSQL, l'API, MinIO, Airflow, Elasticsearch, Logstash, Kibana.
-* **Outils de travail** : GitHub (code, et un kanban GitHub Projects), Confluence (documentation), Discord (échanges), un assistant IA (Claude) pour aider à coder et à relire.
+* **Outils de travail** : GitHub (code, et un kanban GitHub Projects), Confluence (documentation), Discord (échanges), et un agent IA (Claude Code), installé sur le poste de Sébastien et relié au serveur Discord : chaque membre lui donne ses consignes par message, l'agent écrit le code et fait les commits, et chaque sortie est relue.
 * **Budget** : non communiqué par l'entreprise (à revoir si le Product Owner en donne un). Les outils utilisés sont gratuits.
 
 ---
@@ -193,7 +193,7 @@ Sources : pages « Audit du système d'information » et « Registre des anomali
 | Cote | Risque | Impact | Parade envisagée |
 | --- | --- | --- | --- |
 | 🟨 P2 × I2 = 4 | Un membre absent ou surchargé | des livrables en retard | le RACI répartit le travail ; chacun a un remplaçant qui valide (A) |
-| 🟥 P3 × I3 = 9 — 88 % des commits sont de Sébastien (645 sur 729, dépôts Fil-Rouge et Fil-Rouge-API, au 19/11) | Le travail repose trop sur une personne | un oral fragile, une charge inégale | répartir les livrables manquants (RACI du 03/11) ; chacun relit les parties des autres |
+| 🟥 P3 × I3 = 9 — 88 % des commits (645 sur 729, dépôts Fil-Rouge et Fil-Rouge-API, au 19/11) partent du poste de Sébastien, où tourne l'agent Claude Code piloté par les quatre membres via Discord | Tout passe par une seule machine, et le code est écrit par un agent | travail bloqué si ce poste s'arrête ; un code que chacun doit pouvoir expliquer à l'oral ; un historique Git qui ne dit pas qui a demandé quoi | relecture croisée de ce que produit l'agent ; livrables répartis par le RACI du 03/11 ; à terme, agent sur une machine partagée et auteur de la consigne noté dans chaque commit |
 | 🟩 P1 × I3 = 3 — restauration testée le 19/11 (2,82 s, 0 écart) | Perdre des données ou du travail | des jours de travail perdus | tout est sur GitHub et Confluence ; sauvegardes et plan de reprise (PCA/PRA) |
 | 🟩 P1 × I3 = 3 — données fictives ; droits par rôle testés | Données personnelles mal protégées | non-conformité RGPD | registre RGPD, droits par rôle, compte en lecture seule, données pseudonymisées |
 | 🟨 P3 × I2 = 6 — erreurs constatées et corrigées à la relecture le 19/11 | L'assistant IA se trompe | un livrable faux | relire chaque sortie, tout vérifier contre le sujet et le code |
