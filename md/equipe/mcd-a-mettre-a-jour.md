@@ -1,7 +1,7 @@
 # MCD — ce qu'il reste à mettre à jour (TODO)
 
 > ✅ **§ 2 réglé le 2026-11-23** par Sébastien, à la main : **MCD v15, MLD v17, MPD v15** (dossier `vrac/`, hors dépôt). Les trois collent à la base en marche (22 tables, 43 clés étrangères), relus par script et à l'œil sur l'image. La liste détaillée de ces retouches est dans `vrac/retouches-v12.md`, hors dépôt.
-> ⬜ **Reste ouvert : § 3**, les justifications à écrire sous le schéma, et § 4.2, mettre les schémas finaux dans le dépôt (Confluence n'est plus mis à jour depuis le 2026-11-20).
+> ✅ **§ 3 et § 4 réglés le 2026-11-23** : images copiées par Sébastien dans `livrables/2-modelisation/annexes/`, justifications écrites par le Glaude (accord de Sébastien) dans `livrables/2-modelisation/mcd.md`, à relire par l'équipe. Les numéros d'ADR et deux raisons de la liste du § 3 ci-dessous étaient faux : la version juste est dans `mcd.md`.
 
 > Liste de travail du 2026-11-19, rédigée par le Glaude à la demande de Sébastien. **Le Glaude ne touche pas au schéma** : la mise en page se fait à la main, dans draw.io.
 > MCD comparé : `MCD - 3 11 5.drawio.xml` (03/11/2026, dossier `vrac/` hors dépôt), lu par script : ses entités, ses associations, et les cardinalités posées sur chaque lien.
@@ -70,6 +70,6 @@ Une phrase par choix débattu, avec sa source. C'est la moitié du livrable (« 
 ## 4. Ensuite
 
 1. ✅ Corriger le draw.io (§ 2), à la main (fait le 2026-11-23).
-2. ⬜ Exporter le PNG des trois schémas et les mettre dans le dépôt (Confluence n'est plus mis à jour depuis le 2026-11-20).
-3. ⬜ Écrire les justifications (§ 3) sous le schéma.
+2. ✅ Exporter le PNG des trois schémas et les mettre dans le dépôt (Confluence n'est plus mis à jour depuis le 2026-11-20).
+3. ✅ Écrire les justifications (§ 3) sous le schéma (`livrables/2-modelisation/mcd.md`, 2026-11-23).
 4. ✅ Refaire la comparaison par script, pour vérifier qu'il ne reste rien (fait le 2026-11-23).

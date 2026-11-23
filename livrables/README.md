@@ -30,7 +30,7 @@ La liste est tirée de trois documents du sujet : le `Readme.md` (livrables par 
 | 2.3 | Note de cadrage, avec la matrice des risques et leur mitigation (§ 9) | [2.3-note-de-cadrage.md](2-modelisation/2.3-note-de-cadrage.md) |
 | 2.4 | Backlog priorisé (MoSCoW) | [2.4-backlog-moscow.md](2-modelisation/2.4-backlog-moscow.md) |
 | 2.5 | Cahier des charges technique | [2.5-cahier-des-charges-technique.md](2-modelisation/2.5-cahier-des-charges-technique.md) |
-| 2.6 | MCD / MLD cible | [mcd.md](2-modelisation/mcd.md) |
+| 2.6 | MCD / MLD / MPD cibles, avec les justifications des choix | [mcd.md](2-modelisation/mcd.md) |
 | 2.7 | Script de migration (`migration.sql`) | [2.7-migration.sql](2-modelisation/2.7-migration.sql) — copie ; la source est dans le dépôt de l'API |
 | 2.8 | Note d'indexation (EXPLAIN avant/après) | [2.8-note-indexation.md](2-modelisation/2.8-note-indexation.md) |
 
