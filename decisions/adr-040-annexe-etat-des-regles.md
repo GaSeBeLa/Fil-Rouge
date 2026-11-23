@@ -76,7 +76,7 @@ Sébastien le 2026-10-09.
 | C-b | Normaliser un code postal : majuscules, espaces en bord, préfixe `L-`. | ADR-021, Conséquences ; ADR-022, Conséquences | ❌ pas codé |
 | C-c | Un mandat exclusif ne finit pas `'lost'`. | ADR-024, Questions tranchées n° 3 | ❌ pas codé. 💡 ADR-024 propose un `CHECK`, à décider par le groupe. |
 | C-d | L'API calcule `ends_at` (signature + 6 mois). | ADR-039 ; `01:482-484` | ❌ pas calculé. Le `CHECK chk_mandate_six_months` refuse une mauvaise valeur ✅. |
-| C-e | Faire expirer un mandat fini. | `docker/init-v3/02_migration.sql:236-237` (« les faire expirer revient à l'application ») | ❌ pas codé |
+| C-e | Faire expirer un mandat fini. | `docker/init-v3/02_migration.sql:236-237` (« les faire expirer revient à l'application ») | ✅ codé le 23/11/2026 : DAG Airflow `mandate_expiry`, chaque nuit (Fil-Rouge-API `airflow/src/mandates/expiry.py`, choix MAND-EXP) ; la note de performance `'mandate_expired'` reste à faire (PERF-EXP) |
 | C-f | La cohérence d'une version de réglages : poids, plancher et plafond, forme des paliers. | ADR-034, Conséquences (💡 proposé) | ❌ pas codé |
 
 ## Hors API, pour mémoire : deux `CHECK` attendus
