@@ -54,9 +54,9 @@ Déjà corrigés depuis le 03/11 : ✅ SearchRequest — Hunter et — RealEstat
 Une phrase par choix débattu, avec sa source. C'est la moitié du livrable (« justifications des choix débattus »).
 
 - ⬜ **Un compte, et une fiche par rôle** (User + Client, Hunter, RealEstateManager) : l'audit a trouvé un chasseur enregistré comme client (R02) ; une fiche par rôle, et un trigger qui interdit deux fiches au même compte (ADR-005, chantier PRF).
-- ⬜ **Des critères versionnés** (Criteria — Criteria, « Follows ») : le chasseur requalifie la recherche sans perdre l'historique (ADR-014).
-- ⬜ **Un mandat qui en renouvelle un autre** (Mandate — Mandate, « Renews ») : la durée de 6 mois est renouvelable ; le nombre de renouvellements se lit dans la chaîne (ADR-011).
-- ⬜ **La date de fin stockée** (`mandate.ends_at`), contrôlée à signature + 6 mois (ADR-018).
+- ⬜ **Des critères versionnés** (Criteria — Criteria, « Follows ») : le chasseur requalifie la recherche sans perdre l'historique (ADR-013, relation réflexive).
+- ⬜ **Un mandat qui en renouvelle un autre** (Mandate — Mandate, « Renews ») : la durée de 6 mois est renouvelable ; le nombre de renouvellements se lit dans la chaîne (ADR-010, ADR-013, ADR-050).
+- ⬜ **La date de fin stockée** (`mandate.ends_at`), contrôlée à signature + 6 mois (ADR-023).
 - ⬜ **Deux liens bien ↔ demande, deux rôles** : Estate_SearchRequest = le bien trouvé pour la demande, avec l'avis du chasseur ; EstateProposed = le bien proposé au client sous mandat, avec son offre.
 - ⬜ **Une vente au plus par mandat, et par bien** (Sale 0,1 des deux côtés) : un bien ne se vend qu'une fois (P37 de l'audit).
 - ⬜ **Le paiement figé** (Payment — HunterRateParameters, CommissionScale) : le paiement garde les paramètres en vigueur le jour du calcul, pour qu'un changement de barème ne réécrive pas le passé.
