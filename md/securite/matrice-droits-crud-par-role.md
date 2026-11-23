@@ -26,7 +26,7 @@
 * **« Le sien » se lit par le numéro de la fiche** (`client.id`,
   `hunter.id`, `real_estate_manager.id`), pas par celui du compte : les 11
   `id_client`, `id_hunter`, `id_realestatemanager` visent la fiche (PRF2).
-* **96 opérations** dans l'API, recomptées le 2026-11-19 par `app.openapi()` (après l'activation du compte par le particulier).
+* **97 opérations** dans l'API, recomptées le 2026-11-23 par `app.openapi()` (après la note des mandats expirés).
 * ✅ **Codé : le premier contrôle**, le rôle. Fermé par défaut : chaque route
   dit quels rôles passent, les autres reçoivent `403` (fiche DRO1). Les rôles
   suivent l'annexe d'ADR-027, case par case ; `test_droits_par_role.py` les
@@ -87,11 +87,12 @@ Sortie brute de l'outil, recopiée telle quelle :
 | `POST /users/{item_id}/anonymize` | Admin |
 | `POST /users/{item_id}/activation-code` | Admin, Manager d'une demande du client (2026-11-19) |
 | `POST /estate-contacts/anonymize-expired` | Admin |
+| `POST /hunter-performances/expired-mandates` | Admin (choix PERF-EXP, 2026-11-23) |
 | `POST /sales/{item_id}/payment` | Admin |
 | `POST /estate-proposed/{item_id}/offer` | Client du mandat (fiche SUG6) |
 | `POST /search-requests/{item_id}/suggestions` | Hunter de la demande (fiche SUG8) |
 
-96 opérations relevées (recompte du 2026-11-19).
+97 opérations relevées (recompte du 2026-11-23).
 
 **Refaire le relevé** : le tableau sort de
 `docker/tools/print_rights_matrix.py`, dans le dépôt Fil-Rouge-API, depuis
