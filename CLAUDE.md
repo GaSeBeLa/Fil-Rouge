@@ -67,7 +67,7 @@ modifiés**.
 5. **Aucun secret ni `.env` dans git**, aucun chemin absolu dans le code.
 
 **Tout vit sur GitHub depuis le 2026-11-20** (choix de Gabriel) : les ADR sont dans
-`decisions/` (69 fichiers, copiés de Confluence, index `decisions/README.md`),
+`decisions/` (71 fichiers, copiés de Confluence puis complétés, index `decisions/README.md`),
 et le dépôt fait foi. Confluence n'est plus mis à jour ; aucun livrable n'y renvoie.
 
 Prose et commentaires de code en français ; noms de code en anglais.

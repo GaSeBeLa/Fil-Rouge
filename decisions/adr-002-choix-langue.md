@@ -3,7 +3,7 @@
 > Copié de Confluence (page 52592750, espace GaSeBeLa1) le 2026-11-20. Depuis cette date, ce fichier du dépôt fait foi.
 
 **Date :** 03/08/2026
-**Statut :** accepté
+**Statut :** accepté ; le point « commentaires de code » est remplacé par ADR-066 (23/11/2026) : les commentaires s'écrivent en français.
 **Décideurs :** L'équipe projet
 
 **Contexte :** Dans le système d'informations actuel, les noms des tables et attributs sont en français (`secteurs`, `utilisateurs`, `mandats`...). À terme, l'agence GaSeBeLa envisage une dimension internationale (France, DROM, puis Espagne, Allemagne, Royaume-Uni, Irlande, BeNeLux, Italie, Suisse). Se pose la question de la langue à utiliser pour le code, les schémas et la documentation technique du modèle cible.

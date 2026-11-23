@@ -261,7 +261,7 @@ _Source :_ `README` — Le futur du parcours utilisateur, Le chasseur ; `US-09`
 | --- | --- | --- |
 | SGBD | **PostgreSQL**. Tout le SQL du projet est écrit en dialecte PostgreSQL. SQLite est écarté (modèle embarqué mono-écrivain) ; MySQL/MariaDB est écarté après comparaison pondérée. | `ADR-001` |
 | Données de départ | Les fichiers de `fixtures/` représentent l'existant et **ne doivent pas être modifiés** : la migration part d'eux. `fixtures/PgSQL.sql` est la source de vérité ; `fixtures/MySQL.sql` sert de référence de lecture. | `README` — Règles du jeu ; `ADR-001` |
-| Langue | **Anglais** pour le code, les schémas de données et les commentaires de code. Le français reste la langue des échanges métier et de la documentation de contexte. Un glossaire de correspondance FR/EN est maintenu : `livrables/2-modelisation/annexes/glossaire-fr-en.md`, généré depuis le schéma (2026-11-23). | `ADR-002` |
+| Langue | **Anglais** pour les noms du code et les schémas de données. **Français** pour les commentaires de code et les docstrings (ADR-066, qui remplace ADR-002 sur ce point), comme pour les échanges métier et la documentation de contexte. Un glossaire de correspondance FR/EN est maintenu : `livrables/2-modelisation/annexes/glossaire-fr-en.md`, généré depuis le schéma (2026-11-23). | `ADR-002`, `ADR-066` |
 | Méthodologie de modélisation | **Merise** — MCD, MLD, MPD, avec cardinalités complètes. | `README` — Livrables |
 | Stockage objet | **MinIO**, S3-compatible, auto-hébergé, avec 4 buckets `bronze` / `silver` / `gold` / `quarantine` créés automatiquement au démarrage. | `ADR-016` |
 | Conteneurisation | Toutes les images Docker sont **pinnées** sur une version fixe. Le tag `latest` est interdit. | `ADR-015` |

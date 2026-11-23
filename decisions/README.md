@@ -1,12 +1,12 @@
 # Journal de décisions (ADR)
 
-Les 65 décisions d'architecture du projet (ADR-001 à ADR-065), avec deux annexes et deux versions anciennes gardées pour l'historique.
+Les 66 décisions d'architecture du projet (ADR-001 à ADR-066), avec deux annexes et deux versions anciennes gardées pour l'historique.
 Copiées de l'espace de travail de l'équipe le 2026-11-20 : **depuis cette date, ce dossier fait foi**. Les brouillons de travail de certains ADR restent dans `md/adr/`.
 
 | ADR | Statut | Fichier |
 |---|---|---|
 | ADR-001 : Choix du SGBD (SQLite vs MariaDB/MySQL vs PostgreSQL) | accepté | [adr-001-choix-sgbd-postgresql.md](adr-001-choix-sgbd-postgresql.md) |
-| ADR-002 : Choix Langue | accepté | [adr-002-choix-langue.md](adr-002-choix-langue.md) |
+| ADR-002 : Choix Langue | accepté ; point « commentaires de code » remplacé par ADR-066 (23/11/2026) | [adr-002-choix-langue.md](adr-002-choix-langue.md) |
 | ADR-003 : Choix Signature du contrat | accepté | [adr-003-signature-du-contrat.md](adr-003-signature-du-contrat.md) |
 | ADR-004 : Choix Durée du mandat et renouvellement | remplacée par ADR-023 | [adr-004-duree-mandat-renouvellement.md](adr-004-duree-mandat-renouvellement.md) |
 | ADR-005 : Séparation de utilisateurs en user/Client/Hunter/RealEstateManager | accepté | [adr-005-separation-utilisateurs-profils.md](adr-005-separation-utilisateurs-profils.md) |
@@ -74,3 +74,4 @@ Copiées de l'espace de travail de l'équipe le 2026-11-20 : **depuis cette date
 | ADR-063 : La clé d'une annonce est estate.reference | ✅ accepté (Sébastien, Discord, 15/10/2026, question `flux-16`). Publié sur Confluence le 15/10/2026, dans « Proposé », pour relecture par le groupe. | [adr-063-cle-annonce-estate-reference.md](adr-063-cle-annonce-estate-reference.md) |
 | ADR-064 : Un prix revu ne se perd pas — la table estate_price_history | ✅ accepté (Sébastien, Discord, 15/10/2026, question `flux-12b`). Publié sur Confluence le 15/10/2026, dans « Proposé », pour relecture par le groupe. | [adr-064-historique-des-prix.md](adr-064-historique-des-prix.md) |
 | ADR-065 : L'armoire à dossiers papier reste hors de la v1, sa reprise est prévue plus tard | ✅ accepté (Laurence et Sébastien, Discord, 19/11/2026). Discuté entre nous sans être tracé ; écrit pour garder la trace. | [adr-065-armoire-papier-hors-v1.md](adr-065-armoire-papier-hors-v1.md) |
+| ADR-066 : Les commentaires de code s'écrivent en français, les noms restent en anglais | ✅ accepté (Sébastien, Discord, 23/11/2026). Remplace ADR-002 sur le seul point des commentaires de code. | [adr-066-commentaires-de-code-en-francais.md](adr-066-commentaires-de-code-en-francais.md) |
