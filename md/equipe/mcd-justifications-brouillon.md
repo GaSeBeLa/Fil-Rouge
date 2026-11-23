@@ -81,6 +81,6 @@
 
 ---
 
-## 🟡 Reste à trancher par l'équipe
+## ✅ Vérifié : les liens vers `User`
 
-- **Les auteurs** (`criteria`, `estate`, `estate_contact` vers `User`) : tous les montrer sur le MCD, ou aucun et l'écrire ici en une phrase.
+- Le MCD v15 montre les **7** liens vers `User`, autant que de clés étrangères vers `"user"` dans `init-v3/01` : `Client`, `Hunter`, `RealEstateManager`, `SearchRequest`, et les auteurs de `Criteria`, `Estate` et `EstateContact` (relu dans le draw.io le 2026-11-23).
