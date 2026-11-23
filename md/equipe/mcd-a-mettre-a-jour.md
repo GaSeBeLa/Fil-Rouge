@@ -1,5 +1,8 @@
 # MCD — ce qu'il reste à mettre à jour (TODO)
 
+> ✅ **§ 2 réglé le 2026-11-23** par Sébastien, à la main : **MCD v15, MLD v17, MPD v15** (dossier `vrac/`, hors dépôt). Les trois collent à la base en marche (22 tables, 43 clés étrangères), relus par script et à l'œil sur l'image. La liste détaillée de ces retouches est dans `vrac/retouches-v12.md`, hors dépôt.
+> ⬜ **Reste ouvert : § 3**, les justifications à écrire sous le schéma, et § 4.2, mettre les schémas finaux dans le dépôt (Confluence n'est plus mis à jour depuis le 2026-11-20).
+
 > Liste de travail du 2026-11-19, rédigée par le Glaude à la demande de Sébastien. **Le Glaude ne touche pas au schéma** : la mise en page se fait à la main, dans draw.io.
 > MCD comparé : `MCD - 3 11 5.drawio.xml` (03/11/2026, dossier `vrac/` hors dépôt), lu par script : ses entités, ses associations, et les cardinalités posées sur chaque lien.
 > Référence : le schéma v3 réellement monté (`Fil-Rouge-API/docker/init-v3/01_create_fil_rouge_immobilier.sql`), **43 clés étrangères**, lues dans la base le 2026-11-19 (une clé `NOT NULL` donne 1,1 du côté de la table qui la porte, une clé nullable 0,1 ; une clé `UNIQUE` donne 0,1 de l'autre côté, sinon 0,n).
@@ -66,7 +69,7 @@ Une phrase par choix débattu, avec sa source. C'est la moitié du livrable (« 
 
 ## 4. Ensuite
 
-1. ⬜ Corriger le draw.io (§ 2), à la main.
-2. ⬜ Exporter le PNG, et le remplacer sur la page Confluence « Schémas - MCD/MLD/MPD Cible ».
-3. ⬜ Écrire les justifications (§ 3) sous le schéma, sur la même page.
-4. ⬜ Refaire la comparaison par script, pour vérifier qu'il ne reste rien.
+1. ✅ Corriger le draw.io (§ 2), à la main (fait le 2026-11-23).
+2. ⬜ Exporter le PNG des trois schémas et les mettre dans le dépôt (Confluence n'est plus mis à jour depuis le 2026-11-20).
+3. ⬜ Écrire les justifications (§ 3) sous le schéma.
+4. ✅ Refaire la comparaison par script, pour vérifier qu'il ne reste rien (fait le 2026-11-23).
