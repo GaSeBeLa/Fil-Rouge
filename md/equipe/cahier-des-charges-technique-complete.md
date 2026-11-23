@@ -261,7 +261,7 @@ _Source :_ `README` — Le futur du parcours utilisateur, Le chasseur ; `US-09`
 | --- | --- | --- |
 | SGBD | **PostgreSQL**. Tout le SQL du projet est écrit en dialecte PostgreSQL. SQLite est écarté (modèle embarqué mono-écrivain) ; MySQL/MariaDB est écarté après comparaison pondérée. | `ADR-001` |
 | Données de départ | Les fichiers de `fixtures/` représentent l'existant et **ne doivent pas être modifiés** : la migration part d'eux. `fixtures/PgSQL.sql` est la source de vérité ; `fixtures/MySQL.sql` sert de référence de lecture. | `README` — Règles du jeu ; `ADR-001` |
-| Langue | **Anglais** pour le code, les schémas de données et les commentaires de code. Le français reste la langue des échanges métier et de la documentation de contexte. Un glossaire de correspondance FR/EN est maintenu. | `ADR-002` |
+| Langue | **Anglais** pour le code, les schémas de données et les commentaires de code. Le français reste la langue des échanges métier et de la documentation de contexte. Un glossaire de correspondance FR/EN est maintenu : `livrables/2-modelisation/annexes/glossaire-fr-en.md`, généré depuis le schéma (2026-11-23). | `ADR-002` |
 | Méthodologie de modélisation | **Merise** — MCD, MLD, MPD, avec cardinalités complètes. | `README` — Livrables |
 | Stockage objet | **MinIO**, S3-compatible, auto-hébergé, avec 4 buckets `bronze` / `silver` / `gold` / `quarantine` créés automatiquement au démarrage. | `ADR-016` |
 | Conteneurisation | Toutes les images Docker sont **pinnées** sur une version fixe. Le tag `latest` est interdit. | `ADR-015` |
@@ -391,7 +391,7 @@ Trois exigences n'ont pas de scénario Gherkin correspondant et proviennent dire
 ## 11. Annexes
 
 * `GLOSSAIRE-METIER.md` — vocabulaire de la chasse immobilière
-* Glossaire de correspondance FR/EN — `ADR-002`
+* Glossaire de correspondance FR/EN — `ADR-002`, `livrables/2-modelisation/annexes/glossaire-fr-en.md`
 * `user-stories/` — les 10 fichiers `.feature` servant de base à la traçabilité
 * Journal de décisions — ADR-001 à ADR-064, sur Confluence (ADR-004 remplacé par ADR-018)
 * `01_create_fil_rouge_immobilier.sql` — schéma cible en vigueur : dépôt `GaSeBeLa/Fil-Rouge-API`, branche `main`, chemin `docker/init-v3/01_create_fil_rouge_immobilier.sql` (**22 tables**, montants en euros). L'ancien schéma audité le 06/09 (`docker/init/`, 12 tables) n'est plus monté.

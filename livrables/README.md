@@ -34,7 +34,7 @@ La liste est tirée de trois documents du sujet : le `Readme.md` (livrables par 
 | 2.7 | Script de migration (`migration.sql`) | [2.7-migration.sql](2-modelisation/2.7-migration.sql) — copie ; la source est dans le dépôt de l'API |
 | 2.8 | Note d'indexation (EXPLAIN avant/après) | [2.8-note-indexation.md](2-modelisation/2.8-note-indexation.md) |
 
-Appuis : [3 schémas des données](2-modelisation/annexes/) et le script de mesure des index.
+Appuis : [3 schémas des données](2-modelisation/annexes/), le [glossaire français ↔ anglais](2-modelisation/annexes/glossaire-fr-en.md) (ADR-002) et le script de mesure des index.
 
 ## Phase 3 — Absorber la croissance (BC01, BC02, BC05)
 
