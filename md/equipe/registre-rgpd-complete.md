@@ -43,7 +43,7 @@ celles de Gabriel, dans son ordre ; les cinq suivantes sont neuves.
 | 8 | Statistiques (OLAP) | Piloter l'activité | `olap.dim_client` (`id_client`, année d'inscription, ville, pays), `olap.dim_chasseur` (`id_hunter`, année d'embauche, IA ou non, carte T, pays), `fait_ventes` (montants, commission) — **pseudonymisées** : les numéros ramènent aux fiches (RGPD-13) | Intérêt légitime | **10 ans** (RGPD-12, vote du 03/11), comme les ventes | le DAG `olap_refresh` (écrit chaque nuit) ; pas `fil_rouge_reader` (`docker/init-v3/README.md:180`) |
 | 9 | Recherche de biens (Elasticsearch) | Chercher un bien vite | copie des biens (`estate`), dont la ville et le quartier | Exécution du contrat | Suit la base : l'index se remplit chaque nuit (question flux-15, 15/10) | les mêmes rôles que la lecture de `estate` (question flux-14, 15/10) |
 | 10 | Logs de l'API | Sécurité, diagnostic | chaque appel à l'API (FLX10) ; ni mot de passe ni email | Intérêt légitime | **6 mois** (RGPD-11, vote du 03/11, recommandation CNIL) | 🟡 le compte Kibana reste à définir |
-| 11 | Chasseur IA | Proposer des biens sans chasseur humain | les données des traitements 2 et 5, lues par un compte `hunter` à `is_hunter_ai` vrai | Exécution du contrat | Suit les traitements 2 et 5. v1 : **aucun LLM**, tout en local (RGPD-17) | droits réduits, ADR-058 **proposé**, pas accepté (RGPD-18) |
+| 11 | Chasseur IA | Proposer des biens sans chasseur humain | les données des traitements 2 et 5, lues par un compte `hunter` à `is_hunter_ai` vrai | Exécution du contrat | Suit les traitements 2 et 5. v1 : **aucun LLM**, tout en local (RGPD-17) | droits réduits, ADR-058 **accepté et codé** le 24/11/2026 (RGPD-18) |
 
 Compte : **11** traitements, pour **6** lignes sur la page de Gabriel.
 

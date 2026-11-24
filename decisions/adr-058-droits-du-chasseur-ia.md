@@ -7,7 +7,8 @@
 ✅ établi · 🟡 à décider · 💡 proposé
 
 - **Date :** 15/10/2026
-- **Statut :** 💡 proposé (Sébastien, Discord, 15/10/2026). **Rien n'est codé** tant qu'il n'est pas accepté. Accepté, il remplace le point 6 d'ADR-045 (« droits des chasseurs-IA : reportés au parcours IA »).
+- **Statut :** ✅ **accepté et codé** le 24/11/2026 (Sébastien, Discord, choix VAL-ADR058 : « C. Accepter et coder »), **sans l'avis de Jeff** (client injoignable, voir plus bas). Proposé le 15/10/2026. Il remplace le point 6 d'ADR-045 (« droits des chasseurs-IA : reportés au parcours IA »).
+- **Code :** liste blanche `AI_HUNTER_ALLOWED` et contrôle dans `require_roles`, `API/src/app/utils/roles.py` ; tests `API/tests/integration/test_chasseur_ia.py`, 27 tests (dépôt Fil-Rouge-API).
 - **Décideurs :** Sébastien (« une IA n'aurait pas les mêmes droits, ça peut être dangereux », Discord, 15/10/2026).
 - **Voir aussi :** ADR-045, point 6 ; ADR-057 (une fiche, un rôle) ; ADR-029 (un chasseur IA a un manager) ; ADR-054 (contact du vendeur) ; ADR-027 (droits par rôle)
 
@@ -41,12 +42,19 @@
 - Un test par interdiction : un chasseur IA reçoit 403, un chasseur humain non.
 - Au jury, une phrase : « le chasseur IA est un chasseur à droits réduits : il cherche et propose, un humain engage ».
 
-**Ce que cet ADR ne tranche pas**
+**Ce qui restait ouvert le 15/10, tranché à l'acceptation (24/11/2026), et ce qui reste**
 
-- 🟡 La liste exacte des opérations : à relire avec la matrice, opération par opération, avant d'accepter.
-- 🟡 L'enregistrement d'une visite par un chasseur IA : il ne visite pas. Est-ce le chasseur humain qui l'enregistre, ou personne ?
+- ✅ La liste exacte des opérations, relue le 24/11/2026 sur les 55 routes de l'API (OpenAPI). Le chasseur IA peut :
+    - lire ses demandes, leurs critères, ses mandats, les biens et leurs photos, la recherche de biens (`GET /estates/search`) ;
+    - demander des suggestions (`POST /search-requests/{id}/suggestions`) ;
+    - remplir la sélection de ses demandes, puis garder ou écarter un bien (`POST` et `PUT /estate-search-requests`) ;
+    - lire ses propositions, et proposer un bien (`POST /estate-proposed`).
+    - Tout le reste rend **403**, même une route ajoutée plus tard : la liste est fermée par défaut. Un test vérifie que chaque chemin de la liste existe.
+- ✅ La visite : **interdite** au chasseur IA, il ne visite pas. Le chasseur humain ou le client l'enregistre.
+- ✅ Il ne modifie pas une proposition faite : `PUT /estate-proposed/{id}` lui rend 403.
 - 🟡 La tension avec le parcours IA du sujet, où les chasseurs-IA doivent pouvoir « opérer seuls » (`user-stories/09_futur_chasseur_assistance_ia.feature:6-7`, StarterPack, cité par ADR-045). Cet ADR choisit la prudence ; le parcours IA pourra élargir la liste.
-- 🟡 À montrer à Jeff (client) avant d'accepter.
+- ⚠️ Jeff (client) ne l'a pas vu : accepté par le groupe sans lui, le 24/11/2026, comme ADR-027 et ADR-050.
+- ⚠️ Le drapeau `is_hunter_ai` est relu en base à chaque appel d'un chasseur : une requête de plus par appel, pour un chasseur seulement.
 
 **Sources**
 

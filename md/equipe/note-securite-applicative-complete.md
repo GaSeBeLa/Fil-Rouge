@@ -24,6 +24,7 @@ Chaque appel à l'API passe **deux contrôles**, qui ne se remplacent pas (ADR-0
 | **Jeton JWT** signé, valable **60 min** | Agir sans s'être connecté | `utils/security.py`, `create_access_token` | ADR-052 |
 | Compte et rôle **relus en base à chaque appel** | Garder ses droits après une désactivation | `utils/current_user.py`, `get_current_user` | ADR-052, décision 3 |
 | **Droits par rôle**, et « le sien seulement » | Un client qui lit la fiche d'un autre client | `utils/roles.py`, `require_roles` | ADR-027 |
+| **Chasseur IA bridé** : 19 opérations en liste blanche, tout le reste en `403` | Une IA qui engage de l'argent ou un contrat, lit le contact du vendeur, ou change ce qu'un humain a écrit | `utils/roles.py`, `AI_HUNTER_ALLOWED`, `require_roles` ; 27 tests (`test_chasseur_ia.py`) | ADR-058 (2026-11-24) |
 | **Même message** pour un email inconnu ou un mot de passe faux | Deviner quels emails ont un compte | `routes/auth_router.py`, `_BAD_CREDENTIALS` | ADR-052 |
 | **Frein** aux essais en série : 5 échecs par email, 20 par IP, en 15 min | Essayer des mots de passe sans fin (force brute) | `utils/login_throttle.py` | 2026-11-19 |
 | **Code d'activation** à usage unique, valable 7 jours | Un compte que seul un admin pouvait activer | `services/activation_service.py` | user story 01 |

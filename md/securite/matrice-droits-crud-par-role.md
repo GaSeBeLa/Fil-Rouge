@@ -158,6 +158,22 @@ Relevé dans `API/src/app/services/` (Fil-Rouge-API) : le crochet
   comptes désactivés (politique par ligne), ni `"user".password`, ni
   `estate_contact` (fiche DRO9 ; `docker/init-v3/04_role-lecture-seule.sql`).
 
+### Le chasseur IA (ADR-058, codé le 24/11/2026)
+
+* ✅ Un `Hunter` dont la fiche porte `is_hunter_ai` garde son rôle et son
+  « sien », mais ne passe que par une **liste blanche** de 19 opérations
+  (`AI_HUNTER_ALLOWED`, `API/src/app/utils/roles.py`). Tout le reste rend
+  `403`, même une route ajoutée plus tard.
+* Il **lit** : `/search-requests`, `/criteria`, `/mandates`, `/estates` (et
+  `/estates/search`), `/pictures`, `/estate-search-requests`,
+  `/estate-proposed`.
+* Il **écrit** : `POST /search-requests/{id}/suggestions`,
+  `POST` et `PUT /estate-search-requests`, `POST /estate-proposed`.
+* Il **ne peut pas** : contact du vendeur, ventes, paiements, offres,
+  mandats, visites, critères, biens, photos, médias, sa fiche, son compte,
+  ni modifier une proposition faite.
+* Preuve : `API/tests/integration/test_chasseur_ia.py`, 27 tests.
+
 ### Conformes
 
 * ✅ Le rôle, sur les 21 tables et les 10 routes à part (`SPECIAL_ROUTES`,

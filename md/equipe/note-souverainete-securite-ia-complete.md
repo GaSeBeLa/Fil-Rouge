@@ -22,16 +22,16 @@ Quand elle agit, elle a moins de droits qu'un humain, et un humain engage.
 |---|---|---|
 | `estate`, `estate_price_history`, index `estates` | lecture | nécessaire au matching |
 | `criteria` de la demande confiée | lecture | nécessaire au matching |
-| `estate_searchrequest`, `estate_proposed` | lecture ; le moteur de suggestion n'écrit qu'en `suggested`. ⚠️ Un chasseur-IA a aujourd'hui les droits d'un chasseur humain : la restriction (ADR-058) est proposée, pas codée | un chasseur humain garde (`kept`) avant toute proposition |
+| `estate_searchrequest`, `estate_proposed` | lecture ; le moteur de suggestion n'écrit qu'en `suggested`. ✅ Un chasseur-IA a des droits réduits (ADR-058, codé le 24/11/2026) : il ajoute, garde et propose, sans toucher au reste | un chasseur humain garde (`kept`) avant toute proposition |
 | `"user".password` | ✅ fermé au lecteur, colonne par colonne | aucun usage |
-| `estate_contact` (vendeur) | ✅ fermé au lecteur ; 💡 fermé au chasseur IA (ADR-058) | donnée d'un tiers (ADR-054) |
+| `estate_contact` (vendeur) | ✅ fermé au lecteur ; ✅ fermé au chasseur IA (ADR-058, 24/11/2026) | donnée d'un tiers (ADR-054) |
 | `payment` (montants, taux, score) | ✅ fermé au lecteur | données financières (ADR-027) |
 | comptes désactivés | ✅ invisibles au lecteur (politique par ligne) | ADR-027, point 7 |
-| offre, vente, paiement, barème | 💡 interdits au chasseur IA | engager reste humain |
+| offre, vente, paiement, barème | ✅ interdits au chasseur IA (ADR-058, 24/11/2026) | engager reste humain |
 
 - Le chasseur IA passe par l'API, avec un compte `hunter` à
-  `is_hunter_ai` vrai : droits réduits selon **ADR-058, proposé** (pas
-  accepté, pas codé ; RGPD-18).
+  `is_hunter_ai` vrai : droits réduits selon **ADR-058, accepté et codé**
+  le 24/11/2026 (RGPD-18).
 - ⚠️ **Le trou** : `fil_rouge_reader` (`SELECT` seul, `04_role-lecture-seule.sql`)
   lit `client` et `hunter` en clair. Voulu pour un analyste humain, pas pour
   une IA. 🟡 Parade : une IA lirait l'OLAP (ADR-027, l. 165) — mais
@@ -74,7 +74,7 @@ Quand elle agit, elle a moins de droits qu'un humain, et un humain engage.
 |---|---|---|
 | requête destructrice | compte en lecture seule | ✅ codé |
 | données personnelles inutiles | OLAP pseudonymisé ; contact et paiement fermés | ✅ en partie (le trou du § 1) |
-| le chasseur IA engage seul | il cherche et suggère, un humain engage | 💡 ADR-058, proposé |
+| le chasseur IA engage seul | il cherche et suggère, un humain engage | ✅ ADR-058, codé le 24/11/2026 |
 | une suggestion part sans contrôle | `suggested`, puis `kept` par un humain | ✅ SUG4, SUG8 |
 | fuite par un LLM externe | aucun LLM en v1 ; v2 : colonnes minimales, UE ou local | 🟡 v2 |
 
