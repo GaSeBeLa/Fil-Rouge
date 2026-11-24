@@ -31,7 +31,7 @@ modifiés**.
   lecture, la création et la modification sur **21 des 22 tables**, **sans
   suppression** (ADR-049 : un compte se désactive puis s'anonymise) ; le routeur
   commun revalide l'entrée (`422` avant la base). **97 opérations** (recomptées
-  le 2026-11-23, livrable 4.1). **1 126 passed, 7 xfailed** (au 2026-11-20, après les en-têtes de sécurité et la signature du mandat par le client ; rapport du 2026-11-19, 1 116 :
+  le 2026-11-23, livrable 4.1). **1 143 passed, 7 xfailed** (CI du 2026-11-23, `97a566a` ; rapport du 2026-11-20, 1 126 :
   `livrables/4-application/4.4-rapport-tests.md`), unitaires sans base et intégration sur la base de test isolée
   `fil_rouge_test` (`docker/create_test_db.sh`) — voir `API/README.md` § Tests.
 - **Les droits sont codés** (chantier DRO, 2026-10-13) : le rôle, table par
