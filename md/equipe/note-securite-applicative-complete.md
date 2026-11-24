@@ -155,7 +155,7 @@ Les 4 attaques ont été **rejouées après la correction**, par un script qu'on
 | --- | --- | --- |
 | Contrôler un jeton reçu | L'algorithme est **figé** au décodage (`algorithms=["HS256"]`) : un jeton signé autrement, ou « sans signature », est refusé. Le jeton expiré est refusé | `utils/security.py`, `decode_access_token` |
 | Clé secrète robuste | `JWT_SECRET` de **32 caractères au moins**, sinon l'API refuse de démarrer | `utils/security.py`, `_load_jwt_secret` |
-| Politique de mot de passe (NIST 800-63B) | **12 caractères au moins**, aucune règle de complexité, aucun changement forcé : ce que recommande le NIST. ⚠️ Le seuil de 12 reste « à confirmer en réunion » (commentaire du code) | `models/user_model.py` |
+| Politique de mot de passe (NIST 800-63B) | **12 caractères au moins**, aucune règle de complexité, aucun changement forcé : ce que recommande le NIST. Seuil décidé par le groupe le 2026-10-07 (Q-ACC-17), ADR-026 remis en vigueur le 2026-10-08, confirmé par Sébastien le 2026-11-24 (choix PWD-12) | `models/user_model.py` |
 | Ne rien exposer | Une erreur 500 rend un **message neutre et un numéro** ; la pile reste dans le journal | `main.py`, `internal_error_with_reference` |
 | Fail-closed | Sans clé d'API valable, **tout est refusé**, avant même de lire le jeton | `utils/api_keys.py`, `require_api_key` |
 | Défense en profondeur | Trois barrières qui ne se remplacent pas : la clé (le programme), le jeton (la personne), le rôle **relu en base** à chaque appel | § 1 |
@@ -169,6 +169,7 @@ Les 4 attaques ont été **rejouées après la correction**, par un script qu'on
 | Thème du cours | Ce qui manque | Pourquoi, et ce qu'il faudrait |
 | --- | --- | --- |
 | MFA, passkeys | Pas de second facteur | Hors du sujet ; à prévoir pour les comptes Manager et Admin avant une mise en production |
+| Longueur du mot de passe | **12 caractères**, alors que le NIST en demande **15** quand le mot de passe est le seul facteur (SP 800-63B-4, § 3.1.1.2, lu le 2026-10-05) : c'est notre cas | Écart assumé (ADR-026, choix PWD-12) : passer à 15, ou ajouter un second facteur, avant une mise en production |
 | Révocation d'un jeton | Un jeton vit 60 min, sans liste noire | **En partie couvert** : un compte désactivé est refusé à l'appel suivant, car il est relu en base |
 | Mots de passe fuités (NIST) | Aucune comparaison avec une liste de mots de passe connus | Possible sans envoyer le mot de passe (service à préfixe de hachage) ; non fait |
 | Chiffrement au repos | La base et les sauvegardes MinIO ne sont pas chiffrées | Seuls les mots de passe sont protégés (Argon2) ; en production, chiffrer le disque et le bucket `backup` |
