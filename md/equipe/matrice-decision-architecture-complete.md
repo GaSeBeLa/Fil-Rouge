@@ -110,8 +110,10 @@ supportable à notre échelle. Quand l'éco-conception s'oppose à la
 disponibilité, l'éco-conception gagne **tant que le projet reste un MVP** ; ce
 sens s'inverse le jour d'une mise en production.
 
-🟡 Ces arbitrages sont ceux du code et des ADR. Ils restent à valider par
-l'équipe comme une seule position, à défendre d'une voix au jury.
+Ces arbitrages sont ceux du code et des ADR. ✅ Les trois repris dans le
+livrable 3.3 (sécurité avant performance, simplicité avant scalabilité,
+éco-conception avant disponibilité) sont validés par l'équipe le 2026-11-24
+(Sébastien, Discord, choix VAL-MATRICE). 🟡 Les autres restent à valider.
 
 ## 7. Options écartées, et quand les reprendre
 
