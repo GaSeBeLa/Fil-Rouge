@@ -7,6 +7,43 @@
 
 ## Où on en est
 
+### Déplacé de `CLAUDE.md` le 2026-11-25 (allègement : 131 → 95 lignes)
+
+Ces détails datés étaient dans « Où on en est » de `CLAUDE.md`. Ils restent
+vrais à leur date ; `CLAUDE.md` n'en garde que l'essentiel.
+
+- **Schéma v3** — 22 tables depuis le 2026-10-15 (`estate_contact`, ADR-054,
+  puis `estate_price_history`, FLX4). Chantier LOT : LOT1 à LOT12 faits le
+  2026-10-07 (LOT12 : rôle en lecture seule `fil_rouge_reader`). Banc v2/v3 :
+  `API/tests/integration/test_banc_v2_v3.py`, lancé à chaque pytest, ou
+  `docker/compare_v2_v3.sh`. `docker/migrations/v2-vers-v3/` mène une base v2
+  existante au même schéma. `docker/init/` (12 tables, K€) est l'ancien schéma,
+  plus monté.
+- **Pour l'équipe, après un pull** : ajouter `POSTGRES_READER_PASSWORD=` à
+  `docker/.env` (voir `.env.exemple`), puis depuis `docker/`,
+  `docker compose down -v && docker compose up -d` (⚠️ efface la base de dev
+  locale), puis `bash docker/create_test_db.sh`.
+- **API** — **97 opérations** (recomptées le 2026-11-23, livrable 4.1).
+  **1 143 passed, 7 xfailed** (CI du 2026-11-23, `97a566a`) ; rapport du
+  2026-11-20, 1 126 : `livrables/4-application/4.4-rapport-tests.md`. Base de
+  test créée par `docker/create_test_db.sh`.
+- **Droits** (chantier DRO, 2026-10-13) — les comptes désactivés sont réservés
+  à l'`Admin` ; `fil_rouge_reader` est fermé pareil.
+- **Rémunération** — `services/remuneration.py` reprend le code du sujet ;
+  branché sur la base par la fiche API12.
+- **Livrables** — rangés par phase depuis le 2026-11-20 (choix A de Gabriel) :
+  livrables numérotés `<phase>.<ordre>` (`2.3-note-de-cadrage.md`…), appuis
+  sans numéro dans `<phase>/annexes/` (les 8 schémas Mermaid `schema-*.md`,
+  SWOT, scripts de mesure, images). `livrables/README.md` liste les 36
+  livrables du sujet. 12 pages de travail y sont copiées (le dépôt fait foi) ;
+  versions longues en `md/equipe/*-complete.md` ; documents de travail dans `md/`.
+- **GitHub** — tout y vit depuis le 2026-11-20 (choix de Gabriel) : `decisions/`
+  (71 fichiers, copiés de Confluence puis complétés) ; aucun livrable ne renvoie
+  à Confluence.
+- **Économie de contexte, le pourquoi** — la fenêtre sature par densité de
+  contexte, pas par volume horaire ; le voisin d'un fichier utile n'est que du
+  volume ; une session laissée ouverte relit tout son passé à chaque tour.
+
 *(au 2026-09-21 — remplace l'état du 2026-09-07 ; l'historique est au journal)*
 
 - **Base de données** — schéma `fil_rouge_immobilier` (**18 tables**, montants

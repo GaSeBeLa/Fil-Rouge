@@ -12,7 +12,7 @@ QUAND LIRE : on relit un chantier clos ; l'index n'en garde qu'une ligne qui ren
 | `14-banc-v2-v3.md` | on relit le socle du chantier BAN — **clos** « Réparer le banc v2/v3 », `BAN1..BAN3` |
 | `15-seed-demo.md` | on relit le socle du chantier DEM — **clos** « Seed de démo », `DEM1..DEM3` |
 | `16-refacto-profils.md` | on relit le socle du chantier PRF — **clos** « Refacto des profils », `PRF1..PRF9` |
-| `17-flux-donnees.md` | on relit le socle du chantier FLX — **clos** « Flux de données : Airflow et Elasticsearch », `FLX1..FLX13` |
-| `18-merise-mocodo.md` | on relit le socle du chantier MER — **clos** « Modèle de données en Merise (MCD + MLD) », `MER1..MER5` |
+| `17-flux-donnees.md` | on relit le socle du chantier FLX — **clos** « Flux de données : Airflow et Elasticsearch », `FLX1..FLX13` ; `FLX14` (contact du vendeur à l'import), ajoutée le 2026-10-19, faite le 2026-11-02 ; le flux en un dessin : `md/flux/schema-du-flux.md` |
+| `18-merise-mocodo.md` | on relit le socle du chantier MER — **clos** « Modèle de données en Merise (MCD + MLD) », `MER1..MER5` — clos le 2026-11-03 sans rien livrer, recadrage à venir |
 | `19-suggestion-de-biens.md` | on relit le socle du chantier SUG — **clos** « Moteur de suggestion de biens et cohérence des propositions », `SUG1..SUG8` |
 | `20-rgpd.md` | on relit le socle du chantier RGP — **clos** « RGPD : registre, droits et note IA », `RGP1..RGP4` |

@@ -10,45 +10,26 @@ modifiés**.
 
 ## Où on en est — en cinq lignes
 
-- ⚠️ **Depuis le 2026-10-13, le code de l'API et `docker/` vivent dans le
-  dépôt [Fil-Rouge-API](https://github.com/GaSeBeLa/Fil-Rouge-API)**, cloné à
-  côté : `../Fil-Rouge-API/`. Ce dépôt-ci garde les docs, les ADR, les
-  livrables et le suivi des chantiers. **Tout chemin `API/…` ou `docker/…`
+- ⚠️ **Depuis le 2026-10-13, le code de l'API et `docker/` vivent dans
+  [Fil-Rouge-API](https://github.com/GaSeBeLa/Fil-Rouge-API)**, cloné en
+  `../Fil-Rouge-API/` ; ici : docs, ADR, livrables, chantiers. **Tout chemin `API/…` ou `docker/…`
   cité ici, dans `context AI/` ou dans `md/` se lit dans `../Fil-Rouge-API/`.**
-- Le schéma PostgreSQL **v3** (**22 tables** depuis le 2026-10-15 : `estate_contact`, ADR-054, puis `estate_price_history`, FLX4 ; montants en **euros**) est posé
-  dans `docker/init-v3/` et monté par `docker compose` : chantier LOT, LOT1 à
-  LOT12 faits le 2026-10-07 (LOT12 : rôle en lecture seule `fil_rouge_reader`).
-  Changements par thème : `docker/init-v3/README.md` §0. `docker/init-v2/` est
-  **figé**, gardé pour le banc v2/v3 (`API/tests/integration/test_banc_v2_v3.py`,
-  lancé à chaque pytest, ou par `docker/compare_v2_v3.sh`) ;
-  `docker/migrations/v2-vers-v3/` mène une base v2 existante au même schéma ;
-  `docker/init/` (12 tables, K€) est l'ancien schéma, plus monté.
-- **Pour l'équipe, après un pull** : ajouter `POSTGRES_READER_PASSWORD=` à
-  `docker/.env` (voir `.env.exemple`), puis depuis `docker/`,
-  `docker compose down -v && docker compose up -d` (⚠️ efface la base de dev
-  locale), puis `bash docker/create_test_db.sh`.
+- Le schéma PostgreSQL **v3** (**22 tables**, montants en **euros**) est posé
+  dans `docker/init-v3/`, monté par `docker compose` ; changements par thème :
+  `docker/init-v3/README.md` §0 ; historique : `context AI/08-etat.md`.
 - L'API expose, en trois couches (routes / services / repositories), la
   lecture, la création et la modification sur **21 des 22 tables**, **sans
   suppression** (ADR-049 : un compte se désactive puis s'anonymise) ; le routeur
-  commun revalide l'entrée (`422` avant la base). **97 opérations** (recomptées
-  le 2026-11-23, livrable 4.1). **1 143 passed, 7 xfailed** (CI du 2026-11-23, `97a566a` ; rapport du 2026-11-20, 1 126 :
-  `livrables/4-application/4.4-rapport-tests.md`), unitaires sans base et intégration sur la base de test isolée
-  `fil_rouge_test` (`docker/create_test_db.sh`) — voir `API/README.md` § Tests.
-- **Les droits sont codés** (chantier DRO, 2026-10-13) : le rôle, table par
-  table, puis « le sien » (la ligne d'un autre rend `404`) ; les comptes
-  désactivés réservés à l'`Admin` ; `fil_rouge_reader` fermé pareil. Relevé et
-  écarts : `md/securite/matrice-droits-crud-par-role.md`.
+  commun revalide l'entrée (`422` avant la base). Tests : unitaires sans base,
+  intégration sur la base isolée `fil_rouge_test` — voir `API/README.md` § Tests ;
+  derniers comptes : `livrables/4-application/4.4-rapport-tests.md`.
+- **Les droits sont codés** (DRO) : le rôle par table, puis « le sien » (sinon
+  `404`) ; relevé et écarts : `md/securite/matrice-droits-crud-par-role.md`.
 - Les user stories Gherkin (`user-stories/`) couvrent le parcours actuel et le
   futur parcours IA. Seul le **calcul de rémunération** est implémenté
-  (`services/remuneration.py`, code du sujet), branché sur la base par
-  `POST /sales/{id}/payment` (fiche API12).
-- `normalised/` porte la normalisation des annonces et son rapport d'anomalies.
-- `livrables/` est rangé par phase depuis le 2026-11-20 (choix A de Gabriel) : `1-audit/` à `6-pilotage/`, les livrables numérotés `<phase>.<ordre>` (`2.3-note-de-cadrage.md`…), les appuis sans numéro dans `<phase>/annexes/` (les 8 schémas Mermaid `schema-*.md`, SWOT, scripts de mesure, images). `livrables/README.md` est la liste officielle des 36 livrables du sujet, pour le jury. 12 pages de travail y sont copiées (le dépôt fait foi) ; les versions longues sont en `md/equipe/*-complete.md` ; les documents de travail sont dans `md/`. Détail daté dans `context AI/08-etat.md`.
-- Clos le 2026-10-15 : clés vers les fiches et rôles des fiches (chantier PRF).
-- Clos le 2026-10-15 : Airflow, Elasticsearch, Logstash et Kibana branchés sur l'API (chantier FLX).
-- Clos le 2026-11-03 : clos sans rien livrer, recadrage à venir (chantier MER).
-- Clos le 2026-11-03 : un moteur de suggestion de biens et des propositions cohérentes (chantier SUG).
-- Clos le 2026-11-03 : RGPD : registre, droits et note IA (chantier RGP).
+  (`services/remuneration.py`), branché par `POST /sales/{id}/payment`.
+- `livrables/` est rangé par phase (`1-audit/` à `6-pilotage/`) ;
+  `livrables/README.md` est la liste officielle des livrables, pour le jury.
 
 ## Cinq règles non négociables
 
@@ -66,13 +47,9 @@ modifiés**.
    **`NUMERIC(12,2)`** (`Decimal`), car le sujet arrondit au centime.
 5. **Aucun secret ni `.env` dans git**, aucun chemin absolu dans le code.
 
-**Tout vit sur GitHub depuis le 2026-11-20** (choix de Gabriel) : les ADR sont dans
-`decisions/` (71 fichiers, copiés de Confluence puis complétés, index `decisions/README.md`),
-et le dépôt fait foi. Confluence n'est plus mis à jour ; aucun livrable n'y renvoie.
-
-Prose et commentaires de code en français ; noms de code en anglais.
-Le contexte IA (`CLAUDE.md`, `context AI/`) est **versionné** : le projet se
-travaille à plusieurs. Les notes métier libres vivent dans `md/`.
+Le dépôt fait foi (ADR dans `decisions/`) ; Confluence n'est plus mis à jour.
+Prose et commentaires en français, noms de code en anglais. `CLAUDE.md` et
+`context AI/` sont **versionnés** ; les notes métier libres vivent dans `md/`.
 
 ## Ramasser sa poubelle
 
@@ -106,26 +83,13 @@ et seulement dans ce cas, ouvrir l'index.
 | comprendre un choix du schéma (euros, migration, hypothèses, changements v3) | `../Fil-Rouge-API/docker/init-v3/README.md` |
 | relire une décision d'architecture (ADR) | `decisions/README.md`, puis le fichier de l'ADR |
 | ouvrir un chantier, ou le découper en fiches | **lancer `/vlp:chantier`** — la méthode vit dans le kit, pas ici |
-| relire un chantier clos | `context AI/00-INDEX-archive.md` — sa ligne y nomme le fichier de fiches |
-| relire une fiche `C1` à `C5` | `context AI/09-contraintes-mpd.md` — chantier **clos** le 2026-09-11, ne se rejoue pas |
-| relire une fiche `LOT1` à `LOT12` | `context AI/10-lot-migration.md` — chantier « Lot de migration (schéma v3) » **clos** le 2026-10-07, ne se rejoue pas |
-| relire une fiche `API1` à `API12` | `context AI/11-api-auth-rgpd-regles.md` — chantier « API : auth, RGPD et règles métier » **clos** le 2026-10-13, ne se rejoue pas |
-| relire une fiche `DRO1` à `DRO11` | `context AI/12-droits-moindre-privilege.md` — chantier « Droits : moindre privilège » **clos** le 2026-10-13, ne se rejoue pas |
-| relire une fiche `FIN1` à `FIN2` | `context AI/13-finitions-api.md` — chantier « Finitions de l'API : erreurs et Swagger » **clos** le 2026-10-14, ne se rejoue pas |
-| relire une fiche `BAN1` à `BAN3` | `context AI/14-banc-v2-v3.md` — chantier « Réparer le banc v2/v3 » **clos** le 2026-10-14, ne se rejoue pas |
-| relire une fiche `DEM1` à `DEM3` | `context AI/15-seed-demo.md` — chantier « Seed de démo » **clos** le 2026-10-14, ne se rejoue pas |
-| relire une fiche `FLX1` à `FLX14` | `context AI/17-flux-donnees.md` — chantier « Flux de données : Airflow et Elasticsearch » **clos** le 2026-10-15, ne se rejoue pas ; `FLX14` (contact du vendeur à l'import), ajoutée le 2026-10-19, faite le 2026-11-02 ; le flux en un dessin : `md/flux/schema-du-flux.md` |
+| relire un chantier clos | `context AI/00-INDEX-archive.md` — sa ligne y nomme le fichier de fiches (`C1`…`C5`, `LOT1`…, `FLX14`…) |
 | reprendre après une longue interruption | `context AI/08-etat.md` |
 
 ## Économie de contexte
 
-La fenêtre sature par **densité de contexte**, pas par volume horaire. Donc,
-dans cet ordre :
-
-- **Un fichier de contexte ne s'ouvre que si la table ci-dessus le nomme.** Le
-  voisin d'un fichier utile n'est pas utile ; il n'est que du volume.
-- **Ne jamais lire le dossier de contexte en entier**, ni le README.
-- **Une tâche, une session.** `/clear` entre deux tâches : une session laissée
-  ouverte relit tout son passé à chaque tour.
+- **Un fichier de contexte ne s'ouvre que si la table ci-dessus le nomme** ;
+  jamais le dossier de contexte en entier, ni le README.
+- **Une tâche, une session** : `/clear` entre deux tâches.
 - **Explorer et lire avec un modèle léger**, garder le lourd pour ce qui décide.
 - Grep ciblé plutôt que lecture de fichier entier, dans le code comme ici.
