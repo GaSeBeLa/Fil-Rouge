@@ -32,7 +32,7 @@ la tâche les nomme.
 
 | Fichier | Lire quand |
 |---|---|
-| `../Fil-Rouge-API/docker/init-v3/01_create_fil_rouge_immobilier.sql` | on touche une table, une colonne, une contrainte — **18 tables, euros** |
+| `../Fil-Rouge-API/docker/init-v3/01_create_fil_rouge_immobilier.sql` | on touche une table, une colonne, une contrainte — **22 tables, euros** |
 | `../Fil-Rouge-API/docker/init-v3/README.md` | on doute d'un choix du schéma : euros, migration, hypothèses assumées, points ouverts ; changements v3 par thème |
 | `../Fil-Rouge-API/API/README.md` | on installe ou on lance l'API |
 | `../Fil-Rouge-API/API/src/app/main.py` | on cherche où va un bout de code — son en-tête décrit les trois couches |
