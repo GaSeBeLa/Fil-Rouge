@@ -40,3 +40,6 @@ desktop.ini
 # Editeurs
 .vscode/
 .idea/
+
+# Carnets de travail, un par fiche : locaux, jamais commites (regle des carnets du kit vlp)
+context AI/carnets/
